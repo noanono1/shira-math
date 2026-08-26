@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<!-- מסך הבית של האייפד/הטלפון -->
+<link rel="apple-touch-icon" href="../assets/icons/icon-180.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>הטבלה עם החור — סטטיסטיקה — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../vendor/katex.min.css">
+<link rel="stylesheet" href="../css/shira.css">
+<script defer src="../vendor/katex.min.js"></script>
+<script defer src="../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../js/shira.js"></script>
+<style>
+/* מחוון פתיחה — כמה זמן, כמה תרגילים, ואיפה מתחילים לתרגל (מוסתר בהדפסה) */
+.pagemeta{display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px;
+  margin:12px 0 0; font-size:13px; color:var(--soft)}
+.pagemeta .pm-time{background:var(--faint); border-radius:999px; padding:3px 10px}
+.pagemeta .pm-time b{color:var(--ink); font-weight:700}
+.pagemeta .pm-jump{color:var(--accent); font-weight:700; text-decoration:none}
+.pagemeta .pm-jump:hover{text-decoration:underline}
+.pagemeta .pm-note{flex:1 1 100%; margin:0}
+#ex-first,#bank-map{scroll-margin-top:78px}
+</style>
+</head>
+<body data-page="stat:06-table-with-hole">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">סטטיסטיקה — המפה</a>
+    <span class="crumbs">תחנה <b>6</b> מתוך 7 · <b>הטבלה עם החור</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">סטטיסטיקה · תחנה 6 · תרגיל עוגן</div>
+  <h1>הטבלה עם החור</h1>
+  <p class="lead">
+    זה לא "תרגיל בסגנון של". זה <strong>התרגיל האמיתי מעבודת הקיץ שלך</strong> —
+    תרגיל 2 בחלק הסטטיסטיקה. נפרק אותו יחד עד הסוף, ובסוף העמוד הוא פשוט יהיה שלך.
+    ובדרך: כל ארבעת הכלים מהתחנות הקודמות נפגשים בתרגיל אחד.
+  </p>
+  <p class="youknow"><b>בסוף העמוד תדעי:</b> למצוא נעלם בטבלת שכיחויות · לשלוף
+  שכיח, חציון וממוצע מטבלה · לענות על "לכל היותר / לפחות" בלי להתבלבל.</p>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>≈ 15 דק׳</b> · 3 תרגילים</span>
+    <a class="pm-jump" href="#ex-first">לקפוץ ישר לתרגיל הראשון ↓</a>
+  </p>
+</header>
+
+<figure class="shot">
+  <img src="../assets/school/school-ex2-cars.png" alt="תרגיל 2 המקורי מעבודת הקיץ — טבלת המכוניות" loading="lazy">
+  <figcaption>התרגיל, כמו שהוא מופיע בחוברת. נראה מאיים? זו בסך הכל טבלה עם חור אחד. תכף נסתום אותו.</figcaption>
+</figure>
+
+<!-- ============ שלב 1 ============ -->
+<div class="stagebar"><span class="dots-s"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+  שלב <b>1</b> מתוך 7 · לקרוא את הטבלה נכון</div>
+<h2>קודם כל: מה בכלל כתוב פה?</h2>
+
+<table class="dtable">
+  <tr><th>מספר המכוניות</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+  <tr><th>מספר המשפחות</th><td>4</td><td class="x-cell">x</td><td>10</td><td>2</td><td>4</td></tr>
+</table>
+
+<p>
+  השורה העליונה היא <strong>הערכים</strong> (כמה מכוניות יכולות להיות למשפחה),
+  והשורה התחתונה היא <strong>השכיחויות</strong> (כמה משפחות יש מכל סוג).
+</p>
+<p>
+  כלומר: ל-4 משפחות אין מכונית בכלל. ל-x משפחות יש מכונית אחת.
+  ל-10 משפחות יש שתי מכוניות. וכן הלאה.
+</p>
+<div class="box warn">
+  <div class="box-title">שימי לב</div>
+  איזו שורה קוראים לאיזה כיוון? בדיקה מהירה שתמיד עובדת:
+  השורה של ה<strong>משפחות</strong> היא זו שסוכמים.
+  משפחות סופרים; מכוניות הן רק "התוויות" של העמודות.
+</div>
+
+<!-- ============ שלב 2 ============ -->
+<div class="stagebar"><span class="dots-s"><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i></span>
+  שלב <b>2</b> מתוך 7 · סותמים את החור</div>
+<h2>מוצאים את x — חושבים כמו מי שכתב את השאלה</h2>
+
+<article id="ex-first" class="ex">
+  <div class="ex-head"><span class="lvl l1">ביחד</span><h4>סעיף א</h4></div>
+  <p class="q-text">
+    ידוע ש<span class="mk mk-given">עשירית מהמשפחות ביישוב</span> בעלות
+    <span class="mk mk-given2">4 מכוניות</span>.
+    <span class="mk mk-find">לכמה משפחות ביישוב יש מכונית אחת?</span>
+  </p>
+  <p>
+    מי שחיבר את השאלה ידע כמה משפחות יש, וחישב מזה את ה"עשירית".
+    אנחנו נעשה את הדרך שלו — <strong>הפוך</strong>.
+  </p>
+  <details class="step"><summary>שלב ראשון — כמה משפחות יש בסך הכל?</summary>
+    <div class="step-body">
+      מחברים את כל השכיחויות: <span class="fi">\(4+x+10+2+4=20+x\)</span>.
+    </div>
+  </details>
+  <details class="step"><summary>שלב שני — מתרגמים את "עשירית" למשוואה</summary>
+    <div class="step-body">
+      "עשירית מהמשפחות בעלות 4 מכוניות" פירושו:
+      <span class="mk mk-group">המשפחות עם 4 מכוניות</span> חלקי
+      <span class="mk mk-total">כל המשפחות</span> שווה <span class="fi">\(\tfrac{1}{10}\)</span>.
+      $$\frac{\underbrace{\textcolor{#1D6FA5}{4}}_{\textcolor{#1D6FA5}{\text{משפחות עם 4 מכוניות}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{20+x}}_{\textcolor{#8A6D1B}{\text{כל המשפחות ביישוב}}}}=\frac{1}{10}$$
+    </div>
+  </details>
+  <details class="step"><summary>שלב שלישי — פותרים ובודקים</summary>
+    <div class="step-body">
+      כפל בהצלבה: <span class="fi">\(4\cdot 10=20+x\)</span>, כלומר
+      <span class="fi">\(40=20+x\)</span>, ולכן <span class="fi">\(x=20\)</span>.
+      <p>ביישוב יש <span class="fi">\(20+20=40\)</span> משפחות,
+      ול-<strong>20 משפחות יש מכונית אחת</strong>.</p>
+      <p>בדיקה: האם 4 מתוך 40 זו באמת עשירית? <span class="fi">\(\tfrac{4}{40}=\tfrac{1}{10}\)</span> ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex-a"> סיימתי את סעיף א</label>
+</article>
+
+<p>מעכשיו הטבלה שלמה — נעבוד איתה בהמשך. כל עמודה מקבלת צבע קבוע,
+והצבעים האלה ילוו אותנו בכל שאר העמוד (בעיגולים ובחישובים):</p>
+<table class="dtable">
+  <tr><th>מספר המכוניות</th><td class="hl-c1">0</td><td class="hl-c2">1</td><td class="hl-c3">2</td><td class="hl-c4">3</td><td class="hl-c5">4</td></tr>
+  <tr><th>מספר המשפחות</th><td class="hl-c1">4</td><td class="hl-c2"><b>20</b></td><td class="hl-c3">10</td><td class="hl-c4">2</td><td class="hl-c5">4</td></tr>
+</table>
+<p class="tbl-note">סך הכל: 40 משפחות</p>
+
+<details class="alt">
+  <summary>עוד דרכים להגיד "עשירית מהמשפחות" — אותו נתון בחמש תחפושות</summary>
+  <div class="alt-body">
+    <ul>
+      <li>"השכיחות היחסית של 4 מכוניות היא <span class="fi">\(\tfrac{1}{10}\)</span>"</li>
+      <li>"‏10% מהמשפחות מחזיקות 4 מכוניות"</li>
+      <li>"אחת מכל 10 משפחות מחזיקה 4 מכוניות"</li>
+      <li>"היחס בין המשפחות בעלות 4 מכוניות לכלל המשפחות הוא 1:10"</li>
+      <li>"מספר המשפחות עם 4 מכוניות הוא עשירית מכלל המשפחות"</li>
+    </ul>
+    <p>בכל הניסוחים מסתתר אותו שבר בדיוק: <span class="mk mk-group">קבוצה</span>
+    חלקי <span class="mk mk-total">סך הכל</span>. זו בדיוק השכיחות היחסית מתחנה 4.</p>
+  </div>
+</details>
+
+<!-- ============ שלב 3 ============ -->
+<div class="stagebar"><span class="dots-s"><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i></span>
+  שלב <b>3</b> מתוך 7 · השכיח</div>
+<h2>סעיף ב — מהו השכיח?</h2>
+
+<p>
+  מחפשים את השכיחות הגבוהה ביותר בשורת המשפחות: <span class="fi">\(20\)</span>.
+  אבל זהירות — <strong>‏20 הוא לא השכיח</strong>. ‏20 זה כמה משפחות.
+  השכיח הוא <strong>הערך</strong> שהן מחזיקות:
+</p>
+<div class="box def">
+  <div class="box-title">התשובה</div>
+  השכיח הוא <strong>מכונית אחת</strong> (‏1) — כי להכי הרבה משפחות (20) יש בדיוק מכונית אחת.
+</div>
+<p>
+  זה בדיוק ההבדל מתחנה 3: שכיח = הערך; שכיחות = כמה פעמים.
+  בטבלה: השכיח גר בשורה <strong>העליונה</strong>, מעל השכיחות הכי גדולה.
+</p>
+<label class="mark"><input type="checkbox" data-k="ex-b"> סיימתי את סעיף ב</label>
+
+<!-- ============ שלב 4 ============ -->
+<div class="stagebar"><span class="dots-s"><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i></span>
+  שלב <b>4</b> מתוך 7 · החציון — לב העמוד</div>
+<h2>סעיף ג — חציון של 40 משפחות, בשלוש דרכים</h2>
+
+<p>
+  ‏40 משפחות. אי אפשר "להסתכל ולראות את האמצע" — אז נעשה את זה כמו שצריך.
+  קודם <strong>נראה</strong> את זה בעיניים, ואז נעשה את אותו הדבר עם נוסחה ועם הטבלה.
+</p>
+<div class="box warn">
+  <div class="box-title">שימי לב</div>
+  האמצע של השורה העליונה — "‏2, כי הוא באמצע בין 0 ל-4" — הוא <strong>לא</strong> החציון.
+  החציון סופר <strong>משפחות</strong>, לא עמודות: 40 משפחות עומדות בשורה, ואנחנו
+  מחפשים את מי שבאמצע השורה.
+</div>
+
+<h3>דרך 1 · לראות את כל 40 המשפחות</h3>
+<p>
+  כל עיגול = משפחה אחת, והמספר שכתוב בו = כמה מכוניות יש לה.
+  מסודרות משמאל לימין לפי מספר המכוניות — בדיוק כמו צבעי העמודות בטבלה:
+  4 אפורות (0), 20 כחולות (1), 10 ירקרקות (2), 2 סגולות (3), 4 ורודות (4).
+</p>
+<div class="dotrow with-pos">
+  <span class="dot lg d1">0</span><span class="dot lg d1">0</span><span class="dot lg d1">0</span><span class="dot lg d1">0</span><span class="dot lg d2">1</span><span class="dot lg d2">1</span><span class="dot lg d2">1</span><span class="dot lg d2">1</span><span class="dot lg d2">1</span><span class="dot lg d2">1</span><span class="dot lg d2">1</span><span class="dot lg d2">1</span><span class="dot lg d2">1</span><span class="dot lg d2">1</span><span class="dot lg d2">1</span><span class="dot lg d2">1</span><span class="dot lg d2">1</span><span class="dot lg d2">1</span><span class="dot lg d2">1</span><span class="dot lg d2 ring"><span class="pos">20</span>1</span><span class="dot lg d2 ring"><span class="pos">21</span>1</span><span class="dot lg d2">1</span><span class="dot lg d2">1</span><span class="dot lg d2">1</span><span class="dot lg d3">2</span><span class="dot lg d3">2</span><span class="dot lg d3">2</span><span class="dot lg d3">2</span><span class="dot lg d3">2</span><span class="dot lg d3">2</span><span class="dot lg d3">2</span><span class="dot lg d3">2</span><span class="dot lg d3">2</span><span class="dot lg d3">2</span><span class="dot lg d4">3</span><span class="dot lg d4">3</span><span class="dot lg d5">4</span><span class="dot lg d5">4</span><span class="dot lg d5">4</span><span class="dot lg d5">4</span>
+</div>
+<p class="viz-cap">
+  המשפחה ה-20 והמשפחה ה-21 — מספר המקום שלהן רשום מעליהן — יושבות שתיהן
+  בתוך הקבוצה של משפחה עם מכונית אחת, ולכן הערך הכתוב בשתיהן הוא 1.
+</p>
+<p>
+  למה דווקא 20 ו-21? כי 40 זה מספר <strong>זוגי</strong> — אין נקודה אחת באמצע,
+  אלא שתיים. החציון הוא הממוצע של שתיהן. כאן שתיהן 1, ולכן —
+</p>
+<div class="box def">
+  <div class="box-title">התשובה</div>
+  החציון הוא <strong>מכונית אחת</strong> (‏1).
+</div>
+
+<h3>דרך 2 · נוסחת המיקום — בשביל מבחן</h3>
+<p>
+  בנוסחה מופיע <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> — אז קודם מזהות: מה זה <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> אצלנו?
+  <br>כל משפחה היא נתון אחד — אז <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> = כמה משפחות יש בסך הכל.
+  <br>וזה בדיוק סכום שורת המשפחות (שורת השכיחות), עמודה-עמודה בצבעים שלה:
+</p>
+$$\textcolor{#8A6D1B}{N}=\textcolor{#6B7683}{4}+\textcolor{#1D6FA5}{20}+\textcolor{#2E7D6B}{10}+\textcolor{#6D28D9}{2}+\textcolor{#C2408C}{4}=\textcolor{#8A6D1B}{40}$$
+<div class="fbox">
+  <div class="fbox-title">מיקום החציון</div>
+  $$\text{המיקום}=\frac{\textcolor{#8A6D1B}{N}+1}{2}=\frac{\overbrace{\textcolor{#8A6D1B}{40}}^{\textcolor{#8A6D1B}{\text{סך המשפחות — סכום שורת השכיחות}}}+1}{2}=20.5$$
+  <span class="f-legend">
+    <span><i class="sw" style="background:#FBF0C9"></i> ‏N — מספר הנתונים (כאן: 40 משפחות)</span>
+  </span>
+</div>
+<p>
+  מיקום 20.5 פירושו: <strong>בין המקום ה-20 למקום ה-21</strong> —
+  בדיוק שתי הנקודות שסימנו בעיגול. הנוסחה רק אומרת לנו <em>איפה</em> לחפש;
+  את הערך עצמו קוראים מהנתונים.
+</p>
+
+<h3>דרך 3 · שליפה מהטבלה — בשביל מהירות</h3>
+<p>לא חייבים לצייר 40 עיגולים. צוברים לאורך שורת המשפחות — מהעמודה הימנית
+שמאלה, לפי צבעי הטבלה — עד שעוברים את <span class="mk mk-find">20.5</span>.
+<br>הנה הטבלה השלמה שוב, עם שורת צבירה שסופרת תוך כדי הליכה:</p>
+
+<table class="dtable">
+  <tr><th>מספר המכוניות</th><td class="hl-c1">0</td><td class="hl-c2">1</td><td class="hl-c3">2</td><td class="hl-c4">3</td><td class="hl-c5">4</td></tr>
+  <tr><th>מספר המשפחות</th><td class="hl-c1">4</td><td class="hl-c2"><b>20</b></td><td class="hl-c3">10</td><td class="hl-c4">2</td><td class="hl-c5">4</td></tr>
+  <tr><th>כמה ספרנו עד כאן (צבירה)</th>
+      <td class="hl-c1">① <b style="color:#6B7683">4</b></td>
+      <td style="background:#DFF0E1"><b style="color:#2E7D32">② <span dir="ltr">4+20=24</span></b> ✋</td>
+      <td>—</td><td>—</td><td>—</td></tr>
+</table>
+<p class="tbl-note">⬅ כיוון ההליכה: מתחילים בעמודה הימנית (0 מכוניות) וצועדים שמאלה — ① ואז ②.</p>
+<p class="tbl-note" style="color:#2E7D32;font-weight:700;margin-top:2px">✋ עברנו את 20.5 בעמודה של הערך 1 — המקומות 20 ו-21 יושבים בה, ושם עוצרים.</p>
+
+<ol class="steps">
+  <li><i class="sw" style="background:#E8EBEE;display:inline-block;width:11px;height:11px;border-radius:3px;margin-inline-end:5px"></i>תא ① —
+      עד סוף <span style="color:#6B7683;font-weight:800">עמודת ה-0</span>:
+      <span class="fi">\(\textcolor{#6B7683}{4}\)</span> משפחות. עברנו את 20.5? לא.</li>
+  <li><i class="sw" style="background:#DDEDF8;display:inline-block;width:11px;height:11px;border-radius:3px;margin-inline-end:5px"></i>תא ② —
+      ועוד <span style="color:#1D6FA5;font-weight:800">עמודת ה-1</span>:
+      <span class="fi">\(\textcolor{#6B7683}{4}+\textcolor{#1D6FA5}{20}=24\)</span> משפחות.
+      עברנו את <span class="mk mk-find">20.5</span>? כן — עוצרות.</li>
+  <li>המקומות 5 עד 24 כולם בתוך <span style="color:#1D6FA5;font-weight:800">עמודת ה-1</span>
+      — אותה קבוצה שספרנו בשורת העיגולים — ובפרט המקומות 20 ו-21.
+      החציון: <strong>1</strong>.</li>
+</ol>
+<div class="box intuition">
+  <div class="box-title">שלוש דרכים, תשובה אחת</div>
+  הנקודות — כדי להבין. הנוסחה — כדי לדעת איפה מחפשים במבחן.
+  הצבירה בטבלה — כדי לענות מהר. שלושתן חייבות להסכים; אם לא — יש טעות.
+</div>
+<label class="mark"><input type="checkbox" data-k="ex-c"> סיימתי את סעיף ג</label>
+
+<!-- ============ שלב 5 ============ -->
+<div class="stagebar"><span class="dots-s"><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i></span>
+  שלב <b>5</b> מתוך 7 · הממוצע</div>
+<h2>סעיף ד — מספר המכוניות הממוצע למשפחה</h2>
+
+<p>
+  כל ערך נספר כמספר המשפחות שמחזיקות אותו,
+  ומחלקים ב<strong>סך המשפחות</strong> — לא במספר העמודות.
+  בדיוק כמו בתחנה 2.
+</p>
+<div class="fbox">
+  <div class="fbox-title">ממוצע מהטבלה</div>
+  $$\overline{x}=\frac{\underbrace{\textcolor{#6B7683}{0\cdot 4}}_{\textcolor{#6B7683}{\text{0 מכוניות}}}+\underbrace{\textcolor{#1D6FA5}{1\cdot 20}}_{\textcolor{#1D6FA5}{\text{מכונית אחת}}}+\underbrace{\textcolor{#2E7D6B}{2\cdot 10}}_{\textcolor{#2E7D6B}{\text{שתיים}}}+\underbrace{\textcolor{#6D28D9}{3\cdot 2}}_{\textcolor{#6D28D9}{\text{שלוש}}}+\underbrace{\textcolor{#C2408C}{4\cdot 4}}_{\textcolor{#C2408C}{\text{ארבע}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{40}}_{\textcolor{#8A6D1B}{\text{סך המשפחות}}}}=\frac{62}{\textcolor{#8A6D1B}{40}}=1.55$$
+  <span class="f-legend">
+    <span>כל מכפלה צבועה בצבע העמודה שלה מהטבלה — ערך × כמה משפחות.</span>
+    <span><i class="sw" style="background:#FBF0C9"></i> צהוב — הסך הכל במכנה</span>
+  </span>
+</div>
+<p>
+  ‏1.55 מכוניות למשפחה. אף משפחה בעולם לא מחזיקה 1.55 מכוניות — וזה בסדר גמור:
+  הממוצע הוא נקודת איזון, לא ערך שחייב להופיע בטבלה.
+  (שימי לב שהוא קרוב לחציון, 1 — כשאין ערכים קיצוניים, הם נוטים להיות קרובים.)
+</p>
+<p>
+  ועוד פרט קטן ששווה נקודות: <span class="fi">\(0\cdot 4\)</span> אמנם מאפס את
+  המכפלה במונה, אבל 4 המשפחות בלי המכונית <strong>עדיין נספרות במכנה</strong> —
+  הן חלק מהיישוב גם אם הן לא תורמות מכוניות.
+</p>
+<label class="mark"><input type="checkbox" data-k="ex-d"> סיימתי את סעיף ד</label>
+
+<!-- ============ שלב 6 ============ -->
+<div class="stagebar"><span class="dots-s"><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i></span>
+  שלב <b>6</b> מתוך 7 · לכל היותר / לפחות</div>
+<h2>שאלות שאוהבים להוסיף: "לכל היותר" ו"לפחות"</h2>
+
+<p>
+  בעבודות ובמבחנים אוהבים להוסיף לתרגיל כזה סעיף בסגנון:
+  <span class="mk mk-find">"כמה משפחות מחזיקות לכל היותר 2 מכוניות?"</span>
+  כל הסוד: לצבוע בראש את העמודות הנכונות ולסכום.
+</p>
+<p>"לכל היותר 2" = ‏2 או פחות = העמודות 0, 1, 2:</p>
+<table class="dtable">
+  <tr><th>מספר המכוניות</th><td class="hl-group">0</td><td class="hl-group">1</td><td class="hl-group">2</td><td>3</td><td>4</td></tr>
+  <tr><th>מספר המשפחות</th><td class="hl-group">4</td><td class="hl-group">20</td><td class="hl-group">10</td><td>2</td><td>4</td></tr>
+</table>
+<p style="text-align:center"><span class="fi">\(4+20+10=34\)</span> משפחות.</p>
+<p>"לפחות 3" = ‏3 או יותר = העמודות 3, 4: <span class="fi">\(2+4=6\)</span> משפחות.
+בדיקה: <span class="fi">\(34+6=40\)</span> ✓ — שתי הקבוצות יחד הן כל היישוב.</p>
+
+<details class="alt">
+  <summary>כל הניסוחים של "לכל היותר" ו"לפחות" — שלא יעבדו עלייך</summary>
+  <div class="alt-body">
+    <ul>
+      <li>"לכל היותר 2" = "‏2 או פחות" = "לא יותר מ-2" = "עד 2 (כולל)"</li>
+      <li>"לפחות 3" = "‏3 או יותר" = "לא פחות מ-3" = "‏3 ומעלה"</li>
+      <li>וזהירות מהאח הקטן והמסוכן: <strong>"פחות מ-3"</strong> = עד 2,
+          <strong>בלי</strong> ה-3 עצמו! ("פחות מ" לא כולל; "לכל היותר" כולל.)</li>
+      <li>וגם בהיפוך: "כמה משפחות <em>אינן</em> מחזיקות 3 מכוניות או יותר?" —
+          זו שוב "לכל היותר 2", רק במסכה.</li>
+    </ul>
+    <p>המילה "כולל" היא הלב: "לכל היותר 2" תמיד <strong>כולל</strong> את 2 עצמו.</p>
+  </div>
+</details>
+<label class="mark"><input type="checkbox" data-k="ex-e"> סיימתי את השלב הזה</label>
+
+<!-- ============ שלב 7 ============ -->
+<div class="stagebar"><span class="dots-s"><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i></span>
+  שלב <b>7</b> מתוך 7 · הנתונים משתנים + את המורה</div>
+<h2>הנתונים משתנים — ואת כבר יודעת לנבא</h2>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">לבד עם רשת</span><h4>שתי משפחות חדשות עוברות ליישוב</h4></div>
+  <p class="q-text">
+    <span class="mk mk-change">ליישוב עברו שתי משפחות חדשות: לאחת אין מכונית, ולשנייה 4 מכוניות</span>.
+    <span class="mk mk-find">מה יקרה לממוצע? ומה יקרה לחציון?</span>
+    נחשי קודם — ורק אז חשבי.
+  </p>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p><strong>ניחוש חכם:</strong> החדשות מביאות
+      <span class="fi">\(\frac{0+4}{2}=2\)</span> מכוניות למשפחה — מעל 1.55 ←
+      הממוצע יעלה קצת.</p>
+      $$\overline{x}_{\text{חדש}}=\frac{\underbrace{\textcolor{#1D6FA5}{62}}_{\textcolor{#1D6FA5}{\text{הסכום הישן}}}+\underbrace{\textcolor{#6D28D9}{0+4}}_{\textcolor{#6D28D9}{\text{שתי החדשות}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{40+2}}_{\textcolor{#8A6D1B}{\text{גם הכמות גדלה}}}}=\frac{\textcolor{#1D6FA5}{66}}{\textcolor{#8A6D1B}{42}}\approx 1.57$$
+      $$\text{מיקום החציון}=\frac{\textcolor{#8A6D1B}{42}+1}{2}=\underbrace{21.5}_{\text{בין מקום 21 למקום 22}}$$
+      <p>נרשום את הטבלה המעודכנת — שתי המשפחות החדשות נכנסו לעמודות 0 ו-4 — ונחשב את הצבירה מחדש עד שעוברים את 21.5:</p>
+      <table class="dtable sol-table">
+        <tr><th>מספר המכוניות</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+        <tr><th>מספר המשפחות</th>
+            <td style="background:var(--b-change)"><b>5</b></td>
+            <td>20</td><td>10</td><td>2</td>
+            <td style="background:var(--b-change)"><b>5</b></td></tr>
+        <tr><th>כמה ספרנו עד כאן (צבירה)</th>
+            <td>① 5</td>
+            <td style="background:#DFF0E1"><b style="color:#2E7D32">② <span dir="ltr">5+20=25</span></b> ✋</td>
+            <td>—</td><td>—</td><td>—</td></tr>
+      </table>
+      <p class="tbl-note" style="color:#2E7D32;font-weight:700">✋ עברנו את 21.5 — המקומות 21 ו-22 עדיין בעמודת המכונית האחת.</p>
+      <p>המקומות 21 ו-22 עדיין בגוש ה"מכונית אחת" — החציון נשאר <strong>1</strong>.</p>
+      <p><strong>בדיקת היגיון:</strong> כמו הניחוש — הממוצע עלה קצת: 1.55 ← 1.57,
+      והחציון לא זז ✓
+      <br>את התופעה הזו נראה בגדול בתחנה הבאה — עם שיר אחד ויום אחד מטורף.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex-f"> סיימתי</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">עכשיו את המורה</span><h4>מצאי את הטעות של תום</h4></div>
+  <p class="q-text">
+    תום פתר את סעיף א כך: <span class="en">"</span>סך המשפחות הוא
+    <span class="fi">\(20x\)</span>, ולכן <span class="fi">\(\tfrac{4}{20x}=\tfrac{1}{10}\)</span>,
+    מכאן <span class="fi">\(40=20x\)</span> ולכן <span class="fi">\(x=2\)</span><span class="en">"</span>.
+    <span class="mk mk-find">מה השתבש — ואיך היית מסבירה לו את זה?</span>
+  </p>
+  <details class="sol">
+    <summary>הצגי תשובה</summary>
+    <div class="sol-body">
+      <p>הטעות בשורה הראשונה: סך המשפחות הוא סכום —
+      <span class="fi">\(4+x+10+2+4=20+x\)</span> — ותום כתב מכפלה,
+      <span class="fi">\(20x\)</span>. חיבור, לא כפל.</p>
+      <p>וגם בלי למצוא את הטעות, אפשר היה לחשוד בתשובה: אם
+      <span class="fi">\(x=2\)</span>, ביישוב 22 משפחות, ו-4 מתוכן עם 4 מכוניות —
+      זה <span class="fi">\(\tfrac{4}{22}\)</span>, שזה בערך 18%, לא עשירית.
+      <strong>בדיקת היגיון תופסת כמעט כל טעות.</strong></p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex-g"> סיימתי</label>
+</article>
+
+<!-- ============ סרטונים ============ -->
+<h2>🎬 רוצה לראות תרגילים כאלה נפתרים בקול?</h2>
+<div class="watch">
+  <p>אותה משפחת תרגילים בדיוק, בידיים של מורים:</p>
+  <a class="video-link" href="https://www.youtube.com/watch?v=kGz_SUwXdGo">
+    <img src="../assets/stats/kGz_SUwXdGo/01_t0010.jpg" alt="טבלה עם נעלם — הלוח מהסרטון" loading="lazy">
+    <span class="vt"><b>שכיחות יחסית עם נעלם, על לוח</b><span>אותה טכניקת "הנדסה לאחור" בדיוק · 4:21</span></span>
+    <span class="play">▶</span>
+  </a>
+  <a class="video-link" href="https://www.youtube.com/watch?v=ax4QJUwhka4">
+    <img src="../assets/stats/ax4QJUwhka4/02_t0150.jpg" alt="תרגול 4 יחידות — הלוח מהסרטון" loading="lazy">
+    <span class="vt"><b>תרגיל מסכם: נעלם + שכיח + חציון + ממוצע</b><span>עובד לב ארי, רמת 4 יח"ל — והוא לגמרי בהישג ידך · 8:39</span></span>
+    <span class="play">▶</span>
+  </a>
+  <a class="video-link" href="https://www.youtube.com/watch?v=RonjCFh4GO8">
+    <img src="../assets/stats/RonjCFh4GO8/02_t0190.jpg" alt="שאלה מבחינת בגרות — הלוח מהסרטון" loading="lazy">
+    <span class="vt"><b>שאלה כזו בבגרות 3 יחידות</b><span>ככה זה נראה בעוד ארבע שנים — מוכר, נכון? · 9:55</span></span>
+    <span class="play">▶</span>
+  </a>
+</div>
+
+<!-- ============ ניווט ============ -->
+<div class="progresswrap no-print">
+  <span class="progressbar"><i></i></span><span class="progress-label"></span>
+  <button class="all-sols" style="font-family:inherit;font-size:12px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:4px 10px;cursor:pointer">לפתוח את כל הפתרונות</button>
+</div>
+
+<nav class="pagenav">
+  <a href="05-elections.html"><span class="dir">→ התחנה הקודמת</span>ליל המנדטים</a>
+  <a class="next" href="07-music-year.html"><span class="dir">התחנה הבאה ←</span>השנה שלך במוזיקה</a>
+</nav>
+
+<footer class="fin">חלק מהעולם של שירה · <a href="index.html">המפה</a> · <a href="../index.html">המרכז</a></footer>
+</main>
+</div>
+</body>
+</html>

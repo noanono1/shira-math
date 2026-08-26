@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<!-- מסך הבית של האייפד/הטלפון -->
+<link rel="apple-touch-icon" href="../assets/icons/icon-180.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>ממוצע — סטטיסטיקה — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../vendor/katex.min.css">
+<link rel="stylesheet" href="../css/shira.css">
+<style>
+/* איור המטבעות: לפני ← אחרי, בדמות אחת */
+.coins-flow{direction:rtl; display:flex; align-items:center; justify-content:center;
+  gap:10px; margin:14px 0}
+.coins-flow .stacks{margin:0; flex:0 1 auto}
+.coins-arrow{display:flex; flex-direction:column; align-items:center; gap:2px;
+  flex:0 0 auto; color:var(--stat); font-weight:700; font-size:12px;
+  text-align:center; line-height:1.5; padding:0 2px}
+.coins-arrow .ar{font-size:30px; line-height:1; font-weight:400}
+.coins-arrow .ar-v{display:none}
+@media (max-width:640px){
+  .coins-flow{flex-direction:column}
+  .coins-arrow .ar-h{display:none}
+  .coins-arrow .ar-v{display:block}
+}
+</style>
+<script defer src="../vendor/katex.min.js"></script>
+<script defer src="../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../js/shira.js"></script>
+<style>
+/* מחוון פתיחה — כמה זמן, כמה תרגילים, ואיפה מתחילים לתרגל (מוסתר בהדפסה) */
+.pagemeta{display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px;
+  margin:12px 0 0; font-size:13px; color:var(--soft)}
+.pagemeta .pm-time{background:var(--faint); border-radius:999px; padding:3px 10px}
+.pagemeta .pm-time b{color:var(--ink); font-weight:700}
+.pagemeta .pm-jump{color:var(--accent); font-weight:700; text-decoration:none}
+.pagemeta .pm-jump:hover{text-decoration:underline}
+.pagemeta .pm-note{flex:1 1 100%; margin:0}
+#ex-first,#bank-map{scroll-margin-top:78px}
+</style>
+</head>
+<body data-page="stat:02-mean">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">סטטיסטיקה — המפה</a>
+    <span class="crumbs">תחנה <b>2</b> מתוך 7 · <b>ממוצע</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">סטטיסטיקה · תחנה 2</div>
+  <h1>ממוצע — המספר שמאזן את כולם</h1>
+  <p class="lead">
+    את פוגשת ממוצעים כל הזמן: ממוצע ציונים, ממוצע האזנות ליום, "גובה ממוצע".
+    בעמוד הזה נראה מה המספר הזה באמת אומר — ואיך מחשבים אותו גם כשהנתונים
+    מגיעים בטבלה.
+  </p>
+  <p class="youknow"><b>בסוף העמוד תדעי:</b> לחשב ממוצע מרשימה ומטבלת שכיחויות ·
+  להסביר למה הוא "מאזן" · לנבא אם ממוצע יעלה או יירד כשמצטרף נתון חדש.</p>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>≈ 20 דק׳</b> · 6 תרגילים</span>
+    <a class="pm-jump" href="#sec-practice">לקפוץ ישר לתרגילים ↓</a>
+  </p>
+</header>
+
+<!-- ============ 1. הרעיון ============ -->
+<h2><span class="num">1</span>מה הממוצע באמת אומר?</h2>
+
+<p>
+  את הנוסחה בטח כבר ראית בכיתה: מחברים הכל, ומחלקים בכמה שיש.
+  השאלה היא מה המספר שיוצא <strong>באמת אומר</strong> — ובשביל זה יש סיפור קצר.
+</p>
+
+<p>
+  חמישה חברים ספרו כמה מטבעות יש לכל אחד: <span class="fi">\(4,\;5,\;8,\;3,\;10\)</span>.
+  עכשיו דמייני שכולם שמים את המטבעות בערימה אחת במרכז — ומחלקים מחדש,
+  <strong>שווה בשווה</strong>:
+</p>
+
+<div class="coins-flow">
+  <div class="stacks">
+    <div class="stack"><div class="pile"><span class="dot d2"></span><span class="dot d2"></span><span class="dot d2"></span><span class="dot d2"></span></div><span class="cnt">4</span><span class="lbl">נועם</span></div>
+    <div class="stack"><div class="pile"><span class="dot d2"></span><span class="dot d2"></span><span class="dot d2"></span><span class="dot d2"></span><span class="dot d2"></span></div><span class="cnt">5</span><span class="lbl">תמר</span></div>
+    <div class="stack"><div class="pile"><span class="dot d2"></span><span class="dot d2"></span><span class="dot d2"></span><span class="dot d2"></span><span class="dot d2"></span><span class="dot d2"></span><span class="dot d2"></span><span class="dot d2"></span></div><span class="cnt">8</span><span class="lbl">יובל</span></div>
+    <div class="stack"><div class="pile"><span class="dot d2"></span><span class="dot d2"></span><span class="dot d2"></span></div><span class="cnt">3</span><span class="lbl">עדי</span></div>
+    <div class="stack"><div class="pile"><span class="dot d2"></span><span class="dot d2"></span><span class="dot d2"></span><span class="dot d2"></span><span class="dot d2"></span><span class="dot d2"></span><span class="dot d2"></span><span class="dot d2"></span><span class="dot d2"></span><span class="dot d2"></span></div><span class="cnt">10</span><span class="lbl">רוני</span></div>
+  </div>
+  <div class="coins-arrow">
+    <span class="ar ar-h">←</span><span class="ar ar-v">↓</span>
+    <span>אוספים הכל: 30</span>
+    <span>מחלקים ל-5: <span class="fi">\(30:5=6\)</span></span>
+  </div>
+  <div class="stacks">
+    <div class="stack"><div class="pile"><span class="dot d3"></span><span class="dot d3"></span><span class="dot d3"></span><span class="dot d3"></span><span class="dot d3"></span><span class="dot d3"></span></div><span class="cnt">6</span><span class="lbl">נועם</span></div>
+    <div class="stack"><div class="pile"><span class="dot d3"></span><span class="dot d3"></span><span class="dot d3"></span><span class="dot d3"></span><span class="dot d3"></span><span class="dot d3"></span></div><span class="cnt">6</span><span class="lbl">תמר</span></div>
+    <div class="stack"><div class="pile"><span class="dot d3"></span><span class="dot d3"></span><span class="dot d3"></span><span class="dot d3"></span><span class="dot d3"></span><span class="dot d3"></span></div><span class="cnt">6</span><span class="lbl">יובל</span></div>
+    <div class="stack"><div class="pile"><span class="dot d3"></span><span class="dot d3"></span><span class="dot d3"></span><span class="dot d3"></span><span class="dot d3"></span><span class="dot d3"></span></div><span class="cnt">6</span><span class="lbl">עדי</span></div>
+    <div class="stack"><div class="pile"><span class="dot d3"></span><span class="dot d3"></span><span class="dot d3"></span><span class="dot d3"></span><span class="dot d3"></span><span class="dot d3"></span></div><span class="cnt">6</span><span class="lbl">רוני</span></div>
+  </div>
+</div>
+<p class="viz-cap">אותם 30 מטבעות — אחרי חלוקה שווה, 6 לכל אחד. <strong>6 הוא הממוצע.</strong></p>
+
+<div class="box def">
+  <div class="box-title">הגדרה</div>
+  הממוצע הוא הערך שכל אחד היה מקבל, אילו הסכום הכולל היה מתחלק שווה בשווה.
+  <br>מחשבים אותו כך: מחברים את כל הערכים, ומחלקים בכמה ערכים יש.
+</div>
+
+<p>ועכשיו אותו רעיון, בשפה של נוסחה. שימי לב שהצבעים אומרים בדיוק מי זה מי:</p>
+
+<div class="fbox">
+  <div class="fbox-title">חישוב הממוצע</div>
+  $$\overline{x}\;=\;\frac{\underbrace{\textcolor{#1D6FA5}{4+5+8+3+10}}_{\textcolor{#1D6FA5}{\text{סכום כל הערכים}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{5}}_{\textcolor{#8A6D1B}{\text{כמה ערכים יש}}}}\;=\;\frac{\textcolor{#1D6FA5}{30}}{\textcolor{#8A6D1B}{5}}\;=\;6$$
+  <span class="f-legend">
+    <span><i class="sw" style="background:#DDEDF8"></i> כחול — הסכום של כל הערכים יחד</span>
+    <span><i class="sw" style="background:#FBF0C9"></i> צהוב — מספר הערכים (כמה משתתפים)</span>
+    <span><span class="fi">\(\overline{x}\)</span> — כך מסמנים ממוצע (איקס עם קו מעליו)</span>
+  </span>
+</div>
+
+<p>
+  זה כל הסיפור: <strong>סכום ÷ כמות</strong>. כל מה שנעשה מכאן והלאה —
+  ממוצע מטבלה, ממוצע שמשתנה, ממוצע עם נעלם — זה אותו שבר בדיוק,
+  רק שהנתונים מגיעים בתחפושות אחרות.
+</p>
+
+<details class="alt">
+  <summary>איך עוד שואלים "מה הממוצע?" — אותה שאלה בחמש תחפושות</summary>
+  <div class="alt-body">
+    <ul>
+      <li>"חשבי את ממוצע המטבעות."</li>
+      <li>"כמה מטבעות יש לכל ילד <strong>בממוצע</strong>?"</li>
+      <li>"אילו המטבעות היו מתחלקים <strong>שווה בשווה</strong> — כמה היה מקבל כל אחד?"</li>
+      <li>"מהו סכום המטבעות <strong>חלקי</strong> מספר הילדים?"</li>
+      <li>"איזה מספר אחד מייצג הכי טוב את כל הקבוצה?" — זו כבר שאלה עמוקה,
+          ובתחנה הבאה נראה שלפעמים התשובה היא דווקא החציון.</li>
+    </ul>
+    <p>המילים מתחלפות — <span class="mk mk-group">הסכום</span> ו<span class="mk mk-total">הכמות</span>
+    תמיד שם. מצאי אותם קודם.</p>
+  </div>
+</details>
+
+<!-- ============ 2. ממוצע מטבלה ============ -->
+<h2><span class="num">2</span>ממוצע מתוך טבלת שכיחויות</h2>
+
+<p>
+  בבית הספר הנתונים כמעט תמיד מגיעים בטבלה. למשל: 10 תלמידים נבחנו,
+  והציונים סודרו כך —
+</p>
+
+<table class="dtable">
+  <tr><th>הציון</th><td class="hl-c2">60</td><td class="hl-c3">70</td><td class="hl-c4">80</td><td class="hl-c5">90</td></tr>
+  <tr><th>מספר התלמידים</th><td class="hl-c2">2</td><td class="hl-c3">3</td><td class="hl-c4">4</td><td class="hl-c5">1</td></tr>
+</table>
+<p class="tbl-note">השורה העליונה — הערכים (כאן: הציון) · השורה התחתונה — השכיחות (כמה תלמידים).</p>
+<p class="tbl-note">כל עמודה קיבלה צבע — ותכף תראי את אותם צבעים בדיוק בתוך החישוב.</p>
+
+<p>
+  לקרוא טבלה כזו נכון = לתרגם אותה בראש לרשימה:
+  "שניים קיבלו 60, שלושה קיבלו 70, ארבעה קיבלו 80, אחד קיבל 90".
+  <br>מכאן כלל הזהב: כל ציון נספר בסכום <strong>כמספר התלמידים שקיבלו אותו</strong> —
+  ‏60 נספר פעמיים, 70 שלוש פעמים, 80 ארבע פעמים ו-90 פעם אחת.
+  כל מכפלה בנוסחה צבועה בצבע העמודה שממנה היא באה:
+</p>
+
+<div class="fbox">
+  <div class="fbox-title">ממוצע מטבלה — כל ערך כפול השכיחות שלו</div>
+  $$\overline{x}=\frac{\underbrace{\textcolor{#1D6FA5}{60\cdot 2}}_{\textcolor{#1D6FA5}{\text{שניים קיבלו 60}}}+\underbrace{\textcolor{#2E7D6B}{70\cdot 3}}_{\textcolor{#2E7D6B}{\text{שלושה קיבלו 70}}}+\underbrace{\textcolor{#6D28D9}{80\cdot 4}}_{\textcolor{#6D28D9}{\text{ארבעה קיבלו 80}}}+\underbrace{\textcolor{#C2408C}{90\cdot 1}}_{\textcolor{#C2408C}{\text{אחד קיבל 90}}}}{\underbrace{\textcolor{#1D6FA5}{2}+\textcolor{#2E7D6B}{3}+\textcolor{#6D28D9}{4}+\textcolor{#C2408C}{1}}_{\textcolor{#8A6D1B}{\text{סך כל התלמידים — סכום שורת השכיחות}}}}=\frac{740}{\textcolor{#8A6D1B}{10}}=74$$
+  <span class="f-legend">
+    <span>כחול · ירקרק · סגול · ורוד — ארבע העמודות מהטבלה, באותו סדר.</span>
+    <span><i class="sw" style="background:#FBF0C9"></i> צהוב — סכום השכיחויות במכנה (כמה תלמידים בסך הכל)</span>
+  </span>
+</div>
+
+<div class="box warn">
+  <div class="box-title">שימי לב</div>
+  במכנה מחלקים ב<strong>סך התלמידים</strong> (‏<span class="fi">\(2+3+4+1=10\)</span>‏) —
+  <strong>לא</strong> במספר העמודות של הטבלה (4). ארבע זה כמה <em>ציונים שונים</em> יש,
+  לא כמה <em>תלמידים</em>.
+</div>
+
+<!-- ============ 3. תכונות ============ -->
+<h2><span class="num">3</span>שתי תכונות ששוות לדעת</h2>
+
+<h3>א. הממוצע לא חייב להיות "מספר אמיתי" מהרשימה</h3>
+<p>
+  ממוצע של 74 — אף אחד לא קיבל 74 במבחן הזה, וזה בסדר גמור.
+  בהמשך נפגוש אפילו "1.55 מכוניות למשפחה". הממוצע הוא נקודת איזון,
+  לא ערך שחייב להופיע בנתונים.
+</p>
+
+<h3>ב. מה קורה כשמצטרף נתון חדש?</h3>
+<p>כלל פשוט ששווה לזכור לפני שמחשבים בכלל:</p>
+<div class="box intuition">
+  <div class="box-title">אינטואיציה</div>
+  נתון חדש <strong>מעל</strong> הממוצע — מושך את הממוצע <strong>למעלה</strong>.
+  <br>נתון חדש <strong>מתחת</strong> לממוצע — מושך אותו <strong>למטה</strong>.
+  <br>נתון חדש <strong>שווה בדיוק</strong> לממוצע — לא משנה אותו בכלל.
+</div>
+<p>
+  למה זה עובד? תחזרי לתמונת המטבעות: מצטרף ילד שישי עם פחות מ-6 מטבעות —
+  כשמחלקים הכל מחדש שווה בשווה, לכל אחד יוצא קצת פחות.
+</p>
+
+<!-- ============ 4. תרגול ============ -->
+<h2 id="sec-practice"><span class="num">4</span>✏️ תרגול — משלב לשלב</h2>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>ממוצע מרשימה</h4></div>
+  <p class="q-text">
+    <span class="mk mk-group">בארבעה מבחנים קיבלה תלמידה 80, 90, 85 ו-95</span>.
+    <span class="mk mk-find">מהו ממוצע הציונים שלה?</span>
+  </p>
+  <p style="font-size:13px;color:var(--soft)">נסי לנחש את השלב הבא לפני שאת פותחת אותו.</p>
+  <details class="step"><summary>שלב ראשון — מה מחברים?</summary>
+    <div class="step-body">מחברים את כל הציונים:
+    <span class="fi">\(80+90+85+95=350\)</span>.</div>
+  </details>
+  <details class="step"><summary>שלב שני — במה מחלקים?</summary>
+    <div class="step-body">בכמות המבחנים — 4. הסכום למעלה, הכמות למטה:
+    $$\overline{x}=\frac{\underbrace{\textcolor{#1D6FA5}{350}}_{\textcolor{#1D6FA5}{\text{סכום כל הציונים}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{4}}_{\textcolor{#8A6D1B}{\text{כמות המבחנים}}}}=87.5$$
+    בדיוק כמו בנוסחה למעלה.</div>
+  </details>
+  <details class="step"><summary>שלב שלישי — בדיקת היגיון</summary>
+    <div class="step-body">‏87.5 נמצא בין הציון הנמוך (80) לגבוה (95) — ממוצע
+    <strong>תמיד</strong> נמצא בין הערך הקטן לגדול. אם יצא לך משהו מחוץ לטווח,
+    יש טעות חישוב.</div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex1"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex hide-marks">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>ממוצע מרשימה</h4></div>
+  <p class="q-text">
+    <span class="mk mk-group">בחמישה ימים קראה שירה 12, 20, 15, 9 ו-24 עמודים</span>.
+    <span class="mk mk-find">כמה עמודים קראה ביום, בממוצע?</span>
+  </p>
+  <div class="q-row">
+    <button class="marks-btn no-print" style="font-family:inherit;font-size:12.5px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:5px 10px;cursor:pointer">הציגי את הפירוק בצבעים</button>
+  </div>
+  <div class="q-row">
+    <span>התשובה שלי:</span>
+    <input class="q-input" data-answer="16" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      $$\overline{x}=\frac{\underbrace{\textcolor{#1D6FA5}{12+20+15+9+24}}_{\textcolor{#1D6FA5}{\text{סכום העמודים}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{5}}_{\textcolor{#8A6D1B}{\text{כמה ימים}}}}=\frac{\textcolor{#1D6FA5}{80}}{\textcolor{#8A6D1B}{5}}=16$$
+      <p><strong>בדיקת היגיון:</strong> 16 בין 9 ל-24 ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex2"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex hide-marks">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>ממוצע מטבלה</h4></div>
+  <p class="q-text">
+    <span class="mk mk-group">בחנות נמכרו גלידות בארבעה מחירים: 8 ₪ (נמכרו 5), 10 ₪ (נמכרו 12),
+    12 ₪ (נמכרו 8), 15 ₪ (נמכרו 5)</span>.
+    <span class="mk mk-find">מהו המחיר הממוצע לגלידה שנמכרה?</span>
+  </p>
+  <div class="q-row">
+    <button class="marks-btn no-print" style="font-family:inherit;font-size:12.5px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:5px 10px;cursor:pointer">הציגי את הפירוק בצבעים</button>
+  </div>
+  <div class="q-row">
+    <span>התשובה שלי:</span>
+    <input class="q-input" data-answer="11" data-tol="0.05" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>קודם מסדרות את הנתונים כטבלה, עם שורת עבודה — מכפלה בכל עמודה:</p>
+      <table class="dtable sol-table">
+        <tr><th>המחיר</th><td>8 ₪</td><td>10 ₪</td><td>12 ₪</td><td>15 ₪</td></tr>
+        <tr><th>כמה נמכרו</th><td>5</td><td>12</td><td>8</td><td>5</td></tr>
+        <tr><th>מחיר × כמות</th>
+            <td><span dir="ltr">8·5</span><br><b>40</b></td><td><span dir="ltr">10·12</span><br><b>120</b></td>
+            <td><span dir="ltr">12·8</span><br><b>96</b></td><td><span dir="ltr">15·5</span><br><b>75</b></td></tr>
+      </table>
+      $$\overline{x}=\frac{\underbrace{\textcolor{#1D6FA5}{40+120+96+75}}_{\textcolor{#1D6FA5}{\text{סכום שורת העבודה — כל מחיר כפול כמה נמכרו בו}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{5+12+8+5}}_{\textcolor{#8A6D1B}{\text{כמה גלידות נמכרו — סכום שורת הכמויות}}}}=\frac{\textcolor{#1D6FA5}{331}}{\textcolor{#8A6D1B}{30}}\approx 11.03$$
+      <p>כשלא יוצא מספר עגול — שומרים את השבר המדויק
+      (<span class="fi">\(\tfrac{331}{30}\)</span>) ומעגלים רק בסוף
+      (<span class="fi">\(\approx\)</span> = עיגלנו).</p>
+      <p><strong>בדיקת היגיון:</strong> 11.03 בין 8 ל-15 ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex3"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex hide-marks">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>ממוצע מתוך דיאגרמת עמודות</h4></div>
+  <p class="q-text">
+    <span class="mk mk-group">שחקנית כדורסל שיחקה חמישה משחקים, ומספר הנקודות שקלעה בכל משחק
+    מוצג בדיאגרמה</span>. הפעם אין רשימה ואין טבלה — את המספרים קוראים מהעמודות.
+    <span class="mk mk-find">מהו ממוצע הנקודות למשחק?</span>
+  </p>
+  <figure>
+    <div class="axplot" style="max-width:396px">
+    <span class="ax-ylab">הנקודות שקלעה במשחק</span>
+    <svg viewBox="0 0 360 190" style="width:100%;height:auto" role="img" aria-label="דיאגרמת עמודות של הנקודות בחמישה משחקים">
+      <line x1="24" y1="120" x2="336" y2="120" stroke="#E4E8EE" stroke-width="1"></line>
+      <line x1="24" y1="80"  x2="336" y2="80"  stroke="#E4E8EE" stroke-width="1"></line>
+      <line x1="24" y1="40"  x2="336" y2="40"  stroke="#E4E8EE" stroke-width="1"></line>
+      <rect x="40"  y="88"  width="40" height="72"  rx="3" fill="#2E7D6B"></rect>
+      <rect x="100" y="64"  width="40" height="96"  rx="3" fill="#2E7D6B"></rect>
+      <rect x="160" y="112" width="40" height="48"  rx="3" fill="#2E7D6B"></rect>
+      <rect x="220" y="40"  width="40" height="120" rx="3" fill="#2E7D6B"></rect>
+      <rect x="280" y="96"  width="40" height="64"  rx="3" fill="#2E7D6B"></rect>
+      <text x="60"  y="81"  text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">18</text>
+      <text x="120" y="57"  text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">24</text>
+      <text x="180" y="105" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">12</text>
+      <text x="240" y="33"  text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">30</text>
+      <text x="300" y="89"  text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">16</text>
+      <line x1="24" y1="160" x2="336" y2="160" stroke="#5A6875" stroke-width="1.5"></line>
+      <path d="M344 160 L336 156 L336 164 Z" fill="#5A6875"></path>
+      <line x1="24" y1="160" x2="24" y2="26" stroke="#5A6875" stroke-width="1.5"></line>
+      <path d="M24 18 L20 26 L28 26 Z" fill="#5A6875"></path>
+      <line x1="19" y1="120" x2="24" y2="120" stroke="#5A6875" stroke-width="1.5"></line>
+      <line x1="19" y1="80"  x2="24" y2="80"  stroke="#5A6875" stroke-width="1.5"></line>
+      <line x1="19" y1="40"  x2="24" y2="40"  stroke="#5A6875" stroke-width="1.5"></line>
+      <text x="16" y="164" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">0</text>
+      <text x="16" y="124" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">10</text>
+      <text x="16" y="84"  text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">20</text>
+      <text x="16" y="44"  text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">30</text>
+      <line x1="60"  y1="160" x2="60"  y2="165" stroke="#5A6875" stroke-width="1"></line>
+      <line x1="120" y1="160" x2="120" y2="165" stroke="#5A6875" stroke-width="1"></line>
+      <line x1="180" y1="160" x2="180" y2="165" stroke="#5A6875" stroke-width="1"></line>
+      <line x1="240" y1="160" x2="240" y2="165" stroke="#5A6875" stroke-width="1"></line>
+      <line x1="300" y1="160" x2="300" y2="165" stroke="#5A6875" stroke-width="1"></line>
+      <text x="60"  y="182" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">1</text>
+      <text x="120" y="182" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">2</text>
+      <text x="180" y="182" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">3</text>
+      <text x="240" y="182" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">4</text>
+      <text x="300" y="182" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">5</text>
+    </svg>
+    <span class="ax-xlab">מספר המשחק</span>
+    </div>
+    <figcaption>המספר שמעל כל עמודה — כמה נקודות קלעה באותו משחק.</figcaption>
+  </figure>
+  <div class="q-row">
+    <button class="marks-btn no-print" style="font-family:inherit;font-size:12.5px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:5px 10px;cursor:pointer">הציגי את הפירוק בצבעים</button>
+  </div>
+  <div class="q-row">
+    <span>התשובה שלי:</span>
+    <input class="q-input" data-answer="20" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>נעביר את הנתונים מהדיאגרמה לטבלה — גובה כל עמודה הוא מספר:</p>
+      <table class="dtable sol-table">
+        <tr><th>המשחק</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+        <tr><th>נקודות</th><td>18</td><td>24</td><td>12</td><td>30</td><td>16</td></tr>
+      </table>
+      <p>מעכשיו זה תרגיל ממוצע רגיל — הסכום למעלה, כמות המשחקים למטה:</p>
+      $$\overline{x}=\frac{\underbrace{\textcolor{#1D6FA5}{18+24+12+30+16}}_{\textcolor{#1D6FA5}{\text{סכום הנקודות מכל העמודות}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{5}}_{\textcolor{#8A6D1B}{\text{משחקים}}}}=\frac{\textcolor{#1D6FA5}{100}}{\textcolor{#8A6D1B}{5}}=20$$
+      <p><strong>בדיקת היגיון:</strong> 20 בין 12 ל-30 ✓
+      <br>ובעיניים: קו דמיוני בגובה 20 חוצה את הגרף כך שהעמודות הגבוהות ממנו
+      "משלימות" את הנמוכות — בדיוק רעיון האיזון של הממוצע.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex6"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · כמו במבחן</span><h4>מעבודת הקיץ שלך — תרגיל 3</h4></div>
+  <p class="q-text">
+    ממוצע הקליעות למשחק של שחקן כדורסל מסוים במהלך 11 משחקים היה 24 נקודות.
+    במשחק ה-12 הוא קלע 16 נקודות בלבד.
+    <br>א. האם לדעתך הממוצע יעלה, יירד או יישאר אותו דבר? הסבירי.
+    <br>ב. מהו ממוצע הקליעות של השחקן בכל 12 המשחקים?
+  </p>
+  <details class="sol">
+    <summary>הצגי פתרון מלא (כמו שכותבים במחברת)</summary>
+    <div class="sol-body">
+      <p><strong>א.</strong> הממוצע יירד — הצטרף נתון (16) <strong>מתחת</strong> לממוצע (24).</p>
+      <p><strong>ב.</strong> מהנוסחה של הממוצע אפשר למצוא את הסכום:</p>
+      $$\overline{x}=\frac{\text{סכום}}{\text{כמות}}\;\Longrightarrow\;\text{סכום}=\overline{x}\cdot\text{כמות}$$
+      $$\underbrace{\textcolor{#1D6FA5}{264}}_{24\cdot 11\text{ — סך 11 המשחקים}}+\underbrace{\textcolor{#C2408C}{16}}_{\text{המשחק ה-12}}=\textcolor{#1D6FA5}{280}$$
+      $$\overline{x}_{\text{חדש}}=\frac{\textcolor{#1D6FA5}{280}}{\underbrace{\textcolor{#8A6D1B}{12}}_{\textcolor{#8A6D1B}{\text{משחקים — 11 הקודמים ועוד המשחק החדש}}}}\approx 23.33$$
+      <p><strong>בדיקת היגיון:</strong> 16 מתחת ל-24 ← הממוצע ירד: 24 ← 23.33, כמו שניבאנו בסעיף א ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex4"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · כמו במבחן</span><h4>מעבודת הקיץ שלך — תרגיל 4</h4></div>
+  <p class="q-text">
+    א. הגיל הממוצע של 3 נשים הוא 20 שנה. לשלוש הנשים הצטרפה דנה, שגילה 24.
+    מה ממוצע הגילים של ארבע הנשים?
+    <br>ב. הגיל הממוצע של 3 אנשים הוא 20 שנה. לאחר ששני אנשים חדשים הצטרפו לקבוצה,
+    גדל הגיל הממוצע ל-22 שנה. הציעי שתי אפשרויות לגילים של שני המצטרפים.
+    <br>ג. בקבוצה של 4 אנשים — אחד בן 16 ואחד בן 32. רשמי גילים אפשריים לשני
+    האחרים, כך שהממוצע יהיה 25.
+  </p>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p><strong>א.</strong> מהנוסחה של הממוצע אפשר למצוא את הסכום:</p>
+      $$\overline{x}=\frac{\text{סכום}}{\text{כמות}}\;\Longrightarrow\;\text{סכום}=\overline{x}\cdot\text{כמות}$$
+      $$\underbrace{\textcolor{#1D6FA5}{60}}_{20\cdot 3\text{ — סכום השלוש}}+\underbrace{\textcolor{#C2408C}{24}}_{\text{דנה}}=\textcolor{#1D6FA5}{84}$$
+      $$\overline{x}_{\text{חדש}}=\frac{\textcolor{#1D6FA5}{84}}{\textcolor{#8A6D1B}{4}}=21$$
+      <p><strong>בדיקת היגיון:</strong> דנה (24) מעל 20 ← הממוצע עלה: 20 ← 21 ✓</p>
+      <p><strong>ב.</strong> אותה נוסחה — הפעם על הקבוצה החדשה:</p>
+      $$\underbrace{\textcolor{#1D6FA5}{110}}_{22\cdot 5\text{ — סכום החמישה}}-\underbrace{\textcolor{#1D6FA5}{60}}_{20\cdot 3\text{ — סכום השלושה}}=\underbrace{\textcolor{#2E7D32}{50}}_{\text{שני המצטרפים יחד}}$$
+      <p>כל זוג שסכומו 50 מתאים: למשל <strong>25 ו-25</strong>, או <strong>20 ו-30</strong>.</p>
+      <p><strong>בדיקת היגיון:</strong> <span class="fi">\(\frac{50}{2}=25\)</span> לאדם — מעל 20 ← הגיוני שהממוצע עלה ל-22 ✓</p>
+      <p><strong>ג.</strong> אותו רעיון, מהכיוון השלישי:</p>
+      $$\underbrace{\textcolor{#1D6FA5}{100}}_{25\cdot 4\text{ — הסכום הדרוש}}-\underbrace{(16+32)}_{\text{שני הגילים הידועים}}=\underbrace{\textcolor{#2E7D32}{52}}_{\text{שני האחרים יחד}}$$
+      <p>כל זוג שסכומו 52 נכון: למשל <strong>26 ו-26</strong>, או <strong>22 ו-30</strong>.</p>
+      <p><strong>בדיקת היגיון:</strong> <span class="fi">\(16+32+26+26=100\)</span>,
+      <span class="fi">\(\frac{100}{4}=25\)</span> ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex5"> סיימתי את התרגיל הזה</label>
+</article>
+
+<!-- ============ 5. סרטונים ============ -->
+<h2><span class="num">5</span>🎬 רוצה לראות את זה מוסבר בקול?</h2>
+<div class="watch">
+  <p>הסרטונים הם תגבור, לא חובה. ארבעת הראשונים קצרים (3–6 דקות);
+  האחרון הוא שיעור מלא, למי שרוצה לצלול:</p>
+  <a class="video-link" href="https://www.youtube.com/watch?v=0wQdeQc9EkY">
+    <img src="../assets/stats/0wQdeQc9EkY/02_t0030.jpg" alt="מהו ממוצע — שקף מהסרטון" loading="lazy">
+    <span class="vt"><b>מהו ממוצע</b><span>הרעיון של חלוקה שווה, עם סוכריות · 3:04</span></span>
+    <span class="play">▶</span>
+  </a>
+  <a class="video-link" href="https://www.youtube.com/watch?v=rHsSQp7BZjg">
+    <img src="../assets/stats/rHsSQp7BZjg/02_t0050.jpg" alt="חישוב ממוצע — שקף מהסרטון" loading="lazy">
+    <span class="vt"><b>חישוב ממוצע</b><span>בדיוק הדוגמה של המטבעות מהעמוד הזה · 3:45</span></span>
+    <span class="play">▶</span>
+  </a>
+  <a class="video-link" href="https://www.youtube.com/watch?v=MiY1h1x5tcg">
+    <img src="../assets/stats/MiY1h1x5tcg/04_t0130.jpg" alt="תכונות הממוצע — שקף מהסרטון" loading="lazy">
+    <span class="vt"><b>תכונות הממוצע</b><span>מה קורה לממוצע כשהנתונים משתנים · 5:54</span></span>
+    <span class="play">▶</span>
+  </a>
+  <a class="video-link" href="https://www.youtube.com/watch?v=_hqedsImFZ8">
+    <img src="../assets/stats/_hqedsImFZ8/01_t0201.jpg" alt="ממוצע מטבלה — לוח כתוב" loading="lazy">
+    <span class="vt"><b>ממוצע מתוך טבלה, על לוח</b><span>מורה פותר בכתב יד, צעד-צעד · 3:23</span></span>
+    <span class="play">▶</span>
+  </a>
+  <a class="video-link" href="https://www.youtube.com/watch?v=s8KbRwl60js&t=127">
+    <img src="../assets/stats/s8KbRwl60js/02_t0210.jpg" alt="שיעור מלא — עמוד התרגיל" loading="lazy">
+    <span class="vt"><b>שיעור מלא ברמת בגרות קלה (מדקה 2:07)</b><span>ממוצע מטבלה בתוך תרגיל גדול · אילון פרץ</span></span>
+    <span class="play">▶</span>
+  </a>
+</div>
+
+<!-- ============ ניווט ============ -->
+<div class="progresswrap no-print">
+  <span class="progressbar"><i></i></span><span class="progress-label"></span>
+  <button class="all-sols" style="font-family:inherit;font-size:12px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:4px 10px;cursor:pointer">לפתוח את כל הפתרונות</button>
+</div>
+
+<nav class="pagenav">
+  <a href="01-basics.html"><span class="dir">→ התחנה הקודמת</span>נתונים, שכיחות וטבלה</a>
+  <a class="next" href="03-median-mode.html"><span class="dir">התחנה הבאה ←</span>חציון ושכיח</a>
+</nav>
+
+<footer class="fin">חלק מהעולם של שירה · <a href="index.html">המפה</a> · <a href="../index.html">המרכז</a></footer>
+</main>
+</div>
+</body>
+</html>

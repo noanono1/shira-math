@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<!-- מסך הבית של האייפד/הטלפון -->
+<link rel="apple-touch-icon" href="../assets/icons/icon-180.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>השנה שלך במוזיקה — סטטיסטיקה — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../vendor/katex.min.css">
+<link rel="stylesheet" href="../css/shira.css">
+<script defer src="../vendor/katex.min.js"></script>
+<script defer src="../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../js/shira.js"></script>
+<style>
+/* מחוון פתיחה — כמה זמן, כמה תרגילים, ואיפה מתחילים לתרגל (מוסתר בהדפסה) */
+.pagemeta{display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px;
+  margin:12px 0 0; font-size:13px; color:var(--soft)}
+.pagemeta .pm-time{background:var(--faint); border-radius:999px; padding:3px 10px}
+.pagemeta .pm-time b{color:var(--ink); font-weight:700}
+.pagemeta .pm-jump{color:var(--accent); font-weight:700; text-decoration:none}
+.pagemeta .pm-jump:hover{text-decoration:underline}
+.pagemeta .pm-note{flex:1 1 100%; margin:0}
+#ex-first,#bank-map{scroll-margin-top:78px}
+</style>
+</head>
+<body data-page="stat:07-music-year">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">סטטיסטיקה — המפה</a>
+    <span class="crumbs">תחנה <b>7</b> מתוך 7 · <b>השנה שלך במוזיקה</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">סטטיסטיקה · תחנה 7 · תרגיל עוגן</div>
+  <h1>השנה שלך במוזיקה</h1>
+  <p class="lead">
+    בסוף כל שנה האפליקציות שולחות לך סיכום — השיר של השנה, האמן של השנה,
+    כמה דקות האזנת. מאחורי הסיכום החמוד הזה עומדים בדיוק הכלים שלמדת:
+    שכיח, ממוצע, חציון ואחוזים. נריץ אחד כזה בעצמנו.
+  </p>
+  <p class="youknow"><b>בסוף העמוד תדעי:</b> לזהות איזו שאלת סיכום היא שכיח ואיזו ממוצע ·
+  להסביר מה ערך חריג עושה לממוצע — ומה הוא לא עושה לחציון ·
+  לקרוא דיאגרמת עמודות ועוגה כמו טבלה.</p>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>≈ 20 דק׳</b> · 4 תרגילים</span>
+    <a class="pm-jump" href="#ex-first">לקפוץ ישר לתרגיל הראשון ↓</a>
+  </p>
+</header>
+
+<!-- ============ שלב 1 ============ -->
+<div class="stagebar"><span class="dots-s"><i class="on"></i><i></i><i></i><i></i><i></i></span>
+  שלב <b>1</b> מתוך 5 · האמן של השנה</div>
+<h2>מי האמן של השנה שלך?</h2>
+
+<p>
+  כל סיכום שנתי נפתח באותה שורה: "האמן של השנה שלך". איך מחליטים מי זה?
+  לוקחים את רשימת 20 השירים ששמעת הכי הרבה השנה, וסופרים כמה שירים יש בה לכל אמן.
+  זו בדיוק טבלת שכיחויות:
+</p>
+
+<table class="dtable">
+  <tr><th>האמן</th><td class="hl-find"><b>עומר אדם</b></td><td>אודיה</td><td>אחרים</td></tr>
+  <tr><th>כמה שירים ברשימת ה-20</th><td class="hl-group"><b>8</b></td><td>7</td><td>5</td></tr>
+</table>
+<p class="tbl-note">השורה העליונה — הערכים (כאן: האמן) · השורה התחתונה — השכיחות (כמה שירים ברשימה).</p>
+
+<p>
+  בדיקה ראשונה, כמו תמיד: <span class="fi">\(8+7+5=20\)</span> ✓ — כל הרשימה נספרה,
+  אף שיר לא הלך לאיבוד.
+</p>
+<p>
+  ועכשיו התשובה: השכיחות הגבוהה ביותר היא 8, ולכן
+  <strong>האמן של השנה הוא עומר אדם</strong>.
+</p>
+
+<div class="box intuition">
+  <div class="box-title">למה שכיח — ולא ממוצע?</div>
+  שמות אמנים הם <strong>נתונים שמיים</strong> (תחנה 1!) — שמות בלי סדר.
+  אין "אמן ממוצע" כמו שאין "עונה ממוצעת".
+  <br>כשהנתונים הם שמות, המדד היחיד שעובד הוא השכיח —
+  ולכן "האמן של השנה" הוא תמיד שאלת <strong>שכיח</strong>, לא שאלת ממוצע.
+</div>
+
+<p>
+  ותוספת קטנה מתחנה 4: איזה חלק מהרשימה תופס עומר אדם?
+  מצמצמים (מחלקים למעלה ולמטה ב-4), ואז מרחיבים את המכנה ל-100:
+</p>
+
+$$\frac{8}{20}=\frac{8:\textcolor{#2E7D6B}{4}}{20:\textcolor{#2E7D6B}{4}}=\frac{2}{5}=\frac{2\cdot\textcolor{#2E7D6B}{20}}{5\cdot\textcolor{#2E7D6B}{20}}=\frac{40}{100}=40\%$$
+
+<p>
+  ‏40% — שני שירים מכל חמישה ברשימת השירים של השנה שלך.
+</p>
+
+<!-- ============ שלב 2 ============ -->
+<div class="stagebar"><span class="dots-s"><i></i><i class="on"></i><i></i><i></i><i></i></span>
+  שלב <b>2</b> מתוך 5 · היום המטורף — לב העמוד</div>
+<h2>שבוע ההשקה של הסינגל החדש</h2>
+
+<p>
+  עומר אדם הוציא סינגל חדש, ובשבוע של ההשקה ספרת כמה פעמים ביום האזנת לו:
+  <span class="fi">\(4,\;5,\;5,\;6,\;7,\;8,\;49\)</span>.
+  שישה ימים רגילים — וביום השביעי, יום ההשקה עצמו, 49 האזנות ברצף.
+</p>
+<p>
+  לפני שמחשבים משהו — נחשי: כמה האזנת "ביום רגיל" באותו שבוע?
+  תסתכלי על המספרים שנייה, תבחרי מספר אחד, ותחזיקי אותו בראש.
+</p>
+
+<article id="ex-first" class="ex">
+  <div class="ex-head"><span class="lvl l1">ביחד</span><h4>שבוע ההשקה — ממוצע מול חציון</h4></div>
+  <p class="q-text">
+    <span class="mk mk-total">בשבוע ההשקה נמדדו ההאזנות במשך 7 ימים</span>:
+    <span class="mk mk-group"><span class="fi">\(4,\;5,\;5,\;6,\;7,\;8,\;49\)</span></span>.
+    <span class="mk mk-find">חשבי את הממוצע ואת החציון</span>.
+    <span class="mk mk-change">ביום השביעי יצא הסינגל — הסבירי למה שני המדדים רחוקים כל כך</span>.
+  </p>
+  <details class="step"><summary>שלב ראשון — הסכום, ואז הממוצע</summary>
+    <div class="step-body">
+      מחברים את שבעת הימים:
+      <br><span class="fi">\(4+5+5+6+7+8+49=84\)</span>,
+      <br>ומחלקים במספר הימים:
+      $$\overline{x}=\frac{4+5+5+6+7+8+\textcolor{#C2408C}{49}}{7}=\frac{84}{7}=12$$
+      <p>יצא <span class="fi">\(12\)</span>?! ברוב הימים בקושי הגעת ל-8.
+      החישוב נכון — ובכל זאת המספר מרגיש מוזר. תכף נבין למה.</p>
+    </div>
+  </details>
+  <details class="step"><summary>שלב שני — החציון</summary>
+    <div class="step-body">
+      מסדרים מהקטן לגדול — והרשימה כבר מסודרת:
+      <span class="fi">\(4,\;5,\;5,\;6,\;7,\;8,\;\textcolor{#C2408C}{49}\)</span>.
+      <br>יש 7 נתונים — נתון לכל יום — ולכן <span class="fi">\(\textcolor{#8A6D1B}{N}=7\)</span>.
+      <br>מיקום החציון: <span class="fi">\(\frac{\textcolor{#8A6D1B}{7}+1}{2}=4\)</span> — המספר שבמקום הרביעי.
+      <div class="dotrow with-pos" style="margin:12px 0 4px">
+        <span class="dot lg d1">4</span>
+        <span class="dot lg d1">5</span>
+        <span class="dot lg d1">5</span>
+        <span class="dot lg d1 ring"><span class="pos">מקום 4</span>6</span>
+        <span class="dot lg d1">7</span>
+        <span class="dot lg d1">8</span>
+        <span class="dot lg d5">49</span>
+      </div>
+      <p>סופרים מההתחלה: 4, 5, 5, ואז <strong>6</strong>.
+      החציון הוא <strong>6</strong> — בדיוק באזור שרוב האנשים מנחשים בתור "יום רגיל".</p>
+    </div>
+  </details>
+  <details class="step"><summary>שלב שלישי — למה 12 ו-6 רחוקים כל כך?</summary>
+    <div class="step-body">
+      <p>הממוצע עובד עם ה<strong>סכום</strong> — וה-49 נכנס לסכום במלוא הגודל שלו
+      ומושך את הממוצע למעלה. זו בדיוק התכונה מתחנה 2: ערך שנמצא הרבה מעל
+      הממוצע גורר אותו אליו.</p>
+      <p>החציון עובד עם ה<strong>מיקום</strong> — מבחינתו 49 הוא רק "המספר האחרון
+      ברשימה". לא משנה אם כתוב שם 9, 49 או 490 — המספר שבמקום הרביעי נשאר 6.</p>
+      <p>ערך רחוק כזה נקרא באנגלית <span class="en">outlier</span> — ערך חריג.
+      אומרים שהממוצע <strong>רגיש</strong> לערכים חריגים, והחציון <strong>עמיד</strong> בפניהם.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex1"> סיימתי את התרגיל הזה</label>
+</article>
+
+<figure>
+  <div class="axplot" style="max-width:556px">
+  <span class="ax-ylab">כמה האזנות באותו יום</span>
+  <svg viewBox="0 0 560 300" style="width:100%;height:auto" role="img">
+    <line x1="40" y1="222" x2="526" y2="222" stroke="#E4E8EE" stroke-width="1"></line>
+    <line x1="40" y1="174" x2="526" y2="174" stroke="#E4E8EE" stroke-width="1"></line>
+    <line x1="40" y1="126" x2="526" y2="126" stroke="#E4E8EE" stroke-width="1"></line>
+    <line x1="40" y1="78"  x2="526" y2="78"  stroke="#E4E8EE" stroke-width="1"></line>
+    <line x1="40" y1="30"  x2="526" y2="30"  stroke="#E4E8EE" stroke-width="1"></line>
+    <rect x="60"  y="250.8" width="48" height="19.2"  rx="2" fill="#2E7D6B"></rect>
+    <rect x="128" y="246"   width="48" height="24"    rx="2" fill="#2E7D6B"></rect>
+    <rect x="196" y="246"   width="48" height="24"    rx="2" fill="#2E7D6B"></rect>
+    <rect x="264" y="241.2" width="48" height="28.8"  rx="2" fill="#2E7D6B"></rect>
+    <rect x="332" y="236.4" width="48" height="33.6"  rx="2" fill="#2E7D6B"></rect>
+    <rect x="400" y="231.6" width="48" height="38.4"  rx="2" fill="#2E7D6B"></rect>
+    <rect x="468" y="34.8"  width="48" height="235.2" rx="2" fill="#C2408C"></rect>
+    <line x1="40" y1="270" x2="524" y2="270" stroke="#5A6875" stroke-width="1.5"></line>
+    <path d="M532 270 L524 266 L524 274 Z" fill="#5A6875"></path>
+    <line x1="40" y1="270" x2="40" y2="16" stroke="#5A6875" stroke-width="1.5"></line>
+    <path d="M40 8 L36 16 L44 16 Z" fill="#5A6875"></path>
+    <line x1="35" y1="222" x2="40" y2="222" stroke="#5A6875" stroke-width="1.5"></line>
+    <line x1="35" y1="174" x2="40" y2="174" stroke="#5A6875" stroke-width="1.5"></line>
+    <line x1="35" y1="126" x2="40" y2="126" stroke="#5A6875" stroke-width="1.5"></line>
+    <line x1="35" y1="78"  x2="40" y2="78"  stroke="#5A6875" stroke-width="1.5"></line>
+    <line x1="35" y1="30"  x2="40" y2="30"  stroke="#5A6875" stroke-width="1.5"></line>
+    <text x="32" y="274" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">0</text>
+    <text x="32" y="226" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">10</text>
+    <text x="32" y="178" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">20</text>
+    <text x="32" y="130" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">30</text>
+    <text x="32" y="82"  text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">40</text>
+    <text x="32" y="34"  text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">50</text>
+    <line x1="84"  y1="270" x2="84"  y2="275" stroke="#5A6875" stroke-width="1"></line>
+    <line x1="152" y1="270" x2="152" y2="275" stroke="#5A6875" stroke-width="1"></line>
+    <line x1="220" y1="270" x2="220" y2="275" stroke="#5A6875" stroke-width="1"></line>
+    <line x1="288" y1="270" x2="288" y2="275" stroke="#5A6875" stroke-width="1"></line>
+    <line x1="356" y1="270" x2="356" y2="275" stroke="#5A6875" stroke-width="1"></line>
+    <line x1="424" y1="270" x2="424" y2="275" stroke="#5A6875" stroke-width="1"></line>
+    <line x1="492" y1="270" x2="492" y2="275" stroke="#5A6875" stroke-width="1"></line>
+    <line x1="40" y1="212.4" x2="532" y2="212.4" stroke="#C0392B" stroke-width="2" stroke-dasharray="7 5"></line>
+    <line x1="40" y1="241.2" x2="532" y2="241.2" stroke="#2E6F8E" stroke-width="2" stroke-dasharray="7 5"></line>
+    <text x="34" y="209" text-anchor="end" font-family="Arial" font-size="14" font-weight="bold" fill="#C0392B">12</text>
+    <text x="34" y="245.2" text-anchor="end" font-family="Arial" font-size="14" font-weight="bold" fill="#2E6F8E">6</text>
+    <text x="84"  y="265.8" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#fff">4</text>
+    <text x="152" y="261"   text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#fff">5</text>
+    <text x="220" y="261"   text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#fff">5</text>
+    <text x="288" y="256.2" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#fff">6</text>
+    <text x="356" y="251.4" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#fff">7</text>
+    <text x="424" y="246.6" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#fff">8</text>
+    <text x="492" y="49.8"  text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#fff">49</text>
+    <text x="84"  y="292" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">1</text>
+    <text x="152" y="292" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">2</text>
+    <text x="220" y="292" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">3</text>
+    <text x="288" y="292" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">4</text>
+    <text x="356" y="292" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">5</text>
+    <text x="424" y="292" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">6</text>
+    <text x="492" y="292" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">7</text>
+  </svg>
+  <span class="ax-xlab">היום בשבוע (1–7)</span>
+  </div>
+  <figcaption>
+    העמודה הוורודה — יום ההשקה. הקו האדום המקווקו — הממוצע (12);
+    הכחול — החציון (6): החציון בתוך הימים הרגילים,
+    והממוצע מעל כולם — אף יום רגיל לא הגיע אליו.
+  </figcaption>
+</figure>
+
+<div class="box essence">
+  <div class="box-title">המשפט שכדאי לקחת מכל המסלול</div>
+  החציון לא מושפע מהיום המטורף. הממוצע דווקא כן.
+  <br>בגלל זה צריך את שניהם: הממוצע מספר "כמה בסך הכל",
+  והחציון מספר "איך נראה יום טיפוסי".
+</div>
+
+<p>
+  ורמז מוקדם היה מסתתר כבר בטווח: <span class="fi">\(49-4=45\)</span> —
+  טווח ענק ביחס למספרים עצמם.
+  כשהטווח גדול כל כך, כדאי לחשוד שיש בנתונים ערך חריג — ולבדוק גם את החציון.
+</p>
+<p>
+  בתחנה 6 ראית את התופעה הזו בקטן: שתי משפחות חדשות הזיזו את הממוצע,
+  והחציון לא זז. כאן אותו רעיון, רק בגדול —
+  ערך אחד רחוק גרר את הממוצע לגובה שאף יום רגיל לא מגיע אליו.
+</p>
+
+<details class="alt">
+  <summary>איך עוד שואלים על הממוצע הזה — אותה שאלה בחמש תחפושות</summary>
+  <div class="alt-body">
+    <ul>
+      <li>"מה ממוצע ההאזנות ליום בשבוע ההשקה?"</li>
+      <li>"כמה האזנות ביום, בממוצע?"</li>
+      <li>"אילו ההאזנות היו מתחלקות שווה בשווה בין שבעת הימים — כמה היו בכל יום?"</li>
+      <li>"מהו סכום ההאזנות חלקי מספר הימים?"</li>
+      <li>"איזה מספר אחד מייצג את השבוע?" — זהירות: בגלל היום המטורף,
+          התשובה הטובה לשאלה <em>הזו</em> היא דווקא החציון, 6.</li>
+    </ul>
+    <p>ארבעת הניסוחים הראשונים הם חישוב ממוצע רגיל.
+    החמישי נשמע אותו דבר — אבל הוא שאלת שיקול דעת,
+    וכשיש ערך חריג, ההבדל בין 12 ל-6 הוא כל הסיפור.</p>
+  </div>
+</details>
+
+<!-- ============ שלב 3 ============ -->
+<div class="stagebar"><span class="dots-s"><i></i><i></i><i class="on"></i><i></i><i></i></span>
+  שלב <b>3</b> מתוך 5 · מי שלט לך בשנה</div>
+<h2>‏3,000 האזנות — ולמי הן הלכו</h2>
+
+<p>
+  בסך הכל האזנת השנה ל-<span class="fi">3,000</span> שירים.
+  הסיכום השנתי מפרק את המספר הזה לפי אמנים:
+</p>
+
+<table class="dtable">
+  <tr><th>האמן</th><td>עומר אדם</td><td>אודיה</td><td>אחרים</td><td class="hl-total">סך הכל</td></tr>
+  <tr><th>האזנות השנה</th><td>1,200</td><td>900</td><td>900</td><td class="hl-total">3,000</td></tr>
+</table>
+
+<p>
+  מספרים כאלה קשה להרגיש — אחוזים קל להרגיש. נחשב אחד ביחד:
+  הקבוצה חלקי הסך הכל — בדיוק כמו בתחנה 4.
+</p>
+<div class="fbox">
+  <div class="fbox-title">השכיחות היחסית של עומר אדם</div>
+  $$\frac{\underbrace{\textcolor{#1D6FA5}{1200}}_{\textcolor{#1D6FA5}{\text{האזנות לעומר אדם}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{3000}}_{\textcolor{#8A6D1B}{\text{כל ההאזנות השנה}}}}=\frac{1200:\textcolor{#2E7D6B}{30}}{3000:\textcolor{#2E7D6B}{30}}=\frac{40}{100}=40\%$$
+  <span class="f-legend">
+    <span><i class="sw" style="background:#DDEDF8"></i> כחול — ההאזנות של האמן שבודקים</span>
+    <span><i class="sw" style="background:#FBF0C9"></i> צהוב — כל ההאזנות של השנה</span>
+    <span><i class="sw" style="background:#DCEEE9"></i> ירוק — במה חילקנו למעלה ולמטה בדרך למכנה 100</span>
+  </span>
+</div>
+<p>
+  אותו חישוב בדיוק עבור אודיה ועבור כל השאר נותן 30% ו-30%,
+  ובדיקה: <span class="fi">\(40+30+30=100\)</span> ✓ — כל השנה מכוסה.
+  ועכשיו אפשר לצייר את זה כמו שהאפליקציות מציירות:
+</p>
+
+<figure>
+  <svg viewBox="0 0 200 200" style="width:100%;max-width:220px;height:auto" role="img">
+    <path d="M100,100 L100,10 A90,90 0 0 1 152.9,172.81 Z" fill="#2E6F8E" stroke="#fff" stroke-width="2" stroke-linejoin="round"></path>
+    <path d="M100,100 L152.9,172.81 A90,90 0 0 1 14.4,127.81 Z" fill="#C2408C" stroke="#fff" stroke-width="2" stroke-linejoin="round"></path>
+    <path d="M100,100 L14.4,127.81 A90,90 0 0 1 100,10 Z" fill="#9AA5B1" stroke="#fff" stroke-width="2" stroke-linejoin="round"></path>
+    <text x="152.3" y="88"    text-anchor="middle" font-family="Arial" font-size="17" font-weight="bold" fill="#fff">40</text>
+    <text x="83"    y="157.3" text-anchor="middle" font-family="Arial" font-size="17" font-weight="bold" fill="#fff">30</text>
+    <text x="55.5"  y="72.7"  text-anchor="middle" font-family="Arial" font-size="17" font-weight="bold" fill="#fff">30</text>
+  </svg>
+  <div class="mk-legend" style="justify-content:center;margin-top:10px">
+    <span><i class="sw" style="background:#2E6F8E"></i> עומר אדם — <span class="fi">40%</span></span>
+    <span><i class="sw" style="background:#C2408C"></i> אודיה — <span class="fi">30%</span></span>
+    <span><i class="sw" style="background:#9AA5B1"></i> אחרים — <span class="fi">30%</span></span>
+  </div>
+  <figcaption>
+    דיאגרמת עוגה היא בדיוק הטבלה, מצוירת: כל אמן מקבל פרוסה בגודל האחוז שלו,
+    וכל העוגה יחד היא 100% — כל ההאזנות של השנה.
+  </figcaption>
+</figure>
+
+<p>
+  ושימי לב לאודיה: 30% הם כמעט שליש —
+  בערך כל שיר שלישי שהשמעת השנה היה שלה.
+</p>
+
+<article class="ex hide-marks">
+  <div class="ex-head"><span class="lvl l2">לבד עם רשת</span><h4>השכיחות היחסית של אודיה</h4></div>
+  <p class="q-text">
+    <span class="mk mk-total">מתוך 3,000 האזנות השנה</span>,
+    <span class="mk mk-group">900 היו לאודיה</span>.
+    <span class="mk mk-find">מה השכיחות היחסית שלה באחוזים?</span>
+  </p>
+  <div class="q-row">
+    <button class="marks-btn no-print" style="font-family:inherit;font-size:12.5px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:5px 10px;cursor:pointer">הציגי את הפירוק בצבעים</button>
+  </div>
+  <div class="q-row">
+    <span>התשובה שלי:</span>
+    <input class="q-input" data-answer="30" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>את ה-900 מוצאים בטבלה — בעמודה של אודיה:</p>
+      <table class="dtable sol-table">
+        <tr><th>האמן</th><td>עומר אדם</td><td class="hl-group">אודיה</td><td>אחרים</td><td>סך הכל</td></tr>
+        <tr><th>האזנות השנה</th><td>1,200</td><td class="hl-group"><b>900</b></td><td>900</td><td class="hl-total">3,000</td></tr>
+      </table>
+      $$\frac{\underbrace{\textcolor{#1D6FA5}{900}}_{\textcolor{#1D6FA5}{\text{ההאזנות של אודיה}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{3000}}_{\textcolor{#8A6D1B}{\text{כל ההאזנות השנה}}}}=\frac{900:\textcolor{#2E7D6B}{30}}{3000:\textcolor{#2E7D6B}{30}}=\frac{30}{100}=30\%$$
+      <p><strong>בדיקת היגיון:</strong> שליש של 3,000 הוא 1,000. אצל אודיה 900 —
+      קצת פחות משליש, ולכן הגיוני שיצא קצת פחות מ-33% ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex2"> סיימתי את התרגיל הזה</label>
+</article>
+
+<!-- ============ שלב 4 ============ -->
+<div class="stagebar"><span class="dots-s"><i></i><i></i><i></i><i class="on"></i><i></i></span>
+  שלב <b>4</b> מתוך 5 · הטרנד בטיקטוק</div>
+<h2>שבוע של טרנד — לקרוא גרף כמו טבלה</h2>
+
+<p>
+  שיר של אודיה הפך לטרנד בטיקטוק, ומספר הצפיות היומי בסרטוני הטרנד
+  נמדד במשך שבוע. הפעם אין טבלה — יש רק גרף, וזו בדיוק המיומנות:
+  לשלוף ממנו את המספרים בעצמך.
+</p>
+
+<figure>
+  <div class="axplot" style="max-width:556px">
+  <span class="ax-ylab">צפיות באותו יום, במיליונים</span>
+  <svg viewBox="0 0 560 254" style="width:100%;height:auto" role="img">
+    <line x1="40" y1="180" x2="526" y2="180" stroke="#E4E8EE" stroke-width="1"></line>
+    <line x1="40" y1="140" x2="526" y2="140" stroke="#E4E8EE" stroke-width="1"></line>
+    <line x1="40" y1="100" x2="526" y2="100" stroke="#E4E8EE" stroke-width="1"></line>
+    <line x1="40" y1="60"  x2="526" y2="60"  stroke="#E4E8EE" stroke-width="1"></line>
+    <line x1="40" y1="20"  x2="526" y2="20"  stroke="#E4E8EE" stroke-width="1"></line>
+    <rect x="60"  y="180" width="48" height="40"  rx="2" fill="#2E7D6B"></rect>
+    <rect x="128" y="160" width="48" height="60"  rx="2" fill="#2E7D6B"></rect>
+    <rect x="196" y="100" width="48" height="120" rx="2" fill="#2E7D6B"></rect>
+    <rect x="264" y="40"  width="48" height="180" rx="2" fill="#2E7D6B"></rect>
+    <rect x="332" y="80"  width="48" height="140" rx="2" fill="#2E7D6B"></rect>
+    <rect x="400" y="140" width="48" height="80"  rx="2" fill="#2E7D6B"></rect>
+    <rect x="468" y="140" width="48" height="80"  rx="2" fill="#2E7D6B"></rect>
+    <line x1="40" y1="220" x2="524" y2="220" stroke="#5A6875" stroke-width="1.5"></line>
+    <path d="M532 220 L524 216 L524 224 Z" fill="#5A6875"></path>
+    <line x1="40" y1="220" x2="40" y2="12" stroke="#5A6875" stroke-width="1.5"></line>
+    <path d="M40 4 L36 12 L44 12 Z" fill="#5A6875"></path>
+    <line x1="35" y1="180" x2="40" y2="180" stroke="#5A6875" stroke-width="1.5"></line>
+    <line x1="35" y1="140" x2="40" y2="140" stroke="#5A6875" stroke-width="1.5"></line>
+    <line x1="35" y1="100" x2="40" y2="100" stroke="#5A6875" stroke-width="1.5"></line>
+    <line x1="35" y1="60"  x2="40" y2="60"  stroke="#5A6875" stroke-width="1.5"></line>
+    <line x1="35" y1="20"  x2="40" y2="20"  stroke="#5A6875" stroke-width="1.5"></line>
+    <text x="32" y="224" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">0</text>
+    <text x="32" y="184" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">2</text>
+    <text x="32" y="144" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">4</text>
+    <text x="32" y="104" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">6</text>
+    <text x="32" y="64"  text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">8</text>
+    <text x="32" y="24"  text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">10</text>
+    <line x1="84"  y1="220" x2="84"  y2="225" stroke="#5A6875" stroke-width="1"></line>
+    <line x1="152" y1="220" x2="152" y2="225" stroke="#5A6875" stroke-width="1"></line>
+    <line x1="220" y1="220" x2="220" y2="225" stroke="#5A6875" stroke-width="1"></line>
+    <line x1="288" y1="220" x2="288" y2="225" stroke="#5A6875" stroke-width="1"></line>
+    <line x1="356" y1="220" x2="356" y2="225" stroke="#5A6875" stroke-width="1"></line>
+    <line x1="424" y1="220" x2="424" y2="225" stroke="#5A6875" stroke-width="1"></line>
+    <line x1="492" y1="220" x2="492" y2="225" stroke="#5A6875" stroke-width="1"></line>
+    <text x="84"  y="195" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#fff">2</text>
+    <text x="152" y="175" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#fff">3</text>
+    <text x="220" y="115" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#fff">6</text>
+    <text x="288" y="55"  text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#fff">9</text>
+    <text x="356" y="95"  text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#fff">7</text>
+    <text x="424" y="155" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#fff">4</text>
+    <text x="492" y="155" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#fff">4</text>
+    <text x="84"  y="246" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">1</text>
+    <text x="152" y="246" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">2</text>
+    <text x="220" y="246" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">3</text>
+    <text x="288" y="246" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">4</text>
+    <text x="356" y="246" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">5</text>
+    <text x="424" y="246" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">6</text>
+    <text x="492" y="246" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">7</text>
+  </svg>
+  <span class="ax-xlab">היום בשבוע (1–7)</span>
+  </div>
+  <figcaption>
+    צפיות ליום בסרטוני הטרנד, במיליונים, לאורך שבוע (הימים ממוספרים 1–7).
+    עלייה, שיא ודעיכה — הצורה האופיינית של טרנד.
+  </figcaption>
+</figure>
+
+<p>שאלות שגרף כזה תמיד מזמין — ואפשר לענות עליהן בלי חישוב כבד:</p>
+<p>
+  <strong>באיזה יום השיא?</strong> מחפשים את העמודה הגבוהה ביותר:
+  יום 4, עם 9 מיליון צפיות.
+  <br><strong>מה הטווח?</strong> הערך הגבוה פחות הנמוך:
+  <span class="fi">\(9-2=7\)</span> מיליון צפיות.
+</p>
+
+<div class="box intuition">
+  <div class="box-title">הכלל של קריאת גרפים</div>
+  לקרוא גרף = לשלוף ממנו טבלה בראש.
+  גובה כל עמודה הוא מספר; ברגע שרשמת את שבעת המספרים —
+  <span class="fi">\(2,\;3,\;6,\;9,\;7,\;4,\;4\)</span> —
+  הגרף הפך לתרגיל רגיל לגמרי.
+</div>
+
+<article class="ex hide-marks">
+  <div class="ex-head"><span class="lvl l2">לבד עם רשת</span><h4>הממוצע של הטרנד</h4></div>
+  <p class="q-text">
+    מהגרף שלמעלה: <span class="mk mk-find">מה ממוצע הצפיות היומי של הטרנד, במיליונים?</span>
+  </p>
+  <div class="q-row">
+    <span>התשובה שלי:</span>
+    <input class="q-input" data-answer="5" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>נקרא מהגרף את שבעת המספרים, ונרשום אותם בטבלה — מעכשיו זה תרגיל רגיל:</p>
+      <table class="dtable sol-table">
+        <tr><th>היום בשבוע</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td></tr>
+        <tr><th>צפיות (במיליונים)</th><td>2</td><td>3</td><td>6</td><td>9</td><td>7</td><td>4</td><td>4</td></tr>
+      </table>
+      $$\overline{x}=\frac{\underbrace{\textcolor{#1D6FA5}{2+3+6+9+7+4+4}}_{\textcolor{#1D6FA5}{\text{סכום הצפיות}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{7}}_{\textcolor{#8A6D1B}{\text{ימים}}}}=\frac{\textcolor{#1D6FA5}{35}}{\textcolor{#8A6D1B}{7}}=5$$
+      <p><strong>בדיקת היגיון:</strong> 5 נמצא בין 2 ל-9 ✓</p>
+      <p>ואגב, החציון כאן הוא 4 (מסדרים: <span class="fi">\(2,\;3,\;4,\;4,\;6,\;7,\;9\)</span>,
+      המספר שבמקום הרביעי) — קרוב לממוצע. כשאין ערך חריג קיצוני,
+      שני המדדים מתקרבים זה לזה.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex3"> סיימתי את התרגיל הזה</label>
+</article>
+
+<!-- ============ שלב 5 ============ -->
+<div class="stagebar"><span class="dots-s"><i></i><i></i><i></i><i></i><i class="on"></i></span>
+  שלב <b>5</b> מתוך 5 · שיר חדש נכנס לפלייליסט</div>
+<h2>שיר חדש נכנס לפלייליסט — ניבוי אחרון</h2>
+
+<p>
+  <span class="mk mk-total">בפלייליסט שלך 10 שירים, עם ממוצע של 20 האזנות לשיר</span>.
+  <span class="mk mk-given">נכנס שיר חדש, ולו כבר 30 האזנות</span>.
+  <span class="mk mk-find">מה יקרה לממוצע?</span>
+</p>
+<p>
+  קודם נחשי, בעזרת התכונה מתחנה 2: 30 נמצא <strong>מעל</strong> הממוצע (20),
+  ולכן הוא ימשוך את הממוצע <strong>למעלה</strong>. השאלה היא רק — בכמה?
+</p>
+<p>מהנוסחה של הממוצע אפשר למצוא את הסכום:</p>
+$$\overline{x}=\frac{\text{סכום}}{\text{כמות}}\;\Longrightarrow\;\text{סכום}=\overline{x}\cdot\text{כמות}$$
+$$\underbrace{\textcolor{#1D6FA5}{200}}_{20\cdot 10\text{ — סכום עשרת השירים}}+\underbrace{\textcolor{#C2408C}{30}}_{\text{השיר החדש}}=\textcolor{#1D6FA5}{230}$$
+<div class="fbox">
+  <div class="fbox-title">הממוצע החדש</div>
+  $$\overline{x}_{\text{חדש}}=\frac{\textcolor{#1D6FA5}{230}}{\underbrace{\textcolor{#8A6D1B}{11}}_{\textcolor{#8A6D1B}{\text{שירים — 10 הקודמים ועוד השיר החדש}}}}\approx 20.9$$
+</div>
+<p>
+  עלה — אבל בקושי: מ-20 ל-20.9. למה התזוזה קטנה כל כך?
+  כי 30 <strong>קרוב</strong> ל-20. תשווי ליום המטורף משלב 2:
+  שם ערך אחד רחוק מאוד (49 מול ימים של 4–8) גרר את הממוצע עד 12.
+  ככל שהערך החדש רחוק יותר מהממוצע — המשיכה שלו חזקה יותר.
+  זה כל הסוד של רגישות הממוצע.
+</p>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">עכשיו את המורה</span><h4>תקני את החבר</h4></div>
+  <p class="q-text">
+    חבר הסתכל על הנתונים של שבוע ההשקה ואמר:
+    <span class="en">"</span>הממוצע 12, אז ברוב הימים האזנת בערך 12 פעמים<span class="en">"</span>.
+    <span class="mk mk-find">מה היית מתקנת — ובאיזה מדד היית משתמשת במקום?</span>
+  </p>
+  <details class="sol">
+    <summary>הצגי תשובה</summary>
+    <div class="sol-body">
+      <p>נסתכל שוב על השבוע עצמו:</p>
+      <table class="dtable sol-table">
+        <tr><th>היום בשבוע</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td class="hl-given">7</td></tr>
+        <tr><th>האזנות</th><td>4</td><td>5</td><td>5</td><td>6</td><td>7</td><td>8</td><td class="hl-given"><b>49</b></td></tr>
+      </table>
+      <p>ברוב הימים — שישה מתוך שבעה — האזנת <strong>8 פעמים או פחות</strong>.
+      אף יום רגיל לא התקרב ל-12.</p>
+      <p>הממוצע נמשך למעלה על ידי יום אחד חריג — יום ההשקה עם 49 —
+      ולכן הוא לא מתאר "יום רגיל".</p>
+      <p>את "היום הרגיל" מתאר החציון: <strong>6</strong>.
+      המשפט המתוקן: "ביום טיפוסי האזנתי בערך 6 פעמים;
+      בסך הכל 84 פעמים בשבוע."</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex4"> סיימתי את התרגיל הזה</label>
+</article>
+
+<p>
+  וזהו. עברת את כל שבע התחנות — מהטבלה הראשונה ועד ממוצע וחציון
+  שיודעים לספר יחד את הסיפור המלא. הסיכום השנתי הבא שיגיע לך לטלפון —
+  את כבר תדעי בדיוק איך חישבו כל שורה בו.
+</p>
+
+<div class="box def">
+  <div class="box-title">מה עכשיו</div>
+  מכאן חוזרים לעבודת הקיץ: פתחי את תרגילי הסטטיסטיקה,
+  ותראי שאת מזהה כל שאלה — שכיח, חציון, ממוצע, אחוזים.
+  <br>ואם תרגיל בכל זאת מתעקש — המפה תמיד כאן, וכל תחנה נשארת פתוחה בשבילך.
+</div>
+
+<!-- ============ סרטונים ============ -->
+<h2>🎬 רוצה עוד על גרפים ודיאגרמות?</h2>
+<div class="watch">
+  <p>שלושה סרטונים שממשיכים בדיוק מהנקודה הזו:</p>
+  <a class="video-link" href="https://www.youtube.com/watch?v=pqwqTbMfomo">
+    <img src="../assets/stats/pqwqTbMfomo/02_t0152.jpg" alt="קריאת דיאגרמת עמודות — הלוח מהסרטון" loading="lazy">
+    <span class="vt"><b>קריאת דיאגרמת עמודות</b><span>בדיוק המיומנות של הטרנד מטיקטוק · 7:05</span></span>
+    <span class="play">▶</span>
+  </a>
+  <a class="video-link" href="https://www.youtube.com/watch?v=s8KbRwl60js&amp;t=912">
+    <img src="../assets/stats/s8KbRwl60js/10_t1110.jpg" alt="שאלת גרף בשיעור מלא — הלוח מהסרטון" loading="lazy">
+    <span class="vt"><b>שאלת גרף בתוך שיעור מלא (מדקה 15:12)</b><span>ככה שאלת קריאת-גרף נראית בכיתה · אילון פרץ</span></span>
+    <span class="play">▶</span>
+  </a>
+  <a class="video-link" href="https://www.youtube.com/watch?v=tQ-46oTmz3A">
+    <img src="../assets/stats/tQ-46oTmz3A/05_t0210.jpg" alt="בניית דיאגרמת עוגה באקסל — מסך מהסרטון" loading="lazy">
+    <span class="vt"><b>בונוס למתעניינות: לבנות דיאגרמת עוגה אמיתית באקסל</b><span>כמו של האפליקציות, במו ידייך · 8:03</span></span>
+    <span class="play">▶</span>
+  </a>
+</div>
+
+<!-- ============ ניווט ============ -->
+<div class="progresswrap no-print">
+  <span class="progressbar"><i></i></span><span class="progress-label"></span>
+  <button class="all-sols" style="font-family:inherit;font-size:12px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:4px 10px;cursor:pointer">לפתוח את כל הפתרונות</button>
+</div>
+
+<nav class="pagenav">
+  <a href="06-table-with-hole.html"><span class="dir">→ התחנה הקודמת</span>הטבלה עם החור</a>
+  <a class="next" href="08-self-quiz.html"><span class="dir">סיימת את המסלול — הגמר ←</span>בוחן הבית</a>
+</nav>
+
+<footer class="fin">חלק מהעולם של שירה · <a href="index.html">המפה</a> · <a href="../index.html">המרכז</a></footer>
+</main>
+</div>
+</body>
+</html>

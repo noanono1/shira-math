@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<!-- מסך הבית של האייפד/הטלפון -->
+<link rel="apple-touch-icon" href="../assets/icons/icon-180.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>חציון ושכיח — סטטיסטיקה — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../vendor/katex.min.css">
+<link rel="stylesheet" href="../css/shira.css">
+<script defer src="../vendor/katex.min.js"></script>
+<script defer src="../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../js/shira.js"></script>
+<style>
+/* מחוון פתיחה — כמה זמן, כמה תרגילים, ואיפה מתחילים לתרגל (מוסתר בהדפסה) */
+.pagemeta{display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px;
+  margin:12px 0 0; font-size:13px; color:var(--soft)}
+.pagemeta .pm-time{background:var(--faint); border-radius:999px; padding:3px 10px}
+.pagemeta .pm-time b{color:var(--ink); font-weight:700}
+.pagemeta .pm-jump{color:var(--accent); font-weight:700; text-decoration:none}
+.pagemeta .pm-jump:hover{text-decoration:underline}
+.pagemeta .pm-note{flex:1 1 100%; margin:0}
+#ex-first,#bank-map{scroll-margin-top:78px}
+</style>
+</head>
+<body data-page="stat:03-median-mode">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">סטטיסטיקה — המפה</a>
+    <span class="crumbs">תחנה <b>3</b> מתוך 7 · <b>חציון ושכיח</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">סטטיסטיקה · תחנה 3</div>
+  <h1>חציון ושכיח — האמצע והנפוץ</h1>
+  <p class="lead">
+    בתחנה הקודמת פגשת את הממוצע. עכשיו נכיר עוד שני מדדים שהמבחנים אוהבים:
+    החציון — מי עומד בדיוק באמצע, והשכיח — מי מופיע הכי הרבה פעמים.
+    שניהם פשוטים, ולכל אחד יש מלכודת אחת קטנה ששווה להכיר מראש.
+  </p>
+  <p class="youknow"><b>בסוף העמוד תדעי:</b> למצוא חציון של רשימה — אי-זוגית וגם זוגית ·
+  למצוא חציון מתוך טבלה בשיטת הצבירה · להסביר את ההבדל בין שכיח לשכיחות ·
+  לפתור שני תרגילים אמיתיים מעבודת הקיץ שלך.</p>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>≈ 30 דק׳</b> · 7 תרגילים</span>
+    <a class="pm-jump" href="#sec-practice">לקפוץ ישר לתרגילים ↓</a>
+  </p>
+</header>
+
+<!-- ============ 1. מהו חציון ============ -->
+<h2><span class="num">1</span>מהו חציון?</h2>
+
+<p>
+  דמייני את הכיתה מסתדרת בשורה אחת לפי גובה, מהנמוך לגבוה.
+  <br>מי שעומד בדיוק באמצע השורה מחלק את הכיתה לשני חצאים:
+  חצי מהתלמידים נמוכים ממנו, וחצי גבוהים ממנו.
+  <br>הגובה של מי שעומד באמצע — הוא <strong>החציון</strong> של הגבהים.
+</p>
+
+<div class="box def">
+  <div class="box-title">הגדרה</div>
+  החציון הוא הערך האמצעי — <strong>אחרי שמסדרים את הנתונים לפי גודל</strong>.
+  <br>חצי מהנתונים קטנים ממנו, וחצי גדולים ממנו.
+</div>
+
+<div class="box warn">
+  <div class="box-title">בלי לסדר קודם — אין חציון</div>
+  לקחת את המספר שעומד באמצע הרשימה <em>כמו שהיא</em> — זו הטעות הקלאסית.
+  <br>קודם מסדרים מהקטן לגדול, ורק אחר כך מחפשים את האמצע.
+</div>
+
+<!-- ============ 2. אי-זוגי ============ -->
+<h2><span class="num">2</span>מספר אי-זוגי של נתונים</h2>
+
+<p>
+  ניקח חמישה מספרים: <span class="fi">\(7,\;3,\;9,\;1,\;5\)</span>.
+  <br>שלב ראשון — תמיד — מסדרים לפי גודל: <span class="fi">\(1,\;3,\;5,\;7,\;9\)</span>.
+  <br>שלב שני — מוצאים <strong>איפה</strong> האמצע.
+  <br>בשביל זה יש נוסחה — וזו הדרך הכללית, שעובדת גם עם 5 נתונים וגם עם 500:
+</p>
+
+<div class="fbox">
+  <div class="fbox-title">מיקום החציון — הנוסחה</div>
+  $$\text{מיקום החציון}=\frac{\textcolor{#8A6D1B}{N}+1}{2}=\frac{\textcolor{#8A6D1B}{5}+1}{2}=3$$
+  <span class="f-legend">
+    <span><i class="sw" style="background:#FBF0C9"></i> צהוב — <span class="fi">\(N\)</span> הוא מספר הנתונים (כמה מספרים יש בסך הכל)</span>
+    <span>אצלנו ברשימה יש 5 מספרים — לכן הוצב <span class="fi">\(\textcolor{#8A6D1B}{N}=5\)</span></span>
+  </span>
+</div>
+
+<p>הנוסחה אמרה "מקום 3" — אז סופרים בשורה המסודרת עד המקום ה-3, וקוראים מה כתוב שם:</p>
+
+<div class="dotrow with-pos">
+  <span class="dot lg d1">1</span>
+  <span class="dot lg d1">3</span>
+  <span class="dot lg d1 ring"><span class="pos">מקום 3</span>5</span>
+  <span class="dot lg d1">7</span>
+  <span class="dot lg d1">9</span>
+</div>
+<p class="viz-cap">כל עיגול הוא מספר מהרשימה, מסודרים מהקטן לגדול. במקום ה-3 יושב הערך 5 —
+ולכן <strong>החציון הוא 5</strong>.</p>
+
+<p>
+  שימי לב: הנוסחה נותנת את ה<strong>מיקום</strong> בשורה — לא את החציון עצמו.
+  <br>זו הפרדה ששווה לחדד: קודם מוצאים <em>איפה</em> (מקום 3), ואז קוראים <em>מה</em> יושב שם (הערך 5).
+</p>
+
+<div class="box example">
+  <div class="box-title">כשיש מעט מספרים — אפשר גם בלי הנוסחה</div>
+  כשיש רק 5 מספרים, כמו כאן, לא חייבים נוסחה:
+  מסדרות את חמשת המספרים בשורה מהקטן לגדול, ולוקחות את המספר שבאמצע —
+  שניים לפניו ושניים אחריו:
+  <div style="text-align:center;margin:8px 0 2px">
+    <svg viewBox="0 0 152 44" width="152" style="max-width:100%;height:auto" role="img" aria-label="חמישה מספרים מסודרים בשורה — האמצעי מוקף בירוק">
+      <circle cx="16" cy="22" r="12" fill="#7C8794"/>
+      <circle cx="46" cy="22" r="12" fill="#7C8794"/>
+      <circle cx="76" cy="22" r="16" fill="none" stroke="#2E7D32" stroke-width="2.5"/>
+      <circle cx="76" cy="22" r="12" fill="#2E7D32"/>
+      <circle cx="106" cy="22" r="12" fill="#7C8794"/>
+      <circle cx="136" cy="22" r="12" fill="#7C8794"/>
+      <text x="16" y="26" text-anchor="middle" font-size="11.5" font-weight="800" fill="#FFFFFF">1</text>
+      <text x="46" y="26" text-anchor="middle" font-size="11.5" font-weight="800" fill="#FFFFFF">3</text>
+      <text x="76" y="26" text-anchor="middle" font-size="11.5" font-weight="800" fill="#FFFFFF">5</text>
+      <text x="106" y="26" text-anchor="middle" font-size="11.5" font-weight="800" fill="#FFFFFF">7</text>
+      <text x="136" y="26" text-anchor="middle" font-size="11.5" font-weight="800" fill="#FFFFFF">9</text>
+    </svg>
+  </div>
+  ככה מותר לעבוד רק כשיש מעט מספרים וכולם מול העיניים.
+  <br>ברגע שיש הרבה מספרים — או טבלה — חוזרות לנוסחה.
+</div>
+
+<!-- ============ 3. זוגי ============ -->
+<h2><span class="num">3</span>מספר זוגי של נתונים</h2>
+
+<p>
+  ומה אם אין "אמצעי" אחד? ניקח שישה מספרים: <span class="fi">\(4,\;8,\;2,\;6,\;10,\;12\)</span>.
+  <br>מסדרים: <span class="fi">\(2,\;4,\;6,\;8,\;10,\;12\)</span>.
+  <br>הפעם ברשימה יש 6 מספרים — לכן <span class="fi">\(\textcolor{#8A6D1B}{N}=6\)</span>.
+  <br>קודם המיקום, עם אותה נוסחה בדיוק:
+</p>
+
+$$\text{מיקום החציון}=\frac{\textcolor{#8A6D1B}{6}+1}{2}=3.5$$
+
+<p>
+  מקום "שלוש וחצי" לא קיים — וזו בדיוק המשמעות: החציון יושב <strong>בין</strong> המקום
+  ה-3 למקום ה-4.
+  <br>שם יושבים 6 ו-8, ולוקחים את האמצע ביניהם — הממוצע של שניהם:
+</p>
+
+$$\text{החציון}=\frac{6+8}{2}=7$$
+
+<div class="dotrow with-pos">
+  <span class="dot lg d1">2</span>
+  <span class="dot lg d1">4</span>
+  <span class="dot lg d1 ring"><span class="pos">3</span>6</span>
+  <span class="dot lg d1 ring"><span class="pos">4</span>8</span>
+  <span class="dot lg d1">10</span>
+  <span class="dot lg d1">12</span>
+</div>
+<p class="viz-cap">שישה עיגולים — אין אחד אמצעי. שני העיגולים במקומות 3 ו-4 חולקים את האמצע,
+והחציון הוא הממוצע של הערכים הכתובים בהם: <span class="fi">\(\tfrac{6+8}{2}=7\)</span>.</p>
+
+<p>
+  שימי לב: החציון כאן (7) בכלל לא מופיע ברשימה — וזה תקין,
+  בדיוק כמו שממוצע לא חייב להיות אחד מהנתונים.
+</p>
+
+<!-- ============ 4. חציון מטבלה ============ -->
+<h2><span class="num">4</span>חציון מתוך טבלה — שיטת הצבירה</h2>
+
+<p>
+  בבית הספר הנתונים מגיעים כמעט תמיד בטבלת שכיחויות. למשל: בדקו כמה תרגילים
+  פתרו 25 תלמידים בשיעורי הבית —
+</p>
+
+<table class="dtable">
+  <tr><th>מספר התרגילים</th><td class="hl-c2">1</td><td class="hl-c3">2</td><td class="hl-c4">3</td><td class="hl-c5">4</td></tr>
+  <tr><th>מספר התלמידים</th><td class="hl-c2">6</td><td class="hl-c3">5</td><td class="hl-c4">8</td><td class="hl-c5">6</td></tr>
+</table>
+<p class="tbl-note">השורה העליונה — הערכים (כאן: מספר התרגילים) · השורה התחתונה — השכיחות (כמה תלמידים).</p>
+<p class="tbl-note">כל עמודה קיבלה צבע — תכף הצבעים האלה יופיעו גם בחישוב, כדי שתראי בדיוק מאיפה מגיע כל מספר.</p>
+
+<p>
+  היתרון הגדול של טבלה: הנתונים <strong>כבר מסודרים</strong> לפי גודל — הערכים כבר מסודרים מהקטן לגדול, והסידור הזה נעשה בשבילנו.
+  <br>הנוסחה היא אותה נוסחה מסעיף 2: <span class="fi">\(\frac{\textcolor{#8A6D1B}{N}+1}{2}\)</span>.
+  <br>אבל רגע — מה זה <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> אצלנו?
+</p>
+
+<p>
+  <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> הוא מספר הנתונים — כמה נתונים יש בסך הכל.
+  <br>כאן כל תלמיד הוא נתון אחד, אז <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> = כמה תלמידים נשאלו.
+  <br>את זה הטבלה לא כותבת במפורש — אבל היא כן כותבת כמה תלמידים יש בכל עמודה.
+  <br>לכן <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> הוא בדיוק <strong>סכום שורת השכיחות</strong> (השורה התחתונה), עמודה-עמודה בצבעים שלה:
+</p>
+
+$$\textcolor{#8A6D1B}{N}=\textcolor{#1D6FA5}{6}+\textcolor{#2E7D6B}{5}+\textcolor{#6D28D9}{8}+\textcolor{#C2408C}{6}=\textcolor{#8A6D1B}{25}$$
+
+<p>עכשיו אפשר להציב בנוסחת המיקום — במקום <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> נכנס ה-25 שמצאנו:</p>
+
+$$\text{מיקום החציון}=\frac{\textcolor{#8A6D1B}{N}+1}{2}=\frac{\overbrace{\textcolor{#8A6D1B}{25}}^{\textcolor{#8A6D1B}{\text{סך כל התלמידים — סכום שורת השכיחות}}}+1}{2}=\textcolor{#2E7D32}{13}$$
+
+<p>
+  עכשיו אנחנו יודעות: החציון יושב במקום ה-<span class="mk mk-find">13</span> בשורה המסודרת.
+  <br>אפשר היה לכתוב את כל 25 המספרים בשורה ולספור עד 13 — אבל אין צורך.
+  <br>הטבלה כבר ספרה בשבילנו: כל עמודה אומרת כמה תלמידים יש בה.
+  <br>אז פשוט מחברים את העמודות, אחת-אחת, עד שעוברים את <span class="mk mk-find">13</span>.
+  <br>בטבלה בעברית מתחילים מהעמודה <strong>הימנית</strong> (הערך הקטן ביותר)
+  ומתקדמים שמאלה, בדיוק כמו שהשורה המסודרת בנויה.
+  <br>הנה אותה טבלה שוב — הפעם עם שורה שלישית שסופרת תוך כדי הליכה:
+</p>
+
+<table class="dtable">
+  <tr><th>מספר התרגילים</th><td class="hl-c2">1</td><td class="hl-c3">2</td><td class="hl-c4">3</td><td class="hl-c5">4</td></tr>
+  <tr><th>מספר התלמידים</th><td class="hl-c2">6</td><td class="hl-c3">5</td><td class="hl-c4">8</td><td class="hl-c5">6</td></tr>
+  <tr><th>כמה ספרנו עד כאן (צבירה)</th>
+      <td class="hl-c2">① <b style="color:#1D6FA5">6</b></td>
+      <td class="hl-c3">② <span dir="ltr">6+5=<b style="color:#2E7D6B">11</b></span></td>
+      <td style="background:#DFF0E1"><b style="color:#2E7D32">③ <span dir="ltr">11+8=19</span></b> ✋</td>
+      <td>—</td></tr>
+</table>
+<p class="tbl-note">⬅ כיוון ההליכה: מתחילים בעמודה הימנית (הערך הקטן ביותר) וצועדים שמאלה — ① ואז ② ואז ③.</p>
+<p class="tbl-note" style="color:#2E7D32;font-weight:700;margin-top:2px">✋ עברנו את 13 בעמודה של הערך 3 — המקום ה-13 יושב בה, ושם עוצרים.</p>
+
+<ol class="steps">
+  <li><i class="sw" style="background:#DDEDF8;display:inline-block;width:11px;height:11px;border-radius:3px;margin-inline-end:5px"></i>תא ①
+      — העמודה של <span style="color:#1D6FA5;font-weight:800">הערך 1</span>: עד כאן
+      <span class="fi">\(\textcolor{#1D6FA5}{6}\)</span> תלמידים. עוד לא 13.</li>
+  <li><i class="sw" style="background:#DCEEE9;display:inline-block;width:11px;height:11px;border-radius:3px;margin-inline-end:5px"></i>תא ②
+      — ועוד העמודה של <span style="color:#2E7D6B;font-weight:800">הערך 2</span>:
+      <span class="fi">\(\textcolor{#1D6FA5}{6}+\textcolor{#2E7D6B}{5}=11\)</span>. עדיין לא 13.</li>
+  <li><i class="sw" style="background:#EAE0FA;display:inline-block;width:11px;height:11px;border-radius:3px;margin-inline-end:5px"></i>תא ③
+      — ועוד העמודה של <span style="color:#6D28D9;font-weight:800">הערך 3</span>:
+      <span class="fi">\(11+\textcolor{#6D28D9}{8}=19\)</span> —
+      עברנו את <span class="mk mk-find">13</span>! עוצרים: המקום ה-13 יושב בתוך
+      העמודה של <span style="color:#6D28D9;font-weight:800">הערך 3</span>.</li>
+  <li>לכן <strong>החציון הוא 3</strong>. <span class="aside">(לעמודה של הערך 4 בכלל לא הגענו —
+      וזה בסדר, החציון נמצא לפניה.)</span></li>
+</ol>
+
+<p>
+  שווה לראות מה בעצם קרה: המקומות 1 עד 11 שייכים לערכים 1 ו-2,
+  והמקומות 12 עד 19 כולם שייכים לערך 3 — המקום ה-13 נמצא בתוכם.
+  <br>זו כל שיטת הצבירה: מוסיפים שכיחויות עד שעוברים את המיקום, ועוצרים.
+</p>
+
+<h3>וכשמספר הנתונים זוגי? שני מקרים שחייבים להכיר</h3>
+
+<p>
+  בדוגמה שלמעלה היו 25 תלמידים — מספר אי-זוגי, והנוסחה נתנה מקום שלם (13).
+  <br>כשמספר הנתונים <strong>זוגי</strong>, הנוסחה נותנת מקום עם חצי (למשל 8.5) —
+  והחציון יושב בין שני מקומות. בטבלה זה יכול לקרות בשתי צורות שונות:
+</p>
+
+<div class="box example">
+  <div class="box-title">מקרה ראשון — שני המקומות באותה עמודה</div>
+  ‏16 תלמידים נבחנו בבוחן:
+  <table class="dtable">
+    <tr><th>הציון</th><td>60</td><td>70</td><td>80</td><td>90</td></tr>
+    <tr><th>מספר התלמידים</th><td>3</td><td>4</td><td>5</td><td>4</td></tr>
+    <tr><th>כמה ספרנו עד כאן (צבירה)</th>
+        <td>① 3</td>
+        <td>② <span dir="ltr">3+4=7</span></td>
+        <td style="background:#DFF0E1"><b style="color:#2E7D32">③ <span dir="ltr">7+5=12</span></b> ✋</td>
+        <td>—</td></tr>
+  </table>
+  <p style="margin:8px 0 4px">יש 16 נתונים, ולכן מיקום החציון:
+  <span class="fi">\(\frac{\textcolor{#8A6D1B}{16}+1}{2}=8.5\)</span> —
+  בין המקום ה-8 למקום ה-9.</p>
+  <p style="margin:4px 0">צוברים עד שעוברים את 8.5: אחרי 60 ו-70 ספרנו רק 7 —
+  ובעמודת ה-80 הגענו ל-12.
+  <br>המקומות 8 עד 12 כולם יושבים בעמודת ה-80 —
+  כלומר <strong>גם</strong> המקום ה-8 <strong>וגם</strong> המקום ה-9 הם הציון 80.</p>
+  $$\text{החציון}=\frac{80+80}{2}=80$$
+  <p style="margin:4px 0">כששני המקומות באותה עמודה — החציון הוא פשוט הערך של העמודה הזאת.</p>
+</div>
+
+<div class="box example">
+  <div class="box-title">מקרה שני — הצבירה נעצרת בדיוק באמצע, ושני המקומות בשתי עמודות שונות</div>
+  ‏20 תלמידים נבחנו בבוחן אחר:
+  <table class="dtable">
+    <tr><th>הציון</th><td>60</td><td>70</td><td>80</td><td>90</td></tr>
+    <tr><th>מספר התלמידים</th><td>4</td><td>6</td><td>4</td><td>6</td></tr>
+    <tr><th>כמה ספרנו עד כאן (צבירה)</th>
+        <td>① 4</td>
+        <td style="background:#DFF0E1"><b style="color:#2E7D32">② <span dir="ltr">4+6=10</span></b></td>
+        <td style="background:#DFF0E1"><b style="color:#2E7D32">③ <span dir="ltr">10+4=14</span></b> ✋</td>
+        <td>—</td></tr>
+  </table>
+  <p style="margin:8px 0 4px">יש 20 נתונים, ולכן מיקום החציון:
+  <span class="fi">\(\frac{\textcolor{#8A6D1B}{20}+1}{2}=10.5\)</span> —
+  בין המקום ה-10 למקום ה-11.</p>
+  <p style="margin:4px 0">שימי לב מה קרה בצבירה: עמודת ה-70 נסגרה <strong>בדיוק</strong> על 10.
+  <br>המקום ה-10 הוא האחרון בעמודת ה-70, והמקום ה-11 הוא כבר הראשון בעמודת ה-80 —
+  שני המקומות בשתי עמודות שונות.</p>
+  $$\text{החציון}=\frac{\underbrace{70}_{\text{מקום 10 — אחרון ב-70}}+\underbrace{80}_{\text{מקום 11 — ראשון ב-80}}\rule[-1.6em]{0pt}{0pt}}{2}=75$$
+  <p style="margin:4px 0">כשהצבירה נסגרת בדיוק על המספר שמתחת לחצי (כאן 10) —
+  החציון הוא ממוצע של <strong>שני ערכים שונים</strong>,
+  והוא יכול לצאת מספר שבכלל לא מופיע בטבלה (75). זה תקין.</p>
+</div>
+
+<div class="box warn">
+  <div class="box-title">שימי לב</div>
+  ההבדל בין שני המקרים מתגלה רק בצבירה: אם עברנו את המיקום <strong>בתוך</strong> עמודה —
+  שני המקומות בה, והחציון הוא הערך שלה. אם עצרנו <strong>בדיוק</strong> בסוף עמודה —
+  המקום הבא כבר בעמודה הבאה, ומחשבים ממוצע של שני הערכים.
+</div>
+
+<!-- ============ 5. שלוש דרכים ============ -->
+<h2><span class="num">5</span>הדרך עם הנוסחה — ומתי אפשר בלי</h2>
+
+<div class="box def">
+  <div class="box-title">הדרך עם הנוסחה — עובדת תמיד</div>
+  שלב 1: נוסחת המיקום <span class="fi">\(\frac{\textcolor{#8A6D1B}{N}+1}{2}\)</span>
+  אומרת באיזה מקום יושב החציון.
+  <br>שלב 2: סופרים עד המקום הזה — ובטבלה: צוברים שכיחויות, עמודה-עמודה, עד שעוברים אותו.
+  <br>ככה עבדנו בסעיף 4 — וככה עובדים תמיד, עם 25 נתונים או עם 500.
+</div>
+
+<div class="mini-row" style="direction:rtl;margin:14px 0 4px;align-items:flex-start">
+  <div class="mini-fig">
+    <svg viewBox="0 0 152 88" width="152" style="max-width:100%;height:auto" role="img" aria-label="נוסחת המיקום: (5+1) לחלק ל-2 שווה 3, הולכים למקום השלישי">
+      <text x="76" y="14" text-anchor="middle" font-size="12.5" font-weight="800" fill="#1C2733">(5+1) : 2 = <tspan fill="#2E7D32">3</tspan></text>
+      <line x1="76" y1="22" x2="76" y2="40" stroke="#2E7D32" stroke-width="2"/>
+      <polygon points="76,46 71,38 81,38" fill="#2E7D32"/>
+      <circle cx="20" cy="58" r="10" fill="#7C8794"/>
+      <circle cx="48" cy="58" r="10" fill="#7C8794"/>
+      <circle cx="76" cy="58" r="10" fill="#2E7D32"/>
+      <circle cx="104" cy="58" r="10" fill="#7C8794"/>
+      <circle cx="132" cy="58" r="10" fill="#7C8794"/>
+      <text x="20" y="62" text-anchor="middle" font-size="10.5" font-weight="800" fill="#FFFFFF">1</text>
+      <text x="48" y="62" text-anchor="middle" font-size="10.5" font-weight="800" fill="#FFFFFF">3</text>
+      <text x="76" y="62" text-anchor="middle" font-size="10.5" font-weight="800" fill="#FFFFFF">5</text>
+      <text x="104" y="62" text-anchor="middle" font-size="10.5" font-weight="800" fill="#FFFFFF">7</text>
+      <text x="132" y="62" text-anchor="middle" font-size="10.5" font-weight="800" fill="#FFFFFF">9</text>
+      <text x="20" y="82" text-anchor="middle" font-size="9" fill="#8B98A5">1</text>
+      <text x="48" y="82" text-anchor="middle" font-size="9" fill="#8B98A5">2</text>
+      <text x="76" y="82" text-anchor="middle" font-size="9" font-weight="800" fill="#2E7D32">3</text>
+      <text x="104" y="82" text-anchor="middle" font-size="9" fill="#8B98A5">4</text>
+      <text x="132" y="82" text-anchor="middle" font-size="9" fill="#8B98A5">5</text>
+    </svg>
+    <span class="cap">שלב 1 · מחשבים את המיקום, סופרים עד המקום ה-3 — הערך שם: 5</span>
+  </div>
+  <div class="mini-fig">
+    <svg viewBox="0 0 152 84" width="152" style="max-width:100%;height:auto" role="img" aria-label="צבירה בטבלה: 6, אחר כך 11, אחר כך 19 — עוברים את 13 ועוצרים">
+      <rect x="6" y="8" width="30" height="24" rx="4" fill="#C2408C"/>
+      <rect x="44" y="8" width="30" height="24" rx="4" fill="#6D28D9"/>
+      <rect x="82" y="8" width="30" height="24" rx="4" fill="#2E7D6B"/>
+      <rect x="120" y="8" width="30" height="24" rx="4" fill="#1D6FA5"/>
+      <text x="21" y="25" text-anchor="middle" font-size="12" font-weight="800" fill="#FFFFFF">6</text>
+      <text x="59" y="25" text-anchor="middle" font-size="12" font-weight="800" fill="#FFFFFF">8</text>
+      <text x="97" y="25" text-anchor="middle" font-size="12" font-weight="800" fill="#FFFFFF">5</text>
+      <text x="135" y="25" text-anchor="middle" font-size="12" font-weight="800" fill="#FFFFFF">6</text>
+      <text x="135" y="56" text-anchor="middle" font-size="12" font-weight="800" fill="#1C2733">6</text>
+      <text x="97" y="56" text-anchor="middle" font-size="12" font-weight="800" fill="#1C2733">11</text>
+      <text x="59" y="56" text-anchor="middle" font-size="12" font-weight="800" fill="#2E7D32">19</text>
+      <circle cx="59" cy="52" r="11" fill="none" stroke="#2E7D32" stroke-width="2"/>
+      <g stroke="#8B98A5" stroke-width="1.5">
+        <line x1="122" y1="52" x2="112" y2="52"/><line x1="84" y1="52" x2="74" y2="52"/>
+      </g>
+      <polygon points="108,52 115,48.5 115,55.5" fill="#8B98A5"/>
+      <polygon points="70,52 77,48.5 77,55.5" fill="#8B98A5"/>
+      <text x="76" y="78" text-anchor="middle" font-size="9.5" font-weight="700" fill="#8B98A5">6 + 5 = 11,  11 + 8 = 19</text>
+    </svg>
+    <span class="cap">שלב 2 בטבלה · צוברים שכיחויות (כמו בסעיף 4): 6, ואז 11, ואז 19 — עברנו את מקום 13, עוצרים</span>
+  </div>
+</div>
+
+<div class="box example">
+  <div class="box-title">כשיש מעט מספרים — שתי דרכים מהירות</div>
+  כשיש רק חמישה-שישה מספרים וכולם מול העיניים, אפשר בלי הנוסחה:
+  <br><strong>לוקחות את האמצעי בעין</strong> — כמו בקופסה של סעיף 2.
+  <br><strong>מוחקות מהקצוות</strong> — בכל פעם מוחקות זוג: את המספר הקטן ביותר ואת הגדול ביותר,
+  עד שנשאר מספר אחד (ואם נשארים שניים — הממוצע שלהם):
+  <div style="text-align:center;margin:8px 0 2px">
+    <svg viewBox="0 0 152 64" width="152" style="max-width:100%;height:auto" role="img" aria-label="מחיקה מהקצוות: מוחקים את 1 ואת 9, אחר כך את 3 ואת 7, ונשאר 5">
+      <circle cx="16" cy="32" r="12" fill="#EDF0F3" stroke="#C6CDD4" stroke-width="1"/>
+      <circle cx="46" cy="32" r="12" fill="#EDF0F3" stroke="#C6CDD4" stroke-width="1"/>
+      <circle cx="76" cy="32" r="16" fill="none" stroke="#2E7D32" stroke-width="2.5"/>
+      <circle cx="76" cy="32" r="12" fill="#2E7D32"/>
+      <circle cx="106" cy="32" r="12" fill="#EDF0F3" stroke="#C6CDD4" stroke-width="1"/>
+      <circle cx="136" cy="32" r="12" fill="#EDF0F3" stroke="#C6CDD4" stroke-width="1"/>
+      <g stroke="#C0392B" stroke-width="2.2" stroke-linecap="round" opacity=".7">
+        <line x1="7" y1="23" x2="25" y2="41"/><line x1="7" y1="41" x2="25" y2="23"/>
+        <line x1="127" y1="23" x2="145" y2="41"/><line x1="127" y1="41" x2="145" y2="23"/>
+      </g>
+      <g stroke="#C0392B" stroke-width="2.2" stroke-linecap="round" opacity=".35">
+        <line x1="37" y1="23" x2="55" y2="41"/><line x1="37" y1="41" x2="55" y2="23"/>
+        <line x1="97" y1="23" x2="115" y2="41"/><line x1="97" y1="41" x2="115" y2="23"/>
+      </g>
+      <text x="16" y="36" text-anchor="middle" font-size="11.5" font-weight="800" fill="#1C2733">1</text>
+      <text x="46" y="36" text-anchor="middle" font-size="11.5" font-weight="800" fill="#1C2733">3</text>
+      <text x="76" y="36" text-anchor="middle" font-size="11.5" font-weight="800" fill="#FFFFFF">5</text>
+      <text x="106" y="36" text-anchor="middle" font-size="11.5" font-weight="800" fill="#1C2733">7</text>
+      <text x="136" y="36" text-anchor="middle" font-size="11.5" font-weight="800" fill="#1C2733">9</text>
+    </svg>
+    <div style="font-size:11.5px;color:var(--soft)">מוחקים זוג-זוג: קודם 1 ו-9, אחר כך 3 ו-7 — נשאר 5</div>
+  </div>
+  עם הרבה מספרים למחוק 50 זוגות זה מתכון לטעות — שם עובדות רק עם הנוסחה.
+</div>
+
+<p>
+  כל הדרכים נותנות תמיד את אותה תשובה — כי כולן מחפשות את אותו דבר:
+  מי עומד באמצע השורה המסודרת.
+</p>
+
+<!-- ============ 6. שכיח ============ -->
+<h2><span class="num">6</span>שכיח — מי מופיע הכי הרבה</h2>
+
+<div class="box def">
+  <div class="box-title">הגדרה</div>
+  השכיח הוא הערך שמופיע בנתונים <strong>הכי הרבה פעמים</strong> —
+  הערך עם השכיחות הגבוהה ביותר.
+</div>
+
+<div class="box warn">
+  <div class="box-title">הבלבול הנצחי</div>
+  שכיח ≠ שכיחות.
+  <br>ה<strong>שכיח</strong> הוא <strong>הערך</strong> עצמו;
+  ה<strong>שכיחות</strong> היא <strong>כמה פעמים</strong> הוא מופיע.
+</div>
+
+<p>הנה הטבלה המוכרת מתחנה 2 — ציוני 10 תלמידים:</p>
+
+<table class="dtable">
+  <tr><th>הציון</th><td>60</td><td>70</td><td class="hl-find">80</td><td>90</td></tr>
+  <tr><th>מספר התלמידים</th><td>2</td><td>3</td><td class="hl-group">4</td><td>1</td></tr>
+</table>
+
+<p>
+  השכיחות הכי גבוהה היא <span class="mk mk-group">4</span> —
+  ולכן השכיח הוא <span class="mk mk-find">80</span> (הציון שקיבלו הכי הרבה תלמידים).
+  <br>מי שעונה "השכיח הוא 4" התבלבל בין הערך לשכיחות שלו.
+</p>
+
+<p>עוד שני דברים ששווה לדעת על השכיח:</p>
+<ul>
+  <li>הוא לא חייב להיות מספר: אם בודקים את צבע העיניים בכיתה, השכיח יכול להיות "חום".
+  לחציון ולממוצע זה לא יכול לקרות — הם עובדים רק על מספרים.</li>
+  <li>יכולים להיות שני שכיחים: ברשימה <span class="fi">\(3,\;3,\;5,\;7,\;7\)</span>
+  גם 3 וגם 7 מופיעים פעמיים — שניהם שכיחים.</li>
+</ul>
+
+<!-- ============ 7. תרגול ============ -->
+<h2 id="sec-practice"><span class="num">7</span>✏️ תרגול — משלב לשלב</h2>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>חציון מרשימה לא מסודרת</h4></div>
+  <p class="q-text">
+    <span class="mk mk-group">נתונה רשימת המספרים 12, 5, 8, 20, 3, 8, 15</span>.
+    <span class="mk mk-find">מהו החציון?</span>
+  </p>
+  <p style="font-size:13px;color:var(--soft)">נסי לנחש את השלב הבא לפני שאת פותחת אותו.</p>
+  <details class="step"><summary>שלב ראשון — מה עושים קודם?</summary>
+    <div class="step-body">מסדרים לפי גודל:
+    <span class="fi">\(3,\;5,\;8,\;8,\;12,\;15,\;20\)</span>.
+    <br>שימי לב: ה-8 מופיע פעמיים — סופרים אותו פעמיים, לא מוחקים כפילויות.</div>
+  </details>
+  <details class="step"><summary>שלב שני — איפה האמצע?</summary>
+    <div class="step-body">יש 7 נתונים, ולכן המיקום:
+    <span class="fi">\(\frac{7+1}{2}=4\)</span> — המקום הרביעי.</div>
+  </details>
+  <details class="step"><summary>שלב שלישי — מה יושב שם?</summary>
+    <div class="step-body">סופרים ברשימה המסודרת עד המקום הרביעי:
+    3 (מקום 1), 5 (מקום 2), 8 (מקום 3), 8 (מקום 4).
+    <br>החציון הוא <strong>8</strong>.
+    <br>בדיקת היגיון: 8 נמצא בין 3 ל-20 ✓</div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex1"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex hide-marks">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>חציון של רשימה זוגית</h4></div>
+  <p class="q-text">
+    <span class="mk mk-group">נתונה רשימת המספרים 6, 12, 4, 10, 8, 2</span>.
+    <span class="mk mk-find">מהו החציון?</span>
+  </p>
+  <div class="q-row">
+    <button class="marks-btn no-print" style="font-family:inherit;font-size:12.5px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:5px 10px;cursor:pointer">הציגי את הפירוק בצבעים</button>
+  </div>
+  <div class="q-row">
+    <span>התשובה שלי:</span>
+    <input class="q-input" data-answer="7" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>מסדרים לפי גודל: <span class="fi">\(2,\;4,\;6,\;8,\;10,\;12\)</span>.</p>
+      $$\text{מיקום החציון}=\frac{\overbrace{\textcolor{#8A6D1B}{6}}^{\textcolor{#8A6D1B}{\text{כמה נתונים}}}+1}{2}=\underbrace{3.5}_{\text{בין מקום 3 למקום 4}}$$
+      $$\text{החציון}=\frac{\underbrace{6}_{\text{מקום 3}}+\underbrace{8}_{\text{מקום 4}}\rule[-1.6em]{0pt}{0pt}}{2}=7$$
+      <p><strong>בדיקת היגיון:</strong> 7 בין 2 ל-12 ✓
+      <span class="aside">(והוא לא מופיע ברשימה — תקין לגמרי.)</span></p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex2"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex hide-marks">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>חציון מתוך טבלה</h4></div>
+  <p class="q-text">
+    <span class="mk mk-group">בטבלה שלפנייך — ציוני 12 תלמידים בבוחן</span>.
+    <span class="mk mk-find">מהו חציון הציונים?</span>
+  </p>
+  <table class="dtable">
+    <tr><th>הציון</th><td>70</td><td>80</td><td>90</td></tr>
+    <tr><th>מספר התלמידים</th><td>3</td><td>4</td><td>5</td></tr>
+  </table>
+  <div class="q-row">
+    <button class="marks-btn no-print" style="font-family:inherit;font-size:12.5px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:5px 10px;cursor:pointer">הציגי את הפירוק בצבעים</button>
+  </div>
+  <div class="q-row">
+    <span>התשובה שלי:</span>
+    <input class="q-input" data-answer="80" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>קודם מזהות את <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> — סך התלמידים, כלומר סכום שורת השכיחות:</p>
+      $$\textcolor{#8A6D1B}{N}=3+4+5=\textcolor{#8A6D1B}{12}$$
+      $$\text{מיקום החציון}=\frac{\overbrace{\textcolor{#8A6D1B}{12}}^{\text{סך התלמידים}}+1}{2}=\underbrace{6.5}_{\text{בין מקום 6 למקום 7}}$$
+      <p>עכשיו צוברים בטבלה, מהעמודה הימנית שמאלה, עד שעוברים את 6.5:</p>
+      <table class="dtable sol-table">
+        <tr><th>הציון</th><td>70</td><td>80</td><td>90</td></tr>
+        <tr><th>מספר התלמידים</th><td>3</td><td>4</td><td>5</td></tr>
+        <tr><th>כמה ספרנו עד כאן (צבירה)</th>
+            <td>① 3</td>
+            <td style="background:#DFF0E1"><b style="color:#2E7D32">② <span dir="ltr">3+4=7</span></b> ✋</td>
+            <td>—</td></tr>
+      </table>
+      <p class="tbl-note" style="color:#2E7D32;font-weight:700">✋ עברנו את 6.5 — גם המקום ה-6 וגם המקום ה-7 יושבים בעמודה של הציון 80.</p>
+      <p>המקומות 4 עד 7 כולם ציון 80 — גם המקום ה-6 וגם ה-7 בפנים:</p>
+      $$\text{החציון}=\frac{80+80}{2}=80$$
+      <p><strong>בדיקת היגיון:</strong> 80 נמצא בין 70 ל-90 ✓
+      <br>אגב, השכיח כאן הוא דווקא <strong>90</strong> (השכיחות הכי גבוהה — 5).
+      חציון ושכיח לא חייבים להסכים.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex3"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex hide-marks">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>חציון ושכיח מתוך דיאגרמת עמודות</h4></div>
+  <p class="q-text">
+    <span class="mk mk-group">בקבוצת הכדורשת בדקו כמה אימונים עשתה כל אחת מהבנות בשבוע האחרון,
+    וסרטטו את התוצאות בדיאגרמה</span>. הפעם אין טבלה — את כל הנתונים קוראים מהעמודות.
+  </p>
+  <figure>
+    <div class="axplot" style="max-width:396px">
+    <span class="ax-ylab">השכיחות — כמה בנות</span>
+    <svg viewBox="0 0 360 190" style="width:100%;height:auto" role="img" aria-label="דיאגרמת עמודות של מספר האימונים בשבוע">
+      <line x1="24" y1="130" x2="336" y2="130" stroke="#E4E8EE" stroke-width="1"></line>
+      <line x1="24" y1="100" x2="336" y2="100" stroke="#E4E8EE" stroke-width="1"></line>
+      <line x1="24" y1="70"  x2="336" y2="70"  stroke="#E4E8EE" stroke-width="1"></line>
+      <line x1="24" y1="40"  x2="336" y2="40"  stroke="#E4E8EE" stroke-width="1"></line>
+      <rect x="40"  y="115" width="40" height="45"  rx="3" fill="#2E7D6B"></rect>
+      <rect x="100" y="40"  width="40" height="120" rx="3" fill="#2E7D6B"></rect>
+      <rect x="160" y="85"  width="40" height="75"  rx="3" fill="#2E7D6B"></rect>
+      <rect x="220" y="100" width="40" height="60"  rx="3" fill="#2E7D6B"></rect>
+      <rect x="280" y="130" width="40" height="30"  rx="3" fill="#2E7D6B"></rect>
+      <text x="60"  y="108" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">3</text>
+      <text x="120" y="33"  text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">8</text>
+      <text x="180" y="78"  text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">5</text>
+      <text x="240" y="93"  text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">4</text>
+      <text x="300" y="123" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">2</text>
+      <line x1="24" y1="160" x2="336" y2="160" stroke="#5A6875" stroke-width="1.5"></line>
+      <path d="M344 160 L336 156 L336 164 Z" fill="#5A6875"></path>
+      <line x1="24" y1="160" x2="24" y2="26" stroke="#5A6875" stroke-width="1.5"></line>
+      <path d="M24 18 L20 26 L28 26 Z" fill="#5A6875"></path>
+      <line x1="19" y1="130" x2="24" y2="130" stroke="#5A6875" stroke-width="1.5"></line>
+      <line x1="19" y1="100" x2="24" y2="100" stroke="#5A6875" stroke-width="1.5"></line>
+      <line x1="19" y1="70"  x2="24" y2="70"  stroke="#5A6875" stroke-width="1.5"></line>
+      <line x1="19" y1="40"  x2="24" y2="40"  stroke="#5A6875" stroke-width="1.5"></line>
+      <text x="16" y="164" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">0</text>
+      <text x="16" y="134" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">2</text>
+      <text x="16" y="104" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">4</text>
+      <text x="16" y="74"  text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">6</text>
+      <text x="16" y="44"  text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">8</text>
+      <line x1="60"  y1="160" x2="60"  y2="165" stroke="#5A6875" stroke-width="1"></line>
+      <line x1="120" y1="160" x2="120" y2="165" stroke="#5A6875" stroke-width="1"></line>
+      <line x1="180" y1="160" x2="180" y2="165" stroke="#5A6875" stroke-width="1"></line>
+      <line x1="240" y1="160" x2="240" y2="165" stroke="#5A6875" stroke-width="1"></line>
+      <line x1="300" y1="160" x2="300" y2="165" stroke="#5A6875" stroke-width="1"></line>
+      <text x="60"  y="182" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">0</text>
+      <text x="120" y="182" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">1</text>
+      <text x="180" y="182" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">2</text>
+      <text x="240" y="182" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">3</text>
+      <text x="300" y="182" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">4</text>
+    </svg>
+    <span class="ax-xlab">הערכים — מספר האימונים בשבוע</span>
+    </div>
+    <figcaption>המספר שמעל כל עמודה — כמה בנות התאמנו את מספר האימונים הזה.</figcaption>
+  </figure>
+  <div class="q-row">
+    <button class="marks-btn no-print" style="font-family:inherit;font-size:12.5px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:5px 10px;cursor:pointer">הציגי את הפירוק בצבעים</button>
+  </div>
+  <div class="q-row">
+    <span>מהו מספר האימונים השכיח?</span>
+    <input class="q-input" data-answer="1" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <span>מהו חציון מספר האימונים?</span>
+    <input class="q-input" data-answer="1.5" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p><strong>נעביר את הנתונים מהדיאגרמה לטבלה.</strong> גובה כל עמודה הוא השכיחות שלה:</p>
+      <table class="dtable sol-table">
+        <tr><th>מספר האימונים</th><td>0</td><td class="hl-find"><b>1</b></td><td>2</td><td>3</td><td>4</td></tr>
+        <tr><th>מספר הבנות</th><td>3</td><td class="hl-group">8</td><td>5</td><td>4</td><td>2</td></tr>
+      </table>
+      <p><strong>השכיח.</strong> העמודה הגבוהה ביותר היא של הערך 1, וגובהה 8 —
+      ולכן השכיח הוא <strong style="color:var(--c-find)">אימון אחד</strong>.
+      <br>השכיח הוא הערך שחוזר הכי הרבה פעמים — כאן 1.
+      <br>המספר 8 הוא כמה בנות התאמנו פעם אחת.</p>
+      <p><strong>החציון.</strong> מי זה <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> אצלנו?
+      כל בת היא נתון אחד — אז <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> הוא סכום השכיחויות:</p>
+      $$\textcolor{#8A6D1B}{N}=3+8+5+4+2=\textcolor{#8A6D1B}{22}$$
+      $$\text{מיקום החציון}=\frac{\overbrace{\textcolor{#8A6D1B}{22}}^{\textcolor{#8A6D1B}{\text{סך הבנות — סכום השכיחויות}}}+1}{2}=\underbrace{11.5}_{\text{בין מקום 11 למקום 12}}$$
+      <p>צוברים בטבלה, מהעמודה הימנית שמאלה, עד שעוברים את 11.5:</p>
+      <table class="dtable sol-table">
+        <tr><th>מספר האימונים</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+        <tr><th>מספר הבנות</th><td>3</td><td>8</td><td>5</td><td>4</td><td>2</td></tr>
+        <tr><th>כמה ספרנו עד כאן (צבירה)</th>
+            <td>① 3</td>
+            <td style="background:#DFF0E1"><b style="color:#2E7D32">② <span dir="ltr">3+8=11</span></b></td>
+            <td style="background:#DFF0E1"><b style="color:#2E7D32">③ <span dir="ltr">11+5=16</span></b> ✋</td>
+            <td>—</td><td>—</td></tr>
+      </table>
+      <p class="tbl-note" style="color:#2E7D32;font-weight:700">הצבירה נסגרה בדיוק על 11 בסוף עמודת ה-1 —
+      מקום 11 הוא האחרון בעמודת ה-1, ומקום 12 כבר בעמודת ה-2.</p>
+      <p>זה בדיוק "המקרה השני" מסעיף 4 — שני המקומות בשתי עמודות שונות:</p>
+      $$\text{החציון}=\frac{\underbrace{1}_{\text{מקום 11 — אחרון ב-1}}+\underbrace{2}_{\text{מקום 12 — ראשון ב-2}}\rule[-1.6em]{0pt}{0pt}}{2}=1.5$$
+      <p><strong>בדיקת היגיון:</strong> 1.5 בין 0 ל-4 ✓
+      (חציון של "אימון וחצי" — מספר שאף בת לא התאמנה בדיוק, וזה תקין.)</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex6"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex hide-marks">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>כשהצבירה עוצרת כבר בעמודה הראשונה</h4></div>
+  <p class="q-text">
+    <span class="mk mk-group">בבוחן פתע קצר קיבלו 15 תלמידים ציונים בין 6 ל-9</span>:
+  </p>
+  <table class="dtable">
+    <tr><th>הציון</th><td>6</td><td>7</td><td>8</td><td>9</td></tr>
+    <tr><th>מספר התלמידים</th><td>8</td><td>3</td><td>2</td><td>2</td></tr>
+  </table>
+  <p class="q-text"><span class="mk mk-find">מהו חציון הציונים?</span></p>
+  <div class="q-row">
+    <button class="marks-btn no-print" style="font-family:inherit;font-size:12.5px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:5px 10px;cursor:pointer">הציגי את הפירוק בצבעים</button>
+  </div>
+  <div class="q-row">
+    <span>התשובה שלי:</span>
+    <input class="q-input" data-answer="6" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>‏<span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> — סכום שורת השכיחות:</p>
+      $$\textcolor{#8A6D1B}{N}=8+3+2+2=\textcolor{#8A6D1B}{15}$$
+      $$\text{מיקום החציון}=\frac{\textcolor{#8A6D1B}{15}+1}{2}=8$$
+      <p>מתחילים לצבור — ועוצרים מוקדם מהרגיל:</p>
+      <table class="dtable sol-table">
+        <tr><th>הציון</th><td>6</td><td>7</td><td>8</td><td>9</td></tr>
+        <tr><th>מספר התלמידים</th><td>8</td><td>3</td><td>2</td><td>2</td></tr>
+        <tr><th>כמה ספרנו עד כאן (צבירה)</th>
+            <td style="background:#DFF0E1"><b style="color:#2E7D32">① 8</b> ✋</td>
+            <td>—</td><td>—</td><td>—</td></tr>
+      </table>
+      <p class="tbl-note" style="color:#2E7D32;font-weight:700">✋ כבר העמודה הראשונה מגיעה עד המקום ה-8 — המקום שחיפשנו.</p>
+      <p>המקומות 1 עד 8 כולם ציון 6, והמקום ה-8 הוא בדיוק המקום שחיפשנו —
+      ולכן החציון הוא <strong>6</strong>.</p>
+      <p>גם זה קורה: כשערך אחד מחזיק המון תלמידים, הצבירה יכולה לעצור
+      כבר בעמודה הראשונה — לא חייבים "לטייל" על כל הטבלה.</p>
+      <p><strong>בדיקת היגיון:</strong> יותר מחצי מהתלמידים (8 מתוך 15) קיבלו 6 —
+      אז ברור שהאמצע יושב אצלם ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex7"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · כמו במבחן</span><h4>מעבודת הקיץ שלך — תרגיל 1</h4></div>
+  <p class="q-text">
+    במפעל יש שתי דרגות שכר.
+    <span class="mk mk-group">25 פועלים מקבלים שכר לפי הדרגה הנמוכה, ו-80 פועלים מקבלים
+    שכר לפי הדרגה הגבוהה</span>.
+    <span class="mk mk-given">השכר בדרגה הגבוהה גדול ב-15 ₪ לשעה מן השכר לשעה בדרגה
+    הנמוכה</span>.
+    <span class="mk mk-given2">השכר הממוצע במפעל הוא 35 ₪ לשעה</span>.
+    <br>א. חשבי את השכר לשעה בכל אחת משתי הדרגות.
+    <br>ב. מהו השכר השכיח לשעת עבודה?
+    <br>ג. מהו חציון השכר עבור שעת עבודה במפעל? נמקי.
+  </p>
+  <details class="sol">
+    <summary>הצגי פתרון מלא (כמו שכותבים במחברת)</summary>
+    <div class="sol-body">
+      <p><strong>א.</strong> יש שני שכרים שאנחנו עדיין לא יודעות — נסמן אותם, אחד-אחד:</p>
+      <p style="margin:4px 0">השכר לשעה בדרגה <strong>הנמוכה</strong> — נסמן אותו
+      <span class="fi">\(\textcolor{#1D6FA5}{x}\)</span>.</p>
+      <p style="margin:4px 0">השכר לשעה בדרגה <strong>הגבוהה</strong> — לפי הנתון הוא גדול ממנו
+      ב-<span class="mk mk-given">15 ₪</span>, ולכן הוא
+      <span class="fi">\(\textcolor{#1D6FA5}{x}+\textcolor{#C2408C}{15}\)</span>.</p>
+      <p>מהנוסחה של הממוצע אפשר למצוא את הסכום של כל המשכורות:</p>
+      $$\overline{x}=\frac{\text{סכום}}{\text{כמות}}\;\Longrightarrow\;\text{סכום}=\overline{x}\cdot\text{כמות}=35\cdot\underbrace{\textcolor{#8A6D1B}{105}}_{25+80\text{ — כל הפועלים}}=\textcolor{#1D6FA5}{3675}$$
+      $$\underbrace{25x}_{\text{הדרגה הנמוכה}}+\underbrace{80(x+15)}_{\text{הדרגה הגבוהה}}=\textcolor{#1D6FA5}{3675}$$
+      $$105x+1200=3675$$
+      $$105x=2475\;\Longrightarrow\;x=\frac{2475}{105}=23\tfrac{4}{7}\approx 23.57$$
+      <p>הדרגה הנמוכה ≈ <strong>23.57 ₪</strong>, הגבוהה ≈ <strong>38.57 ₪</strong>
+      (בדיוק: <span class="fi">\(23\tfrac{4}{7}\)</span> ו-<span class="fi">\(38\tfrac{4}{7}\)</span> —
+      לא עגול, וזו לא טעות שלך).</p>
+      <p><strong>בדיקה:</strong> הצבה חזרה —
+      <span class="fi">\(105\cdot 23\tfrac{4}{7}=2415+60=2475\)</span> ✓</p>
+      <p><strong>ב.</strong> ‏80 פועלים מהגבוהה מול 25 מהנמוכה ←
+      השכיח הוא השכר עצמו: <span class="mk mk-find">≈ <strong>38.57 ₪</strong></span>.
+      <br>השכיח הוא הערך שחוזר הכי הרבה פעמים — כאן השכר לשעה.
+      <br>המספר 80 הוא כמה פועלים מקבלים אותו.</p>
+      <p><strong>ג.</strong> ‏105 המשכורות כבר מסודרות: 25 נמוכות, ואחריהן 80 גבוהות.</p>
+      $$\text{מיקום החציון}=\frac{\textcolor{#8A6D1B}{105}+1}{2}=53$$
+      <p>וצוברים על שתי הקבוצות, מהשכר הנמוך לגבוה, עד שעוברים את 53:</p>
+      <table class="dtable sol-table">
+        <tr><th>השכר לשעה</th><td>‎≈23.57 ₪</td><td>‎≈38.57 ₪</td></tr>
+        <tr><th>מספר הפועלים</th><td>25</td><td>80</td></tr>
+        <tr><th>כמה ספרנו עד כאן (צבירה)</th>
+            <td>① 25</td>
+            <td style="background:#DFF0E1"><b style="color:#2E7D32">② <span dir="ltr">25+80=105</span></b> ✋</td></tr>
+      </table>
+      <p class="tbl-note" style="color:#2E7D32;font-weight:700">✋ ‏25 לא מגיע ל-53 — המקום ה-53 יושב בקבוצת הדרגה הגבוהה.</p>
+      <p>לכן החציון הוא שכר הדרגה הגבוהה — ≈ <strong>38.57 ₪</strong>.</p>
+      <p><strong>בדיקת היגיון:</strong> רוב גדול באותה דרגה ←
+      גם השכיח וגם החציון נופלים בה ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex4"> סיימתי את התרגיל הזה</label>
+</article>
+
+<details class="more-x">
+  <summary>אתגר — עוד מהעבודה: תרגיל 5, סעיפים ד–ז (ממוצע גדול, חציון וערעור)</summary>
+  <article class="ex">
+    <div class="ex-head"><span class="lvl l3">אתגר</span><h4>מעבודת הקיץ שלך — תרגיל 5 (ד–ז)</h4></div>
+    <p class="q-text">
+      <span class="mk mk-group">דיאגרמת העמודות בעבודה מתארת את התפלגות הציונים שקיבלו
+      תלמידי כיתה ח</span> — הנה אותם נתונים כטבלה:
+    </p>
+    <div class="tbl-scroll">
+    <table class="dtable">
+      <tr><th>הציון</th><td>60</td><td>65</td><td>70</td><td>75</td><td>80</td><td>85</td><td>90</td><td>95</td><td>100</td></tr>
+      <tr><th>מספר התלמידים</th><td>3</td><td>5</td><td>6</td><td>6</td><td>8</td><td>9</td><td>7</td><td>4</td><td>2</td></tr>
+    </table>
+    </div>
+    <p class="q-text">
+      ד. <span class="mk mk-find">חשבי את ממוצע הציונים</span>.
+      <br>ה. <span class="mk mk-find">מהו חציון ציוני התלמידים?</span>
+      <br>ו–ז. <span class="mk mk-change">חמישה תלמידים הגישו ערעור על הציונים שקיבלו.
+      המורה קיבל את הערעור רק של שלושה מהתלמידים, שציוניהם היו 70, 75 ו-80,
+      ושלושת הציונים תוקנו ל-85</span>.
+      האם יש שינוי בחציון לאחר התיקון? ובממוצע? נמקי.
+    </p>
+    <details class="sol">
+      <summary>הצגי פתרון מלא</summary>
+      <div class="sol-body">
+        <p><strong>ד.</strong> החישוב הכי גדול בעבודה — בנחת, מכפלה-מכפלה.
+        שורת העבודה בטבלה עושה מכפלה אחת בכל עמודה:</p>
+        <div class="tbl-scroll">
+        <table class="dtable sol-table">
+          <tr><th>הציון</th><td>60</td><td>65</td><td>70</td><td>75</td><td>80</td><td>85</td><td>90</td><td>95</td><td>100</td></tr>
+          <tr><th>מספר התלמידים</th><td>3</td><td>5</td><td>6</td><td>6</td><td>8</td><td>9</td><td>7</td><td>4</td><td>2</td></tr>
+          <tr><th>ציון × שכיחות</th>
+              <td><span dir="ltr">60·3</span><br><b>180</b></td><td><span dir="ltr">65·5</span><br><b>325</b></td><td><span dir="ltr">70·6</span><br><b>420</b></td>
+              <td><span dir="ltr">75·6</span><br><b>450</b></td><td><span dir="ltr">80·8</span><br><b>640</b></td><td><span dir="ltr">85·9</span><br><b>765</b></td>
+              <td><span dir="ltr">90·7</span><br><b>630</b></td><td><span dir="ltr">95·4</span><br><b>380</b></td><td><span dir="ltr">100·2</span><br><b>200</b></td></tr>
+        </table>
+        </div>
+        $$\overline{x}=\frac{\underbrace{\textcolor{#1D6FA5}{180+325+420+450+640+765+630+380+200}}_{\textcolor{#1D6FA5}{\text{סכום שורת העבודה — כל ציון כפול השכיחות שלו}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{50}}_{\textcolor{#8A6D1B}{\text{סך התלמידים}}}}=\frac{\textcolor{#1D6FA5}{3990}}{\textcolor{#8A6D1B}{50}}=79.8$$
+        <p><strong>בדיקת היגיון:</strong> 79.8 בין 60 ל-100 ✓</p>
+        <p><strong>ה.</strong></p>
+        $$\text{מיקום החציון}=\frac{\overbrace{\textcolor{#8A6D1B}{50}}^{3+5+6+6+8+9+7+4+2}+1}{2}=\underbrace{25.5}_{\text{בין מקום 25 למקום 26}}$$
+        <p>צוברים על הטבלה, מהעמודה הימנית שמאלה, עד שעוברים את 25.5:</p>
+        <div class="tbl-scroll">
+        <table class="dtable sol-table">
+          <tr><th>הציון</th><td>60</td><td>65</td><td>70</td><td>75</td><td>80</td><td>85</td><td>90</td><td>95</td><td>100</td></tr>
+          <tr><th>מספר התלמידים</th><td>3</td><td>5</td><td>6</td><td>6</td><td>8</td><td>9</td><td>7</td><td>4</td><td>2</td></tr>
+          <tr><th>כמה ספרנו עד כאן (צבירה)</th>
+              <td>① 3</td><td>② 8</td><td>③ 14</td><td>④ 20</td>
+              <td style="background:#DFF0E1"><b style="color:#2E7D32">⑤ 28</b> ✋</td>
+              <td>—</td><td>—</td><td>—</td><td>—</td></tr>
+        </table>
+        </div>
+        <p class="tbl-note">⬅ כיוון ההליכה: מתחילים בעמודה הימנית (הציון 60) וצועדים שמאלה — ① ואז ② וכן הלאה, עד שעוברים את 25.5.</p>
+        <p class="tbl-note" style="color:#2E7D32;font-weight:700;margin-top:2px">✋ עברנו את 25.5 — גם מקום 25 וגם מקום 26 יושבים בעמודת ה-80.</p>
+        <p>המקומות 21 עד 28 כולם ציון 80 — גם ה-25 וגם ה-26 בפנים:</p>
+        $$\text{החציון}=\frac{80+80}{2}=80$$
+        <p><strong>ו.</strong> קודם נבין מה בדיוק קרה בטבלה.
+        שלושה תלמידים — אחד עם 70, אחד עם 75 ואחד עם 80 — קיבלו במקום הציון שלהם 85:</p>
+        <div class="tbl-scroll">
+        <table class="dtable sol-table">
+          <tr><th>הציון</th><td>60</td><td>65</td><td>70</td><td>75</td><td>80</td><td>85</td><td>90</td><td>95</td><td>100</td></tr>
+          <tr><th>מספר התלמידים — לפני</th><td>3</td><td>5</td><td>6</td><td>6</td><td>8</td><td>9</td><td>7</td><td>4</td><td>2</td></tr>
+          <tr><th>מה השתנה</th>
+              <td>—</td><td>—</td>
+              <td><b style="color:#C0392B"><span dir="ltr">−1</span></b></td>
+              <td><b style="color:#C0392B"><span dir="ltr">−1</span></b></td>
+              <td><b style="color:#C0392B"><span dir="ltr">−1</span></b></td>
+              <td><b style="color:#C0392B"><span dir="ltr">+3</span></b></td>
+              <td>—</td><td>—</td><td>—</td></tr>
+        </table>
+        </div>
+        <p class="tbl-note">תלמיד אחד עזב את עמודת ה-70, אחד את עמודת ה-75 ואחד את עמודת ה-80 —
+        ושלושתם הצטרפו לעמודת ה-85.</p>
+        <p>אף תלמיד לא הצטרף לכיתה ואף אחד לא עזב אותה — רק ציונים זזו בין עמודות,
+        ולכן הסך נשאר 50 (בדיקה: <span class="fi">\(-1-1-1+3=0\)</span>).</p>
+        <p>נרשום את טבלת הנתונים המעודכנת, ונחשב את הצבירה מחדש:</p>
+        <div class="tbl-scroll">
+        <table class="dtable sol-table">
+          <tr><th>הציון</th><td>60</td><td>65</td><td>70</td><td>75</td><td>80</td><td>85</td><td>90</td><td>95</td><td>100</td></tr>
+          <tr><th>מספר התלמידים</th><td>3</td><td>5</td>
+              <td style="background:var(--b-change)"><b>5</b></td>
+              <td style="background:var(--b-change)"><b>5</b></td>
+              <td style="background:var(--b-change)"><b>7</b></td>
+              <td style="background:var(--b-change)"><b>12</b></td>
+              <td>7</td><td>4</td><td>2</td></tr>
+          <tr><th>הצבירה החדשה</th>
+              <td>① 3</td><td>② 8</td><td>③ 13</td><td>④ 18</td>
+              <td style="background:#DFF0E1"><b style="color:#2E7D32">⑤ 25</b></td>
+              <td style="background:#DFF0E1"><b style="color:#2E7D32">⑥ 37</b> ✋</td>
+              <td>—</td><td>—</td><td>—</td></tr>
+        </table>
+        </div>
+        <p class="tbl-note" style="color:#2E7D32;font-weight:700">הפעם הצבירה נעצרת על 25 בדיוק בסוף עמודת ה-80 —
+        מקום 25 הוא האחרון ב-80, ומקום 26 כבר בעמודת ה-85.</p>
+        $$\text{החציון החדש}=\frac{\underbrace{80}_{\text{מקום 25 — אחרון ב-80}}+\underbrace{85}_{\text{מקום 26 — ראשון ב-85}}\rule[-1.6em]{0pt}{0pt}}{2}=82.5$$
+        <p>כן — החציון השתנה: 80 ← <strong>82.5</strong>.
+        <br>מה זה אומר? שלושת הציונים שתוקנו ישבו בדיוק באזור האמצע של הכיתה —
+        וכשהם קפצו למעלה, האמצע של הכיתה זז איתם.
+        מספיק ששלושה ציונים זזו כדי שהחציון יזוז.</p>
+        <p><strong>ז.</strong> ובממוצע? הסכום השתנה: שלושת הציונים הישנים יצאו ממנו,
+        ושלושה ציוני 85 נכנסו במקומם:</p>
+        $$\overline{x}_{\text{חדש}}=\frac{\underbrace{\textcolor{#1D6FA5}{3990}}_{\textcolor{#1D6FA5}{\text{הסכום הישן}}}-\underbrace{\textcolor{#6D28D9}{(70+75+80)}}_{\textcolor{#6D28D9}{\text{יצאו}}}+\underbrace{\textcolor{#6D28D9}{3\cdot 85}}_{\textcolor{#6D28D9}{\text{נכנסו}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{50}}_{\textcolor{#8A6D1B}{\text{לא השתנה — החלפה, לא הצטרפות}}}}=\frac{\textcolor{#1D6FA5}{4020}}{\textcolor{#8A6D1B}{50}}=80.4$$
+        <p><strong>בדיקת היגיון:</strong> שלושה ציונים רק עלו ←
+        הממוצע עלה: 79.8 ← <strong>80.4</strong> ✓</p>
+      </div>
+    </details>
+    <label class="mark"><input type="checkbox" data-k="ex5"> סיימתי את התרגיל הזה</label>
+  </article>
+</details>
+
+<!-- ============ 8. סרטונים ============ -->
+<h2><span class="num">8</span>🎬 רוצה לראות את זה מוסבר בקול?</h2>
+<div class="watch">
+  <p>הסרטונים הם תגבור, לא חובה. לכל אחד כ-4–7 דקות:</p>
+  <a class="video-link" href="https://www.youtube.com/watch?v=-UJs-JdZgeA">
+    <img src="../assets/stats/-UJs-JdZgeA/02_t0090.jpg" alt="מהו חציון — שקף מהסרטון" loading="lazy">
+    <span class="vt"><b>מהו חציון</b><span>שורת הגבהים — הרעיון של האמצע · 4:12</span></span>
+    <span class="play">▶</span>
+  </a>
+  <a class="video-link" href="https://www.youtube.com/watch?v=E1qkETCECnE">
+    <img src="../assets/stats/E1qkETCECnE/03_t0190.jpg" alt="מחשבים חציון — שקף מהסרטון" loading="lazy">
+    <span class="vt"><b>מחשבים חציון</b><span>אי-זוגי וזוגי, צעד-צעד · 5:42</span></span>
+    <span class="play">▶</span>
+  </a>
+  <a class="video-link" href="https://www.youtube.com/watch?v=XqDzeLE1rYo">
+    <img src="../assets/stats/XqDzeLE1rYo/03_t0150.jpg" alt="חציון מתוך טבלה — שקף מהסרטון" loading="lazy">
+    <span class="vt"><b>חציון מתוך טבלה</b><span>שיטת הצבירה מהעמוד הזה · 7:22</span></span>
+    <span class="play">▶</span>
+  </a>
+  <a class="video-link" href="https://www.youtube.com/watch?v=Hj8to0kELv4">
+    <img src="../assets/stats/Hj8to0kELv4/03_t0130.jpg" alt="שכיח — שקף מהסרטון" loading="lazy">
+    <span class="vt"><b>שכיח</b><span>שכיח מול שכיחות, עם ציפורים · 5:12</span></span>
+    <span class="play">▶</span>
+  </a>
+  <a class="video-link" href="https://www.youtube.com/watch?v=QS1llLwlwRU">
+    <img src="../assets/stats/QS1llLwlwRU/01_t0247.jpg" alt="חציון על לוח — כתב יד" loading="lazy">
+    <span class="vt"><b>חציון על לוח, בכתב יד</b><span>מורה פותר מקרה זוגי, צעד-צעד · 4:09</span></span>
+    <span class="play">▶</span>
+  </a>
+</div>
+
+<!-- ============ ניווט ============ -->
+<div class="progresswrap no-print">
+  <span class="progressbar"><i></i></span><span class="progress-label"></span>
+  <button class="all-sols" style="font-family:inherit;font-size:12px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:4px 10px;cursor:pointer">לפתוח את כל הפתרונות</button>
+</div>
+
+<nav class="pagenav">
+  <a href="02-mean.html"><span class="dir">→ התחנה הקודמת</span>ממוצע</a>
+  <a class="next" href="04-relative-frequency.html"><span class="dir">התחנה הבאה ←</span>שכיחות יחסית</a>
+</nav>
+
+<footer class="fin">חלק מהעולם של שירה · <a href="index.html">המפה</a> · <a href="../index.html">המרכז</a></footer>
+</main>
+</div>
+</body>
+</html>

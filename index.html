@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<!-- מסך הבית של האייפד/הטלפון -->
+<link rel="apple-touch-icon" href="assets/icons/icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>המתמטיקה של שירה — הבית</title>
+<style>
+/* ============================================================
+   הבית של שירה — שער אחד לכל המתמטיקה שלה.
+   שפת-עיצוב של בתי הקורסים (outputs/statistics/index.html), אבל
+   בכוונה קטן ושקט: שער לכל נושא, בלי קירות של לינקים. הציר הוא
+   נושאים (שערים) ולא פעילויות — חריגה מודעת מ-docs/COURSE_HOME.md,
+   כי לשירה יש מעט מוצרים וכל אחד מהם הוא נושא שלם.
+
+   סדר הדף: ברכה → "מאיפה מתחילים?" (הצעד הראשון) → ארבעה שערים →
+   המספרים האמיתיים → לשאול את נועה → הספרייה.
+   כל הניווט הוא עוגנים רגילים — הדף עובד גם בלי JavaScript.
+   ============================================================ */
+:root{
+  --paper:#F7F5F1; --card:#FFFFFF; --ink:#1C2733; --soft:#5A6875;
+  --line:#E9E4DA; --faint:#EFEAE0; --shadow:rgba(28,39,51,.10);
+  --summer:#B7791F; --stat:#2E7D6B; --alg:#2E6F8E; --geo:#7A4E8C; --shelf:#5A6875;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0; background:var(--paper); color:var(--ink);
+  font-family:Arial,"Arial Hebrew","Helvetica Neue",sans-serif;
+  font-size:16px; line-height:1.65; -webkit-font-smoothing:antialiased}
+.en{direction:ltr; unicode-bidi:isolate}
+a{color:inherit}
+
+.topbar{position:sticky; top:0; z-index:50; background:rgba(247,245,241,.94);
+  backdrop-filter:blur(8px); border-bottom:1px solid var(--line)}
+.topbar-in{max-width:860px; margin:0 auto; padding:10px 20px;
+  display:flex; align-items:baseline; gap:10px; flex-wrap:wrap}
+.brand{font-weight:800; font-size:16px}
+.brand small{font-weight:400; font-size:12px; color:var(--soft); margin-inline-start:8px}
+
+.wrap{max-width:860px; margin:0 auto; padding:34px 20px 70px}
+
+header.hero{padding:10px 0 20px; border-bottom:1px solid var(--line); margin-bottom:22px}
+header.hero .eyebrow{font-size:11px; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--stat); font-weight:700}
+header.hero h1{margin:6px 0 12px; font-size:32px; font-weight:800; letter-spacing:-.02em; line-height:1.12}
+
+/* הברכה — שורה אחת = מחשבה אחת */
+.welcome{margin:0 0 4px; max-width:52ch}
+.welcome p{margin:0 0 3px; font-size:15.5px; line-height:1.55}
+.welcome p.lead-line{font-weight:700; font-size:16.5px}
+.welcome p.soft{color:var(--soft)}
+.from-noa{margin:8px 0 0; padding-inline-start:11px; border-inline-start:3px solid var(--stat);
+  font-size:15px; line-height:1.55}
+
+.search{position:relative; margin:16px 0 2px; max-width:560px}
+.search input{width:100%; border:1px solid var(--line); border-radius:12px; background:var(--card);
+  padding:12px 16px; font-size:15px; font-family:inherit; color:var(--ink);
+  box-shadow:0 10px 26px -24px var(--shadow); outline:none; transition:border-color .15s}
+.search input:focus{border-color:var(--stat)}
+.search input::placeholder{color:var(--soft); opacity:.75}
+.search input::-webkit-search-cancel-button{-webkit-appearance:none}
+.search-res{position:absolute; top:calc(100% + 6px); right:0; left:0; z-index:60;
+  background:var(--card); border:1px solid var(--line); border-radius:12px;
+  box-shadow:0 18px 44px -18px var(--shadow); overflow-y:auto; max-height:min(21rem,60vh)}
+.search-res a{display:flex; flex-wrap:wrap; align-items:baseline; align-content:center;
+  column-gap:6px; min-height:44px; padding:10px 16px;
+  text-decoration:none; font-size:14px; line-height:1.45; border-bottom:1px dashed var(--faint)}
+.search-res a:last-child{border-bottom:none}
+.search-res a:hover,.search-res a.sel{background:var(--faint)}
+.search-res a b{font-weight:700}
+.search-res .pg{color:var(--soft); font-size:12.5px}
+.search-res .none{padding:13px 16px; color:var(--soft); font-size:13.5px}
+
+/* ---------- "מאיפה מתחילים?" — הצעד הראשון ---------- */
+.router{margin:0 0 26px}
+.router h2{margin:0 0 3px; font-size:19px; font-weight:800; letter-spacing:-.01em}
+.router .rsub{margin:0 0 12px; font-size:13.5px; color:var(--soft)}
+.paths{display:flex; flex-direction:column; gap:9px}
+.path{background:var(--card); border:1px solid var(--line); border-radius:12px;
+  padding:12px 15px 13px; box-shadow:0 10px 26px -26px var(--shadow)}
+.path-h{display:flex; align-items:baseline; gap:9px; margin-bottom:2px}
+.path-h .pn{flex:0 0 auto; width:21px; height:21px; border-radius:50%; background:var(--faint);
+  color:var(--soft); font-size:11.5px; font-weight:800;
+  display:inline-flex; align-items:center; justify-content:center; transform:translateY(2px)}
+.path-h b{font-size:15.5px}
+.path .why{margin:0 0 9px; padding-inline-start:30px; font-size:13px; color:var(--soft); line-height:1.5}
+.plinks{display:flex; flex-wrap:wrap; gap:7px; padding-inline-start:30px}
+.plinks .step{width:100%; font-size:11.5px; font-weight:700; color:var(--soft);
+  letter-spacing:.04em; margin:2px 0 -2px}
+
+.doors{display:flex; flex-direction:column; gap:14px}
+.card{background:var(--card); border:1px solid var(--line); border-radius:14px;
+  overflow:hidden; box-shadow:0 12px 30px -26px var(--shadow); transition:.18s}
+.card:hover{box-shadow:0 16px 34px -22px var(--shadow); border-color:#DCD5C8}
+.card .strip{height:5px}
+.card .body{padding:15px 20px 15px}
+.card .kick{font-size:10.5px; letter-spacing:.15em; text-transform:uppercase; font-weight:800; margin-bottom:2px}
+.card h2{margin:0 0 5px; font-size:20px; font-weight:800; letter-spacing:-.01em}
+.card p{margin:0 0 8px; font-size:14px; color:var(--soft); line-height:1.55; max-width:64ch}
+.chips{display:flex; flex-wrap:wrap; gap:6px; margin:0 0 11px}
+.chips span{font-size:11.5px; font-weight:700; color:var(--soft); background:#FBFAF7;
+  border:1px solid var(--line); border-radius:6px; padding:2px 8px; white-space:nowrap}
+.acts{display:flex; gap:8px; flex-wrap:wrap; align-items:center}
+.go{display:inline-flex; align-items:center; gap:7px; text-decoration:none;
+  font-size:14px; font-weight:700; color:#fff; background:var(--ink);
+  border-radius:9px; padding:9px 16px; transition:.15s}
+.go:hover{filter:brightness(1.08)}
+.go .ar{font-size:11px}
+.alt{display:inline-flex; align-items:center; gap:6px; text-decoration:none; font-size:12.5px;
+  font-weight:600; color:var(--soft); border:1px solid var(--line); background:#FBFAF7;
+  border-radius:8px; padding:7px 12px; transition:.15s}
+.alt:hover{color:var(--ink); border-color:#D8D1C4}
+/* בלי localStorage אין מה להציג — שלא תישאר רווח יתום */
+.mod-extra:empty{display:none}
+
+.c-summer .strip{background:var(--summer)} .c-summer .kick{color:var(--summer)} .c-summer .go{background:var(--summer)}
+.c-stat .strip{background:var(--stat)} .c-stat .kick{color:var(--stat)} .c-stat .go{background:var(--stat)}
+.c-alg .strip{background:var(--alg)} .c-alg .kick{color:var(--alg)} .c-alg .go{background:var(--alg)}
+.c-geo .strip{background:var(--geo)} .c-geo .kick{color:var(--geo)} .c-geo .go{background:var(--geo)}
+.p-summer .go{background:var(--summer)} .p-exam .go{background:var(--ink)} .p-start .go{background:var(--stat)}
+
+.sec{margin:34px 0 12px; display:flex; align-items:baseline; gap:12px}
+.sec h3{margin:0; font-size:15px; font-weight:800; white-space:nowrap; color:var(--soft)}
+.sec .bar{flex:1; height:1px; background:var(--line)}
+
+/* המספרים האמיתיים — שקט, בלי חגיגות */
+.totals{display:grid; grid-template-columns:repeat(auto-fit,minmax(148px,1fr)); gap:1px;
+  background:var(--line); border:1px solid var(--line); border-radius:12px; overflow:hidden}
+.totals div{background:var(--card); padding:12px 14px 13px}
+.totals b{display:block; font-size:22px; font-weight:800; line-height:1.1; letter-spacing:-.02em}
+.totals span{display:block; font-size:12px; color:var(--soft); line-height:1.4; margin-top:3px}
+.totals-note{margin:8px 2px 0; font-size:12px; color:var(--soft)}
+
+.shelf{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:6px 18px}
+.shelf a{display:flex; align-items:baseline; gap:8px; text-decoration:none; font-size:13.5px;
+  padding:9px 2px; border-bottom:1px dashed var(--faint)}
+.shelf a:last-child{border-bottom:none}
+.shelf a:hover{color:var(--stat)}
+.shelf .d{font-size:11.5px; color:var(--soft); margin-inline-start:auto; text-align:left}
+
+footer.fin{margin-top:40px; padding-top:14px; border-top:1px solid var(--line);
+  color:var(--soft); font-size:12.5px}
+
+/* ---------- מסך צר (טלפון) — שהכול ייסרק בשלוש שניות ---------- */
+@media (max-width:640px){
+  .wrap{padding:18px 14px 54px}
+  header.hero{padding:4px 0 13px; margin-bottom:16px}
+  header.hero h1{font-size:22px; margin:4px 0 9px}
+  .welcome p{font-size:14px; line-height:1.5; margin-bottom:2px}
+  .welcome p.lead-line{font-size:15px}
+  .search{margin:11px 0 2px}
+  .search input{padding:10px 13px; font-size:14px; border-radius:11px}
+  .router{margin-bottom:20px}
+  .router h2{font-size:17px}
+  .router .rsub{margin-bottom:10px; font-size:13px}
+  .path{padding:10px 12px 11px; border-radius:11px}
+  .path-h b{font-size:14.5px}
+  .path .why{font-size:12.5px; line-height:1.45; padding-inline-start:0; margin-bottom:8px}
+  .plinks{padding-inline-start:0; gap:6px}
+  .plinks .alt{font-size:11.5px; padding:6px 9px}
+  .plinks .go{font-size:13px; padding:8px 12px}
+  .plinks .step{margin:1px 0 -3px}
+  .doors{gap:11px}
+  .card .body{padding:13px 15px 14px}
+  .card h2{font-size:17.5px}
+  .card p{font-size:13.5px; margin-bottom:7px}
+  .chips span{font-size:11px; padding:2px 7px}
+  .go{font-size:13.5px; padding:9px 14px}
+  .alt{font-size:12px; padding:7px 10px}
+  .sec{margin:28px 0 10px}
+  .totals{grid-template-columns:repeat(2,1fr)}
+  .totals div{padding:10px 12px 11px}
+  .totals b{font-size:19px}
+  .shelf{padding:4px 14px}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <div class="brand">המתמטיקה של שירה<small>כיתה ט׳ · הקבצה א1</small></div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">המרכז שלך</div>
+    <h1>כל המתמטיקה שלך, במקום אחד</h1>
+
+    <div class="welcome">
+      <p class="lead-line">שירה — כל מה שכאן נבנה בשבילך.</p>
+      <p>כל נושא שאת לומדת השנה מוסבר כאן מההתחלה.</p>
+      <p>כל תרגיל פתור עד הסוף — לא רק התשובה, גם הדרך.</p>
+      <p class="soft">אף אחד לא בודק אותך כאן — נכנסת ויוצאת מתי שבא לך.</p>
+
+      <!-- ★ נועה — כאן המקום למשפט האישי שלך לשירה.
+           הסירי את סימני ההערה מהשורה שמתחת וכתבי בה משפט אחד משלך, בלשונך.
+           בכוונה לא נכתב כאן משפט חתום בשמך שלא כתבת — הדף מציג את הפסקה
+           הזו רק אם באמת מילאת אותה. -->
+      <!-- <p class="from-noa">כאן המשפט שלך. — נועה</p> -->
+    </div>
+
+    <div class="search" id="search-wrap">
+      <input id="search-in" type="search" autocomplete="off" enterkeyhint="go"
+             placeholder="חפשי נושא… למשל: תחום הצבה, חציון, פיתגורס"
+             aria-label="חיפוש נושא באתר">
+      <div class="search-res" id="search-res" hidden></div>
+    </div>
+  </header>
+
+  <!-- ============ מאיפה מתחילים? — שלושה מצבים אמיתיים ============ -->
+  <nav class="router" aria-labelledby="router-h">
+    <h2 id="router-h">מאיפה מתחילים?</h2>
+    <p class="rsub">בחרי את המצב שמתאים לך עכשיו.</p>
+
+    <div class="paths">
+
+      <div class="path p-summer">
+        <div class="path-h"><span class="pn">1</span><b>יש לי שיעורי בית או עבודת קיץ</b></div>
+        <p class="why">פתחי את החוברת, ופתרי עם מחברת ליד. כשנתקעת בשאלה — הקישור לפי הנושא מביא אותך ישר להסבר.</p>
+        <div class="plinks">
+          <a class="go" href="assets/pdf/summer-work-a1.pdf" target="_blank" rel="noopener">החוברת <span class="en">(PDF)</span> <span class="ar">←</span></a>
+          <a class="alt" href="statistics/index.html">נתקעתי בסטטיסטיקה ←</a>
+          <a class="alt" href="algebra/index.html">נתקעתי באלגברה ←</a>
+          <a class="alt" href="geometry/index.html">נתקעתי בגאומטריה ←</a>
+        </div>
+      </div>
+
+      <div class="path p-exam">
+        <div class="path-h"><span class="pn">2</span><b>יש לי מבחן</b></div>
+        <p class="why">קודם תרגול על תרגילים מאותו סוג, ורק אחר כך בוחן בלי רמזים — כדי לראות מה כבר יושב.</p>
+        <div class="plinks">
+          <span class="step">קודם — לתרגל לפי סוג</span>
+          <a class="alt" href="statistics/09-exercise-bank.html">סטטיסטיקה · 46 תרגילים ←</a>
+          <a class="alt" href="algebra/09-exercise-bank.html">אלגברה · 46 תרגילים ←</a>
+          <a class="alt" href="geometry/06-proof-practice.html">הוכחות · 48 תרגילים ←</a>
+          <span class="step">ואז — לבדוק את עצמך</span>
+          <a class="go" href="statistics/08-self-quiz.html">בוחן סטטיסטיקה <span class="ar">←</span></a>
+          <a class="go" href="algebra/08-quiz.html">בוחן אלגברה וגאומטריה <span class="ar">←</span></a>
+        </div>
+      </div>
+
+      <div class="path p-start">
+        <div class="path-h"><span class="pn">3</span><b>רוצה פשוט להתחיל מההתחלה</b></div>
+        <p class="why">התחילי בסטטיסטיקה: היא נפתחת ב"מה זו בכלל סטטיסטיקה", לא מניחה שום דבר שלמדת קודם, ויש בה הכי הרבה סרטונים.</p>
+        <div class="plinks">
+          <a class="go" href="statistics/index.html">להתחיל בסטטיסטיקה <span class="ar">←</span></a>
+        </div>
+      </div>
+
+    </div>
+  </nav>
+
+  <div class="doors">
+
+    <!-- שער 1 · עבודת הקיץ -->
+    <article class="card c-summer">
+      <div class="strip"></div>
+      <div class="body">
+        <div class="kick">עבודת הקיץ</div>
+        <h2>📘 עבודת הקיץ — עולים לכיתה ט׳</h2>
+        <p>החוברת הרשמית של הקבצה א1 — שמונה חלקים, וכולם מכוסים כאן באתר.</p>
+        <div class="chips"><span>PDF</span><span>8 חלקים</span><span>3 מסלולים תומכים</span></div>
+        <div class="acts">
+          <a class="go" href="booklet.html">מפת החוברת — תרגיל אחרי תרגיל <span class="ar">←</span></a>
+          <a class="alt" href="assets/pdf/summer-work-a1.pdf" target="_blank" rel="noopener">לפתוח את ה-<span class="en">PDF</span> ←</a>
+          <a class="alt" href="statistics/index.html">נתקעתי בסטטיסטיקה ←</a>
+          <a class="alt" href="algebra/index.html">נתקעתי באלגברה ומשוואות ←</a>
+          <a class="alt" href="geometry/index.html">נתקעתי בגאומטריה ←</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- שער 2 · סטטיסטיקה -->
+    <article class="card c-stat">
+      <div class="strip"></div>
+      <div class="body">
+        <div class="kick">ללמוד צעד-צעד</div>
+        <h2>📊 סטטיסטיקה</h2>
+        <p>ממוצע, חציון, שכיח ושכיחות יחסית — מההתחלה, בקצב שלך.</p>
+        <div class="chips"><span>7 תחנות</span><span>87 תרגילים פתורים</span><span>25 סרטונים</span><span>בוחן בית</span></div>
+        <div class="acts">
+          <a class="go" href="statistics/index.html">להיכנס לסטטיסטיקה <span class="ar">←</span></a>
+          <span class="mod-extra" data-mod="stat"></span>
+        </div>
+      </div>
+    </article>
+
+    <!-- שער 3 · אלגברה ופונקציות -->
+    <article class="card c-alg">
+      <div class="strip"></div>
+      <div class="body">
+        <div class="kick">ללמוד צעד-צעד</div>
+        <h2>📈 אלגברה ופונקציות</h2>
+        <p>משוואות ומערכות, פונקציה קווית ומשוואת ישר, ובעיות אחוזים — <strong>וכל תרגילי החוברת פתורים</strong>.</p>
+        <div class="chips"><span>7 תחנות + 2 נספחים</span><span>109 תרגילים פתורים</span><span>13 קיצורי "שכחתי איך עושים"</span><span>בוחן בית</span></div>
+        <div class="acts">
+          <a class="go" href="algebra/index.html">להיכנס לאלגברה ופונקציות <span class="ar">←</span></a>
+          <span class="mod-extra" data-mod="alg"></span>
+        </div>
+      </div>
+    </article>
+
+    <!-- שער 4 · גאומטריה -->
+    <article class="card c-geo">
+      <div class="strip"></div>
+      <div class="body">
+        <div class="kick">ללמוד צעד-צעד</div>
+        <h2>📐 גאומטריה</h2>
+        <p>זוויות ומקבילים, חפיפה, שטחים, <strong>דמיון משולשים</strong> ו<strong>פיתגורס</strong> — ואיך כותבים הוכחה.</p>
+        <div class="chips"><span>8 תחנות + נספח</span><span>123 תרגילים פתורים</span><span>23 דגמי הוכחה</span><span>דמיון ופיתגורס — חדש</span></div>
+        <div class="acts">
+          <a class="go" href="geometry/index.html">להיכנס לגאומטריה <span class="ar">←</span></a>
+          <span class="mod-extra" data-mod="geo"></span>
+        </div>
+      </div>
+    </article>
+
+    <!-- שער 5 · השנה הבאה -->
+    <article class="card c-summer">
+      <div class="strip"></div>
+      <div class="body">
+        <div class="kick">הצצה קדימה · לא לעכשיו</div>
+        <h2>🔭 מה מחכה בכיתה ט׳</h2>
+        <p>אחת-עשרה התחנות של השנה הבאה — מה שעוד <em>לא</em> למדת, במקום נפרד משלו.</p>
+        <div class="chips"><span>11 נושאים</span><span>פרבולה · פירוק לגורמים · הסתברות</span><span>אפס שיעורי בית</span></div>
+        <div class="acts">
+          <a class="go" href="grade9/index.html">להציץ בשנה הבאה <span class="ar">←</span></a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+
+  <div class="sec"><h3>מה יש כאן, במספרים</h3><div class="bar"></div></div>
+  <div class="totals">
+    <div><b>299</b><span>תרגילים — כולם פתורים עד הסוף</span></div>
+    <div><b>247</b><span>פתרונות שנפתחים בלחיצה</span></div>
+    <div><b>289</b><span>בדיקות תשובה תוך כדי</span></div>
+    <div><b>23</b><span>דגמי הוכחה מלאים</span></div>
+    <div><b>14</b><span>חוברות PDF בספרייה</span></div>
+  </div>
+  <p class="totals-note">אין צורך לעבור על הכול. זה מחסן, לא מטלה.</p>
+
+  <!-- ============ לשאול את נועה ============
+       מיכל ריק שסקריפט אחר (js/shira.js ואחיו) ממלא: העמודים שבהם שירה
+       סימנה "לא הבנתי". כל עוד אין מה להציג — הסקשן נשאר hidden ולא
+       מופיע כלום. הסקריפט אמור להסיר את hidden ולמלא את #ask-noa-list.
+       אין כאן JavaScript משלנו בכוונה. -->
+  <section id="ask-noa" hidden>
+    <div class="sec"><h3>❓ לשאול את נועה</h3><div class="bar"></div></div>
+    <div id="ask-noa-list" class="shelf"></div>
+  </section>
+
+  <div class="sec"><h3>📚 הספרייה · כל החוברות וה-PDFים</h3><div class="bar"></div></div>
+  <div class="shelf">
+    <a href="library.html"><b>לספרייה המלאה ←</b> העבודות שלך, חוברות מאתר בית הספר, והצצה לשנה הבאה — כל קובץ בנגיעה אחת <span class="d">14 קבצים</span></a>
+    <a href="assets/pdf/stats-practice-grade8.pdf" target="_blank" rel="noopener">חוברת תרגול בסטטיסטיקה (כיתה ח׳) <span class="d">PDF</span></a>
+    <a href="assets/pdf/stats-summary-sheets.pdf" target="_blank" rel="noopener">דפי סיכום בסטטיסטיקה <span class="d">PDF</span></a>
+  </div>
+
+  <footer class="fin">מכל דף באתר אפשר לחזור לכאן ↩</footer>
+
+</div>
+<script src="assets/search-index.js"></script>
+<script>
+/* חיפוש באתר — מעל האינדקס שנבנה ב-build/build_search_index.py */
+document.addEventListener('DOMContentLoaded', function () {
+  var wrap = document.getElementById('search-wrap');
+  var input = document.getElementById('search-in');
+  var box = document.getElementById('search-res');
+  var data = window.SHIRA_SEARCH || [];
+  var SECTION = { statistics: 'סטטיסטיקה', algebra: 'אלגברה ופונקציות', geometry: 'גאומטריה' };
+
+  /* חיפוש סלחני: היא מקלידה איך שבא לה, ואנחנו מיישרים את שני הצדדים לאותה צורה.
+     ניקוד יורד, גרשיים יורדים, אות סופית הופכת לרגילה (חציון/חציונם),
+     ואות-שימוש בתחילת מילה ("בחציון", "מהשכיח", "והממוצע") נחתכת —
+     כך שגם "מה זה השכיח" פוגע במה שכתוב "שכיח". */
+  var FINALS = { 'ם': 'מ', 'ן': 'נ', 'ץ': 'צ', 'ף': 'פ', 'ך': 'כ' };
+  function norm(s) {
+    return (s || '').toLowerCase()
+      .replace(/[֑-ׇ]/g, '')                 /* ניקוד וטעמים */
+      .replace(/[‎‏׳״"'’]/g, '')
+      .replace(/[םןץףך]/g, function (c) { return FINALS[c]; })
+      .replace(/\s+/g, ' ').trim();
+  }
+  /* גזע לחיפוש: חותך אות-שימוש אחת בתחילת מילה ארוכה מספיק */
+  function stem(w) {
+    return (w.length > 3 && 'הובכלמש'.indexOf(w[0]) > -1) ? w.slice(1) : w;
+  }
+
+  /* רשומות שטוחות: כותרת עמוד, מילות-מפתח, וכל כותרת פנימית עם העוגן שלה */
+  var recs = [];
+  data.forEach(function (pg) {
+    var dir = pg.p.indexOf('/') > -1 ? pg.p.split('/')[0] : '';
+    var pageLabel = pg.t + (SECTION[dir] && pg.t !== SECTION[dir] ? ' — ' + SECTION[dir] : '');
+    recs.push({ href: pg.p, main: pg.t, sub: SECTION[dir] || '', hay: norm(pg.t), score: 1 });
+    if (pg.k && pg.k.length) {
+      recs.push({ href: pg.p, main: pg.t, sub: SECTION[dir] || '', hay: norm(pg.k.join(' | ')), score: 2 });
+    }
+    (pg.items || []).forEach(function (it) {
+      recs.push({ href: pg.p + (it.id ? '#' + it.id : ''), main: it.h, sub: pg.t, hay: norm(it.h), score: 0 });
+    });
+  });
+
+  function search(q) {
+    q = norm(q);
+    if (q.length < 2) return [];
+    var toks = q.split(' ').map(stem).filter(function (t) { return t.length > 1; });
+    if (!toks.length) return [];
+    var hits = [];
+    recs.forEach(function (r) {
+      var pos = r.hay.indexOf(q);
+      if (pos < 0 && !toks.every(function (t) { return r.hay.indexOf(t) > -1; })) return;
+      /* ביטוי שלם שנמצא בדיוק שווה יותר מכמה מילים מפוזרות — גם אם הוא במילות מפתח */
+      var rank = r.score - (pos > -1 ? 1.5 : 0);
+      hits.push({ r: r, a: rank, b: pos > -1 ? pos : 999 });
+    });
+    hits.sort(function (x, y) { return x.a - y.a || x.b - y.b; });
+    var seen = {}, out = [];
+    for (var i = 0; i < hits.length && out.length < 8; i++) {
+      var key = hits[i].r.href + '|' + hits[i].r.main;
+      if (seen[key]) continue;
+      seen[key] = 1; out.push(hits[i].r);
+    }
+    return out;
+  }
+
+  function hide() { box.hidden = true; box.innerHTML = ''; }
+
+  function render() {
+    var q = input.value;
+    if (norm(q).length < 2) { hide(); return; }
+    var res = search(q);
+    box.innerHTML = '';
+    if (!res.length) {
+      var d = document.createElement('div');
+      d.className = 'none';
+      d.textContent = 'לא מצאתי — נסי מילה אחרת, למשל שם של נושא';
+      box.appendChild(d);
+    } else {
+      res.forEach(function (r) {
+        var a = document.createElement('a');
+        a.href = r.href;
+        var b = document.createElement('b');
+        b.textContent = r.main;
+        a.appendChild(b);
+        if (r.sub && r.sub !== r.main) {
+          var s = document.createElement('span');
+          s.className = 'pg';
+          s.textContent = '— ' + r.sub;
+          a.appendChild(s);
+        }
+        box.appendChild(a);
+      });
+    }
+    box.hidden = false;
+  }
+
+  input.addEventListener('input', render);
+  input.addEventListener('focus', render);
+  input.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') {
+      var first = box.querySelector('a');
+      if (first) { e.preventDefault(); window.location.href = first.getAttribute('href'); }
+    } else if (e.key === 'Escape') { hide(); }
+  });
+  document.addEventListener('click', function (e) {
+    if (!wrap.contains(e.target)) hide();
+  });
+});
+</script>
+<script>
+/* "המשכי מאיפה שעצרת" + התקדמות — לכל שלושת המודולים */
+document.addEventListener('DOMContentLoaded', function () {
+  var MODS = [
+    { mod: 'stat', dir: 'statistics/', stations: ['01-basics', '02-mean', '03-median-mode',
+        '04-relative-frequency', '05-elections', '06-table-with-hole', '07-music-year', '08-self-quiz',
+        '09-exercise-bank'],
+      names: ['נתונים ושכיחות', 'ממוצע', 'חציון ושכיח', 'שכיחות יחסית',
+        'ליל המנדטים', 'הטבלה עם החור', 'השנה שלך במוזיקה', 'בוחן הבית',
+        'מחסן התרגילים'] },
+    { mod: 'alg', dir: 'algebra/', stations: ['01-algebra-language', '02-equations',
+        '03-coordinates-function', '04-linear-function', '05-line-equation', '06-systems',
+        '07-percent', '08-quiz', '09-exercise-bank'],
+      names: ['השפה האלגברית', 'משוואות', 'מערכת צירים ופונקציה', 'פונקציה קווית',
+        'משוואת ישר', 'מערכת משוואות', 'בעיות אחוזים', 'בוחן הבית',
+        'מחסן התרגילים'] },
+    { mod: 'geo', dir: 'geometry/', stations: ['01-angles', '02-triangles-congruence',
+        '03-quadrilaterals-areas', '04-graphs-and-shapes', '05-proof-models', '06-proof-practice'],
+      names: ['זוויות', 'משולשים וחפיפה', 'מרובעים ושטחים', 'גרפים וצורות',
+        'ספריית הדגמים', 'תרגול הוכחות'] },
+  ];
+  MODS.forEach(function (M) {
+    var holder = document.querySelector('.mod-extra[data-mod=' + M.mod + ']');
+    if (!holder) return;
+    var completed = 0, lastTouched = -1;
+    M.stations.forEach(function (s, i) {
+      try {
+        var d = JSON.parse(localStorage.getItem('shira:' + M.mod + ':' + s) || 'null');
+        if (!d || !d.done) return;
+        var n = Object.keys(d.done).length;
+        if (n > 0) lastTouched = i;
+        if (d.total && n >= d.total) completed++;
+      } catch (e) { /* empty */ }
+    });
+    if (lastTouched < 0) { return; }
+    var a = document.createElement('a');
+    a.className = 'alt';
+    a.href = M.dir + M.stations[lastTouched] + '.html';
+    a.textContent = 'המשכי: ' + M.names[lastTouched] + ' ←';
+    holder.replaceWith(a);
+    var line = document.createElement('span');
+    line.style.cssText = 'flex-basis:100%;font-size:11.5px;color:var(--soft);margin-top:2px';
+    line.textContent = 'הושלמו ' + completed + ' מתוך ' + M.stations.length + ' תחנות';
+    a.after(line);
+  });
+});
+</script>
+<!-- ההתנהגויות המשותפות — כאן הן ממלאות את "לשאול את נועה" -->
+<script defer src="js/shira.js"></script>
+</body>
+</html>

@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<!-- מסך הבית של האייפד/הטלפון -->
+<link rel="apple-touch-icon" href="../assets/icons/icon-180.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>השפה האלגברית והצבה — אלגברה ופונקציות — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../vendor/katex.min.css">
+<link rel="stylesheet" href="../css/shira.css">
+<style>:root{--accent:var(--alg)}</style>
+<script defer src="../vendor/katex.min.js"></script>
+<script defer src="../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../js/shira.js"></script>
+<style>
+/* מחוון פתיחה — כמה זמן, כמה תרגילים, ואיפה מתחילים לתרגל (מוסתר בהדפסה) */
+.pagemeta{display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px;
+  margin:12px 0 0; font-size:13px; color:var(--soft)}
+.pagemeta .pm-time{background:var(--faint); border-radius:999px; padding:3px 10px}
+.pagemeta .pm-time b{color:var(--ink); font-weight:700}
+.pagemeta .pm-jump{color:var(--accent); font-weight:700; text-decoration:none}
+.pagemeta .pm-jump:hover{text-decoration:underline}
+.pagemeta .pm-note{flex:1 1 100%; margin:0}
+#ex-first,#bank-map{scroll-margin-top:78px}
+</style>
+</head>
+<body data-page="alg:01-algebra-language">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">אלגברה ופונקציות — המפה</a>
+    <span class="crumbs">תחנה <b>1</b> מתוך 7 · <b>השפה האלגברית</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">אלגברה ופונקציות · תחנה 1</div>
+  <h1>השפה האלגברית והצבה</h1>
+  <p class="lead">
+    אלגברה היא שפה. במקום לכתוב "חשבתי על מספר, הכפלתי אותו ב-3 והוספתי 7" —
+    כותבים <span class="fi">\(3x+7\)</span>, וזהו. בעמוד הזה נלמד לקרוא את השפה,
+    לסדר בה משפטים (לפשט ביטויים) — ובסוף גם לתרגם חזרה למספרים, עם הצבה.
+  </p>
+  <p class="youknow"><b>בסוף העמוד תדעי:</b> לקרוא ביטוי אלגברי ולזהות מקדם, משתנה
+  ואיבר חופשי · לפשט ביטוי בכינוס איברים דומים ובחוק הפילוג · להציב כל מספר —
+  גם שלילי — בלי ליפול במלכודת הסוגריים.</p>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>≈ 20 דק׳</b> · 5 תרגילים</span>
+    <a class="pm-jump" href="#sec-practice">לקפוץ ישר לתרגילים ↓</a>
+  </p>
+</header>
+
+<!-- ============ 1. מהו ביטוי ============ -->
+<h2 id="sec-terms"><span class="num">1</span>מהו ביטוי אלגברי?</h2>
+
+<p>
+  <strong>משתנה</strong> הוא אות — כמעט תמיד <span class="fi">\(\textcolor{#2563EB}{x}\)</span> —
+  שמייצגת מספר שעדיין לא יודעים (או שעוד לא בחרנו). ברגע שיש בביטוי אות,
+  הוא נקרא <strong>ביטוי אלגברי</strong>. שלושה דברים דומים שכדאי להבדיל ביניהם כבר עכשיו:
+</p>
+
+<table class="dtable">
+  <tr><th></th><th>ביטוי אלגברי</th><th>משוואה</th><th>פונקציה</th></tr>
+  <tr><th style="white-space:nowrap">דוגמה</th>
+      <td><span class="fi">\(3\textcolor{#2563EB}{x}+7\)</span></td>
+      <td><span class="fi">\(3\textcolor{#2563EB}{x}+7=22\)</span></td>
+      <td><span class="fi">\(\textcolor{#7C3AED}{f(x)}=3\textcolor{#2563EB}{x}+7\)</span></td></tr>
+  <tr><th style="white-space:nowrap">מה זה</th>
+      <td>תיאור של חישוב. אין שוויון — אין עדיין מה "לפתור"</td>
+      <td>טענה ששני האגפים שווים. מחפשים איזה x הופך אותה לנכונה</td>
+      <td>כלל קבוע: מקבל קלט x, מחזיר פלט</td></tr>
+</table>
+<p class="tbl-note">בעמוד הזה עובדים עם ביטויים. משוואות מחכות בתחנה הבאה, ופונקציות בהמשך הדרך.</p>
+
+<p>עכשיו ניקח ביטוי אחד ונקרא לכל חלק שלו בשמו:</p>
+
+<div class="fbox">
+  <div class="fbox-title">החלקים של ביטוי אלגברי</div>
+  $$\underbrace{5\textcolor{#2563EB}{x}}_{\text{מקדם: 5}\vphantom{Mg}}\;\underbrace{-\,2\textcolor{#2563EB}{x}}_{\text{מקדם: מינוס 2}\vphantom{Mg}}\;+\;\underbrace{\textcolor{#059669}{9}}_{\textcolor{#059669}{\text{איבר חופשי}}\vphantom{Mg}}$$
+  <span class="f-legend">
+    <span><i class="sw" style="background:#DBEAFE"></i> כחול — המשתנה x: האות שמייצגת מספר</span>
+    <span><i class="sw" style="background:#D1FAE5"></i> ירוק — האיבר החופשי: מספר שעומד לבד, בלי x</span>
+    <span>המקדם — המספר שכפול ב-x (נשאר בצבע רגיל)</span>
+  </span>
+</div>
+
+<p>
+  כל "חתיכה" שמחוברת או מחוסרת נקראת <strong>איבר</strong>: כאן יש שלושה איברים —
+  <span class="fi">\(5x\)</span>, <span class="fi">\(-2x\)</span>
+  ו-<span class="fi">\(9\)</span>. שימי לב: <strong>הסימן שלפני האיבר שייך אליו</strong> —
+  ולכן <strong>האיבר השני הוא <span class="fi">\(-2x\)</span></strong> —
+  המינוס וה-<span class="fi">\(2x\)</span> הם איבר אחד.
+</p>
+<p>
+  ופרט קטן ששווה לזכור: כשכתוב סתם <span class="fi">\(x\)</span>, המקדם הוא 1 —
+  פשוט לא טורחים לכתוב אותו. <span class="fi">\(x=1\cdot x\)</span>.
+</p>
+
+<!-- ============ 2. כינוס איברים ============ -->
+<h2 id="sec-collect"><span class="num">2</span>כינוס איברים דומים</h2>
+
+<p>
+  <strong>איברים דומים</strong> הם איברים עם אותו משתנה באותה חזקה:
+  <span class="fi">\(3x\)</span> ו-<span class="fi">\(2x\)</span> דומים —
+  כמו "3 תפוחים ועוד 2 תפוחים". אבל <span class="fi">\(x\)</span>
+  ו-<span class="fi">\(x^{2}\)</span> <strong>לא</strong> דומים — תפוחים ועוגיות
+  אי אפשר לחבר לערימה אחת.
+</p>
+<p>
+  לפשט ביטוי = לצבוע בראש כל איבר לפי הסוג שלו, לקבץ את בני אותו צבע, ולחבר.
+  ככה זה נראה על <span class="fi">\(3x+5+2x-1\)</span>:
+</p>
+
+<div class="fbox">
+  <div class="fbox-title">כינוס איברים דומים — צובעים, מקבצים, מחברים</div>
+  $$\textcolor{#2563EB}{3x}+\textcolor{#059669}{5}+\textcolor{#2563EB}{2x}-\textcolor{#059669}{1}\;=\;\underbrace{\textcolor{#2563EB}{3x+2x}}_{\textcolor{#2563EB}{\text{האיברים עם המשתנה}}\vphantom{Mg}}+\underbrace{\textcolor{#059669}{(5-1)}}_{\textcolor{#059669}{\text{המספרים החופשיים}}\vphantom{Mg}}\;=\;\textcolor{#2563EB}{5x}+\textcolor{#059669}{4}$$
+  <span class="f-legend">
+    <span><i class="sw" style="background:#DBEAFE"></i> כחול — איברי ה-x מתקבצים יחד</span>
+    <span><i class="sw" style="background:#D1FAE5"></i> ירוק — המספרים החופשיים מתקבצים יחד</span>
+  </span>
+</div>
+
+<div class="box warn">
+  <div class="box-title">שימי לב לסימן</div>
+  הסימן <strong>נוסע עם האיבר</strong> שאחריו: בביטוי למעלה, המינוס שייך ל-1,
+  ולכן המספרים החופשיים הם <span class="fi">\(5-1=4\)</span> — לא
+  <span class="fi">\(5+1\)</span>. מי שמקבצת ושוכחת את המינוס בדרך — מקבלת ביטוי אחר.
+</div>
+
+<!-- ============ 3. חוק הפילוג ============ -->
+<h2 id="sec-distribute"><span class="num">3</span>חוק הפילוג — לפתוח סוגריים</h2>
+
+<p>
+  מה עושים עם <span class="fi">\(\textcolor{#EA580C}{3}(\textcolor{#2563EB}{x}+\textcolor{#059669}{4})\)</span>?
+  המספר שמחוץ לסוגריים מכפיל את <strong>כל</strong> מה שבפנים —
+  הוא "מחלק את עצמו" לכל איבר ואיבר. עקבי אחרי הקשתות:
+</p>
+
+<figure>
+  <svg viewBox="0 0 280 140" style="width:100%;max-width:340px;height:auto" role="img" aria-label="3(x+4)">
+    <defs>
+      <marker id="arr" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+        <path d="M0,0 L10,5 L0,10 z" fill="#EA580C"/>
+      </marker>
+    </defs>
+    <path d="M 58 76 Q 84 34 106 82" fill="none" stroke="#EA580C" stroke-width="2.5" marker-end="url(#arr)"/>
+    <path d="M 62 72 Q 130 8 194 78" fill="none" stroke="#EA580C" stroke-width="2.5" marker-end="url(#arr)"/>
+    <text x="48" y="115" font-family="Arial" font-size="44" font-weight="700" fill="#EA580C" text-anchor="middle">3</text>
+    <text x="82" y="115" font-family="Arial" font-size="44" fill="#1C2733" text-anchor="middle">(</text>
+    <text x="112" y="115" font-family="Arial" font-size="44" font-style="italic" fill="#2563EB" text-anchor="middle">x</text>
+    <text x="155" y="115" font-family="Arial" font-size="40" fill="#1C2733" text-anchor="middle">+</text>
+    <text x="198" y="115" font-family="Arial" font-size="44" font-weight="700" fill="#059669" text-anchor="middle">4</text>
+    <text x="228" y="115" font-family="Arial" font-size="44" fill="#1C2733" text-anchor="middle">)</text>
+  </svg>
+  <figcaption>ה-3 הכתום מגיע דרך הקשתות אל <strong>שני</strong> האיברים שבסוגריים — גם אל ה-x וגם אל ה-4.</figcaption>
+</figure>
+
+<div class="fbox">
+  <div class="fbox-title">חוק הפילוג</div>
+  $$\textcolor{#EA580C}{3}(\textcolor{#2563EB}{x}+\textcolor{#059669}{4})\;=\;\textcolor{#EA580C}{3}\cdot\textcolor{#2563EB}{x}+\textcolor{#EA580C}{3}\cdot\textcolor{#059669}{4}\;=\;3\textcolor{#2563EB}{x}+\textcolor{#059669}{12}$$
+  <span class="f-legend">
+    <span><i class="sw" style="background:#FFE4D1"></i> כתום — המספר שמחוץ לסוגריים, שמכפיל כל איבר בפנים</span>
+    <span><i class="sw" style="background:#DBEAFE"></i> כחול — האיבר עם ה-x</span>
+    <span><i class="sw" style="background:#D1FAE5"></i> ירוק — האיבר החופשי</span>
+  </span>
+</div>
+
+<p>וזה עובד בדיוק אותו דבר גם כשיש מינוס בפנים — המינוס נוסע עם האיבר שלו:</p>
+$$\textcolor{#EA580C}{5}(\textcolor{#2563EB}{x}-\textcolor{#059669}{2})\;=\;\textcolor{#EA580C}{5}\cdot\textcolor{#2563EB}{x}-\textcolor{#EA580C}{5}\cdot\textcolor{#059669}{2}\;=\;5\textcolor{#2563EB}{x}-\textcolor{#059669}{10}$$
+
+<div class="box warn">
+  <div class="box-title">הטעות הקלאסית של הפילוג</div>
+  להכפיל רק את האיבר הראשון: <span class="fi">\(3(x+4)=3x+4\)</span> — שגוי!
+  ה-3 חייב להגיע גם אל ה-4.
+  <br>בדיקה מהירה שתמיד עובדת — הצבה: עבור <span class="fi">\(x=1\)</span>,
+  הביטוי המקורי נותן <span class="fi">\(3\cdot(1+4)=15\)</span>,
+  אבל <span class="fi">\(3\cdot 1+4=7\)</span>. לא שווה — סימן שהפתיחה לא נכונה.
+  (הנכון: <span class="fi">\(3\cdot 1+12=15\)</span> ✓)
+</div>
+
+<!-- ============ 4. הצבה ============ -->
+<h2 id="sec-substitute"><span class="num">4</span>הצבה — לשים מספר במקום x</h2>
+
+<p>
+  עד עכשיו סידרנו ביטויים. <strong>הצבה</strong> היא הרגע שבו נותנים ל-x ערך
+  מספרי — ומגלים כמה הביטוי שווה בפועל.
+</p>
+
+<div class="box def">
+  <div class="box-title">הגדרה</div>
+  הצבה היא החלפה מדויקת: <strong>כל</strong> מקום שבו כתוב x מקבל את
+  <strong>אותו</strong> מספר — <strong>בתוך סוגריים</strong>.
+  אחר כך מחשבים לפי סדר פעולות חשבון: קודם חזקות, אחר כך כפל, ובסוף חיבור וחיסור.
+</div>
+
+<p>
+  נעשה את זה פעם אחת לאט, על פונקציה:
+  <span class="fi">\(\textcolor{#7C3AED}{f(x)}=2\textcolor{#2563EB}{x}^{2}-3\textcolor{#2563EB}{x}+1\)</span>.
+  נחשב את <span class="fi">\(\textcolor{#7C3AED}{f(2)}\)</span> — כלומר נציב
+  <span class="fi">\(\textcolor{#2563EB}{x}=2\)</span>:
+</p>
+
+<ol class="steps">
+  <li>מאתרים את כל המופעים של x בכלל: יש <strong>שניים</strong> —
+      אחד בתוך <span class="fi">\(2\textcolor{#2563EB}{x}^{2}\)</span>
+      ואחד בתוך <span class="fi">\(3\textcolor{#2563EB}{x}\)</span>.</li>
+  <li>כל אחד מהם מתחלף ב-(2), בסוגריים:
+      <span class="fi">\(\textcolor{#7C3AED}{f(2)}=2\cdot(\textcolor{#2563EB}{2})^{2}-3\cdot(\textcolor{#2563EB}{2})+1\)</span>.</li>
+  <li>חזקות קודם: <span class="fi">\((2)^{2}=4\)</span>, ואז הכפל:
+      <span class="fi">\(2\cdot 4-3\cdot 2+1=8-6+1\)</span>.</li>
+  <li>ולבסוף: <span class="fi">\(8-6+1=\textcolor{#7C3AED}{3}\)</span>.
+      הקלט היה 2 — הפלט הוא 3.</li>
+</ol>
+
+<div class="fbox">
+  <div class="fbox-title">כל השרשרת במבט אחד</div>
+  $$\textcolor{#7C3AED}{f(\textcolor{#2563EB}{2})}\;=\;2\cdot(\textcolor{#2563EB}{2})^{2}-3\cdot(\textcolor{#2563EB}{2})+1\;=\;8-6+1\;=\;\textcolor{#7C3AED}{3}$$
+  <span class="f-legend">
+    <span><i class="sw" style="background:#DBEAFE"></i> כחול — הקלט: המספר שנכנס לכל מקום שבו היה x</span>
+    <span><i class="sw" style="background:#EDE0FC"></i> סגול — הפלט: הערך שהפונקציה מחזירה</span>
+  </span>
+</div>
+
+<div class="box warn">
+  <div class="box-title">שימי לב — מספר שלילי בלי סוגריים</div>
+  המשימה: להציב <span class="fi">\(x=-2\)</span> בביטוי <span class="fi">\(x^{2}+3x\)</span>.
+  מי שמציבה בלי סוגריים כותבת <span class="fi">\(-2^{2}+3\cdot-2\)</span>
+  ומקבלת <span class="fi">\(-4-6=-10\)</span> — טעות. למה? כי בלי סוגריים,
+  החזקה תופסת רק את ה-2 והמינוס נשאר בחוץ:
+  <p style="text-align:center;margin:10px 0"><span class="fi">\(-2^{2}=-4\)</span>
+  &nbsp;&nbsp;אבל&nbsp;&nbsp; <span class="fi">\((-2)^{2}=+4\)</span></p>
+  הסוגריים הם ששומרים על המינוס <strong>בתוך</strong> הריבוע.
+</div>
+
+<div class="fbox">
+  <div class="fbox-title">ההצבה הנכונה — כל x בסוגריים</div>
+  $$\textcolor{#2563EB}{x}^{2}+3\textcolor{#2563EB}{x}\;\xrightarrow{\;\textcolor{#2563EB}{x}\,=\,-2\;}\;(\textcolor{#2563EB}{-2})^{2}+3\cdot(\textcolor{#2563EB}{-2})\;=\;4-6\;=\;-2$$
+  <span class="f-legend">
+    <span><i class="sw" style="background:#DBEAFE"></i> כחול — כל מופע של x התחלף באותו מספר: מינוס 2, בתוך סוגריים</span>
+  </span>
+</div>
+
+<p>
+  <strong>כלל אצבע של מצטיינות:</strong> מציבים תמיד בתוך סוגריים — גם מספר חיובי.
+  זה הרגל שלא עולה כלום, וכשיגיע מספר שלילי הוא יציל אותך אוטומטית.
+</p>
+
+<!-- ============ 5. תרגול ============ -->
+<h2 id="sec-practice"><span class="num">5</span>תרגול — משלב לשלב</h2>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>כינוס איברים דומים</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">לפנייך הביטוי <span class="fi">\(4x+7+3x-2\)</span></span>.
+    <span class="mk mk-find">כנסי איברים דומים וכתבי אותו בצורה הקצרה ביותר.</span>
+  </p>
+  <p style="font-size:13px;color:var(--soft)">נסי לנחש את השלב הבא לפני שאת פותחת אותו.</p>
+  <details class="step"><summary>שלב ראשון — מי דומה למי?</summary>
+    <div class="step-body">צובעים כל איבר לפי הסוג שלו — איברי ה-x בכחול,
+    המספרים החופשיים בירוק:
+    <span class="fi">\(\textcolor{#2563EB}{4x}+\textcolor{#059669}{7}+\textcolor{#2563EB}{3x}-\textcolor{#059669}{2}\)</span>.
+    שימי לב שהמינוס נוסע עם ה-2.</div>
+  </details>
+  <details class="step"><summary>שלב שני — מקבצים כל צבע יחד</summary>
+    <div class="step-body">
+    <span class="fi">\(\textcolor{#2563EB}{4x+3x}+\textcolor{#059669}{(7-2)}\)</span></div>
+  </details>
+  <details class="step"><summary>שלב שלישי — מחברים ובודקים</summary>
+    <div class="step-body">
+      <span class="fi">\(\textcolor{#2563EB}{7x}+\textcolor{#059669}{5}\)</span>.
+      <p>בדיקת היגיון בהצבה: עבור <span class="fi">\(x=1\)</span> המקורי נותן
+      <span class="fi">\(4+7+3-2=12\)</span>, והמפושט נותן
+      <span class="fi">\(7+5=12\)</span> ✓ — אותו ערך, סימן שפישטנו נכון.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex1"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex hide-marks">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>הצבה של מספר חיובי</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">הציבי <span class="fi">\(x=3\)</span></span>
+    <span class="mk mk-group">בביטוי <span class="fi">\(2x^{2}-x\)</span></span>.
+    <span class="mk mk-find">מה ערך הביטוי?</span>
+  </p>
+  <div class="q-row">
+    <button class="marks-btn no-print" style="font-family:inherit;font-size:12.5px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:5px 10px;cursor:pointer">הציגי את הפירוק בצבעים</button>
+  </div>
+  <div class="q-row">
+    <span>התשובה שלי:</span>
+    <input class="q-input" data-answer="15" data-tol="0.01" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p><strong>שלב 1 — ההצבה:</strong> כל מופע של
+      <span class="fi">\(\textcolor{#2563EB}{x}\)</span> מתחלף ב-(3), בתוך סוגריים —
+      גם מספר חיובי, מתוך הרגל:</p>
+      $$2\textcolor{#2563EB}{x}^{2}-\textcolor{#2563EB}{x}\;\xrightarrow{\;\textcolor{#2563EB}{x}\,=\,3\;}\;2\cdot(\textcolor{#2563EB}{3})^{2}-(\textcolor{#2563EB}{3})$$
+      <p><strong>שלב 2 — מחשבים לפי סדר פעולות</strong> — קודם החזקה, אחר כך הכפל, ורק בסוף החיסור:</p>
+      $$2\cdot\underbrace{(\textcolor{#2563EB}{3})^{2}}_{\text{החזקה קודם}}-3\;=\;\underbrace{2\cdot 9}_{\text{אז הכפל}}-3\;=\;18-3\;=\;\mathbf{15}$$
+      <p><strong>בדיקת היגיון:</strong> האיבר הגדול הוא
+      <span class="fi">\(2x^{2}=18\)</span>, ומחסירים ממנו רק 3 —
+      אז התשובה צריכה לצאת קצת מתחת ל-18. ‏15 מתאים בדיוק ✓</p>
+    </div>
+  </details>
+  <details class="alt">
+    <summary>אותה שאלה בתחפושות — איך עוד מבקשים להציב?</summary>
+    <div class="alt-body">
+      <ul>
+        <li>"חשבי את <strong>ערך הביטוי</strong> <span class="fi">\(2x^{2}-x\)</span> עבור <span class="fi">\(x=3\)</span>."</li>
+        <li>"נתונה הפונקציה <span class="fi">\(f(x)=2x^{2}-x\)</span>. מצאי את <span class="fi">\(f(3)\)</span>."</li>
+        <li>"מה מקבלים <strong>כאשר</strong> <span class="fi">\(x=3\)</span>?"</li>
+        <li>"מהו הפלט של הכלל <span class="fi">\(2x^{2}-x\)</span> עבור הקלט 3?"</li>
+      </ul>
+      <p>בכל הניסוחים הפעולה זהה: כל x מתחלף ב-(3), ומחשבים לפי סדר פעולות.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex2"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex hide-marks">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>הצבה של מספר שלילי</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">הציבי <span class="fi">\(x=-1\)</span></span>
+    <span class="mk mk-group">בביטוי <span class="fi">\(x^{2}-2x\)</span></span>.
+    <span class="mk mk-find">מה ערך הביטוי?</span>
+  </p>
+  <div class="q-row">
+    <button class="marks-btn no-print" style="font-family:inherit;font-size:12.5px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:5px 10px;cursor:pointer">הציגי את הפירוק בצבעים</button>
+  </div>
+  <div class="q-row">
+    <span>התשובה שלי:</span>
+    <input class="q-input" data-answer="3" data-tol="0.01" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p><strong>שלב 1 — ההצבה:</strong> כל מופע של
+      <span class="fi">\(\textcolor{#2563EB}{x}\)</span> מתחלף ב-(<span class="fi">\(-1\)</span>) —
+      והפעם הסוגריים הם לא נימוס, הם ההגנה על המינוס:</p>
+      $$\textcolor{#2563EB}{x}^{2}-2\textcolor{#2563EB}{x}\;\xrightarrow{\;\textcolor{#2563EB}{x}\,=\,-1\;}\;(\textcolor{#2563EB}{-1})^{2}-2\cdot(\textcolor{#2563EB}{-1})$$
+      <p><strong>שלב 2 — מחשבים את הסימנים,</strong> איבר-איבר:</p>
+      $$\underbrace{(\textcolor{#2563EB}{-1})^{2}}_{\text{מינוס בריבוע — פלוס}}\;\underbrace{-\,2\cdot(\textcolor{#2563EB}{-1})}_{\text{מינוס כפול מינוס — פלוס}}\;=\;1+2\;=\;\mathbf{3}$$
+      <p><strong>בדיקת היגיון:</strong> הצבנו מספר שלילי — ובכל זאת שני האיברים יצאו
+      חיוביים, כי בכל אחד מהם מינוס פגש מינוס. תוצאה חיובית היא בדיוק מה שאמור לצאת ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex3"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · כמו במבחן</span><h4>פישוט והצבה יחד</h4></div>
+  <p class="q-text">
+    פשטי את הביטוי <span class="fi">\(5(x-2)+3x\)</span>,
+    ואחר כך הציבי בו <span class="fi">\(x=4\)</span>.
+  </p>
+  <details class="sol">
+    <summary>הצגי פתרון מלא (כמו שכותבים במחברת)</summary>
+    <div class="sol-body">
+      <p><strong>שלב א — פותחים סוגריים</strong> (חוק הפילוג — ה-5 מגיע לשני האיברים):</p>
+      $$\textcolor{#EA580C}{5}(\textcolor{#2563EB}{x}-\textcolor{#059669}{2})+3\textcolor{#2563EB}{x}\;=\;5\textcolor{#2563EB}{x}-\textcolor{#059669}{10}+3\textcolor{#2563EB}{x}$$
+      <p><strong>שלב ב — מכנסים איברים דומים:</strong></p>
+      $$\textcolor{#2563EB}{5x+3x}-\textcolor{#059669}{10}\;=\;\textcolor{#2563EB}{8x}-\textcolor{#059669}{10}$$
+      <p><strong>שלב ג — מציבים</strong> <span class="fi">\(x=4\)</span> בביטוי המפושט, בסוגריים:</p>
+      $$8\cdot(\textcolor{#2563EB}{4})-10\;=\;32-10\;=\;22$$
+      <p><strong>בדיקה</strong> — מציבים <span class="fi">\(x=4\)</span> גם בביטוי
+      <em>המקורי</em>:
+      <br><span class="fi">\(5\cdot(4-2)+3\cdot 4=5\cdot 2+12=22\)</span> ✓
+      <br>אותה תשובה משני הכיוונים — הפישוט וההצבה שניהם נכונים.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex4"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">עכשיו את המורה</span><h4>מצאי את הטעות של נועה</h4></div>
+  <p class="q-text">
+    נועה הציבה <span class="fi">\(x=-3\)</span> בביטוי <span class="fi">\(x^{2}+2x\)</span> וכתבה:
+    <span class="fi">\(-3^{2}+2\cdot(-3)=-9-6=-15\)</span>.
+    <span class="mk mk-find">מה השתבש — ואיך היית מסבירה לה את זה?</span>
+  </p>
+  <details class="sol">
+    <summary>הצגי תשובה</summary>
+    <div class="sol-body">
+      <p>הטעות באיבר הראשון: נועה כתבה <span class="fi">\(-3^{2}\)</span> בלי סוגריים,
+      וזה אומר "מינוס (3 בריבוע)" — כלומר <span class="fi">\(-9\)</span>.
+      אבל הצבנו את המספר <strong>מינוס 3</strong>, אז המינוס חייב להיכנס לריבוע:
+      <span class="fi">\((-3)^{2}=+9\)</span>.</p>
+      <p>האיבר השני שלה דווקא בסדר גמור: <span class="fi">\(2\cdot(-3)=-6\)</span>.
+      הפתרון הנכון:</p>
+      $$(\textcolor{#2563EB}{-3})^{2}+2\cdot(\textcolor{#2563EB}{-3})\;=\;9-6\;=\;3$$
+      <p>ואפשר היה לחשוד בתשובה שלה עוד לפני שמצאנו את הטעות:
+      <span class="fi">\(x^{2}\)</span> אף פעם לא שלילי, ולכן
+      <span class="fi">\(x^{2}+2x\)</span> לא יכול להגיע ל-<span class="fi">\(-15\)</span>
+      כשמציבים <span class="fi">\(-3\)</span>.
+      <strong>בדיקת היגיון תופסת כמעט כל טעות.</strong></p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex5"> סיימתי את התרגיל הזה</label>
+</article>
+
+<!-- ============ ניווט ============ -->
+<div class="progresswrap no-print">
+  <span class="progressbar"><i></i></span><span class="progress-label"></span>
+  <button class="all-sols" style="font-family:inherit;font-size:12px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:4px 10px;cursor:pointer">לפתוח את כל הפתרונות</button>
+</div>
+
+<nav class="pagenav">
+  <a href="index.html"><span class="dir">→ נקודת ההתחלה</span>המפה</a>
+  <a class="next" href="02-equations.html"><span class="dir">התחנה הבאה ←</span>משוואות ואי-שוויונות</a>
+</nav>
+
+<footer class="fin">חלק מהעולם של שירה · <a href="index.html">המפה</a> · <a href="../index.html">המרכז</a></footer>
+</main>
+</div>
+</body>
+</html>

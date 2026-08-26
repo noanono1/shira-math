@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<!-- מסך הבית של האייפד/הטלפון -->
+<link rel="apple-touch-icon" href="../assets/icons/icon-180.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>ליל המנדטים — סטטיסטיקה — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../vendor/katex.min.css">
+<link rel="stylesheet" href="../css/shira.css">
+<style>
+/* שמות המפלגות יושבים על ציר ה-x עצמו, מתחת לשנתות.
+   .plotbox היא בדיוק קופסת ה-SVG, ולכן המיקום באחוזים = מיקום בתוך התרשים. */
+.axplot .plotbox{position:relative}
+.axplot .ax-cat{position:absolute; top:100%; margin-top:3px; transform:translateX(-50%);
+  font-size:12px; font-weight:700; color:var(--ink); white-space:nowrap; pointer-events:none}
+@media (max-width:640px){ .axplot .ax-cat{font-size:10.5px} }
+</style>
+<script defer src="../vendor/katex.min.js"></script>
+<script defer src="../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../js/shira.js"></script>
+<style>
+/* מחוון פתיחה — כמה זמן, כמה תרגילים, ואיפה מתחילים לתרגל (מוסתר בהדפסה) */
+.pagemeta{display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px;
+  margin:12px 0 0; font-size:13px; color:var(--soft)}
+.pagemeta .pm-time{background:var(--faint); border-radius:999px; padding:3px 10px}
+.pagemeta .pm-time b{color:var(--ink); font-weight:700}
+.pagemeta .pm-jump{color:var(--accent); font-weight:700; text-decoration:none}
+.pagemeta .pm-jump:hover{text-decoration:underline}
+.pagemeta .pm-note{flex:1 1 100%; margin:0}
+#ex-first,#bank-map{scroll-margin-top:78px}
+</style>
+</head>
+<body data-page="stat:05-elections">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">סטטיסטיקה — המפה</a>
+    <span class="crumbs">תחנה <b>5</b> מתוך 7 · <b>ליל המנדטים</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">סטטיסטיקה · תחנה 5 · תרגיל עוגן</div>
+  <h1>ליל המנדטים</h1>
+  <p class="lead">
+    הערב את הסטטיסטיקאית של אולפן החדשות בליל הבחירות —
+    איך יודעים להגיד "42 מנדטים" עוד לפני שספרו את כל הקולות?
+    זו בדיוק העבודה של סוקרים אמיתיים, וזה כל הרעיון של סטטיסטיקה.
+  </p>
+  <p class="youknow"><b>בסוף העמוד תדעי:</b> להסביר למה מדגם של 500 מנבא מיליוני
+  קולות · להפוך תשובות סקר לאחוזים ולמנדטים · לזהות למה מפלגה יכולה לקבל יותר
+  קולות ובכל זאת לרדת באחוזים.</p>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>≈ 15 דק׳</b> · 4 תרגילים</span>
+    <a class="pm-jump" href="#ex-first">לקפוץ ישר לתרגיל הראשון ↓</a>
+  </p>
+</header>
+
+<!-- ============ שלב 1 ============ -->
+<div class="stagebar"><span class="dots-s"><i class="on"></i><i></i><i></i><i></i><i></i><i></i></span>
+  שלב <b>1</b> מתוך 6 · למה בכלל מדגם?</div>
+<h2>איך יודעים את התוצאה לפני שספרו את הקולות?</h2>
+
+<p>
+  עשר בערב. הקלפיות נסגרו לפני רגע, ועל המסך כבר עולה: "מדגם — 42 מנדטים למפלגת הים".
+  <br>אבל ספירת הקולות האמיתית תסתיים רק מחר בבוקר. אז מאיפה המספר?
+</p>
+<p>
+  אי אפשר לשאול מיליוני בוחרים בערב אחד.
+  <br>אפשר לשאול 500 — אם בוחרים אותם בקפידה, כך שייצגו את כולם:
+  צעירים ומבוגרים, מהעיר ומהכפר, מכל הארץ.
+</p>
+
+<div class="box essence">
+  <div class="box-title">המשפט של העמוד</div>
+  אם המדגם מייצג את כלל הבוחרים — החלק היחסי במדגם צפוי להיות קרוב לחלק היחסי בעם.
+  <br>זה כל הסוד. וזו בדיוק השכיחות היחסית מתחנה 4 — הפעם משתמשים בה כדי לנבא.
+</div>
+
+<p>
+  ומילה של יושרה מקצועית, כמו שנהוג באולפן רציני:
+  סקרים גם טועים לפעמים — מדגם הוא ניבוי, לא ספירה.
+</p>
+
+<!-- ============ שלב 2 ============ -->
+<div class="stagebar"><span class="dots-s"><i></i><i class="on"></i><i></i><i></i><i></i><i></i></span>
+  שלב <b>2</b> מתוך 6 · מהתשובות לטבלה</div>
+<h2>‏500 תשובות הופכות לטבלה אחת</h2>
+
+<p>
+  הסקר חזר: 500 פתקים, על כל אחד שם של מפלגה.
+  <br>העבודה הראשונה שלך באולפן היא לספור כמה תשובות קיבלה כל מפלגה, ולסדר בטבלה:
+</p>
+
+<table class="dtable">
+  <tr><th>המפלגה</th>
+    <td><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:#2E6F8E;vertical-align:-1px;margin-inline-end:5px"></span>הים</td>
+    <td><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:#2E7D6B;vertical-align:-1px;margin-inline-end:5px"></span>ההר</td>
+    <td><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:#C77B30;vertical-align:-1px;margin-inline-end:5px"></span>המדבר</td>
+    <td><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:#7A4E8C;vertical-align:-1px;margin-inline-end:5px"></span>העמק</td></tr>
+  <tr><th>מספר הנשאלים</th><td>175</td><td>150</td><td>100</td><td>75</td></tr>
+</table>
+<p class="tbl-note">השורה העליונה — הערכים (כאן: המפלגה) · השורה התחתונה — השכיחות (כמה נשאלים בחרו בה).</p>
+<p class="tbl-note">כל מפלגה קיבלה צבע קבוע — הריבוע הקטן שליד שמה — ואותו צבע חוזר בגרפים ובמליאה שבהמשך.</p>
+
+<p>
+  ולפני שממשיכים — טקס קטן שסוקרים אמיתיים לא מדלגים עליו לעולם:
+  בודקים שהשורה נסגרת על הסך הכל.
+  <br>‏<span class="fi">\(175+150+100+75=500\)</span> ✓
+</p>
+<p>
+  אם הסכום לא היה יוצא 500, סימן שתשובה הלכה לאיבוד —
+  וכל התחזית הייתה נבנית על טעות. תמיד לבדוק שהשורה נסגרת על הסך הכל.
+</p>
+
+<!-- ============ שלב 3 ============ -->
+<div class="stagebar"><span class="dots-s"><i></i><i></i><i class="on"></i><i></i><i></i><i></i></span>
+  שלב <b>3</b> מתוך 6 · מהטבלה לאחוזים</div>
+<h2>מהטבלה לאחוזים</h2>
+
+<p>
+  ‏175 מתוך 500 — זה הרבה? קשה להרגיש ככה.
+  <br>בשביל זה עוברים לאחוזים: החלק של כל מפלגה מתוך כלל הנשאלים.
+  למפלגת הים החישוב נראה כך — מחלקים למעלה ולמטה ב-5 (המספר הירוק),
+  והמכנה נהיה בדיוק 100:
+</p>
+
+$$\frac{\underbrace{\textcolor{#1D6FA5}{175}}_{\textcolor{#1D6FA5}{\text{ענו מפלגת הים}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{500}}_{\textcolor{#8A6D1B}{\text{כל הנשאלים}}}}=\frac{175:\textcolor{#2E7D6B}{5}}{500:\textcolor{#2E7D6B}{5}}=\frac{35}{100}=35\%$$
+
+<p>
+  זו השכיחות היחסית מתחנה 4, אחד לאחד:
+  <span class="mk mk-group">הקבוצה</span> חלקי <span class="mk mk-total">הסך הכל</span>.
+  <br>אותו חישוב בדיוק לשאר המפלגות — והטבלה מקבלת שורה חדשה:
+</p>
+
+<table class="dtable">
+  <tr><th>המפלגה</th>
+    <td><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:#2E6F8E;vertical-align:-1px;margin-inline-end:5px"></span>הים</td>
+    <td><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:#2E7D6B;vertical-align:-1px;margin-inline-end:5px"></span>ההר</td>
+    <td><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:#C77B30;vertical-align:-1px;margin-inline-end:5px"></span>המדבר</td>
+    <td><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:#7A4E8C;vertical-align:-1px;margin-inline-end:5px"></span>העמק</td></tr>
+  <tr><th>מספר הנשאלים</th><td>175</td><td>150</td><td>100</td><td>75</td></tr>
+  <tr><th>שכיחות יחסית</th><td>35%</td><td>30%</td><td>20%</td><td>15%</td></tr>
+</table>
+
+<p>
+  וגם לשורה החדשה יש טקס סגירה:
+  <span class="fi">\(35+30+20+15=100\)</span> ✓ —
+  כל האחוזים יחד חייבים להיסגר על 100.
+</p>
+
+<figure>
+  <div class="axplot" style="padding-bottom:40px">
+  <span class="ax-ylab">השכיחות היחסית באחוזים</span>
+  <div class="plotbox">
+  <svg viewBox="0 -18 460 195" style="width:100%;height:auto" role="img" aria-label="דיאגרמת עמודות: הים 35, ההר 30, המדבר 20, העמק 15 אחוזים">
+    <line x1="28" y1="125" x2="444" y2="125" stroke="#E4E8EE" stroke-width="1"/>
+    <line x1="28" y1="85"  x2="444" y2="85"  stroke="#E4E8EE" stroke-width="1"/>
+    <line x1="28" y1="45"  x2="444" y2="45"  stroke="#E4E8EE" stroke-width="1"/>
+    <line x1="28" y1="165" x2="444" y2="165" stroke="#5A6875" stroke-width="1.5"/>
+    <path d="M452 165 L444 161 L444 169 Z" fill="#5A6875"/>
+    <line x1="28" y1="165" x2="28" y2="-8" stroke="#5A6875" stroke-width="1.5"/>
+    <path d="M28 -16 L24 -8 L32 -8 Z" fill="#5A6875"/>
+    <line x1="23" y1="125" x2="28" y2="125" stroke="#5A6875" stroke-width="1.5"/>
+    <line x1="23" y1="85"  x2="28" y2="85"  stroke="#5A6875" stroke-width="1.5"/>
+    <line x1="23" y1="45"  x2="28" y2="45"  stroke="#5A6875" stroke-width="1.5"/>
+    <line x1="23" y1="5"   x2="28" y2="5"   stroke="#5A6875" stroke-width="1.5"/>
+    <text x="20" y="169" text-anchor="end" font-size="11" fill="#5A6875">0</text>
+    <text x="20" y="129" text-anchor="end" font-size="11" fill="#5A6875">10</text>
+    <text x="20" y="89"  text-anchor="end" font-size="11" fill="#5A6875">20</text>
+    <text x="20" y="49"  text-anchor="end" font-size="11" fill="#5A6875">30</text>
+    <text x="20" y="9"   text-anchor="end" font-size="11" fill="#5A6875">40</text>
+    <rect x="42"  y="25"  width="72" height="140" rx="4" fill="#2E6F8E"/>
+    <rect x="146" y="45"  width="72" height="120" rx="4" fill="#2E7D6B"/>
+    <rect x="250" y="85"  width="72" height="80"  rx="4" fill="#C77B30"/>
+    <rect x="354" y="105" width="72" height="60"  rx="4" fill="#7A4E8C"/>
+    <text x="78"  y="17" text-anchor="middle" font-size="15" font-weight="700" fill="#1C2733">35</text>
+    <text x="182" y="37" text-anchor="middle" font-size="15" font-weight="700" fill="#1C2733">30</text>
+    <text x="286" y="77" text-anchor="middle" font-size="15" font-weight="700" fill="#1C2733">20</text>
+    <text x="390" y="97" text-anchor="middle" font-size="15" font-weight="700" fill="#1C2733">15</text>
+    <line x1="78"  y1="165" x2="78"  y2="170" stroke="#5A6875" stroke-width="1"/>
+    <line x1="182" y1="165" x2="182" y2="170" stroke="#5A6875" stroke-width="1"/>
+    <line x1="286" y1="165" x2="286" y2="170" stroke="#5A6875" stroke-width="1"/>
+    <line x1="390" y1="165" x2="390" y2="170" stroke="#5A6875" stroke-width="1"/>
+  </svg>
+  <span class="ax-cat" style="left:17%">הים</span>
+  <span class="ax-cat" style="left:39.6%">ההר</span>
+  <span class="ax-cat" style="left:62.2%">המדבר</span>
+  <span class="ax-cat" style="left:84.8%">העמק</span>
+  </div>
+  <span class="ax-xlab">הערכים — המפלגה</span>
+  </div>
+  <figcaption>
+    תוצאות הסקר באחוזים — הגרפיקה שעולה לשידור.
+    שם המפלגה כתוב מתחת לעמודה שלה, וגובה העמודה הוא האחוז שלה.
+  </figcaption>
+</figure>
+
+<article id="ex-first" class="ex">
+  <div class="ex-head"><span class="lvl l1">ביחד</span><h4>מהסקר אל המסך</h4></div>
+  <p class="q-text">
+    <span class="mk mk-total">בסקר השתתפו 500 נשאלים</span>.
+    <span class="mk mk-group">175 מהם ענו שיצביעו למפלגת הים</span>.
+    <span class="mk mk-find">מהי השכיחות היחסית של מפלגת הים?</span>
+    <span class="mk mk-given">אם בכנסת 120 מושבים</span> —
+    <span class="mk mk-find">כמה מנדטים צפויה מפלגת הים לקבל?</span>
+  </p>
+  <details class="step"><summary>שלב ראשון — מהי השכיחות היחסית?</summary>
+    <div class="step-body">
+      את ה-175 מוצאים בטבלה — בעמודה של מפלגת הים:
+      <table class="dtable sol-table">
+        <tr><th>המפלגה</th><td class="hl-group">הים</td><td>ההר</td><td>המדבר</td><td>העמק</td><td>סה"כ</td></tr>
+        <tr><th>מספר הנשאלים</th><td class="hl-group"><b>175</b></td><td>150</td><td>100</td><td>75</td><td class="hl-total">500</td></tr>
+      </table>
+      <span class="mk mk-group">הקבוצה</span> חלקי <span class="mk mk-total">הסך הכל</span>:
+      <span class="fi">\(\frac{\textcolor{#1D6FA5}{175}}{\textcolor{#8A6D1B}{500}}=\frac{35}{100}=35\%\)</span>.
+      <br>זה בדיוק החישוב שעשינו למעלה — עכשיו הוא שלך.
+    </div>
+  </details>
+  <details class="step"><summary>שלב שני — מהאחוז למנדטים</summary>
+    <div class="step-body">
+      ‏35% מתוך 120 המושבים:
+      <span class="fi">\(120\cdot \frac{35}{100}=42\)</span>.
+      <br>מפלגת הים צפויה ל-42 מנדטים.
+    </div>
+  </details>
+  <details class="step"><summary>שלב שלישי — בדיקת היגיון</summary>
+    <div class="step-body">
+      ‏35% זה קצת יותר משליש. שליש מ-120 הוא 40 —
+      ו-42 באמת קצת יותר מ-40 ✓
+      <br>אם היה יוצא לך 4 או 420, הבדיקה הזו הייתה תופסת את זה מיד.
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex1"> סיימתי את התרגיל הזה</label>
+</article>
+
+<details class="alt">
+  <summary>עוד דרכים לשאול בדיוק את זה — אותה שאלה בחמש תחפושות</summary>
+  <div class="alt-body">
+    <ul>
+      <li>"מהי השכיחות היחסית של מפלגת הים?"</li>
+      <li>"איזה חלק מהנשאלים ענה מפלגת הים?"</li>
+      <li>"מה אחוז התומכים במפלגת הים?"</li>
+      <li>"מה שיעורם של תומכי מפלגת הים מכלל הנשאלים?"</li>
+      <li>"השלימי: על כל 100 נשאלים, ___ ענו מפלגת הים."</li>
+    </ul>
+    <p>בכל הניסוחים מסתתר אותו שבר בדיוק:
+    <span class="mk mk-group">הקבוצה</span> חלקי <span class="mk mk-total">הסך הכל</span>.</p>
+  </div>
+</details>
+
+<!-- ============ שלב 4 ============ -->
+<div class="stagebar"><span class="dots-s"><i></i><i></i><i></i><i class="on"></i><i></i><i></i></span>
+  שלב <b>4</b> מתוך 6 · מהאחוזים למנדטים</div>
+<h2>מהאחוזים למנדטים</h2>
+
+<p>
+  בכנסת 120 מושבים, והם מתחלקים לפי החלק היחסי של כל מפלגה.
+  <br>מי זה מי בחישוב: הסך הכל = 120 המושבים, והחלק = ‏35% שמצאנו למפלגת הים.
+  <br>מפלגה שמחזיקה ‏35% מהקולות מקבלת ‏35% מתוך 120 המושבים:
+</p>
+
+$$\underbrace{\textcolor{#8A6D1B}{120}}_{\textcolor{#8A6D1B}{\text{כל המושבים}}}\cdot\underbrace{\frac{\textcolor{#1D6FA5}{35}}{100}}_{\textcolor{#1D6FA5}{\text{החלק של מפלגת הים}}}=\textcolor{#2E7D32}{42}$$
+
+<p>
+  אותו כפל לכל מפלגה — וזו התחזית שעולה לשידור:
+</p>
+
+<table class="dtable">
+  <tr><th>המפלגה</th>
+    <td><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:#2E6F8E;vertical-align:-1px;margin-inline-end:5px"></span>הים</td>
+    <td><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:#2E7D6B;vertical-align:-1px;margin-inline-end:5px"></span>ההר</td>
+    <td><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:#C77B30;vertical-align:-1px;margin-inline-end:5px"></span>המדבר</td>
+    <td><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:#7A4E8C;vertical-align:-1px;margin-inline-end:5px"></span>העמק</td></tr>
+  <tr><th>שכיחות יחסית</th><td>35%</td><td>30%</td><td>20%</td><td>15%</td></tr>
+  <tr><th>מנדטים</th><td>42</td><td>36</td><td>24</td><td>18</td></tr>
+</table>
+
+<p>
+  ובדיקה אחרונה לפני השידור:
+  <span class="fi">\(42+36+24+18=120\)</span> ✓ — אף מושב לא נעלם בדרך.
+</p>
+
+<p>וככה זה נראה במליאה — כל עיגול הוא מושב אחד:</p>
+<div class="dotrow">
+<span class="dot" style="background:#2E6F8E"></span><span class="dot" style="background:#2E6F8E"></span><span class="dot" style="background:#2E6F8E"></span><span class="dot" style="background:#2E6F8E"></span><span class="dot" style="background:#2E6F8E"></span><span class="dot" style="background:#2E6F8E"></span><span class="dot" style="background:#2E6F8E"></span><span class="dot" style="background:#2E6F8E"></span><span class="dot" style="background:#2E6F8E"></span><span class="dot" style="background:#2E6F8E"></span><span class="dot" style="background:#2E6F8E"></span><span class="dot" style="background:#2E6F8E"></span>
+<span class="dot" style="background:#2E6F8E"></span><span class="dot" style="background:#2E6F8E"></span><span class="dot" style="background:#2E6F8E"></span><span class="dot" style="background:#2E6F8E"></span><span class="dot" style="background:#2E6F8E"></span><span class="dot" style="background:#2E6F8E"></span><span class="dot" style="background:#2E6F8E"></span><span class="dot" style="background:#2E6F8E"></span><span class="dot" style="background:#2E6F8E"></span><span class="dot" style="background:#2E6F8E"></span><span class="dot" style="background:#2E6F8E"></span><span class="dot" style="background:#2E6F8E"></span>
+<span class="dot" style="background:#2E6F8E"></span><span class="dot" style="background:#2E6F8E"></span><span class="dot" style="background:#2E6F8E"></span><span class="dot" style="background:#2E6F8E"></span><span class="dot" style="background:#2E6F8E"></span><span class="dot" style="background:#2E6F8E"></span><span class="dot" style="background:#2E6F8E"></span><span class="dot" style="background:#2E6F8E"></span><span class="dot" style="background:#2E6F8E"></span><span class="dot" style="background:#2E6F8E"></span><span class="dot" style="background:#2E6F8E"></span><span class="dot" style="background:#2E6F8E"></span>
+<span class="dot" style="background:#2E6F8E"></span><span class="dot" style="background:#2E6F8E"></span><span class="dot" style="background:#2E6F8E"></span><span class="dot" style="background:#2E6F8E"></span><span class="dot" style="background:#2E6F8E"></span><span class="dot" style="background:#2E6F8E"></span><span class="dot" style="background:#2E7D6B"></span><span class="dot" style="background:#2E7D6B"></span><span class="dot" style="background:#2E7D6B"></span><span class="dot" style="background:#2E7D6B"></span><span class="dot" style="background:#2E7D6B"></span><span class="dot" style="background:#2E7D6B"></span>
+<span class="dot" style="background:#2E7D6B"></span><span class="dot" style="background:#2E7D6B"></span><span class="dot" style="background:#2E7D6B"></span><span class="dot" style="background:#2E7D6B"></span><span class="dot" style="background:#2E7D6B"></span><span class="dot" style="background:#2E7D6B"></span><span class="dot" style="background:#2E7D6B"></span><span class="dot" style="background:#2E7D6B"></span><span class="dot" style="background:#2E7D6B"></span><span class="dot" style="background:#2E7D6B"></span><span class="dot" style="background:#2E7D6B"></span><span class="dot" style="background:#2E7D6B"></span>
+<span class="dot" style="background:#2E7D6B"></span><span class="dot" style="background:#2E7D6B"></span><span class="dot" style="background:#2E7D6B"></span><span class="dot" style="background:#2E7D6B"></span><span class="dot" style="background:#2E7D6B"></span><span class="dot" style="background:#2E7D6B"></span><span class="dot" style="background:#2E7D6B"></span><span class="dot" style="background:#2E7D6B"></span><span class="dot" style="background:#2E7D6B"></span><span class="dot" style="background:#2E7D6B"></span><span class="dot" style="background:#2E7D6B"></span><span class="dot" style="background:#2E7D6B"></span>
+<span class="dot" style="background:#2E7D6B"></span><span class="dot" style="background:#2E7D6B"></span><span class="dot" style="background:#2E7D6B"></span><span class="dot" style="background:#2E7D6B"></span><span class="dot" style="background:#2E7D6B"></span><span class="dot" style="background:#2E7D6B"></span><span class="dot" style="background:#C77B30"></span><span class="dot" style="background:#C77B30"></span><span class="dot" style="background:#C77B30"></span><span class="dot" style="background:#C77B30"></span><span class="dot" style="background:#C77B30"></span><span class="dot" style="background:#C77B30"></span>
+<span class="dot" style="background:#C77B30"></span><span class="dot" style="background:#C77B30"></span><span class="dot" style="background:#C77B30"></span><span class="dot" style="background:#C77B30"></span><span class="dot" style="background:#C77B30"></span><span class="dot" style="background:#C77B30"></span><span class="dot" style="background:#C77B30"></span><span class="dot" style="background:#C77B30"></span><span class="dot" style="background:#C77B30"></span><span class="dot" style="background:#C77B30"></span><span class="dot" style="background:#C77B30"></span><span class="dot" style="background:#C77B30"></span>
+<span class="dot" style="background:#C77B30"></span><span class="dot" style="background:#C77B30"></span><span class="dot" style="background:#C77B30"></span><span class="dot" style="background:#C77B30"></span><span class="dot" style="background:#C77B30"></span><span class="dot" style="background:#C77B30"></span><span class="dot" style="background:#7A4E8C"></span><span class="dot" style="background:#7A4E8C"></span><span class="dot" style="background:#7A4E8C"></span><span class="dot" style="background:#7A4E8C"></span><span class="dot" style="background:#7A4E8C"></span><span class="dot" style="background:#7A4E8C"></span>
+<span class="dot" style="background:#7A4E8C"></span><span class="dot" style="background:#7A4E8C"></span><span class="dot" style="background:#7A4E8C"></span><span class="dot" style="background:#7A4E8C"></span><span class="dot" style="background:#7A4E8C"></span><span class="dot" style="background:#7A4E8C"></span><span class="dot" style="background:#7A4E8C"></span><span class="dot" style="background:#7A4E8C"></span><span class="dot" style="background:#7A4E8C"></span><span class="dot" style="background:#7A4E8C"></span><span class="dot" style="background:#7A4E8C"></span><span class="dot" style="background:#7A4E8C"></span>
+</div>
+<p class="viz-cap">
+  ‏120 המושבים, צבועים לפי התחזית:
+  כחול — הים (42) · ירוק — ההר (36) · כתום — המדבר (24) · סגול — העמק (18).
+</p>
+
+<article class="ex hide-marks">
+  <div class="ex-head"><span class="lvl l2">לבד עם רשת</span><h4>הכיוון ההפוך — מהמסך אל הסקר</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">מפלגת המדבר צפויה לקבל 24 מנדטים מתוך 120</span>.
+    <span class="mk mk-total">בסקר החדש השתתפו 600 נשאלים</span>.
+    <span class="mk mk-find">כמה מהם ענו שיצביעו למפלגת המדבר?</span>
+  </p>
+  <div class="q-row">
+    <button class="marks-btn no-print" style="font-family:inherit;font-size:12.5px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:5px 10px;cursor:pointer">הציגי את הפירוק בצבעים</button>
+  </div>
+  <div class="q-row">
+    <span>התשובה שלי:</span>
+    <input class="q-input" data-answer="120" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>את ה-24 מוצאים בשורת המנדטים — בעמודה של מפלגת המדבר:</p>
+      <table class="dtable sol-table">
+        <tr><th>המפלגה</th><td>הים</td><td>ההר</td><td class="hl-group">המדבר</td><td>העמק</td><td>סה"כ</td></tr>
+        <tr><th>מנדטים</th><td>42</td><td>36</td><td class="hl-group"><b>24</b></td><td>18</td><td class="hl-total">120</td></tr>
+      </table>
+      $$\frac{\underbrace{\textcolor{#1D6FA5}{24}}_{\textcolor{#1D6FA5}{\text{המנדטים של המדבר}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{120}}_{\textcolor{#8A6D1B}{\text{כל המושבים}}}}=\frac{24:\textcolor{#2E7D6B}{24}}{120:\textcolor{#2E7D6B}{24}}=\frac{1}{5}=\frac{20}{100}=20\%$$
+      $$\underbrace{\textcolor{#8A6D1B}{600}}_{\textcolor{#8A6D1B}{\text{הנשאלים}}}\cdot\underbrace{\frac{20}{100}}_{\text{האחוז שמצאנו}}=\textcolor{#2E7D32}{120}$$
+      <p>‏120 נשאלים ענו מפלגת המדבר.</p>
+      <p><strong>בדיקה:</strong> 120 מתוך 600 זו באמת חמישית ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex2"> סיימתי את התרגיל הזה</label>
+</article>
+
+<!-- ============ שלב 5 ============ -->
+<div class="stagebar"><span class="dots-s"><i></i><i></i><i></i><i></i><i class="on"></i><i></i></span>
+  שלב <b>5</b> מתוך 6 · הנתונים מתעדכנים</div>
+<h2>הנתונים מתעדכנים</h2>
+
+<p>
+  <span class="mk mk-change">שבוע אחר כך מתפרסם סקר חדש — הפעם 600 נשאלים,
+  ומפלגה חמישית, מפלגת הנהר, נכנסת למשחק</span>.
+  <br>באולפן מרעננים את הגרפיקה, ואת מרעננת את הטבלה:
+</p>
+
+<table class="dtable">
+  <tr><th>המפלגה</th>
+    <td><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:#2E6F8E;vertical-align:-1px;margin-inline-end:5px"></span>הים</td>
+    <td><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:#2E7D6B;vertical-align:-1px;margin-inline-end:5px"></span>ההר</td>
+    <td><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:#C77B30;vertical-align:-1px;margin-inline-end:5px"></span>המדבר</td>
+    <td><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:#7A4E8C;vertical-align:-1px;margin-inline-end:5px"></span>העמק</td>
+    <td><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:#3AA6A6;vertical-align:-1px;margin-inline-end:5px"></span>הנהר</td></tr>
+  <tr><th>מספר הנשאלים</th><td>180</td><td>150</td><td>120</td><td>90</td><td>60</td></tr>
+  <tr><th>שכיחות יחסית</th><td>30%</td><td>25%</td><td>20%</td><td>15%</td><td>10%</td></tr>
+  <tr><th>מנדטים</th><td>36</td><td>30</td><td>24</td><td>18</td><td>12</td></tr>
+</table>
+
+<p>
+  הטקסים מתקיימים גם הפעם:
+  <span class="fi">\(180+150+120+90+60=600\)</span> ✓ ·
+  <span class="fi">\(30+25+20+15+10=100\)</span> ✓ ·
+  <span class="fi">\(36+30+24+18+12=120\)</span> ✓
+</p>
+
+<div class="box warn">
+  <div class="box-title">שימי לב למה שקרה למפלגת הים</div>
+  מפלגת הים קיבלה בסקר החדש <strong>יותר</strong> קולות מבעבר (180 לעומת 175) —
+  ובכל זאת ירדה מ-‏35% ל-‏30%.
+  <br>איך זה ייתכן? העוגה גדלה מ-500 ל-600 נשאלים, והחתיכה של הים גדלה לאט יותר מהעוגה.
+  <br><strong>שכיחות יחסית תלויה גם בסך הכל, לא רק בשכיחות.</strong>
+</div>
+
+<figure>
+  <div class="axplot" style="padding-bottom:40px">
+  <span class="ax-ylab">השכיחות היחסית באחוזים</span>
+  <div class="plotbox">
+  <svg viewBox="0 0 560 187" style="width:100%;height:auto" role="img" aria-label="זוג עמודות לכל מפלגה: הים 35 ו-30, ההר 30 ו-25, המדבר 20 ו-20, העמק 15 ו-15, הנהר 10">
+    <line x1="22" y1="135" x2="540" y2="135" stroke="#E4E8EE" stroke-width="1"/>
+    <line x1="22" y1="95"  x2="540" y2="95"  stroke="#E4E8EE" stroke-width="1"/>
+    <line x1="22" y1="55"  x2="540" y2="55"  stroke="#E4E8EE" stroke-width="1"/>
+    <line x1="22" y1="15"  x2="540" y2="15"  stroke="#E4E8EE" stroke-width="1"/>
+    <line x1="22" y1="175" x2="540" y2="175" stroke="#5A6875" stroke-width="1.5"/>
+    <path d="M548 175 L540 171 L540 179 Z" fill="#5A6875"/>
+    <line x1="22" y1="175" x2="22" y2="10" stroke="#5A6875" stroke-width="1.5"/>
+    <path d="M22 2 L18 10 L26 10 Z" fill="#5A6875"/>
+    <line x1="18" y1="135" x2="22" y2="135" stroke="#5A6875" stroke-width="1.5"/>
+    <line x1="18" y1="95"  x2="22" y2="95"  stroke="#5A6875" stroke-width="1.5"/>
+    <line x1="18" y1="55"  x2="22" y2="55"  stroke="#5A6875" stroke-width="1.5"/>
+    <line x1="18" y1="15"  x2="22" y2="15"  stroke="#5A6875" stroke-width="1.5"/>
+    <text x="15" y="179" text-anchor="end" font-size="11" fill="#5A6875">0</text>
+    <text x="15" y="139" text-anchor="end" font-size="11" fill="#5A6875">10</text>
+    <text x="15" y="99"  text-anchor="end" font-size="11" fill="#5A6875">20</text>
+    <text x="15" y="59"  text-anchor="end" font-size="11" fill="#5A6875">30</text>
+    <text x="15" y="19"  text-anchor="end" font-size="11" fill="#5A6875">40</text>
+    <rect x="30"  y="35"  width="34" height="140" rx="3" fill="#2E6F8E" opacity="0.4"/>
+    <rect x="72"  y="55"  width="34" height="120" rx="3" fill="#2E6F8E"/>
+    <rect x="134" y="55"  width="34" height="120" rx="3" fill="#2E7D6B" opacity="0.4"/>
+    <rect x="176" y="75"  width="34" height="100" rx="3" fill="#2E7D6B"/>
+    <rect x="238" y="95"  width="34" height="80"  rx="3" fill="#C77B30" opacity="0.4"/>
+    <rect x="280" y="95"  width="34" height="80"  rx="3" fill="#C77B30"/>
+    <rect x="342" y="115" width="34" height="60"  rx="3" fill="#7A4E8C" opacity="0.4"/>
+    <rect x="384" y="115" width="34" height="60"  rx="3" fill="#7A4E8C"/>
+    <rect x="488" y="135" width="34" height="40"  rx="3" fill="#3AA6A6"/>
+    <text x="47"  y="27"  text-anchor="middle" font-size="13" fill="#5A6875">35</text>
+    <text x="89"  y="47"  text-anchor="middle" font-size="13" font-weight="700" fill="#1C2733">30</text>
+    <text x="151" y="47"  text-anchor="middle" font-size="13" fill="#5A6875">30</text>
+    <text x="193" y="67"  text-anchor="middle" font-size="13" font-weight="700" fill="#1C2733">25</text>
+    <text x="255" y="87"  text-anchor="middle" font-size="13" fill="#5A6875">20</text>
+    <text x="297" y="87"  text-anchor="middle" font-size="13" font-weight="700" fill="#1C2733">20</text>
+    <text x="359" y="107" text-anchor="middle" font-size="13" fill="#5A6875">15</text>
+    <text x="401" y="107" text-anchor="middle" font-size="13" font-weight="700" fill="#1C2733">15</text>
+    <text x="505" y="127" text-anchor="middle" font-size="13" font-weight="700" fill="#1C2733">10</text>
+    <line x1="68"  y1="175" x2="68"  y2="180" stroke="#5A6875" stroke-width="1"/>
+    <line x1="172" y1="175" x2="172" y2="180" stroke="#5A6875" stroke-width="1"/>
+    <line x1="276" y1="175" x2="276" y2="180" stroke="#5A6875" stroke-width="1"/>
+    <line x1="380" y1="175" x2="380" y2="180" stroke="#5A6875" stroke-width="1"/>
+    <line x1="505" y1="175" x2="505" y2="180" stroke="#5A6875" stroke-width="1"/>
+  </svg>
+  <span class="ax-cat" style="left:12.1%">הים</span>
+  <span class="ax-cat" style="left:30.7%">ההר</span>
+  <span class="ax-cat" style="left:49.3%">המדבר</span>
+  <span class="ax-cat" style="left:67.9%">העמק</span>
+  <span class="ax-cat" style="left:90.2%">הנהר</span>
+  </div>
+  <span class="ax-xlab">הערכים — המפלגה (זוג עמודות לכל אחת)</span>
+  </div>
+  <figcaption>
+    אחוזי התמיכה, זוג עמודות לכל מפלגה: העמודה הבהירה — הסקר הישן (500 נשאלים),
+    הכהה — הסקר החדש (600). שם המפלגה כתוב מתחת לזוג שלה, על הציר.
+    למפלגת הנהר יש רק עמודה אחת, כי היא לא הייתה בסקר הישן.
+    אצל הים המספרים עלו מ-175 ל-180 — אבל העמודה ירדה.
+  </figcaption>
+</figure>
+
+<details class="more-x">
+  <summary>ומה זה "אחוז החסימה" שמזכירים כל ליל בחירות?</summary>
+  <p>מפלגה שמקבלת פחות מ-‏3.25% מהקולות לא נכנסת לכנסת בכלל — זה אחוז החסימה.</p>
+  <p>במדגם של 600 נשאלים זה בערך
+  <span class="fi">\(600\cdot 0.0325\approx 20\)</span> נשאלים.</p>
+  <p>מפלגת הנהר היא הקטנה בסקר החדש, ובכל זאת 60 נשאלים בחרו בה —
+  פי שלושה מהסף, ולכן היא בתוך התחזית.</p>
+  <p>מפלגה שהיו בוחרים בה 15 נשאלים בלבד לא הייתה מגיעה ל-20, ותישאר מחוץ לתחזית.</p>
+</details>
+
+<article class="ex hide-marks">
+  <div class="ex-head"><span class="lvl l2">לבד עם רשת</span><h4>הנעלם הראשון שלך</h4></div>
+  <p class="q-text">
+    <span class="mk mk-group"><span class="fi">\(x\)</span> נשאלים ענו מפלגת העמק</span>.
+    <span class="mk mk-given">השכיחות היחסית שלה 15%</span>.
+    <span class="mk mk-total">בסקר 600 משתתפים</span>.
+    <span class="mk mk-find">מצאי את <span class="fi">\(x\)</span></span>.
+  </p>
+  <div class="q-row">
+    <button class="marks-btn no-print" style="font-family:inherit;font-size:12.5px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:5px 10px;cursor:pointer">הציגי את הפירוק בצבעים</button>
+  </div>
+  <div class="q-row">
+    <span>התשובה שלי:</span>
+    <input class="q-input" data-answer="90" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>שכיחות יחסית = החלק חלקי השלם — הפעם החלק הוא הנעלם:</p>
+      $$\frac{\underbrace{\textcolor{#1D6FA5}{x}}_{\textcolor{#1D6FA5}{\text{ענו העמק}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{600}}_{\textcolor{#8A6D1B}{\text{כל הנשאלים}}}}=\frac{15}{100}$$
+      <p>כפל בהצלבה:</p>
+      $$100x=600\cdot 15=9000\;\Longrightarrow\;x=90$$
+      <p>נרשום את העמודה שמצאנו בתוך טבלת הסקר החדש:</p>
+      <table class="dtable sol-table">
+        <tr><th>המפלגה</th><td>הים</td><td>ההר</td><td>המדבר</td><td class="hl-find">העמק</td><td>הנהר</td><td>סה"כ</td></tr>
+        <tr><th>מספר הנשאלים</th><td>180</td><td>150</td><td>120</td><td class="hl-find"><b>90</b></td><td>60</td><td class="hl-total">600</td></tr>
+      </table>
+      <p><strong>בדיקה:</strong> <span class="fi">\(\frac{90}{600}=\frac{15}{100}\)</span> ✓
+      — בדיוק המספר שבטבלה למעלה.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex3"> סיימתי את התרגיל הזה</label>
+</article>
+
+<p>בתחנה הבאה ה-<span class="fi">\(x\)</span> יסתתר בתוך הטבלה עצמה.</p>
+
+<!-- ============ שלב 6 ============ -->
+<div class="stagebar"><span class="dots-s"><i></i><i></i><i></i><i></i><i></i><i class="on"></i></span>
+  שלב <b>6</b> מתוך 6 · ואיפה הממוצע?</div>
+<h2>רגע — איפה הממוצע והחציון?</h2>
+
+<p>
+  עברנו עמוד שלם של סטטיסטיקה אמיתית — בלי לחשב ממוצע אפילו פעם אחת.
+  זה לא מקרה.
+</p>
+
+<div class="box def">
+  <div class="box-title">"ממוצע המפלגות"? אין דבר כזה</div>
+  שמות מפלגות הם נתונים שמיים — שמות בלי סדר <span class="aside">(זוכרת מתחנה 1?)</span>.
+  <br>בלי סדר אין אמצע, ובלי מספרים אין מה לחבר — אז אין חציון ואין ממוצע.
+  <br>שכיח — דווקא יש: הערך הנפוץ ביותר, כלומר המפלגה הגדולה.
+  בסקר החדש: מפלגת הים.
+</div>
+
+<p>
+  ממוצע וחציון מחכים לנתונים מספריים — והם מחכים לך בתחנה הבאה,
+  בטבלה עם החור.
+</p>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">עכשיו את המורה</span><h4>לתקן את הכתבת</h4></div>
+  <p class="q-text">
+    כתבת באולפן אמרה: "מפלגת הים עלתה מ-175 ל-180 תומכים — היא מתחזקת!"
+    <span class="mk mk-find">מה היית מתקנת לפני שזה עולה לשידור?</span>
+  </p>
+  <details class="sol">
+    <summary>הצגי תשובה</summary>
+    <div class="sol-body">
+      <p>נשווה את שני הסקרים זה מול זה:</p>
+      <table class="dtable sol-table">
+        <tr><th>הנתון</th><th>הסקר הישן</th><th>הסקר החדש</th></tr>
+        <tr><th>כל הנשאלים</th><td class="hl-total">500</td><td class="hl-total">600</td></tr>
+        <tr><th>ענו מפלגת הים</th><td>175</td><td class="hl-given"><b>180</b></td></tr>
+        <tr><th>החלק היחסי</th><td>35%</td><td><b>30%</b></td></tr>
+        <tr><th>מנדטים</th><td>42</td><td><b>36</b></td></tr>
+      </table>
+      <p>המספר באמת עלה — אבל החלק היחסי ירד מ-‏35% ל-‏30%,
+      כי הסך הכל גדל מ-500 ל-600 נשאלים.</p>
+      <p>ומה שקובע מנדטים הוא החלק היחסי, לא המספר:
+      42 מנדטים בסקר הישן, 36 בחדש.</p>
+      <p>ניסוח מדויק לשידור: "למפלגת הים יותר תומכים במספרים —
+      אבל חלק קטן יותר מהעוגה."</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex4"> סיימתי</label>
+</article>
+
+<!-- ============ סרטונים ============ -->
+<h2>🎬 לסגירה — שני סרטונים שמחברים הכל</h2>
+<div class="watch">
+  <p>אחרי שסגרת את התחנה, שני אלה עושים סדר בתמונה הגדולה:</p>
+  <a class="video-link" href="https://www.youtube.com/watch?v=3q4MmEmDnwg">
+    <img src="../assets/stats/3q4MmEmDnwg/02_t0190.jpg" alt="סטטיסטיקה ב-10 דקות — שקף מהסרטון" loading="lazy">
+    <span class="vt"><b>סטטיסטיקה ב-10 דקות</b><span>חזרה מסודרת על כל המושגים של הפרק · 12:13</span></span>
+    <span class="play">▶</span>
+  </a>
+  <a class="video-link" href="https://www.youtube.com/watch?v=RiMvIyRseh4">
+    <img src="../assets/stats/RiMvIyRseh4/01_t0030.jpg" alt="שכיחות יחסית ב-12 דקות — שקף מהסרטון" loading="lazy">
+    <span class="vt"><b>שכיחות יחסית ב-12 דקות</b><span>הכלי המרכזי של העמוד הזה, מוסבר מההתחלה · 12:57</span></span>
+    <span class="play">▶</span>
+  </a>
+</div>
+
+<!-- ============ ניווט ============ -->
+<div class="progresswrap no-print">
+  <span class="progressbar"><i></i></span><span class="progress-label"></span>
+  <button class="all-sols" style="font-family:inherit;font-size:12px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:4px 10px;cursor:pointer">לפתוח את כל הפתרונות</button>
+</div>
+
+<nav class="pagenav">
+  <a href="04-relative-frequency.html"><span class="dir">→ התחנה הקודמת</span>שכיחות יחסית</a>
+  <a class="next" href="06-table-with-hole.html"><span class="dir">התחנה הבאה ←</span>הטבלה עם החור</a>
+</nav>
+
+<footer class="fin">חלק מהעולם של שירה · <a href="index.html">המפה</a> · <a href="../index.html">המרכז</a></footer>
+</main>
+</div>
+</body>
+</html>

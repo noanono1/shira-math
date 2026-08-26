@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<!-- מסך הבית של האייפד/הטלפון -->
+<link rel="apple-touch-icon" href="../assets/icons/icon-180.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>שכיחות יחסית — סטטיסטיקה — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../vendor/katex.min.css">
+<link rel="stylesheet" href="../css/shira.css">
+<style>
+/* שמות הקטגוריות יושבים על ציר ה-x עצמו, מתחת לשנתות.
+   .plotbox היא בדיוק קופסת ה-SVG, ולכן המיקום באחוזים = מיקום בתוך התרשים. */
+.axplot .plotbox{position:relative}
+.axplot .ax-cat{position:absolute; top:100%; margin-top:3px; transform:translateX(-50%);
+  font-size:12px; font-weight:700; color:var(--ink); white-space:nowrap; pointer-events:none}
+@media (max-width:640px){ .axplot .ax-cat{font-size:10.5px} }
+</style>
+<script defer src="../vendor/katex.min.js"></script>
+<script defer src="../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../js/shira.js"></script>
+<style>
+/* מחוון פתיחה — כמה זמן, כמה תרגילים, ואיפה מתחילים לתרגל (מוסתר בהדפסה) */
+.pagemeta{display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px;
+  margin:12px 0 0; font-size:13px; color:var(--soft)}
+.pagemeta .pm-time{background:var(--faint); border-radius:999px; padding:3px 10px}
+.pagemeta .pm-time b{color:var(--ink); font-weight:700}
+.pagemeta .pm-jump{color:var(--accent); font-weight:700; text-decoration:none}
+.pagemeta .pm-jump:hover{text-decoration:underline}
+.pagemeta .pm-note{flex:1 1 100%; margin:0}
+#ex-first,#bank-map{scroll-margin-top:78px}
+</style>
+</head>
+<body data-page="stat:04-relative-frequency">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">סטטיסטיקה — המפה</a>
+    <span class="crumbs">תחנה <b>4</b> מתוך 7 · <b>שכיחות יחסית</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">סטטיסטיקה · תחנה 4</div>
+  <h1>שכיחות יחסית — החלק מתוך השלם</h1>
+  <p class="lead">
+    בתחנות הקודמות ספרנו כמה יש מכל דבר. עכשיו נשאל שאלה חדשה:
+    15 תלמידים — זה הרבה או מעט? מסתבר שאי אפשר לענות על זה
+    בלי לדעת עוד מספר אחד. בעמוד הזה נגלה איזה.
+  </p>
+  <p class="youknow"><b>בסוף העמוד תדעי:</b> לחשב שכיחות יחסית ולכתוב אותה כשבר,
+  כשבר מצומצם וכאחוז · לעבור מאחוז לכמות ובחזרה · לפתור טבלה עם נעלם בעזרת משוואה.</p>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>≈ 20 דק׳</b> · 5 תרגילים</span>
+    <a class="pm-jump" href="#sec-practice">לקפוץ ישר לתרגילים ↓</a>
+  </p>
+</header>
+
+<!-- ============ 1. למה "יחסית"? ============ -->
+<h2><span class="num">1</span>למה "יחסית"?</h2>
+
+<p>
+  בשיעור חינוך שאלו מי רוצה יום ספורט, ו-15 תלמידים בחרו כדורסל.
+  זה הרבה?
+</p>
+<p>
+  אי אפשר לדעת — כי חסרה השאלה החשובה: <strong>מתוך כמה?</strong>
+</p>
+<p>
+  אם שאלו כיתה של 20 — אז 15 מתוך 20 זה רוב הכיתה. הרבה.
+  <br>אם שאלו שכבה של 300 — אז 15 מתוך 300 זה קומץ קטן. מעט.
+  <br>אותם 15 תלמידים בדיוק, ומשמעות הפוכה לגמרי.
+</p>
+
+<div class="box essence">
+  <div class="box-title">המהות</div>
+  שכיחות לבד היא חצי סיפור — היא אומרת רק "כמה".
+  <br>שכיחות <strong>יחסית</strong> משלימה אותו: <strong>החלק מתוך השלם</strong> —
+  כמה בחרו, ביחס לכמה נשאלו בסך הכל.
+</div>
+
+<!-- ============ 2. הנוסחה ============ -->
+<h2><span class="num">2</span>הנוסחה</h2>
+
+<p>
+  כדי להפוך שכיחות לשכיחות יחסית עושים דבר אחד: מחלקים אותה בסך הכל.
+  הצבעים כאן הם אותם צבעים שמלווים אותנו בכל התחנות:
+</p>
+
+<div class="fbox">
+  <div class="fbox-title">שכיחות יחסית</div>
+  $$\text{שכיחות יחסית}=\frac{\rule{0pt}{1.15em}\textcolor{#1D6FA5}{\text{השכיחות של הערך}}}{\textcolor{#8A6D1B}{\text{סך כל הנתונים}}}$$
+  <span class="f-legend">
+    <span><i class="sw" style="background:#DDEDF8"></i> כחול — הקבוצה שמדברים עליה (כמה בחרו כדורסל)</span>
+    <span><i class="sw" style="background:#FBF0C9"></i> צהוב — הסך הכל (כמה נשאלו בכלל)</span>
+  </span>
+</div>
+
+<p>
+  נחזור לכיתה של 20: מתוכם 15 בחרו כדורסל. נציב בנוסחה —
+  והמספר הירוק מראה בכל מעבר במה חילקנו או כפלנו, למעלה ולמטה יחד:
+</p>
+
+$$\frac{\textcolor{#1D6FA5}{15}}{\textcolor{#8A6D1B}{20}}=\frac{15:\textcolor{#2E7D6B}{5}}{20:\textcolor{#2E7D6B}{5}}=\frac{3}{4}=\frac{3\cdot\textcolor{#2E7D6B}{25}}{4\cdot\textcolor{#2E7D6B}{25}}=\frac{75}{100}=75\%$$
+
+<p>
+  שימי לב ששלוש הצורות אומרות בדיוק אותו דבר:
+  <span class="fi">\(\frac{15}{20}\)</span> הוא השבר כמו שהוא,
+  <span class="fi">\(\frac{3}{4}\)</span> הוא אותו שבר אחרי צמצום,
+  ו-75% זו אותה כמות בשפה של אחוזים.
+  <br>שלוש שפות — סיפור אחד: שלושה רבעים מהכיתה.
+</p>
+
+<div class="box intuition">
+  <div class="box-title">בדיקת ביטחון</div>
+  אם מחשבים את השכיחויות היחסיות של <strong>כל</strong> הערכים בטבלה —
+  הסכום שלהן תמיד יוצא <strong>1</strong> (או 100%).
+  <br>סיימת תרגיל? חברי את כל השכיחויות היחסיות. יצא 1 — כנראה שהכל נכון.
+  יצא משהו אחר — יש טעות ששווה לחפש.
+</div>
+
+<!-- ============ 3. מאחוז לכמות ובחזרה ============ -->
+<h2><span class="num">3</span>מאחוז לכמות ובחזרה</h2>
+
+<p>
+  אחוז הוא בסך הכל שכיחות יחסית שכתובה עם מכנה 100.
+  לכן יש כאן שני כיוונים של חישוב, וכל תרגיל שייך לאחד מהם.
+</p>
+
+<h3>א. נתון האחוז — מחפשים כמות</h3>
+<p>
+  "בכיתה 40 תלמידים, ו-30% מהם באים בהסעה. כמה תלמידים באים בהסעה?"
+  <br>קודם מזהות מי זה מי: הסך הכל = 40 התלמידים בכיתה, והאחוז = 30%.
+  <br>לוקחים את הסך הכל וכופלים באחוז:
+</p>
+$$\textcolor{#2E7D32}{\text{הכמות}}=\underbrace{\textcolor{#8A6D1B}{40}}_{\textcolor{#8A6D1B}{\text{הסך הכל — כל הכיתה}}}\cdot\underbrace{\frac{\textcolor{#C2408C}{30}}{100}}_{\textcolor{#C2408C}{\text{האחוז}}}=\frac{1200}{100}=\textcolor{#2E7D32}{12}$$
+<p>כלומר 12 תלמידים באים בהסעה.</p>
+
+<h3>ב. נתונות שתי כמויות — מחפשים אחוז</h3>
+<p>
+  "12 תלמידים מתוך 40 באים בהסעה. איזה חלק מהכיתה זה?"
+  <br>מחלקים את החלק בסך הכל, ואז מביאים את השבר למכנה 100 —
+  קודם מצמצמים, ואז מרחיבים:
+</p>
+
+$$\frac{12}{40}=\frac{12:\textcolor{#2E7D6B}{4}}{40:\textcolor{#2E7D6B}{4}}=\frac{3}{10}=\frac{3\cdot\textcolor{#2E7D6B}{10}}{10\cdot\textcolor{#2E7D6B}{10}}=\frac{30}{100}=30\%$$
+
+<p>
+  חזרנו בדיוק לנקודת ההתחלה — שני הכיוונים הם אותה נוסחה, קדימה ואחורה.
+</p>
+
+<div class="box example">
+  <div class="box-title">איזה כיוון זה?</div>
+  נתון <strong>האחוז</strong> ומבקשים <strong>כמות</strong> — כופלים את הסך הכל באחוז.
+  <br>נתונות <strong>שתי כמויות</strong> ומבקשים אחוז — מחלקים את החלק בסך הכל.
+</div>
+
+<!-- ============ 4. טבלה עם חור ============ -->
+<h2><span class="num">4</span>טבלה עם חור — שכיחות יחסית עם נעלם</h2>
+
+<p>
+  עד עכשיו חישבנו שכיחות יחסית מתוך טבלה מלאה.
+  אבל בשיעורי הבית מחכה גרסה מתוחכמת יותר: טבלה עם <strong>חור</strong> —
+  מספר אחד חסר, ובמקומו כתוב X.
+  <br>ואז נותנים לנו את השכיחות היחסית המוכנה, ואנחנו עובדות <strong>אחורה</strong>
+  כדי לגלות את X. הנה התרגיל מהסרטון, בדיוק כמו שהוא:
+</p>
+
+<div class="box example">
+  <div class="box-title">התרגיל</div>
+  מורה בדקה כמה עטים יש בקלמר של כל ילד בכיתה, ורשמה את התוצאות בטבלה.
+  <br>נתון כי השכיחות היחסית של תלמידים עם <span class="mk mk-given">עט אחד בקלמר</span> היא
+  <span class="mk mk-given2"><span class="fi">\(\frac{1}{7}\)</span></span>.
+  <br><span class="mk mk-find">מצאי את X ואת מספר הילדים בכיתה.</span>
+</div>
+
+<table class="dtable">
+  <tr><th>כמות העטים בקלמר</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+  <tr><th>מספר הילדים</th><td>3</td><td class="hl-group">5</td><td>15</td><td>7</td><td>3</td><td class="x-cell">X</td></tr>
+</table>
+<p class="tbl-note">השורה העליונה — הערכים (כאן: כמות העטים) · השורה התחתונה — השכיחות (כמה ילדים).</p>
+<p class="tbl-note">X = כמה ילדים עם חמישה עטים — את זה אנחנו עדיין לא יודעות.</p>
+
+<ol class="steps">
+  <li>
+    <strong>כמה ילדים יש בסך הכל?</strong>
+    מחברים את מה שכן ידוע: <span class="fi">\(3+5+15+7+3=33\)</span>,
+    ועוד ה-X שעדיין לא ידוע. סך הילדים בכיתה הוא <span class="fi">\(33+X\)</span>.
+  </li>
+  <li>
+    <strong>כותבים את השכיחות היחסית כמשוואה.</strong>
+    עם עט אחד יש 5 ילדים, ולפי הנתון החלק שלהם מתוך הכיתה הוא שביעית:
+    $$\frac{\underbrace{\textcolor{#1D6FA5}{5}}_{\textcolor{#1D6FA5}{\text{ילדים עם עט אחד}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{33+X}}_{\textcolor{#8A6D1B}{\text{כל ילדי הכיתה}}}}=\frac{1}{7}$$
+    זו בדיוק הנוסחה מסעיף 2 — רק שהפעם המכנה מכיל נעלם.
+  </li>
+  <li>
+    <strong>כפל בהצלבה.</strong>
+    כל מונה נכפל במכנה של הצד השני:
+    <span class="fi">\(5\cdot 7=1\cdot(33+X)\)</span>,
+    כלומר <span class="fi">\(35=33+X\)</span>.
+    <br>מעבירים את 33 אגף ומקבלים <span class="fi">\(X=2\)</span> —
+    שני ילדים עם חמישה עטים.
+  </li>
+  <li>
+    <strong>עונים על מה ששאלו ובודקים.</strong>
+    מספר הילדים בכיתה: <span class="fi">\(33+2=35\)</span>.
+    נרשום את הטבלה המלאה:
+    <table class="dtable sol-table">
+      <tr><th>כמות העטים בקלמר</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+      <tr><th>מספר הילדים</th><td>3</td><td class="hl-group">5</td><td>15</td><td>7</td><td>3</td><td class="hl-find"><b>2</b></td></tr>
+    </table>
+    בדיקה: <span class="fi">\(\frac{5}{35}=\frac{1}{7}\)</span> ✓ —
+    בדיוק השכיחות היחסית שנתנו לנו.
+  </li>
+</ol>
+
+<p>
+  זו כל השיטה: לכתוב את הסך הכל עם X, להציב בנוסחת השכיחות היחסית,
+  ולפתור משוואה פשוטה. בסרטון קוראים לזה "הנדסה לאחור" —
+  מישהו חישב שכיחות יחסית, ואנחנו משחזרות מה היה בטבלה שלו.
+</p>
+
+<!-- ============ 5. תרגול ============ -->
+<h2 id="sec-practice"><span class="num">5</span>✏️ תרגול — משלב לשלב</h2>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>שכיחות יחסית מסקר כיתתי</h4></div>
+  <p class="q-text">
+    בסקר כיתתי, <span class="mk mk-total">מתוך 30 תלמידים</span>
+    <span class="mk mk-group">18 באים לבית הספר באופניים</span>.
+    <span class="mk mk-find">מה השכיחות היחסית של הבאים באופניים?</span>
+  </p>
+  <p style="font-size:13px;color:var(--soft)">נסי לנחש את השלב הבא לפני שאת פותחת אותו.</p>
+  <details class="step"><summary>שלב ראשון — כותבים את השבר</summary>
+    <div class="step-body">הקבוצה למעלה, הסך הכל למטה:
+    $$\frac{\underbrace{\textcolor{#1D6FA5}{18}}_{\textcolor{#1D6FA5}{\text{הקבוצה — הבאים באופניים}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{30}}_{\textcolor{#8A6D1B}{\text{הסך הכל — כל התלמידים}}}}$$
+    וזה בדיוק המבנה של הנוסחה למעלה.</div>
+  </details>
+  <details class="step"><summary>שלב שני — מצמצמים</summary>
+    <div class="step-body">המספר הכי גדול שמחלק גם את 18 וגם את 30 הוא 6 —
+    אז מחלקים בו למעלה ולמטה יחד:
+    $$\frac{18}{30}=\frac{18:\textcolor{#2E7D6B}{6}}{30:\textcolor{#2E7D6B}{6}}=\frac{3}{5}$$
+    אותו יחס בדיוק, רק במספרים קטנים: שלושה מתוך כל חמישה.</div>
+  </details>
+  <details class="step"><summary>שלב שלישי — עוברים לאחוזים</summary>
+    <div class="step-body">אחוז פירושו מכנה 100 — ומ-5 מגיעים ל-100 בכפל ב-20.
+    מה שעושים למכנה עושים גם למונה:
+    $$\frac{3}{5}=\frac{3\cdot\textcolor{#2E7D6B}{20}}{5\cdot\textcolor{#2E7D6B}{20}}=\frac{60}{100}=60\%$$
+    כלומר 60% מהכיתה באים באופניים — יותר מחצי, וזה גם נשמע הגיוני
+    כי 18 הוא יותר מחצי מ-30.</div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex1"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex hide-marks">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>מאחוז לכמות</h4></div>
+  <p class="q-text">
+    <span class="mk mk-total">בשכבה 60 תלמידים</span>.
+    <span class="mk mk-given">15% מהם</span> חברים במקהלה.
+    <span class="mk mk-find">כמה תלמידים חברים במקהלה?</span>
+  </p>
+  <div class="q-row">
+    <button class="marks-btn no-print" style="font-family:inherit;font-size:12.5px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:5px 10px;cursor:pointer">הציגי את הפירוק בצבעים</button>
+  </div>
+  <div class="q-row">
+    <span>התשובה שלי:</span>
+    <input class="q-input" data-answer="9" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>נתון האחוז ומבקשים כמות:</p>
+      $$\textcolor{#2E7D32}{\text{הכמות}}=\underbrace{\textcolor{#8A6D1B}{60}}_{\textcolor{#8A6D1B}{\text{הסך הכל}}}\cdot\underbrace{\frac{\textcolor{#C2408C}{15}}{100}}_{\textcolor{#C2408C}{\text{האחוז}}}=\frac{900}{100}=\textcolor{#2E7D32}{9}$$
+      <p>‏9 תלמידים חברים במקהלה.</p>
+      <p><strong>בדיקת היגיון:</strong> 15% זה קצת פחות משישית,
+      ושישית מ-60 היא 10 — אז 9 מתאים ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex2"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex hide-marks">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>מהכמות אל הסך הכל</h4></div>
+  <p class="q-text">
+    בכיתה מסוימת <span class="mk mk-group">14 תלמידים</span> הם
+    <span class="mk mk-given">40% מהכיתה</span>.
+    <span class="mk mk-find">כמה תלמידים יש בכיתה?</span>
+  </p>
+  <div class="q-row">
+    <button class="marks-btn no-print" style="font-family:inherit;font-size:12.5px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:5px 10px;cursor:pointer">הציגי את הפירוק בצבעים</button>
+  </div>
+  <div class="q-row">
+    <span>התשובה שלי:</span>
+    <input class="q-input" data-answer="35" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>אותו קשר — הפעם הנעלם הוא הסך הכל, <span class="fi">\(N\)</span>:</p>
+      $$\underbrace{\textcolor{#8A6D1B}{N}}_{\textcolor{#8A6D1B}{\text{הסך הכל — הנעלם}}}\cdot\underbrace{\frac{\textcolor{#C2408C}{40}}{100}}_{\textcolor{#C2408C}{\text{האחוז}}}=\underbrace{\textcolor{#1D6FA5}{14}}_{\textcolor{#1D6FA5}{\text{הכמות}}}$$
+      $$0.4\cdot\textcolor{#8A6D1B}{N}=\textcolor{#1D6FA5}{14}\;\Longrightarrow\;\textcolor{#8A6D1B}{N}=\frac{\textcolor{#1D6FA5}{14}}{0.4}=35$$
+      <p>בכיתה 35 תלמידים.
+      (דרך שנייה: <span class="fi">\(14\cdot\frac{100}{40}=35\)</span> — אותה תשובה.)</p>
+      <p><strong>בדיקה:</strong> <span class="fi">\(\frac{14}{35}=\frac{2}{5}=40\%\)</span> ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex3"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex hide-marks">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>שכיחות יחסית מתוך דיאגרמת עמודות</h4></div>
+  <p class="q-text">
+    חזרנו ליום הספורט — הפעם ההצבעה נערכה בשכבה אחרת, ואת התוצאות ציירו
+    בדיאגרמה. כל ענף קיבל עמודה בצבע משלו:
+  </p>
+  <figure>
+    <div class="axplot" style="max-width:376px;padding-bottom:40px">
+    <span class="ax-ylab">השכיחות — כמה בחרו</span>
+    <div class="plotbox">
+    <svg viewBox="0 0 340 162" style="width:100%;height:auto" role="img" aria-label="דיאגרמת עמודות של ההצבעה ליום הספורט">
+      <line x1="28" y1="120" x2="316" y2="120" stroke="#E4E8EE" stroke-width="1"></line>
+      <line x1="28" y1="90"  x2="316" y2="90"  stroke="#E4E8EE" stroke-width="1"></line>
+      <line x1="28" y1="60"  x2="316" y2="60"  stroke="#E4E8EE" stroke-width="1"></line>
+      <line x1="28" y1="30"  x2="316" y2="30"  stroke="#E4E8EE" stroke-width="1"></line>
+      <rect x="48"  y="60"  width="44" height="90"  rx="3" fill="#1D6FA5"></rect>
+      <rect x="118" y="30"  width="44" height="120" rx="3" fill="#2E7D6B"></rect>
+      <rect x="188" y="90"  width="44" height="60"  rx="3" fill="#6D28D9"></rect>
+      <rect x="258" y="120" width="44" height="30"  rx="3" fill="#C2408C"></rect>
+      <text x="70"  y="53"  text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">15</text>
+      <text x="140" y="23"  text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">20</text>
+      <text x="210" y="83"  text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">10</text>
+      <text x="280" y="113" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">5</text>
+      <line x1="28" y1="150" x2="316" y2="150" stroke="#5A6875" stroke-width="1.5"></line>
+      <path d="M324 150 L316 146 L316 154 Z" fill="#5A6875"></path>
+      <line x1="28" y1="150" x2="28" y2="16" stroke="#5A6875" stroke-width="1.5"></line>
+      <path d="M28 8 L24 16 L32 16 Z" fill="#5A6875"></path>
+      <line x1="23" y1="120" x2="28" y2="120" stroke="#5A6875" stroke-width="1.5"></line>
+      <line x1="23" y1="90"  x2="28" y2="90"  stroke="#5A6875" stroke-width="1.5"></line>
+      <line x1="23" y1="60"  x2="28" y2="60"  stroke="#5A6875" stroke-width="1.5"></line>
+      <line x1="23" y1="30"  x2="28" y2="30"  stroke="#5A6875" stroke-width="1.5"></line>
+      <text x="20" y="154" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">0</text>
+      <text x="20" y="124" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">5</text>
+      <text x="20" y="94"  text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">10</text>
+      <text x="20" y="64"  text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">15</text>
+      <text x="20" y="34"  text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">20</text>
+      <line x1="70"  y1="150" x2="70"  y2="155" stroke="#5A6875" stroke-width="1"></line>
+      <line x1="140" y1="150" x2="140" y2="155" stroke="#5A6875" stroke-width="1"></line>
+      <line x1="210" y1="150" x2="210" y2="155" stroke="#5A6875" stroke-width="1"></line>
+      <line x1="280" y1="150" x2="280" y2="155" stroke="#5A6875" stroke-width="1"></line>
+    </svg>
+    <span class="ax-cat" style="left:20.6%">כדורסל</span>
+    <span class="ax-cat" style="left:41.2%">כדורגל</span>
+    <span class="ax-cat" style="left:61.8%">שחייה</span>
+    <span class="ax-cat" style="left:82.4%">מחול</span>
+    </div>
+    <span class="ax-xlab">הערכים — ענף הספורט</span>
+    </div>
+    <figcaption>ההצבעה ליום הספורט בשכבה. שם הענף כתוב מתחת לעמודה שלו, על הציר.
+    הענפים הם נתונים שמיים — אין ביניהם סדר של גודל, ולכן הסדר על הציר הוא רק סדר של רשימה.</figcaption>
+  </figure>
+  <div class="q-row">
+    <button class="marks-btn no-print" style="font-family:inherit;font-size:12.5px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:5px 10px;cursor:pointer">הציגי את הפירוק בצבעים</button>
+  </div>
+  <div class="q-row">
+    <span>כמה תלמידים הצביעו בסך הכל?</span>
+    <input class="q-input" data-answer="50" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <span>מה השכיחות היחסית של כדורסל, באחוזים?</span>
+    <input class="q-input" data-answer="30" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>נעביר את הנתונים מהדיאגרמה לטבלה — כל עמודה שומרת על הצבע שלה:</p>
+      <table class="dtable sol-table">
+        <tr><th>ענף הספורט</th><td class="hl-c2">כדורסל</td><td class="hl-c3">כדורגל</td><td class="hl-c4">שחייה</td><td class="hl-c5">מחול</td></tr>
+        <tr><th>מספר התלמידים</th><td class="hl-c2">15</td><td class="hl-c3">20</td><td class="hl-c4">10</td><td class="hl-c5">5</td></tr>
+      </table>
+      <p>הסך הכל — סכום כל העמודות:
+      <span class="fi">\(15+20+10+5=\textcolor{#8A6D1B}{50}\)</span> תלמידים.</p>
+      <p>השכיחות היחסית של כדורסל — הקבוצה חלקי הסך הכל, ואז מביאים את השבר למכנה 100:</p>
+      $$\frac{\underbrace{\textcolor{#1D6FA5}{15}}_{\textcolor{#1D6FA5}{\text{בחרו כדורסל}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{50}}_{\textcolor{#8A6D1B}{\text{כל המצביעים}}}}=\frac{15:\textcolor{#2E7D6B}{5}}{50:\textcolor{#2E7D6B}{5}}=\frac{3}{10}=\frac{3\cdot\textcolor{#2E7D6B}{10}}{10\cdot\textcolor{#2E7D6B}{10}}=\frac{30}{100}=30\%$$
+      <p><strong>בדיקת ביטחון</strong> (מהקופסה של סעיף 2): מחשבים ככה את כל הענפים —
+      כדורגל 40%, שחייה 20%, מחול 10% — ומחברים:
+      <span class="fi">\(30+40+20+10=100\)</span> ✓ — כל השכבה מכוסה.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex5"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · כמו במבחן</span><h4>מהסרטון של "פתרון פשוט" — שאלה 3</h4></div>
+  <p class="q-text">
+    בטבלת השכיחויות הבאה מתוארת התפלגות מספר הילדים במשפחה בעיר מסוימת.
+    <br>נתון כי השכיחות היחסית ל<span class="mk mk-given">ארבעה ילדים במשפחה</span> היא
+    <span class="mk mk-given2"><span class="fi">\(\frac{1}{4}\)</span></span>.
+  </p>
+  <table class="dtable">
+    <tr><th>מספר הילדים</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+    <tr><th>מספר המשפחות</th><td>400</td><td>600</td><td>1000</td><td>2000</td><td class="x-cell">x</td><td>500</td></tr>
+  </table>
+  <p class="q-text">
+    א. מצאי את x.
+    <br>ב. כמה משפחות יש בעיר?
+    <br>ג. מהי השכיחות היחסית של משפחה עם 2 ילדים?
+    <br>ד. מהי השכיחות היחסית של משפחה עם <strong>לפחות</strong> 4 ילדים?
+    <br>ה. מהי השכיחות היחסית של משפחה עם <strong>לכל היותר</strong> 2 ילדים?
+  </p>
+  <figure class="shot">
+    <img src="../assets/stats/RiMvIyRseh4/07_t0761.jpg" alt="התרגיל המקורי — טבלת משפחות וילדים מהסרטון" loading="lazy">
+    <figcaption>התרגיל המקורי מהסרטון</figcaption>
+  </figure>
+  <details class="sol">
+    <summary>הצגי פתרון מלא (כמו שכותבים במחברת)</summary>
+    <div class="sol-body">
+      <p><strong>א.</strong> שכיחות יחסית = החלק חלקי השלם, והשלם כולל את x:</p>
+      $$\frac{\underbrace{\textcolor{#1D6FA5}{x}}_{\textcolor{#1D6FA5}{\text{משפחות עם 4 ילדים}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{4500+x}}_{400+600+1000+2000+500\text{ ועוד }x}}=\frac{1}{4}$$
+      <p>כפל בהצלבה <span class="aside">(ה-x גם למעלה וגם למטה — זה בסדר גמור)</span>:</p>
+      $$4x=4500+x\;\Longrightarrow\;3x=4500\;\Longrightarrow\;x=1500$$
+      <p><strong>ב.</strong> סך המשפחות:
+      <span class="fi">\(4500+1500=\textcolor{#8A6D1B}{6000}\)</span>.
+      נרשום את הטבלה המלאה:</p>
+      <table class="dtable sol-table">
+        <tr><th>מספר הילדים</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>סה"כ</td></tr>
+        <tr><th>מספר המשפחות</th><td>400</td><td>600</td><td>1000</td><td>2000</td><td class="hl-find"><b>1500</b></td><td>500</td><td class="hl-total">6000</td></tr>
+      </table>
+      <p><strong>בדיקה:</strong> <span class="fi">\(\frac{1500}{6000}=\frac{1}{4}\)</span> ✓
+      — בדיוק הנתון.</p>
+      <p><strong>ג.</strong></p>
+      $$\frac{\underbrace{\textcolor{#1D6FA5}{1000}}_{\textcolor{#1D6FA5}{\text{2 ילדים}}}\rule[-1.6em]{0pt}{0pt}}{\textcolor{#8A6D1B}{6000}}=\frac{1}{6}$$
+      <p><strong>ד.</strong> "לפחות 4" = ‏4 או 5 ילדים — מחברים את שתי העמודות האלה:</p>
+      <table class="dtable sol-table">
+        <tr><th>מספר הילדים</th><td>0</td><td>1</td><td>2</td><td>3</td><td class="hl-group">4</td><td class="hl-group">5</td></tr>
+        <tr><th>מספר המשפחות</th><td>400</td><td>600</td><td>1000</td><td>2000</td><td class="hl-group"><b>1500</b></td><td class="hl-group"><b>500</b></td></tr>
+      </table>
+      $$\frac{\underbrace{\textcolor{#1D6FA5}{1500+500}}_{\textcolor{#1D6FA5}{\text{4 ילדים + 5 ילדים}}}\rule[-1.6em]{0pt}{0pt}}{\textcolor{#8A6D1B}{6000}}=\frac{2000}{6000}=\frac{1}{3}$$
+      <p><strong>ה.</strong> "לכל היותר 2" = ‏0, 1 או 2 ילדים — הפעם שלוש העמודות שמצד ימין:</p>
+      <table class="dtable sol-table">
+        <tr><th>מספר הילדים</th><td class="hl-group">0</td><td class="hl-group">1</td><td class="hl-group">2</td><td>3</td><td>4</td><td>5</td></tr>
+        <tr><th>מספר המשפחות</th><td class="hl-group"><b>400</b></td><td class="hl-group"><b>600</b></td><td class="hl-group"><b>1000</b></td><td>2000</td><td>1500</td><td>500</td></tr>
+      </table>
+      $$\frac{\underbrace{\textcolor{#1D6FA5}{400+600+1000}}_{\textcolor{#1D6FA5}{\text{0 + 1 + 2 ילדים}}}\rule[-1.6em]{0pt}{0pt}}{\textcolor{#8A6D1B}{6000}}=\frac{2000}{6000}=\frac{1}{3}$$
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex4"> סיימתי את התרגיל הזה</label>
+</article>
+
+<!-- ============ 6. גשר ============ -->
+<h2><span class="num">6</span>גשר לתחנה הבאה</h2>
+
+<p>
+  בתחנה הבאה ניקח את הכלי הזה לאולפן החדשות: ליל בחירות, סקרים ומנדטים.
+  כשמדווחים "מפלגה קיבלה 25% מהקולות" — זו בדיוק שכיחות יחסית,
+  רק שהסך הכל הוא מיליוני מצביעים.
+</p>
+
+<div class="box intuition">
+  <div class="box-title">אינטואיציה</div>
+  שכיחות יחסית תלויה גם בסך הכל — גם כשהשכיחות עולה,
+  האחוז יכול לרדת — אם הסך הכל גדל. תזכרי את המשפט הזה.
+</div>
+
+<!-- ============ 7. סרטונים ============ -->
+<h2><span class="num">7</span>🎬 רוצה לראות את זה מוסבר בקול?</h2>
+<div class="watch">
+  <p>הסרטונים הם תגבור, לא חובה:</p>
+  <a class="video-link" href="https://www.youtube.com/watch?v=rJ8ydFlQA9U">
+    <img src="../assets/stats/rJ8ydFlQA9U/04_t0150.jpg" alt="שכיחות ושכיחות יחסית — שקף מהסרטון" loading="lazy">
+    <span class="vt"><b>שכיחות ושכיחות יחסית</b><span>הרעיון מההתחלה, עם דוגמאות · 7:19</span></span>
+    <span class="play">▶</span>
+  </a>
+  <a class="video-link" href="https://www.youtube.com/watch?v=RiMvIyRseh4">
+    <img src="../assets/stats/RiMvIyRseh4/02_t0090.jpg" alt="שכיחות יחסית — שקף מהסרטון" loading="lazy">
+    <span class="vt"><b>שכיחות יחסית ב-12 דקות</b><span>הסבר מלא ומסודר, כולל שאלה 3 מהעמוד הזה · 12:57</span></span>
+    <span class="play">▶</span>
+  </a>
+  <a class="video-link" href="https://www.youtube.com/watch?v=kGz_SUwXdGo">
+    <img src="../assets/stats/kGz_SUwXdGo/01_t0010.jpg" alt="הטבלה עם הנעלם — לוח מהסרטון" loading="lazy">
+    <span class="vt"><b>הטבלה עם הנעלם, על לוח</b><span>בדיוק תרגיל העטים מסעיף 4 · 4:21</span></span>
+    <span class="play">▶</span>
+  </a>
+  <a class="video-link" href="https://www.youtube.com/watch?v=ax4QJUwhka4">
+    <img src="../assets/stats/ax4QJUwhka4/01_t0050.jpg" alt="תרגול מסכם — שקף מהסרטון" loading="lazy">
+    <span class="vt"><b>תרגול מסכם 4 יח"ל</b><span>תרגילים ברמה של מבחן · 8:39</span></span>
+    <span class="play">▶</span>
+  </a>
+</div>
+
+<!-- ============ ניווט ============ -->
+<div class="progresswrap no-print">
+  <span class="progressbar"><i></i></span><span class="progress-label"></span>
+  <button class="all-sols" style="font-family:inherit;font-size:12px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:4px 10px;cursor:pointer">לפתוח את כל הפתרונות</button>
+</div>
+
+<nav class="pagenav">
+  <a href="03-median-mode.html"><span class="dir">→ התחנה הקודמת</span>חציון ושכיח</a>
+  <a class="next" href="05-elections.html"><span class="dir">התחנה הבאה ←</span>ליל בחירות — סקרים ומנדטים</a>
+</nav>
+
+<footer class="fin">חלק מהעולם של שירה · <a href="index.html">המפה</a> · <a href="../index.html">המרכז</a></footer>
+</main>
+</div>
+</body>
+</html>

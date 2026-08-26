@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<!-- מסך הבית של האייפד/הטלפון -->
+<link rel="apple-touch-icon" href="../assets/icons/icon-180.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>קטעים, זוויות וישרים מקבילים — גאומטריה — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../vendor/katex.min.css">
+<link rel="stylesheet" href="../css/shira.css">
+<style>
+:root{--accent:var(--alg)}
+/* שורת הפרדה של סעיף בתוך טבלת טענה ונימוק */
+table.dtable tr.tr-sep td{background:var(--faint);font-weight:800;font-size:12.5px;letter-spacing:.05em;padding:4px 10px}
+/* שורת מש"ל — חתימת סוף הוכחה, כמו במחברת */
+table.dtable tr.tr-qed td{background:var(--card);text-align:left;color:var(--accent);font-weight:800;font-size:13.5px;letter-spacing:.05em;padding:4px 14px}
+/* טענה קצרה נשארת בשורה אחת — שלא ייפול "‎= 70°" לשורה משלו */
+table.dtable td.claim-nb{white-space:nowrap}
+</style>
+<script defer src="../vendor/katex.min.js"></script>
+<script defer src="../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../js/shira.js"></script>
+<style>
+/* מחוון פתיחה — כמה זמן, כמה תרגילים, ואיפה מתחילים לתרגל (מוסתר בהדפסה) */
+.pagemeta{display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px;
+  margin:12px 0 0; font-size:13px; color:var(--soft)}
+.pagemeta .pm-time{background:var(--faint); border-radius:999px; padding:3px 10px}
+.pagemeta .pm-time b{color:var(--ink); font-weight:700}
+.pagemeta .pm-jump{color:var(--accent); font-weight:700; text-decoration:none}
+.pagemeta .pm-jump:hover{text-decoration:underline}
+.pagemeta .pm-note{flex:1 1 100%; margin:0}
+#ex-first,#bank-map{scroll-margin-top:78px}
+</style>
+</head>
+<body data-page="geo:01-angles">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">גאומטריה — המפה</a>
+    <span class="crumbs">תחנה <b>1</b> מתוך 8 · <b>זוויות</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">גאומטריה · תחנה 1</div>
+  <h1>קטעים, זוויות וישרים מקבילים</h1>
+  <p class="lead">
+    כאן עוברים לגאומטריה — ובגאומטריה לא מתחילים מנוסחה, אלא מסרטוט.
+    כל התחנה הזו עומדת על שלושה כללים קטנים: שלם שווה לסכום חלקיו,
+    זווית שטוחה היא <span class="fi">\(180^\circ\)</span>,
+    ובין ישרים מקבילים יש רק שתי זוויות שונות.
+    מי ששולטת בשלושתם פותרת כמעט כל סרטוט של כיתה ט.
+  </p>
+  <p class="youknow"><b>בסוף העמוד תדעי:</b> למצוא זווית קודקודית וזווית צמודה בשנייה ·
+  להשלים זווית שלישית במשולש · לזהות זוגות Z / F / C בין ישרים מקבילים —
+  ולמצוא מזווית אחת נתונה את כל שאר הזוויות בסרטוט.</p>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>≈ 30 דק׳</b> · 8 תרגילים</span>
+    <a class="pm-jump" href="#sec-practice">לקפוץ ישר לתרגילים ↓</a>
+  </p>
+</header>
+
+<!-- ============ 1. קטעים ============ -->
+<h2 id="sec-segments"><span class="num">1</span>קטעים — שלם = חלק + חלק</h2>
+
+<p>
+  נתחיל מהכלל הכי פשוט בגאומטריה, שעובד גם על קטעים וגם (תכף) על זוויות:
+  כשנקודה <span class="fi">\(C\)</span> יושבת על הקטע
+  <span class="fi">\(AB\)</span>, היא מחלקת אותו לשני חלקים — והשלם הוא בדיוק סכום החלקים.
+</p>
+
+<figure style="max-width:520px;margin:22px auto">
+  <svg viewBox="0 0 520 140" style="width:100%;max-width:640px;height:auto" role="img" aria-label="קטע AB עם נקודה C עליו">
+    <line x1="60" y1="32" x2="460" y2="32" stroke="#059669" stroke-width="2.5"/>
+    <line x1="60" y1="32" x2="60" y2="42" stroke="#059669" stroke-width="2.5"/>
+    <line x1="460" y1="32" x2="460" y2="42" stroke="#059669" stroke-width="2.5"/>
+    <text x="260" y="24" text-anchor="middle" fill="#059669" font-size="15" font-weight="bold">AB</text>
+    <text x="60" y="60" text-anchor="middle" fill="#1C2733" font-size="15" font-weight="bold">A</text>
+    <text x="240" y="60" text-anchor="middle" fill="#1C2733" font-size="15" font-weight="bold">C</text>
+    <text x="460" y="60" text-anchor="middle" fill="#1C2733" font-size="15" font-weight="bold">B</text>
+    <line x1="60" y1="72" x2="460" y2="72" stroke="#5A6875" stroke-width="3"/>
+    <circle cx="60" cy="72" r="6" fill="#1C2733"/>
+    <circle cx="240" cy="72" r="6" fill="#1C2733"/>
+    <circle cx="460" cy="72" r="6" fill="#1C2733"/>
+    <line x1="64" y1="94" x2="234" y2="94" stroke="#2563EB" stroke-width="4"/>
+    <line x1="246" y1="94" x2="456" y2="94" stroke="#EA580C" stroke-width="4"/>
+    <text x="150" y="118" text-anchor="middle" fill="#2563EB" font-size="14" font-weight="bold">AC</text>
+    <text x="350" y="118" text-anchor="middle" fill="#EA580C" font-size="14" font-weight="bold">CB</text>
+  </svg>
+  <figcaption>הנקודה <span class="fi">\(C\)</span> על הקטע: החלק הכחול
+  <span class="fi">\(\textcolor{#2563EB}{AC}\)</span> והחלק הכתום
+  <span class="fi">\(\textcolor{#EA580C}{CB}\)</span> מרכיבים יחד את הקטע הירוק
+  <span class="fi">\(\textcolor{#059669}{AB}\)</span>.</figcaption>
+</figure>
+
+<div class="fbox">
+  <div class="fbox-title">שלם = חלק + חלק</div>
+  $$\underbrace{\textcolor{#059669}{AB}}_{\textcolor{#059669}{\text{הקטע השלם}}}\;=\;\underbrace{\textcolor{#2563EB}{AC}}_{\textcolor{#2563EB}{\text{חלק}}}\;+\;\underbrace{\textcolor{#EA580C}{CB}}_{\textcolor{#EA580C}{\text{חלק}}}$$
+  <span class="f-legend">
+    <span><i class="sw" style="background:#059669"></i> ירוק — הקטע השלם <span class="fi">\(AB\)</span></span>
+    <span><i class="sw" style="background:#2563EB"></i> כחול — החלק מ-<span class="fi">\(A\)</span> עד <span class="fi">\(C\)</span></span>
+    <span><i class="sw" style="background:#EA580C"></i> כתום — החלק מ-<span class="fi">\(C\)</span> עד <span class="fi">\(B\)</span></span>
+  </span>
+</div>
+
+<p>
+  ומהשוויון הזה מקבלים מיד גם את כיוון החיסור: אם חסר לך חלק —
+  <span class="fi">\(\textcolor{#EA580C}{CB}=\textcolor{#059669}{AB}-\textcolor{#2563EB}{AC}\)</span>.
+  <br>למשל: אם <span class="fi">\(AB=9~\text{ס"מ}\)</span> ו-<span class="fi">\(AC=4~\text{ס"מ}\)</span>,
+  אז <span class="fi">\(CB=9-4=5~\text{ס"מ}\)</span>.
+</p>
+
+<p>
+  זה נראה מובן מאליו — וזה בדיוק הכוח שלו: בתרגילים ארוכים, "שלם = חלק + חלק"
+  הוא כמעט תמיד השורה הראשונה של הפתרון. עוד רגע נראה שאותו רעיון בדיוק
+  עובד גם על זוויות.
+</p>
+
+<!-- ============ 2. סוגי זוויות ============ -->
+<h2 id="sec-angle-types"><span class="num">2</span>סוגי זוויות — ארבע משפחות</h2>
+
+<p>
+  זווית נוצרת משתי קרניים שיוצאות מאותו קודקוד, ומודדים אותה במעלות.
+  את הזווית מסמנים באות יוונית — הכי נפוצה
+  <span class="fi">\(\textcolor{#C2408C}{\alpha}\)</span> (אלפא).
+  ממיינים זוויות לפי הגודל:
+</p>
+
+<div class="fig-row">
+  <figure style="flex:1 1 170px">
+    <svg viewBox="0 0 200 160" style="width:100%;max-width:640px;height:auto" role="img" aria-label="זווית חדה">
+      <line x1="38" y1="132" x2="188" y2="132" stroke="#5A6875" stroke-width="3"/>
+      <line x1="38" y1="132" x2="138" y2="48" stroke="#5A6875" stroke-width="3"/>
+      <path d="M 70 132 A 32 32 0 0 0 62.5 111.4" fill="none" stroke="#C2408C" stroke-width="3"/>
+      <circle cx="38" cy="132" r="5" fill="#1C2733"/>
+      <text x="92" y="118" text-anchor="middle" fill="#C2408C" font-size="14" font-weight="bold">40°</text>
+    </svg>
+    <figcaption><b>חדה</b> — בין <span class="fi">\(0^\circ\)</span>
+    ל-<span class="fi">\(90^\circ\)</span></figcaption>
+  </figure>
+  <figure style="flex:1 1 170px">
+    <svg viewBox="0 0 200 160" style="width:100%;max-width:640px;height:auto" role="img" aria-label="זווית ישרה">
+      <line x1="38" y1="132" x2="188" y2="132" stroke="#5A6875" stroke-width="3"/>
+      <line x1="38" y1="132" x2="38" y2="20" stroke="#5A6875" stroke-width="3"/>
+      <path d="M 38 110 L 60 110 L 60 132" fill="none" stroke="#C2408C" stroke-width="3"/>
+      <circle cx="38" cy="132" r="5" fill="#1C2733"/>
+      <text x="80" y="100" text-anchor="middle" fill="#C2408C" font-size="14" font-weight="bold">90°</text>
+    </svg>
+    <figcaption><b>ישרה</b> — בדיוק <span class="fi">\(90^\circ\)</span>
+    (מסומנת בריבוע קטן)</figcaption>
+  </figure>
+  <figure style="flex:1 1 170px">
+    <svg viewBox="0 0 200 160" style="width:100%;max-width:640px;height:auto" role="img" aria-label="זווית קהה">
+      <line x1="105" y1="132" x2="195" y2="132" stroke="#5A6875" stroke-width="3"/>
+      <line x1="105" y1="132" x2="37.5" y2="51.6" stroke="#5A6875" stroke-width="3"/>
+      <path d="M 135 132 A 30 30 0 0 0 85.7 109" fill="none" stroke="#C2408C" stroke-width="3"/>
+      <circle cx="105" cy="132" r="5" fill="#1C2733"/>
+      <text x="127" y="90" text-anchor="middle" fill="#C2408C" font-size="14" font-weight="bold">130°</text>
+    </svg>
+    <figcaption><b>קהה</b> — בין <span class="fi">\(90^\circ\)</span>
+    ל-<span class="fi">\(180^\circ\)</span></figcaption>
+  </figure>
+  <figure style="flex:1 1 170px">
+    <svg viewBox="0 0 200 160" style="width:100%;max-width:640px;height:auto" role="img" aria-label="זווית שטוחה">
+      <line x1="12" y1="120" x2="188" y2="120" stroke="#5A6875" stroke-width="3"/>
+      <path d="M 130 120 A 30 30 0 0 0 70 120" fill="none" stroke="#C2408C" stroke-width="3"/>
+      <circle cx="100" cy="120" r="5" fill="#1C2733"/>
+      <text x="100" y="76" text-anchor="middle" fill="#C2408C" font-size="14" font-weight="bold">180°</text>
+    </svg>
+    <figcaption><b>שטוחה</b> — בדיוק <span class="fi">\(180^\circ\)</span>:
+    שתי הקרניים נמתחות לישר אחד</figcaption>
+  </figure>
+</div>
+
+<div class="box intuition">
+  <div class="box-title">שני סכומים ששווה לשנן</div>
+  זווית <strong>שטוחה</strong> (ישר) = <span class="fi">\(180^\circ\)</span>.
+  <br>סיבוב שלם <strong>סביב נקודה</strong> = <span class="fi">\(360^\circ\)</span>.
+  <br>כמעט כל תרגיל זוויות בכיתה ט הוא בסך הכל "שלם = חלק + חלק"
+  כשהשלם הוא אחד משני המספרים האלה.
+</div>
+
+<!-- ============ 3. קודקודיות וצמודות ============ -->
+<h2 id="sec-vertical"><span class="num">3</span>שני ישרים נחתכים — קודקודיות וצמודות</h2>
+
+<p>
+  כששני ישרים נחתכים נוצרות ארבע זוויות, אבל בעצם יש שם רק
+  <strong>שני מספרים</strong>: זוג ורוד וזוג ענברי. שימי לב מי שווה למי:
+</p>
+
+<figure style="max-width:460px;margin:22px auto">
+  <svg viewBox="0 0 460 300" style="width:100%;max-width:640px;height:auto" role="img" aria-label="שני ישרים נחתכים: זוויות קודקודיות וצמודות">
+    <line x1="40" y1="60" x2="420" y2="240" stroke="#1C2733" stroke-width="2.5"/>
+    <line x1="40" y1="240" x2="420" y2="60" stroke="#1C2733" stroke-width="2.5"/>
+    <circle cx="230" cy="150" r="4" fill="#1C2733"/>
+    <path d="M 269.8 168.9 A 44 44 0 0 0 269.8 131.1" fill="none" stroke="#C2408C" stroke-width="3.5"/>
+    <path d="M 190.2 131.1 A 44 44 0 0 0 190.2 168.9" fill="none" stroke="#C2408C" stroke-width="3.5"/>
+    <path d="M 262.5 134.5 A 36 36 0 0 0 197.5 134.5" fill="none" stroke="#B7791F" stroke-width="3.5"/>
+    <path d="M 197.5 165.5 A 36 36 0 0 0 262.5 165.5" fill="none" stroke="#B7791F" stroke-width="3.5"/>
+    <text x="296" y="156" text-anchor="middle" fill="#C2408C" font-size="16" font-weight="bold" font-style="italic">α</text>
+    <text x="164" y="156" text-anchor="middle" fill="#C2408C" font-size="16" font-weight="bold" font-style="italic">α</text>
+    <text x="230" y="116" text-anchor="middle" fill="#B7791F" font-size="16" font-weight="bold" font-style="italic">β</text>
+    <text x="230" y="200" text-anchor="middle" fill="#B7791F" font-size="16" font-weight="bold" font-style="italic">β</text>
+  </svg>
+  <figcaption>שתי הזוויות הוורודות — <b>קודקודיות</b>: יושבות זו מול זו, בלי צלע משותפת,
+  ותמיד שוות. זווית ורודה וזווית ענברית שכנות — <b>צמודות</b>: יושבות יחד על ישר אחד,
+  ולכן משלימות ל-<span class="fi">\(180^\circ\)</span>.</figcaption>
+</figure>
+
+<div class="fbox">
+  <div class="fbox-title">שני הכללים של מפגש ישרים</div>
+  $$\underbrace{\textcolor{#C2408C}{\alpha}\;=\;\textcolor{#C2408C}{\alpha}}_{\text{קודקודיות — שוות}}\qquad\qquad\underbrace{\textcolor{#C2408C}{\alpha}\;+\;\textcolor{#B7791F}{\beta}\;=\;180^\circ}_{\text{צמודות — משלימות}}$$
+  <span class="f-legend">
+    <span><i class="sw" style="background:#C2408C"></i> ורוד — <span class="fi">\(\textcolor{#C2408C}{\alpha}\)</span>, זוג הזוויות שממול</span>
+    <span><i class="sw" style="background:#B7791F"></i> ענברי — <span class="fi">\(\textcolor{#B7791F}{\beta}\)</span>, הזווית שיושבת ליד על אותו ישר</span>
+  </span>
+</div>
+
+<p>
+  למשל: אם <span class="fi">\(\textcolor{#C2408C}{\alpha=50^\circ}\)</span>,
+  אז הקודקודית לה גם היא <span class="fi">\(\textcolor{#C2408C}{50^\circ}\)</span>,
+  והצמודה היא <span class="fi">\(\textcolor{#B7791F}{\beta}=180^\circ-50^\circ=\textcolor{#B7791F}{130^\circ}\)</span>.
+</p>
+
+<div class="box intuition">
+  <div class="box-title">למה קודקודיות שוות? (בלי לשנן)</div>
+  שתי הזוויות הוורודות צמודות <strong>לאותה</strong> זווית ענברית:
+  כל אחת מהן היא <span class="fi">\(180^\circ-\textcolor{#B7791F}{\beta}\)</span>.
+  שתיהן שוות לאותו ביטוי — אז הן שוות זו לזו. זה כל ההסבר.
+</div>
+
+<div class="box warn">
+  <div class="box-title">שימי לב: שני כללים — והמיקום מגלה איזה</div>
+  לכל סוג זוויות יש כלל משלו, והמקום שבו הן יושבות מגלה איזה כלל שייך לאיזה:
+  <br>· <strong>צמודות</strong> יושבות יחד על ישר אחד — ולכן ממלאות זווית שטוחה:
+  <span class="fi">\(180^\circ\)</span>.
+  <br>· <strong>קודקודיות</strong> יושבות זו מול זו — תמונת ראי, ולכן <strong>שוות</strong>.
+</div>
+
+<!-- ============ 4. סכום זוויות במשולש ============ -->
+<h2 id="sec-triangle-sum"><span class="num">4</span>סכום הזוויות במשולש — תמיד 180°</h2>
+
+<p>
+  בכל משולש — קטן או ענק, חד או קהה — שלוש הזוויות מסתכמות בדיוק
+  לזווית שטוחה אחת:
+</p>
+
+<figure style="max-width:460px;margin:22px auto">
+  <svg viewBox="0 0 460 300" style="width:100%;max-width:640px;height:auto" role="img" aria-label="משולש עם שלוש זוויות צבועות">
+    <polygon points="230,45 70,255 400,255" fill="#F7FAFC" stroke="#1C2733" stroke-width="2.5"/>
+    <path d="M 209.4 72 A 34 34 0 0 0 251.4 71.4" fill="none" stroke="#C2408C" stroke-width="3.5"/>
+    <path d="M 108 255 A 38 38 0 0 0 93 224.8" fill="none" stroke="#B7791F" stroke-width="3.5"/>
+    <path d="M 376.1 225.5 A 38 38 0 0 0 362 255" fill="none" stroke="#2563EB" stroke-width="3.5"/>
+    <text x="231" y="106" text-anchor="middle" fill="#C2408C" font-size="16" font-weight="bold" font-style="italic">α</text>
+    <text x="124" y="237" text-anchor="middle" fill="#B7791F" font-size="16" font-weight="bold" font-style="italic">β</text>
+    <text x="348" y="237" text-anchor="middle" fill="#2563EB" font-size="16" font-weight="bold" font-style="italic">γ</text>
+    <text x="230" y="32" text-anchor="middle" fill="#1C2733" font-size="15" font-weight="bold">A</text>
+    <text x="55" y="274" text-anchor="middle" fill="#1C2733" font-size="15" font-weight="bold">B</text>
+    <text x="414" y="274" text-anchor="middle" fill="#1C2733" font-size="15" font-weight="bold">C</text>
+  </svg>
+  <figcaption>הזווית הוורודה בקודקוד <span class="fi">\(A\)</span>, הענברית בקודקוד
+  <span class="fi">\(B\)</span> והכחולה בקודקוד <span class="fi">\(C\)</span> —
+  יחד בדיוק <span class="fi">\(180^\circ\)</span>.</figcaption>
+</figure>
+
+<div class="fbox">
+  <div class="fbox-title">משפט סכום הזוויות במשולש</div>
+  $$\textcolor{#C2408C}{\alpha}\;+\;\textcolor{#B7791F}{\beta}\;+\;\textcolor{#2563EB}{\gamma}\;=\;180^\circ$$
+  <span class="f-legend">
+    <span><i class="sw" style="background:#C2408C"></i> ורוד — הזווית בקודקוד <span class="fi">\(A\)</span></span>
+    <span><i class="sw" style="background:#B7791F"></i> ענברי — הזווית בקודקוד <span class="fi">\(B\)</span></span>
+    <span><i class="sw" style="background:#2563EB"></i> כחול — הזווית בקודקוד <span class="fi">\(C\)</span></span>
+  </span>
+</div>
+
+<p>
+  ובגלל ששלושתן שוות יחד <span class="fi">\(180^\circ\)</span> — משתי זוויות
+  ידועות תמיד מוצאים את השלישית בחיסור אחד:
+  אם <span class="fi">\(\textcolor{#B7791F}{\beta=50^\circ}\)</span>
+  ו-<span class="fi">\(\textcolor{#2563EB}{\gamma=60^\circ}\)</span>, אז
+  <span class="fi">\(\textcolor{#C2408C}{\alpha}=180^\circ-50^\circ-60^\circ=\textcolor{#C2408C}{70^\circ}\)</span>.
+</p>
+
+<div class="box intuition">
+  <div class="box-title">ניסוי של שנייה</div>
+  ציירי משולש על נייר, קרעי את שלוש הפינות והצמידי אותן קודקוד לקודקוד —
+  הן יסתדרו בדיוק לאורך ישר אחד: זווית שטוחה. בתרגיל האחרון של העמוד
+  נראה <em>למה</em> זה תמיד עובד — בעזרת הישרים המקבילים מהסעיף הבא.
+</div>
+
+<!-- ============ 5. מקבילים: Z/F/C ============ -->
+<h2 id="sec-zfc"><span class="num">5</span>ישרים מקבילים וחותך — מפת ה-Z / F / C</h2>
+
+<p>
+  זה לב התחנה. שני ישרים <strong>מקבילים</strong> (מסומנים בסרטוט בחיצים קטנים)
+  וישר שלישי שחוצה את שניהם — <strong>חותך</strong>. נוצרות שמונה זוויות,
+  אבל תכף תראי שיש שם רק שני מספרים. שלושת הזוגות החשובים מקבלים שמות
+  לפי צורת האות שהם יושבים עליה:
+</p>
+
+<div class="fig-row">
+  <figure>
+    <svg viewBox="0 0 300 240" style="width:100%;max-width:640px;height:auto" role="img" aria-label="זוויות מתחלפות על צורת Z">
+      <path d="M 66 60 L 189 60 L 111 180 L 234 180" fill="none" stroke="#2E6F8E" stroke-width="11" stroke-opacity="0.25" stroke-linejoin="round"/>
+      <line x1="20" y1="60" x2="280" y2="60" stroke="#5A6875" stroke-width="3"/>
+      <line x1="20" y1="180" x2="280" y2="180" stroke="#5A6875" stroke-width="3"/>
+      <line x1="215" y1="20" x2="85" y2="220" stroke="#1C2733" stroke-width="2.5"/>
+      <path d="M 246 53 l 12 7 -12 7" fill="none" stroke="#5A6875" stroke-width="2.5"/>
+      <path d="M 246 173 l 12 7 -12 7" fill="none" stroke="#5A6875" stroke-width="2.5"/>
+      <path d="M 159 60 A 30 30 0 0 0 172.7 85.2" fill="none" stroke="#C2408C" stroke-width="3.5"/>
+      <path d="M 141 180 A 30 30 0 0 0 127.4 154.8" fill="none" stroke="#C2408C" stroke-width="3.5"/>
+      <text x="147" y="87" text-anchor="middle" fill="#C2408C" font-size="15" font-weight="bold" font-style="italic">α</text>
+      <text x="152" y="163" text-anchor="middle" fill="#C2408C" font-size="15" font-weight="bold" font-style="italic">α</text>
+    </svg>
+    <figcaption><b>מתחלפות</b> (על צורת <span class="en">Z</span>) —
+    בין המקבילים, בצדדים מנוגדים של החותך: <strong>שוות</strong>.
+    שתי הוורודות — אותו מספר בדיוק.</figcaption>
+  </figure>
+  <figure>
+    <svg viewBox="0 0 300 240" style="width:100%;max-width:640px;height:auto" role="img" aria-label="זוויות מתאימות על צורת F">
+      <path d="M 272 60 L 189 60 L 85 220 M 111 180 L 194 180" fill="none" stroke="#2E6F8E" stroke-width="11" stroke-opacity="0.25" stroke-linejoin="round"/>
+      <line x1="20" y1="60" x2="280" y2="60" stroke="#5A6875" stroke-width="3"/>
+      <line x1="20" y1="180" x2="280" y2="180" stroke="#5A6875" stroke-width="3"/>
+      <line x1="215" y1="20" x2="85" y2="220" stroke="#1C2733" stroke-width="2.5"/>
+      <path d="M 246 53 l 12 7 -12 7" fill="none" stroke="#5A6875" stroke-width="2.5"/>
+      <path d="M 246 173 l 12 7 -12 7" fill="none" stroke="#5A6875" stroke-width="2.5"/>
+      <path d="M 219 60 A 30 30 0 0 0 205.4 34.8" fill="none" stroke="#C2408C" stroke-width="3.5"/>
+      <path d="M 141 180 A 30 30 0 0 0 127.4 154.8" fill="none" stroke="#C2408C" stroke-width="3.5"/>
+      <text x="229" y="43" text-anchor="middle" fill="#C2408C" font-size="15" font-weight="bold" font-style="italic">α</text>
+      <text x="152" y="163" text-anchor="middle" fill="#C2408C" font-size="15" font-weight="bold" font-style="italic">α</text>
+    </svg>
+    <figcaption><b>מתאימות</b> (על צורת <span class="en">F</span>) —
+    באותה "פינה" בשני המפגשים, באותו צד של החותך: <strong>שוות</strong>.</figcaption>
+  </figure>
+  <figure>
+    <svg viewBox="0 0 300 240" style="width:100%;max-width:640px;height:auto" role="img" aria-label="זוויות חד-צדדיות על צורת C">
+      <path d="M 245 60 L 189 60 L 111 180 L 245 180" fill="none" stroke="#2E6F8E" stroke-width="11" stroke-opacity="0.25" stroke-linejoin="round"/>
+      <line x1="20" y1="60" x2="280" y2="60" stroke="#5A6875" stroke-width="3"/>
+      <line x1="20" y1="180" x2="280" y2="180" stroke="#5A6875" stroke-width="3"/>
+      <line x1="215" y1="20" x2="85" y2="220" stroke="#1C2733" stroke-width="2.5"/>
+      <path d="M 246 53 l 12 7 -12 7" fill="none" stroke="#5A6875" stroke-width="2.5"/>
+      <path d="M 246 173 l 12 7 -12 7" fill="none" stroke="#5A6875" stroke-width="2.5"/>
+      <path d="M 172.7 85.2 A 30 30 0 0 0 219 60" fill="none" stroke="#B7791F" stroke-width="3.5"/>
+      <path d="M 141 180 A 30 30 0 0 0 127.4 154.8" fill="none" stroke="#C2408C" stroke-width="3.5"/>
+      <text x="213" y="105" text-anchor="middle" fill="#B7791F" font-size="15" font-weight="bold" font-style="italic">β</text>
+      <text x="152" y="163" text-anchor="middle" fill="#C2408C" font-size="15" font-weight="bold" font-style="italic">α</text>
+    </svg>
+    <figcaption><b>חד-צדדיות</b> (על צורת <span class="en">C</span>) —
+    בין המקבילים, באותו צד של החותך: <strong>משלימות</strong>
+    ל-<span class="fi">\(180^\circ\)</span>. ורודה + ענברית = ישר שלם.</figcaption>
+  </figure>
+</div>
+
+<div class="fbox">
+  <div class="fbox-title">שלושת הכללים של מקבילים וחותך</div>
+  $$\underbrace{\textcolor{#C2408C}{\alpha}=\textcolor{#C2408C}{\alpha}}_{\text{מתחלפות}}\qquad\qquad\underbrace{\textcolor{#C2408C}{\alpha}=\textcolor{#C2408C}{\alpha}}_{\text{מתאימות}}\qquad\qquad\underbrace{\textcolor{#C2408C}{\alpha}+\textcolor{#B7791F}{\beta}=180^\circ}_{\text{חד-צדדיות}}$$
+  <span class="f-legend">
+    <span><i class="sw" style="background:#C2408C"></i> ורוד — הזוויות השוות: זוג ה-Z וזוג ה-F</span>
+    <span><i class="sw" style="background:#B7791F"></i> ענברי — בת הזוג המשלימה בזוג ה-C</span>
+  </span>
+</div>
+
+<div class="box warn">
+  <div class="box-title">שימי לב</div>
+  · <strong>מתאימות נראות "רחוקות" זו מזו</strong> — אחת למעלה מעל הישר ואחת למטה —
+  ולכן מפתה לחשוב שהן שונות. הן <strong>שוות</strong>: זו בדיוק אותה פינה של ה-<span class="en">F</span>,
+  שהוזזה לאורך החותך.
+  <br>· <strong>מבלבלים בין <span class="en">Z</span> ל-<span class="en">C</span></strong>:
+  ב-<span class="en">Z</span> הזוויות בצדדים <em>מנוגדים</em> של החותך — שוות;
+  ב-<span class="en">C</span> הן באותו צד — משלימות ל-<span class="fi">\(180^\circ\)</span>.
+  בדיקה מהירה: זוג של חדה + קהה באותו צד לא יכול להיות שווה.
+  <br>· והתנאי שלפני הכל: הכללים נכונים <strong>רק כשהישרים מקבילים</strong>.
+  אין סימון מקבילים בסרטוט (או נתון במילים) — אין <span class="en">Z</span> /
+  <span class="en">F</span> / <span class="en">C</span>.
+</div>
+
+<div class="box intuition">
+  <div class="box-title">גם Z הפוכה היא Z</div>
+  האות יכולה להיות מסובבת, הפוכה או במראה — הקשר לא משתנה.
+  מה שקובע הוא <strong>המיקום היחסי</strong>: בין המקבילים או מחוץ להם,
+  אותו צד של החותך או צדדים מנוגדים. סובבי את הדף בדמיון — האות תופיע.
+</div>
+
+<h3>מזווית אחת מוצאים את כל השמונה — צעד אחרי צעד</h3>
+
+<p>
+  נתון: שני ישרים מקבילים, חותך, וזווית אחת בלבד —
+  <span class="fi">\(\textcolor{#C2408C}{\alpha=65^\circ}\)</span> (מסומנת בקשת).
+  בואי נמצא את כל שבע האחרות:
+</p>
+
+<figure style="max-width:460px;margin:22px auto">
+  <svg viewBox="0 0 460 300" style="width:100%;max-width:640px;height:auto" role="img" aria-label="שמונה זוויות בין מקבילים וחותך, נתונה זווית 65 מעלות">
+    <line x1="30" y1="80" x2="430" y2="80" stroke="#5A6875" stroke-width="3"/>
+    <line x1="30" y1="220" x2="430" y2="220" stroke="#5A6875" stroke-width="3"/>
+    <line x1="290" y1="30" x2="178" y2="270" stroke="#1C2733" stroke-width="2.5"/>
+    <path d="M 389 73 l 12 7 -12 7" fill="none" stroke="#5A6875" stroke-width="2.5"/>
+    <path d="M 389 213 l 12 7 -12 7" fill="none" stroke="#5A6875" stroke-width="2.5"/>
+    <circle cx="266.7" cy="80" r="4" fill="#1C2733"/>
+    <circle cx="201.3" cy="220" r="4" fill="#1C2733"/>
+    <path d="M 292.7 80 A 26 26 0 0 0 277.7 56.4" fill="none" stroke="#C2408C" stroke-width="3.5"/>
+    <text x="302" y="62" text-anchor="middle" fill="#C2408C" font-size="14" font-weight="bold">65°</text>
+    <text x="243" y="48" text-anchor="middle" fill="#B7791F" font-size="14" font-weight="bold">115°</text>
+    <text x="231" y="107" text-anchor="middle" fill="#C2408C" font-size="14" font-weight="bold">65°</text>
+    <text x="290" y="122" text-anchor="middle" fill="#B7791F" font-size="14" font-weight="bold">115°</text>
+    <text x="237" y="202" text-anchor="middle" fill="#C2408C" font-size="14" font-weight="bold">65°</text>
+    <text x="178" y="188" text-anchor="middle" fill="#B7791F" font-size="14" font-weight="bold">115°</text>
+    <text x="166" y="247" text-anchor="middle" fill="#C2408C" font-size="14" font-weight="bold">65°</text>
+    <text x="225" y="262" text-anchor="middle" fill="#B7791F" font-size="14" font-weight="bold">115°</text>
+  </svg>
+  <figcaption>הזווית הנתונה — עם הקשת הוורודה, למעלה מימין. כל זווית ורודה בסרטוט
+  היא <span class="fi">\(65^\circ\)</span>, כל ענברית —
+  <span class="fi">\(115^\circ\)</span>. שמונה זוויות, שני מספרים.</figcaption>
+</figure>
+
+<ol class="steps">
+  <li>מתחילים מהנתונה: <span class="fi">\(\textcolor{#C2408C}{65^\circ}\)</span>
+      במפגש העליון, מעל הישר ומימין לחותך.</li>
+  <li><strong>צמודה</strong> לה על הישר העליון:
+      <span class="fi">\(180^\circ-65^\circ=\textcolor{#B7791F}{115^\circ}\)</span>.</li>
+  <li><strong>קודקודיות</strong>: שתי הזוויות שמתחת לישר העליון הן תמונת ראי —
+      <span class="fi">\(\textcolor{#C2408C}{65^\circ}\)</span>
+      ו-<span class="fi">\(\textcolor{#B7791F}{115^\circ}\)</span>. המפגש העליון סגור.</li>
+  <li>יורדים למפגש התחתון עם <strong>מתאימות</strong> (<span class="en">F</span>):
+      הזווית באותה פינה — מעל הישר התחתון, מימין לחותך — שווה לנתונה:
+      <span class="fi">\(\textcolor{#C2408C}{65^\circ}\)</span>.</li>
+  <li>ובמפגש התחתון שוב צמודות וקודקודיות — וכל שמונה הזוויות ידועות.
+      בדיקת היגיון: כל זוג חד-צדדי אכן נותן
+      <span class="fi">\(65^\circ+115^\circ=180^\circ\)</span> ✓</li>
+</ol>
+
+<div class="box def">
+  <div class="box-title">המסקנה ששווה לזכור</div>
+  בין שני ישרים מקבילים וחותך יש רק <strong>שני מספרים</strong>:
+  זווית חדה אחת וזווית קהה אחת, שמשלימות זו את זו ל-<span class="fi">\(180^\circ\)</span>.
+  מצאת אחת — מצאת את כולן.
+</div>
+
+<!-- ============ 6. תרגול ============ -->
+<h2 id="sec-practice"><span class="num">6</span>תרגול — משלב לשלב</h2>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>קודקודית וצמודה</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">שני ישרים נחתכים. אחת הזוויות שנוצרו היא <span class="fi">\(\textcolor{#C2408C}{110^\circ}\)</span></span>.
+    <span class="mk mk-find">מצאי את הזווית הקודקודית לה ואת הזווית הצמודה לה</span>.
+  </p>
+  <figure style="max-width:300px;margin:14px auto">
+    <svg viewBox="0 0 300 220" style="width:100%;max-width:640px;height:auto" role="img" aria-label="שני ישרים נחתכים עם זווית נתונה של 110 מעלות">
+      <line x1="20" y1="110" x2="280" y2="110" stroke="#1C2733" stroke-width="2.5"/>
+      <line x1="115.8" y1="204" x2="184.2" y2="16" stroke="#1C2733" stroke-width="2.5"/>
+      <circle cx="150" cy="110" r="4" fill="#1C2733"/>
+      <path d="M 159.6 83.7 A 28 28 0 0 0 122 110" fill="none" stroke="#C2408C" stroke-width="3.5"/>
+      <text x="121" y="74" text-anchor="middle" fill="#C2408C" font-size="14" font-weight="bold">110°</text>
+      <path d="M 140.4 136.3 A 28 28 0 0 0 178 110" fill="none" stroke="#C2408C" stroke-width="2.5" stroke-dasharray="5 4"/>
+      <text x="180" y="154" text-anchor="middle" fill="#C2408C" font-size="14" font-weight="bold" font-style="italic">α = ?</text>
+      <path d="M 172 110 A 22 22 0 0 0 157.5 89.3" fill="none" stroke="#B7791F" stroke-width="2.5" stroke-dasharray="5 4"/>
+      <text x="192" y="88" text-anchor="middle" fill="#B7791F" font-size="14" font-weight="bold" font-style="italic">β = ?</text>
+    </svg>
+    <figcaption>הנתונה בקשת המלאה. <span class="fi">\(\textcolor{#C2408C}{\alpha}\)</span> —
+    הזווית הקודקודית לה; <span class="fi">\(\textcolor{#B7791F}{\beta}\)</span> — הצמודה לה.</figcaption>
+  </figure>
+  <p style="font-size:13px;color:var(--soft)">נסי לנחש את השלב הבא לפני שאת פותחת אותו.</p>
+  <details class="step"><summary>שלב ראשון — הקודקודית</summary>
+    <div class="step-body">
+      הקודקודית יושבת ממול, בלי צלע משותפת — וקודקודיות <strong>שוות</strong>:
+      <br><span class="fi">\(\textcolor{#C2408C}{\alpha}=\textcolor{#C2408C}{110^\circ}\)</span>. בלי שום חישוב.
+    </div>
+  </details>
+  <details class="step"><summary>שלב שני — הצמודה</summary>
+    <div class="step-body">
+      הצמודה יושבת עם הנתונה על ישר אחד, ויחד הן זווית שטוחה:
+      <br><span class="fi">\(\textcolor{#B7791F}{\beta}=180^\circ-110^\circ=\textcolor{#B7791F}{70^\circ}\)</span>.
+    </div>
+  </details>
+  <details class="step"><summary>שלב שלישי — בדיקת היגיון</summary>
+    <div class="step-body">
+      סביב נקודת החיתוך יש סיבוב שלם:
+      <br><span class="fi">\(110^\circ+70^\circ+110^\circ+70^\circ=360^\circ\)</span> ✓
+      <br>וגם: הנתונה קהה, אז הצמודה חייבת לצאת חדה — ואכן
+      <span class="fi">\(70^\circ\lt 90^\circ\)</span>.
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex1"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex hide-marks">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>הזווית השלישית במשולש</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">במשולש נתונות שתי זוויות: <span class="fi">\(52^\circ\)</span>
+    ו-<span class="fi">\(63^\circ\)</span></span>.
+    <span class="mk mk-find">מהי הזווית השלישית?</span>
+  </p>
+  <div class="q-row">
+    <button class="marks-btn no-print" style="font-family:inherit;font-size:12.5px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:5px 10px;cursor:pointer">הציגי את הפירוק בצבעים</button>
+  </div>
+  <div class="q-row">
+    <span>הזווית השלישית (במעלות):</span>
+    <input class="q-input" data-answer="65" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p><strong>מסרטטים מחדש בגדול</strong>: כותבים את שתי הנתונות על הסרטוט,
+      והמבוקשת מקבלת שם: <span class="fi">\(\alpha\)</span>.</p>
+      <figure style="max-width:460px;margin:10px auto">
+        <svg viewBox="0 0 460 300" style="width:100%;max-width:640px;height:auto" role="img" aria-label="משולש עם שתי זוויות נתונות 52 ו-63 מעלות והזווית המבוקשת אלפא">
+          <polygon points="256,55 100,255 358,255" fill="#F7FAFC" stroke="#1C2733" stroke-width="2.5"/>
+          <path d="M 235.1 81.8 A 34 34 0 0 0 271.5 85.3" fill="none" stroke="#C2408C" stroke-width="3.5"/>
+          <path d="M 138 255 A 38 38 0 0 0 123.4 225" fill="none" stroke="#B7791F" stroke-width="3.5"/>
+          <path d="M 340.7 221.1 A 38 38 0 0 0 320 255" fill="none" stroke="#2563EB" stroke-width="3.5"/>
+          <text x="256" y="112" text-anchor="middle" fill="#C2408C" font-size="17" font-weight="bold" font-style="italic">α</text>
+          <text x="160" y="237" text-anchor="middle" fill="#B7791F" font-size="15" font-weight="bold">52°</text>
+          <text x="300" y="237" text-anchor="middle" fill="#2563EB" font-size="15" font-weight="bold">63°</text>
+        </svg>
+        <figcaption>הנתונות על הבסיס — <span class="fi">\(52^\circ\)</span>
+        ו-<span class="fi">\(63^\circ\)</span>;
+        <span class="fi">\(\alpha\)</span> — הזווית שמחפשים.</figcaption>
+      </figure>
+      <p><strong>המשפט שעובד כאן</strong> — סכום הזוויות במשולש:</p>
+      $$\textcolor{#C2408C}{\alpha}+\textcolor{#B7791F}{\beta}+\textcolor{#2563EB}{\gamma}=180^\circ$$
+      <p><strong>מציבים</strong> את שתי הידועות:</p>
+      $$\textcolor{#C2408C}{\alpha}+\textcolor{#B7791F}{52^\circ}+\textcolor{#2563EB}{63^\circ}=180^\circ$$
+      <p><strong>מבודדים</strong> את המבוקשת:</p>
+      $$\textcolor{#C2408C}{\alpha}=180^\circ-\textcolor{#B7791F}{52^\circ}-\textcolor{#2563EB}{63^\circ}=180^\circ-115^\circ=\textcolor{#C2408C}{65^\circ}$$
+      <p><strong>תשובה:</strong> הזווית השלישית היא <span class="fi">\(65^\circ\)</span>.</p>
+      <p>בדיקת היגיון: <span class="fi">\(52^\circ+63^\circ+65^\circ=180^\circ\)</span> ✓
+      <br>ושלוש הזוויות חדות, כלומר משולש חד-זוויות.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex2"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex hide-marks">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>בין מקבילים</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">בסרטוט: שני ישרים מקבילים וחותך. הזווית המסומנת בקשת מלאה היא
+    <span class="fi">\(\textcolor{#C2408C}{48^\circ}\)</span></span>.
+    <span class="mk mk-find">מצאי את הזווית המתחלפת לה <span class="fi">\(\textcolor{#C2408C}{\alpha}\)</span>
+    ואת הזווית החד-צדדית לה <span class="fi">\(\textcolor{#B7791F}{\beta}\)</span></span>.
+  </p>
+  <figure style="max-width:300px;margin:14px auto">
+    <svg viewBox="0 0 300 210" style="width:100%;max-width:640px;height:auto" role="img" aria-label="מקבילים וחותך עם זווית נתונה של 48 מעלות">
+      <line x1="20" y1="55" x2="280" y2="55" stroke="#5A6875" stroke-width="3"/>
+      <line x1="20" y1="155" x2="280" y2="155" stroke="#5A6875" stroke-width="3"/>
+      <line x1="215" y1="15" x2="53" y2="195" stroke="#1C2733" stroke-width="2.5"/>
+      <path d="M 244 48 l 12 7 -12 7" fill="none" stroke="#5A6875" stroke-width="2.5"/>
+      <path d="M 244 148 l 12 7 -12 7" fill="none" stroke="#5A6875" stroke-width="2.5"/>
+      <circle cx="179" cy="55" r="4" fill="#1C2733"/>
+      <circle cx="89" cy="155" r="4" fill="#1C2733"/>
+      <path d="M 115 155 A 26 26 0 0 0 106.4 135.7" fill="none" stroke="#C2408C" stroke-width="3.5"/>
+      <text x="132" y="141" text-anchor="middle" fill="#C2408C" font-size="14" font-weight="bold">48°</text>
+      <path d="M 153 55 A 26 26 0 0 0 161.6 74.3" fill="none" stroke="#C2408C" stroke-width="2.5" stroke-dasharray="5 4"/>
+      <text x="134" y="80" text-anchor="middle" fill="#C2408C" font-size="14" font-weight="bold" font-style="italic">α = ?</text>
+      <path d="M 165.6 69.9 A 20 20 0 0 0 199 55" fill="none" stroke="#B7791F" stroke-width="2.5" stroke-dasharray="5 4"/>
+      <text x="203" y="98" text-anchor="middle" fill="#B7791F" font-size="14" font-weight="bold" font-style="italic">β = ?</text>
+    </svg>
+    <figcaption>הנתונה למטה, בין המקבילים.
+    <span class="fi">\(\textcolor{#C2408C}{\alpha}\)</span> — בצד השני של החותך (מתחלפת);
+    <span class="fi">\(\textcolor{#B7791F}{\beta}\)</span> — באותו צד (חד-צדדית).</figcaption>
+  </figure>
+  <div class="q-row">
+    <button class="marks-btn no-print" style="font-family:inherit;font-size:12.5px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:5px 10px;cursor:pointer">הציגי את הפירוק בצבעים</button>
+  </div>
+  <div class="q-row">
+    <span>הזווית המתחלפת <span class="fi">\(\textcolor{#C2408C}{\alpha}\)</span>:</span>
+    <input class="q-input" data-answer="48" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <span>הזווית החד-צדדית <span class="fi">\(\textcolor{#B7791F}{\beta}\)</span>:</span>
+    <input class="q-input" data-answer="132" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p><strong>מזהות את הזוג הראשון:</strong> הנתונה ו-<span class="fi">\(\textcolor{#C2408C}{\alpha}\)</span> יושבות <strong>בין</strong> המקבילים,
+      <strong>בצדדים מנוגדים</strong> של החותך — מתחלפות, על צורת
+      <span class="en">Z</span>. הכלל: זוויות מתחלפות בין מקבילים <strong>שוות</strong>, ולכן בלי שום חישוב:</p>
+      $$\textcolor{#C2408C}{\alpha}=\textcolor{#C2408C}{48^\circ}$$
+      <p><strong>מזהות את הזוג השני:</strong> <span class="fi">\(\textcolor{#B7791F}{\beta}\)</span>
+      יושבת בין המקבילים <strong>באותו צד</strong> של החותך כמו הנתונה —
+      חד-צדדית, על צורת <span class="en">C</span>.
+      הכלל: זוויות חד-צדדיות משלימות זו את זו ל-<span class="fi">\(180^\circ\)</span>, ומציבים את הנתונה:</p>
+      $$\textcolor{#C2408C}{48^\circ}+\textcolor{#B7791F}{\beta}=180^\circ$$
+      <p><strong>מבודדים:</strong></p>
+      $$\textcolor{#B7791F}{\beta}=180^\circ-\textcolor{#C2408C}{48^\circ}=\textcolor{#B7791F}{132^\circ}$$
+      <p>בדיקת היגיון: <span class="fi">\(48^\circ+132^\circ=180^\circ\)</span> ✓
+      <br>וזוג של חדה + קהה, בדיוק כמו שצריך בין מקבילים.</p>
+    </div>
+  </details>
+  <details class="alt">
+    <summary>אותה שאלה בניסוחים אחרים — איך עוד מנסחים "מתחלפות"</summary>
+    <div class="alt-body">
+      <ul>
+        <li>"הישרים <span class="fi">\(a\)</span> ו-<span class="fi">\(b\)</span> מקבילים.
+            חשבי את הזווית המסומנת." — בלי לומר איזה קשר; את מזהה את ה-<span class="en">Z</span> לבד.</li>
+        <li>"הזוויות המסומנות שוות. נמקי." — התשובה היא שם הכלל:
+            זוויות מתחלפות בין ישרים מקבילים.</li>
+        <li>"מצאי את הזווית שבין החותך לישר השני." — שוב מתחלפות, רק בלי סרטוט מסומן.</li>
+        <li>ולפעמים בכלל נותנים את החד-צדדית (<span class="fi">\(132^\circ\)</span>)
+            ומבקשים את הנתונה שלנו — אותו סרטוט, כיוון הפוך.</li>
+      </ul>
+      <p>בכל הניסוחים, הצעד הראשון זהה: לסמן על הסרטוט מי בין המקבילים,
+      ובאיזה צד של החותך.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex3"> סיימתי את התרגיל הזה</label>
+</article>
+
+<div class="box example">
+  <div class="box-title">הוכחות ראשונות — בדיוק כמו בחוברת</div>
+  שלושת התרגילים הבאים הם הוכחות של ממש, כתובות בטבלת <strong>טענה | נימוק</strong> —
+  הפורמט שכל הוכחה בבית הספר כתובה בו (נעמיק בו בתחנה הבאה).
+  הכל נכתב בתוך הטבלה: הנתונים פותחים אותה, כל חישוב הוא שורה משלו,
+  וסעיף חדש ממשיך באותה טבלה אחרי שורת הפרדה.
+  התרגילים בנויים לפי חוברת ההוכחות של הכיתה — המקור המלא מחכה
+  <a href="../library.html">בספרייה</a> ("חוברת הוכחות — חפיפה, קטעים וזוויות").
+</div>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>הוכחה על קטעים — חיבור</h4></div>
+  <p class="q-text">
+    הנקודות <span class="fi">\(B,\;F,\;C,\;D\)</span> נמצאות על ישר אחד, בסדר הזה.
+    <span class="mk mk-given">נתון: <span class="fi">\(BF=CD\)</span></span>.
+    <span class="mk mk-find">הוכיחי: <span class="fi">\(BC=FD\)</span></span>.
+  </p>
+  <figure style="max-width:440px;margin:14px auto">
+    <svg viewBox="0 0 460 108" style="width:100%;max-width:640px;height:auto" role="img" aria-label="ארבע נקודות על ישר אחד עם שני קטעים חופפים">
+      <line x1="30" y1="62" x2="430" y2="62" stroke="#1C2733" stroke-width="2.5"/>
+      <circle cx="60" cy="62" r="4.5" fill="#1C2733"/>
+      <circle cx="170" cy="62" r="4.5" fill="#1C2733"/>
+      <circle cx="280" cy="62" r="4.5" fill="#1C2733"/>
+      <circle cx="390" cy="62" r="4.5" fill="#1C2733"/>
+      <line x1="115" y1="55" x2="115" y2="69" stroke="#1C2733" stroke-width="2.5"/>
+      <line x1="335" y1="55" x2="335" y2="69" stroke="#1C2733" stroke-width="2.5"/>
+      <line x1="60" y1="40" x2="280" y2="40" stroke="#5A6875" stroke-width="2"/>
+      <line x1="60" y1="40" x2="60" y2="47" stroke="#5A6875" stroke-width="2"/>
+      <line x1="280" y1="40" x2="280" y2="47" stroke="#5A6875" stroke-width="2"/>
+      <text x="170" y="32" text-anchor="middle" font-size="13" font-weight="bold" fill="#5A6875">BC</text>
+      <line x1="170" y1="16" x2="390" y2="16" stroke="#5A6875" stroke-width="2"/>
+      <line x1="170" y1="16" x2="170" y2="23" stroke="#5A6875" stroke-width="2"/>
+      <line x1="390" y1="16" x2="390" y2="23" stroke="#5A6875" stroke-width="2"/>
+      <text x="285" y="10" text-anchor="middle" font-size="13" font-weight="bold" fill="#5A6875">FD</text>
+      <text x="60" y="88" text-anchor="middle" font-size="14" font-weight="bold" fill="#1C2733">B</text>
+      <text x="170" y="88" text-anchor="middle" font-size="14" font-weight="bold" fill="#1C2733">F</text>
+      <text x="280" y="88" text-anchor="middle" font-size="14" font-weight="bold" fill="#1C2733">C</text>
+      <text x="390" y="88" text-anchor="middle" font-size="14" font-weight="bold" fill="#1C2733">D</text>
+    </svg>
+    <figcaption>הסימון הקצר על <span class="fi">\(BF\)</span> ועל <span class="fi">\(CD\)</span> —
+    הנתון ששני הקטעים האלה שווים.
+    <br>שני הקטעים שרוצים להשוות — <span class="fi">\(BC\)</span>
+    ו-<span class="fi">\(FD\)</span> — חופפים זה על זה בקטע האמצעי.</figcaption>
+  </figure>
+  <details class="sol">
+    <summary>הצגי פתרון מלא (כמו שכותבים במחברת)</summary>
+    <div class="sol-body">
+      <p><strong>מסרטטים מחדש בגדול</strong> ומסמנים על הסרטוט את הזוג הנתון
+      ואת הקטע המשותף <span class="fi">\(FC\)</span>.</p>
+      <figure style="max-width:440px;margin:10px auto">
+        <svg viewBox="0 0 460 108" style="width:100%;max-width:640px;height:auto" role="img" aria-label="אותו שרטוט עם סימוני צבע: BF ו-CD בירוק, FC בכחול">
+          <line x1="30" y1="62" x2="430" y2="62" stroke="#1C2733" stroke-width="2.5"/>
+          <line x1="93" y1="62" x2="137" y2="62" stroke="#059669" stroke-width="5"/>
+          <line x1="313" y1="62" x2="357" y2="62" stroke="#059669" stroke-width="5"/>
+          <line x1="115" y1="55" x2="115" y2="69" stroke="#059669" stroke-width="3"/>
+          <line x1="335" y1="55" x2="335" y2="69" stroke="#059669" stroke-width="3"/>
+          <line x1="203" y1="62" x2="247" y2="62" stroke="#2563EB" stroke-width="5"/>
+          <circle cx="60" cy="62" r="4.5" fill="#1C2733"/>
+          <circle cx="170" cy="62" r="4.5" fill="#1C2733"/>
+          <circle cx="280" cy="62" r="4.5" fill="#1C2733"/>
+          <circle cx="390" cy="62" r="4.5" fill="#1C2733"/>
+          <line x1="60" y1="40" x2="280" y2="40" stroke="#5A6875" stroke-width="2"/>
+          <line x1="60" y1="40" x2="60" y2="47" stroke="#5A6875" stroke-width="2"/>
+          <line x1="280" y1="40" x2="280" y2="47" stroke="#5A6875" stroke-width="2"/>
+          <text x="170" y="32" text-anchor="middle" font-size="13" font-weight="bold" fill="#5A6875">BC</text>
+          <line x1="170" y1="16" x2="390" y2="16" stroke="#5A6875" stroke-width="2"/>
+          <line x1="170" y1="16" x2="170" y2="23" stroke="#5A6875" stroke-width="2"/>
+          <line x1="390" y1="16" x2="390" y2="23" stroke="#5A6875" stroke-width="2"/>
+          <text x="285" y="10" text-anchor="middle" font-size="13" font-weight="bold" fill="#5A6875">FD</text>
+          <text x="60" y="88" text-anchor="middle" font-size="14" font-weight="bold" fill="#1C2733">B</text>
+          <text x="170" y="88" text-anchor="middle" font-size="14" font-weight="bold" fill="#1C2733">F</text>
+          <text x="280" y="88" text-anchor="middle" font-size="14" font-weight="bold" fill="#1C2733">C</text>
+          <text x="390" y="88" text-anchor="middle" font-size="14" font-weight="bold" fill="#1C2733">D</text>
+        </svg>
+        <figcaption>הזוג הנתון <span class="fi">\(BF=CD\)</span>
+        (סימון קצר באמצע כל קטע) והחלק המשותף
+        <span class="fi">\(FC\)</span>.</figcaption>
+      </figure>
+      <p><strong>הרעיון:</strong> כל אחד מהקטעים המבוקשים בנוי מחלק נתון + אותו חלק
+      משותף — אז מוסיפים לשני האגפים השווים את אותו הדבר.</p>
+      <table class="dtable">
+        <tr><th></th><th>טענה</th><th>נימוק</th></tr>
+        <tr><td>1</td><td class="hl-c3"><span class="fi">\(\textcolor{#059669}{BF=CD}\)</span></td><td style="text-align:right">נתון</td></tr>
+        <tr><td>2</td><td class="hl-c2"><span class="fi">\(\textcolor{#2563EB}{FC=FC}\)</span></td><td style="text-align:right">קטע משותף</td></tr>
+        <tr><td>3</td><td><span class="fi">\(BF+FC=CD+FC\)</span></td><td style="text-align:right">חיבור: הוספנו לשני האגפים את אותו הקטע (לפי 1, 2)</td></tr>
+        <tr><td>4</td><td><span class="fi">\(BF+FC=BC\)</span></td><td style="text-align:right">השלם שווה לסכום חלקיו</td></tr>
+        <tr><td>5</td><td><span class="fi">\(FC+CD=FD\)</span></td><td style="text-align:right">השלם שווה לסכום חלקיו</td></tr>
+        <tr><td>6</td><td><span class="fi">\(BC=FD\)</span></td><td style="text-align:right">כלל המעבר (לפי 3, 4, 5)</td></tr>
+        <tr class="tr-qed"><td colspan="3"><b>מש"ל</b></td></tr>
+      </table>
+      <p>בדיקת היגיון עם מספרים קטנים: אם <span class="fi">\(BF=CD=2\)</span>
+      ו-<span class="fi">\(FC=3\)</span>, אז <span class="fi">\(BC=5\)</span>
+      וגם <span class="fi">\(FD=5\)</span> ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="exp1"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex hide-marks">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>הוכחה על זוויות — צמודות עם נעלם</h4></div>
+  <p class="q-text">
+    הנקודות <span class="fi">\(A,\;B,\;C\)</span> על ישר אחד, ומהנקודה
+    <span class="fi">\(B\)</span> יוצאת הקרן <span class="fi">\(BD\)</span>.
+    <span class="mk mk-given">נתון: <span class="fi">\(\measuredangle ABD=3x\)</span>,
+    <span class="fi">\(\measuredangle DBC=x+20^\circ\)</span></span>.
+    <span class="mk mk-find">מצאי את <span class="fi">\(x\)</span> ואת שתי הזוויות</span>.
+  </p>
+  <figure style="max-width:380px;margin:14px auto">
+    <svg viewBox="0 0 380 152" style="width:100%;max-width:640px;height:auto" role="img" aria-label="קרן היוצאת מנקודה על ישר ויוצרת שתי זוויות צמודות">
+      <line x1="30" y1="120" x2="350" y2="120" stroke="#1C2733" stroke-width="2.5"/>
+      <line x1="190" y1="120" x2="244" y2="26" stroke="#1C2733" stroke-width="2.5"/>
+      <circle cx="190" cy="120" r="4.5" fill="#1C2733"/>
+      <path d="M 166 120 A 24 24 0 0 1 202 99.2" fill="none" stroke="#5A6875" stroke-width="2.5"/>
+      <path d="M 205 94 A 30 30 0 0 1 220 120" fill="none" stroke="#5A6875" stroke-width="2.5"/>
+      <text x="158" y="90" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">3x</text>
+      <text x="245" y="102" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">x+20°</text>
+      <text x="60" y="142" text-anchor="middle" font-size="14" font-weight="bold" fill="#1C2733">A</text>
+      <text x="190" y="142" text-anchor="middle" font-size="14" font-weight="bold" fill="#1C2733">B</text>
+      <text x="320" y="142" text-anchor="middle" font-size="14" font-weight="bold" fill="#1C2733">C</text>
+      <text x="251" y="18" text-anchor="middle" font-size="14" font-weight="bold" fill="#1C2733">D</text>
+    </svg>
+    <figcaption>שתי הזוויות יושבות יחד על הישר <span class="fi">\(AC\)</span> —
+    צמודות.</figcaption>
+  </figure>
+  <div class="q-row">
+    <span>מצאתי: <span class="fi">\(x=\)</span></span>
+    <input class="q-input" data-answer="40" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא (כמו שכותבים במחברת)</summary>
+    <div class="sol-body">
+      <p><strong>מסרטטים מחדש בגדול</strong> ומסמנים את שתי הזוויות:</p>
+      <figure style="max-width:380px;margin:10px auto">
+        <svg viewBox="0 0 380 152" style="width:100%;max-width:640px;height:auto" role="img" aria-label="אותו שרטוט עם הזוויות בצבע: 3x בוורוד, x ועוד 20 מעלות בענברי">
+          <line x1="30" y1="120" x2="350" y2="120" stroke="#1C2733" stroke-width="2.5"/>
+          <line x1="190" y1="120" x2="244" y2="26" stroke="#1C2733" stroke-width="2.5"/>
+          <circle cx="190" cy="120" r="4.5" fill="#1C2733"/>
+          <path d="M 166 120 A 24 24 0 0 1 202 99.2" fill="none" stroke="#C2408C" stroke-width="3.5"/>
+          <path d="M 205 94 A 30 30 0 0 1 220 120" fill="none" stroke="#B7791F" stroke-width="3.5"/>
+          <text x="158" y="90" text-anchor="middle" font-size="14" font-weight="bold" fill="#C2408C">3x</text>
+          <text x="245" y="102" text-anchor="middle" font-size="14" font-weight="bold" fill="#B7791F">x+20°</text>
+          <text x="60" y="142" text-anchor="middle" font-size="14" font-weight="bold" fill="#1C2733">A</text>
+          <text x="190" y="142" text-anchor="middle" font-size="14" font-weight="bold" fill="#1C2733">B</text>
+          <text x="320" y="142" text-anchor="middle" font-size="14" font-weight="bold" fill="#1C2733">C</text>
+          <text x="251" y="18" text-anchor="middle" font-size="14" font-weight="bold" fill="#1C2733">D</text>
+        </svg>
+      </figure>
+      <table class="dtable">
+        <tr><th></th><th>טענה</th><th>נימוק</th></tr>
+        <tr><td>1</td><td class="hl-c5"><span class="fi">\(\textcolor{#C2408C}{\measuredangle ABD=3x}\)</span></td><td style="text-align:right">נתון</td></tr>
+        <tr><td>2</td><td style="background:#FBF0C9"><span class="fi">\(\textcolor{#B7791F}{\measuredangle DBC=x+20^\circ}\)</span></td><td style="text-align:right">נתון</td></tr>
+        <tr><td>3</td><td><span class="fi">\(\measuredangle ABD+\measuredangle DBC=180^\circ\)</span></td><td style="text-align:right">סכום זוויות צמודות <span class="fi">\(180^\circ\)</span> (<span class="fi">\(A,\;B,\;C\)</span> על ישר אחד)</td></tr>
+        <tr><td>4</td><td><span class="fi">\(3x+x+20^\circ=180^\circ\)</span></td><td style="text-align:right">הצבה של 1 ו-2 בתוך 3</td></tr>
+        <tr><td>5</td><td><span class="fi">\(4x=160^\circ\)</span></td><td style="text-align:right">כינוס איברים והעברת אגף</td></tr>
+        <tr><td>6</td><td><span class="fi">\(x=40^\circ\)</span></td><td style="text-align:right">חילוק שני האגפים ב-4</td></tr>
+        <tr class="tr-sep"><td colspan="3">סעיף ב — חישוב הזוויות עצמן</td></tr>
+        <tr><td>7</td><td class="hl-c5"><span class="fi">\(\textcolor{#C2408C}{\measuredangle ABD}=3\cdot 40^\circ=120^\circ\)</span></td><td style="text-align:right">הצבה של 6 בתוך 1</td></tr>
+        <tr><td>8</td><td style="background:#FBF0C9"><span class="fi">\(\textcolor{#B7791F}{\measuredangle DBC}=40^\circ+20^\circ=60^\circ\)</span></td><td style="text-align:right">הצבה של 6 בתוך 2</td></tr>
+      </table>
+      <p><strong>תשובה:</strong> <span class="fi">\(x=40^\circ\)</span>,
+      <span class="fi">\(\measuredangle ABD=120^\circ\)</span>,
+      <span class="fi">\(\measuredangle DBC=60^\circ\)</span>.</p>
+      <p>בדיקת היגיון: <span class="fi">\(120^\circ+60^\circ=180^\circ\)</span> ✓
+      — באמת זווית שטוחה.
+      <br>וגם: <span class="fi">\(\measuredangle ABD\)</span> יצאה קהה
+      ו-<span class="fi">\(\measuredangle DBC\)</span> חדה, בדיוק כמו בשרטוט.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="exp2"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · כמו במבחן</span><h4>הוכחה על זוויות — קודקודיות עם נעלם</h4></div>
+  <p class="q-text">
+    הישרים <span class="fi">\(AB\)</span> ו-<span class="fi">\(CD\)</span> נחתכים בנקודה
+    <span class="fi">\(O\)</span>.
+    <span class="mk mk-given">נתון: <span class="fi">\(\measuredangle AOC=2x+10^\circ\)</span>,
+    <span class="fi">\(\measuredangle BOD=3x-20^\circ\)</span></span>.
+    <br>א. מצאי את <span class="fi">\(x\)</span>.
+    <br>ב. חשבי את <span class="fi">\(\measuredangle AOD\)</span> (המסומנת בסימן שאלה).
+  </p>
+  <figure style="max-width:400px;margin:14px auto">
+    <svg viewBox="0 0 380 200" style="width:100%;max-width:640px;height:auto" role="img" aria-label="שני ישרים נחתכים בנקודה O עם זוג זוויות קודקודיות וזווית מבוקשת">
+      <line x1="75" y1="20" x2="305" y2="180" stroke="#1C2733" stroke-width="2.5"/>
+      <line x1="75" y1="180" x2="305" y2="20" stroke="#1C2733" stroke-width="2.5"/>
+      <circle cx="190" cy="100" r="4.5" fill="#1C2733"/>
+      <path d="M 168.7 114.8 A 26 26 0 0 1 168.7 85.2" fill="none" stroke="#5A6875" stroke-width="2.5"/>
+      <path d="M 211.3 85.2 A 26 26 0 0 1 211.3 114.8" fill="none" stroke="#5A6875" stroke-width="2.5"/>
+      <path d="M 162.1 80.6 A 34 34 0 0 1 217.9 80.6" fill="none" stroke="#5A6875" stroke-width="2" stroke-dasharray="5 4"/>
+      <text x="190" y="66" text-anchor="middle" font-size="15" font-weight="bold" fill="#5A6875">?</text>
+      <text x="112" y="105" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#334155">2x+10°</text>
+      <text x="270" y="105" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#334155">3x−20°</text>
+      <text x="62" y="16" text-anchor="middle" font-size="14" font-weight="bold" fill="#1C2733">A</text>
+      <text x="318" y="16" text-anchor="middle" font-size="14" font-weight="bold" fill="#1C2733">D</text>
+      <text x="62" y="196" text-anchor="middle" font-size="14" font-weight="bold" fill="#1C2733">C</text>
+      <text x="318" y="196" text-anchor="middle" font-size="14" font-weight="bold" fill="#1C2733">B</text>
+      <text x="199" y="124" text-anchor="middle" font-size="14" font-weight="bold" fill="#1C2733">O</text>
+    </svg>
+    <figcaption>שתי הזוויות עם הנעלם — זו מול זו. סימן השאלה — הזווית שבסעיף ב.</figcaption>
+  </figure>
+  <details class="sol">
+    <summary>הצגי פתרון מלא (כמו שכותבים במחברת)</summary>
+    <div class="sol-body">
+      <p><strong>מסרטטים מחדש בגדול</strong> ומסמנים את הזוג הקודקודי
+      ואת הזווית המבוקשת.</p>
+      <figure style="max-width:400px;margin:10px auto">
+        <svg viewBox="0 0 380 200" style="width:100%;max-width:640px;height:auto" role="img" aria-label="אותו שרטוט עם הזוג הקודקודי בוורוד והזווית המבוקשת בענברי">
+          <line x1="75" y1="20" x2="305" y2="180" stroke="#1C2733" stroke-width="2.5"/>
+          <line x1="75" y1="180" x2="305" y2="20" stroke="#1C2733" stroke-width="2.5"/>
+          <circle cx="190" cy="100" r="4.5" fill="#1C2733"/>
+          <path d="M 168.7 114.8 A 26 26 0 0 1 168.7 85.2" fill="none" stroke="#C2408C" stroke-width="3.5"/>
+          <path d="M 211.3 85.2 A 26 26 0 0 1 211.3 114.8" fill="none" stroke="#C2408C" stroke-width="3.5"/>
+          <path d="M 162.1 80.6 A 34 34 0 0 1 217.9 80.6" fill="none" stroke="#B7791F" stroke-width="3.5"/>
+          <text x="190" y="66" text-anchor="middle" font-size="15" font-weight="bold" fill="#B7791F">?</text>
+          <text x="112" y="105" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#C2408C">2x+10°</text>
+          <text x="270" y="105" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#C2408C">3x−20°</text>
+          <text x="62" y="16" text-anchor="middle" font-size="14" font-weight="bold" fill="#1C2733">A</text>
+          <text x="318" y="16" text-anchor="middle" font-size="14" font-weight="bold" fill="#1C2733">D</text>
+          <text x="62" y="196" text-anchor="middle" font-size="14" font-weight="bold" fill="#1C2733">C</text>
+          <text x="318" y="196" text-anchor="middle" font-size="14" font-weight="bold" fill="#1C2733">B</text>
+          <text x="199" y="124" text-anchor="middle" font-size="14" font-weight="bold" fill="#1C2733">O</text>
+        </svg>
+      </figure>
+      <table class="dtable">
+        <tr><th></th><th>טענה</th><th>נימוק</th></tr>
+        <tr><td>1</td><td class="hl-c5"><span class="fi">\(\textcolor{#C2408C}{\measuredangle AOC=2x+10^\circ}\)</span></td><td style="text-align:right">נתון</td></tr>
+        <tr><td>2</td><td class="hl-c5"><span class="fi">\(\textcolor{#C2408C}{\measuredangle BOD=3x-20^\circ}\)</span></td><td style="text-align:right">נתון</td></tr>
+        <tr><td>3</td><td><span class="fi">\(\measuredangle AOC=\measuredangle BOD\)</span></td><td style="text-align:right">זוויות קודקודיות שוות</td></tr>
+        <tr><td>4</td><td><span class="fi">\(2x+10^\circ=3x-20^\circ\)</span></td><td style="text-align:right">הצבה של 1 ו-2 בתוך 3</td></tr>
+        <tr><td>5</td><td><span class="fi">\(x=30^\circ\)</span></td><td style="text-align:right">העברת אגפים: <span class="fi">\(10^\circ+20^\circ=3x-2x\)</span></td></tr>
+        <tr class="tr-sep"><td colspan="3">סעיף ב — חישוב <span class="fi">\(\measuredangle AOD\)</span></td></tr>
+        <tr><td>6</td><td class="hl-c5 claim-nb"><span class="fi">\(\textcolor{#C2408C}{\measuredangle AOC}=2\cdot 30^\circ+10^\circ=70^\circ\)</span></td><td style="text-align:right">הצבה של 5 בתוך 1</td></tr>
+        <tr><td>7</td><td class="claim-nb" style="background:#FBF0C9"><span class="fi">\(\textcolor{#B7791F}{\measuredangle AOD}=180^\circ-70^\circ=110^\circ\)</span></td><td style="text-align:right">צמודות על הישר <span class="fi">\(CD\)</span>, סכומן <span class="fi">\(180^\circ\)</span> (לפי 6)</td></tr>
+      </table>
+      <p><strong>תשובה:</strong> <span class="fi">\(x=30^\circ\)</span>,
+      <span class="fi">\(\measuredangle AOD=110^\circ\)</span>.</p>
+      <p>בדיקת היגיון: גם <span class="fi">\(\measuredangle BOD=3\cdot 30^\circ-20^\circ=70^\circ\)</span> ✓
+      — הקודקודיות באמת יצאו שוות,
+      <br>וגם <span class="fi">\(110^\circ+70^\circ=180^\circ\)</span> ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="exp3"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · כמו במבחן</span><h4>משולש בין מקבילים</h4></div>
+  <p class="q-text">
+    בסרטוט: הישר העליון והישר התחתון מקבילים. קודקוד <span class="fi">\(A\)</span>
+    של המשולש נמצא על הישר העליון, והקודקודים <span class="fi">\(B\)</span>
+    ו-<span class="fi">\(C\)</span> — על הישר התחתון.
+    נתון: <span class="fi">\(\textcolor{#B7791F}{\measuredangle B=40^\circ}\)</span>,
+    <span class="fi">\(\textcolor{#2563EB}{\measuredangle C=60^\circ}\)</span>.
+    <br>א. מצאי את הזווית שבין הצלע <span class="fi">\(AB\)</span> לישר העליון —
+    הקשת המקווקוות משמאל לקודקוד <span class="fi">\(A\)</span>.
+    <br>ב. מצאי את <span class="fi">\(\measuredangle BAC\)</span> (המסומנת בסימן שאלה).
+    <br>ג. הראי שהתשובה מתאימה לסכום הזוויות במשולש.
+  </p>
+  <figure style="max-width:460px;margin:14px auto">
+    <svg viewBox="0 0 460 270" style="width:100%;max-width:640px;height:auto" role="img" aria-label="משולש שקודקודו על ישר מקביל לבסיסו">
+      <line x1="40" y1="74" x2="420" y2="74" stroke="#5A6875" stroke-width="3"/>
+      <line x1="40" y1="210" x2="420" y2="210" stroke="#5A6875" stroke-width="3"/>
+      <path d="M 394 67 l 12 7 -12 7" fill="none" stroke="#5A6875" stroke-width="2.5"/>
+      <path d="M 394 203 l 12 7 -12 7" fill="none" stroke="#5A6875" stroke-width="2.5"/>
+      <polygon points="272,74 110,210 350,210" fill="none" stroke="#1C2733" stroke-width="2.5"/>
+      <path d="M 140 210 A 30 30 0 0 0 133 190.7" fill="none" stroke="#B7791F" stroke-width="3.5"/>
+      <text x="160" y="197" text-anchor="middle" fill="#B7791F" font-size="14" font-weight="bold">40°</text>
+      <path d="M 335.1 184 A 30 30 0 0 0 320 210" fill="none" stroke="#2563EB" stroke-width="3.5"/>
+      <text x="300" y="193" text-anchor="middle" fill="#2563EB" font-size="14" font-weight="bold">60°</text>
+      <path d="M 246 74 A 26 26 0 0 0 252.1 90.7" fill="none" stroke="#B7791F" stroke-width="2.5" stroke-dasharray="5 4"/>
+      <path d="M 252.1 90.7 A 26 26 0 0 0 284.9 96.6" fill="none" stroke="#C2408C" stroke-width="2.5" stroke-dasharray="5 4"/>
+      <text x="264" y="122" text-anchor="middle" fill="#C2408C" font-size="15" font-weight="bold">?</text>
+      <text x="272" y="60" text-anchor="middle" fill="#1C2733" font-size="15" font-weight="bold">A</text>
+      <text x="95" y="228" text-anchor="middle" fill="#1C2733" font-size="15" font-weight="bold">B</text>
+      <text x="365" y="228" text-anchor="middle" fill="#1C2733" font-size="15" font-weight="bold">C</text>
+    </svg>
+    <figcaption>הזוויות הנתונות בקודקודים <span class="fi">\(B\)</span>
+    ו-<span class="fi">\(C\)</span> — בקשת מלאה.
+    <br>שתי הקשתות המקווקוות בקודקוד <span class="fi">\(A\)</span> הן המבוקשות:
+    זו שמשמאל היא סעיף א, וזו שבסימן שאלה היא סעיף ב.</figcaption>
+  </figure>
+  <details class="sol">
+    <summary>הצגי פתרון מלא (כמו שכותבים במחברת)</summary>
+    <div class="sol-body">
+      <p><strong>מסרטטים מחדש בגדול</strong> — וכותבים על הסרטוט כל זווית שמצאנו.
+      ככה זה נראה בסוף הפתרון:</p>
+      <figure style="max-width:460px;margin:10px auto">
+        <svg viewBox="0 0 460 270" style="width:100%;max-width:640px;height:auto" role="img" aria-label="אותו שרטוט עם שלוש הזוויות בקודקוד A מסומנות: 40, 80 ו-60 מעלות">
+          <line x1="40" y1="74" x2="420" y2="74" stroke="#5A6875" stroke-width="3"/>
+          <line x1="40" y1="210" x2="420" y2="210" stroke="#5A6875" stroke-width="3"/>
+          <path d="M 394 67 l 12 7 -12 7" fill="none" stroke="#5A6875" stroke-width="2.5"/>
+          <path d="M 394 203 l 12 7 -12 7" fill="none" stroke="#5A6875" stroke-width="2.5"/>
+          <polygon points="272,74 110,210 350,210" fill="none" stroke="#1C2733" stroke-width="2.5"/>
+          <path d="M 140 210 A 30 30 0 0 0 133 190.7" fill="none" stroke="#B7791F" stroke-width="3.5"/>
+          <text x="160" y="197" text-anchor="middle" fill="#B7791F" font-size="14" font-weight="bold">40°</text>
+          <path d="M 335.1 184 A 30 30 0 0 0 320 210" fill="none" stroke="#2563EB" stroke-width="3.5"/>
+          <text x="300" y="193" text-anchor="middle" fill="#2563EB" font-size="14" font-weight="bold">60°</text>
+          <path d="M 246 74 A 26 26 0 0 0 252.1 90.7" fill="none" stroke="#B7791F" stroke-width="3.5"/>
+          <text x="228" y="94" text-anchor="middle" fill="#B7791F" font-size="13.5" font-weight="bold">40°</text>
+          <path d="M 252.1 90.7 A 26 26 0 0 0 284.9 96.6" fill="none" stroke="#C2408C" stroke-width="3.5"/>
+          <text x="266" y="126" text-anchor="middle" fill="#C2408C" font-size="14" font-weight="bold">80°</text>
+          <path d="M 284.9 96.6 A 26 26 0 0 0 298 74" fill="none" stroke="#2563EB" stroke-width="3.5"/>
+          <text x="312" y="98" text-anchor="middle" fill="#2563EB" font-size="13.5" font-weight="bold">60°</text>
+          <text x="272" y="60" text-anchor="middle" fill="#1C2733" font-size="15" font-weight="bold">A</text>
+          <text x="95" y="228" text-anchor="middle" fill="#1C2733" font-size="15" font-weight="bold">B</text>
+          <text x="365" y="228" text-anchor="middle" fill="#1C2733" font-size="15" font-weight="bold">C</text>
+        </svg>
+        <figcaption>שלוש הזוויות בקודקוד <span class="fi">\(A\)</span> יושבות יחד על הישר
+        העליון: <span class="fi">\(\textcolor{#B7791F}{40^\circ}\)</span> (מתחלפת עם
+        <span class="fi">\(\measuredangle B\)</span>),
+        <span class="fi">\(\textcolor{#C2408C}{80^\circ}\)</span> (המבוקשת),
+        <span class="fi">\(\textcolor{#2563EB}{60^\circ}\)</span> (מתחלפת עם
+        <span class="fi">\(\measuredangle C\)</span>) — וביחד
+        <span class="fi">\(180^\circ\)</span>.</figcaption>
+      </figure>
+      <p><strong>א.</strong> הצלע <span class="fi">\(AB\)</span> היא חותך של שני
+      הישרים המקבילים. הזווית שמשמאל ל-<span class="fi">\(A\)</span> (בין
+      <span class="fi">\(AB\)</span> לישר העליון) והזווית
+      <span class="fi">\(\measuredangle B\)</span> יושבות בין המקבילים, בצדדים
+      מנוגדים של החותך — <strong>מתחלפות</strong> (צורת <span class="en">Z</span>), ולכן:</p>
+      $$\underbrace{\textcolor{#B7791F}{\measuredangle B}\;=\;\textcolor{#B7791F}{40^\circ}}_{\textcolor{#B7791F}{\text{וזו גם הזווית שמשמאל ל-}A}}$$
+      <p><strong>ב.</strong> באותו נימוק בדיוק, הצלע <span class="fi">\(AC\)</span>
+      גם היא חותך: הזווית שמימין ל-<span class="fi">\(A\)</span> מתחלפת עם
+      <span class="fi">\(\textcolor{#2563EB}{\measuredangle C=60^\circ}\)</span>.
+      <br>עכשיו שלוש הזוויות בקודקוד <span class="fi">\(A\)</span> יושבות יחד על הישר
+      העליון — זווית שטוחה, ושוב "שלם = חלק + חלק + חלק":</p>
+      $$\textcolor{#B7791F}{40^\circ}+\textcolor{#C2408C}{\measuredangle BAC}+\textcolor{#2563EB}{60^\circ}=180^\circ
+      \qquad\Longrightarrow\qquad
+      \textcolor{#C2408C}{\measuredangle BAC}=180^\circ-40^\circ-60^\circ=\textcolor{#C2408C}{80^\circ}$$
+      <p><strong>ג.</strong> בדיקה מול משפט סכום הזוויות:
+      <span class="fi">\(40^\circ+60^\circ+80^\circ=180^\circ\)</span> ✓</p>
+      <p>ושימי לב מה קרה כאן בדרך: שלוש זוויות המשולש נאספו לזווית שטוחה אחת
+      על הישר העליון. זו בדיוק ההוכחה של המשפט "סכום הזוויות במשולש הוא
+      <span class="fi">\(180^\circ\)</span>" — פתרת תרגיל, ובדרך הוכחת גם את המשפט עצמו.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex4"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">עכשיו את המורה</span><h4>מצאי את הטעות של דנה</h4></div>
+  <p class="q-text">
+    בסרטוט שני ישרים מקבילים וחותך. אחת הזוויות שבין המקבילים היא
+    <span class="fi">\(\textcolor{#C2408C}{70^\circ}\)</span>. דנה כתבה:
+    <span class="en">"</span>הזווית החד-צדדית לה היא גם <span class="fi">\(70^\circ\)</span>,
+    כי זוויות בין ישרים מקבילים שוות<span class="en">"</span>.
+    <span class="mk mk-find">מה השתבש — ואיך היית מסבירה לה את זה?</span>
+  </p>
+  <details class="sol">
+    <summary>הצגי תשובה</summary>
+    <div class="sol-body">
+      <p><strong>מסרטטים את המצב</strong> — ומיד רואים איפה דנה טעתה:</p>
+      <figure style="max-width:340px;margin:10px auto">
+        <svg viewBox="0 0 300 210" style="width:100%;max-width:640px;height:auto" role="img" aria-label="מקבילים וחותך: הזוג החד-צדדי 70 ו-110 מעלות">
+          <line x1="20" y1="55" x2="280" y2="55" stroke="#5A6875" stroke-width="3"/>
+          <line x1="20" y1="155" x2="280" y2="155" stroke="#5A6875" stroke-width="3"/>
+          <line x1="181" y1="15" x2="115.4" y2="195" stroke="#1C2733" stroke-width="2.5"/>
+          <path d="M 244 48 l 12 7 -12 7" fill="none" stroke="#5A6875" stroke-width="2.5"/>
+          <path d="M 244 148 l 12 7 -12 7" fill="none" stroke="#5A6875" stroke-width="2.5"/>
+          <circle cx="166.4" cy="55" r="4" fill="#1C2733"/>
+          <circle cx="130" cy="155" r="4" fill="#1C2733"/>
+          <path d="M 156 155 A 26 26 0 0 0 138.9 130.6" fill="none" stroke="#C2408C" stroke-width="3.5"/>
+          <text x="175" y="141" text-anchor="middle" fill="#C2408C" font-size="14" font-weight="bold">70°</text>
+          <path d="M 159.6 73.8 A 20 20 0 0 0 186.4 55" fill="none" stroke="#B7791F" stroke-width="3.5"/>
+          <text x="191" y="96" text-anchor="middle" fill="#B7791F" font-size="14" font-weight="bold">110°</text>
+        </svg>
+        <figcaption>שתי הזוויות בין המקבילים, באותו צד של החותך — זוג חד-צדדי
+        (צורת <span class="en">C</span>): <span class="fi">\(70^\circ\)</span>
+        ו-<span class="fi">\(110^\circ\)</span> משלימות
+        ל-<span class="fi">\(180^\circ\)</span> — לא שוות.</figcaption>
+      </figure>
+      <p>הכלל "שוות" נכון רק לשני זוגות: <strong>מתחלפות</strong>
+      (<span class="en">Z</span>) ו<strong>מתאימות</strong> (<span class="en">F</span>).
+      דנה החילה אותו על זוג <strong>חד-צדדי</strong> (<span class="en">C</span>) —
+      ושם הכלל הפוך: משלימות ל-<span class="fi">\(180^\circ\)</span>. הכלל הנכון, ואז ההצבה:</p>
+      $$\textcolor{#C2408C}{\alpha}+\textcolor{#B7791F}{\beta}=180^\circ
+      \qquad\Longrightarrow\qquad
+      \textcolor{#B7791F}{\beta}=180^\circ-\textcolor{#C2408C}{70^\circ}=\textcolor{#B7791F}{110^\circ}$$
+      <p>ואפשר לתפוס את הטעות גם בלי לזכור את הכלל: בין מקבילים יש רק זווית חדה
+      אחת וזווית קהה אחת. אילו שתי החד-צדדיות היו <span class="fi">\(70^\circ\)</span>,
+      שני הישרים היו נוטים זה אל זה באותה מידה — כלומר נפגשים,
+      ואז הם בכלל לא מקבילים. <strong>בדיקת היגיון תופסת כמעט כל טעות.</strong></p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex5"> סיימתי</label>
+</article>
+
+<!-- ============ ניווט ============ -->
+<div class="progresswrap no-print">
+  <span class="progressbar"><i></i></span><span class="progress-label"></span>
+  <button class="all-sols" style="font-family:inherit;font-size:12px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:4px 10px;cursor:pointer">לפתוח את כל הפתרונות</button>
+</div>
+
+<nav class="pagenav">
+  <a href="index.html"><span class="dir">→ נקודת ההתחלה</span>המפה</a>
+  <a class="next" href="02-triangles-congruence.html"><span class="dir">התחנה הבאה ←</span>משולשים וחפיפה</a>
+</nav>
+
+<footer class="fin">חלק מהעולם של שירה · <a href="index.html">המפה</a> · <a href="../index.html">המרכז</a></footer>
+</main>
+</div>
+</body>
+</html>

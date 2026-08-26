@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<!-- מסך הבית של האייפד/הטלפון -->
+<link rel="apple-touch-icon" href="../assets/icons/icon-180.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>משולשים וחפיפה — גאומטריה — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../vendor/katex.min.css">
+<link rel="stylesheet" href="../css/shira.css">
+<style>
+:root{--accent:var(--alg)}
+/* רשימת שוויונות צבעונית — רווח רחב במקום נקודת-אמצע (שנקראת בטעות ככפל) */
+.eq-list{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 34px;margin:8px 0 2px;font-size:15px}
+/* שורת הפרדה של סעיף בתוך טבלת טענה ונימוק */
+table.dtable tr.tr-sep td{background:var(--faint);font-weight:800;font-size:12.5px;letter-spacing:.05em;padding:4px 10px}
+/* שורת מש"ל — חתימת סוף הוכחה, כמו במחברת */
+table.dtable tr.tr-qed td{background:var(--card);text-align:left;color:var(--accent);font-weight:800;font-size:13.5px;letter-spacing:.05em;padding:4px 14px}
+/* נוסחת פיתגורס והשרטוט הקטן זה לצד זה (נערם במסך צר) */
+.fx-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 26px}
+.fx-row .fx-main{flex:1 1 250px;min-width:230px}
+.fx-row svg{flex:0 0 auto}
+</style>
+<script defer src="../vendor/katex.min.js"></script>
+<script defer src="../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../js/shira.js"></script>
+<style>
+/* מחוון פתיחה — כמה זמן, כמה תרגילים, ואיפה מתחילים לתרגל (מוסתר בהדפסה) */
+.pagemeta{display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px;
+  margin:12px 0 0; font-size:13px; color:var(--soft)}
+.pagemeta .pm-time{background:var(--faint); border-radius:999px; padding:3px 10px}
+.pagemeta .pm-time b{color:var(--ink); font-weight:700}
+.pagemeta .pm-jump{color:var(--accent); font-weight:700; text-decoration:none}
+.pagemeta .pm-jump:hover{text-decoration:underline}
+.pagemeta .pm-note{flex:1 1 100%; margin:0}
+#ex-first,#bank-map{scroll-margin-top:78px}
+</style>
+</head>
+<body data-page="geo:02-triangles-congruence">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">גאומטריה — המפה</a>
+    <span class="crumbs">תחנה <b>2</b> מתוך 8 · <b>משולשים וחפיפה</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">גאומטריה · תחנה 2 · תרגילי עוגן</div>
+  <h1>משולשים, חפיפה ופיתגורס</h1>
+  <p class="lead">
+    זו התחנה שבה הגאומטריה מפסיקה להיות "לזהות צורות" ומתחילה להיות "להוכיח".
+    נלמד מתי מותר להגיד ששני משולשים הם בעצם אותו משולש, איך כותבים את זה במחברת
+    כמו שהמורה מבקשת — ובסוף נפתור יחד, עד הסוף, את <strong>שלושת תרגילי החפיפה
+    האמיתיים מעבודת הקיץ שלך</strong>.
+  </p>
+  <p class="youknow"><b>בסוף העמוד תדעי:</b> לבחור נכון בין ארבעת משפטי החפיפה —
+  צ.צ.צ, צ.ז.צ, ז.צ.ז ו-צ.צ.ז ·
+  לכתוב הוכחת חפיפה מסודרת בטבלת טענה ונימוק ·
+  למצוא צלע חסרה במשולש ישר-זווית עם משפט פיתגורס.</p>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>≈ 30 דק׳</b> · 7 תרגילים</span>
+    <a class="pm-jump" href="#ex-first">לקפוץ ישר לתרגיל הראשון ↓</a>
+  </p>
+</header>
+
+<!-- ============ שלב 1 · סוגי משולשים ============ -->
+<div class="stagebar"><span class="dots-s"><i class="on"></i><i></i><i></i><i></i><i></i><i></i></span>
+  שלב <b>1</b> מתוך 6 · איזה משולש מולי?</div>
+<h2 id="sec-types">קודם כל מזהים: סוגי משולשים וסכום הזוויות</h2>
+
+<p>
+  כל תרגיל גאומטריה מתחיל באותה שנייה של זיהוי: <strong>איזה משולש יש לי, ומה מסומן בו?</strong>
+  כל סימון פותח משפחה אחרת של כללים.
+</p>
+<ul>
+  <li><strong>לפי צלעות:</strong> שווה-צלעות (שלוש צלעות שוות, וכל זווית <span class="fi">\(60^\circ\)</span>) ·
+      שווה-שוקיים (שתי צלעות שוות — עליו כל שלב 2) · שונה-צלעות (אין צלעות שוות בהכרח).</li>
+  <li><strong>לפי זוויות:</strong> חד-זוויות (כל הזוויות חדות) ·
+      ישר-זווית (זווית אחת של <span class="fi">\(90^\circ\)</span> — עליו כל שלב 5) ·
+      קהה-זווית (זווית אחת קהה).</li>
+</ul>
+
+<p>והכלל שעובד <strong>בכל</strong> משולש, בלי יוצא מהכלל:</p>
+
+<div class="fbox">
+  <div class="fbox-title">סכום הזוויות במשולש</div>
+  $$\textcolor{#C2408C}{\alpha}\;+\;\textcolor{#B7791F}{\beta}\;+\;\textcolor{#2E7D32}{\gamma}\;=\;180^\circ$$
+  <span class="f-legend">
+    <span><i class="sw" style="background:#FADCEC"></i> ורוד — <span class="fi">\(\alpha\)</span>, זווית ידועה אחת</span>
+    <span><i class="sw" style="background:#FBF0C9"></i> ענברי — <span class="fi">\(\beta\)</span>, זווית ידועה שנייה</span>
+    <span><i class="sw" style="background:#DFF0DC"></i> ירוק — <span class="fi">\(\gamma\)</span>, הזווית שמחפשים: <span class="fi">\(\gamma=180^\circ-\alpha-\beta\)</span></span>
+  </span>
+</div>
+
+<figure>
+  <svg viewBox="0 0 340 205" style="width:100%;max-width:480px;height:auto" role="img" aria-label="משולש עם שתי זוויות ידועות ואחת חסרה">
+    <polygon points="30,180 310,180 206,32" fill="#F7FAFC" stroke="#334155" stroke-width="3"/>
+    <path d="M68,180 A38,38 0 0 0 59.1,155.6" fill="none" stroke="#C2408C" stroke-width="3"/>
+    <text x="88" y="160" text-anchor="middle" font-size="15" font-weight="bold" fill="#C2408C">40°</text>
+    <path d="M270,180 A40,40 0 0 1 287,147.3" fill="none" stroke="#B7791F" stroke-width="3"/>
+    <text x="253" y="155" text-anchor="middle" font-size="15" font-weight="bold" fill="#B7791F">55°</text>
+    <path d="M183.1,51.3 A30,30 0 0 0 223.2,56.5" fill="none" stroke="#2E7D32" stroke-width="3"/>
+    <text x="205" y="86" text-anchor="middle" font-size="17" font-weight="bold" font-style="italic" fill="#2E7D32">γ = ?</text>
+  </svg>
+  <figcaption>שתי זוויות ידועות — השלישית כבר לא בחירה שלנו:
+  <span class="fi">\(\textcolor{#2E7D32}{\gamma}=180^\circ-\textcolor{#C2408C}{40^\circ}-\textcolor{#B7791F}{55^\circ}=85^\circ\)</span>.</figcaption>
+</figure>
+
+<p>
+  את כל ארגז הכלים של הזוויות — קודקודיות, מתחלפות, זוויות על ישר —
+  פגשת <a href="01-angles.html">בתחנה הקודמת</a>. נשתמש בו הרבה גם כאן:
+  בתרגילי עבודת הקיץ של התחנה הזו יש גם זוויות קודקודיות וגם זוויות מתחלפות.
+</p>
+
+<!-- ============ שלב 2 · שווה-שוקיים ============ -->
+<div class="stagebar"><span class="dots-s"><i></i><i class="on"></i><i></i><i></i><i></i><i></i></span>
+  שלב <b>2</b> מתוך 6 · שווה-שוקיים</div>
+<h2 id="sec-isosceles">משולש שווה-שוקיים: זוויות הבסיס שוות</h2>
+
+<p>
+  במשולש שווה-שוקיים שתי הצלעות השוות נקראות <strong>שוקיים</strong>, הצלע השלישית
+  נקראת <strong>בסיס</strong>, ושתי הזוויות שיושבות על הבסיס נקראות <strong>זוויות הבסיס</strong>.
+  המשפט המרכזי — בשני הכיוונים:
+</p>
+
+<div class="box def">
+  <div class="box-title">המשפט (וההפך שלו)</div>
+  אם <span class="fi">\(\textcolor{#2563EB}{AB=AC}\)</span>, אז זוויות הבסיס שוות:
+  <span class="fi">\(\textcolor{#C2408C}{\angle B=\angle C}\)</span>.
+  <br>וגם ההפך נכון: אם <span class="fi">\(\textcolor{#C2408C}{\angle B=\angle C}\)</span>,
+  אז <span class="fi">\(\textcolor{#2563EB}{AB=AC}\)</span> —
+  והמשולש שווה-שוקיים גם אם אף אחד לא אמר לנו את זה מראש.
+</div>
+
+<figure>
+  <svg viewBox="0 0 340 225" style="width:100%;max-width:480px;height:auto" role="img" aria-label="משולש שווה שוקיים עם זוויות בסיס שוות">
+    <polygon points="170,28 40,183 300,183" fill="#F7FAFC" stroke="#334155" stroke-width="3"/>
+    <line x1="131" y1="74.5" x2="79" y2="136.5" stroke="#2563EB" stroke-width="5"/>
+    <line x1="209" y1="74.5" x2="261" y2="136.5" stroke="#2563EB" stroke-width="5"/>
+    <line x1="99.7" y1="101" x2="110.3" y2="110" stroke="#2563EB" stroke-width="3.5"/>
+    <line x1="240.3" y1="101" x2="229.7" y2="110" stroke="#2563EB" stroke-width="3.5"/>
+    <path d="M74,183 A34,34 0 0 0 61.8,157" fill="none" stroke="#C2408C" stroke-width="3"/>
+    <text x="93" y="163" text-anchor="middle" font-size="15" font-weight="bold" fill="#C2408C">50°</text>
+    <path d="M266,183 A34,34 0 0 1 278.2,157.1" fill="none" stroke="#C2408C" stroke-width="3"/>
+    <text x="247" y="163" text-anchor="middle" font-size="15" font-weight="bold" fill="#C2408C">50°</text>
+    <path d="M153.4,47.8 A26,26 0 0 0 186.6,47.8" fill="none" stroke="#B7791F" stroke-width="3"/>
+    <text x="170" y="80" text-anchor="middle" font-size="15" font-weight="bold" fill="#B7791F">80°</text>
+    <text x="170" y="16" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">A</text>
+    <text x="24" y="201" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">B</text>
+    <text x="316" y="201" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">C</text>
+  </svg>
+  <figcaption>הסימון הכחול — קו באמצע כל שוק (לא מקצה לקצה) — אומר
+  "שתי אלה שוות זו לזו", ולכן שתי זוויות הבסיס הוורודות שוות. כאן זווית הראש היא
+  <span class="fi">\(\textcolor{#B7791F}{80^\circ}\)</span>, ולכן כל זווית בסיס:
+  <span class="fi">\(\frac{180^\circ-\textcolor{#B7791F}{80^\circ}}{2}=\frac{100^\circ}{2}=\textcolor{#C2408C}{50^\circ}\)</span>.</figcaption>
+</figure>
+
+<div class="box intuition">
+  <div class="box-title">איך משתמשים בזה בתרגילים</div>
+  ברגע שכתוב "שווה-שוקיים" (או שרואים סימוני צלעות שוות בשרטוט) —
+  מסמנות מיד את שתי זוויות הבסיס באותה אות. זווית אחת ידועה במשולש כזה
+  כמעט תמיד מספיקה כדי למצוא את כל השאר, כי שתיים מהזוויות שוות.
+</div>
+
+<!-- ============ שלב 3 · משפטי החפיפה ============ -->
+<div class="stagebar"><span class="dots-s"><i></i><i></i><i class="on"></i><i></i><i></i><i></i></span>
+  שלב <b>3</b> מתוך 6 · חפיפה</div>
+<h2 id="sec-congruence">חפיפת משולשים: מתי שני משולשים הם אותו משולש?</h2>
+
+<p>
+  שני משולשים <strong>חופפים</strong> אם הם זהים לחלוטין — כל הצלעות שוות בהתאמה
+  וכל הזוויות שוות בהתאמה. אפשר לחשוב על זה כך: זה אותו משולש בדיוק,
+  רק במקום אחר — מוזז, מסובב, אולי הפוך כמו במראה. מסמנים:
+  <span class="fi">\(\triangle ABC\cong\triangle DEF\)</span>.
+</p>
+
+<div class="box warn">
+  <div class="box-title">שימי לב: סדר האותיות קובע</div>
+  כשכותבים <span class="fi">\(\triangle ABC\cong\triangle DEF\)</span>, האותיות מסודרות
+  <strong>לפי ההתאמה</strong>: <span class="fi">\(A\leftrightarrow D\)</span>,
+  <span class="fi">\(B\leftrightarrow E\)</span>, <span class="fi">\(C\leftrightarrow F\)</span>.
+  מזה קוראים ישר את השוויונות: <span class="fi">\(AB=DE\)</span>,
+  <span class="fi">\(\angle A=\angle D\)</span> וכן הלאה — בלי להסתכל בשרטוט בכלל.
+  ובכיוון השני: כשאת כותבת חפיפה, בדקי שהאותיות שלך באמת מסודרות לפי ההתאמה.
+</div>
+
+<p>
+  והחדשות הטובות: לא צריך לבדוק את כל שש ההשוואות. מספיקות <strong>שלוש נכונות</strong> —
+  ואלה בדיוק <strong>ארבעת משפטי החפיפה</strong> שברשימת המשפטים של החוברת:
+  צ.ז.צ, ז.צ.ז, צ.צ.צ, וצלע-צלע-והזווית-שמול-הצלע-הגדולה (בקיצור צ.צ.ז).
+</p>
+
+<p class="aside">
+  איך מסמנים בכיתה: כל זוג איברים שווים מקבל סימון משלו בשני המשולשים.
+  הסימון על צלע הוא קו <strong>קצר</strong> באמצע הצלע — קצר במובהק מהצלע עצמה,
+  כדי שייקרא כסימון ולא כצלע.
+</p>
+
+<div class="box example">
+  <div class="box-title">משפט חפיפה 1 · צ.צ.צ (צלע-צלע-צלע)</div>
+  שלוש הצלעות של משולש אחד שוות לשלוש הצלעות של המשולש השני, בהתאמה.
+  <figure style="margin:12px 0 4px">
+    <svg viewBox="0 0 325 138" style="width:100%;max-width:340px;height:auto;display:block;margin:0 auto" role="img" aria-label="שני משולשים עם שלוש צלעות מסומנות שוות בצבעים תואמים">
+      <polygon points="15,105 135,105 95,20" fill="#FBFAF7" stroke="#334155" stroke-width="2.5"/>
+      <polygon points="185,105 305,105 265,20" fill="#FBFAF7" stroke="#334155" stroke-width="2.5"/>
+      <line x1="39" y1="79.5" x2="71" y2="45.5" stroke="#059669" stroke-width="5"/>
+      <line x1="209" y1="79.5" x2="241" y2="45.5" stroke="#059669" stroke-width="5"/>
+      <line x1="51" y1="105" x2="99" y2="105" stroke="#2563EB" stroke-width="5"/>
+      <line x1="221" y1="105" x2="269" y2="105" stroke="#2563EB" stroke-width="5"/>
+      <line x1="107" y1="45.5" x2="123" y2="79.5" stroke="#EA580C" stroke-width="5"/>
+      <line x1="277" y1="45.5" x2="293" y2="79.5" stroke="#EA580C" stroke-width="5"/>
+      <line x1="75" y1="99" x2="75" y2="111" stroke="#2563EB" stroke-width="3"/>
+      <line x1="245" y1="99" x2="245" y2="111" stroke="#2563EB" stroke-width="3"/>
+      <line x1="48.3" y1="61.6" x2="56.3" y2="69.2" stroke="#059669" stroke-width="3"/>
+      <line x1="53.7" y1="55.8" x2="61.7" y2="63.4" stroke="#059669" stroke-width="3"/>
+      <line x1="218.3" y1="61.6" x2="226.3" y2="69.2" stroke="#059669" stroke-width="3"/>
+      <line x1="223.7" y1="55.8" x2="231.7" y2="63.4" stroke="#059669" stroke-width="3"/>
+      <line x1="108.4" y1="60.1" x2="117.4" y2="55.9" stroke="#EA580C" stroke-width="3"/>
+      <line x1="110.5" y1="64.6" x2="119.5" y2="60.4" stroke="#EA580C" stroke-width="3"/>
+      <line x1="112.6" y1="69.1" x2="121.6" y2="64.9" stroke="#EA580C" stroke-width="3"/>
+      <line x1="278.4" y1="60.1" x2="287.4" y2="55.9" stroke="#EA580C" stroke-width="3"/>
+      <line x1="280.5" y1="64.6" x2="289.5" y2="60.4" stroke="#EA580C" stroke-width="3"/>
+      <line x1="282.6" y1="69.1" x2="291.6" y2="64.9" stroke="#EA580C" stroke-width="3"/>
+      <text x="160" y="72" text-anchor="middle" font-size="20" fill="#5A6875">≅</text>
+      <text x="10" y="122" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">A</text>
+      <text x="95" y="14" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">B</text>
+      <text x="140" y="122" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">C</text>
+      <text x="180" y="122" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">D</text>
+      <text x="265" y="14" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">E</text>
+      <text x="310" y="122" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">F</text>
+    </svg>
+    <div class="eq-list">
+      <span class="fi">\(\textcolor{#059669}{AB=DE}\)</span>
+      <span class="fi">\(\textcolor{#2563EB}{AC=DF}\)</span>
+      <span class="fi">\(\textcolor{#EA580C}{BC=EF}\)</span>
+    </div>
+    <figcaption>שלושת זוגות הצלעות השוות — ירוק, כחול וכתום;
+    הקווים הקטנים (1 / 2 / 3) אומרים איזה זוג הוא איזה.</figcaption>
+  </figure>
+</div>
+
+<div class="box example">
+  <div class="box-title">משפט חפיפה 2 · צ.ז.צ (צלע-זווית-צלע)</div>
+  שתי צלעות והזווית <strong>הכלואה ביניהן</strong> במשולש אחד שוות לשתי צלעות
+  והזווית הכלואה ביניהן במשולש השני.
+  <figure style="margin:12px 0 4px">
+    <svg viewBox="0 0 325 138" style="width:100%;max-width:340px;height:auto;display:block;margin:0 auto" role="img" aria-label="שני משולשים עם שתי צלעות והזווית הכלואה מסומנות בצבעים תואמים">
+      <polygon points="15,105 135,105 95,20" fill="#FBFAF7" stroke="#334155" stroke-width="2.5"/>
+      <polygon points="185,105 305,105 265,20" fill="#FBFAF7" stroke="#334155" stroke-width="2.5"/>
+      <line x1="39" y1="79.5" x2="71" y2="45.5" stroke="#059669" stroke-width="5"/>
+      <line x1="209" y1="79.5" x2="241" y2="45.5" stroke="#059669" stroke-width="5"/>
+      <line x1="51" y1="105" x2="99" y2="105" stroke="#2563EB" stroke-width="5"/>
+      <line x1="221" y1="105" x2="269" y2="105" stroke="#2563EB" stroke-width="5"/>
+      <line x1="75" y1="99" x2="75" y2="111" stroke="#2563EB" stroke-width="3"/>
+      <line x1="245" y1="99" x2="245" y2="111" stroke="#2563EB" stroke-width="3"/>
+      <line x1="48.3" y1="61.6" x2="56.3" y2="69.2" stroke="#059669" stroke-width="3"/>
+      <line x1="53.7" y1="55.8" x2="61.7" y2="63.4" stroke="#059669" stroke-width="3"/>
+      <line x1="218.3" y1="61.6" x2="226.3" y2="69.2" stroke="#059669" stroke-width="3"/>
+      <line x1="223.7" y1="55.8" x2="231.7" y2="63.4" stroke="#059669" stroke-width="3"/>
+      <path d="M35,105 A20,20 0 0 0 28.7,90.4" fill="none" stroke="#C2408C" stroke-width="3.5"/>
+      <path d="M205,105 A20,20 0 0 0 198.7,90.4" fill="none" stroke="#C2408C" stroke-width="3.5"/>
+      <text x="160" y="72" text-anchor="middle" font-size="20" fill="#5A6875">≅</text>
+      <text x="10" y="122" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">A</text>
+      <text x="95" y="14" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">B</text>
+      <text x="140" y="122" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">C</text>
+      <text x="180" y="122" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">D</text>
+      <text x="265" y="14" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">E</text>
+      <text x="310" y="122" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">F</text>
+    </svg>
+    <div class="eq-list">
+      <span class="fi">\(\textcolor{#059669}{AB=DE}\)</span>
+      <span class="fi">\(\textcolor{#C2408C}{\angle A=\angle D}\)</span>
+      <span class="fi">\(\textcolor{#2563EB}{AC=DF}\)</span>
+    </div>
+    <figcaption>צלע ירוקה, זווית ורודה, צלע כחולה — והזווית הוורודה יושבת
+    <strong>בין</strong> שתי הצלעות המסומנות: כלואה. זה התנאי, ותכף נראה למה הוא קריטי.</figcaption>
+  </figure>
+</div>
+
+<div class="box example">
+  <div class="box-title">משפט חפיפה 3 · ז.צ.ז (זווית-צלע-זווית)</div>
+  שתי זוויות והצלע <strong>הכלואה ביניהן</strong> במשולש אחד שוות לשתי זוויות
+  והצלע הכלואה ביניהן במשולש השני.
+  <figure style="margin:12px 0 4px">
+    <svg viewBox="0 0 325 138" style="width:100%;max-width:340px;height:auto;display:block;margin:0 auto" role="img" aria-label="שני משולשים עם שתי זוויות והצלע הכלואה מסומנות בצבעים תואמים">
+      <polygon points="15,105 135,105 95,20" fill="#FBFAF7" stroke="#334155" stroke-width="2.5"/>
+      <polygon points="185,105 305,105 265,20" fill="#FBFAF7" stroke="#334155" stroke-width="2.5"/>
+      <line x1="51" y1="105" x2="99" y2="105" stroke="#2563EB" stroke-width="5"/>
+      <line x1="221" y1="105" x2="269" y2="105" stroke="#2563EB" stroke-width="5"/>
+      <path d="M35,105 A20,20 0 0 0 28.7,90.4" fill="none" stroke="#C2408C" stroke-width="3.5"/>
+      <path d="M205,105 A20,20 0 0 0 198.7,90.4" fill="none" stroke="#C2408C" stroke-width="3.5"/>
+      <path d="M115,105 A20,20 0 0 1 126.5,86.9" fill="none" stroke="#B7791F" stroke-width="3.5"/>
+      <path d="M285,105 A20,20 0 0 1 296.5,86.9" fill="none" stroke="#B7791F" stroke-width="3.5"/>
+      <line x1="75" y1="99" x2="75" y2="111" stroke="#2563EB" stroke-width="3"/>
+      <line x1="245" y1="99" x2="245" y2="111" stroke="#2563EB" stroke-width="3"/>
+      <text x="160" y="72" text-anchor="middle" font-size="20" fill="#5A6875">≅</text>
+      <text x="10" y="122" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">A</text>
+      <text x="95" y="14" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">B</text>
+      <text x="140" y="122" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">C</text>
+      <text x="180" y="122" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">D</text>
+      <text x="265" y="14" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">E</text>
+      <text x="310" y="122" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">F</text>
+    </svg>
+    <div class="eq-list">
+      <span class="fi">\(\textcolor{#C2408C}{\angle A=\angle D}\)</span>
+      <span class="fi">\(\textcolor{#2563EB}{AC=DF}\)</span>
+      <span class="fi">\(\textcolor{#B7791F}{\angle C=\angle F}\)</span>
+    </div>
+    <figcaption>הצלע הכחולה מחברת בדיוק את שני קודקודי הזוויות המסומנות —
+    ורוד בקצה אחד, ענברי בקצה השני: כלואה ביניהן.</figcaption>
+  </figure>
+</div>
+
+<div class="box example" id="thm-ssa">
+  <div class="box-title">משפט חפיפה 4 · צ.צ.ז (צלע-צלע-זווית)</div>
+  שתי צלעות והזווית שנמצאת <strong>מול הצלע הגדולה מבין השתיים</strong> במשולש אחד
+  שוות בהתאמה לשתי צלעות ולזווית שמול הגדולה מביניהן במשולש השני.
+  <figure style="margin:12px 0 4px">
+    <svg viewBox="0 0 325 138" style="width:100%;max-width:340px;height:auto;display:block;margin:0 auto" role="img" aria-label="שני משולשים עם שתי צלעות שוות והזווית שמול הצלע הגדולה מסומנות בצבעים תואמים">
+      <polygon points="15,105 135,105 110,22" fill="#FBFAF7" stroke="#334155" stroke-width="2.5"/>
+      <polygon points="185,105 305,105 280,22" fill="#FBFAF7" stroke="#334155" stroke-width="2.5"/>
+      <line x1="43.5" y1="80.1" x2="81.5" y2="46.9" stroke="#059669" stroke-width="5"/>
+      <line x1="56.5" y1="60.8" x2="64.4" y2="69.8" stroke="#059669" stroke-width="3"/>
+      <line x1="60.6" y1="57.2" x2="68.5" y2="66.2" stroke="#059669" stroke-width="3"/>
+      <line x1="213.5" y1="80.1" x2="251.5" y2="46.9" stroke="#059669" stroke-width="5"/>
+      <line x1="226.5" y1="60.8" x2="234.4" y2="69.8" stroke="#059669" stroke-width="3"/>
+      <line x1="230.6" y1="57.2" x2="238.5" y2="66.2" stroke="#059669" stroke-width="3"/>
+      <line x1="117.5" y1="46.9" x2="127.5" y2="80.1" stroke="#EA580C" stroke-width="5"/>
+      <line x1="126.7" y1="56.5" x2="115.2" y2="60" stroke="#EA580C" stroke-width="3"/>
+      <line x1="128.2" y1="61.8" x2="116.8" y2="65.2" stroke="#EA580C" stroke-width="3"/>
+      <line x1="129.8" y1="67" x2="118.3" y2="70.5" stroke="#EA580C" stroke-width="3"/>
+      <line x1="287.5" y1="46.9" x2="297.5" y2="80.1" stroke="#EA580C" stroke-width="5"/>
+      <line x1="296.7" y1="56.5" x2="285.2" y2="60" stroke="#EA580C" stroke-width="3"/>
+      <line x1="298.2" y1="61.8" x2="286.8" y2="65.2" stroke="#EA580C" stroke-width="3"/>
+      <line x1="299.8" y1="67" x2="288.3" y2="70.5" stroke="#EA580C" stroke-width="3"/>
+      <path d="M113,105 A22,22 0 0 1 128.7,83.9" fill="none" stroke="#C2408C" stroke-width="3.5"/>
+      <path d="M283,105 A22,22 0 0 1 298.7,83.9" fill="none" stroke="#C2408C" stroke-width="3.5"/>
+      <text x="160" y="72" text-anchor="middle" font-size="20" fill="#5A6875">≅</text>
+      <text x="10" y="122" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">A</text>
+      <text x="112" y="15" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">B</text>
+      <text x="140" y="122" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">C</text>
+      <text x="180" y="122" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">D</text>
+      <text x="282" y="15" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">E</text>
+      <text x="310" y="122" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">F</text>
+    </svg>
+    <div class="eq-list">
+      <span class="fi">\(\textcolor{#059669}{AB=DE}\)</span>
+      <span class="fi">\(\textcolor{#EA580C}{BC=EF}\)</span>
+      <span class="fi">\(\textcolor{#C2408C}{\angle C=\angle F}\)</span>
+    </div>
+    <div class="eq-list" style="margin-top:2px">
+      <span>והתנאי: <span class="fi">\(\textcolor{#059669}{AB}>\textcolor{#EA580C}{BC}\)</span></span>
+    </div>
+    <figcaption>הצלע הירוקה <span class="fi">\(AB\)</span> גדולה מהכתומה
+    <span class="fi">\(BC\)</span>, והזווית הוורודה ב-<span class="fi">\(C\)</span> יושבת
+    בדיוק <strong>מול</strong> הירוקה — הגדולה מבין השתיים. זה התנאי של המשפט.</figcaption>
+  </figure>
+  <p style="margin:8px 0 0">
+    <b>המקרה השכיח ביותר שלו:</b> שני משולשים ישרי-זווית שבהם שווים היתר וניצב.
+    היתר הוא תמיד הצלע הגדולה במשולש ישר-זווית, והזווית הישרה יושבת בדיוק מולו —
+    כך שהתנאי מתקיים מעצמו.
+    למשל <span class="fi">\(\angle B=\angle E=90^\circ\)</span> עם
+    <span class="fi">\(AC=DF=10\)</span> ו-<span class="fi">\(BC=EF=6\)</span>:
+    <span class="fi">\(10>6\)</span>, ולכן <span class="fi">\(\triangle ABC\cong\triangle DEF\)</span>
+    לפי צ.צ.ז.
+    ההוכחה המלאה של המקרה הזה, שורה-שורה, היא
+    <a href="05-proof-models.html#m08">דגם 8 בספריית הדגמים</a>.
+  </p>
+</div>
+
+<div class="box warn">
+  <div class="box-title">שימי לב: בצ.צ.ז בודקים קודם מול איזו צלע יושבת הזווית</div>
+  התנאי של המשפט הוא שהזווית השווה יושבת מול הצלע <strong>הגדולה</strong> מבין שתי הצלעות
+  השוות — ורק כך הוא חל. כשהיא יושבת מול הקטנה, אותם נתונים מתאימים לשני משולשים שונים
+  (רואים את זה בשרטוט של התרגיל האחרון בעמוד), ולכן שם מחפשות דרך אחרת.
+  <br>וכלל נוסף מאותה רשימה:
+  <strong>אין לחפוף משולשים לפי צ.ז.ז</strong> (זווית, זווית והצלע שאינה ביניהן).
+  מה שכן עושים במצב הזה: מראים ששתי הזוויות שוות, מסיקים מהן שגם
+  <strong>הזווית השלישית</strong> שווה (סכום הזוויות במשולש
+  <span class="fi">\(180^\circ\)</span>), ואז הצלע כבר כלואה בין שתי זוויות שוות —
+  ומשתמשים ב-ז.צ.ז.
+</div>
+
+<div class="box intuition">
+  <div class="box-title">איך בוחרים משפט? סופרים מה יש</div>
+  אחרי שסימנת על השרטוט את כל מה שנתון, ספרי:
+  <br>שלוש צלעות? ← צ.צ.צ. · שתי צלעות וזווית ביניהן? ← צ.ז.צ ·
+  שתי זוויות וצלע ביניהן? ← ז.צ.ז.
+  <br>שתי צלעות וזווית שאינה ביניהן? בודקות מול איזו צלע היא יושבת: מול הגדולה ← צ.צ.ז.
+  <br>שתי זוויות וצלע שאינה ביניהן? משלימות את הזווית השלישית ← ז.צ.ז.
+  <br>יש רק שניים מתוך שלושה? מחפשים איבר שלישי שהשרטוט עצמו נותן:
+  צלע משותפת, זוויות קודקודיות, זוויות מתחלפות בין מקבילים, זוויות בסיס
+  בשווה-שוקיים. זה בדיוק המשחק בתרגילים של שלב 6.
+</div>
+
+<!-- ============ שלב 4 · איך כותבים הוכחה ============ -->
+<div class="stagebar"><span class="dots-s"><i></i><i></i><i></i><i class="on"></i><i></i><i></i></span>
+  שלב <b>4</b> מתוך 6 · כותבים הוכחה</div>
+<h2 id="sec-proof">איך כותבים הוכחת חפיפה במחברת — טענה ונימוק</h2>
+
+<p>
+  בעבודת הקיץ כתוב במפורש: "רשמו: נתון, צ"ל והוכחה מנומקת".
+  זה בדיוק השלד שכל הוכחה בבית הספר בנויה ממנו — וההוכחה עצמה נכתבת
+  כטבלה של <strong>טענה | נימוק</strong>: כל שורה אומרת משהו, ומיד מסבירה
+  מאיפה היא יודעת אותו. נבנה אחת ביחד, מההתחלה עד הסוף.
+</p>
+
+<article id="ex-first" class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>הוכחת החפיפה הראשונה שלך</h4></div>
+  <p class="q-text">
+    בשרטוט: הקטעים <span class="fi">\(AC\)</span> ו-<span class="fi">\(BD\)</span> נחתכים בנקודה
+    <span class="fi">\(E\)</span>.
+    <span class="mk mk-given">נתון: <span class="fi">\(\textcolor{#2563EB}{AE=CE}\)</span> וגם <span class="fi">\(\textcolor{#059669}{BE=DE}\)</span></span>.
+    <span class="mk mk-find">צריך להוכיח (צ"ל): <span class="fi">\(\triangle AEB\cong\triangle CED\)</span></span>.
+    <br>ובהמשך — סעיף ב: רשמי את השוויונות הנובעים מהחפיפה.
+  </p>
+  <figure>
+    <svg viewBox="0 0 340 200" style="width:100%;max-width:440px;height:auto" role="img" aria-label="שני קטעים נחתכים בנקודה E ויוצרים שני משולשים">
+      <line x1="40" y1="30" x2="300" y2="170" stroke="#334155" stroke-width="3"/>
+      <line x1="290" y1="30" x2="50" y2="170" stroke="#334155" stroke-width="3"/>
+      <line x1="79" y1="51" x2="131" y2="79" stroke="#2563EB" stroke-width="5"/>
+      <line x1="209" y1="121" x2="261" y2="149" stroke="#2563EB" stroke-width="5"/>
+      <line x1="254" y1="51" x2="206" y2="79" stroke="#059669" stroke-width="5"/>
+      <line x1="134" y1="121" x2="86" y2="149" stroke="#059669" stroke-width="5"/>
+      <line x1="102.2" y1="70.3" x2="107.8" y2="59.7" stroke="#2563EB" stroke-width="3.5"/>
+      <line x1="232.2" y1="140.3" x2="237.8" y2="129.7" stroke="#2563EB" stroke-width="3.5"/>
+      <line x1="224" y1="61.6" x2="230" y2="72" stroke="#059669" stroke-width="3"/>
+      <line x1="230" y1="58" x2="236" y2="68.4" stroke="#059669" stroke-width="3"/>
+      <line x1="104" y1="131.6" x2="110" y2="142" stroke="#059669" stroke-width="3"/>
+      <line x1="110" y1="128" x2="116" y2="138.4" stroke="#059669" stroke-width="3"/>
+      <path d="M150.6,89.6 A22,22 0 0 1 189,88.9" fill="none" stroke="#C2408C" stroke-width="3"/>
+      <path d="M151,111.1 A22,22 0 0 0 189.4,110.4" fill="none" stroke="#C2408C" stroke-width="3"/>
+      <text x="30" y="24" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">A</text>
+      <text x="300" y="24" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">B</text>
+      <text x="38" y="188" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">D</text>
+      <text x="312" y="188" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">C</text>
+      <text x="146" y="105" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">E</text>
+    </svg>
+    <figcaption>כחול = הזוג <span class="fi">\(\textcolor{#2563EB}{AE=CE}\)</span>,
+    ירוק = הזוג <span class="fi">\(\textcolor{#059669}{BE=DE}\)</span>,
+    והקשתות הוורודות = הזוויות בנקודת החיתוך, שתכף נשתמש בהן.</figcaption>
+  </figure>
+  <p style="font-size:13px;color:var(--soft)">נסי לנחש את השלב הבא לפני שאת פותחת אותו.</p>
+  <details class="step"><summary>שלב ראשון — מסמנים על השרטוט מה נתון</summary>
+    <div class="step-body">
+      מסמנות קו קצר באמצע <span class="fi">\(AE\)</span> ובאמצע
+      <span class="fi">\(CE\)</span> (זוג אחד), וסימון אחר באמצע
+      <span class="fi">\(BE\)</span> ובאמצע <span class="fi">\(DE\)</span>
+      (זוג שני). יש לנו <strong>שתי צלעות</strong>
+      בכל משולש — חסר איבר שלישי כדי להפעיל משפט חפיפה.
+    </div>
+  </details>
+  <details class="step"><summary>שלב שני — מאיפה משיגים איבר שלישי?</summary>
+    <div class="step-body">
+      מסתכלות איפה שני המשולשים נפגשים: בנקודה <span class="fi">\(E\)</span>.
+      הזוויות <span class="fi">\(\angle AEB\)</span> ו-<span class="fi">\(\angle CED\)</span>
+      הן <strong>זוויות קודקודיות</strong> — ומהתחנה הקודמת את יודעת שהן שוות, תמיד.
+      ועכשיו שימי לב <em>איפה</em> הזווית הזו יושבת: בדיוק <strong>בין</strong> שתי הצלעות
+      הנתונות בכל משולש. כלואה. זה בדיוק מה שצ.ז.צ דורש.
+    </div>
+  </details>
+  <details class="step"><summary>שלב שלישי — כותבים במחברת: טענה ונימוק</summary>
+    <div class="step-body">
+      <p>ככה זה נראה כתוב מסודר — בדיוק בפורמט שהמורה מצפה לו.
+      <strong>הכל נכתב בתוך הטבלה</strong>: הנתונים פותחים אותה (והנימוק שלהם — פשוט
+      "נתון"), כל חישוב הוא שורה משלו, וסעיף ב ממשיך באותה טבלה אחרי שורת הפרדה:</p>
+      <table class="dtable">
+        <tr><th></th><th>טענה</th><th>נימוק</th></tr>
+        <tr><td>1</td><td class="hl-c2"><span class="fi">\(\textcolor{#2563EB}{AE=CE}\)</span></td><td style="text-align:right">נתון</td></tr>
+        <tr><td>2</td><td class="hl-c3"><span class="fi">\(\textcolor{#059669}{BE=DE}\)</span></td><td style="text-align:right">נתון</td></tr>
+        <tr><td>3</td><td class="hl-c5"><span class="fi">\(\textcolor{#C2408C}{\angle AEB=\angle CED}\)</span></td><td style="text-align:right">זוויות קודקודיות שוות</td></tr>
+        <tr><td>4</td><td><span class="fi">\(\triangle AEB\cong\triangle CED\)</span></td><td style="text-align:right">משפט חפיפה צ.ז.צ (לפי 1, 3, 2)</td></tr>
+        <tr class="tr-qed"><td colspan="3"><b>מש"ל א׳</b></td></tr>
+        <tr class="tr-sep"><td colspan="3">סעיף ב — השוויונות הנובעים מהחפיפה</td></tr>
+        <tr><td>5</td><td><span class="fi">\(AB=CD\)</span></td><td style="text-align:right">צלעות מתאימות במשולשים חופפים שוות (לפי 4)</td></tr>
+        <tr><td>6</td><td><span class="fi">\(\angle EAB=\angle ECD\)</span></td><td style="text-align:right">זוויות מתאימות במשולשים חופפים שוות (לפי 4)</td></tr>
+        <tr><td>7</td><td><span class="fi">\(\angle ABE=\angle CDE\)</span></td><td style="text-align:right">זוויות מתאימות במשולשים חופפים שוות (לפי 4)</td></tr>
+        <tr class="tr-qed"><td colspan="3"><b>מש"ל ב׳</b></td></tr>
+      </table>
+      <p>את השורות של סעיף ב קוראים ישר מהתאמת האותיות
+      (<span class="fi">\(A\leftrightarrow C\)</span>, <span class="fi">\(E\leftrightarrow E\)</span>,
+      <span class="fi">\(B\leftrightarrow D\)</span>) — בלי להסתכל בשרטוט בכלל.</p>
+    </div>
+  </details>
+  <details class="alt">
+    <summary>אותה שאלה בניסוחים אחרים — איך עוד מבקשים הוכחת חפיפה?</summary>
+    <div class="alt-body">
+      <ul>
+        <li>"הוכיחו כי <span class="fi">\(\triangle AEB\cong\triangle CED\)</span>" — הניסוח הישיר.</li>
+        <li>"הוכיחו כי <span class="fi">\(AB=CD\)</span>" — ניסוח נפוץ מאוד! כדי להוכיח
+            ששתי צלעות שוות, מוכיחים קודם שהמשולשים שלהן חופפים, ואז הצלעות שוות כי הן מתאימות.</li>
+        <li>"הוכיחו כי <span class="fi">\(\angle A=\angle C\)</span>" — אותו טריק בדיוק, עם זוויות.</li>
+        <li>"מצאו את גודל הזווית..." כשחסר נתון במשולש אחד — לפעמים הדרך היחידה אליו
+            עוברת דרך חפיפה למשולש השני (זה בדיוק תרגיל 2 של עבודת הקיץ, בשלב 6).</li>
+      </ul>
+      <p>ברגע שכתוב "הוכיחו ששני קטעים / שתי זוויות שווים" ואין דרך ישירה —
+      חשדי מיד: כנראה הדרך עוברת דרך חפיפה.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex1"> סיימתי את התרגיל הזה</label>
+</article>
+
+<div class="box def">
+  <div class="box-title">השלד הקבוע של כל הוכחה</div>
+  <strong>נתון</strong> (מה שקיבלנו) ← <strong>צ"ל</strong> (מה שצריך להוכיח) ←
+  <strong>הוכחה</strong> בטבלת טענה | נימוק ← <strong>מסקנה</strong> (אם ביקשו שוויונות נובעים).
+  <br>ובסוף כל חלק שהוכחת — חותמים <strong>מש"ל</strong> ("מה שצריך היה להוכיח");
+  כשיש כמה סעיפים, כל אחד מקבל את שלו: מש"ל א׳, מש"ל ב׳.
+  סעיף שהוא רק חישוב נגמר בתשובה מודגשת, בלי מש"ל.
+  <br>כלל הזהב לנימוקים: מותר לכתוב רק "נתון", משפט שלמדנו, או שורה קודמת בטבלה.
+  "רואים בשרטוט" הוא לא נימוק.
+</div>
+
+<details class="more-x">
+  <summary>הנימוקים החוזרים — עשרת המשפטים שכמעט כל הוכחה נשענת עליהם</summary>
+  <div class="step-body">
+    <ul>
+      <li>נתון — הנימוק הראשון של כמעט כל הוכחה.</li>
+      <li>זוויות קודקודיות שוות זו לזו.</li>
+      <li>סכום זוויות צמודות (על ישר אחד) הוא <span class="fi">\(180^\circ\)</span>.</li>
+      <li>סכום הזוויות במשולש הוא <span class="fi">\(180^\circ\)</span>.</li>
+      <li>זוויות מתחלפות בין ישרים מקבילים שוות (וגם מתאימות שוות).</li>
+      <li>במשולש שווה-שוקיים זוויות הבסיס שוות — וגם ההפך.</li>
+      <li>זווית חיצונית למשולש שווה לסכום שתי הזוויות הפנימיות שאינן צמודות לה.</li>
+      <li>צלע משותפת לשני המשולשים (למשל <span class="fi">\(BD=BD\)</span>).</li>
+      <li>הגדרת ריבוע / מלבן: כל הצלעות שוות · כל הזוויות ישרות.</li>
+      <li>כלל המעבר: שני דברים ששווים לאותו דבר — שווים זה לזה.</li>
+    </ul>
+    <p>הרשימה המלאה, עם שרטוט וכתיב מתמטי לכל משפט, נמצאת בחוברת
+    "המשפטים בגיאומטריה" — <a href="../library.html">בספרייה</a>.</p>
+  </div>
+</details>
+
+<!-- ============ שלב 5 · פיתגורס ============ -->
+<div class="stagebar"><span class="dots-s"><i></i><i></i><i></i><i></i><i class="on"></i><i></i></span>
+  שלב <b>5</b> מתוך 6 · פיתגורס</div>
+<h2 id="sec-pythagoras">משפט פיתגורס: רק במשולש ישר-זווית</h2>
+
+<p>
+  במשולש ישר-זווית יש שמות לצלעות: שתי הצלעות שיוצרות את הזווית הישרה נקראות
+  <strong>ניצבים</strong>, והצלע שמול הזווית הישרה — הארוכה מכולן — נקראת
+  <strong>יתר</strong>. משפט פיתגורס קושר את שלושתן:
+</p>
+
+<div class="fbox">
+  <div class="fbox-title">משפט פיתגורס</div>
+  <div class="fx-row">
+    <div class="fx-main">
+      $$\underbrace{\textcolor{#2E7D6B}{a}^{2}+\textcolor{#66B08A}{b}^{2}}_{\raisebox{-0.5em}{$\textcolor{#2E7D6B}{\text{שני הניצבים}}$}}\;=\;\underbrace{\textcolor{#7C3AED}{c}^{2}}_{\raisebox{-0.5em}{$\textcolor{#7C3AED}{\text{היתר}}$}}$$
+      <span class="f-legend">
+        <span><i class="sw" style="background:#2E7D6B"></i> ירוק כהה — הניצב <span class="fi">\(\textcolor{#2E7D6B}{a}\)</span></span>
+        <span><i class="sw" style="background:#66B08A"></i> ירוק בהיר — הניצב <span class="fi">\(\textcolor{#66B08A}{b}\)</span></span>
+        <span><i class="sw" style="background:#7C3AED"></i> סגול — היתר: הצלע שמול הזווית הישרה, תמיד הארוכה ביותר</span>
+      </span>
+    </div>
+    <svg viewBox="0 0 360 260" width="245" style="max-width:100%;height:auto" role="img" aria-label="משולש ישר זווית עם ניצבים 3 ו-4 ויתר 5">
+      <polygon points="60,220 300,220 60,40" fill="#F8FAFC" stroke="none"/>
+      <line x1="60" y1="220" x2="60" y2="40" stroke="#2E7D6B" stroke-width="5"/>
+      <line x1="60" y1="220" x2="300" y2="220" stroke="#66B08A" stroke-width="5"/>
+      <line x1="60" y1="40" x2="300" y2="220" stroke="#7C3AED" stroke-width="5"/>
+      <path d="M60,204 h16 v16" fill="none" stroke="#C2408C" stroke-width="3"/>
+      <text x="42" y="136" text-anchor="middle" font-size="19" font-weight="bold" fill="#2E7D6B">3</text>
+      <text x="180" y="250" text-anchor="middle" font-size="19" font-weight="bold" fill="#66B08A">4</text>
+      <text x="198" y="112" text-anchor="middle" font-size="19" font-weight="bold" fill="#7C3AED">5</text>
+    </svg>
+  </div>
+</div>
+
+<p>
+  המשולש הקטן שליד הנוסחה הוא המפורסם בעולם — 3-4-5.
+  הריבוע הקטן מסמן את הזווית הישרה — והיתר תמיד יושב ממול לה.
+  בדיקה שהמשולש הזה באמת מקיים את המשפט:</p>
+$$\textcolor{#2E7D6B}{3}^{2}+\textcolor{#66B08A}{4}^{2}=9+16=25=\textcolor{#7C3AED}{5}^{2}\;\;\checkmark$$
+
+<p>
+  ובכיוון השני — כשהיתר ידוע וניצב חסר — מזיזים אגף:
+  <span class="fi">\(\textcolor{#2E7D6B}{a}^{2}=\textcolor{#7C3AED}{c}^{2}-\textcolor{#66B08A}{b}^{2}\)</span>.
+  שימי לב: <strong>מחסרים</strong>, לא מחברים.
+</p>
+
+<div class="box warn">
+  <div class="box-title">שימי לב — שתי הטעויות הנפוצות בפיתגורס</div>
+  <strong>טעות 1:</strong> להשתמש בפיתגורס במשולש שאין בו זווית ישרה. אסור.
+  המשפט עובד רק כשיש <span class="fi">\(90^\circ\)</span>, ורק ביחס אליה.
+  <br><strong>טעות 2:</strong> כשמחפשים ניצב — לחבר במקום לחסר. בדיקת ההיגיון
+  שתופסת את זה תמיד: היתר חייב לצאת הכי ארוך. יצא לך ניצב ארוך מהיתר? יש טעות.
+</div>
+
+<article class="ex hide-marks">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>מוצאים יתר</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">במשולש ישר-זווית אורכי הניצבים 6 ס"מ ו-8 ס"מ</span>.
+    <span class="mk mk-find">מה אורך היתר בס"מ?</span>
+  </p>
+  <div class="q-row">
+    <button class="marks-btn no-print" style="font-family:inherit;font-size:12.5px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:5px 10px;cursor:pointer">הציגי את הפירוק בצבעים</button>
+  </div>
+  <div class="q-row">
+    <span>התשובה שלי:</span>
+    <input class="q-input" data-answer="10" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p><strong>מסרטטים מחדש בגדול</strong> — ומעתיקים את הנתונים על הסרטוט:</p>
+      <figure style="max-width:380px;margin:8px auto 2px">
+        <svg viewBox="0 0 235 170" style="width:100%;max-width:380px;height:auto" role="img" aria-label="משולש ישר זווית עם ניצבים 6 ו-8 ויתר לא ידוע המסומן c">
+          <polygon points="45,20 45,140 205,140" fill="#F8FAFC" stroke="none"/>
+          <line x1="45" y1="20" x2="45" y2="140" stroke="#2E7D6B" stroke-width="4.5"/>
+          <line x1="45" y1="140" x2="205" y2="140" stroke="#66B08A" stroke-width="4.5"/>
+          <line x1="45" y1="20" x2="205" y2="140" stroke="#7C3AED" stroke-width="4.5"/>
+          <path d="M45,126 h14 v14" fill="none" stroke="#C2408C" stroke-width="2.5"/>
+          <text x="30" y="86" text-anchor="middle" font-size="16" font-weight="bold" fill="#2E7D6B">6</text>
+          <text x="125" y="161" text-anchor="middle" font-size="16" font-weight="bold" fill="#66B08A">8</text>
+          <text x="140" y="66" text-anchor="middle" font-size="16" font-weight="bold" font-style="italic" fill="#7C3AED">c = ?</text>
+        </svg>
+        <figcaption>הניצבים הידועים — 6 ו-8; היתר המבוקש מקבל שם כבר על
+        הסרטוט: <span class="fi">\(c\)</span>.</figcaption>
+      </figure>
+      <p><strong>המשפט</strong> — פיתגורס, כי יש זווית ישרה והיתר המבוקש יושב מולה:</p>
+      $$\textcolor{#2E7D6B}{a}^{2}+\textcolor{#66B08A}{b}^{2}=\textcolor{#7C3AED}{c}^{2}$$
+      <p><strong>מציבים</strong> את שני הניצבים הידועים:</p>
+      $$\textcolor{#2E7D6B}{6}^{2}+\textcolor{#66B08A}{8}^{2}=\textcolor{#7C3AED}{c}^{2}$$
+      <p><strong>מחשבים</strong> את אגף הניצבים:</p>
+      $$\textcolor{#7C3AED}{c}^{2}=36+64=100$$
+      <p><strong>מוציאים שורש</strong> — ועונים עם יחידות:</p>
+      $$\textcolor{#7C3AED}{c}=\sqrt{100}=10~\text{ס"מ}$$
+      <p>בדיקת היגיון: <span class="fi">\(10&gt;8&gt;6\)</span> —
+      היתר באמת ארוך מכל ניצב ✓
+      (ושימי לב: זה 3-4-5 מוגדל פי 2.)</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex2"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex hide-marks">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>מוצאים ניצב</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">במשולש ישר-זווית אורך היתר 13 ס"מ ואורך אחד הניצבים 5 ס"מ</span>.
+    <span class="mk mk-find">מה אורך הניצב השני בס"מ?</span>
+  </p>
+  <div class="q-row">
+    <button class="marks-btn no-print" style="font-family:inherit;font-size:12.5px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:5px 10px;cursor:pointer">הציגי את הפירוק בצבעים</button>
+  </div>
+  <div class="q-row">
+    <span>התשובה שלי:</span>
+    <input class="q-input" data-answer="12" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p><strong>מסרטטים מחדש בגדול</strong> — והשרטוט כבר מסגיר את הכיוון:</p>
+      <figure style="max-width:330px;margin:8px auto 2px">
+        <svg viewBox="0 0 190 170" style="width:100%;max-width:330px;height:auto" role="img" aria-label="משולש ישר זווית עם יתר 13, ניצב 5 וניצב לא ידוע המסומן a">
+          <polygon points="60,20 60,140 110,140" fill="#F8FAFC" stroke="none"/>
+          <line x1="60" y1="20" x2="60" y2="140" stroke="#2E7D6B" stroke-width="4.5"/>
+          <line x1="60" y1="140" x2="110" y2="140" stroke="#66B08A" stroke-width="4.5"/>
+          <line x1="60" y1="20" x2="110" y2="140" stroke="#7C3AED" stroke-width="4.5"/>
+          <path d="M60,126 h14 v14" fill="none" stroke="#C2408C" stroke-width="2.5"/>
+          <text x="32" y="86" text-anchor="middle" font-size="16" font-weight="bold" font-style="italic" fill="#2E7D6B">a = ?</text>
+          <text x="85" y="161" text-anchor="middle" font-size="16" font-weight="bold" fill="#66B08A">5</text>
+          <text x="105" y="75" text-anchor="middle" font-size="16" font-weight="bold" fill="#7C3AED">13</text>
+        </svg>
+        <figcaption>היתר (13) ידוע — הפעם מחפשים ניצב, וקוראים לו
+        <span class="fi">\(\textcolor{#2E7D6B}{a}\)</span>.</figcaption>
+      </figure>
+      <p><strong>המשפט</strong> — אותו פיתגורס בדיוק, גם כשהנעלם הוא ניצב:</p>
+      $$\textcolor{#2E7D6B}{a}^{2}+\textcolor{#66B08A}{b}^{2}=\textcolor{#7C3AED}{c}^{2}$$
+      <p><strong>מציבים</strong> את הידועים — ניצב 5 ויתר 13:</p>
+      $$\textcolor{#2E7D6B}{a}^{2}+\textcolor{#66B08A}{5}^{2}=\textcolor{#7C3AED}{13}^{2}$$
+      <p><strong>מבודדים</strong> את הניצב החסר — מעבירים אגף, ולכן מחסרים:</p>
+      $$\textcolor{#2E7D6B}{a}^{2}=\textcolor{#7C3AED}{169}-\textcolor{#66B08A}{25}=144$$
+      <p><strong>מוציאים שורש</strong> — ועונים עם יחידות:</p>
+      $$\textcolor{#2E7D6B}{a}=\sqrt{144}=12~\text{ס"מ}$$
+      <p>מי שחיברה קיבלה <span class="fi">\(\sqrt{194}\approx 13.9\)</span> —
+      "ניצב" ארוך מהיתר, וזה הסימן לעצור ולבדוק.
+      בדיקת היגיון לתשובה הנכונה: <span class="fi">\(12&lt;13\)</span> ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex3"> סיימתי את התרגיל הזה</label>
+</article>
+
+<!-- ============ שלב 6 · עבודת הקיץ ============ -->
+<div class="stagebar"><span class="dots-s"><i></i><i></i><i></i><i></i><i></i><i class="on"></i></span>
+  שלב <b>6</b> מתוך 6 · עבודת הקיץ האמיתית</div>
+<h2 id="sec-school">תרגילי עבודת הקיץ — שלושתם, עד הסוף</h2>
+
+<p>
+  אלה לא תרגילים "בסגנון של" — אלה <strong>שלושת תרגילי החפיפה האמיתיים</strong>
+  מהחוברת שלך, סרוקים כמו שהם. בכל אחד: קודם נסי לבד עם מה שבנינו בעמוד,
+  ורק אז פתחי את הפתרון המלא, שכתוב בדיוק כמו שכדאי לכתוב במחברת.
+</p>
+
+<div class="box intuition">
+  <div class="box-title">ההרגל שפותח כל תרגיל: מסרטטים מחדש, בגדול</div>
+  את השרטוט מהשאלה מעתיקות למחברת — גדול, חצי עמוד — ומסמנות עליו בצבע כל נתון.
+  שרטוט קטן וצפוף גורם לטעויות; שרטוט גדול ומסומן פותר חצי תרגיל לבד.
+  בכל פתרון למטה תמצאי את השרטוט המועתק והמסומן — כזה בדיוק אמור להופיע גם במחברת שלך.
+</div>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · כמו במבחן</span><h4>מעבודת הקיץ שלך — תרגיל 1</h4></div>
+  <figure class="shot">
+    <img src="../assets/school/school-ex-cong1.png" alt="תרגיל 1 מעבודת הקיץ — מרובע עם אלכסון והוכחת חפיפה" loading="lazy">
+    <figcaption>התרגיל כמו שהוא בחוברת: מרובע <span class="fi">\(ABCD\)</span> עם האלכסון
+    <span class="fi">\(DB\)</span>.</figcaption>
+  </figure>
+  <p class="q-text">
+    בסרטוט שלפנייך: <span class="fi">\(AD\parallel BC\)</span> וגם
+    <span class="fi">\(AB\parallel DC\)</span>.
+    <br>א. הוכיחי כי <span class="fi">\(\triangle ADB\cong\triangle CBD\)</span>
+    (רשמי: נתון, צ"ל והוכחה מנומקת).
+    <br>ב. רשמי את השוויונות הנובעים מהחפיפה.
+  </p>
+  <details class="sol">
+    <summary>הצגי פתרון מלא (כמו שכותבים במחברת)</summary>
+    <div class="sol-body">
+      <p><strong>נתון:</strong> <span class="fi">\(AD\parallel BC\)</span>,
+      <span class="fi">\(AB\parallel DC\)</span>.
+      <strong>צ"ל:</strong> <span class="fi">\(\triangle ADB\cong\triangle CBD\)</span>.</p>
+      <p><strong>מסרטטים מחדש בגדול</strong> — ומסמנים על השרטוט כל זוג שווה.</p>
+      <figure style="max-width:410px;margin:10px auto">
+        <svg viewBox="0 0 380 200" style="width:100%;max-width:410px;height:auto" role="img" aria-label="מקבילית עם האלכסון המשותף ושני זוגות זוויות מתחלפות">
+          <polygon points="60,30 290,30 330,155 100,155" fill="#FBFAF7" stroke="#334155" stroke-width="2.5"/>
+          <line x1="100" y1="155" x2="290" y2="30" stroke="#334155" stroke-width="2.5"/>
+          <line x1="157" y1="117.5" x2="233" y2="67.5" stroke="#2563EB" stroke-width="5"/>
+          <path d="M 92.1 130.2 A 26 26 0 0 1 121.7 140.7" fill="none" stroke="#C2408C" stroke-width="3.5"/>
+          <path d="M 297.9 54.8 A 26 26 0 0 1 268.3 44.3" fill="none" stroke="#C2408C" stroke-width="3.5"/>
+          <path d="M 258 30 A 32 32 0 0 0 263.2 47.6" fill="none" stroke="#B7791F" stroke-width="3.5"/>
+          <path d="M 132 155 A 32 32 0 0 0 126.8 137.4" fill="none" stroke="#B7791F" stroke-width="3.5"/>
+          <path d="M -6 -7 L 6 0 L -6 7" transform="translate(80,92.5) rotate(72.3)" fill="none" stroke="#5A6875" stroke-width="2.5"/>
+          <path d="M -6 -7 L 6 0 L -6 7" transform="translate(310,92.5) rotate(72.3)" fill="none" stroke="#5A6875" stroke-width="2.5"/>
+          <path d="M -6 -7 L 6 0 L -6 7" transform="translate(169,30)" fill="none" stroke="#5A6875" stroke-width="2.5"/>
+          <path d="M -6 -7 L 6 0 L -6 7" transform="translate(181,30)" fill="none" stroke="#5A6875" stroke-width="2.5"/>
+          <path d="M -6 -7 L 6 0 L -6 7" transform="translate(209,155)" fill="none" stroke="#5A6875" stroke-width="2.5"/>
+          <path d="M -6 -7 L 6 0 L -6 7" transform="translate(221,155)" fill="none" stroke="#5A6875" stroke-width="2.5"/>
+          <text x="48" y="26" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">A</text>
+          <text x="302" y="26" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">B</text>
+          <text x="344" y="174" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">C</text>
+          <text x="88" y="176" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">D</text>
+        </svg>
+        <figcaption>האלכסון המשותף <span class="fi">\(BD\)</span>, הזוג המתחלף של
+        <span class="fi">\(AD\parallel BC\)</span> והזוג המתחלף של
+        <span class="fi">\(AB\parallel DC\)</span>.
+        החיצים — סימוני המקבילים מהשאלה.</figcaption>
+      </figure>
+      <p><strong>הרעיון:</strong> צלע משותפת + כל זוג מקבילים שהאלכסון חוצה נותן
+      זוג זוויות מתחלפות שוות (צורת ה-Z מהתחנה הקודמת). שתי זוויות + הצלע שביניהן = ז.צ.ז.</p>
+      <p><strong>הוכחה</strong> — הנתונים פותחים, וסעיף ב ממשיך באותה טבלה:</p>
+      <table class="dtable">
+        <tr><th></th><th>טענה</th><th>נימוק</th></tr>
+        <tr><td>1</td><td><span class="fi">\(AD\parallel BC\)</span></td><td style="text-align:right">נתון</td></tr>
+        <tr><td>2</td><td><span class="fi">\(AB\parallel DC\)</span></td><td style="text-align:right">נתון</td></tr>
+        <tr><td>3</td><td class="hl-c2"><span class="fi">\(\textcolor{#2563EB}{BD=BD}\)</span></td><td style="text-align:right">צלע משותפת לשני המשולשים</td></tr>
+        <tr><td>4</td><td class="hl-c5"><span class="fi">\(\textcolor{#C2408C}{\angle ADB=\angle CBD}\)</span></td><td style="text-align:right">זוויות מתחלפות שוות בין ישרים מקבילים (לפי 1, החותך <span class="fi">\(BD\)</span>)</td></tr>
+        <tr><td>5</td><td style="background:#FBF0C9"><span class="fi">\(\textcolor{#B7791F}{\angle ABD=\angle CDB}\)</span></td><td style="text-align:right">זוויות מתחלפות שוות בין ישרים מקבילים (לפי 2, החותך <span class="fi">\(BD\)</span>)</td></tr>
+        <tr><td>6</td><td><span class="fi">\(\triangle ADB\cong\triangle CBD\)</span></td><td style="text-align:right">משפט חפיפה ז.צ.ז (לפי 4, 3, 5)</td></tr>
+        <tr class="tr-qed"><td colspan="3"><b>מש"ל א׳</b></td></tr>
+        <tr class="tr-sep"><td colspan="3">סעיף ב — השוויונות הנובעים מהחפיפה</td></tr>
+        <tr><td>7</td><td><span class="fi">\(AD=CB\)</span></td><td style="text-align:right">צלעות מתאימות במשולשים חופפים שוות (לפי 6)</td></tr>
+        <tr><td>8</td><td><span class="fi">\(AB=CD\)</span></td><td style="text-align:right">צלעות מתאימות במשולשים חופפים שוות (לפי 6)</td></tr>
+        <tr><td>9</td><td><span class="fi">\(\angle DAB=\angle BCD\)</span></td><td style="text-align:right">זוויות מתאימות במשולשים חופפים שוות (לפי 6)</td></tr>
+        <tr class="tr-qed"><td colspan="3"><b>מש"ל ב׳</b></td></tr>
+      </table>
+      <p>שימי לב שהתנאי של ז.צ.ז באמת מתקיים: הצלע <span class="fi">\(BD\)</span> כלואה
+      בין שתי הזוויות — בשני המשולשים היא מחברת בדיוק את שני הקודקודים שהזוויות שלהם שוות.</p>
+      <p>ובסעיף ב: זוג הזוויות בשורה 9 הוא היחיד שעוד לא ידענו — שני זוגות
+      הזוויות האחרים הם בדיוק שורות 4 ו-5 (התאמת האותיות:
+      <span class="fi">\(A\leftrightarrow C\)</span>, <span class="fi">\(D\leftrightarrow B\)</span>,
+      <span class="fi">\(B\leftrightarrow D\)</span>).</p>
+      <p>ועוד דבר, לקראת התחנה הבאה: הרגע הוכחת שבמרובע שבו כל זוג צלעות נגדיות
+      מקבילות — <strong>מקבילית</strong> — הצלעות הנגדיות גם שוות. זה משפט אמיתי
+      מהתחנה הבאה, ואת כבר הוכחת אותו לבד.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex4"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · כמו במבחן</span><h4>מעבודת הקיץ שלך — תרגיל 2</h4></div>
+  <figure class="shot">
+    <img src="../assets/school/school-ex-cong2.png" alt="תרגיל 2 מעבודת הקיץ — שני משולשים ישרי זווית שנפגשים בנקודה E" loading="lazy">
+    <figcaption>שני משולשים שנפגשים בנקודה אחת — בדיוק התבנית של התרגיל שפתרנו ביחד בשלב 4.</figcaption>
+  </figure>
+  <p class="q-text">
+    התבונני בנתונים שבסרטוט.
+    <br>א. רשמי נתונים והוכיחי כי <span class="fi">\(\triangle EFG\cong\triangle EDB\)</span>.
+    <br>ב. נתון: <span class="fi">\(\angle BED=33^\circ\)</span>. חשבי את גודלה של
+    <span class="fi">\(\angle G\)</span>. נמקי את תשובתך.
+  </p>
+  <details class="sol">
+    <summary>הצגי פתרון מלא (כמו שכותבים במחברת)</summary>
+    <div class="sol-body">
+      <p><strong>א. רושמים נתונים — כלומר קוראים את השרטוט במילים:</strong>
+      הנקודות <span class="fi">\(F,\;E,\;D\)</span> על ישר אחד, וגם
+      <span class="fi">\(G,\;E,\;B\)</span> על ישר אחד (שני הקווים נחתכים ב-<span class="fi">\(E\)</span>);
+      <br>ריבועי הזווית מסמנים <span class="fi">\(\angle GFE=\angle BDE=90^\circ\)</span>;
+      <br>ולפי המידות: <span class="fi">\(FE=ED=3~\text{ס"מ}\)</span>.
+      <br><strong>צ"ל:</strong> <span class="fi">\(\triangle EFG\cong\triangle EDB\)</span>.</p>
+      <p><strong>מסרטטים מחדש בגדול</strong> ומסמנים את הנתונים:</p>
+      <figure style="max-width:370px;margin:10px auto">
+        <svg viewBox="0 0 340 200" style="width:100%;max-width:370px;height:auto" role="img" aria-label="שני משולשים ישרי זווית שנפגשים בנקודה E עם הסימונים בצבע">
+          <line x1="38" y1="105" x2="302" y2="105" stroke="#334155" stroke-width="2.5"/>
+          <line x1="48" y1="184" x2="292" y2="26" stroke="#334155" stroke-width="2.5"/>
+          <line x1="60" y1="105" x2="60" y2="176" stroke="#334155" stroke-width="2.5"/>
+          <line x1="280" y1="105" x2="280" y2="34" stroke="#334155" stroke-width="2.5"/>
+          <path d="M 72 105 v 12 h -12" fill="none" stroke="#B7791F" stroke-width="2.5"/>
+          <path d="M 268 105 v -12 h 12" fill="none" stroke="#B7791F" stroke-width="2.5"/>
+          <line x1="93" y1="105" x2="137" y2="105" stroke="#2563EB" stroke-width="5"/>
+          <line x1="203" y1="105" x2="247" y2="105" stroke="#2563EB" stroke-width="5"/>
+          <line x1="115" y1="99" x2="115" y2="111" stroke="#2563EB" stroke-width="3"/>
+          <line x1="225" y1="99" x2="225" y2="111" stroke="#2563EB" stroke-width="3"/>
+          <path d="M 148 105 A 22 22 0 0 0 151.5 117" fill="none" stroke="#C2408C" stroke-width="3.5"/>
+          <path d="M 192 105 A 22 22 0 0 0 188.5 93" fill="none" stroke="#C2408C" stroke-width="3.5"/>
+          <text x="115" y="93" text-anchor="middle" font-size="14" font-weight="bold" fill="#2563EB">3</text>
+          <text x="225" y="93" text-anchor="middle" font-size="14" font-weight="bold" fill="#2563EB">3</text>
+          <text x="53" y="126" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">F</text>
+          <text x="160" y="97" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">E</text>
+          <text x="288" y="126" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">D</text>
+          <text x="48" y="192" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">G</text>
+          <text x="293" y="33" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">B</text>
+        </svg>
+        <figcaption>זוג הזוויות הישרות, זוג הצלעות השוות,
+        והזוויות הקודקודיות ב-<span class="fi">\(E\)</span>.</figcaption>
+      </figure>
+      <p><strong>הוכחה</strong> — והפעם גם סעיף ב נכנס לאותה טבלה:</p>
+      <table class="dtable">
+        <tr><th></th><th>טענה</th><th>נימוק</th></tr>
+        <tr><td>1</td><td style="background:#FBF0C9"><span class="fi">\(\textcolor{#B7791F}{\angle GFE=\angle BDE}=90^\circ\)</span></td><td style="text-align:right">נתון</td></tr>
+        <tr><td>2</td><td class="hl-c2"><span class="fi">\(\textcolor{#2563EB}{FE=DE}=3~\text{ס"מ}\)</span></td><td style="text-align:right">נתון</td></tr>
+        <tr><td>3</td><td class="hl-c5"><span class="fi">\(\textcolor{#C2408C}{\angle FEG=\angle DEB}\)</span></td><td style="text-align:right">זוויות קודקודיות שוות (שני הישרים נחתכים ב-<span class="fi">\(E\)</span>)</td></tr>
+        <tr><td>4</td><td><span class="fi">\(\triangle EFG\cong\triangle EDB\)</span></td><td style="text-align:right">משפט חפיפה ז.צ.ז (לפי 1, 2, 3)</td></tr>
+        <tr class="tr-qed"><td colspan="3"><b>מש"ל א׳</b></td></tr>
+        <tr class="tr-sep"><td colspan="3">סעיף ב — חישוב <span class="fi">\(\angle G\)</span></td></tr>
+        <tr><td>5</td><td><span class="fi">\(\angle BED=33^\circ\)</span></td><td style="text-align:right">נתון</td></tr>
+        <tr><td>6</td><td class="hl-c5"><span class="fi">\(\textcolor{#C2408C}{\angle FEG}=33^\circ\)</span></td><td style="text-align:right">זוויות קודקודיות שוות (לפי 5)</td></tr>
+        <tr><td>7</td><td><span class="fi">\(\angle G=180^\circ-90^\circ-33^\circ=57^\circ\)</span></td><td style="text-align:right">סכום הזוויות במשולש <span class="fi">\(180^\circ\)</span> (במשולש <span class="fi">\(EFG\)</span>; לפי 1, 6)</td></tr>
+      </table>
+      <p>הצלע <span class="fi">\(FE\)</span> באמת כלואה: בקצה אחד שלה הזווית הישרה
+      (ב-<span class="fi">\(F\)</span>), בקצה השני הזווית הקודקודית (ב-<span class="fi">\(E\)</span>) —
+      ובדיוק אותו דבר ב-<span class="fi">\(\triangle EDB\)</span> עם <span class="fi">\(DE\)</span>.</p>
+      <p>דרך שנייה לסעיף ב, אם בא לך לקצר: מהתאמת האותיות בחפיפה
+      (<span class="fi">\(G\leftrightarrow B\)</span>) נובע
+      <span class="fi">\(\angle G=\angle B\)</span>,
+      <br>ובמשולש <span class="fi">\(EDB\)</span>:
+      <span class="fi">\(\angle B=180^\circ-90^\circ-33^\circ=57^\circ\)</span>.</p>
+      <p><strong>תשובה:</strong> <span class="fi">\(\angle G=57^\circ\)</span>.
+      <br>(אם בשרטוט שלך נתון קצת שונה ממה שקראנו כאן — אותה שיטה בדיוק: קודקודיות, ואז סכום זוויות.)</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex5"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · כמו במבחן</span><h4>מעבודת הקיץ שלך — תרגיל 3</h4></div>
+  <figure class="shot">
+    <img src="../assets/school/school-ex-cong3.png" alt="תרגיל 3 מעבודת הקיץ — ריבוע עם שני משולשים חופפים" loading="lazy">
+    <figcaption>ריבוע שצלעו 12 ס"מ, עם נקודה על צלע שמאלית ונקודה על הצלע התחתונה.</figcaption>
+  </figure>
+  <p class="q-text">
+    <span class="fi">\(ABCD\)</span> הוא ריבוע שצלעו 12 ס"מ. הנקודה
+    <span class="fi">\(P\)</span> על <span class="fi">\(AD\)</span> כך ש-<span class="fi">\(PD=7~\text{ס"מ}\)</span>,
+    והנקודה <span class="fi">\(R\)</span> על <span class="fi">\(DC\)</span> כך
+    ש-<span class="fi">\(DR=7~\text{ס"מ}\)</span>.
+    <br>א. רשמי נתונים והוכיחי כי <span class="fi">\(\triangle ABP\cong\triangle CBR\)</span>.
+    <br>ב. נתון: <span class="fi">\(\angle APB=67.4^\circ\)</span>. חשבי את גודלה של:
+    (i) <span class="fi">\(\angle BRC\)</span>&emsp;(ii) <span class="fi">\(\angle RBC\)</span>.
+    הסבירי את חישובייך.
+  </p>
+  <details class="sol">
+    <summary>הצגי פתרון מלא (כמו שכותבים במחברת)</summary>
+    <div class="sol-body">
+      <p><strong>נתון:</strong> <span class="fi">\(ABCD\)</span> ריבוע,
+      <span class="fi">\(AB=12~\text{ס"מ}\)</span>; <span class="fi">\(P\)</span> על
+      <span class="fi">\(AD\)</span>, <span class="fi">\(PD=7~\text{ס"מ}\)</span>;
+      <span class="fi">\(R\)</span> על <span class="fi">\(DC\)</span>,
+      <span class="fi">\(DR=7~\text{ס"מ}\)</span>.
+      <strong>צ"ל:</strong> <span class="fi">\(\triangle ABP\cong\triangle CBR\)</span>.</p>
+      <p><strong>מסרטטים מחדש בגדול</strong> ומסמנים את הנתונים:</p>
+      <figure style="max-width:330px;margin:10px auto">
+        <svg viewBox="0 0 320 240" style="width:100%;max-width:330px;height:auto" role="img" aria-label="ריבוע עם הנקודות P ו-R ושני המשולשים החופפים, מסומן בצבע">
+          <polygon points="80,25 260,25 260,205 80,205" fill="#FBFAF7" stroke="#334155" stroke-width="2.5"/>
+          <line x1="260" y1="25" x2="80" y2="100" stroke="#334155" stroke-width="2.5"/>
+          <line x1="260" y1="25" x2="185" y2="205" stroke="#334155" stroke-width="2.5"/>
+          <line x1="134" y1="25" x2="206" y2="25" stroke="#2563EB" stroke-width="5"/>
+          <line x1="260" y1="151" x2="260" y2="79" stroke="#2563EB" stroke-width="5"/>
+          <line x1="170" y1="19" x2="170" y2="31" stroke="#2563EB" stroke-width="3"/>
+          <line x1="254" y1="115" x2="266" y2="115" stroke="#2563EB" stroke-width="3"/>
+          <line x1="80" y1="47.5" x2="80" y2="77.5" stroke="#059669" stroke-width="5"/>
+          <line x1="237.5" y1="205" x2="207.5" y2="205" stroke="#059669" stroke-width="5"/>
+          <line x1="74" y1="62.5" x2="86" y2="62.5" stroke="#059669" stroke-width="3"/>
+          <line x1="222.5" y1="199" x2="222.5" y2="211" stroke="#059669" stroke-width="3"/>
+          <path d="M 92 25 v 12 h -12" fill="none" stroke="#C2408C" stroke-width="2.5"/>
+          <path d="M 248 205 v -12 h 12" fill="none" stroke="#C2408C" stroke-width="2.5"/>
+          <text x="170" y="15" text-anchor="middle" font-size="13" font-weight="bold" fill="#2563EB">12</text>
+          <text x="276" y="119" text-anchor="middle" font-size="13" font-weight="bold" fill="#2563EB">12</text>
+          <text x="68" y="66" text-anchor="middle" font-size="13" font-weight="bold" fill="#059669">5</text>
+          <text x="222" y="224" text-anchor="middle" font-size="13" font-weight="bold" fill="#059669">5</text>
+          <text x="68" y="158" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">7</text>
+          <text x="132" y="221" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">7</text>
+          <text x="66" y="22" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">A</text>
+          <text x="274" y="22" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">B</text>
+          <text x="274" y="218" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">C</text>
+          <text x="66" y="218" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">D</text>
+          <text x="66" y="105" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">P</text>
+          <text x="185" y="224" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">R</text>
+        </svg>
+        <figcaption>זוג הצלעות <span class="fi">\(AB=CB\)</span>,
+        זוג הזוויות הישרות, והזוג המחושב
+        <span class="fi">\(AP=CR\)</span>.</figcaption>
+      </figure>
+      <p><strong>הוכחה</strong> — גם החישובים וגם סעיף ב הם שורות בטבלה:</p>
+      <table class="dtable">
+        <tr><th></th><th>טענה</th><th>נימוק</th></tr>
+        <tr><td>1</td><td><span class="fi">\(ABCD\)</span> ריבוע, <span class="fi">\(AB=12~\text{ס"מ}\)</span></td><td style="text-align:right">נתון</td></tr>
+        <tr><td>2</td><td><span class="fi">\(PD=7~\text{ס"מ}\)</span></td><td style="text-align:right">נתון</td></tr>
+        <tr><td>3</td><td><span class="fi">\(DR=7~\text{ס"מ}\)</span></td><td style="text-align:right">נתון</td></tr>
+        <tr><td>4</td><td class="hl-c2"><span class="fi">\(\textcolor{#2563EB}{AB=CB}=AD=DC=12~\text{ס"מ}\)</span></td><td style="text-align:right">כל צלעות הריבוע שוות (לפי 1)</td></tr>
+        <tr><td>5</td><td class="hl-c5"><span class="fi">\(\textcolor{#C2408C}{\angle A=\angle C}=90^\circ\)</span></td><td style="text-align:right">כל זוויות הריבוע ישרות (לפי 1)</td></tr>
+        <tr><td>6</td><td><span class="fi">\(AP=AD-PD=12-7=5~\text{ס"מ}\)</span></td><td style="text-align:right">חיסור קטעים: השלם פחות החלק (לפי 4, 2)</td></tr>
+        <tr><td>7</td><td><span class="fi">\(CR=DC-DR=12-7=5~\text{ס"מ}\)</span></td><td style="text-align:right">חיסור קטעים: השלם פחות החלק (לפי 4, 3)</td></tr>
+        <tr><td>8</td><td class="hl-c3"><span class="fi">\(\textcolor{#059669}{AP=CR}\)</span></td><td style="text-align:right">כלל המעבר — שתיהן <span class="fi">\(5~\text{ס"מ}\)</span> (לפי 6, 7)</td></tr>
+        <tr><td>9</td><td><span class="fi">\(\triangle ABP\cong\triangle CBR\)</span></td><td style="text-align:right">משפט חפיפה צ.ז.צ (לפי 4, 5, 8)</td></tr>
+        <tr class="tr-qed"><td colspan="3"><b>מש"ל א׳</b></td></tr>
+        <tr class="tr-sep"><td colspan="3">סעיף ב — חישוב הזוויות</td></tr>
+        <tr><td>10</td><td><span class="fi">\(\angle APB=67.4^\circ\)</span></td><td style="text-align:right">נתון</td></tr>
+        <tr><td>11</td><td><span class="fi">\(\angle BRC=\angle APB=67.4^\circ\)</span></td><td style="text-align:right">זוויות מתאימות במשולשים חופפים שוות (לפי 9, 10)</td></tr>
+        <tr><td>12</td><td><span class="fi">\(\angle RBC=180^\circ-90^\circ-67.4^\circ=22.6^\circ\)</span></td><td style="text-align:right">סכום הזוויות במשולש <span class="fi">\(180^\circ\)</span> (במשולש <span class="fi">\(RBC\)</span>; לפי 5, 11)</td></tr>
+      </table>
+      <p>הזווית הישרה כלואה בין שתי הצלעות בשני המשולשים:
+      <span class="fi">\(\angle A\)</span> בין <span class="fi">\(AB\)</span> ל-<span class="fi">\(AP\)</span>,
+      ו-<span class="fi">\(\angle C\)</span> בין <span class="fi">\(CB\)</span>
+      ל-<span class="fi">\(CR\)</span> — בדיוק מה שצ.ז.צ דורש.
+      ובסעיף ב, שורה 11 נשענת על התאמת האותיות
+      (<span class="fi">\(P\leftrightarrow R\)</span>, <span class="fi">\(B\leftrightarrow B\)</span>).</p>
+      <p><strong>תשובות:</strong> <span class="fi">\(\angle BRC=67.4^\circ\)</span>,
+      <span class="fi">\(\angle RBC=22.6^\circ\)</span>.
+      (אם בשרטוט שלך ה-7 מסומן דווקא בין <span class="fi">\(A\)</span>
+      ל-<span class="fi">\(P\)</span> — אותה שיטה בדיוק, רק שאז
+      <span class="fi">\(AP=CR=7\)</span> בלי שורות החיסור.)</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex6"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">עכשיו את המורה</span><h4>מצאי את הטעות של יעל</h4></div>
+  <p class="q-text">
+    יעל השוותה שני משולשים ומצאה: שתי צלעות שוות בהתאמה (8 ס"מ ו-5 ס"מ בשניהם),
+    וגם זווית שווה — והזווית יושבת <em>מול</em> הצלע של ה-5.
+    היא כתבה: "המשולשים חופפים לפי משפט צ.צ.ז".
+    <span class="mk mk-find">מה תגידי לה — ולמה השרטוט שלמטה מוכיח שהיא לא יכולה להיות בטוחה?</span>
+  </p>
+  <figure>
+    <svg viewBox="0 0 345 185" style="width:100%;max-width:440px;height:auto" role="img" aria-label="אותה זווית ואותן שתי צלעות יוצרות שני משולשים שונים">
+      <line x1="20" y1="150" x2="335" y2="150" stroke="#9AA5B1" stroke-width="2.5"/>
+      <line x1="20" y1="150" x2="151" y2="58.2" stroke="#334155" stroke-width="3"/>
+      <path d="M111.3,150 A100,100 0 0 0 190.7,150" fill="none" stroke="#5A6875" stroke-width="2" stroke-dasharray="3 5"/>
+      <line x1="151" y1="58.2" x2="111.3" y2="150" stroke="#059669" stroke-width="3" stroke-dasharray="7 5"/>
+      <line x1="151" y1="58.2" x2="190.7" y2="150" stroke="#059669" stroke-width="3"/>
+      <line x1="59.3" y1="122.5" x2="111.7" y2="85.7" stroke="#2563EB" stroke-width="5"/>
+      <path d="M44,150 A24,24 0 0 0 39.7,136.2" fill="none" stroke="#C2408C" stroke-width="3"/>
+      <line x1="82.1" y1="99.2" x2="88.9" y2="109" stroke="#2563EB" stroke-width="3.5"/>
+      <line x1="128.1" y1="97.3" x2="138.2" y2="101.7" stroke="#059669" stroke-width="3.5"/>
+      <line x1="124.1" y1="106.5" x2="134.2" y2="110.9" stroke="#059669" stroke-width="3.5"/>
+      <line x1="173.9" y1="97.3" x2="163.8" y2="101.7" stroke="#059669" stroke-width="3.5"/>
+      <line x1="177.9" y1="106.5" x2="167.8" y2="110.9" stroke="#059669" stroke-width="3.5"/>
+      <text x="75" y="89" text-anchor="middle" font-size="14" font-weight="bold" fill="#2563EB">8</text>
+      <text x="108" y="120" text-anchor="middle" font-size="14" font-weight="bold" fill="#059669">5</text>
+      <text x="193" y="120" text-anchor="middle" font-size="14" font-weight="bold" fill="#059669">5</text>
+      <text x="106" y="170" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">1</text>
+      <text x="196" y="170" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">2</text>
+    </svg>
+    <figcaption>אותה זווית ורודה, אותה צלע כחולה של 8, ואותו אורך 5 בדיוק לצלע הירוקה —
+    והיא עדיין יכולה "להתנדנד" ולנחות בשתי נקודות שונות (1 או 2) על הקו.
+    שני משולשים שונים, אותם שלושה נתונים.</figcaption>
+  </figure>
+  <details class="sol">
+    <summary>הצגי תשובה</summary>
+    <div class="sol-body">
+      <p><strong>למשפט צ.צ.ז יש תנאי, ואצל יעל הוא לא מתקיים.</strong>
+      המשפט דורש שהזווית השווה תשב מול הצלע <strong>הגדולה</strong> מבין השתיים.
+      שתי הצלעות כאן הן 8 ו-5, ולכן התנאי היה מתקיים רק אם הזווית יושבת מול הצלע של 8.
+      אצל יעל היא יושבת מול הצלע של 5 — הקטנה — ולכן המשפט לא חל, ואי אפשר להסיק חפיפה.</p>
+      <p><strong>למה זה לא סתם כלל טכני?</strong> משפט חפיפה הוא הבטחה: "אם שלושת
+      הנתונים האלה שווים — לא קיימים שני משולשים שונים כאלה". והשרטוט מראה שההבטחה
+      הזו נשברת בדיוק במקרה הזה: מהזווית והצלע הכחולה אפשר "להניף" את הצלע הירוקה כמו מחוג —
+      ובאותו אורך בדיוק היא פוגשת את הקו בשתי נקודות שונות. משולש 1 צר, משולש 2 רחב,
+      ושניהם מקיימים את כל הנתונים של יעל. הצלע הקצרה היא זו שמספיק קצרה כדי להגיע לשתי
+      נחיתות; אילו הייתה הגדולה מבין השתיים, הייתה לה נחיתה אחת בלבד — וזה בדיוק מה
+      שהתנאי של המשפט שומר עליו.</p>
+      <p>מה כן תגידי לה: "בדקי אם הזווית יושבת מול הצלע הגדולה — אם כן, זה צ.צ.ז חוקי.
+      אחרת: מצאי את הזווית הכלואה (ואז צ.ז.צ), מצאי צלע שלישית (צ.צ.צ),
+      או מצאי זווית נוספת והשלימי לזווית השלישית (ואז ז.צ.ז)".</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex7"> סיימתי את התרגיל הזה</label>
+</article>
+
+<!-- ============ ניווט ============ -->
+<h2>🎬 רוצה לראות את זה מוסבר בקול?</h2>
+<div class="watch">
+  <p>הסרטונים הם תגבור, לא חובה:</p>
+  <a class="video-link" href="https://www.youtube.com/watch?v=WwLbwr14Fas">
+    <img src="../assets/alg-vids/WwLbwr14Fas.jpg" alt="חפיפת משולשים — כולל טענה ונימוק — תמונת הסרטון" loading="lazy">
+    <span class="vt"><b>חפיפת משולשים — כולל טענה ונימוק</b><span>אילון פרץ · 17:25</span></span>
+    <span class="play">▶</span>
+  </a>
+  <a class="video-link" href="https://www.youtube.com/watch?v=bLEygHO4KII">
+    <img src="../assets/alg-vids/bLEygHO4KII.jpg" alt="חפיפת משולשים ברמה מתקדמת — תמונת הסרטון" loading="lazy">
+    <span class="vt"><b>חפיפת משולשים ברמה מתקדמת</b><span>עובד לב ארי · 9:22</span></span>
+    <span class="play">▶</span>
+  </a>
+</div>
+
+<div class="progresswrap no-print">
+  <span class="progressbar"><i></i></span><span class="progress-label"></span>
+  <button class="all-sols" style="font-family:inherit;font-size:12px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:4px 10px;cursor:pointer">לפתוח את כל הפתרונות</button>
+</div>
+
+<nav class="pagenav">
+  <a href="01-angles.html"><span class="dir">→ התחנה הקודמת</span>זוויות</a>
+  <a class="next" href="03-quadrilaterals-areas.html"><span class="dir">התחנה הבאה ←</span>מרובעים ושטחים</a>
+</nav>
+
+<footer class="fin">חלק מהעולם של שירה · <a href="index.html">המפה</a> · <a href="../index.html">המרכז</a></footer>
+</main>
+</div>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<!-- מסך הבית של האייפד/הטלפון -->
+<link rel="apple-touch-icon" href="../assets/icons/icon-180.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>סטטיסטיקה — המפה — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../css/shira.css">
+<style>
+/* עיצוב ייחודי למפה בלבד — רשימת תחנות */
+.station{display:flex; gap:14px; align-items:flex-start; text-decoration:none;
+  background:var(--card); border:1px solid var(--line); border-radius:var(--r-lg);
+  padding:14px 16px; margin:10px 0; color:var(--ink);
+  box-shadow:0 10px 28px -26px var(--shadow); transition:.15s}
+.station:hover{border-color:var(--stat)}
+.station .n{flex:0 0 auto; width:34px; height:34px; border-radius:50%;
+  background:var(--stat); color:#fff; font-weight:800; font-size:15px;
+  display:flex; align-items:center; justify-content:center; margin-top:2px}
+.station.anchor .n{background:#7A4E8C}
+.station .t{min-width:0; flex:1}
+.station .t b{display:block; font-size:16.5px}
+.station .t span{font-size:13px; color:var(--soft); line-height:1.5}
+.station .st{flex:0 0 auto; font-size:11.5px; color:var(--soft); text-align:left;
+  margin-top:4px; min-width:74px}
+.station .st .okk{color:var(--stat); font-weight:700}
+.station .t .tm{display:block; margin-top:6px; font-size:11.5px; color:var(--soft)}
+.station .t .tm b{display:inline; font-size:inherit; color:var(--ink); font-weight:700}
+.groupt{margin:26px 0 4px; font-size:13px; font-weight:800; color:var(--soft);
+  letter-spacing:.06em}
+</style>
+<script defer src="../js/shira.js"></script>
+</head>
+<body data-page="stat:index">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../index.html">⌂ המרכז של שירה</a>
+    <span class="crumbs"><b>סטטיסטיקה</b> · המפה</span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">סטטיסטיקה · המפה</div>
+  <h1>שבע תחנות, מסלול אחד</h1>
+  <p class="lead">
+    ארבע תחנות של כלים, ואז שלושה סיפורים גדולים שבהם הכלים נפגשים.
+    המסלול המומלץ: מלמעלה למטה. אבל זו המפה שלך — אפשר לקפוץ לכל תחנה,
+    ובכל דף תמיד רשום איפה את.
+    בסוף המסלול מחכים מחסן תרגילים ובוחן בית.
+  </p>
+</header>
+
+<div class="groupt">הכלים · תחנות 1–4</div>
+
+<a class="station" href="01-basics.html">
+  <span class="n">1</span>
+  <span class="t"><b>📋 נתונים, שכיחות וטבלה שמספרת סיפור</b>
+  <span>מה זו בכלל סטטיסטיקה, איך בונים טבלת שכיחויות, טווח, וקריאת דיאגרמת עמודות.</span><span class="tm"><b>≈ 20 דק׳</b> · 6 תרגילים</span></span>
+  <span class="st" data-st="stat:01-basics"></span>
+</a>
+<a class="station" href="02-mean.html">
+  <span class="n">2</span>
+  <span class="t"><b>⚖️ ממוצע — המספר שמאזן את כולם</b>
+  <span>חלוקה שווה בשווה, ממוצע מטבלה, ומה קורה כשמצטרף נתון חדש.</span><span class="tm"><b>≈ 20 דק׳</b> · 6 תרגילים</span></span>
+  <span class="st" data-st="stat:02-mean"></span>
+</a>
+<a class="station" href="03-median-mode.html">
+  <span class="n">3</span>
+  <span class="t"><b>🎯 חציון ושכיח — האמצע והנפוץ</b>
+  <span>לסדר קודם, נוסחת המיקום, חציון בשלוש דרכים — ולמה שכיח זה לא שכיחות.</span><span class="tm"><b>≈ 30 דק׳</b> · 7 תרגילים</span></span>
+  <span class="st" data-st="stat:03-median-mode"></span>
+</a>
+<a class="station" href="04-relative-frequency.html">
+  <span class="n">4</span>
+  <span class="t"><b>🥧 שכיחות יחסית — החלק מתוך השלם</b>
+  <span>מהשבר לאחוז ובחזרה, וטבלאות עם נעלם x — הטכניקה שחוזרת בכל עבודה.</span><span class="tm"><b>≈ 20 דק׳</b> · 5 תרגילים</span></span>
+  <span class="st" data-st="stat:04-relative-frequency"></span>
+</a>
+
+<div class="groupt">הסיפורים הגדולים · תחנות 5–7</div>
+
+<a class="station anchor" href="05-elections.html">
+  <span class="n">5</span>
+  <span class="t"><b>🗳️ ליל המנדטים</b>
+  <span>איך סוקרים מנבאים 120 מושבים מ-500 נשאלים — שכיחות יחסית בתור מכונת ניבוי.</span><span class="tm"><b>≈ 15 דק׳</b> · 4 תרגילים</span></span>
+  <span class="st" data-st="stat:05-elections"></span>
+</a>
+<a class="station anchor" href="06-table-with-hole.html">
+  <span class="n">6</span>
+  <span class="t"><b>🚗 הטבלה עם החור</b>
+  <span>התרגיל האמיתי מעבודת הקיץ שלך, מפורק עד הסוף: נעלם, שכיח, חציון של 40, ממוצע.</span><span class="tm"><b>≈ 15 דק׳</b> · 3 תרגילים</span></span>
+  <span class="st" data-st="stat:06-table-with-hole"></span>
+</a>
+<a class="station anchor" href="07-music-year.html">
+  <span class="n">7</span>
+  <span class="t"><b>🎧 השנה שלך במוזיקה</b>
+  <span>השיר של השנה, יום השקה מטורף אחד, ולמה צריך גם ממוצע וגם חציון.</span><span class="tm"><b>≈ 20 דק׳</b> · 4 תרגילים</span></span>
+  <span class="st" data-st="stat:07-music-year"></span>
+</a>
+
+<div class="groupt">כשרוצים עוד תרגול</div>
+
+<a class="station" href="09-exercise-bank.html">
+  <span class="n" style="background:#7A4E8C">∑</span>
+  <span class="t"><b>🗂️ מחסן התרגילים</b>
+  <span>46 תרגילים מסודרים לפי סוג — טבלה עם נעלם, ממוצע, חציון, שכיח, אחוזים, דיאגרמות ובעיות מילוליות. מוצאים את הסוג של התרגיל שלך, ורואים פתרון מלא.</span><span class="tm">‏46 תרגילים · <b>≈ 4 דק׳ לתרגיל</b> · אפשר לעשות בחלקים</span></span>
+  <span class="st" data-st="stat:09-exercise-bank"></span>
+</a>
+
+<div class="groupt">ולסיום</div>
+
+<a class="station" href="08-self-quiz.html" style="border-style:dashed">
+  <span class="n" style="background:var(--ink)">✓</span>
+  <span class="t"><b>📝 בוחן הבית</b>
+  <span>שישה תרגילים חדשים לגמרי, בלי רמזים ובלי שלבים — הבדיקה שכל זה באמת שלך.</span><span class="tm"><b>≈ 30 דק׳</b> · 6 תרגילים</span></span>
+  <span class="st" data-st="stat:08-self-quiz"></span>
+</a>
+
+<div class="box intuition" style="margin-top:26px">
+  <div class="box-title">נתקעת בשאלה מעבודת הקיץ?</div>
+  תרגילי הסטטיסטיקה של החוברת מחכים פתורים בתחנות:
+  שכר במפעל — תחנה 3 · המכוניות ביישוב — תחנה 6 ·
+  הכדורסלן והגילים — תחנה 2 · דיאגרמת הציונים — תחנות 1 ו-3.
+</div>
+
+<footer class="fin">חלק מהעולם של שירה · <a href="../index.html">חזרה למרכז</a></footer>
+</main>
+</div>
+
+<script>
+/* "איפה עצרת" — קורא את ההתקדמות שכל תחנה שומרת ב-localStorage,
+   וכשכל שבע התחנות הושלמו — רגע של קו סיום. */
+document.addEventListener('DOMContentLoaded', function () {
+  var completed = 0;
+  document.querySelectorAll('.st[data-st]').forEach(function (el) {
+    try {
+      var d = JSON.parse(localStorage.getItem('shira:' + el.dataset.st) || 'null');
+      if (!d || !d.total) { el.textContent = ''; return; }
+      var n = Object.keys(d.done || {}).length;
+      if (n === 0) { el.textContent = ''; return; }
+      if (n >= d.total) {
+        el.innerHTML = '<span class="okk">הושלמה ✓</span>';
+        completed++;
+      } else {
+        el.innerHTML = '<span class="okk">' + n + '</span> מתוך ' + d.total + ' סומנו';
+      }
+    } catch (e) { el.textContent = ''; }
+  });
+  if (completed >= 9) {
+    var fin = document.createElement('div');
+    fin.className = 'box def';
+    fin.style.marginTop = '20px';
+    fin.innerHTML = '<div class="box-title">סיימת את כל המסלול — כולל הבוחן 🎉</div>' +
+      'כל תחנה מסומנת כהושלמה. הסטטיסטיקה הזו שלך עכשיו, ועבודת הקיץ מחכה בלי פחד.';
+    document.querySelector('main').insertBefore(fin, document.querySelector('footer.fin'));
+  }
+});
+</script>
+</body>
+</html>

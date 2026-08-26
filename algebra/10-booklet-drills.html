@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<link rel="apple-touch-icon" href="../assets/icons/icon-180.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>תרגילי החוברת — משוואות, אי-שוויונות, מערכות ואחוזים — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../vendor/katex.min.css">
+<link rel="stylesheet" href="../css/shira.css">
+<style>
+:root{--accent:var(--alg,#2E6F8E); --alg:#2E6F8E}
+/* רשת של תרגילי-אימון קצרים — שניים בשורה במסך רחב */
+.drills{display:flex; flex-wrap:wrap; gap:12px; margin:16px 0}
+.drills>article.ex{flex:1 1 340px; margin:0}
+.eqline{direction:ltr; unicode-bidi:isolate; text-align:center}
+.ans{display:inline-block; background:#F0F8F4; border:1px solid #BFE0CE; border-radius:8px;
+  padding:3px 11px; font-weight:800; color:#2E7D32; margin-top:4px}
+.pagemeta{display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px;
+  margin:12px 0 0; font-size:13px; color:var(--soft)}
+.pagemeta .pm-time{background:var(--faint); border-radius:999px; padding:3px 10px}
+.pagemeta .pm-time b{color:var(--ink); font-weight:700}
+.pagemeta .pm-jump{color:var(--accent); font-weight:700; text-decoration:none}
+/* טבלת עשר המערכות. כל משוואה יושבת בשורה משלה — כך נכתבת מערכת ממילא,
+   וכך היא גם לא נמעכת כשהמסך צר. */
+table.sys{border-collapse:collapse; margin:14px 0; width:100%}
+table.sys th,table.sys td{border:1px solid var(--line); padding:8px 10px; font-size:14px;
+  text-align:center; vertical-align:middle}
+table.sys th{background:var(--faint); font-size:12.5px; font-weight:800}
+table.sys td.n{font-weight:800; color:var(--soft); width:34px}
+table.sys td.q .eqn{display:block; line-height:1.9}
+table.sys td.a{font-weight:800; color:#2E7D32}
+table.sys td.a .katex{color:#2E7D32}
+/* בטלפון ארבע עמודות עם משוואות נמעכות לבלילה — אז כל מערכת הופכת לכרטיס
+   משלה, וכותרות העמודות עוברות להיות תוויות קטנות מעל כל שדה. */
+@media (max-width:640px){
+  table.sys{border:none}
+  table.sys thead{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0)}
+  table.sys tbody,table.sys tr,table.sys td{display:block; width:auto}
+  table.sys tr{border:1px solid var(--line); border-radius:var(--r-md); background:var(--card);
+    margin:10px 0; padding:8px 15px 11px; box-shadow:0 10px 28px -26px var(--shadow)}
+  table.sys td{border:none; text-align:right; padding:5px 0; font-size:14.5px}
+  table.sys td::before{content:attr(data-l); display:block; direction:rtl;
+    font-size:11px; font-weight:800; letter-spacing:.05em; color:var(--soft); margin-bottom:2px}
+  table.sys td.n{width:auto; font-size:12.5px; color:var(--soft);
+    border-bottom:1px dashed var(--faint); padding-bottom:6px; margin-bottom:3px}
+  table.sys td.n::before{display:inline; margin:0}
+  table.sys td.q .eqn{line-height:2}
+}
+</style>
+<script defer src="../vendor/katex.min.js"></script>
+<script defer src="../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../js/shira.js"></script>
+</head>
+<body data-page="alg:10-booklet-drills">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">אלגברה — המפה</a>
+    <span class="crumbs">תרגילי החוברת · <b>חלקים ב׳ ו-ג׳</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">אלגברה · נספח תרגילי החוברת</div>
+  <h1>חלק ב׳ וחלק ג׳ — כל מה שנשאר, פתור</h1>
+  <p class="lead">
+    כל תרגיל שעדיין לא היה פתור באתר מילה במילה מהחוברת:
+    <strong>שלוש המשוואות עם השברים</strong>, <strong>ארבעת האי-שוויונות</strong>,
+    <strong>עשר המערכות בשיטת ההצבה</strong>, ו<strong>שלוש בעיות האחוזים
+    האחרונות</strong>. עם הדף הזה חלקים ב׳ ו-ג׳ סגורים לגמרי.
+  </p>
+  <p class="youknow"><b>איך להשתמש בו:</b> פתרי כל תרגיל במחברת, ואז פתחי את
+  הפתרון והשווי. אם התשובה יצאה זהה — אין צורך לקרוא את הדרך. אם לא —
+  שם בדיוק תמצאי איפה נשברת.</p>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>≈ 50 דק׳</b> · 6 תרגילים · 20 תת-סעיפים</span>
+    <a class="pm-jump" href="#sec-b1">משוואות ↓</a>
+    <a class="pm-jump" href="#sec-b3">אי-שוויונות ↓</a>
+    <a class="pm-jump" href="#sec-b4">מערכות ↓</a>
+    <a class="pm-jump" href="#sec-c">אחוזים ↓</a>
+  </p>
+</header>
+
+<!-- =================== ב.1 =================== -->
+<h2 id="sec-b1">חלק ב׳ · תרגיל 1 — משוואות עם שברים</h2>
+
+<div class="box def">
+  <div class="box-title">אותו סדר פעולות בכל השלוש</div>
+  <strong>1.</strong> מוצאים מכנה משותף לכל המשוואה ·
+  <strong>2.</strong> כופלים בו <em>כל</em> איבר — גם את אלה שאין להם מכנה ·
+  <strong>3.</strong> פותחים סוגריים (זהירות עם מינוס לפני סוגריים) ·
+  <strong>4.</strong> מכנסים ומבודדים.
+  <br>ההסבר המלא של השיטה נמצא ב<a href="02-equations.html#sec-fractions">תחנה 2</a>.
+</div>
+
+<div class="drills">
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">ב.1 · א</span><h4>מכנים 5 ו-10</h4></div>
+  <p class="q-text eqline">$$\frac{4x-1}{5}-\frac{6x-1}{10}=0$$</p>
+  <details class="sol"><summary>לראות את הפתרון</summary>
+    <div class="sol-body">
+      <p>המכנה המשותף הוא <span class="fi">\(10\)</span>. כופלים:</p>
+      $$2(4x-1)-(6x-1)=0$$
+      <p>פותחים — והמינוס לפני הסוגריים הופך את שני האיברים:</p>
+      $$8x-2-6x+1=0$$
+      $$2x-1=0\;\Longrightarrow\;\mathbf{x=0.5}$$
+    </div>
+  </details>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">ב.1 · ב</span><h4>מכנים 5, 2, 20 — ו-4 בלי מכנה</h4></div>
+  <p class="q-text eqline">$$-\frac{x-7}{5}-\frac{4x-3}{2}+4=\frac{7x-15}{20}$$</p>
+  <details class="sol"><summary>לראות את הפתרון</summary>
+    <div class="sol-body">
+      <p>מכנה משותף <span class="fi">\(20\)</span>. שימי לב שגם ה-<span class="fi">\(4\)</span>
+      נכפל — זו הטעות הכי נפוצה כאן:</p>
+      $$-4(x-7)-10(4x-3)+80=7x-15$$
+      $$-4x+28-40x+30+80=7x-15$$
+      $$-44x+138=7x-15$$
+      <p>מעבירים אגפים:</p>
+      $$138+15=7x+44x\;\Longrightarrow\;153=51x\;\Longrightarrow\;\mathbf{x=3}$$
+      <p class="aside">בדיקה: <span class="fi">\(-\frac{-4}{5}-\frac{9}{2}+4=0.8-4.5+4=0.3\)</span> ,
+      וגם <span class="fi">\(\frac{21-15}{20}=0.3\)</span> ✓</p>
+    </div>
+  </details>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">ב.1 · ג</span><h4>מכנים 7, 5, 10 — ותשובה גדולה</h4></div>
+  <p class="q-text eqline">$$\frac{2(x-5)}{7}-\frac{3(x-1)}{5}=\frac{5-3x}{10}$$</p>
+  <details class="sol"><summary>לראות את הפתרון</summary>
+    <div class="sol-body">
+      <p>מכנה משותף של <span class="fi">\(7,5,10\)</span> הוא
+      <span class="fi">\(70\)</span>:</p>
+      $$20(x-5)-42(x-1)=7(5-3x)$$
+      $$20x-100-42x+42=35-21x$$
+      $$-22x-58=35-21x$$
+      <p>מעבירים את כל ה-<span class="fi">\(x\)</span>-ים לצד אחד:</p>
+      $$-58-35=-21x+22x\;\Longrightarrow\;-93=x\;\Longrightarrow\;\mathbf{x=-93}$$
+      <p class="aside">תשובה "מכוערת" איננה סימן לטעות. בדיקה:
+      אגף שמאל <span class="fi">\(\frac{2\cdot(-98)}{7}-\frac{3\cdot(-94)}{5}=-28+56.4=28.4\)</span> ,
+      אגף ימין <span class="fi">\(\frac{5+279}{10}=28.4\)</span> ✓ — וזה מה שקובע.</p>
+    </div>
+  </details>
+</article>
+</div>
+
+<!-- =================== ב.3 =================== -->
+<h2 id="sec-b3">חלק ב׳ · תרגיל 3 — אי-שוויונות</h2>
+
+<div class="box warn">
+  <div class="box-title">הכלל היחיד שמבדיל אי-שוויון ממשוואה</div>
+  כשמחלקים או כופלים את שני האגפים ב<strong>מספר שלילי</strong> —
+  <strong>סימן האי-שוויון מתהפך</strong>.
+  <span class="fi">\(\le\)</span> הופך ל-<span class="fi">\(\ge\)</span>,
+  <span class="fi">\(>\)</span> הופך ל-<span class="fi">\(<\)</span>.
+  <br>כל השאר זהה לגמרי לפתרון משוואה.
+</div>
+
+<div class="drills">
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">ב.3 · א</span><h4>שברים, ומספר מעורב באגף ימין</h4></div>
+  <p class="q-text eqline">$$-\frac{1}{3}x+\frac{1}{4}\le 2\tfrac{1}{2}$$</p>
+  <details class="sol"><summary>לראות את הפתרון</summary>
+    <div class="sol-body">
+      <p>קודם הופכים את המספר המעורב לשבר:
+      <span class="fi">\(2\tfrac12=\tfrac52\)</span>. מכנה משותף
+      <span class="fi">\(12\)</span>:</p>
+      $$-4x+3\le 30$$
+      $$-4x\le 27$$
+      <p>מחלקים ב-<span class="fi">\(-4\)</span> — <strong>והסימן מתהפך</strong>:</p>
+      $$x\ge-\frac{27}{4}\;\Longrightarrow\;\mathbf{x\ge-6.75}$$
+    </div>
+  </details>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">ב.3 · ב</span><h4>סוגריים בשני האגפים</h4></div>
+  <p class="q-text eqline">$$5(3x-2)-(10x+4)>7x-8$$</p>
+  <details class="sol"><summary>לראות את הפתרון</summary>
+    <div class="sol-body">
+      $$15x-10-10x-4>7x-8$$
+      $$5x-14>7x-8$$
+      $$-14+8>7x-5x\;\Longrightarrow\;-6>2x$$
+      <p>מחלקים ב-<span class="fi">\(2\)</span> — מספר <em>חיובי</em>, ולכן הסימן נשאר:</p>
+      $$-3>x\;\Longrightarrow\;\mathbf{x<-3}$$
+      <p class="aside">שימי לב: <span class="fi">\(-3>x\)</span> ו-<span class="fi">\(x<-3\)</span>
+      הם אותו דבר בדיוק. נוח לכתוב את התשובה כשה-<span class="fi">\(x\)</span> משמאל.</p>
+    </div>
+  </details>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">ב.3 · ג</span><h4>שבר מול שבר</h4></div>
+  <p class="q-text eqline">$$\frac{3x-6}{3}<\frac{5x-3}{4}$$</p>
+  <details class="sol"><summary>לראות את הפתרון</summary>
+    <div class="sol-body">
+      <p>מכנה משותף <span class="fi">\(12\)</span>:</p>
+      $$4(3x-6)<3(5x-3)$$
+      $$12x-24<15x-9$$
+      $$-24+9<15x-12x\;\Longrightarrow\;-15<3x\;\Longrightarrow\;\mathbf{x>-5}$$
+    </div>
+  </details>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">ב.3 · ד</span><h4>שלושה שברים — והתשובה מפתיעה</h4></div>
+  <p class="q-text eqline">$$\frac{4x-1}{3}-\frac{2x+3}{5}\le\frac{17x-14}{15}$$</p>
+  <details class="sol"><summary>לראות את הפתרון</summary>
+    <div class="sol-body">
+      <p>מכנה משותף <span class="fi">\(15\)</span>:</p>
+      $$5(4x-1)-3(2x+3)\le 17x-14$$
+      $$20x-5-6x-9\le 17x-14$$
+      $$14x-14\le 17x-14$$
+      <p>ה-<span class="fi">\(-14\)</span> מופיע בשני האגפים ומתבטל:</p>
+      $$0\le 3x\;\Longrightarrow\;\mathbf{x\ge 0}$$
+      <p class="aside">כשהמספרים החופשיים מתבטלים משני הצדדים זה לא סימן לטעות —
+      זו פשוט תשובה נקייה במיוחד.</p>
+    </div>
+  </details>
+</article>
+</div>
+
+<!-- =================== ב.4 =================== -->
+<h2 id="sec-b4">חלק ב׳ · תרגיל 4 — עשר המערכות, בשיטת ההצבה</h2>
+
+<p>
+  השיטה כולה מוסברת ב<a href="06-systems.html#sec-method">תחנה 6</a>. כאן רק
+  התשובות והצעד המכריע בכל מערכת, כדי שתוכלי לבדוק את עצמך מהר.
+  <strong>שש הראשונות</strong> נותנות לך את <span class="fi">\(y\)</span> כבר
+  מבודד — פשוט מציבים. ב<strong>ארבע האחרונות</strong> צריך קודם לבודד נעלם
+  אחד בעצמך, ואת זה עושים תמיד מהמשוואה שבה המקדם הוא
+  <span class="fi">\(1\)</span> או <span class="fi">\(-1\)</span>.
+</p>
+
+<table class="sys">
+  <thead><tr><th>#</th><th>המערכת</th><th>הצעד המכריע</th><th>הפתרון</th></tr></thead>
+  <tbody>
+    <tr>
+      <td class="n" data-l="מערכת ">1</td>
+      <td class="q" data-l="המערכת"><span class="eqn">\(x+y=5\)</span><span class="eqn">\(y=3x-3\)</span></td>
+      <td class="st" data-l="הצעד המכריע">\(x+(3x-3)=5\)</td>
+      <td class="a" data-l="הפתרון">\(x=2,\;y=3\)</td>
+    </tr>
+    <tr>
+      <td class="n" data-l="מערכת ">2</td>
+      <td class="q" data-l="המערכת"><span class="eqn">\(3x-y=-5\)</span><span class="eqn">\(y=-4x-9\)</span></td>
+      <td class="st" data-l="הצעד המכריע">\(3x-(-4x-9)=-5\)</td>
+      <td class="a" data-l="הפתרון">\(x=-2,\;y=-1\)</td>
+    </tr>
+    <tr>
+      <td class="n" data-l="מערכת ">3</td>
+      <td class="q" data-l="המערכת"><span class="eqn">\(-3x-7y=-5\)</span><span class="eqn">\(y=-3x+11\)</span></td>
+      <td class="st" data-l="הצעד המכריע">\(-3x-7(-3x+11)=-5\)</td>
+      <td class="a" data-l="הפתרון">\(x=4,\;y=-1\)</td>
+    </tr>
+    <tr>
+      <td class="n" data-l="מערכת ">4</td>
+      <td class="q" data-l="המערכת"><span class="eqn">\(2x-5y=-8\)</span><span class="eqn">\(y-x=1\)</span></td>
+      <td class="st" data-l="הצעד המכריע">\(\text{מבודדים}\;\;y=x+1\)</td>
+      <td class="a" data-l="הפתרון">\(x=1,\;y=2\)</td>
+    </tr>
+    <tr>
+      <td class="n" data-l="מערכת ">5</td>
+      <td class="q" data-l="המערכת"><span class="eqn">\(2x+7y=5\)</span><span class="eqn">\(y=5x+6\)</span></td>
+      <td class="st" data-l="הצעד המכריע">\(2x+7(5x+6)=5\)</td>
+      <td class="a" data-l="הפתרון">\(x=-1,\;y=1\)</td>
+    </tr>
+    <tr>
+      <td class="n" data-l="מערכת ">6</td>
+      <td class="q" data-l="המערכת"><span class="eqn">\(y=-2x-3\)</span><span class="eqn">\(-3x=4y-13\)</span></td>
+      <td class="st" data-l="הצעד המכריע">\(-3x=4(-2x-3)-13\)</td>
+      <td class="a" data-l="הפתרון">\(x=-5,\;y=7\)</td>
+    </tr>
+    <tr>
+      <td class="n" data-l="מערכת ">7</td>
+      <td class="q" data-l="המערכת"><span class="eqn">\(y=-2x-1\)</span><span class="eqn">\(3x-7y=-44\)</span></td>
+      <td class="st" data-l="הצעד המכריע">\(3x-7(-2x-1)=-44\)</td>
+      <td class="a" data-l="הפתרון">\(x=-3,\;y=5\)</td>
+    </tr>
+    <tr>
+      <td class="n" data-l="מערכת ">8</td>
+      <td class="q" data-l="המערכת"><span class="eqn">\(4x-7y=26\)</span><span class="eqn">\(2y-6x=-22\)</span></td>
+      <td class="st" data-l="הצעד המכריע">\(\text{מבודדים}\;\;y=3x-11\)</td>
+      <td class="a" data-l="הפתרון">\(x=3,\;y=-2\)</td>
+    </tr>
+    <tr>
+      <td class="n" data-l="מערכת ">9</td>
+      <td class="q" data-l="המערכת"><span class="eqn">\(2x-8y=-6\)</span><span class="eqn">\(7y+4x=34\)</span></td>
+      <td class="st" data-l="הצעד המכריע">\(\text{מבודדים}\;\;x=4y-3\)</td>
+      <td class="a" data-l="הפתרון">\(x=5,\;y=2\)</td>
+    </tr>
+    <tr>
+      <td class="n" data-l="מערכת ">10</td>
+      <td class="q" data-l="המערכת"><span class="eqn">\(4x-5y=4\)</span><span class="eqn">\(3x+9y=3\)</span></td>
+      <td class="st" data-l="הצעד המכריע">\(\text{מבודדים}\;\;x=1-3y\)</td>
+      <td class="a" data-l="הפתרון">\(x=1,\;y=0\)</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="nb" data-nb>
+  <div class="nb-head"><b>בונים ביחד את מערכת 8 — זו שדורשת בידוד</b><span class="nb-count"></span></div>
+  <ol class="nb-steps">
+    <li class="nb-step"><b>מסתכלים ובוחרים מאיפה לבודד</b>
+      $$4x-7y=26\qquad\qquad 2y-6x=-22$$
+      <p>אף נעלם לא מבודד. אז מחפשים את הכי קל: במשוואה השנייה
+      ל-<span class="fi">\(y\)</span> יש מקדם <span class="fi">\(2\)</span> —
+      וכל שאר המספרים שם מתחלקים ב-2. משם.</p>
+    </li>
+    <li class="nb-step"><b>מבודדים</b>
+      $$2y-6x=-22\;\Longrightarrow\;2y=6x-22\;\Longrightarrow\;y=3x-11$$
+    </li>
+    <li class="nb-step"><b>מציבים במשוואה השנייה — ורק בה</b>
+      $$4x-7\,(3x-11)=26$$
+      $$4x-21x+77=26$$
+      $$-17x=-51\;\Longrightarrow\;x=3$$
+    </li>
+    <li class="nb-step"><b>חוזרים לביטוי המבודד</b>
+      $$y=3\cdot 3-11=-2$$
+      <p><strong>הפתרון:</strong> <span class="fi">\(x=3\;,\;y=-2\)</span>.</p>
+    </li>
+    <li class="nb-step"><b>בודקים בשתי המשוואות המקוריות</b>
+      $$4\cdot3-7\cdot(-2)=12+14=26\ \checkmark$$
+      $$2\cdot(-2)-6\cdot3=-4-18=-22\ \checkmark$$
+      <p class="aside">חייבים לבדוק ב<em>שתיהן</em>. אם מציבים רק במשוואה שממנה
+      בודדנו, כל טעות בהצבה תעבור בשקט.</p>
+    </li>
+  </ol>
+  <div class="nb-acts">
+    <button type="button" class="nb-next">השלב הבא ↓</button>
+    <button type="button" class="nb-all">להציג את כל השלבים</button>
+  </div>
+</div>
+
+<!-- =================== ג =================== -->
+<h2 id="sec-c">חלק ג׳ · שלוש בעיות האחוזים האחרונות</h2>
+
+<p>
+  ארבע האחרות (1, 2, 3, 5, 6) פתורות כבר
+  <a href="07-percent.html">בתחנת האחוזים</a>. אלה שלוש שנשארו.
+</p>
+
+<article class="ex" id="c4">
+  <div class="ex-head"><span class="lvl l2">חוברת · ג.4</span><h4>התיק — שתי התייקרויות ברצף</h4></div>
+  <p class="q-text">
+    מוצר התייקר ב-<span class="fi">\(40\%\)</span> ואחר-כך ב-<span class="fi">\(25\%\)</span>.
+    לאחר שתי ההתייקרויות היה מחיר המוצר <span class="fi">\(210\)</span> שקלים.
+    <br>א. מה היה מחיר המוצר לפני שתי ההתייקרויות?
+    ב. בכמה אחוז התייקר בסה"כ המוצר?
+  </p>
+  <div class="q-row">
+    <label for="q-c4a">א. המחיר המקורי (₪):</label>
+    <input class="q-input" id="q-c4a" type="text" inputmode="decimal" data-answer="120" data-tol="0.01">
+    <button class="q-check">בדיקה</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <label for="q-c4b">ב. ההתייקרות הכוללת (%):</label>
+    <input class="q-input" id="q-c4b" type="text" inputmode="decimal" data-answer="75" data-tol="0.01">
+    <button class="q-check">בדיקה</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol"><summary>לראות את הפתרון</summary>
+    <div class="sol-body">
+      <p>עובדים עם <strong>מקדמים</strong>: התייקרות ב-<span class="fi">\(40\%\)</span>
+      היא כפל ב-<span class="fi">\(1.4\)</span>, והתייקרות ב-<span class="fi">\(25\%\)</span>
+      היא כפל ב-<span class="fi">\(1.25\)</span>. שתיהן ברצף — שני כפלים:</p>
+      $$x\cdot 1.4\cdot 1.25=210$$
+      $$x\cdot 1.75=210\;\Longrightarrow\;x=\frac{210}{1.75}=\mathbf{120}\ \text{₪}$$
+      <p><strong>סעיף ב.</strong> המקדם הכולל הוא <span class="fi">\(1.75\)</span>,
+      כלומר המחיר הוא <span class="fi">\(175\%\)</span> מהמקורי — ולכן
+      ההתייקרות היא <span class="fi">\(\mathbf{75\%}\)</span>.</p>
+      <p class="aside"><strong>לא</strong> <span class="fi">\(40+25=65\%\)</span>!
+      אחוזים ברצף לא מתחברים, כי ההתייקרות השנייה מחושבת מהמחיר שכבר עלה.
+      זה בדיוק הרעיון של <a href="07-percent.html#sec-successive">שני שינויים ברצף</a>.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="c4"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="c7">
+  <div class="ex-head"><span class="lvl l3">חוברת · ג.7</span><h4>חולצה ומכנסיים — שתי הנחות שונות</h4></div>
+  <p class="q-text">
+    המחיר של חולצה נמוך ב-<span class="fi">\(25\)</span> שקלים מהמחיר של מכנסיים.
+    אם תינתן הנחה של <span class="fi">\(12\%\)</span> על החולצה
+    ו-<span class="fi">\(8\%\)</span> הנחה על המכנסיים, יהיה המחיר של החולצה
+    והמכנסיים ביחד <span class="fi">\(158\)</span> שקלים.
+    מהו המחיר של החולצה ושל המכנסיים עכשיו?
+  </p>
+  <div class="q-row">
+    <label for="q-c7a">החולצה עכשיו (₪):</label>
+    <input class="q-input" id="q-c7a" type="text" inputmode="decimal" data-answer="75" data-tol="0.01">
+    <button class="q-check">בדיקה</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <label for="q-c7b">המכנסיים עכשיו (₪):</label>
+    <input class="q-input" id="q-c7b" type="text" inputmode="decimal" data-answer="100" data-tol="0.01">
+    <button class="q-check">בדיקה</button>
+    <span class="q-feedback"></span>
+  </div>
+
+  <div class="nb" data-nb>
+    <div class="nb-head"><b>בונים ביחד במחברת</b><span class="nb-count"></span></div>
+    <ol class="nb-steps">
+      <li class="nb-step"><b>בוחרים את הנעלם — ותמיד את זה ש"האחר" נמדד ממנו</b>
+        <p>המשפט אומר "החולצה נמוכה ב-25 <em>מהמכנסיים</em>" — כלומר המכנסיים הם
+        נקודת הייחוס. נסמן:</p>
+        $$\text{מכנסיים}=x\qquad\qquad\text{חולצה}=x-25$$
+        <p class="aside">אם היינו מסמנות את החולצה כ-<span class="fi">\(x\)</span>
+        זה גם היה עובד — פשוט המכנסיים היו <span class="fi">\(x+25\)</span>.
+        אבל הכיוון שהמשפט מכתיב הוא תמיד הפחות מבלבל.</p>
+      </li>
+      <li class="nb-step"><b>מתרגמים כל הנחה למקדם</b>
+        <p>הנחה של <span class="fi">\(12\%\)</span> משאירה לשלם
+        <span class="fi">\(88\%\)</span>, כלומר כפל ב-<span class="fi">\(0.88\)</span>.
+        הנחה של <span class="fi">\(8\%\)</span> משאירה
+        <span class="fi">\(0.92\)</span>.</p>
+      </li>
+      <li class="nb-step"><b>המשפט האחרון בשאלה הוא המשוואה</b>
+        <p>"ביחד 158 שקלים" — כלומר סכום שני המחירים <em>אחרי</em> ההנחה:</p>
+        $$0.88(x-25)+0.92x=158$$
+      </li>
+      <li class="nb-step"><b>פותרים</b>
+        $$0.88x-22+0.92x=158$$
+        $$1.8x=180\;\Longrightarrow\;x=100$$
+      </li>
+      <li class="nb-step"><b>עונים על מה שנשאל</b>
+        <p>השאלה מבקשת את המחירים <strong>עכשיו</strong> — כלומר לפני ההנחה
+        המוצעת (ההנחה עוד לא ניתנה, היא רק תנאי בשאלה):</p>
+        $$\text{מכנסיים}=\mathbf{100}\ \text{₪}\qquad\qquad
+          \text{חולצה}=100-25=\mathbf{75}\ \text{₪}$$
+      </li>
+      <li class="nb-step"><b>בודקים</b>
+        $$0.88\cdot 75=66
+          \qquad
+          0.92\cdot 100=92
+          \qquad
+          66+92=158\ \checkmark$$
+      </li>
+    </ol>
+    <div class="nb-acts">
+      <button type="button" class="nb-next">השלב הבא ↓</button>
+      <button type="button" class="nb-all">להציג את כל השלבים</button>
+    </div>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="c7"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="c8">
+  <div class="ex-head"><span class="lvl l3">חוברת · ג.8</span><h4>תפוזים ותפוחים — שני נעלמים ומשוואה אחת</h4></div>
+  <p class="q-text">
+    המחיר של ק״ג אחד של תפוזים וק״ג אחד של תפוחים היה ביחד
+    <span class="fi">\(6\)</span> שקלים.
+    העלו את המחיר של ק״ג תפוזים ב-<span class="fi">\(50\%\)</span> והורידו את
+    המחיר של ק״ג תפוחים ב-<span class="fi">\(25\%\)</span>.
+    מצאו כמה עולים עכשיו ביחד <span class="fi">\(2\)</span> ק״ג תפוזים
+    ו-<span class="fi">\(4\)</span> ק״ג תפוחים.
+  </p>
+  <div class="q-row">
+    <label for="q-c8">המחיר ביחד (₪):</label>
+    <input class="q-input" id="q-c8" type="text" inputmode="decimal" data-answer="18" data-tol="0.01">
+    <button class="q-check">בדיקה</button>
+    <span class="q-feedback"></span>
+  </div>
+
+  <div class="nb" data-nb>
+    <div class="nb-head"><b>בונים ביחד במחברת</b><span class="nb-count"></span></div>
+    <ol class="nb-steps">
+      <li class="nb-step"><b>מסמנים — ומגלים בעיה</b>
+        $$\text{ק״ג תפוזים}=z\qquad\qquad\text{ק״ג תפוחים}=p$$
+        <p>הנתון היחיד הוא <span class="fi">\(z+p=6\)</span> — <strong>שני נעלמים
+        ומשוואה אחת</strong>. אי אפשר למצוא כל אחד מהם בנפרד, וזה נראה כמו
+        חסר-נתון. אבל נסתכל מה בעצם ביקשו.</p>
+      </li>
+      <li class="nb-step"><b>כותבים את המחירים החדשים</b>
+        <p>עלייה של <span class="fi">\(50\%\)</span> = כפל ב-<span class="fi">\(1.5\)</span> ,
+        ירידה של <span class="fi">\(25\%\)</span> = כפל ב-<span class="fi">\(0.75\)</span>:</p>
+        $$\text{תפוזים}=1.5z\qquad\qquad\text{תפוחים}=0.75p$$
+      </li>
+      <li class="nb-step"><b>כותבים את מה שביקשו</b>
+        $$2\cdot 1.5z\;+\;4\cdot 0.75p\;=\;3z+3p$$
+      </li>
+      <li class="nb-step"><b>ושני האיברים מקבלים אותו מקדם</b>
+        <p>לשני האיברים יצא <em>אותו</em> מקדם, ולכן אפשר להוציא אותו החוצה:</p>
+        $$3z+3p=3(z+p)=3\cdot 6=\mathbf{18}\ \text{₪}$$
+        <p>לא היינו צריכות לדעת כמה עולה כל אחד בנפרד. הכמויות
+        <span class="fi">\(2\)</span> ו-<span class="fi">\(4\)</span> נבחרו
+        בדיוק כדי שזה יקרה.</p>
+      </li>
+      <li class="nb-step"><b>ולראות שזה באמת עובד — עם מספרים כלשהם</b>
+        <p>נניח תפוזים 4 ₪ ותפוחים 2 ₪ (סכום 6 ✓):
+        <span class="fi">\(2\cdot 6+4\cdot 1.5=12+6=18\)</span>.
+        <br>ונניח תפוזים 1 ₪ ותפוחים 5 ₪ (סכום 6 ✓):
+        <span class="fi">\(2\cdot 1.5+4\cdot 3.75=3+15=18\)</span>.
+        <br>אותה תשובה. זה בדיוק מה שהמשוואה אמרה.</p>
+        <p class="aside">הלקח שנשאר: כשיש שני נעלמים ומשוואה אחת —
+        לפני שמכריזות "חסר נתון", כדאי לבדוק אם השאלה בכלל דורשת
+        את הנעלמים בנפרד, או רק צירוף מסוים שלהם.</p>
+      </li>
+    </ol>
+    <div class="nb-acts">
+      <button type="button" class="nb-next">השלב הבא ↓</button>
+      <button type="button" class="nb-all">להציג את כל השלבים</button>
+    </div>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="c8"> סיימתי את התרגיל הזה</label>
+</article>
+
+<div class="box intuition" style="margin-top:28px">
+  <div class="box-title">שלוש שורות לפני מבחן</div>
+  <strong>משוואה עם שברים:</strong> מכנה משותף, כופלים <em>כל</em> איבר, פותחים סוגריים, מכנסים.
+  <br><strong>אי-שוויון:</strong> בדיוק אותו דבר — רק שחילוק במספר שלילי הופך את הסימן.
+  <br><strong>אחוזים:</strong> הכול הופך למקדם. עלייה של <span class="fi">\(p\%\)</span> היא
+  <span class="fi">\(\times(1+\frac{p}{100})\)</span> וירידה היא
+  <span class="fi">\(\times(1-\frac{p}{100})\)</span>, וברצף פשוט כופלים אותם.
+</div>
+
+<div class="pagenav">
+  <a href="07-percent.html"><span class="dir">התחנה שממנה זה נשען</span>אחוזים</a>
+  <a class="next" href="09-exercise-bank.html"><span class="dir">עוד 46 תרגילים</span>בנק התרגילים ←</a>
+</div>
+
+<footer class="fin">חלק מהעולם של שירה · <a href="index.html">חזרה למפת האלגברה</a> ·
+<a href="../booklet.html">מפת החוברת</a></footer>
+</main>
+</div>
+</body>
+</html>

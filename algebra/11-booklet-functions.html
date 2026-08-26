@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<link rel="apple-touch-icon" href="../assets/icons/icon-180.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>תרגילי החוברת — פונקציה קווית וקריאת גרפים — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../vendor/katex.min.css">
+<link rel="stylesheet" href="../css/shira.css">
+<style>
+:root{--accent:var(--alg,#2E6F8E); --alg:#2E6F8E}
+.pagemeta{display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px;
+  margin:12px 0 0; font-size:13px; color:var(--soft)}
+.pagemeta .pm-time{background:var(--faint); border-radius:999px; padding:3px 10px}
+.pagemeta .pm-time b{color:var(--ink); font-weight:700}
+.pagemeta .pm-jump{color:var(--accent); font-weight:700; text-decoration:none}
+/* טבלת "נקודה → שיעורים → מאיפה" */
+table.pts{border-collapse:collapse; margin:12px 0; width:100%}
+table.pts th,table.pts td{border:1px solid var(--line); padding:6px 10px; font-size:13.5px; text-align:center}
+table.pts th{background:var(--faint); font-size:12.5px; font-weight:800}
+table.pts td.why{text-align:right; color:var(--soft); font-size:12.5px}
+/* סעיפים ממוספרים בתוך תרגיל */
+ol.parts{list-style:none; padding:0; margin:10px 0; counter-reset:pt}
+ol.parts>li{counter-increment:pt; position:relative; padding:6px 34px 6px 0; margin:4px 0;
+  border-bottom:1px dashed var(--faint)}
+ol.parts>li:last-child{border-bottom:none}
+ol.parts>li::before{content:attr(data-l); position:absolute; right:0; top:8px;
+  width:24px; text-align:center; font-weight:800; font-size:12.5px; color:var(--accent)}
+.ansline{color:#2E7D32; font-weight:700}
+</style>
+<script defer src="../vendor/katex.min.js"></script>
+<script defer src="../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../js/shira.js"></script>
+</head>
+<body data-page="alg:11-booklet-functions">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">אלגברה — המפה</a>
+    <span class="crumbs">תרגילי החוברת · <b>חלק א׳</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">אלגברה · נספח תרגילי החוברת</div>
+  <h1>חלק א׳ — עשרת תרגילי הפונקציות</h1>
+  <p class="lead">
+    החלק הארוך ביותר בחוברת, ובו החלק הכי גדול מהעבודה. כאן כל עשרת התרגילים,
+    <strong>עם התשובות המלאות של כל סעיף וסעיף</strong> — כדי שתוכלי לפתור לבד
+    ואז לבדוק את עצמך שורה-שורה, בלי לחכות לאף אחד.
+  </p>
+  <p class="youknow"><b>שלוש שאלות שפותרות כמעט כל סעיף כאן:</b>
+  איפה הישר חותך את הצירים? (מציבים <span class="fi">\(x=0\)</span> ואז
+  <span class="fi">\(y=0\)</span>) · איפה שני ישרים נפגשים? (משווים ופותרים) ·
+  ומה שטח המשולש שנוצר? (בסיס על ציר או על ישר אופקי, וגובה = המרחק אליו).</p>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>≈ 90 דק׳</b> · 10 תרגילים · אפשר בחלקים</span>
+    <a class="pm-jump" href="#a1">1</a><a class="pm-jump" href="#a2">2</a>
+    <a class="pm-jump" href="#a3">3</a><a class="pm-jump" href="#a4">4</a>
+    <a class="pm-jump" href="#a5">5</a><a class="pm-jump" href="#a6">6</a>
+    <a class="pm-jump" href="#a7">7</a><a class="pm-jump" href="#a8">8</a>
+    <a class="pm-jump" href="#a9">9</a><a class="pm-jump" href="#a10">10</a>
+  </p>
+</header>
+
+<div class="box def">
+  <div class="box-title">ארבעת הכלים — וזה כל מה שהחלק הזה דורש</div>
+  <strong>חיתוך עם ציר <span class="fi">\(y\)</span>:</strong> מציבים
+  <span class="fi">\(x=0\)</span>. בישר <span class="fi">\(y=mx+b\)</span> זה תמיד
+  <span class="fi">\((0,b)\)</span>.
+  <br><strong>חיתוך עם ציר <span class="fi">\(x\)</span>:</strong> מציבים
+  <span class="fi">\(y=0\)</span> ופותרים.
+  <br><strong>תחום חיוביות / שליליות:</strong> מוצאים את נקודת האפס, ואז
+  <em>שיפוע חיובי</em> ⇐ חיובי מימין לה, <em>שיפוע שלילי</em> ⇐ חיובי משמאל לה.
+  <br><strong>נקודת חיתוך של שני ישרים:</strong> משווים את שני הביטויים ופותרים
+  משוואה אחת.
+  <br>הכול מוסבר במלואו בתחנות <a href="04-linear-function.html">4</a>
+  ו-<a href="05-line-equation.html">5</a>.
+</div>
+
+<!-- ================= 1 ================= -->
+<h2 id="a1">תרגיל 1 · <span class="fi">\(y=-4x+4\)</span></h2>
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">חוברת · א.1</span><h4>ישר אחד, ואז ישר חדש דרך נקודת האפס שלו</h4></div>
+  <details class="sol" open><summary>התשובות, סעיף-סעיף</summary>
+    <div class="sol-body">
+      <ol class="parts">
+        <li data-l="א"><b>סרטוט.</b> הכי מהיר בשיטת המדרגות: מתחילים ב-<span class="fi">\((0,4)\)</span>,
+          ומכל נקודה עושים צעד אחד ימינה ו-4 <em>למטה</em> (כי
+          <span class="fi">\(m=-4\)</span>). מקבלים גם את
+          <span class="fi">\((1,0)\)</span>, ומחברים.</li>
+        <li data-l="ב"><b>חיתוך עם ציר <span class="fi">\(y\)</span>:</b>
+          מציבים <span class="fi">\(x=0\)</span>:
+          <span class="fi">\(y=4\)</span> <span class="ansline">← <span class="fi">\((0,4)\)</span></span></li>
+        <li data-l="ג"><b>חיתוך עם ציר <span class="fi">\(x\)</span>:</b>
+          <span class="fi">\(-4x+4=0\;\Rightarrow\;x=1\)</span>
+          <span class="ansline">← <span class="fi">\((1,0)\)</span></span></li>
+        <li data-l="ד"><b>תחום חיוביות:</b> <span class="fi">\(-4x+4>0\;\Rightarrow\;-4x>-4\;\Rightarrow\)</span>
+          (חילוק בשלילי — הסימן מתהפך) <span class="ansline"><span class="fi">\(x<1\)</span></span></li>
+        <li data-l="ה"><b>תחום שליליות:</b> <span class="ansline"><span class="fi">\(x>1\)</span></span></li>
+        <li data-l="ו">
+          <b>(i)</b> ישר בשיפוע <span class="fi">\(2\)</span> דרך
+          <span class="fi">\((1,0)\)</span> — נקודת החיתוך מסעיף ג:
+          $$y=2x+b\;\Rightarrow\;0=2\cdot1+b\;\Rightarrow\;b=-2$$
+          <span class="ansline"><span class="fi">\(y=2x-2\)</span></span>
+          <br><b>(ii)</b> מסרטטים מ-<span class="fi">\((0,-2)\)</span>, צעד ימינה
+          ושניים למעלה.
+          <br><b>(iii)</b> נקודת האפס היא שוב <span class="fi">\(x=1\)</span>,
+          אבל השיפוע חיובי — ולכן <strong>הכיוונים מתהפכים</strong>:
+          <span class="ansline">חיוביות <span class="fi">\(x>1\)</span> ,
+          שליליות <span class="fi">\(x<1\)</span></span>
+        </li>
+      </ol>
+      <p class="aside">שני הישרים חותכים את ציר <span class="fi">\(x\)</span> באותה
+      נקודה בדיוק, ובכל זאת תחומי הסימן שלהם הפוכים. זה בדיוק מראה שתחום החיוביות
+      נקבע משני דברים ביחד — <strong>נקודת האפס והשיפוע</strong> — ולא מאחד מהם לבד.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="a1"> סיימתי</label>
+</article>
+
+<!-- ================= 2 ================= -->
+<h2 id="a2">תרגיל 2 · שני גרפים בסרטוט</h2>
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">חוברת · א.2</span><h4>כשהנתונים הם הגרף עצמו</h4></div>
+  <p class="q-text">
+    בתרגיל הזה לא נתונות משוואות — רק שני גרפים משורטטים על משבצות.
+    התשובות תלויות במה שאת <em>קוראת</em> מהסרטוט שבחוברת שלך, ולכן כאן נעבור
+    על <strong>השיטה המלאה</strong> על גרף תאום נקי, ואת תיישמי אותה על שלך.
+  </p>
+  <figure>
+    <svg viewBox="0 0 280 250" style="width:100%;max-width:400px;height:auto" role="img" aria-label="שני ישרים במערכת צירים: f עולה וחותך ב-מינוס אחד, g יורד וחותך ב-שלוש, נפגשים בנקודה (1,2)">
+      <g stroke="#E3E8EC" stroke-width="1">
+        <path d="M26,25 V233 M52,25 V233 M78,25 V233 M104,25 V233 M156,25 V233 M182,25 V233 M208,25 V233 M234,25 V233 M260,25 V233"/>
+        <path d="M26,25 H260 M26,51 H260 M26,77 H260 M26,103 H260 M26,129 H260 M26,181 H260 M26,207 H260 M26,233 H260"/>
+      </g>
+      <line x1="20" y1="155" x2="272" y2="155" stroke="#5A6875" stroke-width="1.8"/>
+      <line x1="130" y1="18" x2="130" y2="240" stroke="#5A6875" stroke-width="1.8"/>
+      <line x1="26" y1="233" x2="234" y2="25" stroke="#2E6F8E" stroke-width="2.8"/>
+      <line x1="78" y1="25" x2="260" y2="207" stroke="#C2408C" stroke-width="2.8"/>
+      <circle cx="104" cy="155" r="4" fill="#2E6F8E"/>
+      <circle cx="208" cy="155" r="4" fill="#C2408C"/>
+      <circle cx="156" cy="103" r="4.5" fill="#6D28D9"/>
+      <text x="238" y="22" font-size="12" font-weight="bold" font-style="italic" fill="#2E6F8E">f</text>
+      <text x="264" y="220" font-size="12" font-weight="bold" font-style="italic" fill="#C2408C">g</text>
+      <text x="92" y="172" font-size="11" fill="#2E6F8E">−1</text>
+      <text x="205" y="172" font-size="11" fill="#C2408C">3</text>
+      <text x="164" y="93" font-size="11" font-weight="bold" fill="#6D28D9">(1,2)</text>
+      <text x="273" y="151" font-size="12" font-style="italic" fill="#5A6875">x</text>
+      <text x="120" y="20" font-size="12" font-style="italic" fill="#5A6875">y</text>
+    </svg>
+    <figcaption>גרף תאום נקי — לא זה שבחוברת. השיטה זהה לחלוטין.</figcaption>
+  </figure>
+
+  <div class="nb" data-nb>
+    <div class="nb-head"><b>השיטה, סעיף אחרי סעיף</b><span class="nb-count"></span></div>
+    <ol class="nb-steps">
+      <li class="nb-step"><b>א+ב · נקודת האפס של כל פונקציה</b>
+        <p>נקודת האפס היא המקום שבו הגרף <strong>חוצה את ציר ה-<span class="fi">\(x\)</span></strong>.
+        קוראים ישירות מהמשבצות — כאן <span class="fi">\(f\)</span> חוצה ב-<span class="fi">\(-1\)</span>
+        ו-<span class="fi">\(g\)</span> ב-<span class="fi">\(3\)</span>.
+        <br>בחוברת שלך: הניחי סרגל על נקודת החיתוך וספרי משבצות מהראשית.</p>
+      </li>
+      <li class="nb-step"><b>ג · תחומי חיוביות ושליליות</b>
+        <p>"חיובי" פירושו <em>הגרף מעל ציר ה-<span class="fi">\(x\)</span></em>.
+        מסתכלים בתמונה, לא מחשבים:
+        <br><span class="fi">\(f\)</span> עולה וחוצה ב-<span class="fi">\(-1\)</span> ⇐
+        חיובית ב-<span class="fi">\(x>-1\)</span> , שלילית ב-<span class="fi">\(x<-1\)</span>.
+        <br><span class="fi">\(g\)</span> יורדת וחוצה ב-<span class="fi">\(3\)</span> ⇐
+        חיובית ב-<span class="fi">\(x<3\)</span> , שלילית ב-<span class="fi">\(x>3\)</span>.</p>
+      </li>
+      <li class="nb-step"><b>ד · משוואות שני הישרים</b>
+        <p>שני מספרים לכל ישר: <span class="fi">\(b\)</span> — איפה הוא חוצה את
+        ציר <span class="fi">\(y\)</span>, ו-<span class="fi">\(m\)</span> — כמה
+        עולים על כל צעד ימינה.
+        <br>כאן <span class="fi">\(f\)</span> חוצה ב-<span class="fi">\(1\)</span>
+        ועולה משבצת אחת לכל צעד: <span class="fi">\(f(x)=x+1\)</span>.
+        <br>ו-<span class="fi">\(g\)</span> חוצה ב-<span class="fi">\(3\)</span>
+        ויורדת משבצת אחת לכל צעד: <span class="fi">\(g(x)=-x+3\)</span>.</p>
+      </li>
+      <li class="nb-step"><b>ה · מתי <span class="fi">\(f(x)>g(x)\)</span></b>
+        <p>שאלת "מי מעל מי". מוצאים את נקודת המפגש, ואז מסתכלים בגרף מאיזה צד
+        <span class="fi">\(f\)</span> נמצאת <em>מעל</em>:</p>
+        $$x+1=-x+3\;\Longrightarrow\;2x=2\;\Longrightarrow\;x=1$$
+        <p>מימין ל-<span class="fi">\(x=1\)</span> הישר הכחול גבוה יותר, ולכן
+        <span class="fi">\(f(x)>g(x)\)</span> עבור <span class="fi">\(x>1\)</span>.</p>
+      </li>
+      <li class="nb-step"><b>ו · שיעורי הנקודה שבה <span class="fi">\(f(x)=g(x)\)</span></b>
+        <p>זו אותה נקודה מהסעיף הקודם, רק שעכשיו צריך גם את
+        <span class="fi">\(y\)</span> — מציבים בחזרה באחת הפונקציות:</p>
+        $$y=1+1=2\;\Longrightarrow\;(1,\,2)$$
+        <p class="aside">תמיד להציב <em>בשתיהן</em> כבדיקה:
+        <span class="fi">\(-1+3=2\)</span> ✓ — אם יצאו שני ערכים שונים, יש טעות.</p>
+      </li>
+    </ol>
+    <div class="nb-acts">
+      <button type="button" class="nb-next">השלב הבא ↓</button>
+      <button type="button" class="nb-all">להציג את כל השלבים</button>
+    </div>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="a2"> סיימתי</label>
+</article>
+
+<!-- ================= 3 ================= -->
+<h2 id="a3">תרגיל 3 · <span class="fi">\(y=-\tfrac{x}{5}+5\)</span> ו-<span class="fi">\(y=x+2\)</span></h2>
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">חוברת · א.3</span><h4>שלוש נקודות, ושטח משולש</h4></div>
+  <details class="sol" open><summary>התשובות, סעיף-סעיף</summary>
+    <div class="sol-body">
+      <ol class="parts">
+        <li data-l="א"><b>התאמה.</b> <span class="fi">\(\text{I}:\;y=-\tfrac{x}{5}+5\)</span>
+          שיפועה שלילי וקטן (<span class="fi">\(-0.2\)</span>) — זה הישר
+          <strong>היורד לאט</strong>. <span class="fi">\(\text{II}:\;y=x+2\)</span>
+          שיפועה חיובי — זה הישר <strong>העולה</strong>.</li>
+        <li data-l="ב"><b>שיעורי הנקודות.</b>
+          <table class="pts">
+            <tr><th>נקודה</th><th>שיעורים</th><th class="why">מאיפה</th></tr>
+            <tr><td><span class="fi">\(A\)</span></td><td><span class="fi">\((-2,0)\)</span></td><td class="why">חיתוך של <span class="fi">\(y=x+2\)</span> עם ציר <span class="fi">\(x\)</span>: <span class="fi">\(x+2=0\)</span></td></tr>
+            <tr><td><span class="fi">\(B\)</span></td><td><span class="fi">\((25,0)\)</span></td><td class="why">חיתוך של <span class="fi">\(y=-\tfrac{x}{5}+5\)</span> עם ציר <span class="fi">\(x\)</span>: <span class="fi">\(-\tfrac{x}{5}+5=0\)</span></td></tr>
+            <tr><td><span class="fi">\(C\)</span></td><td><span class="fi">\((2.5,\;4.5)\)</span></td><td class="why">נקודת החיתוך של שני הישרים</td></tr>
+          </table>
+          <p>החישוב של <span class="fi">\(C\)</span>:</p>
+          $$-\frac{x}{5}+5=x+2\;\Longrightarrow\;5-2=x+\frac{x}{5}\;\Longrightarrow\;3=\frac{6x}{5}$$
+          $$x=2.5\;,\qquad y=2.5+2=4.5$$
+        </li>
+        <li data-l="ג"><b>שטח המשולש <span class="fi">\(ACB\)</span>.</b>
+          הבסיס <span class="fi">\(AB\)</span> שוכב על ציר <span class="fi">\(x\)</span>,
+          והגובה אליו הוא פשוט ה-<span class="fi">\(y\)</span> של
+          <span class="fi">\(C\)</span>:
+          $$AB=25-(-2)=27\qquad h=4.5$$
+          $$S=\frac{27\cdot 4.5}{2}=\mathbf{60.75}$$
+        </li>
+      </ol>
+      <p class="aside">כשהבסיס יושב על ציר, הגובה הוא תמיד השיעור השני של הקדקוד
+      השלישי — בלי לחשב שום דבר. זה הטריק שחוזר בתרגילים 6, 7 ובכל תחנת
+      <a href="../geometry/04-graphs-and-shapes.html">שטח מתוך גרף</a>.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="a3"> סיימתי</label>
+</article>
+
+<!-- ================= 4+5 ================= -->
+<h2 id="a4">תרגיל 4 · משוואת ישר משתי נקודות</h2>
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">חוברת · א.4</span><h4>דרך <span class="fi">\((-10,4)\)</span> ו-<span class="fi">\((20,7)\)</span></h4></div>
+  <details class="sol" open><summary>התשובות, סעיף-סעיף</summary>
+    <div class="sol-body">
+      <ol class="parts">
+        <li data-l="א"><b>המשוואה.</b> קודם שיפוע, ואז <span class="fi">\(b\)</span>:
+          $$m=\frac{7-4}{20-(-10)}=\frac{3}{30}=0.1$$
+          $$4=0.1\cdot(-10)+b\;\Longrightarrow\;4=-1+b\;\Longrightarrow\;b=5$$
+          <span class="ansline"><span class="fi">\(y=0.1x+5\)</span></span>
+        </li>
+        <li data-l="ב"><b>האם <span class="fi">\((30,8)\)</span> על הישר?</b>
+          מציבים ובודקים אם מתקבל שוויון:
+          $$0.1\cdot 30+5=3+5=8\;\checkmark$$
+          <span class="ansline">כן, הנקודה נמצאת על הישר.</span>
+        </li>
+        <li data-l="ג"><b>ישר מקביל דרך חיתוך ה-<span class="fi">\(y\)</span> של
+          <span class="fi">\(y=-x-\tfrac13\)</span>.</b>
+          חיתוך ה-<span class="fi">\(y\)</span> של אותו ישר הוא
+          <span class="fi">\(\left(0,-\tfrac13\right)\)</span>, ומקבילות פירושו
+          <strong>אותו שיפוע</strong> <span class="fi">\(m=0.1\)</span>:
+          $$-\tfrac13=0.1\cdot 0+b\;\Longrightarrow\;b=-\tfrac13$$
+          <span class="ansline"><span class="fi">\(y=0.1x-\tfrac13\)</span></span>
+        </li>
+      </ol>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="a4"> סיימתי</label>
+</article>
+
+<h2 id="a5">תרגיל 5 · אותו דבר, עם מספרים שליליים</h2>
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">חוברת · א.5</span><h4>דרך <span class="fi">\((2,-10)\)</span> ו-<span class="fi">\((-1,-1)\)</span></h4></div>
+  <details class="sol" open><summary>התשובות, סעיף-סעיף</summary>
+    <div class="sol-body">
+      <ol class="parts">
+        <li data-l="א">
+          $$m=\frac{-1-(-10)}{-1-2}=\frac{9}{-3}=-3$$
+          $$-10=-3\cdot 2+b\;\Longrightarrow\;-10=-6+b\;\Longrightarrow\;b=-4$$
+          <span class="ansline"><span class="fi">\(y=-3x-4\)</span></span>
+          <p class="aside">בדיקה בנקודה השנייה:
+          <span class="fi">\(-3\cdot(-1)-4=3-4=-1\)</span> ✓</p>
+        </li>
+        <li data-l="ב"><b>מקביל דרך <span class="fi">\((2,3)\)</span>:</b>
+          אותו שיפוע <span class="fi">\(m=-3\)</span>:
+          $$3=-3\cdot 2+b\;\Longrightarrow\;3=-6+b\;\Longrightarrow\;b=9$$
+          <span class="ansline"><span class="fi">\(y=-3x+9\)</span></span>
+        </li>
+      </ol>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="a5"> סיימתי</label>
+</article>
+
+<!-- ================= 6 ================= -->
+<h2 id="a6">תרגיל 6 · <span class="fi">\(y=3x-1\)</span> ו-<span class="fi">\(y=-x+7\)</span></h2>
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">חוברת · א.6</span><h4>חמש נקודות ושני שטחים</h4></div>
+  <figure>
+    <svg viewBox="0 0 320 320" style="width:100%;max-width:400px;height:auto" role="img" aria-label="שני ישרים במערכת צירים עם הנקודות A B C D E">
+      <line x1="14" y1="230" x2="312" y2="230" stroke="#5A6875" stroke-width="1.8"/>
+      <line x1="70" y1="30" x2="70" y2="310" stroke="#5A6875" stroke-width="1.8"/>
+      <line x1="50" y1="304" x2="154" y2="38" stroke="#2E6F8E" stroke-width="2.8"/>
+      <line x1="42" y1="38" x2="294" y2="254" stroke="#C2408C" stroke-width="2.8"/>
+      <circle cx="70" cy="62" r="4" fill="#334155"/>
+      <circle cx="126" cy="110" r="4" fill="#6D28D9"/>
+      <circle cx="266" cy="230" r="4" fill="#334155"/>
+      <circle cx="70" cy="254" r="4" fill="#334155"/>
+      <circle cx="79" cy="230" r="4" fill="#334155"/>
+      <text x="52" y="60" font-size="13" font-weight="bold" fill="#334155">A</text>
+      <text x="131" y="106" font-size="13" font-weight="bold" fill="#6D28D9">B</text>
+      <text x="264" y="248" font-size="13" font-weight="bold" fill="#334155">C</text>
+      <text x="54" y="268" font-size="13" font-weight="bold" fill="#334155">D</text>
+      <text x="82" y="222" font-size="13" font-weight="bold" fill="#334155">E</text>
+      <text x="52" y="222" font-size="11" fill="#5A6875">O</text>
+      <text x="158" y="36" font-size="12" font-weight="bold" fill="#2E6F8E">3x−1</text>
+      <text x="252" y="266" font-size="12" font-weight="bold" fill="#C2408C">−x+7</text>
+      <text x="314" y="226" font-size="12" font-style="italic" fill="#5A6875">x</text>
+      <text x="60" y="28" font-size="12" font-style="italic" fill="#5A6875">y</text>
+    </svg>
+    <figcaption>הכחול הוא <span class="fi">\(y=3x-1\)</span> (שיפוע חיובי תלול),
+    והוורוד <span class="fi">\(y=-x+7\)</span> (שיפוע שלילי).</figcaption>
+  </figure>
+  <details class="sol" open><summary>התשובות, סעיף-סעיף</summary>
+    <div class="sol-body">
+      <ol class="parts">
+        <li data-l="א"><b>התאמה ונימוקים.</b> <span class="fi">\(y=3x-1\)</span> —
+          שיפוע חיובי, ולכן היא הישר <strong>העולה</strong>, וחיתוך ה-<span class="fi">\(y\)</span>
+          שלה שלילי (<span class="fi">\(-1\)</span>) — כלומר הוא חוצה את הציר
+          <em>מתחת</em> לראשית. <span class="fi">\(y=-x+7\)</span> — שיפוע שלילי,
+          ולכן <strong>יורדת</strong>, וחוצה את ציר <span class="fi">\(y\)</span>
+          גבוה, ב-<span class="fi">\(7\)</span>.</li>
+        <li data-l="ב"><b>שיעורי חמש הנקודות.</b>
+          <table class="pts">
+            <tr><th>נקודה</th><th>שיעורים</th><th class="why">מאיפה</th></tr>
+            <tr><td><span class="fi">\(A\)</span></td><td><span class="fi">\((0,7)\)</span></td><td class="why">חיתוך <span class="fi">\(y=-x+7\)</span> עם ציר <span class="fi">\(y\)</span></td></tr>
+            <tr><td><span class="fi">\(B\)</span></td><td><span class="fi">\((2,5)\)</span></td><td class="why">חיתוך שני הישרים</td></tr>
+            <tr><td><span class="fi">\(C\)</span></td><td><span class="fi">\((7,0)\)</span></td><td class="why">חיתוך <span class="fi">\(y=-x+7\)</span> עם ציר <span class="fi">\(x\)</span></td></tr>
+            <tr><td><span class="fi">\(D\)</span></td><td><span class="fi">\((0,-1)\)</span></td><td class="why">חיתוך <span class="fi">\(y=3x-1\)</span> עם ציר <span class="fi">\(y\)</span></td></tr>
+            <tr><td><span class="fi">\(E\)</span></td><td><span class="fi">\(\left(\tfrac13,0\right)\)</span></td><td class="why">חיתוך <span class="fi">\(y=3x-1\)</span> עם ציר <span class="fi">\(x\)</span></td></tr>
+          </table>
+          <p>החישוב של <span class="fi">\(B\)</span>:</p>
+          $$3x-1=-x+7\;\Longrightarrow\;4x=8\;\Longrightarrow\;x=2\;,\quad y=3\cdot2-1=5$$
+        </li>
+        <li data-l="ג"><b>שטח <span class="fi">\(\triangle ABD\)</span>.</b>
+          הקדקודים <span class="fi">\(A(0,7)\)</span> ו-<span class="fi">\(D(0,-1)\)</span>
+          יושבים שניהם על ציר <span class="fi">\(y\)</span> — אז
+          <span class="fi">\(AD\)</span> הוא הבסיס, והגובה הוא המרחק האופקי של
+          <span class="fi">\(B\)</span> מהציר:
+          $$AD=7-(-1)=8\qquad h=2$$
+          $$S=\frac{8\cdot 2}{2}=\mathbf{8}$$
+        </li>
+        <li data-l="ד"><b>שטח <span class="fi">\(\triangle AOC\)</span>.</b>
+          משולש ישר-זווית שניצביו על הצירים:
+          <span class="fi">\(OA=7\)</span> , <span class="fi">\(OC=7\)</span>:
+          $$S=\frac{7\cdot 7}{2}=\mathbf{24.5}$$
+        </li>
+        <li data-l="ה"><b>תחום השליליות של <span class="fi">\(y=3x-1\)</span>:</b>
+          <span class="fi">\(3x-1<0\;\Rightarrow\)</span>
+          <span class="ansline"><span class="fi">\(x<\tfrac13\)</span></span></li>
+        <li data-l="ו"><b>תחום החיוביות של <span class="fi">\(y=-x+7\)</span>:</b>
+          <span class="fi">\(-x+7>0\;\Rightarrow\;7>x\;\Rightarrow\)</span>
+          <span class="ansline"><span class="fi">\(x<7\)</span></span></li>
+      </ol>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="a6"> סיימתי</label>
+</article>
+
+<!-- ================= 7 ================= -->
+<h2 id="a7">תרגיל 7 · שלושה ישרים — התרגיל הארוך בחוברת</h2>
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">חוברת · א.7</span><h4><span class="fi">\(f=\tfrac34x+3\)</span> , <span class="fi">\(g=-\tfrac12x+5\)</span> , <span class="fi">\(h=1\)</span></h4></div>
+  <figure>
+    <svg viewBox="0 0 310 245" style="width:100%;max-width:430px;height:auto" role="img" aria-label="שלושה ישרים במערכת צירים עם הנקודות A B C D E F G M">
+      <line x1="14" y1="200" x2="302" y2="200" stroke="#5A6875" stroke-width="1.8"/>
+      <line x1="105" y1="28" x2="105" y2="232" stroke="#5A6875" stroke-width="1.8"/>
+      <line x1="20" y1="219.5" x2="173" y2="44" stroke="#2E6F8E" stroke-width="2.8"/>
+      <line x1="71" y1="44" x2="292" y2="213" stroke="#C2408C" stroke-width="2.8"/>
+      <line x1="20" y1="174" x2="292" y2="174" stroke="#B7791F" stroke-width="2.8"/>
+      <line x1="20" y1="122" x2="292" y2="122" stroke="#6D28D9" stroke-width="2" stroke-dasharray="5 4"/>
+      <circle cx="132" cy="91" r="4" fill="#334155"/>
+      <circle cx="60" cy="174" r="4" fill="#334155"/>
+      <circle cx="241" cy="174" r="4" fill="#334155"/>
+      <circle cx="37" cy="200" r="4" fill="#334155"/>
+      <circle cx="275" cy="200" r="4" fill="#334155"/>
+      <circle cx="105" cy="122" r="4" fill="#334155"/>
+      <circle cx="105" cy="70" r="4" fill="#334155"/>
+      <circle cx="173" cy="122" r="4" fill="#6D28D9"/>
+      <text x="136" y="87" font-size="12.5" font-weight="bold" fill="#334155">A</text>
+      <text x="52" y="167" font-size="12.5" font-weight="bold" fill="#334155">B</text>
+      <text x="245" y="167" font-size="12.5" font-weight="bold" fill="#334155">C</text>
+      <text x="30" y="216" font-size="12.5" font-weight="bold" fill="#334155">D</text>
+      <text x="277" y="216" font-size="12.5" font-weight="bold" fill="#334155">E</text>
+      <text x="90" y="126" font-size="12.5" font-weight="bold" fill="#334155">F</text>
+      <text x="90" y="68" font-size="12.5" font-weight="bold" fill="#334155">G</text>
+      <text x="176" y="116" font-size="12.5" font-weight="bold" fill="#6D28D9">M</text>
+      <text x="176" y="42" font-size="11.5" font-weight="bold" fill="#2E6F8E">f</text>
+      <text x="294" y="222" font-size="11.5" font-weight="bold" fill="#C2408C">g</text>
+      <text x="24" y="169" font-size="11.5" font-weight="bold" fill="#B7791F">h</text>
+      <text x="304" y="196" font-size="12" font-style="italic" fill="#5A6875">x</text>
+      <text x="95" y="26" font-size="12" font-style="italic" fill="#5A6875">y</text>
+    </svg>
+    <figcaption>המקווקו הסגול הוא הישר שמוסיפים בסעיף ז׳ —
+    דרך <span class="fi">\(F\)</span> ומקביל ל-<span class="fi">\(BC\)</span>.</figcaption>
+  </figure>
+  <details class="sol" open><summary>התשובות, סעיף-סעיף</summary>
+    <div class="sol-body">
+      <ol class="parts">
+        <li data-l="א"><b>התאמה.</b> <span class="fi">\(f\)</span> — השיפוע החיובי
+          (<span class="fi">\(\tfrac34\)</span>), הישר <strong>העולה</strong>.
+          <span class="fi">\(g\)</span> — שיפוע שלילי, <strong>יורד</strong>.
+          <span class="fi">\(h=1\)</span> — <strong>הישר האופקי</strong>
+          בגובה <span class="fi">\(1\)</span> (אין בו <span class="fi">\(x\)</span> בכלל).</li>
+        <li data-l="ב"><b>שיעורי <span class="fi">\(A\)</span> , <span class="fi">\(B\)</span> , <span class="fi">\(C\)</span>.</b>
+          <p><span class="fi">\(A\)</span> היא נקודת החיתוך של
+          <span class="fi">\(f\)</span> ו-<span class="fi">\(g\)</span>:</p>
+          $$\tfrac34x+3=-\tfrac12x+5\;\Longrightarrow\;\tfrac34x+\tfrac12x=2\;\Longrightarrow\;\tfrac54x=2$$
+          $$x=1.6\;,\qquad y=\tfrac34\cdot1.6+3=4.2$$
+          <p><span class="fi">\(B\)</span> ו-<span class="fi">\(C\)</span> יושבות על
+          הישר <span class="fi">\(h\)</span>, כלומר <span class="fi">\(y=1\)</span>:</p>
+          $$B:\;\tfrac34x+3=1\;\Rightarrow\;x=-\tfrac83
+            \qquad
+            C:\;-\tfrac12x+5=1\;\Rightarrow\;x=8$$
+          <table class="pts">
+            <tr><th><span class="fi">\(A\)</span></th><th><span class="fi">\(B\)</span></th><th><span class="fi">\(C\)</span></th></tr>
+            <tr><td><span class="fi">\((1.6,\;4.2)\)</span></td><td><span class="fi">\(\left(-\tfrac83,\;1\right)\)</span></td><td><span class="fi">\((8,\;1)\)</span></td></tr>
+          </table>
+        </li>
+        <li data-l="ג"><b>ישר דרך <span class="fi">\(F\)</span> ומקביל ל-<span class="fi">\(GC\)</span>.</b>
+          קודם מזהים: <span class="fi">\(G(0,5)\)</span> ו-<span class="fi">\(C(8,1)\)</span>
+          שתיהן על <span class="fi">\(g\)</span> — כלומר
+          <span class="fi">\(GC\)</span> <em>הוא</em> הישר <span class="fi">\(g\)</span>,
+          ושיפועו <span class="fi">\(-\tfrac12\)</span>. והנקודה
+          <span class="fi">\(F(0,3)\)</span> היא חיתוך <span class="fi">\(f\)</span>
+          עם ציר <span class="fi">\(y\)</span>:
+          <span class="ansline"><span class="fi">\(y=-\tfrac12x+3\)</span></span>
+        </li>
+        <li data-l="ד"><b><span class="fi">\(f(x)>0\)</span>:</b>
+          <span class="fi">\(\tfrac34x+3>0\;\Rightarrow\;\tfrac34x>-3\;\Rightarrow\)</span>
+          <span class="ansline"><span class="fi">\(x>-4\)</span></span></li>
+        <li data-l="ה"><b><span class="fi">\(f(x)>g(x)\)</span>:</b>
+          כבר מצאנו שהן נפגשות ב-<span class="fi">\(x=1.6\)</span>, ו-<span class="fi">\(f\)</span>
+          עולה בעוד <span class="fi">\(g\)</span> יורדת — ולכן
+          <span class="ansline"><span class="fi">\(x>1.6\)</span></span></li>
+        <li data-l="ו"><b>שטח <span class="fi">\(\triangle ABC\)</span>.</b>
+          הבסיס <span class="fi">\(BC\)</span> שוכב על הישר האופקי
+          <span class="fi">\(y=1\)</span>, ולכן הגובה הוא ההפרש בין
+          ה-<span class="fi">\(y\)</span> של <span class="fi">\(A\)</span> לבין
+          <span class="fi">\(1\)</span>:
+          $$BC=8-\left(-\tfrac83\right)=\tfrac{32}{3}\qquad h=4.2-1=3.2$$
+          $$S=\frac{\tfrac{32}{3}\cdot 3.2}{2}=\frac{256}{15}\approx\mathbf{17.07}$$
+        </li>
+        <li data-l="ז"><b>ישר דרך <span class="fi">\(F\)</span> ומקביל ל-<span class="fi">\(BC\)</span>.</b>
+          <span class="fi">\(BC\)</span> אופקי (שתי הנקודות בגובה
+          <span class="fi">\(1\)</span>), ולכן גם המקביל לו אופקי, ועובר דרך
+          <span class="fi">\(F(0,3)\)</span>:
+          <span class="ansline"><span class="fi">\(y=3\)</span></span>
+          — הקו המקווקו בסרטוט.</li>
+        <li data-l="ח"><b>הנקודה <span class="fi">\(M\)</span> ושטח <span class="fi">\(\triangle AFM\)</span>.</b>
+          <span class="fi">\(M\)</span> היא חיתוך <span class="fi">\(y=3\)</span>
+          עם <span class="fi">\(GC\)</span> (כלומר עם <span class="fi">\(g\)</span>):
+          $$3=-\tfrac12x+5\;\Longrightarrow\;\tfrac12x=2\;\Longrightarrow\;x=4
+            \;\Longrightarrow\;M(4,\,3)$$
+          <p>ובמשולש <span class="fi">\(AFM\)</span> הבסיס
+          <span class="fi">\(FM\)</span> אופקי בגובה <span class="fi">\(3\)</span>:</p>
+          $$FM=4-0=4\qquad h=4.2-3=1.2$$
+          $$S=\frac{4\cdot 1.2}{2}=\mathbf{2.4}$$
+        </li>
+        <li data-l="ט"><b>סוג המרובע <span class="fi">\(BFMC\)</span> ושטחו.</b>
+          <p><span class="fi">\(FM\)</span> נמצא על <span class="fi">\(y=3\)</span>
+          ו-<span class="fi">\(BC\)</span> על <span class="fi">\(y=1\)</span> —
+          שניהם אופקיים, כלומר <strong>מקבילים</strong>. אבל אורכיהם שונים
+          (<span class="fi">\(4\)</span> מול <span class="fi">\(\tfrac{32}{3}\)</span>),
+          ולכן זה <span class="ansline">טרפז</span> ולא מקבילית.</p>
+          <p>שטחו — בדיוק כמו שהרמז בחוברת מציע, ההפרש בין שני השטחים שכבר חישבנו:</p>
+          $$S_{BFMC}=S_{\triangle ABC}-S_{\triangle AFM}=\frac{256}{15}-2.4=\frac{44}{3}\approx\mathbf{14.67}$$
+          <p>ואפשר גם ישירות, בנוסחת הטרפז — ומקבלים את אותו הדבר:</p>
+          $$S=\frac{FM+BC}{2}\cdot h=\frac{4+\tfrac{32}{3}}{2}\cdot 2=\frac{44}{3}\ \checkmark$$
+          <p class="aside">הגובה של הטרפז הוא המרחק בין שני הישרים האופקיים:
+          <span class="fi">\(3-1=2\)</span>.</p>
+        </li>
+      </ol>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="a7"> סיימתי</label>
+</article>
+
+<!-- ================= 8 ================= -->
+<h2 id="a8">תרגיל 8 · <span class="fi">\(f=-\tfrac12x-3\)</span> ו-<span class="fi">\(g=2x-8\)</span></h2>
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">חוברת · א.8</span><h4>הכול בשפה של <span class="fi">\(f(x)\)</span> ו-<span class="fi">\(g(x)\)</span></h4></div>
+  <details class="sol" open><summary>התשובות, סעיף-סעיף</summary>
+    <div class="sol-body">
+      <ol class="parts">
+        <li data-l="א"><b>התאמה.</b> <span class="fi">\(f\)</span> — שיפוע שלילי,
+          <strong>יורדת</strong>, וחוצה את ציר <span class="fi">\(y\)</span>
+          ב-<span class="fi">\(-3\)</span>. <span class="fi">\(g\)</span> — שיפוע
+          חיובי תלול, <strong>עולה</strong>, וחוצה ב-<span class="fi">\(-8\)</span>
+          (הרבה יותר נמוך).</li>
+        <li data-l="ב"><b><span class="fi">\(f(0)\)</span>:</b>
+          <span class="fi">\(-\tfrac12\cdot 0-3=\)</span>
+          <span class="ansline"><span class="fi">\(-3\)</span></span></li>
+        <li data-l="ג"><b><span class="fi">\(g(0)\)</span>:</b>
+          <span class="fi">\(2\cdot 0-8=\)</span>
+          <span class="ansline"><span class="fi">\(-8\)</span></span></li>
+        <li data-l="ד"><b>הנקודה שבה <span class="fi">\(f(x)=0\)</span>:</b>
+          <span class="fi">\(-\tfrac12x-3=0\;\Rightarrow\;x=-6\;\Rightarrow\)</span>
+          <span class="ansline"><span class="fi">\((-6,\,0)\)</span></span></li>
+        <li data-l="ה"><b>הנקודה שבה <span class="fi">\(g(x)=0\)</span>:</b>
+          <span class="fi">\(2x-8=0\;\Rightarrow\;x=4\;\Rightarrow\)</span>
+          <span class="ansline"><span class="fi">\((4,\,0)\)</span></span></li>
+        <li data-l="ו"><b>הנקודה שבה <span class="fi">\(f(x)=g(x)\)</span>:</b>
+          $$-\tfrac12x-3=2x-8\;\Longrightarrow\;5=2.5x\;\Longrightarrow\;x=2$$
+          $$y=2\cdot 2-8=-4$$
+          <span class="ansline"><span class="fi">\((2,\,-4)\)</span></span>
+          — זו הנקודה <span class="fi">\(D\)</span> בסרטוט.</li>
+        <li data-l="ז"><b><span class="fi">\(h(x)\)</span> דרך ראשית הצירים ודרך
+          <span class="fi">\(D\)</span>.</b>
+          ישר דרך הראשית הוא תמיד <span class="fi">\(y=mx\)</span> (אין
+          <span class="fi">\(b\)</span>, כי <span class="fi">\(b=0\)</span>):
+          $$m=\frac{-4-0}{2-0}=-2$$
+          <span class="ansline"><span class="fi">\(h(x)=-2x\)</span></span>
+        </li>
+        <li data-l="ח"><b><span class="fi">\(t(x)\)</span> דרך הראשית ומקבילה
+          ל-<span class="fi">\(g(x)\)</span>.</b>
+          מקבילה ⇐ אותו שיפוע <span class="fi">\(m=2\)</span>, ודרך הראשית ⇐
+          <span class="fi">\(b=0\)</span>:
+          <span class="ansline"><span class="fi">\(t(x)=2x\)</span></span>
+        </li>
+      </ol>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="a8"> סיימתי</label>
+</article>
+
+<!-- ================= 9 ================= -->
+<h2 id="a9">תרגיל 9 · שתי המשאיות</h2>
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">חוברת · א.9</span><h4>גרף מרחק-זמן — כשהשיפוע הוא מהירות</h4></div>
+  <figure>
+    <svg viewBox="0 0 330 270" style="width:100%;max-width:430px;height:auto" role="img" aria-label="גרף מרחק מאילת כפונקציה של זמן, שתי משאיות">
+      <line x1="45" y1="220" x2="320" y2="220" stroke="#5A6875" stroke-width="1.8"/>
+      <line x1="55" y1="25" x2="55" y2="235" stroke="#5A6875" stroke-width="1.8"/>
+      <line x1="55" y1="220" x2="295" y2="40" stroke="#2E6F8E" stroke-width="2.8"/>
+      <line x1="55" y1="40" x2="175" y2="220" stroke="#C2408C" stroke-width="2.8"/>
+      <circle cx="55" cy="220" r="4" fill="#2E6F8E"/>
+      <circle cx="295" cy="40" r="4" fill="#2E6F8E"/>
+      <circle cx="55" cy="40" r="4" fill="#C2408C"/>
+      <circle cx="175" cy="220" r="4" fill="#C2408C"/>
+      <circle cx="135" cy="160" r="5" fill="#6D28D9"/>
+      <text x="18" y="224" font-size="11" fill="#5A6875">(0,0)</text>
+      <text x="270" y="34" font-size="11" fill="#2E6F8E">(15,600)</text>
+      <text x="10" y="36" font-size="11" fill="#C2408C">(0,600)</text>
+      <text x="152" y="236" font-size="11" fill="#C2408C">(7.5,0)</text>
+      <text x="146" y="151" font-size="11" font-weight="bold" fill="#6D28D9">(5,200)</text>
+      <text x="200" y="90" font-size="11.5" font-weight="bold" fill="#2E6F8E">טעונה</text>
+      <text x="66" y="120" font-size="11.5" font-weight="bold" fill="#C2408C">ריקה</text>
+      <text x="234" y="248" font-size="11" fill="#5A6875">הזמן (בשעות)</text>
+      <text x="4" y="18" font-size="11" fill="#5A6875">המרחק מאילת (בק״מ)</text>
+    </svg>
+    <figcaption>שני הגרפים נחתכים בנקודה <span class="fi">\((5,200)\)</span> —
+    הרגע והמקום שבהם המשאיות נפגשו.</figcaption>
+  </figure>
+  <details class="sol" open><summary>התשובות, סעיף-סעיף</summary>
+    <div class="sol-body">
+      <ol class="parts">
+        <li data-l="א"><b>משמעות חמש הנקודות.</b>
+          <table class="pts">
+            <tr><th>הנקודה</th><th class="why">מה היא אומרת</th></tr>
+            <tr><td><span class="fi">\((0,0)\)</span></td><td class="why">ב-6:00 המשאית הטעונה נמצאת באילת — מרחק אפס ממנה</td></tr>
+            <tr><td><span class="fi">\((15,600)\)</span></td><td class="why">אחרי 15 שעות היא מגיעה לקריית-שמונה, 600 ק״מ מאילת</td></tr>
+            <tr><td><span class="fi">\((0,600)\)</span></td><td class="why">ב-6:00 המשאית הריקה נמצאת בקריית-שמונה</td></tr>
+            <tr><td><span class="fi">\((7.5,0)\)</span></td><td class="why">אחרי 7.5 שעות היא מגיעה לאילת</td></tr>
+            <tr><td><span class="fi">\((5,200)\)</span></td><td class="why">אחרי 5 שעות שתיהן באותו מקום — <b>הן נפגשות</b></td></tr>
+          </table>
+          <p><strong>ומה נוסף אפשר ללמוד מהשיפועים?</strong> השיפוע הוא
+          "כמה ק״מ בכל שעה" — כלומר <strong>המהירות</strong>. שיפוע חיובי =
+          מתרחקת מאילת, שיפוע שלילי = מתקרבת אליה. וככל שהישר תלול יותר —
+          המשאית מהירה יותר.</p>
+        </li>
+        <li data-l="ב"><b>המהירויות.</b>
+          $$\text{ריקה}=\frac{600}{7.5}=\mathbf{80}\ \text{קמ״ש}
+            \qquad
+            \text{טעונה}=\frac{600}{15}=\mathbf{40}\ \text{קמ״ש}$$
+          <p class="aside">הגיוני: משאית ריקה נוסעת מהר יותר מטעונה — פי שניים.</p>
+        </li>
+        <li data-l="ג"><b>מתי ואיפה נפגשו.</b>
+          כעבור <span class="fi">\(5\)</span> שעות מהיציאה, כלומר בשעה
+          <span class="fi">\(11{:}00\)</span>, במרחק
+          <span class="fi">\(\mathbf{200}\)</span> ק״מ מאילת.</li>
+        <li data-l="ד"><b>שתי הפונקציות.</b>
+          <p><strong>הטעונה</strong> יוצאת מ-<span class="fi">\(0\)</span> ומתרחקת
+          ב-40 קמ״ש:</p>
+          $$y=40x$$
+          <p><strong>הריקה</strong> יוצאת מ-<span class="fi">\(600\)</span> ומתקרבת
+          ב-80 קמ״ש — ולכן השיפוע שלילי:</p>
+          $$y=-80x+600$$
+          <p>בדיקה — נקודת המפגש היא בדיוק החיתוך שלהן:</p>
+          $$40x=-80x+600\;\Longrightarrow\;120x=600\;\Longrightarrow\;x=5\;,\;y=200\ \checkmark$$
+          <p><strong>ואיזה מידע כל פונקציה נותנת?</strong> ה-<span class="fi">\(b\)</span>
+          אומר <em>איפה המשאית הייתה בהתחלה</em>, וה-<span class="fi">\(m\)</span>
+          אומר <em>באיזו מהירות ולאיזה כיוון</em> היא נוסעת.</p>
+        </li>
+      </ol>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="a9"> סיימתי</label>
+</article>
+
+<!-- ================= 10 ================= -->
+<h2 id="a10">תרגיל 10 · שלושת הכלים המתחממים</h2>
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">חוברת · א.10</span><h4>מנתון מילולי אל ייצוג אלגברי</h4></div>
+  <p class="q-text">
+    כלי א׳: מתחיל ב-<span class="fi">\(40^\circ\text{C}\)</span> ומתחמם בקצב
+    <span class="fi">\(10^\circ\text{C}\)</span> לדקה ·
+    כלי ב׳: מתחיל ב-<span class="fi">\(60^\circ\text{C}\)</span> , קצב
+    <span class="fi">\(5^\circ\text{C}\)</span> לדקה ·
+    כלי ג׳: מתחיל ב-<span class="fi">\(0^\circ\text{C}\)</span> , קצב
+    <span class="fi">\(15^\circ\text{C}\)</span> לדקה.
+  </p>
+  <figure>
+    <svg viewBox="0 0 330 255" style="width:100%;max-width:430px;height:auto" role="img" aria-label="שלושה גרפים של טמפרטורה כפונקציה של זמן">
+      <line x1="45" y1="205" x2="320" y2="205" stroke="#5A6875" stroke-width="1.8"/>
+      <line x1="55" y1="25" x2="55" y2="222" stroke="#5A6875" stroke-width="1.8"/>
+      <line x1="55" y1="169" x2="295" y2="61" stroke="#2E6F8E" stroke-width="2.8"/>
+      <line x1="55" y1="151" x2="295" y2="97" stroke="#C2408C" stroke-width="2.8"/>
+      <line x1="55" y1="205" x2="295" y2="43" stroke="#2E7D32" stroke-width="2.8"/>
+      <circle cx="135" cy="133" r="4.5" fill="#6D28D9"/>
+      <circle cx="215" cy="97" r="4.5" fill="#6D28D9"/>
+      <text x="299" y="60" font-size="11.5" font-weight="bold" fill="#2E6F8E">א׳</text>
+      <text x="299" y="100" font-size="11.5" font-weight="bold" fill="#C2408C">ב׳</text>
+      <text x="299" y="42" font-size="11.5" font-weight="bold" fill="#2E7D32">ג׳</text>
+      <text x="108" y="128" font-size="10.5" font-weight="bold" fill="#6D28D9">(4,80)</text>
+      <text x="196" y="90" font-size="10.5" font-weight="bold" fill="#6D28D9">(8,120)</text>
+      <text x="240" y="222" font-size="11" fill="#5A6875">דקות</text>
+      <text x="6" y="18" font-size="11" fill="#5A6875">טמפרטורה (°C)</text>
+    </svg>
+    <figcaption>בין שתי הנקודות הסגולות — ורק שם — כלי א׳ (כחול) הוא הגבוה מכולם.</figcaption>
+  </figure>
+  <details class="sol" open><summary>התשובות, סעיף-סעיף</summary>
+    <div class="sol-body">
+      <ol class="parts">
+        <li data-l="א"><b>התאמת גרף לכלי, והייצוג האלגברי.</b>
+          <p>שני דברים מזהים כל גרף: <strong>איפה הוא מתחיל</strong> (הטמפרטורה
+          ההתחלתית — זה <span class="fi">\(b\)</span>) ו<strong>כמה תלול הוא</strong>
+          (הקצב — זה <span class="fi">\(m\)</span>).</p>
+          <table class="pts">
+            <tr><th>כלי</th><th>מתחיל ב־</th><th>קצב</th><th>הייצוג</th></tr>
+            <tr><td>א׳</td><td><span class="fi">\(40\)</span></td><td><span class="fi">\(10\)</span></td><td><span class="fi">\(y=10x+40\)</span></td></tr>
+            <tr><td>ב׳</td><td><span class="fi">\(60\)</span></td><td><span class="fi">\(5\)</span></td><td><span class="fi">\(y=5x+60\)</span></td></tr>
+            <tr><td>ג׳</td><td><span class="fi">\(0\)</span></td><td><span class="fi">\(15\)</span></td><td><span class="fi">\(y=15x\)</span></td></tr>
+          </table>
+          <p>וכך מזהים בסרטוט: הגרף שיוצא <strong>מהראשית</strong> הוא ג׳ (מתחיל
+          ב-0), והוא גם <strong>התלול ביותר</strong> ולכן בסוף הוא העליון.
+          מבין שני הנותרים, זה שמתחיל <strong>גבוה יותר</strong> הוא ב׳,
+          והתלול מביניהם הוא א׳.</p>
+        </li>
+        <li data-l="ב"><b>כעבור כמה דקות כלי א׳ וכלי ב׳ באותה טמפרטורה?</b>
+          $$10x+40=5x+60\;\Longrightarrow\;5x=20\;\Longrightarrow\;x=\mathbf{4}\ \text{דקות}$$
+          <p>ובאותו רגע שניהם ב-<span class="fi">\(80^\circ\text{C}\)</span>.</p>
+        </li>
+        <li data-l="ג"><b>הטמפרטורה בכל כלי כעבור 5 דקות.</b>
+          $$\text{א׳}:\;10\cdot5+40=\mathbf{90^\circ}
+            \qquad
+            \text{ב׳}:\;5\cdot5+60=\mathbf{85^\circ}
+            \qquad
+            \text{ג׳}:\;15\cdot5=\mathbf{75^\circ}$$
+        </li>
+        <li data-l="ד"><b>במשך כמה דקות כלי א׳ הוא הגבוה מכולם? ומה טווח הטמפרטורה?</b>
+          <p>צריך ש-א׳ יהיה גבוה גם מ-ב׳ וגם מ-ג׳, ולכן פותרים שני אי-שוויונות:</p>
+          $$\text{א׳}>\text{ב׳}:\quad 10x+40>5x+60\;\Longrightarrow\;5x>20\;\Longrightarrow\;x>4$$
+          $$\text{א׳}>\text{ג׳}:\quad 10x+40>15x\;\Longrightarrow\;40>5x\;\Longrightarrow\;x<8$$
+          <p>שני התנאים יחד:</p>
+          $$4<x<8\;\Longrightarrow\;\textbf{4 דקות}$$
+          <p>ובטווח הזה הטמפרטורה של כלי א׳ נעה מ-</p>
+          $$10\cdot4+40=80^\circ\ \text{עד}\ 10\cdot8+40=120^\circ$$
+          <span class="ansline">בין <span class="fi">\(80^\circ\text{C}\)</span> ל-<span class="fi">\(120^\circ\text{C}\)</span></span>
+          <p class="aside">שימי לב שהתשובה היא <em>קטע</em> ולא נקודה אחת — כי
+          מדובר בשתי "עקיפות": ב-4 דקות א׳ עוקף את ב׳, וב-8 דקות ג׳ עוקף את א׳.
+          בין שתי העקיפות א׳ בראש.</p>
+        </li>
+      </ol>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="a10"> סיימתי</label>
+</article>
+
+<div class="box intuition" style="margin-top:28px">
+  <div class="box-title">מה שחזר בכל עשרת התרגילים</div>
+  כל תרגיל כאן הוא צירוף של אותם ארבעה מהלכים:
+  <strong>מציבים אפס</strong> כדי למצוא חיתוך עם ציר ·
+  <strong>משווים שני ביטויים</strong> כדי למצוא נקודת מפגש ·
+  <strong>אותו <span class="fi">\(m\)</span></strong> פירושו מקבילים ·
+  ו<strong>בסיס על ציר או על ישר אופקי</strong> הופך כל שאלת שטח לנוסחה אחת.
+  <br>ואם התשובה היא תחום ולא מספר — כמעט תמיד צריך <em>שני</em> אי-שוויונות,
+  ולוקחים את החיתוך שלהם.
+</div>
+
+<div class="pagenav">
+  <a href="05-line-equation.html"><span class="dir">התחנה שממנה זה נשען</span>משוואת ישר</a>
+  <a class="next" href="10-booklet-drills.html"><span class="dir">חלקים ב׳ ו-ג׳</span>נספח התרגילים הבא ←</a>
+</div>
+
+<footer class="fin">חלק מהעולם של שירה · <a href="index.html">חזרה למפת האלגברה</a> ·
+<a href="../booklet.html">מפת החוברת</a></footer>
+</main>
+</div>
+</body>
+</html>

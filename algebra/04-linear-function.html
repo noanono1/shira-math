@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<!-- מסך הבית של האייפד/הטלפון -->
+<link rel="apple-touch-icon" href="../assets/icons/icon-180.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>פונקציה קווית — אלגברה ופונקציות — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../vendor/katex.min.css">
+<link rel="stylesheet" href="../css/shira.css">
+<style>:root{--accent:var(--alg)}</style>
+<script defer src="../vendor/katex.min.js"></script>
+<script defer src="../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../js/shira.js"></script>
+<style>
+/* מחוון פתיחה — כמה זמן, כמה תרגילים, ואיפה מתחילים לתרגל (מוסתר בהדפסה) */
+.pagemeta{display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px;
+  margin:12px 0 0; font-size:13px; color:var(--soft)}
+.pagemeta .pm-time{background:var(--faint); border-radius:999px; padding:3px 10px}
+.pagemeta .pm-time b{color:var(--ink); font-weight:700}
+.pagemeta .pm-jump{color:var(--accent); font-weight:700; text-decoration:none}
+.pagemeta .pm-jump:hover{text-decoration:underline}
+.pagemeta .pm-note{flex:1 1 100%; margin:0}
+#ex-first,#bank-map{scroll-margin-top:78px}
+</style>
+</head>
+<body data-page="alg:04-linear-function">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">אלגברה ופונקציות — המפה</a>
+    <span class="crumbs">תחנה <b>4</b> מתוך 7 · <b>פונקציה קווית</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">אלגברה ופונקציות · תחנה 4</div>
+  <h1>פונקציה קווית — שיפוע ונקודת חיתוך</h1>
+  <p class="lead">
+    בתחנה הקודמת פגשת פונקציה בתור מכונה: מכניסים <span class="fi">\(\textcolor{#2563EB}{x}\)</span>,
+    מקבלים <span class="fi">\(\textcolor{#7C3AED}{y}\)</span>. עכשיו נכיר את המשפחה החשובה ביותר בתיכון —
+    <strong>הפונקציה הקווית</strong>: הגרף שלה תמיד קו ישר, וכל מה שצריך לדעת עליה
+    מסתתר בשני מספרים בלבד: <span class="fi">\(\textcolor{#EA580C}{m}\)</span>
+    ו-<span class="fi">\(\textcolor{#059669}{b}\)</span>.
+  </p>
+  <p class="youknow"><b>בסוף העמוד תדעי:</b> לקרוא מכל משוואת ישר מי השיפוע ומי המספר החופשי ·
+  לזהות בגרף שיפוע חיובי, שלילי ואפס · למצוא את שתי נקודות החיתוך עם הצירים
+  ולבדוק אם נקודה נתונה נמצאת על הישר · לקבוע תחום חיוביות ושליליות
+  מנקודת האפס והשיפוע.</p>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>≈ 30 דק׳</b> · 5 תרגילים</span>
+    <a class="pm-jump" href="#sec-practice">לקפוץ ישר לתרגילים ↓</a>
+  </p>
+</header>
+
+<!-- ============ 1. מבנה y=mx+b ============ -->
+<h2 id="sec-mb"><span class="num">1</span>המבנה: <span class="fi">\(y=mx+b\)</span></h2>
+
+<p>
+  כל פונקציה קווית אפשר לכתוב באותה תבנית בדיוק. זו הנוסחה של העמוד —
+  שווה להכיר כל חלק בה בשמו ובצבעו:
+</p>
+
+<div class="fbox">
+  <div class="fbox-title">תעודת הזהות של הישר</div>
+  $$\textcolor{#7C3AED}{y}\;=\;\underbrace{\textcolor{#EA580C}{m}}_{\textcolor{#EA580C}{\text{השיפוע}}}\cdot\textcolor{#2563EB}{x}\;+\;\underbrace{\textcolor{#059669}{b}}_{\textcolor{#059669}{\text{המספר החופשי}}}$$
+  <span class="f-legend">
+    <span><i class="sw" style="background:#EA580C"></i> <bdi>כתום — <span class="fi">\(\textcolor{#EA580C}{m}\)</span>, השיפוע: כמה עולים על כל צעד ימינה</bdi></span>
+    <span><i class="sw" style="background:#059669"></i> <bdi>ירוק — <span class="fi">\(\textcolor{#059669}{b}\)</span>, המספר החופשי: איפה חוצים את ציר <span class="fi">\(y\)</span></bdi></span>
+    <span><i class="sw" style="background:#2563EB"></i> <bdi>כחול — <span class="fi">\(\textcolor{#2563EB}{x}\)</span>, הקלט</bdi></span>
+    <span><i class="sw" style="background:#7C3AED"></i> <bdi>סגול — <span class="fi">\(\textcolor{#7C3AED}{y}\)</span>, הפלט</bdi></span>
+  </span>
+</div>
+
+<p>למשל, הישר שילווה אותנו לאורך כל העמוד:</p>
+$$\textcolor{#7C3AED}{y}\;=\;\underbrace{\textcolor{#EA580C}{2}}_{\textcolor{#EA580C}{m}}\textcolor{#2563EB}{x}+\underbrace{\textcolor{#059669}{1}}_{\textcolor{#059669}{b}}$$
+<p>
+  <strong>קוראים אותו ישר מהמשוואה:</strong>
+  השיפוע הוא <span class="fi">\(\textcolor{#EA580C}{m=2}\)</span> — על כל צעד ימינה עולים 2.
+  המספר החופשי הוא <span class="fi">\(\textcolor{#059669}{b=1}\)</span> — הישר חוצה את
+  ציר <span class="fi">\(y\)</span> בנקודה <span class="fi">\(\textcolor{#059669}{(0,1)}\)</span>.
+  את שתי העובדות האלה נראה בעיניים בסעיף הבא.
+</p>
+
+<div class="box intuition">
+  <div class="box-title">אינטואיציה — נסיעה במונית</div>
+  תעריף פתיחה של 12 ₪ (עוד לפני שזזת), ועוד 3 ₪ על כל קילומטר.
+  המחיר אחרי <span class="fi">\(\textcolor{#2563EB}{x}\)</span> קילומטרים:
+  <span class="fi">\(\textcolor{#7C3AED}{y}=\textcolor{#EA580C}{3}\textcolor{#2563EB}{x}+\textcolor{#059669}{12}\)</span>.
+  <br><span class="fi">\(\textcolor{#059669}{b}\)</span> הוא נקודת הפתיחה — המחיר כש-<span class="fi">\(x=0\)</span>.
+  <span class="fi">\(\textcolor{#EA580C}{m}\)</span> הוא הקצב — כמה נוסף על כל יחידה.
+</div>
+
+<div class="box warn">
+  <div class="box-title">שימי לב</div>
+  שלוש תחפושות שכדאי לזהות מראש:
+  <br><span class="fi">\(y=6-2x\)</span> — הסדר התחלף. <span class="fi">\(\textcolor{#EA580C}{m}\)</span>
+  הוא המספר שצמוד ל-<span class="fi">\(x\)</span>, <strong>כולל הסימן</strong>:
+  כאן <span class="fi">\(\textcolor{#EA580C}{m=-2}\)</span> ו-<span class="fi">\(\textcolor{#059669}{b=6}\)</span>.
+  <br><span class="fi">\(y=3x\)</span> — אין מספר חופשי? יש, הוא פשוט אפס:
+  <span class="fi">\(\textcolor{#059669}{b=0}\)</span>, והישר עובר דרך ראשית הצירים.
+  <br><span class="fi">\(y=x+5\)</span> — לא רואים מספר לפני <span class="fi">\(x\)</span>?
+  הוא שם: <span class="fi">\(\textcolor{#EA580C}{m=1}\)</span>.
+</div>
+
+<!-- ============ 2. שיפוע ============ -->
+<h2 id="sec-slope"><span class="num">2</span>השיפוע — הקצב של הישר</h2>
+
+<p>
+  בסעיף הקודם קראת את השיפוע <strong>ישר מהמשוואה</strong> — הוא המספר הצמוד
+  ל-<span class="fi">\(x\)</span>. אבל בשאלות הוא לא תמיד מגיע מוכן:
+  לפעמים יש רק טבלת ערכים, ולפעמים רק גרף.
+  אלה שלוש דרכים שונות לקרוא את אותו מספר — והנה שתי החדשות.
+</p>
+
+<h3>לקרוא שיפוע מטבלה — הקפיצה הקבועה</h3>
+
+<p>
+  ניקח את <span class="fi">\(y=2x+1\)</span> ונחשב כמה ערכים:
+</p>
+
+<table class="dtable">
+  <tr><th><span class="fi">\(\textcolor{#2563EB}{x}\)</span></th>
+      <td style="background:#E3ECFB">0</td><td style="background:#E3ECFB">1</td>
+      <td style="background:#E3ECFB">2</td><td style="background:#E3ECFB">3</td></tr>
+  <tr><th><span class="fi">\(\textcolor{#7C3AED}{y}\)</span></th>
+      <td style="background:#ECE4FA">1</td><td style="background:#ECE4FA">3</td>
+      <td style="background:#ECE4FA">5</td><td style="background:#ECE4FA">7</td></tr>
+</table>
+<p class="tbl-note">שורה כחולה — הקלט. שורה סגולה — הפלט. אותם צבעים כמו בנוסחה.</p>
+
+<p>
+  שימי לב לקצב: בכל פעם ש-<span class="fi">\(\textcolor{#2563EB}{x}\)</span> גדל ב-1,
+  <span class="fi">\(\textcolor{#7C3AED}{y}\)</span> קופץ ב-2.
+  תמיד ב-2. הקפיצה הקבועה הזו היא בדיוק השיפוע:
+</p>
+
+<div class="fbox">
+  <div class="fbox-title">מה השיפוע מודד</div>
+  $$\textcolor{#EA580C}{m}\;=\;\frac{\textcolor{#7C3AED}{\text{כמה עולים}}}{\textcolor{#2563EB}{\text{כמה מתקדמים ימינה}}}\;=\;\frac{\textcolor{#7C3AED}{2}}{\textcolor{#2563EB}{1}}\;=\;\textcolor{#EA580C}{2}$$
+  <span class="f-legend">
+    <span><i class="sw" style="background:#7C3AED"></i> <bdi>סגול — העלייה (השינוי ב-<span class="fi">\(y\)</span>)</bdi></span>
+    <span><i class="sw" style="background:#2563EB"></i> <bdi>כחול — הצעד ימינה (השינוי ב-<span class="fi">\(x\)</span>)</bdi></span>
+    <span><i class="sw" style="background:#EA580C"></i> כתום — השיפוע שמתקבל מהחלוקה</span>
+  </span>
+</div>
+
+<h3>לקרוא שיפוע מהגרף — משולש השיפוע</h3>
+
+<p>ובגרף רואים את אותו שיפוע כמשולש — צעד ימינה, עלייה למעלה:</p>
+
+<figure style="max-width:340px;margin:22px auto">
+  <svg viewBox="0 0 250 360" style="width:100%;max-width:640px;height:auto" role="img" aria-label="הישר y=2x+1 עם שני משולשי שיפוע">
+    <g stroke="#E4E8EE" stroke-width="1">
+      <line x1="20" y1="20" x2="20" y2="340"/><line x1="60" y1="20" x2="60" y2="340"/>
+      <line x1="100" y1="20" x2="100" y2="340"/><line x1="140" y1="20" x2="140" y2="340"/>
+      <line x1="180" y1="20" x2="180" y2="340"/><line x1="220" y1="20" x2="220" y2="340"/>
+      <line x1="20" y1="20" x2="230" y2="20"/><line x1="20" y1="60" x2="230" y2="60"/>
+      <line x1="20" y1="100" x2="230" y2="100"/><line x1="20" y1="140" x2="230" y2="140"/>
+      <line x1="20" y1="180" x2="230" y2="180"/><line x1="20" y1="220" x2="230" y2="220"/>
+      <line x1="20" y1="260" x2="230" y2="260"/><line x1="20" y1="300" x2="230" y2="300"/>
+      <line x1="20" y1="340" x2="230" y2="340"/>
+    </g>
+    <line x1="20" y1="300" x2="238" y2="300" stroke="#5A6875" stroke-width="2"/>
+    <path d="M244 300 L234 295 L234 305 Z" fill="#5A6875"/>
+    <line x1="60" y1="346" x2="60" y2="16" stroke="#5A6875" stroke-width="2"/>
+    <path d="M60 10 L55 20 L65 20 Z" fill="#5A6875"/>
+    <g fill="#5A6875" font-size="11">
+      <text x="52" y="317" text-anchor="end">0</text>
+      <text x="100" y="317" text-anchor="middle">1</text>
+      <text x="140" y="317" text-anchor="middle">2</text>
+      <text x="180" y="317" text-anchor="middle">3</text>
+      <text x="220" y="317" text-anchor="middle">4</text>
+      <text x="52" y="264" text-anchor="end">1</text>
+      <text x="52" y="224" text-anchor="end">2</text>
+      <text x="52" y="184" text-anchor="end">3</text>
+      <text x="52" y="144" text-anchor="end">4</text>
+      <text x="52" y="104" text-anchor="end">5</text>
+      <text x="52" y="64" text-anchor="end">6</text>
+      <text x="52" y="24" text-anchor="end">7</text>
+    </g>
+    <line x1="36" y1="308" x2="184" y2="12" stroke="#7C3AED" stroke-width="3"/>
+    <text x="100" y="48" text-anchor="start" fill="#7C3AED" font-size="12" font-weight="bold" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3">y=2x+1</text>
+    <g stroke="#EA580C" stroke-width="2.5" stroke-dasharray="5 4">
+      <line x1="100" y1="180" x2="140" y2="180"/>
+      <line x1="140" y1="180" x2="140" y2="100"/>
+      <line x1="140" y1="100" x2="180" y2="100"/>
+      <line x1="180" y1="100" x2="180" y2="20"/>
+    </g>
+    <g fill="#EA580C" font-size="12" font-weight="bold">
+      <text x="120" y="196" text-anchor="middle">1</text>
+      <text x="150" y="144" text-anchor="start">2</text>
+      <text x="160" y="116" text-anchor="middle">1</text>
+      <text x="188" y="64" text-anchor="start">2</text>
+    </g>
+    <circle cx="60" cy="260" r="5" fill="#059669" stroke="#fff" stroke-width="2"/>
+    <text x="68" y="276" fill="#059669" font-size="11" font-weight="bold" text-anchor="start">(0,1)</text>
+    <circle cx="100" cy="180" r="5" fill="#7C3AED" stroke="#fff" stroke-width="2"/>
+    <text x="92" y="176" fill="#7C3AED" font-size="11" font-weight="bold" text-anchor="end">(1,3)</text>
+    <circle cx="140" cy="100" r="5" fill="#7C3AED" stroke="#fff" stroke-width="2"/>
+    <text x="132" y="96" fill="#7C3AED" font-size="11" font-weight="bold" text-anchor="end">(2,5)</text>
+    <circle cx="180" cy="20" r="5" fill="#7C3AED" stroke="#fff" stroke-width="2"/>
+    <text x="190" y="16" fill="#7C3AED" font-size="11" font-weight="bold" text-anchor="start">(3,7)</text>
+  </svg>
+  <figcaption>מכל נקודה — צעד ימינה, עלייה של 2: זה
+  <span class="fi">\(\textcolor{#EA580C}{m=2}\)</span>, זהה בכל מקום על הישר.
+  הנקודה הירוקה <span class="fi">\(\textcolor{#059669}{(0,1)}\)</span> —
+  זה <span class="fi">\(\textcolor{#059669}{b=1}\)</span>.</figcaption>
+</figure>
+
+<div class="box intuition">
+  <div class="box-title">למה הגרף ישר?</div>
+  כי הקצב קבוע: כל צעד ימינה מוסיף בדיוק אותה עלייה. פונקציה עם קצב משתנה
+  הייתה מציירת עקומה — ואת כאלה תפגשי בהמשך השנה.
+</div>
+
+<h3>שלוש הפנים של השיפוע</h3>
+<p>הסימן של <span class="fi">\(\textcolor{#EA580C}{m}\)</span> קובע לאן הישר הולך כשמתקדמים ימינה:</p>
+
+<div class="fig-row">
+  <figure>
+    <svg viewBox="0 0 200 200" style="width:100%;max-width:640px;height:auto" role="img" aria-label="ישר עולה">
+      <g stroke="#E4E8EE" stroke-width="1">
+        <line x1="20" y1="20" x2="20" y2="180"/><line x1="60" y1="20" x2="60" y2="180"/>
+        <line x1="100" y1="20" x2="100" y2="180"/><line x1="140" y1="20" x2="140" y2="180"/>
+        <line x1="180" y1="20" x2="180" y2="180"/>
+        <line x1="20" y1="20" x2="180" y2="20"/><line x1="20" y1="60" x2="180" y2="60"/>
+        <line x1="20" y1="100" x2="180" y2="100"/><line x1="20" y1="140" x2="180" y2="140"/>
+        <line x1="20" y1="180" x2="180" y2="180"/>
+      </g>
+      <line x1="12" y1="100" x2="184" y2="100" stroke="#5A6875" stroke-width="2"/>
+      <path d="M190 100 L181 96 L181 104 Z" fill="#5A6875"/>
+      <line x1="100" y1="188" x2="100" y2="16" stroke="#5A6875" stroke-width="2"/>
+      <path d="M100 10 L96 19 L104 19 Z" fill="#5A6875"/>
+      <text x="108" y="113" text-anchor="start" fill="#5A6875" font-size="10">0</text>
+      <text x="140" y="113" text-anchor="middle" fill="#5A6875" font-size="10">1</text>
+      <text x="93" y="63" text-anchor="end" fill="#5A6875" font-size="10">1</text>
+      <line x1="28" y1="172" x2="172" y2="28" stroke="#7C3AED" stroke-width="3"/>
+      <text x="32" y="132" text-anchor="start" fill="#7C3AED" font-size="11" font-weight="bold" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3">y=x</text>
+      <g stroke="#EA580C" stroke-width="2" stroke-dasharray="4 3">
+        <line x1="140" y1="60" x2="180" y2="60"/>
+        <line x1="180" y1="60" x2="180" y2="20"/>
+      </g>
+      <text x="160" y="74" text-anchor="middle" fill="#EA580C" font-size="11" font-weight="bold">1</text>
+      <text x="186" y="44" text-anchor="start" fill="#EA580C" font-size="11" font-weight="bold">1</text>
+    </svg>
+    <figcaption>שיפוע חיובי, <span class="fi">\(m\gt 0\)</span> — הישר עולה: צעד ימינה, עלייה למעלה.</figcaption>
+  </figure>
+  <figure>
+    <svg viewBox="0 0 200 200" style="width:100%;max-width:640px;height:auto" role="img" aria-label="ישר יורד">
+      <g stroke="#E4E8EE" stroke-width="1">
+        <line x1="20" y1="20" x2="20" y2="180"/><line x1="60" y1="20" x2="60" y2="180"/>
+        <line x1="100" y1="20" x2="100" y2="180"/><line x1="140" y1="20" x2="140" y2="180"/>
+        <line x1="180" y1="20" x2="180" y2="180"/>
+        <line x1="20" y1="20" x2="180" y2="20"/><line x1="20" y1="60" x2="180" y2="60"/>
+        <line x1="20" y1="100" x2="180" y2="100"/><line x1="20" y1="140" x2="180" y2="140"/>
+        <line x1="20" y1="180" x2="180" y2="180"/>
+      </g>
+      <line x1="12" y1="100" x2="184" y2="100" stroke="#5A6875" stroke-width="2"/>
+      <path d="M190 100 L181 96 L181 104 Z" fill="#5A6875"/>
+      <line x1="100" y1="188" x2="100" y2="16" stroke="#5A6875" stroke-width="2"/>
+      <path d="M100 10 L96 19 L104 19 Z" fill="#5A6875"/>
+      <text x="93" y="113" text-anchor="end" fill="#5A6875" font-size="10">0</text>
+      <text x="140" y="113" text-anchor="middle" fill="#5A6875" font-size="10">1</text>
+      <text x="93" y="63" text-anchor="end" fill="#5A6875" font-size="10">1</text>
+      <line x1="28" y1="28" x2="182" y2="182" stroke="#7C3AED" stroke-width="3"/>
+      <text x="30" y="80" text-anchor="start" fill="#7C3AED" font-size="11" font-weight="bold" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3">y=−x</text>
+      <g stroke="#EA580C" stroke-width="2" stroke-dasharray="4 3">
+        <line x1="140" y1="140" x2="180" y2="140"/>
+        <line x1="180" y1="140" x2="180" y2="180"/>
+      </g>
+      <text x="160" y="133" text-anchor="middle" fill="#EA580C" font-size="11" font-weight="bold">1</text>
+      <text x="186" y="164" text-anchor="start" fill="#EA580C" font-size="11" font-weight="bold">1</text>
+    </svg>
+    <figcaption>שיפוע שלילי, <span class="fi">\(m\lt 0\)</span> — הישר יורד: צעד ימינה, ירידה למטה.</figcaption>
+  </figure>
+  <figure>
+    <svg viewBox="0 0 200 200" style="width:100%;max-width:640px;height:auto" role="img" aria-label="ישר אופקי">
+      <g stroke="#E4E8EE" stroke-width="1">
+        <line x1="20" y1="20" x2="20" y2="180"/><line x1="60" y1="20" x2="60" y2="180"/>
+        <line x1="100" y1="20" x2="100" y2="180"/><line x1="140" y1="20" x2="140" y2="180"/>
+        <line x1="180" y1="20" x2="180" y2="180"/>
+        <line x1="20" y1="20" x2="180" y2="20"/><line x1="20" y1="60" x2="180" y2="60"/>
+        <line x1="20" y1="100" x2="180" y2="100"/><line x1="20" y1="140" x2="180" y2="140"/>
+        <line x1="20" y1="180" x2="180" y2="180"/>
+      </g>
+      <line x1="12" y1="100" x2="184" y2="100" stroke="#5A6875" stroke-width="2"/>
+      <path d="M190 100 L181 96 L181 104 Z" fill="#5A6875"/>
+      <line x1="100" y1="188" x2="100" y2="16" stroke="#5A6875" stroke-width="2"/>
+      <path d="M100 10 L96 19 L104 19 Z" fill="#5A6875"/>
+      <text x="93" y="113" text-anchor="end" fill="#5A6875" font-size="10">0</text>
+      <text x="140" y="113" text-anchor="middle" fill="#5A6875" font-size="10">1</text>
+      <line x1="16" y1="60" x2="184" y2="60" stroke="#7C3AED" stroke-width="3"/>
+      <text x="93" y="63" text-anchor="end" fill="#5A6875" font-size="10" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3">1</text>
+      <text x="150" y="52" text-anchor="start" fill="#7C3AED" font-size="11" font-weight="bold" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3">y=1</text>
+    </svg>
+    <figcaption>שיפוע אפס, <span class="fi">\(m=0\)</span> — ישר אופקי:
+    מתקדמים ימינה וה-<span class="fi">\(y\)</span> לא משתנה.</figcaption>
+  </figure>
+</div>
+
+<!-- ============ 3. נקודה על ישר ============ -->
+<h2 id="sec-point-on-line"><span class="num">3</span>האם נקודה נמצאת על הישר? בדיקת הצבה</h2>
+
+<p>
+  שאלה שחוזרת בכל מבחן: נתון ישר ונתונה נקודה — האם הנקודה יושבת עליו?
+  לא צריך לסרטט. יש בדיקה של שורה אחת:
+</p>
+
+<div class="box def">
+  <div class="box-title">הכלל</div>
+  מציבים את ה-<span class="fi">\(\textcolor{#2563EB}{x}\)</span> של הנקודה במשוואת הישר.
+  <br>אם מתקבל <strong>בדיוק</strong> ה-<span class="fi">\(\textcolor{#7C3AED}{y}\)</span> של הנקודה — הנקודה על הישר.
+  <br>אם מתקבל מספר אחר — היא לא.
+</div>
+
+<p>
+  למשל: האם הנקודה <span class="fi">\((\textcolor{#2563EB}{2},\textcolor{#7C3AED}{7})\)</span>
+  נמצאת על הישר <span class="fi">\(y=3x+1\)</span>?
+  מציבים <span class="fi">\(\textcolor{#2563EB}{x=2}\)</span>:
+</p>
+
+$$\textcolor{#7C3AED}{y}\;=\;3\cdot \textcolor{#2563EB}{2}+1\;=\;\textcolor{#7C3AED}{7}\;\checkmark$$
+
+<p>
+  קיבלנו 7 — בדיוק ה-<span class="fi">\(\textcolor{#7C3AED}{y}\)</span> של הנקודה.
+  <strong>כן, הנקודה על הישר.</strong>
+</p>
+<p>
+  ולעומתה הנקודה <span class="fi">\((\textcolor{#2563EB}{1},\textcolor{#7C3AED}{5})\)</span>, ביחס לאותו ישר:
+  מציבים <span class="fi">\(\textcolor{#2563EB}{x=1}\)</span> ומקבלים
+  <span class="fi">\(3\cdot \textcolor{#2563EB}{1}+1=4\)</span> —
+  אבל בנקודה כתוב <span class="fi">\(\textcolor{#7C3AED}{5}\)</span>.
+  ‏4 זה לא 5, ולכן הנקודה <strong>לא</strong> על הישר (היא צפה קצת מעליו).
+</p>
+
+<div class="box warn">
+  <div class="box-title">שימי לב</div>
+  בנקודה <span class="fi">\((2,7)\)</span> — המספר <strong>הראשון</strong> הוא תמיד
+  ה-<span class="fi">\(\textcolor{#2563EB}{x}\)</span> והשני הוא
+  ה-<span class="fi">\(\textcolor{#7C3AED}{y}\)</span>.
+  מי שמציבה בטעות את ה-7 במקום ה-2 מקבלת בדיקה הפוכה — ותשובה שגויה בביטחון מלא.
+  <br>סדר קבוע: <strong>מציבים את ה-<span class="fi">\(x\)</span>, משווים ל-<span class="fi">\(y\)</span></strong>.
+</div>
+
+<!-- ============ 4. חיתוכים עם הצירים ============ -->
+<h2 id="sec-intercepts"><span class="num">4</span>נקודות החיתוך עם הצירים</h2>
+
+<p>
+  לכל ישר (שאינו מקביל לאחד הצירים) יש שתי נקודות פגישה עם מערכת הצירים —
+  ובשתיהן עובד אותו רעיון:
+</p>
+
+<div class="box def">
+  <div class="box-title">כלל החיתוכים</div>
+  בחיתוך עם ציר אחד — המשתנה של הציר <strong>השני</strong> מתאפס.
+  <br>· חיתוך עם ציר <span class="fi">\(y\)</span>: מציבים <span class="fi">\(\textcolor{#2563EB}{x=0}\)</span>.
+  <br>· חיתוך עם ציר <span class="fi">\(x\)</span>: מציבים <span class="fi">\(\textcolor{#7C3AED}{y=0}\)</span> — ופותרים משוואה.
+</div>
+
+<p>נעבוד על הישר <span class="fi">\(y=2x-4\)</span>, ונראה הכל גם בגרף:</p>
+
+<h3>חיתוך עם ציר <span class="fi">\(y\)</span> — ההצבה הקלה</h3>
+<p>מציבים <span class="fi">\(\textcolor{#2563EB}{x=0}\)</span>:</p>
+$$\textcolor{#7C3AED}{y}\;=\;2\cdot \textcolor{#2563EB}{0}-4\;=\;\textcolor{#059669}{-4}
+\qquad\Longrightarrow\qquad \textcolor{#059669}{(0,\,-4)}$$
+<p>
+  שימי לב: יצא בדיוק המספר החופשי. זה לא מקרה —
+  במשוואה <span class="fi">\(y=mx+b\)</span> החיתוך עם ציר <span class="fi">\(y\)</span>
+  הוא <strong>תמיד</strong> <span class="fi">\(\textcolor{#059669}{(0,b)}\)</span>,
+  בלי שום חישוב.
+</p>
+
+<h3>חיתוך עם ציר <span class="fi">\(x\)</span> — קצת עבודה</h3>
+<p>מציבים <span class="fi">\(\textcolor{#7C3AED}{y=0}\)</span>, ונשארת משוואה שפותרים
+כמו בתחנה 2 — הפעולות על שני האגפים מסומנות באדום:</p>
+
+<div class="fbox">
+  <div class="fbox-title">פתרון המשוואה של החיתוך</div>
+  $$\textcolor{#7C3AED}{0}=2\textcolor{#2563EB}{x}-4
+  \;\;\xrightarrow{\;\textcolor{#C0392B}{+4}\;}\;\;
+  4=2\textcolor{#2563EB}{x}
+  \;\;\xrightarrow{\;\textcolor{#C0392B}{:2}\;}\;\;
+  \textcolor{#2563EB}{x}=2
+  \qquad\Longrightarrow\qquad \textcolor{#2563EB}{(2,\,0)}$$
+  <span class="f-legend">
+    <span><i class="sw" style="background:#C0392B"></i> אדום — פעולה שעושים על שני האגפים</span>
+    <span><i class="sw" style="background:#2563EB"></i> <bdi>כחול — ה-<span class="fi">\(x\)</span> שמחפשים; הנקודה על ציר <span class="fi">\(x\)</span></bdi></span>
+  </span>
+</div>
+
+<figure style="max-width:360px;margin:22px auto">
+  <svg viewBox="0 0 340 400" style="width:100%;max-width:640px;height:auto" role="img" aria-label="הישר y=2x-4 ושתי נקודות החיתוך עם הצירים">
+    <g stroke="#E4E8EE" stroke-width="1">
+      <line x1="20" y1="20" x2="20" y2="380"/><line x1="60" y1="20" x2="60" y2="380"/>
+      <line x1="100" y1="20" x2="100" y2="380"/><line x1="140" y1="20" x2="140" y2="380"/>
+      <line x1="180" y1="20" x2="180" y2="380"/><line x1="220" y1="20" x2="220" y2="380"/>
+      <line x1="260" y1="20" x2="260" y2="380"/><line x1="300" y1="20" x2="300" y2="380"/>
+      <line x1="20" y1="20" x2="320" y2="20"/><line x1="20" y1="60" x2="320" y2="60"/>
+      <line x1="20" y1="100" x2="320" y2="100"/><line x1="20" y1="140" x2="320" y2="140"/>
+      <line x1="20" y1="180" x2="320" y2="180"/><line x1="20" y1="220" x2="320" y2="220"/>
+      <line x1="20" y1="260" x2="320" y2="260"/><line x1="20" y1="300" x2="320" y2="300"/>
+      <line x1="20" y1="340" x2="320" y2="340"/><line x1="20" y1="380" x2="320" y2="380"/>
+    </g>
+    <line x1="20" y1="200" x2="326" y2="200" stroke="#5A6875" stroke-width="2"/>
+    <path d="M332 200 L322 195 L322 205 Z" fill="#5A6875"/>
+    <line x1="140" y1="388" x2="140" y2="16" stroke="#5A6875" stroke-width="2"/>
+    <path d="M140 10 L135 20 L145 20 Z" fill="#5A6875"/>
+    <g fill="#5A6875" font-size="11">
+      <text x="132" y="217" text-anchor="end">0</text>
+      <text x="100" y="217" text-anchor="middle">−1</text>
+      <text x="60" y="217" text-anchor="middle">−2</text>
+      <text x="180" y="217" text-anchor="middle">1</text>
+      <text x="260" y="217" text-anchor="middle">3</text>
+      <text x="300" y="217" text-anchor="middle">4</text>
+      <text x="132" y="124" text-anchor="end">2</text>
+      <text x="132" y="44" text-anchor="end">4</text>
+      <text x="132" y="284" text-anchor="end">−2</text>
+      <text x="132" y="364" text-anchor="end">−4</text>
+    </g>
+    <line x1="128" y1="384" x2="312" y2="16" stroke="#7C3AED" stroke-width="3"/>
+    <text x="280" y="58" text-anchor="end" fill="#7C3AED" font-size="12" font-weight="bold" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3">y=2x−4</text>
+    <circle cx="140" cy="360" r="6" fill="#059669" stroke="#fff" stroke-width="2"/>
+    <text x="152" y="374" fill="#059669" font-size="12" font-weight="bold" text-anchor="start">(0,−4)</text>
+    <circle cx="220" cy="200" r="6" fill="#2563EB" stroke="#fff" stroke-width="2"/>
+    <text x="212" y="187" fill="#2563EB" font-size="12" font-weight="bold" text-anchor="end">(2,0)</text>
+  </svg>
+  <figcaption>הירוקה <span class="fi">\(\textcolor{#059669}{(0,-4)}\)</span> —
+  החיתוך עם ציר <span class="fi">\(y\)</span> (הצבנו <span class="fi">\(x=0\)</span>);
+  הכחולה <span class="fi">\(\textcolor{#2563EB}{(2,0)}\)</span> — עם ציר
+  <span class="fi">\(x\)</span> (הצבנו <span class="fi">\(y=0\)</span> ופתרנו).</figcaption>
+</figure>
+
+<div class="box warn">
+  <div class="box-title">שימי לב</div>
+  זה מרגיש הפוך מהאינטואיציה: בשביל חיתוך עם ציר <span class="fi">\(x\)</span>
+  מאפסים דווקא את <span class="fi">\(y\)</span> — ולהפך.
+  <br>הבדיקה שמצילה תמיד: נקודה שיושבת <strong>על ציר <span class="fi">\(x\)</span></strong>
+  נראית כמו <span class="fi">\((\square,\,0)\)</span> — הגובה שלה אפס.
+  נקודה על ציר <span class="fi">\(y\)</span> נראית כמו <span class="fi">\((0,\,\square)\)</span>.
+  <br>וטעות שנייה ששווה נקודה במבחן: לענות "<span class="fi">\(x=2\)</span>" ולא לכתוב
+  את הנקודה המלאה <span class="fi">\((2,0)\)</span>.
+</div>
+
+<!-- ============ 5. תחום חיוביות ושליליות ============ -->
+<h2 id="sec-sign"><span class="num">5</span>תחום החיוביות והשליליות</h2>
+
+<p>
+  עכשיו, כשאת יודעת למצוא את נקודת החיתוך עם ציר <span class="fi">\(x\)</span>,
+  אפשר לענות על השאלה שכל מבחן אוהב לשאול מיד אחריה:
+  <strong>מתי הפונקציה חיובית, ומתי שלילית?</strong>
+  כלומר — באילו ערכי <span class="fi">\(x\)</span> הגרף נמצא מעל ציר
+  ה-<span class="fi">\(x\)</span>, ובאילו מתחתיו.
+</p>
+
+<div class="box def">
+  <div class="box-title">הגדרה</div>
+  <strong>תחום החיוביות</strong> — כל ערכי ה-<span class="fi">\(\textcolor{#2563EB}{x}\)</span>
+  שעבורם הגרף נמצא <strong>מעל</strong> ציר ה-<span class="fi">\(x\)</span>,
+  כלומר <span class="fi">\(f(x)\gt 0\)</span>.
+  <br><strong>תחום השליליות</strong> — כל ערכי ה-<span class="fi">\(\textcolor{#2563EB}{x}\)</span>
+  שעבורם הגרף נמצא <strong>מתחת</strong> לציר, כלומר <span class="fi">\(f(x)\lt 0\)</span>.
+  <br>הגבול בין שני התחומים הוא נקודת החיתוך עם ציר ה-<span class="fi">\(x\)</span>,
+  שנקראת גם <strong>נקודת האפס</strong> — שני שמות לאותה נקודה בדיוק.
+  שם הגרף יושב על הציר עצמו: <span class="fi">\(f(x)=0\)</span>.
+</div>
+
+<p>ואיך מוצאים את התחומים? שלושה צעדים קבועים:</p>
+
+<ol class="steps">
+  <li><strong>מוצאים את נקודת האפס:</strong> מציבים
+      <span class="fi">\(\textcolor{#7C3AED}{y=0}\)</span> ופותרים —
+      בדיוק כמו בסעיף הקודם.</li>
+  <li><strong>מסתכלים על השיפוע:</strong> ישר <strong>עולה</strong>
+      (<span class="fi">\(\textcolor{#EA580C}{m}\gt 0\)</span>) —
+      שלילי לפני נקודת האפס, חיובי אחריה.
+      ישר <strong>יורד</strong> — בדיוק הפוך.</li>
+  <li><strong>כותבים את התשובה</strong> בשפה של <span class="fi">\(x\)</span>:
+      ‏<span class="fi">\(x\gt \ldots\)</span> או <span class="fi">\(x\lt \ldots\)</span>.</li>
+</ol>
+
+<p>
+  נחזור לישר של הסעיף הקודם, <span class="fi">\(y=2x-4\)</span>.
+  את נקודת האפס כבר מצאנו — <span class="fi">\(\textcolor{#2563EB}{(2,0)}\)</span> —
+  והשיפוע <span class="fi">\(\textcolor{#EA580C}{m=2}\)</span> חיובי, כלומר הישר עולה:
+  לפני 2 הוא עוד מתחת לציר, ואחרי 2 הוא כבר מעליו.
+  ככה זה נראה בצבעים:
+</p>
+
+<figure style="max-width:360px;margin:22px auto">
+  <svg viewBox="0 0 340 400" style="width:100%;max-width:640px;height:auto" role="img" aria-label="הישר y=2x-4 צבוע לפי סימן: אדום מתחת לציר, ירוק מעליו">
+    <g stroke="#E4E8EE" stroke-width="1">
+      <line x1="20" y1="20" x2="20" y2="380"/><line x1="60" y1="20" x2="60" y2="380"/>
+      <line x1="100" y1="20" x2="100" y2="380"/><line x1="140" y1="20" x2="140" y2="380"/>
+      <line x1="180" y1="20" x2="180" y2="380"/><line x1="220" y1="20" x2="220" y2="380"/>
+      <line x1="260" y1="20" x2="260" y2="380"/><line x1="300" y1="20" x2="300" y2="380"/>
+      <line x1="20" y1="20" x2="320" y2="20"/><line x1="20" y1="60" x2="320" y2="60"/>
+      <line x1="20" y1="100" x2="320" y2="100"/><line x1="20" y1="140" x2="320" y2="140"/>
+      <line x1="20" y1="180" x2="320" y2="180"/><line x1="20" y1="220" x2="320" y2="220"/>
+      <line x1="20" y1="260" x2="320" y2="260"/><line x1="20" y1="300" x2="320" y2="300"/>
+      <line x1="20" y1="340" x2="320" y2="340"/><line x1="20" y1="380" x2="320" y2="380"/>
+    </g>
+    <line x1="20" y1="200" x2="326" y2="200" stroke="#5A6875" stroke-width="2"/>
+    <path d="M332 200 L322 195 L322 205 Z" fill="#5A6875"/>
+    <line x1="140" y1="388" x2="140" y2="16" stroke="#5A6875" stroke-width="2"/>
+    <path d="M140 10 L135 20 L145 20 Z" fill="#5A6875"/>
+    <g fill="#5A6875" font-size="11">
+      <text x="132" y="217" text-anchor="end">0</text>
+      <text x="100" y="217" text-anchor="middle">−1</text>
+      <text x="60" y="217" text-anchor="middle">−2</text>
+      <text x="180" y="217" text-anchor="middle">1</text>
+      <text x="260" y="217" text-anchor="middle">3</text>
+      <text x="300" y="217" text-anchor="middle">4</text>
+      <text x="132" y="124" text-anchor="end">2</text>
+      <text x="132" y="44" text-anchor="end">4</text>
+      <text x="132" y="284" text-anchor="end">−2</text>
+      <text x="132" y="364" text-anchor="end">−4</text>
+    </g>
+    <line x1="128" y1="384" x2="220" y2="200" stroke="#C0392B" stroke-width="3.5"/>
+    <line x1="220" y1="200" x2="312" y2="16" stroke="#059669" stroke-width="3.5"/>
+    <text x="170" y="322" fill="#C0392B" font-size="20" font-weight="800" text-anchor="middle">−</text>
+    <text x="185" y="344" fill="#C0392B" font-size="12" font-weight="bold" text-anchor="middle" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3">f(x)&lt;0</text>
+    <text x="272" y="86" fill="#059669" font-size="20" font-weight="800" text-anchor="middle">+</text>
+    <text x="258" y="60" fill="#059669" font-size="12" font-weight="bold" text-anchor="middle" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3">f(x)&gt;0</text>
+    <circle cx="220" cy="200" r="7.5" fill="#FFFFFF" stroke="#1C2733" stroke-width="2.6"/>
+    <text x="208" y="187" fill="#1C2733" font-size="12" font-weight="bold" text-anchor="end">(2,0)</text>
+  </svg>
+  <figcaption>אותו ישר, <span class="fi">\(y=2x-4\)</span>: אדום — מתחת לציר,
+  ירוק — מעל; הגבול הוא נקודת האפס <span class="fi">\((2,0)\)</span>.</figcaption>
+</figure>
+
+<p>
+  ומכאן התשובה, כמו שכותבים אותה במבחן:
+  <br>תחום החיוביות: <span class="fi">\(x\gt 2\)</span>.
+  <br>תחום השליליות: <span class="fi">\(x\lt 2\)</span>.
+  <br>ובדיקה בהצבה — <span class="fi">\(x=3\)</span> נותן
+  <span class="fi">\(2\cdot 3-4=2\gt 0\)</span> ✓,
+  ו-<span class="fi">\(x=0\)</span> נותן
+  <span class="fi">\(2\cdot 0-4=-4\lt 0\)</span> ✓.
+</p>
+
+<div class="box warn">
+  <div class="box-title">שימי לב</div>
+  התשובה היא תמיד <strong>תחום של <span class="fi">\(x\)</span></strong> —
+  לא של <span class="fi">\(y\)</span>. כותבים <span class="fi">\(x\gt 2\)</span>,
+  לא <span class="fi">\(y\gt 0\)</span>.
+  <br>‏"<span class="fi">\(y\gt 0\)</span>" זו השאלה ("מתי הגרף מעל הציר?") —
+  ו-"<span class="fi">\(x\gt 2\)</span>" זו התשובה ("בערכי ה-<span class="fi">\(x\)</span> האלה").
+</div>
+
+<article class="ex hide-marks">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תחום חיוביות של ישר יורד</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">נתונה הפונקציה <span class="fi">\(y=-x+3\)</span></span>.
+    <span class="mk mk-find">מצאי את תחום החיוביות שלה.</span>
+  </p>
+  <div class="q-row">
+    <button class="marks-btn no-print" style="font-family:inherit;font-size:12.5px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:5px 10px;cursor:pointer">הציגי את הפירוק בצבעים</button>
+  </div>
+  <div class="q-row">
+    <span>עד איזה <span class="fi">\(x\)</span> הפונקציה חיובית? ‏<span class="fi">\(x\lt\)</span></span>
+    <input class="q-input" data-answer="3" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>נקודת האפס — מציבים <span class="fi">\(\textcolor{#7C3AED}{y=0}\)</span> ופותרים:</p>
+      $$\textcolor{#7C3AED}{0}=-\textcolor{#2563EB}{x}+3
+      \;\;\xrightarrow{\;\textcolor{#C0392B}{+x}\;}\;\;
+      \textcolor{#2563EB}{x}=3$$
+      <p>השיפוע <span class="fi">\(\textcolor{#EA580C}{m=-1}\)</span> שלילי — הישר יורד,
+      ולכן הוא מעל הציר דווקא <strong>לפני</strong> נקודת האפס.
+      <br>תחום החיוביות: <span class="fi">\(x\lt 3\)</span>.
+      תחום השליליות: <span class="fi">\(x\gt 3\)</span>.</p>
+      <figure style="max-width:270px;margin:14px auto">
+        <svg viewBox="0 0 250 200" style="width:100%;height:auto" role="img" aria-label="סקיצה: ישר יורד עם נקודת אפס, חיובי משמאל ושלילי מימין">
+          <line x1="30" y1="124" x2="234" y2="124" stroke="#5A6875" stroke-width="1.6"/>
+          <polygon points="244,124 232,118.5 232,129.5" fill="#5A6875"/>
+          <line x1="66" y1="190" x2="66" y2="20" stroke="#5A6875" stroke-width="1.6"/>
+          <polygon points="66,10 60.5,22 71.5,22" fill="#5A6875"/>
+          <g font-family="Arial" font-size="11" fill="#5A6875">
+            <text x="58" y="138" text-anchor="end">0</text>
+            <text x="92" y="138" text-anchor="middle">1</text>
+            <text x="118" y="138" text-anchor="middle">2</text>
+            <text x="170" y="138" text-anchor="middle">4</text>
+            <text x="58" y="50" text-anchor="end">3</text>
+          </g>
+          <text x="144" y="140" text-anchor="middle" font-family="Arial" font-size="12" font-weight="800" fill="#1C2733">3</text>
+          <line x1="40" y1="20" x2="144" y2="124" stroke="#059669" stroke-width="3.5"/>
+          <line x1="144" y1="124" x2="196" y2="176" stroke="#C0392B" stroke-width="3.5"/>
+          <text x="95" y="92" text-anchor="middle" font-family="Arial" font-size="18" font-weight="800" fill="#059669">+</text>
+          <text x="95" y="108" text-anchor="middle" font-family="Arial" font-size="10.5" font-weight="700" fill="#059669" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3">f(x)&gt;0</text>
+          <text x="207" y="152" text-anchor="middle" font-family="Arial" font-size="18" font-weight="800" fill="#C0392B">&#8722;</text>
+          <text x="207" y="168" text-anchor="middle" font-family="Arial" font-size="10.5" font-weight="700" fill="#C0392B" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3">f(x)&lt;0</text>
+          <circle cx="144" cy="124" r="6" fill="#FFFFFF" stroke="#1C2733" stroke-width="2.4"/>
+          <text x="152" y="114" text-anchor="start" font-family="Arial" font-size="11.5" font-weight="700" fill="#1C2733">(3,0)</text>
+        </svg>
+        <figcaption>הסקיצה של הפתרון במחברת: הישר יורד, נקודת האפס
+        ב-<span class="fi">\((3,0)\)</span> — משמאל לה הגרף מעל הציר (חיובי),
+        מימין לה מתחתיו (שלילי).</figcaption>
+      </figure>
+      <p>בדיקה: ‏<span class="fi">\(x=0\)</span> נותן
+      <span class="fi">\(-0+3=3\gt 0\)</span> ✓,
+      ו-<span class="fi">\(x=4\)</span> נותן
+      <span class="fi">\(-4+3=-1\lt 0\)</span> ✓.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex5"> סיימתי את התרגיל הזה</label>
+</article>
+
+<!-- ============ 6. תרגול ============ -->
+<h2 id="sec-practice"><span class="num">6</span>תרגול — משלב לשלב</h2>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>לקרוא ישר מהמשוואה</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">נתון הישר <span class="fi">\(y=-2x+6\)</span></span>.
+    <span class="mk mk-find">מהו השיפוע, ובאיזו נקודה חוצה הישר את ציר <span class="fi">\(y\)</span>?</span>
+  </p>
+  <p style="font-size:13px;color:var(--soft)">נסי לנחש את השלב הבא לפני שאת פותחת אותו.</p>
+  <details class="step"><summary>שלב ראשון — משווים לתבנית</summary>
+    <div class="step-body">
+      מציבים את המשוואה מול תעודת הזהות <span class="fi">\(y=mx+b\)</span>:
+      $$\textcolor{#7C3AED}{y}=\underbrace{\textcolor{#EA580C}{-2}}_{\textcolor{#EA580C}{m}}\cdot\textcolor{#2563EB}{x}+\underbrace{\textcolor{#059669}{6}}_{\textcolor{#059669}{b}}$$
+      השיפוע הוא המספר שצמוד ל-<span class="fi">\(x\)</span>, <strong>כולל הסימן שלפניו</strong>:
+      <span class="mk mk-find"><span class="fi">\(\textcolor{#EA580C}{m=-2}\)</span></span>.
+    </div>
+  </details>
+  <details class="step"><summary>שלב שני — המספר החופשי</summary>
+    <div class="step-body">
+      <span class="fi">\(\textcolor{#059669}{b=6}\)</span>, ולכן הישר חוצה את ציר
+      <span class="fi">\(y\)</span> בנקודה <span class="fi">\(\textcolor{#059669}{(0,6)}\)</span>.
+      לא לשכוח לכתוב נקודה מלאה — עם ה-0.
+    </div>
+  </details>
+  <details class="step"><summary>שלב שלישי — בדיקת היגיון</summary>
+    <div class="step-body">
+      <span class="fi">\(m\)</span> שלילי, אז הישר יורד. בודקים בהצבה קטנה:
+      <br>ב-<span class="fi">\(x=0\)</span> מקבלים 6, וב-<span class="fi">\(x=1\)</span> מקבלים
+      <span class="fi">\(-2+6=4\)</span>.
+      <br>ירדנו מ-6 ל-4 — ירידה של 2 בצעד אחד,
+      בדיוק השיפוע <span class="fi">\(m=-2\)</span> ✓
+      <figure style="max-width:280px;margin:12px auto">
+        <svg viewBox="0 0 250 225" style="width:100%;height:auto" role="img" aria-label="הישר יורד, מתחיל בנקודה 0 6, וכל צעד ימינה יורד 2">
+          <line x1="24" y1="170" x2="232" y2="170" stroke="#5A6875" stroke-width="1.6"/>
+          <polygon points="240,170 228,164.5 228,175.5" fill="#5A6875"/>
+          <line x1="60" y1="217" x2="60" y2="18" stroke="#5A6875" stroke-width="1.6"/>
+          <polygon points="60,10 54.5,22 65.5,22" fill="#5A6875"/>
+          <g font-family="Arial" font-size="11" fill="#5A6875">
+            <text x="52" y="184" text-anchor="end">0</text>
+            <text x="88" y="184" text-anchor="middle">1</text>
+            <text x="144" y="184" text-anchor="middle">3</text>
+            <text x="52" y="54" text-anchor="end">6</text>
+            <text x="52" y="94" text-anchor="end">4</text>
+          </g>
+          <line x1="46" y1="30" x2="180" y2="222" stroke="#7C3AED" stroke-width="3"/>
+          <text x="122" y="98" text-anchor="start" font-family="Arial" font-size="12" font-weight="700" fill="#7C3AED" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3">y=−2x+6</text>
+          <g stroke="#EA580C" stroke-width="2.5" stroke-dasharray="5 4" fill="none">
+            <line x1="60" y1="50" x2="88" y2="50"/>
+            <line x1="88" y1="50" x2="88" y2="90"/>
+          </g>
+          <text x="74" y="44" text-anchor="middle" font-family="Arial" font-size="11.5" font-weight="700" fill="#EA580C">+1</text>
+          <text x="94" y="74" text-anchor="start" font-family="Arial" font-size="11.5" font-weight="700" fill="#EA580C">−2</text>
+          <circle cx="60" cy="50" r="6" fill="#059669" stroke="#fff" stroke-width="2"/>
+          <text x="68" y="34" text-anchor="start" font-family="Arial" font-size="11.5" font-weight="700" fill="#059669">(0, 6)</text>
+        </svg>
+        <figcaption>שתי התשובות על סרטוט אחד: הישר חוצה את ציר
+        ה-<span class="fi">\(y\)</span> ב-<span class="fi">(0, 6)</span> —
+        זה <span class="fi">\(b=6\)</span> — וכל צעד ימינה מוריד אותו ב-2 —
+        זה <span class="fi">\(m=-2\)</span>.</figcaption>
+      </figure>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex1"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex hide-marks">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>נקודה על ישר?</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">נתון הישר <span class="fi">\(y=2x-1\)</span></span>.
+    <span class="mk mk-find">האם הנקודה <span class="fi">\((3,5)\)</span> נמצאת על הישר?</span>
+  </p>
+  <div class="q-row">
+    <button class="marks-btn no-print" style="font-family:inherit;font-size:12.5px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:5px 10px;cursor:pointer">הציגי את הפירוק בצבעים</button>
+  </div>
+  <div class="q-row">
+    <span>מציבים <span class="fi">\(x=3\)</span>. כמה יוצא <span class="fi">\(2\cdot 3-1\)</span>?</span>
+    <input class="q-input" data-answer="5" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <p style="font-size:13.5px">עכשיו השווי את מה שיצא ל-<span class="fi">\(y\)</span> של הנקודה — והחליטי.</p>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>מציבים את ה-<span class="fi">\(\textcolor{#2563EB}{x}\)</span> של הנקודה:</p>
+      $$\textcolor{#7C3AED}{y}=2\cdot \textcolor{#2563EB}{3}-1=\textcolor{#7C3AED}{5}\;\checkmark$$
+      <p>קיבלנו 5, וה-<span class="fi">\(y\)</span> של הנקודה הוא בדיוק 5 —
+      <strong>אז כן, הנקודה על הישר.</strong></p>
+      <p>ואילו השאלה הייתה על <span class="fi">\((3,6)\)</span>? ההצבה הייתה נותנת שוב 5,
+      אבל 5 זה לא 6 — והתשובה הייתה: לא על הישר.</p>
+      <figure style="max-width:280px;margin:12px auto">
+        <svg viewBox="0 0 250 220" style="width:100%;height:auto" role="img" aria-label="הנקודה 3 5 יושבת על הישר, והנקודה 3 6 מעליו">
+          <line x1="18" y1="180" x2="232" y2="180" stroke="#5A6875" stroke-width="1.6"/>
+          <polygon points="240,180 228,174.5 228,185.5" fill="#5A6875"/>
+          <line x1="50" y1="216" x2="50" y2="16" stroke="#5A6875" stroke-width="1.6"/>
+          <polygon points="50,8 44.5,20 55.5,20" fill="#5A6875"/>
+          <g font-family="Arial" font-size="11" fill="#5A6875">
+            <text x="42" y="196" text-anchor="end">0</text>
+            <text x="140" y="197" text-anchor="middle" font-size="12" font-weight="800" fill="#1C2733">3</text>
+            <text x="42" y="64" text-anchor="end" font-size="12" font-weight="800" fill="#1C2733">5</text>
+          </g>
+          <path d="M140 60V180 M140 60H50" stroke="#9AA5B1" stroke-width="1.4" stroke-dasharray="5 5" fill="none"/>
+          <line x1="44" y1="214" x2="170" y2="12" stroke="#7C3AED" stroke-width="3"/>
+          <text x="102" y="102" text-anchor="end" font-family="Arial" font-size="12" font-weight="700" fill="#7C3AED" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3">y=2x−1</text>
+          <circle cx="140" cy="36" r="6" fill="#FFFFFF" stroke="#C0392B" stroke-width="2.8"/>
+          <text x="128" y="32" text-anchor="end" font-family="Arial" font-size="11.5" font-weight="700" fill="#C0392B">(3, 6)</text>
+          <circle cx="140" cy="60" r="6.5" fill="#1C2733" stroke="#fff" stroke-width="2.2"/>
+          <text x="148" y="72" text-anchor="start" font-family="Arial" font-size="11.5" font-weight="700" fill="#1C2733">(3, 5)</text>
+        </svg>
+        <figcaption>מעל <span class="fi">\(x=3\)</span> הישר עומד בגובה 5 בדיוק —
+        לכן <span class="fi">(3, 5)</span> יושבת עליו,
+        ו-<span class="fi">(3, 6)</span>, יחידה אחת גבוה יותר, כבר מחוץ לישר.</figcaption>
+      </figure>
+    </div>
+  </details>
+  <details class="alt">
+    <summary>אותה שאלה בתחפושות — כל הניסוחים של "נקודה על ישר"</summary>
+    <div class="alt-body">
+      <ul>
+        <li>"האם הישר <strong>עובר דרך</strong> הנקודה <span class="fi">\((3,5)\)</span>?"</li>
+        <li>"האם הנקודה <span class="fi">\((3,5)\)</span> <strong>מקיימת</strong> את משוואת הישר?"</li>
+        <li>"נתונה הפונקציה <span class="fi">\(f(x)=2x-1\)</span>. האם <span class="fi">\(f(3)=5\)</span>?"</li>
+        <li>"האם הגרף של הפונקציה עובר בנקודה <span class="fi">\((3,5)\)</span>?"</li>
+      </ul>
+      <p>ארבעה ניסוחים — בדיקה אחת: מציבים את ה-<span class="fi">\(x\)</span>,
+      משווים ל-<span class="fi">\(y\)</span>.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex2"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex hide-marks">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>חיתוך עם ציר <span class="fi">\(x\)</span></h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">נתון הישר <span class="fi">\(y=2x-8\)</span></span>.
+    <span class="mk mk-find">מצאי את נקודת החיתוך של הישר עם ציר <span class="fi">\(x\)</span></span>.
+  </p>
+  <div class="q-row">
+    <button class="marks-btn no-print" style="font-family:inherit;font-size:12.5px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:5px 10px;cursor:pointer">הציגי את הפירוק בצבעים</button>
+  </div>
+  <div class="q-row">
+    <span>שיעור ה-<span class="fi">\(x\)</span> של נקודת החיתוך:</span>
+    <input class="q-input" data-answer="4" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>חיתוך עם ציר <span class="fi">\(x\)</span> — מאפסים את המשתנה של הציר השני:
+      מציבים <span class="fi">\(\textcolor{#7C3AED}{y=0}\)</span> ופותרים:</p>
+      $$\textcolor{#7C3AED}{0}=2\textcolor{#2563EB}{x}-8
+      \;\;\xrightarrow{\;\textcolor{#C0392B}{+8}\;}\;\;
+      8=2\textcolor{#2563EB}{x}
+      \;\;\xrightarrow{\;\textcolor{#C0392B}{:2}\;}\;\;
+      \textcolor{#2563EB}{x}=4$$
+      <p>הנקודה המלאה: <span class="fi">\(\textcolor{#2563EB}{(4,0)}\)</span> —
+      על ציר <span class="fi">\(x\)</span>, הגובה תמיד 0.</p>
+      <figure style="max-width:280px;margin:12px auto">
+        <svg viewBox="0 0 250 215" style="width:100%;height:auto" role="img" aria-label="הישר חוצה את ציר x בנקודה 4 0">
+          <line x1="20" y1="80" x2="232" y2="80" stroke="#5A6875" stroke-width="1.6"/>
+          <polygon points="240,80 228,74.5 228,85.5" fill="#5A6875"/>
+          <line x1="55" y1="211" x2="55" y2="18" stroke="#5A6875" stroke-width="1.6"/>
+          <polygon points="55,10 49.5,22 60.5,22" fill="#5A6875"/>
+          <g font-family="Arial" font-size="11" fill="#5A6875">
+            <text x="47" y="94" text-anchor="end">0</text>
+            <text x="107" y="96" text-anchor="middle">2</text>
+            <text x="159" y="96" text-anchor="middle" font-size="12" font-weight="800" fill="#1C2733">4</text>
+            <text x="47" y="144" text-anchor="end">−4</text>
+            <text x="47" y="204" text-anchor="end">−8</text>
+          </g>
+          <line x1="47" y1="209" x2="185" y2="50" stroke="#7C3AED" stroke-width="3"/>
+          <text x="188" y="42" text-anchor="start" font-family="Arial" font-size="11.5" font-weight="700" fill="#7C3AED" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3">y=2x−8</text>
+          <circle cx="55" cy="200" r="5" fill="#059669" stroke="#fff" stroke-width="1.8"/>
+          <text x="63" y="206" text-anchor="start" font-family="Arial" font-size="11" font-weight="700" fill="#059669">(0, −8)</text>
+          <circle cx="159" cy="80" r="6.5" fill="#2563EB" stroke="#fff" stroke-width="2.2"/>
+          <text x="151" y="66" text-anchor="end" font-family="Arial" font-size="11.5" font-weight="700" fill="#2563EB">(4, 0)</text>
+        </svg>
+        <figcaption>הישר עולה מ-<span class="fi">(0, −8)</span> וחוצה את ציר
+        ה-<span class="fi">\(x\)</span> בדיוק ב-<span class="fi">(4, 0)</span> —
+        הנקודה שבה הגובה מתאפס.</figcaption>
+      </figure>
+      <p>בדיקת היגיון: מציבים חזרה <span class="fi">\(x=4\)</span>:
+      <br><span class="fi">\(2\cdot 4-8=0\)</span> ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex3"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · כמו במבחן</span><h4>שני חיתוכים ונקודה אחת</h4></div>
+  <p class="q-text">
+    נתון הישר <span class="fi">\(y=-3x+12\)</span>.
+    <br>א. מצאי את נקודת החיתוך של הישר עם ציר <span class="fi">\(y\)</span>.
+    <br>ב. מצאי את נקודת החיתוך של הישר עם ציר <span class="fi">\(x\)</span>.
+    <br>ג. קבעי אם הנקודה <span class="fi">\((2,6)\)</span> נמצאת על הישר. נמקי.
+  </p>
+  <details class="sol">
+    <summary>הצגי פתרון מלא (כמו שכותבים במחברת)</summary>
+    <div class="sol-body">
+      <p><strong>א.</strong> חיתוך עם ציר <span class="fi">\(y\)</span> — מציבים
+      <span class="fi">\(\textcolor{#2563EB}{x=0}\)</span>:
+      <br><span class="fi">\(y=-3\cdot 0+12=12\)</span>
+      <br>הנקודה: <span class="fi">\(\textcolor{#059669}{(0,12)}\)</span>.
+      <br>(ואפשר גם בלי חישוב — זה בדיוק <span class="fi">\(\textcolor{#059669}{b=12}\)</span>.)</p>
+      <p><strong>ב.</strong> חיתוך עם ציר <span class="fi">\(x\)</span> — מציבים
+      <span class="fi">\(\textcolor{#7C3AED}{y=0}\)</span> ופותרים:</p>
+      $$\textcolor{#7C3AED}{0}=-3\textcolor{#2563EB}{x}+12
+      \;\;\xrightarrow{\;\textcolor{#C0392B}{+3x}\;}\;\;
+      3\textcolor{#2563EB}{x}=12
+      \;\;\xrightarrow{\;\textcolor{#C0392B}{:3}\;}\;\;
+      \textcolor{#2563EB}{x}=4$$
+      <p>הנקודה: <span class="fi">\(\textcolor{#2563EB}{(4,0)}\)</span>.</p>
+      <p><strong>ג.</strong> בדיקת הצבה — מציבים את ה-<span class="fi">\(\textcolor{#2563EB}{x}\)</span> של הנקודה:
+      <br><span class="fi">\(y=-3\cdot \textcolor{#2563EB}{2}+12=-6+12=\textcolor{#7C3AED}{6}\)</span>
+      <br>קיבלנו בדיוק את ה-<span class="fi">\(y\)</span> של הנקודה —
+      <strong>כן, <span class="fi">\((2,6)\)</span> על הישר</strong> ✓</p>
+      <p>בדיקת היגיון יפה: <span class="fi">\((2,6)\)</span> נמצאת בדיוק באמצע הדרך בין
+      <span class="fi">\((0,12)\)</span> ל-<span class="fi">\((4,0)\)</span> —
+      ואמצע של קטע שמונח על ישר תמיד נמצא על אותו ישר.</p>
+      <figure style="max-width:280px;margin:12px auto">
+        <svg viewBox="0 0 250 235" style="width:100%;height:auto" role="img" aria-label="הישר עם שתי נקודות החיתוך והנקודה 2 6 באמצע ביניהן">
+          <line x1="20" y1="190" x2="232" y2="190" stroke="#5A6875" stroke-width="1.6"/>
+          <polygon points="240,190 228,184.5 228,195.5" fill="#5A6875"/>
+          <line x1="55" y1="228" x2="55" y2="16" stroke="#5A6875" stroke-width="1.6"/>
+          <polygon points="55,8 49.5,20 60.5,20" fill="#5A6875"/>
+          <g font-family="Arial" font-size="11" fill="#5A6875">
+            <text x="47" y="204" text-anchor="end">0</text>
+            <text x="123" y="206" text-anchor="middle">2</text>
+            <text x="47" y="116" text-anchor="end">6</text>
+          </g>
+          <path d="M123 112V190 M123 112H55" stroke="#9AA5B1" stroke-width="1.4" stroke-dasharray="5 5" fill="none"/>
+          <line x1="45" y1="22" x2="211" y2="213" stroke="#7C3AED" stroke-width="3"/>
+          <text x="130" y="58" text-anchor="start" font-family="Arial" font-size="12" font-weight="700" fill="#7C3AED" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3">y=−3x+12</text>
+          <circle cx="55" cy="34" r="6" fill="#059669" stroke="#fff" stroke-width="2"/>
+          <text x="63" y="28" text-anchor="start" font-family="Arial" font-size="11.5" font-weight="700" fill="#059669">(0, 12)</text>
+          <circle cx="191" cy="190" r="6" fill="#2563EB" stroke="#fff" stroke-width="2"/>
+          <text x="197" y="176" text-anchor="start" font-family="Arial" font-size="11.5" font-weight="700" fill="#2563EB">(4, 0)</text>
+          <circle cx="123" cy="112" r="6.5" fill="#1C2733" stroke="#fff" stroke-width="2.2"/>
+          <text x="131" y="106" text-anchor="start" font-family="Arial" font-size="11.5" font-weight="700" fill="#1C2733">(2, 6)</text>
+        </svg>
+        <figcaption>שלושת הסעיפים על סרטוט אחד: החיתוך עם ציר
+        ה-<span class="fi">\(y\)</span> ב-<span class="fi">(0, 12)</span>,
+        החיתוך עם ציר ה-<span class="fi">\(x\)</span> ב-<span class="fi">(4, 0)</span> —
+        ו-<span class="fi">(2, 6)</span> יושבת על הישר, בדיוק באמצע ביניהן.</figcaption>
+      </figure>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex4"> סיימתי את התרגיל הזה</label>
+</article>
+
+<!-- ============ ניווט ============ -->
+<h2>🎬 רוצה לראות את זה מוסבר בקול?</h2>
+<div class="watch">
+  <p>הסרטונים הם תגבור, לא חובה:</p>
+  <a class="video-link" href="https://www.youtube.com/watch?v=e-POZXA4pHc">
+    <img src="../assets/alg-vids/e-POZXA4pHc.jpg" alt="פונקציה קווית — ההסבר המובן ביותר — תמונת הסרטון" loading="lazy">
+    <span class="vt"><b>פונקציה קווית — ההסבר המובן ביותר</b><span>פתרון פשוט · 11:04</span></span>
+    <span class="play">▶</span>
+  </a>
+  <a class="video-link" href="https://www.youtube.com/watch?v=YZUWHy6BcXw">
+    <img src="../assets/alg-vids/YZUWHy6BcXw.jpg" alt="איך לשרטט כל גרף של פונקציה קווית — תמונת הסרטון" loading="lazy">
+    <span class="vt"><b>איך לשרטט כל גרף של פונקציה קווית</b><span>פתרון פשוט · 12:06</span></span>
+    <span class="play">▶</span>
+  </a>
+</div>
+
+<div class="progresswrap no-print">
+  <span class="progressbar"><i></i></span><span class="progress-label"></span>
+  <button class="all-sols" style="font-family:inherit;font-size:12px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:4px 10px;cursor:pointer">לפתוח את כל הפתרונות</button>
+</div>
+
+<nav class="pagenav">
+  <a href="03-coordinates-function.html"><span class="dir">→ התחנה הקודמת</span>מערכת צירים ופונקציה</a>
+  <a class="next" href="05-line-equation.html"><span class="dir">התחנה הבאה ←</span>משוואת ישר וחיתוכים</a>
+</nav>
+
+<footer class="fin">חלק מהעולם של שירה · <a href="index.html">המפה</a> · <a href="../index.html">המרכז</a></footer>
+</main>
+</div>
+</body>
+</html>

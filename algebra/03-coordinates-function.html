@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<!-- מסך הבית של האייפד/הטלפון -->
+<link rel="apple-touch-icon" href="../assets/icons/icon-180.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>מערכת צירים ומהי פונקציה — אלגברה ופונקציות — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../vendor/katex.min.css">
+<link rel="stylesheet" href="../css/shira.css">
+<style>:root{--accent:var(--alg)}</style>
+<script defer src="../vendor/katex.min.js"></script>
+<script defer src="../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../js/shira.js"></script>
+<style>
+/* מחוון פתיחה — כמה זמן, כמה תרגילים, ואיפה מתחילים לתרגל (מוסתר בהדפסה) */
+.pagemeta{display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px;
+  margin:12px 0 0; font-size:13px; color:var(--soft)}
+.pagemeta .pm-time{background:var(--faint); border-radius:999px; padding:3px 10px}
+.pagemeta .pm-time b{color:var(--ink); font-weight:700}
+.pagemeta .pm-jump{color:var(--accent); font-weight:700; text-decoration:none}
+.pagemeta .pm-jump:hover{text-decoration:underline}
+.pagemeta .pm-note{flex:1 1 100%; margin:0}
+#ex-first,#bank-map{scroll-margin-top:78px}
+</style>
+</head>
+<body data-page="alg:03-coordinates-function">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">אלגברה ופונקציות — המפה</a>
+    <span class="crumbs">תחנה <b>3</b> מתוך 7 · <b>מערכת צירים ופונקציה</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">אלגברה ופונקציות · תחנה 3</div>
+  <h1>מערכת צירים ומהי פונקציה</h1>
+  <p class="lead">
+    עד עכשיו עבדנו עם ביטויים ומשוואות. עכשיו ניתן למספרים בית:
+    מפה שבה לכל נקודה יש כתובת משני מספרים.
+    ואז נפגוש את הרעיון המרכזי של השנה — <strong>פונקציה</strong> —
+    ונגלה שהסימון <span class="fi">\(f(x)\)</span>, שנראה מאיים, הוא בסך הכל הוראת הצבה.
+  </p>
+  <p class="youknow"><b>בסוף העמוד תדעי:</b> לקרוא ולסמן כל נקודה לפי
+  <span class="fi">\((x,\,y)\)</span> בלי להתבלבל בסדר · לחשב
+  <span class="fi">\(f(4)\)</span> לכל פונקציה שנותנים לך ·
+  להציג פונקציה אחת בשלוש שפות — מילים, נוסחה וטבלה.</p>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>≈ 15 דק׳</b> · 3 תרגילים</span>
+    <a class="pm-jump" href="#sec-practice">לקפוץ ישר לתרגילים ↓</a>
+  </p>
+</header>
+
+<!-- ============ 1. מערכת הצירים ============ -->
+<h2 id="sec-axes"><span class="num">1</span>מערכת הצירים — שני צירים, מפה אחת</h2>
+
+<p>
+  את כבר מכירה ציר מספרים אחד. מערכת צירים היא פשוט <strong>שני</strong> צירי מספרים
+  שנפגשים באפס של שניהם: ציר אופקי — ציר ה-<span class="fi">\(\textcolor{#2563EB}{x}\)</span>
+  (בעמוד הזה הוא תמיד כחול), וציר אנכי — ציר ה-<span class="fi">\(\textcolor{#7C3AED}{y}\)</span>
+  (תמיד סגול). נקודת המפגש נקראת <strong>ראשית הצירים</strong>, והכתובת שלה היא
+  <span class="fi">\((0,\,0)\)</span>.
+</p>
+<p>
+  שני הצירים מחלקים את המישור לארבעה חלקים שנקראים <strong>רביעים</strong>,
+  וסופרים אותם נגד כיוון השעון: הרביע הראשון למעלה מימין (שם שני המספרים חיוביים),
+  ומשם ממשיכים — שני, שלישי, רביעי.
+</p>
+
+<figure>
+  <svg viewBox="0 0 480 480" style="width:100%;max-width:640px;height:auto" role="img" aria-label="מערכת צירים עם ארבע נקודות">
+    <path d="M40 40V440 M80 40V440 M120 40V440 M160 40V440 M200 40V440 M240 40V440 M280 40V440 M320 40V440 M360 40V440 M400 40V440 M440 40V440 M40 40H440 M40 80H440 M40 120H440 M40 160H440 M40 200H440 M40 240H440 M40 280H440 M40 320H440 M40 360H440 M40 400H440 M40 440H440" stroke="#E4E8EE" stroke-width="1" fill="none"/>
+    <line x1="26" y1="240" x2="454" y2="240" stroke="#2563EB" stroke-width="2.5"/>
+    <path d="M452 233 L466 240 L452 247 Z" fill="#2563EB"/>
+    <line x1="240" y1="454" x2="240" y2="26" stroke="#7C3AED" stroke-width="2.5"/>
+    <path d="M233 28 L240 14 L247 28 Z" fill="#7C3AED"/>
+    <g font-size="11.5" fill="#5A6875" text-anchor="middle">
+      <text x="80" y="257">−4</text><text x="120" y="257">−3</text><text x="160" y="257">−2</text><text x="200" y="257">−1</text>
+      <text x="280" y="257">1</text><text x="320" y="257">2</text><text x="360" y="257">3</text><text x="400" y="257">4</text>
+    </g>
+    <g font-size="11.5" fill="#5A6875" text-anchor="end">
+      <text x="230" y="84">4</text><text x="230" y="124">3</text><text x="230" y="164">2</text><text x="230" y="204">1</text>
+      <text x="230" y="284">−1</text><text x="230" y="324">−2</text><text x="230" y="364">−3</text><text x="230" y="404">−4</text>
+      <text x="231" y="258">0</text>
+    </g>
+    <circle cx="360" cy="160" r="6.5" fill="#2E7D6B" stroke="#fff" stroke-width="2"/>
+    <text x="370" y="153" font-size="13" font-weight="700" fill="#2E7D6B">(3, 2)</text>
+    <circle cx="160" cy="80" r="6.5" fill="#C2408C" stroke="#fff" stroke-width="2"/>
+    <text x="170" y="72" font-size="13" font-weight="700" fill="#C2408C">(−2, 4)</text>
+    <circle cx="120" cy="280" r="6.5" fill="#EA580C" stroke="#fff" stroke-width="2"/>
+    <text x="120" y="305" font-size="13" font-weight="700" fill="#EA580C" text-anchor="middle">(−3, −1)</text>
+    <circle cx="320" cy="360" r="6.5" fill="#B7791F" stroke="#fff" stroke-width="2"/>
+    <text x="330" y="353" font-size="13" font-weight="700" fill="#B7791F">(2, −3)</text>
+  </svg>
+  <figcaption>
+    ארבע נקודות — אחת בכל רביע:
+    <span class="fi">(3, 2)</span> בראשון, <span class="fi">(−2, 4)</span> בשני,
+    <span class="fi">(−3, −1)</span> בשלישי, <span class="fi">(2, −3)</span> ברביעי.
+  </figcaption>
+</figure>
+
+<!-- ============ 2. קריאת נקודות ============ -->
+<h2 id="sec-points"><span class="num">2</span>קריאת נקודות — קודם במסדרון, אחר כך במדרגות</h2>
+
+<p>
+  הכתובת של נקודה היא זוג מספרים בסוגריים, ולסדר שלהם יש שם וחוק:
+  המספר הראשון הוא תמיד ה-<span class="fi">\(\textcolor{#2563EB}{x}\)</span>,
+  והשני הוא תמיד ה-<span class="fi">\(\textcolor{#7C3AED}{y}\)</span>.
+</p>
+
+<div class="box intuition">
+  <div class="box-title">איך זוכרים את הסדר?</div>
+  כמו בבניין: <strong>קודם הולכים במסדרון, אחר כך עולים במדרגות.</strong>
+  <br>קודם צועדים על הציר הכחול — ימינה אם ה-<span class="fi">\(\textcolor{#2563EB}{x}\)</span>
+  חיובי, שמאלה אם הוא שלילי.
+  <br>אחר כך מטפסים במקביל לציר הסגול — למעלה אם ה-<span class="fi">\(\textcolor{#7C3AED}{y}\)</span>
+  חיובי, למטה אם הוא שלילי.
+</div>
+
+<figure>
+  <svg viewBox="0 0 320 250" style="width:100%;max-width:520px;height:auto" role="img" aria-label="הדרך אל הנקודה 3 2">
+    <path d="M40 22V210 M85 22V210 M130 22V210 M175 22V210 M220 22V210 M265 22V210 M40 210H285 M40 165H285 M40 120H285 M40 75H285 M40 30H285" stroke="#E4E8EE" stroke-width="1" fill="none"/>
+    <line x1="32" y1="210" x2="296" y2="210" stroke="#2563EB" stroke-width="2.5"/>
+    <path d="M294 204 L308 210 L294 216 Z" fill="#2563EB"/>
+    <line x1="40" y1="218" x2="40" y2="24" stroke="#7C3AED" stroke-width="2.5"/>
+    <path d="M33 26 L40 12 L47 26 Z" fill="#7C3AED"/>
+    <g font-size="11.5" fill="#5A6875" text-anchor="middle">
+      <text x="85" y="227">1</text><text x="130" y="227">2</text><text x="175" y="227">3</text><text x="220" y="227">4</text><text x="265" y="227">5</text>
+    </g>
+    <g font-size="11.5" fill="#5A6875" text-anchor="end">
+      <text x="32" y="169">1</text><text x="32" y="124">2</text><text x="32" y="79">3</text><text x="32" y="34">4</text>
+      <text x="34" y="227">0</text>
+    </g>
+    <line x1="42" y1="207" x2="175" y2="207" stroke="#2563EB" stroke-width="4" stroke-dasharray="7 5"/>
+    <text x="108" y="199" font-size="13" font-weight="700" fill="#2563EB" text-anchor="middle">3</text>
+    <line x1="175" y1="207" x2="175" y2="126" stroke="#7C3AED" stroke-width="4" stroke-dasharray="7 5"/>
+    <path d="M170 128 L175 116 L180 128 Z" fill="#7C3AED"/>
+    <text x="184" y="170" font-size="13" font-weight="700" fill="#7C3AED">2</text>
+    <circle cx="175" cy="120" r="6.5" fill="#1C2733" stroke="#fff" stroke-width="2"/>
+    <text x="186" y="114" font-size="13" font-weight="700" fill="#1C2733">(3, 2)</text>
+  </svg>
+  <figcaption>
+    הדרך אל <span class="fi">(3, 2)</span>: קודם 3 צעדים במסדרון — לאורך ציר
+    ה-<span class="fi">\(x\)</span> הכחול. אחר כך 2 קומות במדרגות — בכיוון ציר
+    ה-<span class="fi">\(y\)</span> הסגול.
+  </figcaption>
+</figure>
+
+<div class="box warn">
+  <div class="box-title">שימי לב</div>
+  הסדר לא מתחלף: <span class="fi">\((3,\,2)\)</span> ו-<span class="fi">\((2,\,3)\)</span>
+  הן <strong>שתי נקודות שונות לגמרי</strong>.
+  <br>בסרטוט שלמעלה הלכנו אל <span class="fi">(3, 2)</span>: 3 צעדים במסדרון, ואז 2 קומות במדרגות.
+  <br>אל <span class="fi">(2, 3)</span> הולכים הפוך — 2 צעדים במסדרון, ואז 3 קומות —
+  ונוחתים במקום אחר לגמרי.
+  <br>בכל פעם שאת כותבת נקודה, שאלי את עצמך: כתבתי קודם את המסדרון
+  (<span class="fi">\(\textcolor{#2563EB}{x}\)</span>) ורק אז את המדרגות
+  (<span class="fi">\(\textcolor{#7C3AED}{y}\)</span>)?
+</div>
+
+<p>
+  ועוד שני מקרים מיוחדים ששווה להכיר:
+  נקודה שיושבת <strong>על ציר ה-<span class="fi">\(x\)</span></strong> לא טיפסה במדרגות בכלל,
+  ולכן ה-<span class="fi">\(\textcolor{#7C3AED}{y}\)</span> שלה הוא 0 — למשל
+  <span class="fi">\((5,\,0)\)</span>.
+  נקודה <strong>על ציר ה-<span class="fi">\(y\)</span></strong> לא זזה במסדרון,
+  ולכן ה-<span class="fi">\(\textcolor{#2563EB}{x}\)</span> שלה הוא 0 — למשל
+  <span class="fi">\((0,\,-4)\)</span>.
+</p>
+
+<!-- ============ 3. מהי פונקציה ============ -->
+<h2 id="sec-function"><span class="num">3</span>מהי פונקציה? מכונה עם כלל</h2>
+
+<p>
+  דמייני מכונה: מכניסים לה מספר, היא מפעילה עליו כלל קבוע, ויוצא מספר.
+  המספר שנכנס נקרא <strong style="color:#2563EB">קלט</strong> ומסומן
+  <span class="fi">\(\textcolor{#2563EB}{x}\)</span>; המספר שיוצא נקרא
+  <strong style="color:#7C3AED">פלט</strong> ומסומן
+  <span class="fi">\(\textcolor{#7C3AED}{y}\)</span>.
+</p>
+
+<div style="display:flex;align-items:stretch;justify-content:center;gap:12px;flex-wrap:wrap;margin:18px 0;padding:16px;background:var(--card);border:1px solid var(--line);border-radius:10px">
+  <div style="text-align:center;border:1.5px solid #2563EB;border-radius:10px;padding:8px 18px;min-width:92px">
+    <div style="font-size:11.5px;color:var(--soft);font-weight:700">קלט</div>
+    <div class="fi" style="font-size:17px">\(\textcolor{#2563EB}{x=3}\)</div>
+  </div>
+  <div style="font-size:20px;color:var(--soft);align-self:center">←</div>
+  <div style="text-align:center;border:1.5px solid var(--line);background:var(--faint);border-radius:10px;padding:8px 18px">
+    <div style="font-size:11.5px;color:var(--soft);font-weight:700">הכלל</div>
+    <div style="font-weight:700">כפול 2, ועוד 1</div>
+  </div>
+  <div style="font-size:20px;color:var(--soft);align-self:center">←</div>
+  <div style="text-align:center;border:1.5px solid #7C3AED;border-radius:10px;padding:8px 18px;min-width:92px">
+    <div style="font-size:11.5px;color:var(--soft);font-weight:700">פלט</div>
+    <div class="fi" style="font-size:17px">\(\textcolor{#7C3AED}{y=7}\)</div>
+  </div>
+</div>
+
+<div class="box def">
+  <div class="box-title">הגדרה</div>
+  פונקציה היא כלל שמתאים <strong>לכל קלט — פלט אחד בדיוק</strong>.
+  <br>מותר לשני קלטים שונים לקבל אותו פלט; אסור לקלט אחד לקבל שני פלטים.
+</div>
+
+<div class="box example">
+  <div class="box-title">מתי זה לא פונקציה?</div>
+  אם באותו כלל גם <span class="fi">\((2,\,3)\)</span> וגם <span class="fi">\((2,\,5)\)</span> —
+  הקלט 2 קיבל שני פלטים שונים, והמכונה "לא החליטה". כלל כזה אינו פונקציה.
+</div>
+
+<!-- ============ 4. הסימון f של x ============ -->
+<h2 id="sec-fx"><span class="num">4</span>הסימון <span class="fi">\(f(x)\)</span> — פחות מפחיד ממה שהוא נראה</h2>
+
+<p>
+  למכונה שלנו נותנים שם — בדרך כלל האות <span class="fi">\(f\)</span> (מהמילה function).
+  הכתיב <span class="fi">\(\textcolor{#7C3AED}{f(}\textcolor{#2563EB}{x}\textcolor{#7C3AED}{)}\)</span>
+  אומר: "הפלט של המכונה <span class="fi">\(f\)</span> כשמכניסים לה את
+  <span class="fi">\(\textcolor{#2563EB}{x}\)</span>".
+  ולכן <span class="fi">\(f(3)\)</span> פירושו פשוט: <strong>הציבי 3 במקום
+  <span class="fi">\(\textcolor{#2563EB}{x}\)</span></strong> — בכל מקום שבו הוא מופיע.
+</p>
+
+<div class="fbox">
+  <div class="fbox-title">הצבה בפונקציה — כל הסיפור בשורה אחת</div>
+  $$\textcolor{#7C3AED}{f(}\textcolor{#2563EB}{x}\textcolor{#7C3AED}{)}=2\cdot\textcolor{#2563EB}{x}+1$$
+  $$\textcolor{#7C3AED}{f(}\textcolor{#2563EB}{3}\textcolor{#7C3AED}{)}\;=\;2\cdot\underbrace{\textcolor{#2563EB}{3}}_{\textcolor{#2563EB}{\text{הקלט}}}+1\;=\;6+1\;=\;\underbrace{\textcolor{#7C3AED}{7}}_{\textcolor{#7C3AED}{\text{הפלט}}}$$
+  <span class="f-legend">
+    <span><i class="sw" style="background:#2563EB"></i> <bdi>כחול — הקלט <span class="fi">\(x\)</span>: המספר שמציבים, גם בתוך הסוגריים</bdi></span>
+    <span><i class="sw" style="background:#7C3AED"></i> <bdi>סגול — המכונה <span class="fi">\(f\)</span> והפלט שלה</bdi></span>
+  </span>
+</div>
+
+<p>
+  שימי לב: הפלט הזה בדיוק הוא ה-<span class="fi">\(\textcolor{#7C3AED}{y}\)</span> מהמכונה למעלה.
+  <span class="fi">\(\textcolor{#7C3AED}{y}\)</span> ו-<span class="fi">\(\textcolor{#7C3AED}{f(x)}\)</span>
+  הם <strong>שני שמות לאותו דבר בדיוק</strong>.
+</p>
+
+<div class="box warn">
+  <div class="box-title">שימי לב</div>
+  <span class="fi">\(f(x)\)</span> הוא <strong>לא</strong> "<span class="fi">\(f\)</span> כפול
+  <span class="fi">\(x\)</span>"! זה שם של פלט, לא תרגיל כפל.
+  אי אפשר "לצמצם את הסוגריים" ואסור לחלק ב-<span class="fi">\(f\)</span>.
+  <br>קראי את זה בקול כמו המורה: "<span class="fi">\(f\)</span> של
+  <span class="fi">\(x\)</span>", "<span class="fi">\(f\)</span> של 3".
+</div>
+
+<h3>שלוש שפות לאותה פונקציה</h3>
+<p>
+  את אותו כלל בדיוק אפשר לספר בשלוש שפות. במבחן חייבים לדעת לעבור ביניהן בחופשיות —
+  הנה <span class="fi">\(\textcolor{#7C3AED}{f(}\textcolor{#2563EB}{x}\textcolor{#7C3AED}{)}=2\textcolor{#2563EB}{x}+1\)</span>
+  בשלושתן:
+</p>
+
+<div class="fbox">
+  <div class="fbox-title">שפה אחת, שלושה לבושים</div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin:8px 0">
+    <div style="flex:1 1 200px;border:1px solid var(--line);border-radius:10px;padding:10px 14px;background:#FBFAF7">
+      <b>כלל מילולי</b>
+      <p style="margin:6px 0 0">"לוקחים את הקלט, מכפילים ב-2 ומוסיפים 1."</p>
+    </div>
+    <div style="flex:1 1 200px;border:1px solid var(--line);border-radius:10px;padding:10px 14px;background:#FBFAF7">
+      <b>נוסחה</b>
+      $$\textcolor{#7C3AED}{f(}\textcolor{#2563EB}{x}\textcolor{#7C3AED}{)}=2\textcolor{#2563EB}{x}+1$$
+    </div>
+    <div style="flex:1 1 240px;border:1px solid var(--line);border-radius:10px;padding:10px 14px;background:#FBFAF7">
+      <b>טבלת ערכים</b>
+      <table class="dtable" style="margin:10px auto 4px">
+        <tr><th><span class="fi">\(\textcolor{#2563EB}{x}\)</span></th><td class="hl-c2">0</td><td class="hl-c3">1</td><td class="hl-c4">2</td><td class="hl-c5">3</td></tr>
+        <tr><th><span class="fi">\(\textcolor{#7C3AED}{f(x)}\)</span></th><td class="hl-c2">1</td><td class="hl-c3">3</td><td class="hl-c4">5</td><td class="hl-c5">7</td></tr>
+      </table>
+    </div>
+  </div>
+  <span class="f-legend">
+    <span><i class="sw" style="background:#2563EB"></i> <bdi>כחול — הקלט <span class="fi">\(x\)</span></bdi></span>
+    <span><i class="sw" style="background:#7C3AED"></i> <bdi>סגול — הפלט <span class="fi">\(f(x)\)</span></bdi></span>
+    <span>כל עמודה צבעונית בטבלה = נקודה אחת — ותכף תראי אותה, באותו צבע, על הגרף.</span>
+  </span>
+</div>
+
+<p>
+  ויש דרך רביעית לראות את זה בעיניים: כל עמודה בטבלה היא זוג
+  <span class="fi">\((\textcolor{#2563EB}{x},\,\textcolor{#7C3AED}{f(x)})\)</span> —
+  כלומר כתובת של נקודה. מסמנים את כולן במערכת הצירים:
+</p>
+
+<figure>
+  <svg viewBox="0 0 360 300" style="width:100%;max-width:560px;height:auto" role="img" aria-label="נקודות הפונקציה על מערכת צירים">
+    <path d="M50 32V260 M115 32V260 M180 32V260 M245 32V260 M310 32V260 M50 260H322 M50 232H322 M50 204H322 M50 176H322 M50 148H322 M50 120H322 M50 92H322 M50 64H322 M50 36H322" stroke="#E4E8EE" stroke-width="1" fill="none"/>
+    <line x1="42" y1="260" x2="334" y2="260" stroke="#2563EB" stroke-width="2.5"/>
+    <path d="M332 254 L346 260 L332 266 Z" fill="#2563EB"/>
+    <line x1="50" y1="268" x2="50" y2="30" stroke="#7C3AED" stroke-width="2.5"/>
+    <path d="M43 32 L50 18 L57 32 Z" fill="#7C3AED"/>
+    <g font-size="10.5" fill="#5A6875" text-anchor="middle">
+      <text x="115" y="277">1</text><text x="180" y="277">2</text><text x="245" y="277">3</text><text x="310" y="277">4</text>
+    </g>
+    <g font-size="10.5" fill="#5A6875" text-anchor="end">
+      <text x="42" y="236">1</text><text x="42" y="208">2</text><text x="42" y="180">3</text><text x="42" y="152">4</text>
+      <text x="42" y="124">5</text><text x="42" y="96">6</text><text x="42" y="68">7</text><text x="42" y="40">8</text>
+      <text x="42" y="274">0</text>
+    </g>
+    <line x1="50" y1="232" x2="271" y2="42" stroke="#9AA5B1" stroke-width="2" stroke-dasharray="6 5"/>
+    <text x="277" y="48" text-anchor="start" font-size="12.5" font-weight="700" fill="#9AA5B1" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3">f(x)=2x+1</text>
+    <circle cx="50" cy="232" r="6" fill="#1D6FA5" stroke="#fff" stroke-width="2"/>
+    <text x="60" y="248" font-size="12.5" font-weight="700" fill="#1D6FA5">(0, 1)</text>
+    <circle cx="115" cy="176" r="6" fill="#2E7D6B" stroke="#fff" stroke-width="2"/>
+    <text x="125" y="192" font-size="12.5" font-weight="700" fill="#2E7D6B">(1, 3)</text>
+    <circle cx="180" cy="120" r="6" fill="#6D28D9" stroke="#fff" stroke-width="2"/>
+    <text x="190" y="136" font-size="12.5" font-weight="700" fill="#6D28D9">(2, 5)</text>
+    <circle cx="245" cy="64" r="6" fill="#C2408C" stroke="#fff" stroke-width="2"/>
+    <text x="255" y="80" font-size="12.5" font-weight="700" fill="#C2408C">(3, 7)</text>
+  </svg>
+  <figcaption>
+    ארבע העמודות מהטבלה — ארבע נקודות, כל אחת בצבע העמודה שלה —
+    וכולן מסתדרות על קו ישר (הסיפור של התחנה הבאה).
+  </figcaption>
+</figure>
+
+<!-- ============ 5. תרגול ============ -->
+<h2 id="sec-practice"><span class="num">5</span>תרגול — משלב לשלב</h2>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>קוראים נקודות מהסרטוט</h4></div>
+  <figure style="margin:10px 0">
+    <svg viewBox="0 0 440 440" style="width:100%;max-width:560px;height:auto" role="img" aria-label="שלוש נקודות לקריאה">
+      <path d="M40 40V400 M85 40V400 M130 40V400 M175 40V400 M220 40V400 M265 40V400 M310 40V400 M355 40V400 M400 40V400 M40 40H400 M40 85H400 M40 130H400 M40 175H400 M40 220H400 M40 265H400 M40 310H400 M40 355H400 M40 400H400" stroke="#E4E8EE" stroke-width="1" fill="none"/>
+      <line x1="28" y1="220" x2="414" y2="220" stroke="#2563EB" stroke-width="2.5"/>
+      <path d="M412 213 L426 220 L412 227 Z" fill="#2563EB"/>
+      <line x1="220" y1="414" x2="220" y2="26" stroke="#7C3AED" stroke-width="2.5"/>
+      <path d="M213 28 L220 14 L227 28 Z" fill="#7C3AED"/>
+      <g font-size="11.5" fill="#5A6875" text-anchor="middle">
+        <text x="40" y="237">−4</text><text x="85" y="237">−3</text><text x="130" y="237">−2</text><text x="175" y="237">−1</text>
+        <text x="265" y="237">1</text><text x="310" y="237">2</text><text x="355" y="237">3</text><text x="400" y="237">4</text>
+      </g>
+      <g font-size="11.5" fill="#5A6875" text-anchor="end">
+        <text x="210" y="44">4</text><text x="210" y="89">3</text><text x="210" y="134">2</text><text x="210" y="179">1</text>
+        <text x="210" y="269">−1</text><text x="210" y="314">−2</text><text x="210" y="359">−3</text><text x="210" y="404">−4</text>
+        <text x="211" y="238">0</text>
+      </g>
+      <circle cx="310" cy="85" r="7" fill="#2E7D6B" stroke="#fff" stroke-width="2.5"/>
+      <circle cx="85" cy="175" r="7" fill="#C2408C" stroke="#fff" stroke-width="2.5"/>
+      <circle cx="265" cy="310" r="7" fill="#EA580C" stroke="#fff" stroke-width="2.5"/>
+    </svg>
+    <figcaption>שלוש נקודות מחכות שתקראי אותן: ירוקה, ורודה וכתומה.</figcaption>
+  </figure>
+  <p class="q-text">
+    <span class="mk mk-given">בסרטוט שלוש נקודות צבועות</span>.
+    <span class="mk mk-find">מהם השיעורים — זוג המספרים <span class="fi">\((x,\,y)\)</span> — של כל אחת?</span>
+  </p>
+  <p style="font-size:13px;color:var(--soft)">נסי לקרוא בעצמך לפני שאת פותחת כל שלב — מסדרון, ואז מדרגות.</p>
+  <details class="step"><summary>שלב ראשון — הנקודה הירוקה</summary>
+    <div class="step-body">
+      מסדרון: 2 צעדים ימינה ← <span class="fi">\(\textcolor{#2563EB}{x=2}\)</span>.
+      <br>מדרגות: 3 קומות למעלה ← <span class="fi">\(\textcolor{#7C3AED}{y=3}\)</span>.
+      <br>הנקודה הירוקה: <span class="fi">\((\textcolor{#2563EB}{2},\,\textcolor{#7C3AED}{3})\)</span> — רביע ראשון.
+    </div>
+  </details>
+  <details class="step"><summary>שלב שני — הנקודה הוורודה</summary>
+    <div class="step-body">
+      מסדרון: 3 צעדים <strong>שמאלה</strong> — שמאלה זה מינוס ←
+      <span class="fi">\(\textcolor{#2563EB}{x=-3}\)</span>.
+      <br>מדרגות: קומה אחת למעלה ← <span class="fi">\(\textcolor{#7C3AED}{y=1}\)</span>.
+      <br>הנקודה הוורודה: <span class="fi">\((\textcolor{#2563EB}{-3},\,\textcolor{#7C3AED}{1})\)</span> — רביע שני.
+    </div>
+  </details>
+  <details class="step"><summary>שלב שלישי — הנקודה הכתומה + בדיקה</summary>
+    <div class="step-body">
+      מסדרון: צעד אחד ימינה ← <span class="fi">\(\textcolor{#2563EB}{x=1}\)</span>.
+      <br>מדרגות: 2 קומות <strong>למטה</strong> — למטה זה מינוס ←
+      <span class="fi">\(\textcolor{#7C3AED}{y=-2}\)</span>.
+      <br>הנקודה הכתומה: <span class="fi">\((\textcolor{#2563EB}{1},\,\textcolor{#7C3AED}{-2})\)</span> — רביע רביעי.
+      <br>בדיקה אחרונה לכל השלוש: בכל זוג, המספר הראשון הוא המסדרון והשני הוא המדרגות? כן ✓
+      <figure style="max-width:290px;margin:12px auto">
+        <svg viewBox="0 0 260 260" style="width:100%;height:auto" role="img" aria-label="שלוש הנקודות עם הדרך אל כל אחת: מסדרון כחול ומדרגות סגולות">
+          <path d="M10 10V250 M40 10V250 M70 10V250 M100 10V250 M160 10V250 M190 10V250 M220 10V250 M250 10V250 M10 10H250 M10 40H250 M10 70H250 M10 100H250 M10 160H250 M10 190H250 M10 220H250 M10 250H250" stroke="#E4E8EE" stroke-width="1" fill="none"/>
+          <line x1="6" y1="130" x2="244" y2="130" stroke="#2563EB" stroke-width="2.2"/>
+          <path d="M242 124 L254 130 L242 136 Z" fill="#2563EB"/>
+          <line x1="130" y1="254" x2="130" y2="18" stroke="#7C3AED" stroke-width="2.2"/>
+          <path d="M124 20 L130 8 L136 20 Z" fill="#7C3AED"/>
+          <g font-family="Arial" font-size="9.5" fill="#5A6875" text-anchor="middle">
+            <text x="40" y="143">−3</text><text x="70" y="143">−2</text><text x="100" y="143">−1</text>
+            <text x="160" y="143">1</text><text x="190" y="143">2</text><text x="220" y="143">3</text>
+          </g>
+          <g font-family="Arial" font-size="9.5" fill="#5A6875" text-anchor="end">
+            <text x="125" y="43">3</text><text x="125" y="73">2</text><text x="125" y="103">1</text>
+            <text x="125" y="166">−1</text><text x="125" y="196">−2</text>
+            <text x="126" y="143">0</text>
+          </g>
+          <line x1="132" y1="126" x2="190" y2="126" stroke="#2563EB" stroke-width="2.6" stroke-dasharray="5 4"/>
+          <line x1="190" y1="126" x2="190" y2="46" stroke="#7C3AED" stroke-width="2.6" stroke-dasharray="5 4"/>
+          <line x1="128" y1="126" x2="40" y2="126" stroke="#2563EB" stroke-width="2.6" stroke-dasharray="5 4"/>
+          <line x1="40" y1="126" x2="40" y2="106" stroke="#7C3AED" stroke-width="2.6" stroke-dasharray="5 4"/>
+          <line x1="132" y1="134" x2="160" y2="134" stroke="#2563EB" stroke-width="2.6" stroke-dasharray="5 4"/>
+          <line x1="160" y1="134" x2="160" y2="184" stroke="#7C3AED" stroke-width="2.6" stroke-dasharray="5 4"/>
+          <circle cx="190" cy="40" r="6" fill="#2E7D6B" stroke="#fff" stroke-width="2"/>
+          <text x="196" y="32" font-family="Arial" font-size="11.5" font-weight="700" fill="#2E7D6B" text-anchor="start">(2, 3)</text>
+          <circle cx="40" cy="100" r="6" fill="#C2408C" stroke="#fff" stroke-width="2"/>
+          <text x="46" y="92" font-family="Arial" font-size="11.5" font-weight="700" fill="#C2408C" text-anchor="start">(−3, 1)</text>
+          <circle cx="160" cy="190" r="6" fill="#EA580C" stroke="#fff" stroke-width="2"/>
+          <text x="166" y="206" font-family="Arial" font-size="11.5" font-weight="700" fill="#EA580C" text-anchor="start">(1, −2)</text>
+        </svg>
+        <figcaption>שלוש התשובות על הסרטוט — ולכל נקודה רואים את הדרך:
+        קודם המסדרון לאורך הציר הכחול, ואז המדרגות במקביל לציר הסגול.</figcaption>
+      </figure>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex1"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex hide-marks">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>הצבה בפונקציה</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">נתונה הפונקציה <span class="fi">\(\textcolor{#7C3AED}{f(}\textcolor{#2563EB}{x}\textcolor{#7C3AED}{)}=3\textcolor{#2563EB}{x}-2\)</span></span>.
+    <span class="mk mk-find">חשבי את <span class="fi">\(f(4)\)</span> ואת <span class="fi">\(f(-1)\)</span></span>.
+  </p>
+  <div class="q-row">
+    <button class="marks-btn no-print" style="font-family:inherit;font-size:12.5px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:5px 10px;cursor:pointer">הציגי את הפירוק בצבעים</button>
+  </div>
+  <div class="q-row">
+    <span><span class="fi">\(f(4)\)</span> =</span>
+    <input class="q-input" data-answer="10" data-tol="0.01" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <span><span class="fi">\(f(-1)\)</span> =</span>
+    <input class="q-input" data-answer="-5" data-tol="0.01" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>מציבים 4 במקום <span class="fi">\(\textcolor{#2563EB}{x}\)</span>:</p>
+      $$\textcolor{#7C3AED}{f(}\textcolor{#2563EB}{4}\textcolor{#7C3AED}{)}=3\cdot\textcolor{#2563EB}{4}-2=12-2=\textcolor{#7C3AED}{10}$$
+      <p>ועכשיו עם קלט שלילי — שימי לב לסוגריים:</p>
+      $$\textcolor{#7C3AED}{f(}\textcolor{#2563EB}{-1}\textcolor{#7C3AED}{)}=3\cdot\textcolor{#2563EB}{(-1)}-2=-3-2=\textcolor{#7C3AED}{-5}$$
+      <div class="box warn" style="margin:8px 0">
+        <div class="box-title">שימי לב</div>
+        כשמציבים מספר שלילי, שמים אותו <strong>בסוגריים</strong>:
+        <span class="fi">\(3\cdot(-1)\)</span>. מי שמשמיטה אותם מתבלבלת בסימן ומקבלת
+        <span class="fi">\(3\cdot 1-2=1\)</span> — תשובה שגויה.
+      </div>
+    </div>
+  </details>
+  <details class="alt">
+    <summary>איך עוד שואלים "חשבי את <span class="fi">\(f(4)\)</span>" — אותה שאלה בתחפושות</summary>
+    <div class="alt-body">
+      <ul>
+        <li>"מהו ערך הפונקציה כאשר <span class="fi">\(x=4\)</span>?"</li>
+        <li>"מהו הפלט של הפונקציה עבור הקלט 4?"</li>
+        <li>"השלימי בטבלת הערכים: בעמודה שבה <span class="fi">\(x=4\)</span>, מה יבוא בשורת <span class="fi">\(f(x)\)</span>?"</li>
+        <li>"מהו שיעור ה-<span class="fi">\(y\)</span> של הנקודה על הגרף שבה <span class="fi">\(x=4\)</span>?"</li>
+      </ul>
+      <p>ארבעה ניסוחים — הצבה אחת. בכולם: 4 נכנס במקום
+      <span class="fi">\(\textcolor{#2563EB}{x}\)</span>, ומחשבים.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex2"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · כמו במבחן</span><h4>הצבה — וגם בכיוון ההפוך</h4></div>
+  <p class="q-text">
+    נתונה הפונקציה <span class="fi">\(\textcolor{#7C3AED}{f(}\textcolor{#2563EB}{x}\textcolor{#7C3AED}{)}=5-2\textcolor{#2563EB}{x}\)</span>.
+    <br>א. חשבי את <span class="fi">\(f(0)\)</span> ואת <span class="fi">\(f(2.5)\)</span>.
+    <br>ב. מצאי עבור איזה <span class="fi">\(x\)</span> מתקיים <span class="fi">\(f(x)=1\)</span>.
+  </p>
+  <details class="sol">
+    <summary>הצגי פתרון מלא (כמו שכותבים במחברת)</summary>
+    <div class="sol-body">
+      <p><strong>א.</strong> מציבים, וזוכרים: כפל לפני חיסור.</p>
+      $$\textcolor{#7C3AED}{f(}\textcolor{#2563EB}{0}\textcolor{#7C3AED}{)}=5-2\cdot\textcolor{#2563EB}{0}=5-0=\textcolor{#7C3AED}{5}$$
+      $$\textcolor{#7C3AED}{f(}\textcolor{#2563EB}{2.5}\textcolor{#7C3AED}{)}=5-2\cdot\textcolor{#2563EB}{2.5}=5-5=\textcolor{#7C3AED}{0}$$
+      <p class="aside">(אגב, <span class="fi">\(f(2.5)=0\)</span> אומר שהנקודה
+      <span class="fi">\((2.5,\,0)\)</span> יושבת בדיוק על ציר ה-<span class="fi">\(x\)</span> —
+      זוכרת? <span class="fi">\(y=0\)</span> על הציר.)</p>
+      <p><strong>ב.</strong> כאן הכיוון מתהפך: הפעם <strong>הפלט ידוע</strong> (1)
+      והקלט מסתתר. "עבור איזה <span class="fi">\(x\)</span> מתקיים
+      <span class="fi">\(f(x)=1\)</span>" זו בעצם משוואה — בדיוק מה שעשית בתחנה 2:</p>
+      $$\begin{aligned}5-2\textcolor{#2563EB}{x}&=1&&\textcolor{#C0392B}{/-5}\\[2pt]-2\textcolor{#2563EB}{x}&=-4&&\textcolor{#C0392B}{/:(-2)}\\[2pt]\textcolor{#2563EB}{x}&=2\end{aligned}$$
+      <p>בדיקה: <span class="fi">\(f(2)=5-2\cdot 2=5-4=1\)</span> ✓</p>
+      <figure style="max-width:290px;margin:12px auto">
+        <svg viewBox="0 0 260 230" style="width:100%;height:auto" role="img" aria-label="הישר של הפונקציה עם שלוש הנקודות מהפתרון">
+          <line x1="18" y1="160" x2="240" y2="160" stroke="#2563EB" stroke-width="1.6"/>
+          <polygon points="248,160 236,154.5 236,165.5" fill="#2563EB"/>
+          <line x1="50" y1="222" x2="50" y2="18" stroke="#7C3AED" stroke-width="1.6"/>
+          <polygon points="50,10 44.5,22 55.5,22" fill="#7C3AED"/>
+          <g font-family="Arial" font-size="11" fill="#5A6875">
+            <text x="42" y="176" text-anchor="end">0</text>
+            <text x="86" y="176" text-anchor="middle">1</text>
+            <text x="122" y="176" text-anchor="middle">2</text>
+            <text x="42" y="54" text-anchor="end">5</text>
+            <text x="42" y="142" text-anchor="end">1</text>
+          </g>
+          <path d="M122 138V160 M122 138H50" stroke="#9AA5B1" stroke-width="1.4" stroke-dasharray="5 5" fill="none"/>
+          <line x1="32" y1="28" x2="187" y2="217" stroke="#5A6875" stroke-width="3"/>
+          <text x="96" y="34" text-anchor="start" font-family="Arial" font-size="12" font-weight="700" fill="#5A6875" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3">f(x)=5−2x</text>
+          <circle cx="50" cy="50" r="5.5" fill="#059669" stroke="#fff" stroke-width="2"/>
+          <text x="58" y="46" text-anchor="start" font-family="Arial" font-size="11.5" font-weight="700" fill="#059669">(0, 5)</text>
+          <circle cx="140" cy="160" r="5.5" fill="#2563EB" stroke="#fff" stroke-width="2"/>
+          <text x="150" y="153" text-anchor="start" font-family="Arial" font-size="11.5" font-weight="700" fill="#2563EB">(2.5, 0)</text>
+          <circle cx="122" cy="138" r="6.5" fill="#1C2733" stroke="#fff" stroke-width="2.2"/>
+          <text x="130" y="132" text-anchor="start" font-family="Arial" font-size="11.5" font-weight="700" fill="#1C2733">(2, 1)</text>
+        </svg>
+        <figcaption>כל הפתרון על סרטוט אחד: ‏<span class="fi">\(f(0)=5\)</span> —
+        הנקודה <span class="fi">(0, 5)</span> על ציר ה-<span class="fi">\(y\)</span>;
+        ‏<span class="fi">\(f(2.5)=0\)</span> — הנקודה <span class="fi">(2.5, 0)</span>
+        בדיוק על ציר ה-<span class="fi">\(x\)</span>;
+        וסעיף ב — בגובה 1 הישר עומד מעל <span class="fi">\(x=2\)</span>.</figcaption>
+      </figure>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex3"> סיימתי את התרגיל הזה</label>
+</article>
+
+<!-- ============ ניווט ============ -->
+<div class="progresswrap no-print">
+  <span class="progressbar"><i></i></span><span class="progress-label"></span>
+  <button class="all-sols" style="font-family:inherit;font-size:12px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:4px 10px;cursor:pointer">לפתוח את כל הפתרונות</button>
+</div>
+
+<nav class="pagenav">
+  <a href="02-equations.html"><span class="dir">→ התחנה הקודמת</span>משוואות</a>
+  <a class="next" href="04-linear-function.html"><span class="dir">התחנה הבאה ←</span>פונקציה קווית</a>
+</nav>
+
+<footer class="fin">חלק מהעולם של שירה · <a href="index.html">המפה</a> · <a href="../index.html">המרכז</a></footer>
+</main>
+</div>
+</body>
+</html>

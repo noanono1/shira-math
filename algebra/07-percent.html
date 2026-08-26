@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<!-- מסך הבית של האייפד/הטלפון -->
+<link rel="apple-touch-icon" href="../assets/icons/icon-180.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>בעיות אחוזים — אלגברה ופונקציות — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../vendor/katex.min.css">
+<link rel="stylesheet" href="../css/shira.css">
+<style>:root{--accent:var(--alg)} .fx-tall .katex-display{padding-top:1.2em}</style>
+<script defer src="../vendor/katex.min.js"></script>
+<script defer src="../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../js/shira.js"></script>
+<style>
+/* מחוון פתיחה — כמה זמן, כמה תרגילים, ואיפה מתחילים לתרגל (מוסתר בהדפסה) */
+.pagemeta{display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px;
+  margin:12px 0 0; font-size:13px; color:var(--soft)}
+.pagemeta .pm-time{background:var(--faint); border-radius:999px; padding:3px 10px}
+.pagemeta .pm-time b{color:var(--ink); font-weight:700}
+.pagemeta .pm-jump{color:var(--accent); font-weight:700; text-decoration:none}
+.pagemeta .pm-jump:hover{text-decoration:underline}
+.pagemeta .pm-note{flex:1 1 100%; margin:0}
+#ex-first,#bank-map{scroll-margin-top:78px}
+</style>
+</head>
+<body data-page="alg:07-percent">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">אלגברה ופונקציות — המפה</a>
+    <span class="crumbs">תחנה <b>7</b> מתוך 7 · <b>בעיות אחוזים</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">אלגברה ופונקציות · תחנה 7</div>
+  <h1>בעיות אחוזים — הנחות, התייקרויות ומה שביניהן</h1>
+  <p class="lead">
+    את הבסיס — מהו אחוז, איך שבר הופך לאחוז — פגשת כבר
+    <a href="../statistics/04-relative-frequency.html">בתחנה 4 של הסטטיסטיקה</a>;
+    כאן בונים עליו. בעיות אחוזים במבחן הן כמעט תמיד סיפור על מחיר שמשתנה:
+    הנחה, התייקרות, ולפעמים שתיהן ברצף. יש לזה כלי אחד שפותר הכל —
+    מקדם הכפל — ובעמוד הזה נלמד להשתמש בו לכל הכיוונים.
+  </p>
+  <p class="youknow"><b>בסוף העמוד תדעי:</b> להפוך כל הנחה או התייקרות למקדם כפל אחד ·
+  לחשב בכמה אחוזים השתנה מחיר · לטפל בשני שינויים ברצף בלי ליפול במלכודת "זה מתקזז" ·
+  לחזור מהמחיר שאחרי ההנחה אל המחיר המקורי.</p>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>≈ 30 דק׳</b> · 6 תרגילים</span>
+    <a class="pm-jump" href="#sec-school">לקפוץ ישר לתרגילים ↓</a>
+  </p>
+</header>
+
+<!-- ============ 1. מקדם הכפל ============ -->
+<h2 id="sec-multiplier"><span class="num">1</span>הכלי המרכזי — מקדם הכפל</h2>
+
+<p>
+  נתחיל מהנחה מוכרת: מעיל עולה 200 ₪, ועליו הנחה של 25%.
+  הדרך הארוכה שאת מכירה: לחשב כמה זה 25% מ-200, ואז לחסר.
+  הדרך הקצרה מסתכלת על מה ש<strong>נשאר</strong> לשלם —
+  אם ירדו 25%, נשארו לשלם:
+</p>
+
+$$100\%-25\%=75\%=0.75$$
+
+<p>
+  כלומר: הנחה של 25% היא בסך הכל כפל ב-0.75.
+  צעד אחד במקום שניים:
+</p>
+
+$$200\times 0.75=150$$
+
+<p>
+  ‏150 ₪ — ובדיקה בדרך הארוכה: 25% מ-200 הם 50, ובאמת
+  <span class="fi">\(200-50=150\)</span> ✓ אותה תשובה בדיוק.
+  אותו רעיון עובד גם כשהמחיר עולה. התייקרות של 40% פירושה שמשלמים
+  את כל ה-100% ועוד 40%:
+</p>
+
+$$100\%+40\%=140\%=1.4$$
+
+<p>
+  המספר האחד הזה — 0.75, 1.4 — נקרא <strong>מקדם הכפל</strong>,
+  וזו הנוסחה של כל העמוד:
+</p>
+
+<div class="fbox">
+  <div class="fbox-title">מחיר חדש = מחיר ישן × מקדם</div>
+  $$\underbrace{\text{מחיר חדש}}_{\text{אחרי השינוי}}\;=\;\underbrace{\text{מחיר ישן}}_{\text{לפני השינוי}}\;\times\;\underbrace{\textcolor{#EA580C}{\text{מקדם}}}_{\textcolor{#EA580C}{\text{כל השינוי במספר אחד}}}$$
+  <span class="f-legend">
+    <span><i class="sw" style="background:#EA580C"></i> כתום — המקדם: הנחה נותנת מקדם קטן מ-1, התייקרות — גדול מ-1</span>
+    <span>מקדם 1 בדיוק = המחיר לא זז</span>
+  </span>
+</div>
+
+<p>שווה להכיר כמה מקדמים בעל-פה — שימי לב איך צד ההנחות כולו מתחת ל-1 וצד ההתייקרויות כולו מעל:</p>
+
+<table class="dtable">
+  <tr><th>השינוי</th>
+      <td class="hl-c2">הנחה 10%</td><td class="hl-c2">הנחה 25%</td><td class="hl-c2">הנחה 50%</td>
+      <td class="hl-c3">התייקרות 20%</td><td class="hl-c3">התייקרות 40%</td><td class="hl-c3">התייקרות 100%</td></tr>
+  <tr><th>המקדם</th>
+      <td class="hl-c2">0.9</td><td class="hl-c2">0.75</td><td class="hl-c2">0.5</td>
+      <td class="hl-c3">1.2</td><td class="hl-c3">1.4</td><td class="hl-c3">2</td></tr>
+</table>
+<p class="tbl-note">המקדם חוסך את שני השלבים של "לחשב את האחוז ולחסר" — כפל אחד וגמרנו.</p>
+
+<!-- ============ 2. אחוז השינוי ============ -->
+<h2 id="sec-change"><span class="num">2</span>בכמה אחוזים השתנה המחיר?</h2>
+
+<p>
+  עכשיו השאלה ההפוכה: יודעים את שני המחירים — הישן והחדש —
+  ושואלים <strong>בכמה אחוזים</strong> המחיר השתנה.
+  משווים תמיד את ההפרש למחיר שממנו יצאנו:
+</p>
+
+<div class="fbox">
+  <div class="fbox-title">אחוז השינוי</div>
+  <div class="fx-tall">
+  $$\text{אחוז השינוי}\;=\;\frac{\underbrace{\textcolor{#1D6FA5}{\text{ההפרש בין המחירים}}}_{\textcolor{#1D6FA5}{\text{כמה השתנה בפועל}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{\text{המחיר המקורי}}}_{\textcolor{#8A6D1B}{\text{המחיר שלפני השינוי}}}}\times 100$$
+  </div>
+  <span class="f-legend">
+    <span><i class="sw" style="background:#DDEDF8"></i> כחול — ההפרש: מחיר ישן פחות מחיר חדש (או להפך, מה שחיובי)</span>
+    <span><i class="sw" style="background:#FBF0C9"></i> צהוב — המכנה: תמיד המחיר המקורי</span>
+  </span>
+</div>
+
+<p>
+  ניקח דוגמה אמיתית מדף העבודה שלך: מחירה של כורסה היה 1500 ₪ בתחילת החודש,
+  ובסוף החודש היא נמכרה ב-1050 ₪. קודם ההפרש:
+</p>
+
+$$1500-1050=450$$
+
+<p>המחיר ירד ב-450 ₪. עכשיו משווים את הירידה הזו למחיר המקורי:</p>
+
+$$\frac{\textcolor{#1D6FA5}{450}}{\textcolor{#8A6D1B}{1500}}\times 100=0.3\times 100=30$$
+
+<p>המחיר הופחת ב-<strong>30%</strong> — ותכף נפגוש את הכורסה הזו שוב בתרגול.</p>
+
+<div class="box warn">
+  <div class="box-title">שימי לב</div>
+  במכנה עומד תמיד <strong>המחיר שלפני השינוי</strong> — לא המחיר שאחריו.
+  <br>מי שמחלקת כאן ב-1050 מקבלת
+  ‏<span class="fi">\(\frac{450}{1050}\approx 42.9\%\)</span> — תשובה שגויה,
+  למרות שההפרש חושב נכון. השאלה "בכמה אחוזים הופחת" מודדת את השינוי
+  <em>ביחס לנקודת ההתחלה</em>.
+</div>
+
+<!-- ============ 3. שני שינויים ברצף ============ -->
+<h2 id="sec-successive"><span class="num">3</span>שני שינויים ברצף — כופלים את שני המקדמים</h2>
+
+<p>
+  מה קורה כשמחיר עובר שני שינויים בזה אחר זה — קודם התייקרות ואחר כך הנחה?
+  כל שינוי הוא כפל במקדם, ולכן שני שינויים ברצף הם פשוט שני כפלים:
+</p>
+
+<div class="fbox">
+  <div class="fbox-title">מקדם כולל של שני שינויים</div>
+  $$\text{המקדם הכולל}\;=\;\underbrace{\textcolor{#EA580C}{\text{המקדם הראשון}}}_{\textcolor{#EA580C}{\text{השינוי הראשון}}}\;\times\;\underbrace{\textcolor{#EA580C}{\text{המקדם השני}}}_{\textcolor{#EA580C}{\text{השינוי השני}}}$$
+  <span class="f-legend">
+    <span><i class="sw" style="background:#EA580C"></i> כתום — המקדמים; כופלים אותם, אף פעם לא מחברים את האחוזים עצמם</span>
+  </span>
+</div>
+
+<p>
+  דוגמה: מוצר התייקר ב-40% ואחר כך הוזל ב-25%, ומחירו בסוף 210 ₪.
+  מה היה מחירו המקורי? קודם המקדם הכולל:
+</p>
+
+$$1.4\times 0.75=1.05$$
+
+<p>
+  מקדם כולל 1.05 — כלומר בסך הכל המחיר עלה רק ב-5%.
+  את המחיר המקורי נסמן ב-<span class="fi">\(\textcolor{#2563EB}{x}\)</span>,
+  וכל הסיפור הופך למשוואה מתחנה 2:
+</p>
+
+$$\begin{aligned}
+1.05\,\textcolor{#2563EB}{x} &amp;= 210 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{:}\,1.05}\\[2pt]
+\textcolor{#2563EB}{x} &amp;= \mathbf{200}
+\end{aligned}$$
+
+<p>
+  המחיר המקורי: 200 ₪. בדיקה קדימה:
+  ‏<span class="fi">\(200\times 1.4=280\)</span>,
+  ואז <span class="fi">\(280\times 0.75=210\)</span> ✓ מגיעים בדיוק למחיר הסופי.
+</p>
+
+<p>
+  ועכשיו המלכודת המפורסמת, ישר מדף העבודה שלך:
+  מחירו של מוצר <strong>עלה ב-20% ואחר כך ירד ב-20%</strong>.
+  האם המחיר חזר לעצמו? נבדוק עם המקדמים:
+</p>
+
+$$1.2\times 0.8=0.96$$
+
+<p>
+  ‏0.96 קטן מ-1 — המחיר <strong>יָרַד ב-4%</strong>! הוא לא חוזר למקור.
+  ככה זה נראה על מחיר לדוגמה של 100 ₪:
+</p>
+
+<figure>
+  <svg viewBox="0 0 640 215" style="width:100%;max-width:640px;height:auto" role="img" aria-label="100 * 1.2 = 120, 120 * 0.8 = 96">
+    <line x1="60" y1="80" x2="580" y2="80" stroke="#1C2733" stroke-width="1.5" stroke-dasharray="7 5" opacity="0.5"/>
+    <text x="44" y="84" text-anchor="end" font-size="12" fill="#5A6875">100</text>
+    <rect x="470" y="80" width="80" height="100" rx="4" fill="#7C8794"/>
+    <rect x="280" y="60" width="80" height="120" rx="4" fill="#2563EB"/>
+    <rect x="90" y="84" width="80" height="96" rx="4" fill="#2563EB"/>
+    <line x1="60" y1="180" x2="580" y2="180" stroke="#5A6875" stroke-width="2"/>
+    <text x="510" y="72" text-anchor="middle" font-size="16" font-weight="800" fill="#1C2733">100</text>
+    <text x="320" y="52" text-anchor="middle" font-size="16" font-weight="800" fill="#1C2733">120</text>
+    <text x="130" y="76" text-anchor="middle" font-size="16" font-weight="800" fill="#C0392B">96</text>
+    <line x1="490" y1="34" x2="347" y2="34" stroke="#5A6875" stroke-width="2"/>
+    <polygon points="337,34 349,28 349,40" fill="#5A6875"/>
+    <text x="414" y="24" text-anchor="middle" font-size="15" font-weight="800" fill="#C0392B">×1.2</text>
+    <line x1="295" y1="34" x2="157" y2="34" stroke="#5A6875" stroke-width="2"/>
+    <polygon points="147,34 159,28 159,40" fill="#5A6875"/>
+    <text x="226" y="24" text-anchor="middle" font-size="15" font-weight="800" fill="#C0392B">×0.8</text>
+  </svg>
+  <figcaption>
+    הסרטוט זורם מימין לשמאל, כמו הקריאה: מחיר של 100 ₪ עולה ב-20% ל-120,
+    ואז יורד ב-20% — אבל נוחת על 96.
+    שימי לב שהעמודה השמאלית, האחרונה, לא מגיעה בחזרה אל הקו המקווקו של ה-100:
+    חסרות לה בדיוק 4 יחידות.
+  </figcaption>
+</figure>
+
+<div class="box essence">
+  <div class="box-title">אחוזים לא מתקזזים</div>
+  ‏"עלה 20% וירד 20%" זה <strong>לא</strong> אפס שינוי — כי שני האחוזים נלקחים
+  ממחירים <strong>שונים</strong>. העלייה היא 20% מ-100 (כלומר 20 ₪),
+  אבל הירידה היא 20% מ-<strong>120</strong> (כלומר 24 ₪).
+  <br>דוגמה פרטית אחת מסכמת הכל: <span class="fi">\(100\to 120\to 96\)</span>.
+</div>
+
+<!-- ============ 4. מהמחיר החדש אל המקורי ============ -->
+<h2 id="sec-reverse"><span class="num">4</span>מהמחיר שאחרי ההנחה אל המקורי — מחלקים במקדם</h2>
+
+<p>
+  עד עכשיו הלכנו קדימה: מהמחיר הישן אל החדש. במבחן אוהבים את הכיוון ההפוך —
+  נותנים את המחיר <strong>שאחרי</strong> השינוי ושואלים מה היה קודם.
+  אין צורך בשום כלל חדש: הנוסחה "מחיר חדש = מחיר ישן × מקדם" היא משוואה,
+  ומשוואות את כבר פותרת מתחנה 2. למשל: אחרי הנחה של 25% שילמו על כורסה 1125 ₪.
+  נסמן את המחיר המקורי ב-<span class="fi">\(\textcolor{#2563EB}{x}\)</span>:
+</p>
+
+$$\begin{aligned}
+0.75\,\textcolor{#2563EB}{x} &amp;= 1125 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{:}\,0.75}\\[2pt]
+\textcolor{#2563EB}{x} &amp;= \mathbf{1500}
+\end{aligned}$$
+
+<p>
+  המחיר המקורי היה 1500 ₪ — וזו בדיוק הכורסה מסעיף 2!
+  שם הלכנו קדימה: <span class="fi">\(1500\times 0.75=1125\)</span> ✓
+  ועכשיו חזרנו אחורה: <span class="fi">\(1125:0.75=1500\)</span> ✓
+</p>
+
+<div class="box intuition">
+  <div class="box-title">מקדם אחד, שני כיוונים</div>
+  קדימה (מהישן אל החדש) — <strong>כופלים</strong> במקדם.
+  <br>אחורה (מהחדש אל הישן) — <strong>מחלקים</strong> במקדם.
+  <br>ועל איזה מחיר מפעילים את האחוז? תמיד על ה<strong>ישן</strong> —
+  ה-25% של ההנחה נלקחו מ-1500.
+  <br>לכן הדרך חזרה היא חילוק במקדם:
+  <span class="fi">\(1125:0.75=\)</span> <span class="mk mk-find">1500</span> ₪.
+</div>
+
+<!-- ============ 5. תרגול ============ -->
+<h2 id="sec-school"><span class="num">5</span>תרגול — משלב לשלב</h2>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>מהדף של בית הספר — תרגיל 1: הכורסה</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">מחירה של כורסה מסוג מסוים היה 1500 ₪ בתחילת החודש</span>.
+    <span class="mk mk-change">באמצע החודש נמכרה כורסה מסוג זה בהנחה של 25%</span>.
+    <br>א. <span class="mk mk-find">מה היה מחירה של הכורסה באמצע החודש?</span>
+    <br>ב. <span class="mk mk-given">בסוף החודש נמכרה כורסה מאותו הסוג במחיר של 1050 ₪</span>.
+    <span class="mk mk-find">בכמה אחוזים הופחת מחיר הכורסה ממחירה בתחילת החודש?</span>
+  </p>
+  <p style="font-size:13px;color:var(--soft)">נסי לנחש את השלב הבא לפני שאת פותחת אותו.</p>
+  <details class="step"><summary>שלב ראשון — סעיף א: מההנחה אל המקדם</summary>
+    <div class="step-body">הנחה של 25% משאירה לשלם 75%, כלומר מקדם
+    ‏<span class="fi">\(0.75\)</span>. כפל אחד:
+    $$1500\times 0.75=1125$$
+    המחיר באמצע החודש: 1125 ₪.</div>
+  </details>
+  <details class="step"><summary>שלב שני — סעיף ב: קודם ההפרש</summary>
+    <div class="step-body">משווים את סוף החודש לתחילתו:
+    <br><span class="fi">\(1500-1050=450\)</span>
+    <br>המחיר ירד ב-450 ₪ — ואת הירידה הזו מודדים מול המחיר המקורי, 1500.</div>
+  </details>
+  <details class="step"><summary>שלב שלישי — סעיף ב: אחוז השינוי</summary>
+    <div class="step-body">מציבים בנוסחה של סעיף 2:
+    $$\frac{\textcolor{#1D6FA5}{450}}{\textcolor{#8A6D1B}{1500}}\times 100=30$$
+    המחיר הופחת ב-<strong>30%</strong>.
+    <figure style="max-width:290px;margin:12px auto">
+      <svg viewBox="0 0 260 84" style="width:100%;height:auto" role="img" aria-label="מלבן של 1500 שקלים: 1050 נשארו ו-450 ירדו, שהם 30 אחוז">
+        <line x1="20" y1="14" x2="20" y2="22" stroke="#5A6875" stroke-width="1.5"/>
+        <line x1="230" y1="14" x2="230" y2="22" stroke="#5A6875" stroke-width="1.5"/>
+        <line x1="20" y1="18" x2="230" y2="18" stroke="#5A6875" stroke-width="1.5"/>
+        <text x="125" y="10" text-anchor="middle" font-family="Arial" font-size="11.5" font-weight="800" fill="#1C2733">1500</text>
+        <rect x="20" y="28" width="147" height="26" fill="#DDEDF8" stroke="#1D6FA5" stroke-width="1.5"/>
+        <rect x="167" y="28" width="63" height="26" fill="#FADBD8" stroke="#C0392B" stroke-width="1.5"/>
+        <text x="93" y="45.5" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="800" fill="#1D6FA5">1050</text>
+        <text x="198" y="45.5" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="800" fill="#C0392B">450</text>
+        <text x="93" y="72" text-anchor="middle" font-family="Arial" font-size="11.5" fill="#1D6FA5">70%</text>
+        <text x="198" y="72" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="800" fill="#C0392B">30%</text>
+      </svg>
+      <figcaption>המלבן כולו — המחיר בתחילת החודש, 1500 ₪.
+      החתיכה שירדה — 450 ₪ — היא בדיוק 30% מהשלם.</figcaption>
+    </figure></div>
+  </details>
+  <details class="step"><summary>שלב רביעי — בדיקת היגיון</summary>
+    <div class="step-body">‏30% מ-1500 הם 450, ובאמת
+    <span class="fi">\(1500-450=1050\)</span> ✓
+    בדיוק המחיר של סוף החודש.</div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex1"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex hide-marks">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>מהמחיר החדש אל המקורי</h4></div>
+  <p class="q-text">
+    <span class="mk mk-change">מחירו של מוצר עלה ב-30%</span>,
+    <span class="mk mk-given">ומחירו עכשיו 260 ₪</span>.
+    <span class="mk mk-find">מה היה מחירו לפני ההתייקרות?</span>
+  </p>
+  <div class="q-row">
+    <button class="marks-btn no-print" style="font-family:inherit;font-size:12.5px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:5px 10px;cursor:pointer">הציגי את הפירוק בצבעים</button>
+  </div>
+  <div class="q-row">
+    <span>התשובה שלי (ב-₪):</span>
+    <input class="q-input" data-answer="200" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p><strong>שלב 1 — מהאחוז אל המקדם:</strong> התייקרות של 30% פירושה שמשלמים
+      את כל ה-100% ועוד 30%:</p>
+      $$100\%+30\%=130\%=\textcolor{#EA580C}{1.3}$$
+      <p><strong>שלב 2 — בונים משוואה מהנוסחה של העמוד:</strong>
+      המחיר המקורי הוא הנעלם — נסמן אותו
+      ב-<span class="fi">\(\textcolor{#2563EB}{x}\)</span> — והמחיר החדש (260) ידוע:</p>
+      $$\underbrace{260}_{\text{מחיר חדש}}\;=\;\underbrace{\textcolor{#2563EB}{x}}_{\text{מחיר ישן}}\;\times\;\underbrace{\textcolor{#EA580C}{1.3}}_{\textcolor{#EA580C}{\text{מקדם}}}$$
+      <p><strong>שלב 3 — פותרים,</strong> כמו כל משוואה מתחנה 2:</p>
+      $$\begin{aligned}
+      1.3\,\textcolor{#2563EB}{x} &amp;= 260 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{:}\,1.3}\\[2pt]
+      \textcolor{#2563EB}{x} &amp;= \mathbf{200}
+      \end{aligned}$$
+      <p><strong>בדיקה קדימה</strong> — מהמחיר המקורי אל החדש:
+      <span class="fi">\(200\times 1.3=260\)</span> ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex2"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex hide-marks">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>הנחה בצעד אחד</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">חולצה עולה 80 ₪</span>.
+    <span class="mk mk-change">בסוף העונה ניתנת עליה הנחה של 15%</span>.
+    <span class="mk mk-find">מה מחירה אחרי ההנחה?</span>
+  </p>
+  <div class="q-row">
+    <button class="marks-btn no-print" style="font-family:inherit;font-size:12.5px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:5px 10px;cursor:pointer">הציגי את הפירוק בצבעים</button>
+  </div>
+  <div class="q-row">
+    <span>התשובה שלי (ב-₪):</span>
+    <input class="q-input" data-answer="68" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p><strong>שלב 1 — מהאחוז אל המקדם:</strong> הנחה של 15% משאירה לשלם:</p>
+      $$100\%-15\%=85\%=\textcolor{#EA580C}{0.85}$$
+      <p><strong>שלב 2 — כפל אחד,</strong> לפי הנוסחה של העמוד:</p>
+      $$\underbrace{80}_{\text{מחיר ישן}}\times\underbrace{\textcolor{#EA580C}{0.85}}_{\textcolor{#EA580C}{\text{מקדם}}}=\mathbf{68}$$
+      <p>המחיר אחרי ההנחה: 68 ₪.</p>
+      <p><strong>בדיקה בדרך הארוכה:</strong> 15% מ-80 הם 12, ובאמת
+      <span class="fi">\(80-12=68\)</span> ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex3"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · כמו במבחן</span><h4>מהדף של בית הספר — תרגיל 3: שלושת האחים</h4></div>
+  <figure class="shot">
+    <img src="../assets/school/school-ex-percent1.png" alt="דף העבודה — בעיות אחוזים, תרגילים 1 עד 3" loading="lazy">
+    <figcaption>העמוד הראשון של דף בעיות האחוזים. את תרגיל 1 פתרנו יחד למעלה — עכשיו תרגיל 3.</figcaption>
+  </figure>
+  <p class="q-text">
+    <span class="mk mk-total">סכום כסף חולק בין שלושה אחים</span>.
+    <span class="mk mk-group">הבכור קיבל 40% מהסכום, השני קיבל 60% ממה שנותר לאחר שהבכור קיבל את חלקו</span>,
+    <span class="mk mk-given">והשלישי קיבל 1200 ₪</span>.
+    <span class="mk mk-find">איזה סכום כסף חולק בין שלושת האחים?</span>
+  </p>
+  <details class="sol">
+    <summary>הצגי פתרון מלא (כמו שכותבים במחברת)</summary>
+    <div class="sol-body">
+      <p>נסמן ב-<span class="fi">\(\textcolor{#2563EB}{x}\)</span> את הסכום כולו,
+      ונתרגם כל אח לביטוי:</p>
+      <p>הבכור קיבל 40% מהסכום:
+      <span class="fi">\(0.4\textcolor{#2563EB}{x}\)</span>.
+      <br>אחרי הבכור נותר:
+      <span class="fi">\(\textcolor{#2563EB}{x}-0.4\textcolor{#2563EB}{x}=0.6\textcolor{#2563EB}{x}\)</span>.
+      <br>השני קיבל 60% <strong>מהנותר</strong> — לא מהסכום כולו:
+      <span class="fi">\(0.6\cdot 0.6\textcolor{#2563EB}{x}=0.36\textcolor{#2563EB}{x}\)</span>.</p>
+      <p>השלישי קיבל את כל מה שנשאר אחרי שניהם:</p>
+      $$\textcolor{#2563EB}{x}-0.4\textcolor{#2563EB}{x}-0.36\textcolor{#2563EB}{x}=0.24\textcolor{#2563EB}{x}$$
+      <p>ואת החלק הזה אנחנו מכירות בשקלים — 1200 ₪. זו המשוואה:</p>
+      $$\begin{aligned}
+      0.24\,\textcolor{#2563EB}{x} &amp;= 1200 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{:}\,0.24}\\[2pt]
+      \textcolor{#2563EB}{x} &amp;= \mathbf{5000}
+      \end{aligned}$$
+      <p>חולקו <strong>5000 ₪</strong>. בדיקה מלאה:
+      הבכור <span class="fi">\(0.4\times 5000=2000\)</span>,
+      השני <span class="fi">\(0.36\times 5000=1800\)</span>,
+      השלישי 1200 —
+      <br>וביחד <span class="fi">\(2000+1800+1200=5000\)</span> ✓
+      וגם באחוזים: <span class="fi">\(40\%+36\%+24\%=100\%\)</span> ✓</p>
+      <figure style="max-width:290px;margin:12px auto">
+        <svg viewBox="0 0 260 92" style="width:100%;height:auto" role="img" aria-label="הסכום כולו מחולק לשלושה חלקים: 40 אחוז, 36 אחוז, ו-24 אחוז ששווים 1200 שקלים">
+          <line x1="22" y1="14" x2="22" y2="22" stroke="#5A6875" stroke-width="1.5"/>
+          <line x1="238" y1="14" x2="238" y2="22" stroke="#5A6875" stroke-width="1.5"/>
+          <line x1="22" y1="18" x2="238" y2="18" stroke="#5A6875" stroke-width="1.5"/>
+          <text x="130" y="11" text-anchor="middle" font-family="Arial" font-size="13" font-weight="800" font-style="italic" fill="#2563EB">x</text>
+          <rect x="22" y="28" width="86.4" height="26" fill="#DBEAFE" stroke="#1D6FA5" stroke-width="1.5"/>
+          <rect x="108.4" y="28" width="77.8" height="26" fill="#ECE4FA" stroke="#6D28D9" stroke-width="1.5"/>
+          <rect x="186.2" y="28" width="51.8" height="26" fill="#D1FAE5" stroke="#059669" stroke-width="1.5"/>
+          <text x="65" y="45.5" text-anchor="middle" font-family="Arial" font-size="12" font-weight="800" fill="#1D6FA5">40%</text>
+          <text x="147" y="45.5" text-anchor="middle" font-family="Arial" font-size="12" font-weight="800" fill="#6D28D9">36%</text>
+          <text x="212" y="45.5" text-anchor="middle" font-family="Arial" font-size="12" font-weight="800" fill="#059669">24%</text>
+          <line x1="212" y1="58" x2="212" y2="66" stroke="#059669" stroke-width="1.5"/>
+          <text x="212" y="80" text-anchor="middle" font-family="Arial" font-size="12" font-weight="800" fill="#059669">1200</text>
+        </svg>
+        <figcaption>הסכום כולו (<span class="fi">\(\textcolor{#2563EB}{x}\)</span>)
+        מתחלק בין שלושת האחים: 40% לבכור, 36% לשני — ומה שנשאר, 24%, הוא בדיוק
+        1200 ₪ של השלישי. מ-24% אחד מגיעים לכל הסכום.</figcaption>
+      </figure>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex4"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · כמו במבחן</span><h4>מהדף של בית הספר — תרגיל 6: מחשב ומדפסת</h4></div>
+  <figure class="shot">
+    <img src="../assets/school/school-ex-percent2.png" alt="דף העבודה — בעיות אחוזים, תרגילים 4 עד 8" loading="lazy">
+    <figcaption>העמוד השני של הדף. את תרגיל 5 — "עלה 20% וירד 20%" — כבר פיצחנו בסעיף 3; עכשיו תרגיל 6.</figcaption>
+  </figure>
+  <p class="q-text">
+    <span class="mk mk-total">המחיר של מחשב ומדפסת ביחד הוא 7500 ₪</span>.
+    <span class="mk mk-change">אם מחיר המחשב יעלה ב-20% ומחיר המדפסת יירד ב-20%</span>,
+    <span class="mk mk-given">המחיר של שניהם ביחד יהיה 8400 ₪</span>.
+    <span class="mk mk-find">מצאי את המחיר ההתחלתי של המחשב ושל המדפסת.</span>
+  </p>
+  <details class="sol">
+    <summary>הצגי פתרון מלא (כמו שכותבים במחברת)</summary>
+    <div class="sol-body">
+      <p><strong>שלב 1 — מהסיפור אל מערכת:</strong> שני נעלמים ושני נתונים —
+      זו בדיוק <strong>מערכת משוואות מתחנה 6</strong>!
+      <br>נסמן את מחיר המחשב ב-<span class="fi">\(\textcolor{#2563EB}{x}\)</span>.
+      <br>את מחיר המדפסת נסמן ב-<span class="fi">\(\textcolor{#7C3AED}{y}\)</span>:</p>
+      $$\begin{cases}\textcolor{#2563EB}{x}+\textcolor{#7C3AED}{y}=7500\\[2pt]1.2\,\textcolor{#2563EB}{x}+0.8\,\textcolor{#7C3AED}{y}=8400\end{cases}$$
+      <p>המשוואה הראשונה היא המחירים של היום; השנייה — אחרי השינויים,
+      כשכל מחיר קיבל את המקדם שלו: עלייה של 20% היא
+      <span class="fi">\(\textcolor{#EA580C}{1.2}\)</span>, ירידה של 20% היא
+      <span class="fi">\(\textcolor{#EA580C}{0.8}\)</span>.</p>
+      <p><strong>שלב 2 — מבודדים נעלם מהמשוואה הקלה:</strong>
+      בראשונה שני המקדמים הם 1, אז הבידוד נקי, בלי שברים:</p>
+      $$\begin{aligned}
+      \textcolor{#2563EB}{x}+\textcolor{#7C3AED}{y} &amp;= 7500 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{-x}}\\[2pt]
+      \textcolor{#7C3AED}{y} &amp;= 7500-\textcolor{#2563EB}{x}
+      \end{aligned}$$
+      <p><strong>שלב 3 — מציבים במשוואה השנייה,</strong> בסוגריים, ופותרים:</p>
+      $$\begin{aligned}
+      1.2\,\textcolor{#2563EB}{x}+0.8(\underbrace{\textcolor{#7C3AED}{7500-x}}_{\textcolor{#7C3AED}{y}}) &amp;= 8400 &amp;&amp;\qquad\textcolor{#C0392B}{\text{פותחים סוגריים}}\\[4pt]
+      1.2\,\textcolor{#2563EB}{x}+6000-0.8\,\textcolor{#2563EB}{x} &amp;= 8400 &amp;&amp;\qquad\textcolor{#C0392B}{\text{מכנסים איברים}}\\[2pt]
+      0.4\,\textcolor{#2563EB}{x}+6000 &amp;= 8400 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{-6000}}\\[2pt]
+      0.4\,\textcolor{#2563EB}{x} &amp;= 2400 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{:}\,0.4}\\[2pt]
+      \textcolor{#2563EB}{x} &amp;= \mathbf{6000}
+      \end{aligned}$$
+      <p><strong>שלב 4 — מציבים חזרה</strong> בביטוי המבודד ומוצאים את המדפסת:</p>
+      $$\textcolor{#7C3AED}{y}=7500-\textcolor{#2563EB}{6000}=\mathbf{1500}$$
+      <p><strong>בדיקה בשתי המשוואות:</strong>
+      <br>הראשונה — <span class="fi">\(6000+1500=7500\)</span> ✓
+      <br>השנייה — <span class="fi">\(1.2\times 6000=7200\)</span>
+      ו-<span class="fi">\(0.8\times 1500=1200\)</span>,
+      וביחד <span class="fi">\(7200+1200=8400\)</span> ✓
+      <br><strong>תשובה:</strong> המחשב — 6000 ₪, המדפסת — 1500 ₪.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex5"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">עכשיו את המורה</span><h4>החבר שבטוח שזה מתקזז</h4></div>
+  <p class="q-text">
+    חבר מהכיתה אמר: "המחיר עלה ב-20% ואחר כך ירד ב-20% — אז הוא חזר בדיוק לאותו מחיר."
+    <br><span class="mk mk-find">הסבירי לו איפה הטעות — עם דוגמה מספרית שסוגרת את הוויכוח.</span>
+  </p>
+  <details class="sol">
+    <summary>הצגי תשובה</summary>
+    <div class="sol-body">
+      <p>הדרך הכי משכנעת: דוגמה מספרית. ניקח מחיר של 100 ₪:</p>
+      $$100\;\xrightarrow{\;\textcolor{#EA580C}{\times 1.2}\;}\;120\;\xrightarrow{\;\textcolor{#EA580C}{\times 0.8}\;}\;96$$
+      <p>המחיר נחת על 96 ₪ — לא על 100.
+      <br>ועכשיו ההסבר לחבר:
+      ה-20% של העלייה נלקחו מ-100 (עלייה של 20 ₪),
+      אבל ה-20% של הירידה נלקחו מ-<strong>120</strong> —
+      ו-20% מ-120 הם <span class="fi">\(0.2\times 120=24\)</span>.
+      <br>ירדו 24 ₪ אבל עלו רק 20 ₪, ולכן המחיר בסוף נמוך ב-4 ₪.</p>
+      <p>ובשפת המקדמים, בשורה אחת:
+      ‏<span class="fi">\(1.2\times 0.8=0.96\)</span> —
+      מקדם כולל קטן מ-1, כלומר ירידה של 4%.
+      <br>אחוזים לא מתקזזים, כי כל אחוז נלקח ממחיר אחר.
+      <br>(וזה בדיוק תרגיל 5 מהדף של בית הספר.)</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex6"> סיימתי את התרגיל הזה</label>
+</article>
+
+<!-- ============ ניווט ============ -->
+<h2>🎬 רוצה לראות את זה מוסבר בקול?</h2>
+<div class="watch">
+  <p>הסרטונים הם תגבור, לא חובה:</p>
+  <a class="video-link" href="https://www.youtube.com/watch?v=1-hX_gGLjV4">
+    <img src="../assets/alg-vids/1-hX_gGLjV4.jpg" alt="אחוזים ב-6 דקות — תמונת הסרטון" loading="lazy">
+    <span class="vt"><b>אחוזים ב-6 דקות</b><span>פתרון פשוט · 6:44</span></span>
+    <span class="play">▶</span>
+  </a>
+  <a class="video-link" href="https://www.youtube.com/watch?v=6MqON2bik-o">
+    <img src="../assets/alg-vids/6MqON2bik-o.jpg" alt="אחוזים — השיעור המלא — תמונת הסרטון" loading="lazy">
+    <span class="vt"><b>אחוזים — השיעור המלא</b><span>‏Ask Dani · 7:34</span></span>
+    <span class="play">▶</span>
+  </a>
+  <a class="video-link" href="https://www.youtube.com/watch?v=g0vwz6UjlsY">
+    <img src="../assets/alg-vids/g0vwz6UjlsY.jpg" alt="בעיות אחוזים לכיתה ח׳ — תמונת הסרטון" loading="lazy">
+    <span class="vt"><b>בעיות אחוזים לכיתה ח׳</b><span>עובד לב ארי · 7:04</span></span>
+    <span class="play">▶</span>
+  </a>
+</div>
+
+<div class="progresswrap no-print">
+  <span class="progressbar"><i></i></span><span class="progress-label"></span>
+  <button class="all-sols" style="font-family:inherit;font-size:12px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:4px 10px;cursor:pointer">לפתוח את כל הפתרונות</button>
+</div>
+
+<nav class="pagenav">
+  <a href="06-systems.html"><span class="dir">→ התחנה הקודמת</span>מערכת משוואות</a>
+  <a class="next" href="08-quiz.html"><span class="dir">התחנה הבאה ←</span>בוחן הבית</a>
+</nav>
+
+<footer class="fin">חלק מהעולם של שירה · <a href="index.html">המפה</a> · <a href="../index.html">המרכז</a></footer>
+</main>
+</div>
+</body>
+</html>

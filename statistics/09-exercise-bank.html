@@ -1,0 +1,2535 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<!-- מסך הבית של האייפד/הטלפון -->
+<link rel="apple-touch-icon" href="../assets/icons/icon-180.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>בנק התרגילים — סטטיסטיקה — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../vendor/katex.min.css">
+<link rel="stylesheet" href="../css/shira.css">
+<style>
+/* עיצוב ייחודי לבנק בלבד — מאתר הסוגים */
+.finder{display:grid; grid-template-columns:repeat(auto-fill,minmax(228px,1fr)); gap:10px;
+  margin:16px 0 6px}
+.finder a{display:block; text-decoration:none; color:var(--ink); background:var(--card);
+  border:1px solid var(--line); border-radius:var(--r-md); padding:10px 13px;
+  box-shadow:0 10px 28px -26px var(--shadow); transition:.15s}
+.finder a:hover{border-color:var(--stat)}
+.finder a b{display:block; font-size:14.5px; line-height:1.4}
+.finder a span{display:block; font-size:12.5px; color:var(--soft); line-height:1.5; margin-top:3px}
+.finder a i{display:block; font-style:normal; font-size:11.5px; font-weight:700;
+  color:var(--stat); margin-top:5px}
+.gwhen{font-size:13.5px; color:var(--soft); margin:6px 0 2px}
+.gwhen b{color:var(--ink)}
+.backtop{display:inline-block; font-size:12px; color:var(--soft); text-decoration:none;
+  border:1px solid var(--line); background:#FBFAF7; border-radius:7px; padding:3px 9px;
+  margin-top:10px}
+.backtop:hover{color:var(--ink)}
+h2 .num{font-size:19px}
+</style>
+<script defer src="../vendor/katex.min.js"></script>
+<script defer src="../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../js/shira.js"></script>
+<style>
+/* מחוון פתיחה — כמה זמן, כמה תרגילים, ואיפה מתחילים לתרגל (מוסתר בהדפסה) */
+.pagemeta{display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px;
+  margin:12px 0 0; font-size:13px; color:var(--soft)}
+.pagemeta .pm-time{background:var(--faint); border-radius:999px; padding:3px 10px}
+.pagemeta .pm-time b{color:var(--ink); font-weight:700}
+.pagemeta .pm-jump{color:var(--accent); font-weight:700; text-decoration:none}
+.pagemeta .pm-jump:hover{text-decoration:underline}
+.pagemeta .pm-note{flex:1 1 100%; margin:0}
+#ex-first,#bank-map{scroll-margin-top:78px}
+</style>
+</head>
+<body data-page="stat:09-exercise-bank">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">סטטיסטיקה — המפה</a>
+    <span class="crumbs">בנק התרגילים · <b>46 תרגילים לפי סוג</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">סטטיסטיקה · בנק התרגילים</div>
+  <h1>בנק התרגילים — לפי סוג</h1>
+  <p class="lead">
+    ‏46 תרגילים, מסודרים לפי הסוג שלהם.
+    כשמחכה לך תרגיל בשיעורי הבית או במבחן — מחפשים כאן את הסוג המתאים,
+    ומוצאים תרגיל קרוב אליו שכבר פתור עד הסוף.
+  </p>
+  <p class="youknow"><b>בסוף העמוד תדעי:</b> לזהות לאיזו קבוצה שייך תרגיל שאת רואה בפעם הראשונה ·
+  לפתור אותו במחברת ולבדוק את התשובה לבד ·
+  להשוות את הפתרון שלך לפתרון מלא, שורה מול שורה.
+  <br><b>איך משתמשים:</b> מזהות בטבלה שלמטה לאיזה סוג התרגיל שלך שייך ·
+  לוחצות על הסוג · פותרות במחברת · בודקות את התשובה במחשבון הבדיקה ·
+  ורק אז פותחות את הפתרון המלא ומשוות שלב-שלב.</p>
+  <p class="pagemeta no-print">
+    <span class="pm-time">‏46 תרגילים ב-10 קבוצות · <b>≈ 4 דק׳ לתרגיל</b></span>
+    <a class="pm-jump" href="#finder">לקפוץ ישר למאתר הסוגים ↓</a>
+    <span class="pm-note">אין צורך לעשות הכל ברצף — כל קבוצה עומדת בפני עצמה.</span>
+  </p>
+</header>
+
+<h2 id="finder"><span class="num">🔎</span>מאתר הסוגים</h2>
+
+<div class="finder">
+  <a href="#g-read"><b>קריאת טבלת שכיחויות</b>
+    <span>נתונה טבלה, ושואלים כמה · מה השכיחות של · כמה נשאלו בסך הכל</span>
+    <i>‏3 תרגילים · 1–3</i></a>
+  <a href="#g-x"><b>טבלה עם נעלם x</b>
+    <span>בטבלה יש תא עם x, ונתון משהו נוסף: הסך הכל, שכיחות יחסית, אחוז או ממוצע ·
+    וגם נעלם בתוך רשימה</span>
+    <i>‏6 תרגילים · 4–9</i></a>
+  <a href="#g-mean"><b>ממוצע</b>
+    <span>מרשימה · מטבלה · ממוצע משוקלל · נתון חסר כשהממוצע ידוע · מה קורה כשמוסיפים,
+    מורידים או מחליפים ערך</span>
+    <i>‏7 תרגילים · 10–16</i></a>
+  <a href="#g-median"><b>חציון</b>
+    <span>מרשימה אי-זוגית וזוגית · מטבלה בשיטת הצבירה · מדיאגרמה</span>
+    <i>‏6 תרגילים · 17–22</i></a>
+  <a href="#g-mode"><b>שכיח</b>
+    <span>מרשימה · מטבלה · מדיאגרמה · וגם מקרה של שני שכיחים</span>
+    <i>‏4 תרגילים · 23–26</i></a>
+  <a href="#g-range"><b>טווח</b>
+    <span>הערך הגדול ביותר פחות הקטן ביותר — כולל טבלה שיש בה עמודה עם שכיחות 0</span>
+    <i>‏2 תרגילים · 27–28</i></a>
+  <a href="#g-percent"><b>שכיחות יחסית ואחוזים</b>
+    <span>משבר לאחוז ובחזרה · אחוז מתוך סך · מציאת הסך מתוך אחוז · השלמת טבלה ל-100%</span>
+    <i>‏6 תרגילים · 29–34</i></a>
+  <a href="#g-charts"><b>קריאה מדיאגרמות</b>
+    <span>דיאגרמת עמודות עם מספרים ובלי מספרים · דיאגרמת עוגה · שני שכיחים בדיאגרמה</span>
+    <i>‏4 תרגילים · 35–38</i></a>
+  <a href="#g-words"><b>שאלות מילוליות</b>
+    <span>יותר מ- · פחות מ- · לפחות · לכל היותר · שברים ואחוזים בתוך סיפור</span>
+    <i>‏3 תרגילים · 39–41</i></a>
+  <a href="#g-challenge"><b>אתגר</b>
+    <span>כמה מדדים על אותם נתונים · איזה מדד מתאים לשאלה · ממוצע לפני ואחרי ·
+    שתי דרגות שכר</span>
+    <i>‏5 תרגילים · 42–46</i></a>
+</div>
+
+<div class="box intuition">
+  <div class="box-title">חמש המילים שקובעות איזה סוג זה</div>
+  <b>ממוצע</b> — מחלקים שווה בשווה בין כולם.
+  <br><b>חציון</b> — מי עומד באמצע השורה המסודרת.
+  <br><b>שכיח</b> — הערך שחוזר הכי הרבה פעמים.
+  <br><b>טווח</b> — המרחק בין הגדול ביותר לקטן ביותר.
+  <br><b>שכיחות יחסית</b> — איזה חלק מהשלם זה, בשבר או באחוזים.
+</div>
+
+<!-- ==================================================================== -->
+<!-- ============ א · קריאת טבלת שכיחויות ============ -->
+<!-- ==================================================================== -->
+<h2 id="g-read"><span class="num">א</span>קריאת טבלת שכיחויות</h2>
+<p class="gwhen">
+  <b>זה התרגיל שלך אם:</b> נתונה טבלה, ושואלים "כמה תלמידים…", "מהי השכיחות של…",
+  "כמה נשאלו בסך הכל", או שצריך להשלים תא חסר לפי הסך הכל.
+</p>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">תרגיל 1</span><h4>מה בדיוק שואלים — ערך או שכיחות</h4></div>
+  <p class="q-text">
+    ‏28 תלמידות נשאלו כמה ספרים קראו בחופש הגדול, והתשובות נרשמו בטבלה:
+  </p>
+  <table class="dtable">
+    <tr><th>מספר הספרים</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+    <tr><th>מספר התלמידות</th><td>4</td><td>7</td><td>9</td><td>5</td><td>3</td></tr>
+  </table>
+  <p class="q-text">
+    א. כמה תלמידות קראו 2 ספרים?
+    <br>ב. מהי השכיחות של הערך 4?
+    <br>ג. כמה תלמידות נשאלו בסך הכל?
+    <br>ד. כמה תלמידות קראו יותר מ-2 ספרים?
+  </p>
+  <div class="q-row"><span>א.</span>
+    <input class="q-input" data-answer="9" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ב.</span>
+    <input class="q-input" data-answer="3" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ג.</span>
+    <input class="q-input" data-answer="28" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ד.</span>
+    <input class="q-input" data-answer="8" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p><strong>קודם נזהה את שתי השורות אצלנו.</strong>
+    <br>השורה העליונה היא שורת <strong>הערכים</strong> — כמה ספרים.
+    <br>השורה התחתונה היא שורת <strong>השכיחות</strong> — כמה תלמידות.
+    <br>כל שאלה מכוונת לאחת מהשתיים, וזה כל הסיפור:</p>
+    <table class="dtable sol-table">
+      <tr><th>מה שואלים</th><th>מאיפה קוראים</th><th>התשובה</th></tr>
+      <tr><td>כמה תלמידות קראו 2 ספרים?</td><td>שורת השכיחות, בעמודה של הערך 2</td><td><b>9</b> תלמידות</td></tr>
+      <tr><td>מהי השכיחות של הערך 4?</td><td>שורת השכיחות, בעמודה של הערך 4</td><td><b>3</b> תלמידות</td></tr>
+      <tr><td>כמה תלמידות נשאלו בסך הכל?</td><td>סכום כל שורת השכיחות</td><td><b>28</b> תלמידות</td></tr>
+      <tr><td>כמה קראו יותר מ-2 ספרים?</td><td>שורת השכיחות, בעמודות 3 ו-4</td><td><b>8</b> תלמידות</td></tr>
+    </table>
+    <p><strong>א.</strong> בעמודה של הערך 2 רשום 9 ← <span class="mk mk-find"><strong>9 תלמידות</strong></span> קראו 2 ספרים.</p>
+    <p><strong>ב.</strong> השכיחות היא כמה פעמים הערך מופיע.
+    <br>בעמודה של הערך 4 רשום 3 ← השכיחות של הערך 4 היא <span class="mk mk-find"><strong>3</strong></span>.</p>
+    <p><strong>ג.</strong> מי זה <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> אצלנו?
+    כל תלמידה היא נתון אחד, ולכן <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> הוא סכום שורת השכיחות:</p>
+    $$\textcolor{#8A6D1B}{N}=4+7+9+5+3=\textcolor{#8A6D1B}{28}$$
+    <p><strong>בדיקה:</strong> ‏28 — בדיוק המספר שכתוב בשאלה ✓</p>
+    <p><strong>ד.</strong> "יותר מ-2" פירושו 3 או 4, <strong>בלי</strong> העמודה של 2 עצמה.
+    <br>נסמן את שתי העמודות ונסכם אותן:</p>
+    <table class="dtable sol-table">
+      <tr><th>מספר הספרים</th><td>0</td><td>1</td><td>2</td><td class="hl-group">3</td><td class="hl-group">4</td></tr>
+      <tr><th>מספר התלמידות</th><td>4</td><td>7</td><td>9</td><td class="hl-group">5</td><td class="hl-group">3</td></tr>
+    </table>
+    $$\underbrace{\textcolor{#1D6FA5}{5+3}}_{\textcolor{#1D6FA5}{\text{התלמידות עם 3 ספרים ועם 4 ספרים}}}=\textcolor{#2E7D32}{8}$$
+    <p><strong>בדיקה:</strong> מי שקראה 2 ספרים או פחות היא <span class="fi">\(4+7+9=20\)</span> תלמידות,
+    ויחד <span class="fi">\(20+8=28\)</span> ✓ — כל הכיתה.</p>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e1"> פתרתי את תרגיל 1</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">תרגיל 2</span><h4>השלמת תא חסר לפי הסך הכל</h4></div>
+  <p class="q-text">
+    בטבלה נרשם כמה ימים נעדר כל תלמיד בחודש מרץ. בסך הכל נבדקו 34 תלמידים,
+    ותא אחד בטבלה נמחק:
+  </p>
+  <table class="dtable">
+    <tr><th>ימי היעדרות</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+    <tr><th>מספר התלמידים</th><td>12</td><td>9</td><td class="x-cell">?</td><td>4</td><td>2</td></tr>
+  </table>
+  <p class="q-text">
+    א. כמה תלמידים נעדרו יומיים?
+    <br>ב. כמה תלמידים נעדרו לכל היותר יום אחד?
+  </p>
+  <div class="q-row"><span>א.</span>
+    <input class="q-input" data-answer="7" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ב.</span>
+    <input class="q-input" data-answer="21" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p><strong>א.</strong> מי זה <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> אצלנו?
+    כל תלמיד הוא נתון אחד, ו-<span class="fi">\(\textcolor{#8A6D1B}{N}=34\)</span> נתון בשאלה.
+    <br>‏<span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> הוא גם סכום שורת השכיחות —
+    ולכן התא החסר הוא מה שנשאר כשמורידים מ-34 את כל השאר:</p>
+    $$\textcolor{#2E7D32}{\text{התא החסר}}=\underbrace{\textcolor{#8A6D1B}{34}}_{\textcolor{#8A6D1B}{\text{כל התלמידים}}}-\underbrace{(12+9+4+2)}_{\text{ארבע העמודות הידועות}}=34-27=\textcolor{#2E7D32}{7}$$
+    <p>נשלים את הטבלה:</p>
+    <table class="dtable sol-table">
+      <tr><th>ימי היעדרות</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+      <tr><th>מספר התלמידים</th><td>12</td><td>9</td><td class="hl-find"><b>7</b></td><td>4</td><td>2</td></tr>
+    </table>
+    <p><strong>בדיקה:</strong> <span class="fi">\(12+9+7+4+2=34\)</span> ✓ — בדיוק הסך הכל שנתון.</p>
+    <p><strong>ב.</strong> "לכל היותר יום אחד" פירושו 0 ימים או יום אחד, כולל היום האחד עצמו:</p>
+    <table class="dtable sol-table">
+      <tr><th>ימי היעדרות</th><td class="hl-group">0</td><td class="hl-group">1</td><td>2</td><td>3</td><td>4</td></tr>
+      <tr><th>מספר התלמידים</th><td class="hl-group">12</td><td class="hl-group">9</td><td>7</td><td>4</td><td>2</td></tr>
+    </table>
+    $$\underbrace{\textcolor{#1D6FA5}{12+9}}_{\textcolor{#1D6FA5}{\text{מי שנעדר 0 ימים ומי שנעדר יום אחד}}}=\textcolor{#2E7D32}{21}\;\text{תלמידים}$$
+    <p><strong>בדיקה:</strong> השאר הם <span class="fi">\(7+4+2=13\)</span>,
+    ויחד <span class="fi">\(21+13=34\)</span> ✓</p>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e2"> פתרתי את תרגיל 2</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">תרגיל 3</span><h4>הכיוון ההפוך — נתונה השכיחות, מחפשים את הערך</h4></div>
+  <p class="q-text">
+    בכיתה נשאלו כל התלמידים כמה אחים ואחיות יש להם:
+  </p>
+  <table class="dtable">
+    <tr><th>מספר האחים</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+    <tr><th>מספר התלמידים</th><td>5</td><td>11</td><td>8</td><td>4</td><td>2</td></tr>
+  </table>
+  <p class="q-text">
+    א. כמה תלמידים יש להם 3 אחים?
+    <br>ב. לאיזה מספר אחים מתאימה השכיחות 11?
+    <br>ג. כמה תלמידים יש בכיתה?
+  </p>
+  <div class="q-row"><span>א.</span>
+    <input class="q-input" data-answer="4" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ב.</span>
+    <input class="q-input" data-answer="1" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ג.</span>
+    <input class="q-input" data-answer="30" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p><strong>א.</strong> נחפש בשורה העליונה את הערך 3, ונקרא מה רשום מתחתיו:
+    <span class="mk mk-find"><strong>4 תלמידים</strong></span>.</p>
+    <p><strong>ב.</strong> הפעם ההליכה הפוכה: נחפש בשורה <strong>התחתונה</strong> את המספר 11,
+    ונקרא מה רשום <strong>מעליו</strong>:</p>
+    <table class="dtable sol-table">
+      <tr><th>מספר האחים</th><td>0</td><td class="hl-find"><b>1</b></td><td>2</td><td>3</td><td>4</td></tr>
+      <tr><th>מספר התלמידים</th><td>5</td><td class="hl-group">11</td><td>8</td><td>4</td><td>2</td></tr>
+    </table>
+    <p>מעל 11 רשום 1 ← השכיחות 11 שייכת לערך <span class="mk mk-find"><strong>אח אחד</strong></span>.
+    <br>‏11 הוא מספר התלמידים; 1 הוא מספר האחים שיש לכל אחד מהם.</p>
+    <p><strong>ג.</strong> מי זה <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> אצלנו?
+    כל תלמיד הוא נתון אחד, ולכן <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> הוא סכום שורת השכיחות:</p>
+    $$\textcolor{#8A6D1B}{N}=5+11+8+4+2=\textcolor{#8A6D1B}{30}\;\text{תלמידים}$$
+    <p><strong>בדיקת היגיון:</strong> ‏30 תלמידים בכיתה — מספר סביר לכיתה ✓</p>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e3"> פתרתי את תרגיל 3</label>
+</article>
+
+<a class="backtop" href="#finder">↑ חזרה למאתר הסוגים</a>
+
+<!-- ==================================================================== -->
+<!-- ============ ב · טבלה עם נעלם x ============ -->
+<!-- ==================================================================== -->
+<h2 id="g-x"><span class="num">ב</span>טבלה עם נעלם x</h2>
+<p class="gwhen">
+  <b>זה התרגיל שלך אם:</b> באחד התאים בטבלה כתוב x, ובשאלה נתון עוד דבר אחד —
+  הסך הכל, שכיחות יחסית, אחוז או ממוצע.
+  <br>הדרך תמיד אותה דרך: כותבות את הסך הכל <strong>עם</strong> ה-x,
+  מתרגמות את הנתון למשוואה, ופותרות.
+</p>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">תרגיל 4</span><h4>נעלם כשנתון הסך הכל</h4></div>
+  <p class="q-text">
+    לפניכן טבלה המתארת כמה כוסות מים שותות ביום תלמידות כיתה ט׳.
+    בסך הכל נשאלו 30 תלמידות.
+  </p>
+  <table class="dtable">
+    <tr><th>מספר הכוסות</th><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td></tr>
+    <tr><th>מספר התלמידות</th><td>3</td><td class="x-cell">x</td><td>9</td><td>6</td><td>2</td></tr>
+  </table>
+  <p class="q-text">
+    א. מצאי את x.
+    <br>ב. כמה תלמידות שותות יותר מ-4 כוסות ביום?
+  </p>
+  <div class="q-row"><span>א. ‏x =</span>
+    <input class="q-input" data-answer="10" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ב.</span>
+    <input class="q-input" data-answer="8" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p><strong>א.</strong> מי זה <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> אצלנו?
+    כל תלמידה היא נתון אחד, ולכן <span class="fi">\(\textcolor{#8A6D1B}{N}=30\)</span> — נתון בשאלה.
+    <br>‏<span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> הוא גם סכום שורת השכיחות, והפעם בסכום הזה יושב גם ה-x:</p>
+    $$\underbrace{\textcolor{#8A6D1B}{3+x+9+6+2}}_{\textcolor{#8A6D1B}{\text{סכום שורת השכיחות — כל התלמידות}}}=\underbrace{\textcolor{#C2408C}{30}}_{\textcolor{#C2408C}{\text{הסך הכל שנתון בשאלה}}}$$
+    $$20+x=30\;\Longrightarrow\;x=\textcolor{#2E7D32}{10}$$
+    <p>נשלים את הטבלה:</p>
+    <table class="dtable sol-table">
+      <tr><th>מספר הכוסות</th><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td></tr>
+      <tr><th>מספר התלמידות</th><td>3</td><td class="hl-find"><b>10</b></td><td>9</td><td>6</td><td>2</td></tr>
+    </table>
+    <p><strong>בדיקה:</strong> <span class="fi">\(3+10+9+6+2=30\)</span> ✓ — בדיוק הסך הכל שנתון.</p>
+    <p><strong>ב.</strong> "יותר מ-4 כוסות" פירושו 5 או 6 כוסות, בלי העמודה של 4 עצמה:</p>
+    <table class="dtable sol-table">
+      <tr><th>מספר הכוסות</th><td>2</td><td>3</td><td>4</td><td class="hl-group">5</td><td class="hl-group">6</td></tr>
+      <tr><th>מספר התלמידות</th><td>3</td><td>10</td><td>9</td><td class="hl-group">6</td><td class="hl-group">2</td></tr>
+    </table>
+    $$\underbrace{\textcolor{#1D6FA5}{6+2}}_{\textcolor{#1D6FA5}{\text{התלמידות עם 5 כוסות ועם 6 כוסות}}}=\textcolor{#2E7D32}{8}\;\text{תלמידות}$$
+    <p><strong>בדיקה:</strong> השאר הן <span class="fi">\(3+10+9=22\)</span>,
+    ויחד <span class="fi">\(22+8=30\)</span> ✓</p>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e4"> פתרתי את תרגיל 4</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">תרגיל 5</span><h4>נעלם כשנתונה שכיחות יחסית במילים</h4></div>
+  <p class="q-text">
+    לפניכן טבלה המתארת כמה חיות מחמד יש לתלמידי כיתה מסוימת:
+  </p>
+  <table class="dtable">
+    <tr><th>מספר חיות המחמד</th><td>0</td><td>1</td><td>2</td><td>3</td></tr>
+    <tr><th>מספר התלמידים</th><td>8</td><td class="x-cell">x</td><td>5</td><td>2</td></tr>
+  </table>
+  <p class="q-text">
+    ידוע ש<span class="mk mk-given">שתי חמישיות מתלמידי הכיתה</span> אין להם חיית מחמד.
+    <br>א. מצאי את x.
+    <br>ב. כמה תלמידים יש בכיתה?
+  </p>
+  <div class="q-row"><span>א. ‏x =</span>
+    <input class="q-input" data-answer="5" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ב. מספר התלמידים:</span>
+    <input class="q-input" data-answer="20" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p><strong>א.</strong> נתרגם קודם את הנתון: "שתי חמישיות" הוא השבר
+    <span class="fi">\(\tfrac{2}{5}\)</span>, וזו השכיחות היחסית של הערך 0.</p>
+    <p>שכיחות יחסית היא הקבוצה חלקי הסך הכל.
+    <br>הקבוצה אצלנו — התלמידים בעמודה של 0, כלומר 8 תלמידים.
+    <br>הסך הכל אצלנו — סכום כל שורת השכיחות, ובתוכה ה-x:
+    <span class="fi">\(8+x+5+2=15+x\)</span>.</p>
+    $$\frac{\underbrace{\textcolor{#1D6FA5}{8}}_{\textcolor{#1D6FA5}{\text{תלמידים בלי חיית מחמד}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{15+x}}_{\textcolor{#8A6D1B}{\text{כל תלמידי הכיתה}}}}=\underbrace{\textcolor{#C2408C}{\frac{2}{5}}}_{\textcolor{#C2408C}{\text{שתי חמישיות — הנתון}}}$$
+    <p>כפל בהצלבה — כל מונה נכפל במכנה של הצד השני:</p>
+    $$8\cdot 5=2\cdot(15+x)\;\Longrightarrow\;40=30+2x\;\Longrightarrow\;10=2x\;\Longrightarrow\;x=\textcolor{#2E7D32}{5}$$
+    <p><strong>ב.</strong> מספר התלמידים בכיתה:
+    <span class="fi">\(15+5=\textcolor{#8A6D1B}{20}\)</span> תלמידים.</p>
+    <table class="dtable sol-table">
+      <tr><th>מספר חיות המחמד</th><td>0</td><td>1</td><td>2</td><td>3</td></tr>
+      <tr><th>מספר התלמידים</th><td class="hl-group">8</td><td class="hl-find"><b>5</b></td><td>5</td><td>2</td></tr>
+    </table>
+    <p><strong>בדיקה:</strong> <span class="fi">\(\frac{8}{20}=\frac{2}{5}\)</span> ✓ —
+    בדיוק השכיחות היחסית שנתונה בשאלה.</p>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e5"> פתרתי את תרגיל 5</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">תרגיל 6</span><h4>נעלם כשנתון אחוז</h4></div>
+  <p class="q-text">
+    לפניכן טבלה המתארת כמה פעמים בשבוע מתאמנים תלמידי השכבה:
+  </p>
+  <table class="dtable">
+    <tr><th>מספר האימונים</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+    <tr><th>מספר התלמידים</th><td>6</td><td>9</td><td class="x-cell">x</td><td>5</td><td>4</td></tr>
+  </table>
+  <p class="q-text">
+    ידוע ש<span class="mk mk-given">‏25% מתלמידי השכבה</span> מתאמנים פעמיים בשבוע.
+    <br>א. מצאי את x.
+    <br>ב. כמה תלמידים יש בשכבה?
+  </p>
+  <div class="q-row"><span>א. ‏x =</span>
+    <input class="q-input" data-answer="8" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ב. מספר התלמידים:</span>
+    <input class="q-input" data-answer="32" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p><strong>א.</strong> אחוז הוא שכיחות יחסית שכתובה עם מכנה 100,
+    ולכן <span class="fi">\(25\%=\frac{25}{100}=\frac{1}{4}\)</span>.</p>
+    <p>הקבוצה אצלנו — התלמידים שמתאמנים פעמיים, כלומר x עצמו.
+    <br>הסך הכל אצלנו — סכום שורת השכיחות:
+    <span class="fi">\(6+9+x+5+4=24+x\)</span>.
+    <br>שימי לב ש-x מופיע כאן <strong>גם</strong> במונה <strong>וגם</strong> במכנה:</p>
+    $$\frac{\underbrace{\textcolor{#1D6FA5}{x}}_{\textcolor{#1D6FA5}{\text{המתאמנים פעמיים}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{24+x}}_{\textcolor{#8A6D1B}{\text{כל תלמידי השכבה}}}}=\underbrace{\textcolor{#C2408C}{\frac{1}{4}}}_{\textcolor{#C2408C}{25\%\text{ — הנתון}}}$$
+    <p>כפל בהצלבה:</p>
+    $$4x=24+x\;\Longrightarrow\;3x=24\;\Longrightarrow\;x=\textcolor{#2E7D32}{8}$$
+    <p><strong>ב.</strong> מספר התלמידים בשכבה:
+    <span class="fi">\(24+8=\textcolor{#8A6D1B}{32}\)</span> תלמידים.</p>
+    <table class="dtable sol-table">
+      <tr><th>מספר האימונים</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+      <tr><th>מספר התלמידים</th><td>6</td><td>9</td><td class="hl-find"><b>8</b></td><td>5</td><td>4</td></tr>
+    </table>
+    <p><strong>בדיקה:</strong> <span class="fi">\(\frac{8}{32}=\frac{1}{4}=25\%\)</span> ✓</p>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e6"> פתרתי את תרגיל 6</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">תרגיל 7</span><h4>נעלם כשנתון הממוצע</h4></div>
+  <p class="q-text">
+    לפניכן טבלת ציונים של תלמידי כיתה במבחן:
+  </p>
+  <table class="dtable">
+    <tr><th>הציון</th><td>70</td><td>80</td><td>90</td><td>100</td></tr>
+    <tr><th>מספר התלמידים</th><td>4</td><td class="x-cell">x</td><td>6</td><td>2</td></tr>
+  </table>
+  <p class="q-text">
+    ידוע ש<span class="mk mk-given">ממוצע הציונים הוא 84</span>.
+    <br>א. מצאי את x.
+    <br>ב. כמה תלמידים נבחנו?
+  </p>
+  <div class="q-row"><span>א. ‏x =</span>
+    <input class="q-input" data-answer="3" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ב. מספר הנבחנים:</span>
+    <input class="q-input" data-answer="15" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p>ממוצע הוא סכום כל הציונים חלקי מספר התלמידים —
+    ואת שניהם נכתוב עם x.</p>
+    <p>שורת העבודה עושה מכפלה בכל עמודה, גם בעמודה של ה-x:</p>
+    <table class="dtable sol-table">
+      <tr><th>הציון</th><td>70</td><td>80</td><td>90</td><td>100</td></tr>
+      <tr><th>מספר התלמידים</th><td>4</td><td class="x-cell">x</td><td>6</td><td>2</td></tr>
+      <tr><th>ציון × שכיחות</th>
+          <td><span dir="ltr">70·4</span><br><b>280</b></td>
+          <td><span dir="ltr">80·x</span><br><b>80x</b></td>
+          <td><span dir="ltr">90·6</span><br><b>540</b></td>
+          <td><span dir="ltr">100·2</span><br><b>200</b></td></tr>
+    </table>
+    <p>סכום שורת העבודה: <span class="fi">\(280+80x+540+200=1020+80x\)</span>.
+    <br>מספר התלמידים: <span class="fi">\(4+x+6+2=12+x\)</span>.</p>
+    $$\frac{\underbrace{\textcolor{#1D6FA5}{1020+80x}}_{\textcolor{#1D6FA5}{\text{סכום כל הציונים}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{12+x}}_{\textcolor{#8A6D1B}{\text{מספר התלמידים}}}}=\underbrace{\textcolor{#C2408C}{84}}_{\textcolor{#C2408C}{\text{הממוצע שנתון}}}$$
+    <p>נכפול את שני האגפים במכנה:</p>
+    $$1020+80x=84(12+x)$$
+    $$1020+80x=1008+84x\;\Longrightarrow\;12=4x\;\Longrightarrow\;x=\textcolor{#2E7D32}{3}$$
+    <p><strong>ב.</strong> מספר הנבחנים:
+    <span class="fi">\(12+3=\textcolor{#8A6D1B}{15}\)</span> תלמידים.</p>
+    <p><strong>בדיקה:</strong> סכום הציונים
+    <span class="fi">\(1020+80\cdot 3=1260\)</span>,
+    והממוצע <span class="fi">\(\frac{1260}{15}=84\)</span> ✓ —
+    בדיוק הממוצע שנתון בשאלה.</p>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e7"> פתרתי את תרגיל 7</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">תרגיל 8</span><h4>נעלם כשנתון סכום של כמה עמודות</h4></div>
+  <p class="q-text">
+    לפניכן טבלה המתארת כמה ספרים קרא כל תלמיד בחודש האחרון:
+  </p>
+  <table class="dtable">
+    <tr><th>מספר הספרים</th><td>0</td><td>1</td><td>2</td><td>3</td></tr>
+    <tr><th>מספר התלמידים</th><td class="x-cell">x</td><td>11</td><td>9</td><td>5</td></tr>
+  </table>
+  <p class="q-text">
+    ידוע ש<span class="mk mk-given">‏18 תלמידים קראו פחות משני ספרים</span>.
+    <br>א. מצאי את x.
+    <br>ב. כמה תלמידים יש בכיתה?
+  </p>
+  <div class="q-row"><span>א. ‏x =</span>
+    <input class="q-input" data-answer="7" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ב. מספר התלמידים:</span>
+    <input class="q-input" data-answer="32" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p><strong>א.</strong> קודם נתרגם את הנתון לעמודות.
+    <br>"פחות משני ספרים" פירושו 0 ספרים או ספר אחד — שתי העמודות הימניות:</p>
+    <table class="dtable sol-table">
+      <tr><th>מספר הספרים</th><td class="hl-group">0</td><td class="hl-group">1</td><td>2</td><td>3</td></tr>
+      <tr><th>מספר התלמידים</th><td class="hl-group x-cell">x</td><td class="hl-group">11</td><td>9</td><td>5</td></tr>
+    </table>
+    $$\underbrace{\textcolor{#1D6FA5}{x+11}}_{\textcolor{#1D6FA5}{\text{שתי העמודות: 0 ספרים וספר אחד}}}=\underbrace{\textcolor{#C2408C}{18}}_{\textcolor{#C2408C}{\text{הנתון בשאלה}}}\;\Longrightarrow\;x=\textcolor{#2E7D32}{7}$$
+    <p><strong>ב.</strong> עכשיו הטבלה מלאה, ואפשר לסכם את שורת השכיחות:</p>
+    <table class="dtable sol-table">
+      <tr><th>מספר הספרים</th><td>0</td><td>1</td><td>2</td><td>3</td></tr>
+      <tr><th>מספר התלמידים</th><td class="hl-find"><b>7</b></td><td>11</td><td>9</td><td>5</td></tr>
+    </table>
+    $$\textcolor{#8A6D1B}{N}=7+11+9+5=\textcolor{#8A6D1B}{32}\;\text{תלמידים}$$
+    <p><strong>בדיקה:</strong> <span class="fi">\(7+11=18\)</span> ✓ —
+    בדיוק מספר התלמידים שקראו פחות משני ספרים.</p>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e8"> פתרתי את תרגיל 8</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">תרגיל 9</span><h4>נעלם בתוך רשימה כשהממוצע נתון</h4></div>
+  <p class="q-text">
+    נתונה סדרת המספרים: <span class="fi">\(x,\;26,\;34,\;13,\;21,\;20,\;40,\;48,\;18,\;15\)</span>.
+    <br><span class="mk mk-given">ממוצע הסדרה הוא 26</span>.
+    <br>א. מצאי את ערכו של x.
+    <br>ב. מהו החציון של הסדרה?
+    <br>ג. מהו הטווח של הסדרה?
+  </p>
+  <div class="q-row"><span>א. ‏x =</span>
+    <input class="q-input" data-answer="25" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ב. החציון:</span>
+    <input class="q-input" data-answer="23" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ג. הטווח:</span>
+    <input class="q-input" data-answer="35" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p><strong>א.</strong> מי זה <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> אצלנו?
+    בסדרה יש 10 מספרים, ולכן <span class="fi">\(\textcolor{#8A6D1B}{N}=10\)</span>.
+    <br>הממוצע הוא הסכום חלקי הכמות, והסכום כולל את x:</p>
+    $$\frac{\underbrace{\textcolor{#1D6FA5}{x+26+34+13+21+20+40+48+18+15}}_{\textcolor{#1D6FA5}{\text{סכום כל המספרים בסדרה}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{10}}_{\textcolor{#8A6D1B}{\text{כמה מספרים יש בסדרה}}}}=\underbrace{\textcolor{#C2408C}{26}}_{\textcolor{#C2408C}{\text{הממוצע שנתון}}}$$
+    <p>סכום תשעת המספרים הידועים הוא 235, ולכן:</p>
+    $$\frac{235+x}{10}=26\;\Longrightarrow\;235+x=260\;\Longrightarrow\;x=\textcolor{#2E7D32}{25}$$
+    <p><strong>ב.</strong> קודם מסדרות את כל עשרת המספרים לפי גודל:</p>
+    <p style="text-align:center"><span class="fi">\(13,\;15,\;18,\;20,\;21,\;25,\;26,\;34,\;40,\;48\)</span></p>
+    $$\text{מיקום החציון}=\frac{\overbrace{\textcolor{#8A6D1B}{10}}^{\textcolor{#8A6D1B}{\text{כמה מספרים בסדרה}}}+1}{2}=\underbrace{5.5}_{\text{בין מקום 5 למקום 6}}$$
+    <p>נספור בשורה המסודרת: במקום 5 יושב 21, ובמקום 6 יושב 25.</p>
+    $$\text{החציון}=\frac{\underbrace{21}_{\text{מקום 5}}+\underbrace{25}_{\text{מקום 6}}\rule[-1.6em]{0pt}{0pt}}{2}=\textcolor{#2E7D32}{23}$$
+    <p><strong>ג.</strong> הטווח הוא ההפרש בין הגדול ביותר לקטן ביותר:</p>
+    $$\text{טווח}=\underbrace{48}_{\text{הגדול ביותר}}-\underbrace{13}_{\text{הקטן ביותר}}=\textcolor{#2E7D32}{35}$$
+    <p><strong>בדיקה:</strong> סכום הסדרה המלאה
+    <span class="fi">\(235+25=260\)</span>, והממוצע
+    <span class="fi">\(260:10=26\)</span> ✓
+    <br><strong>בדיקת היגיון:</strong> החציון 23 נמצא בין 13 ל-48 ✓</p>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e9"> פתרתי את תרגיל 9</label>
+</article>
+
+<a class="backtop" href="#finder">↑ חזרה למאתר הסוגים</a>
+
+<!-- ==================================================================== -->
+<!-- ============ ג · ממוצע ============ -->
+<!-- ==================================================================== -->
+<h2 id="g-mean"><span class="num">ג</span>ממוצע</h2>
+<p class="gwhen">
+  <b>זה התרגיל שלך אם:</b> מופיעה המילה "ממוצע" — מחשבות אותו מרשימה או מטבלה,
+  מחפשות נתון חסר כשהממוצע כבר נתון, או שואלים מה יקרה לממוצע כשמוסיפים,
+  מורידים או מחליפים ערך.
+</p>
+<div class="box def">
+  <div class="box-title">הנוסחה — ומה כל חלק בה אצלך</div>
+  $$\overline{x}=\frac{\textcolor{#1D6FA5}{\text{סכום כל הנתונים}}}{\textcolor{#8A6D1B}{\text{כמה נתונים יש}}}$$
+  ברשימה — הסכום הוא חיבור של כל המספרים.
+  <br>בטבלה — הסכום הוא סכום שורת העבודה: כל ערך כפול השכיחות שלו.
+</div>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">תרגיל 10</span><h4>ממוצע מרשימה</h4></div>
+  <p class="q-text">
+    בשישה מבחני ריצה נמדדו הזמנים (בשניות) של דנה:
+    <span class="fi">\(14,\;9,\;12,\;7,\;11,\;13\)</span>.
+    <br>מהו הזמן הממוצע?
+  </p>
+  <div class="q-row"><span>הממוצע:</span>
+    <input class="q-input" data-answer="11" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p>מי זה <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> אצלנו?
+    כל מדידה היא נתון אחד, ויש שש מדידות — לכן
+    <span class="fi">\(\textcolor{#8A6D1B}{N}=6\)</span>.</p>
+    $$\overline{x}=\frac{\underbrace{\textcolor{#1D6FA5}{14+9+12+7+11+13}}_{\textcolor{#1D6FA5}{\text{סכום כל הזמנים}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{6}}_{\textcolor{#8A6D1B}{\text{כמה מדידות}}}}=\frac{\textcolor{#1D6FA5}{66}}{\textcolor{#8A6D1B}{6}}=\textcolor{#2E7D32}{11}\;\text{שניות}$$
+    <p><strong>בדיקת היגיון:</strong> ‏11 שניות נמצא בין 7 ל-14 ✓ —
+    ממוצע תמיד נוחת בין הערך הקטן ביותר לגדול ביותר.</p>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e10"> פתרתי את תרגיל 10</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">תרגיל 11</span><h4>ממוצע מטבלת שכיחויות</h4></div>
+  <p class="q-text">
+    לפניכן טבלה המתארת כמה שיעורים יש ביום לכל תלמיד בשבוע מסוים:
+  </p>
+  <table class="dtable">
+    <tr><th>מספר השיעורים</th><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td></tr>
+    <tr><th>מספר התלמידים</th><td>2</td><td>5</td><td>8</td><td>4</td><td>1</td></tr>
+  </table>
+  <p class="q-text">חשבי את מספר השיעורים הממוצע.</p>
+  <div class="q-row"><span>הממוצע:</span>
+    <input class="q-input" data-answer="5.85" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p>מי זה <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> אצלנו?
+    כל תלמיד הוא נתון אחד, ולכן <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> הוא סכום שורת השכיחות:</p>
+    $$\textcolor{#8A6D1B}{N}=2+5+8+4+1=\textcolor{#8A6D1B}{20}\;\text{תלמידים}$$
+    <p>עכשיו הסכום. בטבלה כל ערך חוזר כמה פעמים, ולכן מוסיפים שורת עבודה
+    שמכפילה בכל עמודה את הערך בשכיחות שלו:</p>
+    <table class="dtable sol-table">
+      <tr><th>מספר השיעורים</th><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td></tr>
+      <tr><th>מספר התלמידים</th><td>2</td><td>5</td><td>8</td><td>4</td><td>1</td></tr>
+      <tr><th>ערך × שכיחות</th>
+          <td><span dir="ltr">4·2</span><br><b>8</b></td>
+          <td><span dir="ltr">5·5</span><br><b>25</b></td>
+          <td><span dir="ltr">6·8</span><br><b>48</b></td>
+          <td><span dir="ltr">7·4</span><br><b>28</b></td>
+          <td><span dir="ltr">8·1</span><br><b>8</b></td></tr>
+    </table>
+    $$\overline{x}=\frac{\underbrace{\textcolor{#1D6FA5}{8+25+48+28+8}}_{\textcolor{#1D6FA5}{\text{סכום שורת העבודה}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{20}}_{\textcolor{#8A6D1B}{\text{סך התלמידים}}}}=\frac{\textcolor{#1D6FA5}{117}}{\textcolor{#8A6D1B}{20}}=\textcolor{#2E7D32}{5.85}$$
+    <p><strong>בדיקת היגיון:</strong> ‏5.85 נמצא בין 4 ל-8, וקרוב ל-6 —
+    שם יושבת העמודה הגבוהה ביותר ✓</p>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e11"> פתרתי את תרגיל 11</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">תרגיל 12</span><h4>ממוצע משוקלל — שתי קבוצות בגדלים שונים</h4></div>
+  <p class="q-text">
+    בכיתה ט׳ יש <span class="mk mk-group">12 בנות שגובהן הממוצע 160 ס"מ</span>,
+    ו<span class="mk mk-group">‏18 בנים שגובהם הממוצע 165 ס"מ</span>.
+    <br><span class="mk mk-find">מהו הגובה הממוצע של כל תלמידי הכיתה יחד?</span>
+  </p>
+  <div class="q-row"><span>הממוצע (ס"מ):</span>
+    <input class="q-input" data-answer="163" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p>הממוצע של כל הכיתה הוא סכום כל הגבהים חלקי מספר התלמידים —
+    אז נשחזר את שני הסכומים בנפרד.</p>
+    <p>ממוצע של 12 בנות הוא 160 ס"מ, ולכן סכום גבהי הבנות:</p>
+    $$\underbrace{12}_{\text{כמה בנות}}\cdot\underbrace{160}_{\text{הממוצע שלהן}}=1920\;\text{ס"מ}$$
+    <p>ובאותה דרך אצל הבנים:</p>
+    $$\underbrace{18}_{\text{כמה בנים}}\cdot\underbrace{165}_{\text{הממוצע שלהם}}=2970\;\text{ס"מ}$$
+    <table class="dtable sol-table">
+      <tr><th>הקבוצה</th><th>כמה</th><th>הממוצע</th><th>סכום הגבהים</th></tr>
+      <tr><td>בנות</td><td>12</td><td>160</td><td><span dir="ltr">12·160=1920</span></td></tr>
+      <tr><td>בנים</td><td>18</td><td>165</td><td><span dir="ltr">18·165=2970</span></td></tr>
+      <tr><td><b>יחד</b></td><td><b>30</b></td><td>—</td><td><b><span dir="ltr">4890</span></b></td></tr>
+    </table>
+    $$\overline{x}=\frac{\underbrace{\textcolor{#1D6FA5}{1920+2970}}_{\textcolor{#1D6FA5}{\text{סכום כל הגבהים}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{12+18}}_{\textcolor{#8A6D1B}{\text{כל תלמידי הכיתה}}}}=\frac{\textcolor{#1D6FA5}{4890}}{\textcolor{#8A6D1B}{30}}=\textcolor{#2E7D32}{163}\;\text{ס"מ}$$
+    <p><strong>בדיקת היגיון:</strong> ‏163 נמצא בין 160 ל-165, וקרוב יותר ל-165 —
+    כי הבנים הם הקבוצה הגדולה יותר, והם מושכים את הממוצע לכיוונם ✓</p>
+    <p class="aside">האמצע הפשוט בין 160 ל-165 הוא 162.5.
+    הממוצע יוצא 163 מפני שכל תלמיד נספר פעם אחת, ולבנים יש יותר נציגים.</p>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e12"> פתרתי את תרגיל 12</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">תרגיל 13</span><h4>נתון חסר כשהממוצע ידוע</h4></div>
+  <p class="q-text">
+    נועה נבחנה בחמישה מבחנים. ארבעה מהציונים שלה:
+    <span class="fi">\(82,\;90,\;75,\;88\)</span>, והציון החמישי נמחק מהמחברת.
+    <br>ידוע ש<span class="mk mk-given">ממוצע חמשת הציונים הוא 85</span>.
+    <br><span class="mk mk-find">מהו הציון החמישי?</span>
+  </p>
+  <div class="q-row"><span>הציון החמישי:</span>
+    <input class="q-input" data-answer="90" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p>הממוצע נותן לנו את הסכום — וזו כל הטכניקה כאן.
+    <br>אם ממוצע של 5 ציונים הוא 85, אז הסכום שלהם הוא:</p>
+    $$\underbrace{\textcolor{#8A6D1B}{5}}_{\textcolor{#8A6D1B}{\text{כמה מבחנים}}}\cdot\underbrace{\textcolor{#C2408C}{85}}_{\textcolor{#C2408C}{\text{הממוצע שנתון}}}=\textcolor{#1D6FA5}{425}$$
+    <p>סכום ארבעת הציונים הידועים:</p>
+    $$82+90+75+88=335$$
+    <p>הציון החסר הוא ההפרש בין הסכום שצריך להיות לסכום שכבר יש:</p>
+    $$\textcolor{#2E7D32}{\text{הציון החמישי}}=\underbrace{\textcolor{#1D6FA5}{425}}_{\textcolor{#1D6FA5}{\text{הסכום הדרוש}}}-\underbrace{335}_{\text{ארבעת הידועים}}=\textcolor{#2E7D32}{90}$$
+    <p><strong>בדיקה:</strong> <span class="fi">\(82+90+75+88+90=425\)</span>,
+    והממוצע <span class="fi">\(425:5=85\)</span> ✓ —
+    בדיוק הממוצע שנתון בשאלה.</p>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e13"> פתרתי את תרגיל 13</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">תרגיל 14</span><h4>מה קורה לממוצע כשמשנים את הנתונים</h4></div>
+  <p class="q-text">
+    בקבוצת כדורסל <span class="mk mk-group">‏8 שחקניות</span>,
+    ו<span class="mk mk-given">ממוצע הנקודות שלהן במשחק הוא 12</span>.
+    <br>כל סעיף מתחיל מהמצב המקורי הזה מחדש.
+    <br>א. <span class="mk mk-change">הצטרפה שחקנית תשיעית שקלעה 21 נקודות</span>. מהו הממוצע החדש?
+    <br>ב. <span class="mk mk-change">שחקנית שקלעה 5 נקודות שיפרה ל-21 נקודות</span>. מהו הממוצע החדש?
+    <br>ג. <span class="mk mk-change">שחקנית שקלעה 12 נקודות עזבה את הקבוצה</span>. מהו הממוצע החדש?
+    <br>ד. <span class="mk mk-change">כל שחקנית קיבלה בונוס של 3 נקודות</span>. מהו הממוצע החדש?
+  </p>
+  <div class="q-row"><span>א.</span>
+    <input class="q-input" data-answer="13" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ב.</span>
+    <input class="q-input" data-answer="14" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ג.</span>
+    <input class="q-input" data-answer="12" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ד.</span>
+    <input class="q-input" data-answer="15" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p><strong>קודם משחזרות את הסכום המקורי.</strong>
+    ‏8 שחקניות בממוצע 12 נקודות:</p>
+    $$\underbrace{\textcolor{#8A6D1B}{8}}_{\textcolor{#8A6D1B}{\text{כמה שחקניות}}}\cdot\underbrace{12}_{\text{הממוצע}}=\textcolor{#1D6FA5}{96}\;\text{נקודות}$$
+    <p>מכאן כל סעיף שואל שאלה אחת בלבד: האם הסכום השתנה, והאם הכמות השתנתה.</p>
+    <table class="dtable sol-table">
+      <tr><th>הסעיף</th><th>הסכום</th><th>הכמות</th><th>הממוצע החדש</th></tr>
+      <tr><td>א · שחקנית הצטרפה</td><td><span dir="ltr">96+21=117</span></td><td><span dir="ltr">8+1=9</span></td><td><b>13</b></td></tr>
+      <tr><td>ב · ערך הוחלף</td><td><span dir="ltr">96−5+21=112</span></td><td>‏8 — ללא שינוי</td><td><b>14</b></td></tr>
+      <tr><td>ג · שחקנית עזבה</td><td><span dir="ltr">96−12=84</span></td><td><span dir="ltr">8−1=7</span></td><td><b>12</b></td></tr>
+      <tr><td>ד · בונוס לכולן</td><td><span dir="ltr">96+8·3=120</span></td><td>‏8 — ללא שינוי</td><td><b>15</b></td></tr>
+    </table>
+    <p><strong>א.</strong> מצטרפת שחקנית — גם הסכום גדל וגם הכמות גדלה:</p>
+    $$\overline{x}_{\text{חדש}}=\frac{\underbrace{\textcolor{#1D6FA5}{96}}_{\textcolor{#1D6FA5}{\text{הסכום הישן}}}+\underbrace{\textcolor{#6D28D9}{21}}_{\textcolor{#6D28D9}{\text{החדשה}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{8+1}}_{\textcolor{#8A6D1B}{\text{גם הכמות גדלה}}}}=\frac{\textcolor{#1D6FA5}{117}}{\textcolor{#8A6D1B}{9}}=\textcolor{#2E7D32}{13}$$
+    <p>‏21 נקודות זה מעל הממוצע הישן (12), ולכן הממוצע עלה ✓</p>
+    <p><strong>ב.</strong> אותה שחקנית, ציון אחר — הכמות נשארת 8,
+    ובסכום מורידות את הערך הישן ומוסיפות את החדש:</p>
+    $$\overline{x}_{\text{חדש}}=\frac{\underbrace{\textcolor{#1D6FA5}{96}}_{\textcolor{#1D6FA5}{\text{הסכום הישן}}}-\underbrace{\textcolor{#6D28D9}{5}}_{\textcolor{#6D28D9}{\text{הערך שיצא}}}+\underbrace{\textcolor{#6D28D9}{21}}_{\textcolor{#6D28D9}{\text{הערך שנכנס}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{8}}_{\textcolor{#8A6D1B}{\text{הכמות לא השתנתה}}}}=\frac{\textcolor{#1D6FA5}{112}}{\textcolor{#8A6D1B}{8}}=\textcolor{#2E7D32}{14}$$
+    <p><strong>ג.</strong> העוזבת קלעה בדיוק 12 — בדיוק הממוצע:</p>
+    $$\overline{x}_{\text{חדש}}=\frac{\underbrace{\textcolor{#1D6FA5}{96}}_{\textcolor{#1D6FA5}{\text{הסכום הישן}}}-\underbrace{\textcolor{#6D28D9}{12}}_{\textcolor{#6D28D9}{\text{העוזבת}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{8-1}}_{\textcolor{#8A6D1B}{\text{גם הכמות קטנה}}}}=\frac{\textcolor{#1D6FA5}{84}}{\textcolor{#8A6D1B}{7}}=\textcolor{#2E7D32}{12}$$
+    <p>הממוצע נשאר 12. ערך ששווה בדיוק לממוצע לא מזיז אותו — לא כשהוא נכנס
+    ולא כשהוא יוצא.</p>
+    <p><strong>ד.</strong> כל אחת מ-8 השחקניות קיבלה 3 נקודות,
+    ולכן הסכום גדל ב-<span class="fi">\(8\cdot 3=24\)</span>:</p>
+    $$\overline{x}_{\text{חדש}}=\frac{\underbrace{\textcolor{#1D6FA5}{96}}_{\textcolor{#1D6FA5}{\text{הסכום הישן}}}+\underbrace{\textcolor{#6D28D9}{8\cdot 3}}_{\textcolor{#6D28D9}{\text{3 נקודות לכל שחקנית}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{8}}_{\textcolor{#8A6D1B}{\text{הכמות לא השתנתה}}}}=\frac{\textcolor{#1D6FA5}{120}}{\textcolor{#8A6D1B}{8}}=\textcolor{#2E7D32}{15}$$
+    <p>תוספת אחידה לכולן מזיזה את הממוצע באותה תוספת בדיוק:
+    <span class="fi">\(12+3=15\)</span> ✓</p>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e14"> פתרתי את תרגיל 14</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">תרגיל 15</span><h4>ממוצע משוקלל לפי אחוזים</h4></div>
+  <p class="q-text">
+    ציון הסמסטר במתמטיקה מורכב משני חלקים:
+    <span class="mk mk-given">הבוחן שוקל 40%</span> ו<span class="mk mk-given2">המבחן שוקל 60%</span>.
+    <br>שירה קיבלה 75 בבוחן ו-90 במבחן.
+    <br><span class="mk mk-find">מהו ציון הסמסטר שלה?</span>
+  </p>
+  <div class="q-row"><span>ציון הסמסטר:</span>
+    <input class="q-input" data-answer="84" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p>כאן שני הציונים לא שווים במשקל, ולכן כל אחד נכפל במשקל שלו.
+    <br>‏40% הם <span class="fi">\(\frac{40}{100}=0.4\)</span>,
+    ו-60% הם <span class="fi">\(\frac{60}{100}=0.6\)</span>.</p>
+    <table class="dtable sol-table">
+      <tr><th>החלק</th><th>הציון</th><th>המשקל</th><th>התרומה לציון</th></tr>
+      <tr><td>בוחן</td><td>75</td><td>40%</td><td><span dir="ltr">75·0.4=30</span></td></tr>
+      <tr><td>מבחן</td><td>90</td><td>60%</td><td><span dir="ltr">90·0.6=54</span></td></tr>
+      <tr><td><b>יחד</b></td><td>—</td><td><b>100%</b></td><td><b>84</b></td></tr>
+    </table>
+    $$\textcolor{#2E7D32}{\text{ציון הסמסטר}}=\underbrace{75\cdot\textcolor{#C2408C}{0.4}}_{\text{הבוחן ומשקלו}}+\underbrace{90\cdot\textcolor{#C2408C}{0.6}}_{\text{המבחן ומשקלו}}=30+54=\textcolor{#2E7D32}{84}$$
+    <p><strong>בדיקת היגיון:</strong> ‏84 נמצא בין 75 ל-90, וקרוב יותר ל-90 —
+    כי למבחן יש משקל גדול יותר ✓
+    <br><strong>בדיקת המשקלות:</strong> <span class="fi">\(40\%+60\%=100\%\)</span> ✓</p>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e15"> פתרתי את תרגיל 15</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">תרגיל 16</span><h4>ממוצע מסיפור בלי טבלה</h4></div>
+  <p class="q-text">
+    במבחן בספרות נבחנו 10 תלמידים.
+    <span class="mk mk-group">‏5 תלמידים קיבלו 70</span>,
+    <span class="mk mk-group">‏4 תלמידים קיבלו 80</span>
+    ו<span class="mk mk-group">תלמיד אחד קיבל 100</span>.
+    <br><span class="mk mk-find">מהו ממוצע הציונים?</span>
+  </p>
+  <div class="q-row"><span>הממוצע:</span>
+    <input class="q-input" data-answer="77" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p>הסיפור הזה הוא בעצם טבלת שכיחויות שנכתבה במילים.
+    <br>נעביר אותו לטבלה, ונוסיף שורת עבודה:</p>
+    <table class="dtable sol-table">
+      <tr><th>הציון</th><td>70</td><td>80</td><td>100</td></tr>
+      <tr><th>מספר התלמידים</th><td>5</td><td>4</td><td>1</td></tr>
+      <tr><th>ציון × שכיחות</th>
+          <td><span dir="ltr">70·5</span><br><b>350</b></td>
+          <td><span dir="ltr">80·4</span><br><b>320</b></td>
+          <td><span dir="ltr">100·1</span><br><b>100</b></td></tr>
+    </table>
+    <p>מי זה <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> אצלנו?
+    כל תלמיד הוא נתון אחד, ולכן
+    <span class="fi">\(\textcolor{#8A6D1B}{N}=5+4+1=10\)</span> —
+    בדיוק כמו שכתוב בשאלה ✓</p>
+    $$\overline{x}=\frac{\underbrace{\textcolor{#1D6FA5}{350+320+100}}_{\textcolor{#1D6FA5}{\text{סכום שורת העבודה}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{10}}_{\textcolor{#8A6D1B}{\text{סך הנבחנים}}}}=\frac{\textcolor{#1D6FA5}{770}}{\textcolor{#8A6D1B}{10}}=\textcolor{#2E7D32}{77}$$
+    <p><strong>בדיקת היגיון:</strong> ‏77 נמצא בין 70 ל-100, וקרוב ל-70 —
+    כי בעמודת ה-70 יושבים הכי הרבה תלמידים ✓</p>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e16"> פתרתי את תרגיל 16</label>
+</article>
+
+<a class="backtop" href="#finder">↑ חזרה למאתר הסוגים</a>
+
+<!-- ==================================================================== -->
+<!-- ============ ד · חציון ============ -->
+<!-- ==================================================================== -->
+<h2 id="g-median"><span class="num">ד</span>חציון</h2>
+<p class="gwhen">
+  <b>זה התרגיל שלך אם:</b> מבקשים את הערך שעומד באמצע.
+  <br>הדרך תמיד זהה: מסדרות לפי גודל ← מחשבות את המיקום ← קוראות מה יושב שם.
+  ההבדל בין ששת התרגילים כאן הוא רק מה קורה בשלב האחרון.
+</p>
+<div class="box def">
+  <div class="box-title">נוסחת המיקום — ומה כל חלק בה אצלך</div>
+  $$\text{מיקום החציון}=\frac{\textcolor{#8A6D1B}{N}+1}{2}$$
+  ‏<span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> הוא מספר הנתונים.
+  <br>ברשימה — כמה מספרים כתובים בה.
+  <br>בטבלה — סכום שורת השכיחות (ולא מספר העמודות).
+  <br>הנוסחה נותנת <strong>מיקום</strong>, ואת הערך עצמו קוראות מהנתונים.
+</div>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">תרגיל 17</span><h4>חציון מרשימה — מספר נתונים אי-זוגי</h4></div>
+  <p class="q-text">
+    נתונה סדרת המספרים: <span class="fi">\(23,\;17,\;31,\;12,\;28,\;19,\;25\)</span>.
+    <br>מהו החציון?
+  </p>
+  <div class="q-row"><span>החציון:</span>
+    <input class="q-input" data-answer="23" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p><strong>שלב 1 — מסדרות לפי גודל:</strong></p>
+    <p style="text-align:center"><span class="fi">\(12,\;17,\;19,\;23,\;25,\;28,\;31\)</span></p>
+    <p><strong>שלב 2 — המיקום.</strong>
+    מי זה <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> אצלנו?
+    בסדרה 7 מספרים, ולכן <span class="fi">\(\textcolor{#8A6D1B}{N}=7\)</span>:</p>
+    $$\text{מיקום החציון}=\frac{\overbrace{\textcolor{#8A6D1B}{7}}^{\textcolor{#8A6D1B}{\text{כמה מספרים בסדרה}}}+1}{2}=\textcolor{#2E7D32}{4}$$
+    <p><strong>שלב 3 — קוראות מה יושב במקום ה-4:</strong></p>
+    <div class="dotrow with-pos">
+      <span class="dot lg d1">12</span>
+      <span class="dot lg d1">17</span>
+      <span class="dot lg d1">19</span>
+      <span class="dot lg d1 ring"><span class="pos">מקום 4</span>23</span>
+      <span class="dot lg d1">25</span>
+      <span class="dot lg d1">28</span>
+      <span class="dot lg d1">31</span>
+    </div>
+    <p class="viz-cap">שבעה עיגולים מסודרים מהקטן לגדול. במקום הרביעי יושב הערך 23.</p>
+    <p>החציון הוא <span class="mk mk-find"><strong>23</strong></span>.</p>
+    <p><strong>בדיקה:</strong> לפני 23 יש שלושה מספרים (12, 17, 19),
+    ואחריו שלושה (25, 28, 31) ✓ — בדיוק באמצע.</p>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e17"> פתרתי את תרגיל 17</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">תרגיל 18</span><h4>חציון מרשימה — מספר נתונים זוגי</h4></div>
+  <p class="q-text">
+    נתונה סדרת המספרים: <span class="fi">\(8,\;15,\;4,\;11,\;6,\;20\)</span>.
+    <br>מהו החציון?
+  </p>
+  <div class="q-row"><span>החציון:</span>
+    <input class="q-input" data-answer="9.5" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p><strong>שלב 1 — מסדרות לפי גודל:</strong></p>
+    <p style="text-align:center"><span class="fi">\(4,\;6,\;8,\;11,\;15,\;20\)</span></p>
+    <p><strong>שלב 2 — המיקום.</strong>
+    בסדרה 6 מספרים, ולכן <span class="fi">\(\textcolor{#8A6D1B}{N}=6\)</span>:</p>
+    $$\text{מיקום החציון}=\frac{\overbrace{\textcolor{#8A6D1B}{6}}^{\textcolor{#8A6D1B}{\text{כמה מספרים בסדרה}}}+1}{2}=\underbrace{3.5}_{\text{בין מקום 3 למקום 4}}$$
+    <p>מקום "שלוש וחצי" לא קיים — וזו בדיוק המשמעות:
+    החציון יושב <strong>בין</strong> המקום ה-3 למקום ה-4, ולוקחות את הממוצע של שניהם.</p>
+    <div class="dotrow with-pos">
+      <span class="dot lg d1">4</span>
+      <span class="dot lg d1">6</span>
+      <span class="dot lg d1 ring"><span class="pos">מקום 3</span>8</span>
+      <span class="dot lg d1 ring"><span class="pos">מקום 4</span>11</span>
+      <span class="dot lg d1">15</span>
+      <span class="dot lg d1">20</span>
+    </div>
+    <p class="viz-cap">שישה עיגולים — שני האמצעיים חולקים את האמצע.</p>
+    $$\text{החציון}=\frac{\underbrace{8}_{\text{מקום 3}}+\underbrace{11}_{\text{מקום 4}}\rule[-1.6em]{0pt}{0pt}}{2}=\textcolor{#2E7D32}{9.5}$$
+    <p><strong>בדיקת היגיון:</strong> ‏9.5 נמצא בין 4 ל-20 ✓
+    <span class="aside">(הוא לא מופיע בסדרה עצמה, וזה תקין לגמרי.)</span></p>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e18"> פתרתי את תרגיל 18</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">תרגיל 19</span><h4>חציון מטבלה — מספר נתונים אי-זוגי</h4></div>
+  <p class="q-text">
+    לפניכן טבלה המתארת כמה אחים ואחיות יש לתלמידי הכיתה:
+  </p>
+  <table class="dtable">
+    <tr><th>מספר האחים</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+    <tr><th>מספר התלמידים</th><td>5</td><td>8</td><td>7</td><td>4</td><td>3</td></tr>
+  </table>
+  <p class="q-text">מהו חציון מספר האחים?</p>
+  <div class="q-row"><span>החציון:</span>
+    <input class="q-input" data-answer="2" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p>מי זה <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> אצלנו?
+    כל תלמיד הוא נתון אחד, ולכן <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> הוא סכום שורת השכיחות:</p>
+    $$\textcolor{#8A6D1B}{N}=5+8+7+4+3=\textcolor{#8A6D1B}{27}\;\text{תלמידים}$$
+    $$\text{מיקום החציון}=\frac{\overbrace{\textcolor{#8A6D1B}{27}}^{\textcolor{#8A6D1B}{\text{סך התלמידים — סכום שורת השכיחות}}}+1}{2}=\textcolor{#2E7D32}{14}$$
+    <p>הטבלה כבר מסודרת לפי גודל, אז צוברות בה מהעמודה הימנית שמאלה,
+    עד שמגיעות למקום ה-14:</p>
+    <table class="dtable sol-table">
+      <tr><th>מספר האחים</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+      <tr><th>מספר התלמידים</th><td>5</td><td>8</td><td>7</td><td>4</td><td>3</td></tr>
+      <tr><th>כמה ספרנו עד כאן (צבירה)</th>
+          <td>① 5</td>
+          <td>② <span dir="ltr">5+8=13</span></td>
+          <td style="background:#DFF0E1"><b style="color:#2E7D32">③ <span dir="ltr">13+7=20</span></b> ✋</td>
+          <td>—</td><td>—</td></tr>
+    </table>
+    <p class="tbl-note">⬅ כיוון ההליכה: מתחילות בעמודה הימנית (0 אחים) וצועדות שמאלה — ① ואז ② ואז ③.</p>
+    <p class="tbl-note" style="color:#2E7D32;font-weight:700;margin-top:2px">✋ עברנו את 14 בעמודה של 2 אחים — המקום ה-14 יושב בה.</p>
+    <p>המקומות 14 עד 20 כולם בעמודה של 2 אחים, והמקום ה-14 בתוכם ←
+    החציון הוא <span class="mk mk-find"><strong>2</strong></span>.</p>
+    <p><strong>בדיקת היגיון:</strong> ‏2 נמצא בין 0 ל-4 ✓</p>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e19"> פתרתי את תרגיל 19</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">תרגיל 20</span><h4>חציון מטבלה — זוגי, ושני האמצעיים באותה עמודה</h4></div>
+  <p class="q-text">
+    לפניכן טבלת ציונים של תלמידי כיתה במבחן:
+  </p>
+  <table class="dtable">
+    <tr><th>הציון</th><td>60</td><td>70</td><td>80</td><td>90</td><td>100</td></tr>
+    <tr><th>מספר התלמידים</th><td>3</td><td>5</td><td>9</td><td>5</td><td>2</td></tr>
+  </table>
+  <p class="q-text">מהו חציון הציונים?</p>
+  <div class="q-row"><span>החציון:</span>
+    <input class="q-input" data-answer="80" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p>מי זה <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> אצלנו?
+    כל תלמיד הוא נתון אחד, ולכן <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> הוא סכום שורת השכיחות:</p>
+    $$\textcolor{#8A6D1B}{N}=3+5+9+5+2=\textcolor{#8A6D1B}{24}\;\text{תלמידים}$$
+    $$\text{מיקום החציון}=\frac{\overbrace{\textcolor{#8A6D1B}{24}}^{\textcolor{#8A6D1B}{\text{סך התלמידים}}}+1}{2}=\underbrace{12.5}_{\text{בין מקום 12 למקום 13}}$$
+    <p>צוברות בטבלה, מהעמודה הימנית שמאלה, עד שעוברות את 12.5:</p>
+    <table class="dtable sol-table">
+      <tr><th>הציון</th><td>60</td><td>70</td><td>80</td><td>90</td><td>100</td></tr>
+      <tr><th>מספר התלמידים</th><td>3</td><td>5</td><td>9</td><td>5</td><td>2</td></tr>
+      <tr><th>כמה ספרנו עד כאן (צבירה)</th>
+          <td>① 3</td>
+          <td>② <span dir="ltr">3+5=8</span></td>
+          <td style="background:#DFF0E1"><b style="color:#2E7D32">③ <span dir="ltr">8+9=17</span></b> ✋</td>
+          <td>—</td><td>—</td></tr>
+    </table>
+    <p class="tbl-note">⬅ כיוון ההליכה: מתחילות בעמודה הימנית (60) וצועדות שמאלה — ① ואז ② ואז ③.</p>
+    <p class="tbl-note" style="color:#2E7D32;font-weight:700;margin-top:2px">✋ עברנו את 12.5 <b>בתוך</b> עמודת ה-80 — גם המקום ה-12 וגם המקום ה-13 יושבים בה.</p>
+    <p>המקומות 9 עד 17 כולם הציון 80, ובתוכם גם 12 וגם 13:</p>
+    $$\text{החציון}=\frac{80+80}{2}=\textcolor{#2E7D32}{80}$$
+    <p>כששני המקומות באותה עמודה — החציון הוא פשוט הערך של העמודה הזאת.</p>
+    <p><strong>בדיקת היגיון:</strong> ‏80 נמצא בין 60 ל-100 ✓</p>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e20"> פתרתי את תרגיל 20</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">תרגיל 21</span><h4>חציון מטבלה — זוגי, ושני האמצעיים בשתי עמודות</h4></div>
+  <p class="q-text">
+    לפניכן טבלה המתארת כמה מקצועות אוהבים תלמידי הכיתה:
+  </p>
+  <table class="dtable">
+    <tr><th>מספר המקצועות</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+    <tr><th>מספר התלמידים</th><td>5</td><td>8</td><td>6</td><td>5</td><td>2</td></tr>
+  </table>
+  <p class="q-text">מהו חציון מספר המקצועות?</p>
+  <div class="q-row"><span>החציון:</span>
+    <input class="q-input" data-answer="2.5" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p>מי זה <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> אצלנו?
+    כל תלמיד הוא נתון אחד, ולכן <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> הוא סכום שורת השכיחות:</p>
+    $$\textcolor{#8A6D1B}{N}=5+8+6+5+2=\textcolor{#8A6D1B}{26}\;\text{תלמידים}$$
+    $$\text{מיקום החציון}=\frac{\overbrace{\textcolor{#8A6D1B}{26}}^{\textcolor{#8A6D1B}{\text{סך התלמידים}}}+1}{2}=\underbrace{13.5}_{\text{בין מקום 13 למקום 14}}$$
+    <p>צוברות בטבלה, מהעמודה הימנית שמאלה:</p>
+    <table class="dtable sol-table">
+      <tr><th>מספר המקצועות</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+      <tr><th>מספר התלמידים</th><td>5</td><td>8</td><td>6</td><td>5</td><td>2</td></tr>
+      <tr><th>כמה ספרנו עד כאן (צבירה)</th>
+          <td>① 5</td>
+          <td style="background:#DFF0E1"><b style="color:#2E7D32">② <span dir="ltr">5+8=13</span></b></td>
+          <td style="background:#DFF0E1"><b style="color:#2E7D32">③ <span dir="ltr">13+6=19</span></b> ✋</td>
+          <td>—</td><td>—</td></tr>
+    </table>
+    <p class="tbl-note">⬅ כיוון ההליכה: מתחילות בעמודה הימנית (מקצוע אחד) וצועדות שמאלה.</p>
+    <p class="tbl-note" style="color:#2E7D32;font-weight:700;margin-top:2px">✋ הצבירה נסגרה <b>בדיוק</b> על 13 בסוף עמודת ה-2.</p>
+    <p>שימי לב מה קרה כאן: עמודת ה-2 נסגרה בדיוק על המקום ה-13.
+    <br>המקום ה-13 הוא האחרון בעמודת ה-2, והמקום ה-14 הוא כבר הראשון בעמודת ה-3 —
+    שני המקומות בשתי עמודות שונות, ולוקחות את הממוצע של שני הערכים:</p>
+    $$\text{החציון}=\frac{\underbrace{2}_{\text{מקום 13 — אחרון בעמודת ה-2}}+\underbrace{3}_{\text{מקום 14 — ראשון בעמודת ה-3}}\rule[-1.6em]{0pt}{0pt}}{2}=\textcolor{#2E7D32}{2.5}$$
+    <p><strong>בדיקת היגיון:</strong> ‏2.5 נמצא בין 1 ל-5 ✓
+    <span class="aside">(חציון של "שניים וחצי מקצועות" — מספר שלא מופיע בטבלה, וזה תקין.)</span></p>
+    <div class="box warn" style="margin:12px 0 2px">
+      <div class="box-title">איך מבדילות בין תרגיל 20 לתרגיל 21</div>
+      ההבדל מתגלה רק בשורת הצבירה.
+      <br>אם עברנו את המיקום <strong>בתוך</strong> עמודה — שני המקומות בה,
+      והחציון הוא הערך שלה (כמו בתרגיל 20).
+      <br>אם הצבירה נסגרה <strong>בדיוק</strong> על המספר השלם שמתחת למיקום —
+      המקום הבא כבר בעמודה הבאה, ומחשבות ממוצע של שני הערכים (כמו כאן).
+    </div>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e21"> פתרתי את תרגיל 21</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">תרגיל 22</span><h4>חציון מדיאגרמת עמודות</h4></div>
+  <p class="q-text">
+    בספרייה בדקו כמה ספרים שאל כל תלמיד בחודש האחרון,
+    והציגו את התוצאות בדיאגרמה. הפעם אין טבלה:
+  </p>
+  <figure>
+    <div class="axplot" style="max-width:396px">
+    <span class="ax-ylab">השכיחות — כמה תלמידים</span>
+    <svg viewBox="0 0 360 190" style="width:100%;height:auto" role="img" aria-label="דיאגרמת עמודות של מספר הספרים שנשאלו: 2, 5, 9, 6, 3 תלמידים">
+      <line x1="24" y1="132" x2="336" y2="132" stroke="#E4E8EE" stroke-width="1"></line>
+      <line x1="24" y1="104" x2="336" y2="104" stroke="#E4E8EE" stroke-width="1"></line>
+      <line x1="24" y1="76" x2="336" y2="76" stroke="#E4E8EE" stroke-width="1"></line>
+      <line x1="24" y1="48" x2="336" y2="48" stroke="#E4E8EE" stroke-width="1"></line>
+      <rect x="35.2" y="132" width="40" height="28" rx="3" fill="#2E7D6B"></rect>
+      <rect x="97.6" y="90" width="40" height="70" rx="3" fill="#2E7D6B"></rect>
+      <rect x="160" y="34" width="40" height="126" rx="3" fill="#2E7D6B"></rect>
+      <rect x="222.4" y="76" width="40" height="84" rx="3" fill="#2E7D6B"></rect>
+      <rect x="284.8" y="118" width="40" height="42" rx="3" fill="#2E7D6B"></rect>
+      <text x="55.2" y="125" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">2</text>
+      <text x="117.6" y="83" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">5</text>
+      <text x="180" y="27" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">9</text>
+      <text x="242.4" y="69" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">6</text>
+      <text x="304.8" y="111" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">3</text>
+      <line x1="24" y1="160" x2="336" y2="160" stroke="#5A6875" stroke-width="1.5"></line>
+      <path d="M344 160 L336 156 L336 164 Z" fill="#5A6875"></path>
+      <line x1="24" y1="160" x2="24" y2="12" stroke="#5A6875" stroke-width="1.5"></line>
+      <path d="M24 4 L20 12 L28 12 Z" fill="#5A6875"></path>
+      <line x1="19" y1="132" x2="24" y2="132" stroke="#5A6875" stroke-width="1.5"></line>
+      <line x1="19" y1="104" x2="24" y2="104" stroke="#5A6875" stroke-width="1.5"></line>
+      <line x1="19" y1="76" x2="24" y2="76" stroke="#5A6875" stroke-width="1.5"></line>
+      <line x1="19" y1="48" x2="24" y2="48" stroke="#5A6875" stroke-width="1.5"></line>
+      <text x="16" y="164" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">0</text>
+      <text x="16" y="136" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">2</text>
+      <text x="16" y="108" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">4</text>
+      <text x="16" y="80" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">6</text>
+      <text x="16" y="52" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">8</text>
+      <line x1="55.2" y1="160" x2="55.2" y2="165" stroke="#5A6875" stroke-width="1"></line>
+      <line x1="117.6" y1="160" x2="117.6" y2="165" stroke="#5A6875" stroke-width="1"></line>
+      <line x1="180" y1="160" x2="180" y2="165" stroke="#5A6875" stroke-width="1"></line>
+      <line x1="242.4" y1="160" x2="242.4" y2="165" stroke="#5A6875" stroke-width="1"></line>
+      <line x1="304.8" y1="160" x2="304.8" y2="165" stroke="#5A6875" stroke-width="1"></line>
+      <text x="55.2" y="182" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">0</text>
+      <text x="117.6" y="182" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">1</text>
+      <text x="180" y="182" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">2</text>
+      <text x="242.4" y="182" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">3</text>
+      <text x="304.8" y="182" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">4</text>
+    </svg>
+    <span class="ax-xlab">הערכים — מספר הספרים</span>
+    </div>
+    <figcaption>המספר שמעל כל עמודה — כמה תלמידים שאלו את מספר הספרים הזה.</figcaption>
+  </figure>
+  <p class="q-text">
+    א. כמה תלמידים נבדקו בסך הכל?
+    <br>ב. מהו חציון מספר הספרים?
+  </p>
+  <div class="q-row"><span>א.</span>
+    <input class="q-input" data-answer="25" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ב. החציון:</span>
+    <input class="q-input" data-answer="2" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p><strong>נעביר את הנתונים מהדיאגרמה לטבלה.</strong>
+    גובה כל עמודה הוא השכיחות שלה:</p>
+    <table class="dtable sol-table">
+      <tr><th>מספר הספרים</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+      <tr><th>מספר התלמידים</th><td>2</td><td>5</td><td>9</td><td>6</td><td>3</td></tr>
+    </table>
+    <p><strong>א.</strong> מי זה <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> אצלנו?
+    כל תלמיד הוא נתון אחד, ולכן <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> הוא סכום השכיחויות:</p>
+    $$\textcolor{#8A6D1B}{N}=2+5+9+6+3=\textcolor{#8A6D1B}{25}\;\text{תלמידים}$$
+    <p><strong>ב.</strong> עכשיו יש טבלה, וממשיכות בדיוק כמו בתרגיל 19:</p>
+    $$\text{מיקום החציון}=\frac{\overbrace{\textcolor{#8A6D1B}{25}}^{\textcolor{#8A6D1B}{\text{סך התלמידים — סכום השכיחויות}}}+1}{2}=\textcolor{#2E7D32}{13}$$
+    <table class="dtable sol-table">
+      <tr><th>מספר הספרים</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+      <tr><th>מספר התלמידים</th><td>2</td><td>5</td><td>9</td><td>6</td><td>3</td></tr>
+      <tr><th>כמה ספרנו עד כאן (צבירה)</th>
+          <td>① 2</td>
+          <td>② <span dir="ltr">2+5=7</span></td>
+          <td style="background:#DFF0E1"><b style="color:#2E7D32">③ <span dir="ltr">7+9=16</span></b> ✋</td>
+          <td>—</td><td>—</td></tr>
+    </table>
+    <p class="tbl-note">⬅ כיוון ההליכה: מתחילות בעמודה הימנית (0 ספרים) וצועדות שמאלה.</p>
+    <p class="tbl-note" style="color:#2E7D32;font-weight:700;margin-top:2px">✋ עברנו את 13 בעמודה של 2 ספרים — המקום ה-13 יושב בה.</p>
+    <p>החציון הוא <span class="mk mk-find"><strong>2</strong></span> ספרים.</p>
+    <p><strong>בדיקת היגיון:</strong> ‏2 נמצא בין 0 ל-4, ובעמודה הזאת יושבים
+    הכי הרבה תלמידים — סביר שהאמצע ייפול בה ✓</p>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e22"> פתרתי את תרגיל 22</label>
+</article>
+
+<a class="backtop" href="#finder">↑ חזרה למאתר הסוגים</a>
+
+<!-- ==================================================================== -->
+<!-- ============ ה · שכיח ============ -->
+<!-- ==================================================================== -->
+<h2 id="g-mode"><span class="num">ה</span>שכיח</h2>
+<p class="gwhen">
+  <b>זה התרגיל שלך אם:</b> מבקשים את הערך שחוזר הכי הרבה פעמים.
+  <br>ברשימה — סופרות כמה פעמים מופיע כל מספר.
+  בטבלה או בדיאגרמה — מחפשות את השכיחות הגבוהה ביותר, וקוראות את
+  <strong>הערך</strong> שמעליה.
+</p>
+<div class="box def">
+  <div class="box-title">שכיח לעומת שכיחות</div>
+  ה<strong>שכיח</strong> הוא <strong>הערך</strong> — הוא גר בשורה העליונה של הטבלה.
+  <br>ה<strong>שכיחות</strong> היא <strong>כמה פעמים</strong> הערך מופיע —
+  היא גרה בשורה התחתונה.
+  <br>שאלה שמבקשת "מהו השכיח" מבקשת את הערך.
+</div>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">תרגיל 23</span><h4>שכיח מרשימה</h4></div>
+  <p class="q-text">
+    נתונה סדרת המספרים:
+    <span class="fi">\(6,\;9,\;6,\;12,\;9,\;6,\;15,\;9,\;6\)</span>.
+    <br>מהו השכיח?
+  </p>
+  <div class="q-row"><span>השכיח:</span>
+    <input class="q-input" data-answer="6" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p>הדרך הבטוחה: בונות טבלת שכיחויות קטנה, ורושמות כמה פעמים מופיע כל מספר.</p>
+    <table class="dtable sol-table">
+      <tr><th>המספר</th><td class="hl-find"><b>6</b></td><td>9</td><td>12</td><td>15</td></tr>
+      <tr><th>כמה פעמים מופיע</th><td class="hl-group"><b>4</b></td><td>3</td><td>1</td><td>1</td></tr>
+    </table>
+    <p><strong>בדיקה:</strong> <span class="fi">\(4+3+1+1=9\)</span> ✓ —
+    בדיוק מספר האיברים בסדרה.</p>
+    <p>השכיחות הגבוהה ביותר היא 4, והיא יושבת מתחת לערך 6 ←
+    השכיח הוא <span class="mk mk-find"><strong>6</strong></span>.
+    <br>‏4 הוא כמה פעמים המספר 6 מופיע; 6 הוא המספר עצמו.</p>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e23"> פתרתי את תרגיל 23</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">תרגיל 24</span><h4>שכיח מטבלה — והשכיחות שלו</h4></div>
+  <p class="q-text">
+    לפניכן טבלה המתארת כמה פעמים ביקרו תלמידי הכיתה בים בחודש אוגוסט:
+  </p>
+  <table class="dtable">
+    <tr><th>מספר הביקורים</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+    <tr><th>מספר התלמידים</th><td>2</td><td>6</td><td>11</td><td>7</td><td>3</td><td>1</td></tr>
+  </table>
+  <p class="q-text">
+    א. מהו מספר הביקורים השכיח?
+    <br>ב. מהי השכיחות של השכיח?
+    <br>ג. כמה תלמידים יש בכיתה?
+  </p>
+  <div class="q-row"><span>א. השכיח:</span>
+    <input class="q-input" data-answer="2" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ב. השכיחות שלו:</span>
+    <input class="q-input" data-answer="11" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ג. מספר התלמידים:</span>
+    <input class="q-input" data-answer="30" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p><strong>א.</strong> נסרוק את שורת השכיחות ונחפש את המספר הגדול ביותר:
+    <span class="fi">\(2,\;6,\;\textbf{11},\;7,\;3,\;1\)</span> — הגדול ביותר הוא 11.
+    <br>עכשיו נקרא מה כתוב <strong>מעליו</strong>:</p>
+    <table class="dtable sol-table">
+      <tr><th>מספר הביקורים</th><td>0</td><td>1</td><td class="hl-find"><b>2</b></td><td>3</td><td>4</td><td>5</td></tr>
+      <tr><th>מספר התלמידים</th><td>2</td><td>6</td><td class="hl-group"><b>11</b></td><td>7</td><td>3</td><td>1</td></tr>
+    </table>
+    <p>השכיח הוא <span class="mk mk-find"><strong>2 ביקורים</strong></span>.</p>
+    <p><strong>ב.</strong> השכיחות של השכיח היא המספר שמתחתיו:
+    <span class="mk mk-group"><strong>11</strong></span> תלמידים ביקרו בים פעמיים.</p>
+    <p><strong>ג.</strong> מי זה <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> אצלנו?
+    כל תלמיד הוא נתון אחד, ולכן <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> הוא סכום שורת השכיחות:</p>
+    $$\textcolor{#8A6D1B}{N}=2+6+11+7+3+1=\textcolor{#8A6D1B}{30}\;\text{תלמידים}$$
+    <p><strong>בדיקת היגיון:</strong> ‏11 מתוך 30 הוא קצת יותר משליש הכיתה —
+    סביר לעמודה הגבוהה ביותר ✓</p>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e24"> פתרתי את תרגיל 24</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">תרגיל 25</span><h4>כששני ערכים חוזרים אותו מספר פעמים</h4></div>
+  <p class="q-text">
+    נתונה סדרת המספרים:
+    <span class="fi">\(3,\;7,\;5,\;7,\;3,\;8,\;2\)</span>.
+    <br>מהו השכיח?
+  </p>
+  <div class="q-row"><span>השכיח הקטן:</span>
+    <input class="q-input" data-answer="3" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>השכיח הגדול:</span>
+    <input class="q-input" data-answer="7" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p>בונות טבלת שכיחויות קטנה, בדיוק כמו בתרגיל 23:</p>
+    <table class="dtable sol-table">
+      <tr><th>המספר</th><td>2</td><td class="hl-find"><b>3</b></td><td>5</td><td class="hl-find"><b>7</b></td><td>8</td></tr>
+      <tr><th>כמה פעמים מופיע</th><td>1</td><td class="hl-group"><b>2</b></td><td>1</td><td class="hl-group"><b>2</b></td><td>1</td></tr>
+    </table>
+    <p><strong>בדיקה:</strong> <span class="fi">\(1+2+1+2+1=7\)</span> ✓ —
+    בדיוק מספר האיברים בסדרה.</p>
+    <p>השכיחות הגבוהה ביותר היא 2, והיא מופיעה <strong>פעמיים</strong> בטבלה:
+    מתחת ל-3 ומתחת ל-7.
+    <br>לסדרה הזאת יש שני שכיחים:
+    <span class="mk mk-find"><strong>3</strong></span> ו-<span class="mk mk-find"><strong>7</strong></span>.</p>
+    <p>שני שכיחים זו תשובה מלאה ותקינה — התשובה כאן היא שני המספרים יחד.</p>
+    <p class="aside">כשכל הערכים מופיעים אותו מספר פעמים (למשל
+    <span class="fi">\(4,\;5,\;6,\;7\)</span>) — אין שכיח בכלל.</p>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e25"> פתרתי את תרגיל 25</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">תרגיל 26</span><h4>שכיח מדיאגרמת עמודות</h4></div>
+  <p class="q-text">
+    בסקר בכיתה נשאלו התלמידים כמה סרטים ראו בחודש האחרון,
+    והתשובות הוצגו בדיאגרמה:
+  </p>
+  <figure>
+    <div class="axplot" style="max-width:430px">
+    <span class="ax-ylab">השכיחות — כמה תלמידים</span>
+    <svg viewBox="0 0 400 190" style="width:100%;height:auto" role="img" aria-label="דיאגרמת עמודות של מספר הסרטים: 1, 4, 7, 10, 5, 3 תלמידים">
+      <line x1="24" y1="136" x2="376" y2="136" stroke="#E4E8EE" stroke-width="1"></line>
+      <line x1="24" y1="112" x2="376" y2="112" stroke="#E4E8EE" stroke-width="1"></line>
+      <line x1="24" y1="88" x2="376" y2="88" stroke="#E4E8EE" stroke-width="1"></line>
+      <line x1="24" y1="64" x2="376" y2="64" stroke="#E4E8EE" stroke-width="1"></line>
+      <line x1="24" y1="40" x2="376" y2="40" stroke="#E4E8EE" stroke-width="1"></line>
+      <rect x="33.3333" y="148" width="40" height="12" rx="3" fill="#2E7D6B"></rect>
+      <rect x="92" y="112" width="40" height="48" rx="3" fill="#2E7D6B"></rect>
+      <rect x="150.667" y="76" width="40" height="84" rx="3" fill="#2E7D6B"></rect>
+      <rect x="209.333" y="40" width="40" height="120" rx="3" fill="#2E7D6B"></rect>
+      <rect x="268" y="100" width="40" height="60" rx="3" fill="#2E7D6B"></rect>
+      <rect x="326.667" y="124" width="40" height="36" rx="3" fill="#2E7D6B"></rect>
+      <text x="53.3333" y="141" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">1</text>
+      <text x="112" y="105" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">4</text>
+      <text x="170.667" y="69" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">7</text>
+      <text x="229.333" y="33" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">10</text>
+      <text x="288" y="93" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">5</text>
+      <text x="346.667" y="117" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">3</text>
+      <line x1="24" y1="160" x2="376" y2="160" stroke="#5A6875" stroke-width="1.5"></line>
+      <path d="M384 160 L376 156 L376 164 Z" fill="#5A6875"></path>
+      <line x1="24" y1="160" x2="24" y2="18" stroke="#5A6875" stroke-width="1.5"></line>
+      <path d="M24 10 L20 18 L28 18 Z" fill="#5A6875"></path>
+      <line x1="19" y1="136" x2="24" y2="136" stroke="#5A6875" stroke-width="1.5"></line>
+      <line x1="19" y1="112" x2="24" y2="112" stroke="#5A6875" stroke-width="1.5"></line>
+      <line x1="19" y1="88" x2="24" y2="88" stroke="#5A6875" stroke-width="1.5"></line>
+      <line x1="19" y1="64" x2="24" y2="64" stroke="#5A6875" stroke-width="1.5"></line>
+      <line x1="19" y1="40" x2="24" y2="40" stroke="#5A6875" stroke-width="1.5"></line>
+      <text x="16" y="164" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">0</text>
+      <text x="16" y="140" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">2</text>
+      <text x="16" y="116" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">4</text>
+      <text x="16" y="92" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">6</text>
+      <text x="16" y="68" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">8</text>
+      <text x="16" y="44" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">10</text>
+      <line x1="53.3333" y1="160" x2="53.3333" y2="165" stroke="#5A6875" stroke-width="1"></line>
+      <line x1="112" y1="160" x2="112" y2="165" stroke="#5A6875" stroke-width="1"></line>
+      <line x1="170.667" y1="160" x2="170.667" y2="165" stroke="#5A6875" stroke-width="1"></line>
+      <line x1="229.333" y1="160" x2="229.333" y2="165" stroke="#5A6875" stroke-width="1"></line>
+      <line x1="288" y1="160" x2="288" y2="165" stroke="#5A6875" stroke-width="1"></line>
+      <line x1="346.667" y1="160" x2="346.667" y2="165" stroke="#5A6875" stroke-width="1"></line>
+      <text x="53.3333" y="182" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">0</text>
+      <text x="112" y="182" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">1</text>
+      <text x="170.667" y="182" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">2</text>
+      <text x="229.333" y="182" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">3</text>
+      <text x="288" y="182" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">4</text>
+      <text x="346.667" y="182" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">5</text>
+    </svg>
+    <span class="ax-xlab">הערכים — מספר הסרטים</span>
+    </div>
+    <figcaption>המספר שמעל כל עמודה — כמה תלמידים ראו את מספר הסרטים הזה.</figcaption>
+  </figure>
+  <p class="q-text">
+    א. מהו מספר הסרטים השכיח?
+    <br>ב. מהי השכיחות של השכיח?
+    <br>ג. כמה תלמידים השתתפו בסקר?
+  </p>
+  <div class="q-row"><span>א. השכיח:</span>
+    <input class="q-input" data-answer="3" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ב. השכיחות שלו:</span>
+    <input class="q-input" data-answer="10" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ג. מספר המשתתפים:</span>
+    <input class="q-input" data-answer="30" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p><strong>נעביר את הנתונים מהדיאגרמה לטבלה.</strong>
+    גובה כל עמודה הוא השכיחות שלה:</p>
+    <table class="dtable sol-table">
+      <tr><th>מספר הסרטים</th><td>0</td><td>1</td><td>2</td><td class="hl-find"><b>3</b></td><td>4</td><td>5</td></tr>
+      <tr><th>מספר התלמידים</th><td>1</td><td>4</td><td>7</td><td class="hl-group"><b>10</b></td><td>5</td><td>3</td></tr>
+    </table>
+    <p><strong>א.</strong> העמודה הגבוהה ביותר בדיאגרמה יושבת מעל הערך 3,
+    וגובהה 10 ← השכיח הוא <span class="mk mk-find"><strong>3 סרטים</strong></span>.</p>
+    <p><strong>ב.</strong> השכיחות של השכיח היא גובה העמודה:
+    <span class="mk mk-group"><strong>10</strong></span> תלמידים ראו 3 סרטים.
+    <br>‏3 הוא מספר הסרטים; 10 הוא כמה תלמידים ראו כל כך.</p>
+    <p><strong>ג.</strong> מי זה <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> אצלנו?
+    כל תלמיד הוא נתון אחד, ולכן <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> הוא
+    סכום גובהי כל העמודות:</p>
+    $$\textcolor{#8A6D1B}{N}=1+4+7+10+5+3=\textcolor{#8A6D1B}{30}\;\text{תלמידים}$$
+    <p><strong>בדיקת היגיון:</strong> ‏30 תלמידים בכיתה — סביר ✓</p>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e26"> פתרתי את תרגיל 26</label>
+</article>
+
+<a class="backtop" href="#finder">↑ חזרה למאתר הסוגים</a>
+
+<!-- ==================================================================== -->
+<!-- ============ ו · טווח ============ -->
+<!-- ==================================================================== -->
+<h2 id="g-range"><span class="num">ו</span>טווח</h2>
+<p class="gwhen">
+  <b>זה התרגיל שלך אם:</b> מבקשים את הטווח — ההפרש בין הערך הגדול ביותר
+  לערך הקטן ביותר.
+  <br>המלכודת היחידה: בטבלה סופרות רק ערכים שבאמת מופיעים בנתונים,
+  כלומר ערכים שהשכיחות שלהם גדולה מ-0.
+</p>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">תרגיל 27</span><h4>טווח מרשימה</h4></div>
+  <p class="q-text">
+    בחמישה ימים נמדדה הטמפרטורה המרבית (במעלות):
+    <span class="fi">\(34,\;19,\;41,\;27,\;22\)</span>.
+    <br>מהו הטווח?
+  </p>
+  <div class="q-row"><span>הטווח:</span>
+    <input class="q-input" data-answer="22" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p>מסדרות לפי גודל, וכך הגדול ביותר והקטן ביותר קופצים לעין:</p>
+    <p style="text-align:center"><span class="fi">\(19,\;22,\;27,\;34,\;41\)</span></p>
+    $$\text{טווח}=\underbrace{41}_{\text{הגדול ביותר}}-\underbrace{19}_{\text{הקטן ביותר}}=\textcolor{#2E7D32}{22}\;\text{מעלות}$$
+    <p><strong>בדיקה:</strong> כל חמש המדידות נמצאות בין 19 ל-41,
+    ורוחב הרצועה הזאת הוא 22 ✓</p>
+    <p class="aside">בחלק מחוברות התרגול התשובה נרשמת גם בצורה
+    "מ-19 עד 41" במקום המספר 22. שתי הצורות מתארות בדיוק את אותו דבר.</p>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e27"> פתרתי את תרגיל 27</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">תרגיל 28</span><h4>טווח מטבלה שיש בה עמודה עם שכיחות 0</h4></div>
+  <p class="q-text">
+    לפניכן טבלת ציונים של תלמידי כיתה בבוחן:
+  </p>
+  <table class="dtable">
+    <tr><th>הציון</th><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td></tr>
+    <tr><th>מספר התלמידים</th><td>0</td><td>4</td><td>6</td><td>5</td><td>2</td></tr>
+  </table>
+  <p class="q-text">
+    א. מהו טווח הציונים בכיתה?
+    <br>ב. תלמיד נוסף נבחן וקיבל 5. מהו הטווח עכשיו?
+  </p>
+  <div class="q-row"><span>א. הטווח:</span>
+    <input class="q-input" data-answer="3" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ב. הטווח החדש:</span>
+    <input class="q-input" data-answer="4" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p><strong>א.</strong> קודם בודקות אילו ציונים באמת התקבלו בכיתה.
+    <br>בעמודה של 5 רשומה השכיחות 0 — כלומר אף תלמיד לא קיבל 5,
+    והציון הזה לא נמצא בין הנתונים.
+    <br>הציונים שכן התקבלו הם 6, 7, 8 ו-9:</p>
+    <table class="dtable sol-table">
+      <tr><th>הציון</th><td>5</td><td class="hl-group"><b>6</b></td><td>7</td><td>8</td><td class="hl-group"><b>9</b></td></tr>
+      <tr><th>מספר התלמידים</th><td><b>0</b></td><td>4</td><td>6</td><td>5</td><td>2</td></tr>
+    </table>
+    $$\text{טווח}=\underbrace{9}_{\text{הציון הגבוה ביותר שהתקבל}}-\underbrace{6}_{\text{הציון הנמוך ביותר שהתקבל}}=\textcolor{#2E7D32}{3}$$
+    <p><strong>בדיקה:</strong> מספר התלמידים בכיתה
+    <span class="fi">\(0+4+6+5+2=17\)</span>, וכל 17 קיבלו ציון בין 6 ל-9 ✓</p>
+    <p><strong>ב.</strong> עכשיו יש תלמיד עם הציון 5, ולכן העמודה הזאת כבר לא ריקה:</p>
+    <table class="dtable sol-table">
+      <tr><th>הציון</th><td class="hl-group"><b>5</b></td><td>6</td><td>7</td><td>8</td><td class="hl-group"><b>9</b></td></tr>
+      <tr><th>מספר התלמידים</th><td style="background:var(--b-change)"><b>1</b></td><td>4</td><td>6</td><td>5</td><td>2</td></tr>
+    </table>
+    $$\text{טווח}=\underbrace{9}_{\text{הגבוה ביותר}}-\underbrace{5}_{\text{הנמוך ביותר עכשיו}}=\textcolor{#2E7D32}{4}$$
+    <p>הציון הנמוך ביותר ירד מ-6 ל-5, והטווח גדל ב-1 ✓</p>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e28"> פתרתי את תרגיל 28</label>
+</article>
+
+<a class="backtop" href="#finder">↑ חזרה למאתר הסוגים</a>
+
+<!-- ==================================================================== -->
+<!-- ============ ז · שכיחות יחסית ואחוזים ============ -->
+<!-- ==================================================================== -->
+<h2 id="g-percent"><span class="num">ז</span>שכיחות יחסית ואחוזים</h2>
+<p class="gwhen">
+  <b>זה התרגיל שלך אם:</b> מופיעים המילים "שכיחות יחסית", "אחוז", "חלק מתוך",
+  או שבר כמו "רבע מהתלמידים".
+  <br>הכל נשען על אותה שברה אחת — <strong>הקבוצה חלקי הסך הכל</strong> —
+  ורק הכיוון משתנה.
+</p>
+<div class="box def">
+  <div class="box-title">שלושת הכיוונים — ואיך מזהות איזה מהם זה</div>
+  $$\text{שכיחות יחסית}=\frac{\textcolor{#1D6FA5}{\text{הקבוצה}}}{\textcolor{#8A6D1B}{\text{הסך הכל}}}$$
+  נתונות שתי כמויות ומבקשים אחוז ← מחלקות את הקבוצה בסך הכל.
+  <br>נתון האחוז ונתון הסך הכל ← כופלות את הסך הכל באחוז.
+  <br>נתון האחוז ונתונה הקבוצה ← מחפשות את הסך הכל, בעזרת משוואה.
+</div>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">תרגיל 29</span><h4>משבר לאחוז — ובחזרה</h4></div>
+  <p class="q-text">
+    בכיתה <span class="mk mk-total">‏25 תלמידים</span>,
+    ו<span class="mk mk-group">‏15 מהם לומדים נגינה</span>.
+    <br>א. מהי השכיחות היחסית של לומדי הנגינה, באחוזים?
+    <br>ב. בכיתה מקבילה יש 40 תלמידים, ואותו אחוז מהם לומדים נגינה.
+    כמה תלמידים לומדים שם נגינה?
+  </p>
+  <div class="q-row"><span>א. באחוזים:</span>
+    <input class="q-input" data-answer="60" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ב. מספר התלמידים:</span>
+    <input class="q-input" data-answer="24" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p><strong>א.</strong> נזהה קודם מי הקבוצה ומי הסך הכל.
+    <br>הקבוצה אצלנו — 15 לומדי הנגינה.
+    <br>הסך הכל אצלנו — 25 תלמידי הכיתה.
+    <br>אחוז פירושו שבר עם מכנה 100, אז נצמצם ואז נרחיב:</p>
+    $$\frac{\underbrace{\textcolor{#1D6FA5}{15}}_{\textcolor{#1D6FA5}{\text{לומדי הנגינה}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{25}}_{\textcolor{#8A6D1B}{\text{כל תלמידי הכיתה}}}}=\frac{15:5}{25:5}=\frac{3}{5}=\frac{3\cdot 20}{5\cdot 20}=\frac{60}{100}=\textcolor{#2E7D32}{60\%}$$
+    <p><strong>ב.</strong> עכשיו הכיוון הפוך: נתון האחוז ונתון הסך הכל,
+    ומבקשים את הכמות.</p>
+    $$\textcolor{#2E7D32}{\text{הכמות}}=\underbrace{\textcolor{#8A6D1B}{40}}_{\textcolor{#8A6D1B}{\text{כל הכיתה המקבילה}}}\cdot\underbrace{\frac{\textcolor{#C2408C}{60}}{100}}_{\textcolor{#C2408C}{\text{האחוז שמצאנו}}}=\frac{2400}{100}=\textcolor{#2E7D32}{24}\;\text{תלמידים}$$
+    <p><strong>בדיקה הפוכה:</strong>
+    <span class="fi">\(\frac{24}{40}=\frac{3}{5}=60\%\)</span> ✓ — בדיוק אותו אחוז.
+    <br><strong>בדיקת היגיון:</strong> ‏60% הם קצת יותר מחצי,
+    וחצי מ-40 הוא 20 — אז 24 מתאים ✓</p>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e29"> פתרתי את תרגיל 29</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">תרגיל 30</span><h4>אחוז מתוך הסך — מחפשים את הכמות</h4></div>
+  <p class="q-text">
+    בבית הספר <span class="mk mk-total">‏320 תלמידים</span>,
+    ו<span class="mk mk-given">‏35% מהם</span> מגיעים בהסעה.
+    <br><span class="mk mk-find">כמה תלמידים מגיעים בהסעה?</span>
+  </p>
+  <div class="q-row"><span>מספר התלמידים:</span>
+    <input class="q-input" data-answer="112" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p>נזהה קודם מי מי.
+    <br>הסך הכל אצלנו — 320 תלמידי בית הספר.
+    <br>האחוז אצלנו — 35%, כלומר <span class="fi">\(\frac{35}{100}\)</span>.
+    <br>מבקשים כמות ← כופלות את הסך הכל באחוז:</p>
+    $$\textcolor{#2E7D32}{\text{הכמות}}=\underbrace{\textcolor{#8A6D1B}{320}}_{\textcolor{#8A6D1B}{\text{כל תלמידי בית הספר}}}\cdot\underbrace{\frac{\textcolor{#C2408C}{35}}{100}}_{\textcolor{#C2408C}{\text{האחוז שנתון}}}=\frac{11200}{100}=\textcolor{#2E7D32}{112}\;\text{תלמידים}$$
+    <p><strong>בדיקה הפוכה:</strong>
+    <span class="fi">\(\frac{112}{320}=\frac{35}{100}=35\%\)</span> ✓
+    <br><strong>בדיקת היגיון:</strong> ‏35% הם קצת יותר משליש,
+    ושליש מ-320 הוא בערך 107 — אז 112 מתאים ✓</p>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e30"> פתרתי את תרגיל 30</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">תרגיל 31</span><h4>מציאת הסך הכל מתוך אחוז</h4></div>
+  <p class="q-text">
+    בסקר בבית הספר <span class="mk mk-group">‏18 תלמידות ענו שהן משחקות כדורסל</span>,
+    והן <span class="mk mk-given">‏24% מכלל הנשאלות</span>.
+    <br><span class="mk mk-find">כמה תלמידות נשאלו בסך הכל?</span>
+  </p>
+  <div class="q-row"><span>מספר הנשאלות:</span>
+    <input class="q-input" data-answer="75" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p>הפעם דווקא <strong>הסך הכל</strong> הוא מה שמחפשים,
+    אז נסמן אותו ב-x ונכתוב את השברה הרגילה.
+    <br>הקבוצה אצלנו — 18 שחקניות הכדורסל.
+    <br>הסך הכל אצלנו — x, מספר הנשאלות.</p>
+    $$\frac{\underbrace{\textcolor{#1D6FA5}{18}}_{\textcolor{#1D6FA5}{\text{משחקות כדורסל}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{x}}_{\textcolor{#8A6D1B}{\text{כל הנשאלות}}}}=\underbrace{\textcolor{#C2408C}{\frac{24}{100}}}_{\textcolor{#C2408C}{24\%\text{ — הנתון}}}$$
+    <p>כפל בהצלבה — כל מונה נכפל במכנה של הצד השני:</p>
+    $$18\cdot 100=24\cdot x\;\Longrightarrow\;1800=24x\;\Longrightarrow\;x=\frac{1800}{24}=\textcolor{#2E7D32}{75}$$
+    <p><strong>בדיקה:</strong>
+    <span class="fi">\(\frac{18}{75}=\frac{24}{100}=24\%\)</span> ✓
+    <br><strong>בדיקת היגיון:</strong> ‏24% הם בערך רבע,
+    ורבע מ-75 הוא כמעט 19 — קרוב מאוד ל-18 ✓</p>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e31"> פתרתי את תרגיל 31</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">תרגיל 32</span><h4>השלמת טבלת אחוזים ל-100%</h4></div>
+  <p class="q-text">
+    בסקר בבית הספר נשאלו התלמידים איך הם מגיעים בבוקר.
+    התוצאות נרשמו באחוזים, ותא אחד חסר:
+  </p>
+  <table class="dtable">
+    <tr><th>אופן ההגעה</th><td>ברגל</td><td>אופניים</td><td>הסעה</td><td>אחר</td></tr>
+    <tr><th>אחוז התלמידים</th><td>35%</td><td>20%</td><td>30%</td><td class="x-cell">?</td></tr>
+  </table>
+  <p class="q-text">
+    א. איזה אחוז מהתלמידים מגיעים בדרך אחרת?
+    <br>ב. בבית הספר 400 תלמידים. כמה מהם מגיעים בדרך אחרת?
+  </p>
+  <div class="q-row"><span>א. באחוזים:</span>
+    <input class="q-input" data-answer="15" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ב. מספר התלמידים:</span>
+    <input class="q-input" data-answer="60" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p><strong>א.</strong> כל תלמיד מגיע בדרך אחת בלבד, ולכן ארבע הקטגוריות
+    מכסות יחד את כל בית הספר — והאחוזים שלהן מסתכמים ל-100%.</p>
+    $$\textcolor{#2E7D32}{\text{האחוז החסר}}=\underbrace{\textcolor{#8A6D1B}{100\%}}_{\textcolor{#8A6D1B}{\text{כל התלמידים}}}-\underbrace{(35\%+20\%+30\%)}_{\text{שלוש הקטגוריות הידועות}}=100\%-85\%=\textcolor{#2E7D32}{15\%}$$
+    <table class="dtable sol-table">
+      <tr><th>אופן ההגעה</th><td>ברגל</td><td>אופניים</td><td>הסעה</td><td>אחר</td><th>סך הכל</th></tr>
+      <tr><th>אחוז התלמידים</th><td>35%</td><td>20%</td><td>30%</td><td class="hl-find"><b>15%</b></td><th>100%</th></tr>
+    </table>
+    <p><strong>בדיקה:</strong> <span class="fi">\(35+20+30+15=100\)</span> ✓</p>
+    <p><strong>ב.</strong> עכשיו נתון הסך הכל ונתון האחוז ← כופלות:</p>
+    $$\textcolor{#2E7D32}{\text{הכמות}}=\underbrace{\textcolor{#8A6D1B}{400}}_{\textcolor{#8A6D1B}{\text{כל תלמידי בית הספר}}}\cdot\underbrace{\frac{\textcolor{#C2408C}{15}}{100}}_{\textcolor{#C2408C}{\text{האחוז שמצאנו}}}=\frac{6000}{100}=\textcolor{#2E7D32}{60}\;\text{תלמידים}$$
+    <p><strong>בדיקה מלאה:</strong> נמלא את כל הטבלה בכמויות ונוודא שהיא מגיעה ל-400:</p>
+    <table class="dtable sol-table">
+      <tr><th>אופן ההגעה</th><td>ברגל</td><td>אופניים</td><td>הסעה</td><td>אחר</td><th>סך הכל</th></tr>
+      <tr><th>אחוז התלמידים</th><td>35%</td><td>20%</td><td>30%</td><td>15%</td><th>100%</th></tr>
+      <tr><th>מספר התלמידים</th><td>140</td><td>80</td><td>120</td><td class="hl-find"><b>60</b></td><th>400</th></tr>
+    </table>
+    <p><span class="fi">\(140+80+120+60=400\)</span> ✓</p>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e32"> פתרתי את תרגיל 32</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">תרגיל 33</span><h4>שכיחות יחסית מטבלה — לערך אחד ולקבוצת עמודות</h4></div>
+  <p class="q-text">
+    לפניכן טבלה המתארת כמה אחים ואחיות יש לתלמידי השכבה:
+  </p>
+  <table class="dtable">
+    <tr><th>מספר האחים</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+    <tr><th>מספר התלמידים</th><td>6</td><td>10</td><td>14</td><td>6</td><td>4</td></tr>
+  </table>
+  <p class="q-text">
+    א. מהי השכיחות היחסית, באחוזים, של תלמידים עם 2 אחים?
+    <br>ב. איזה אחוז מהתלמידים יש להם יותר משני אחים?
+  </p>
+  <div class="q-row"><span>א. באחוזים:</span>
+    <input class="q-input" data-answer="35" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ב. באחוזים:</span>
+    <input class="q-input" data-answer="25" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p>לפני הכל — מי זה <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> אצלנו?
+    כל תלמיד הוא נתון אחד, ולכן <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> הוא סכום שורת השכיחות:</p>
+    $$\textcolor{#8A6D1B}{N}=6+10+14+6+4=\textcolor{#8A6D1B}{40}\;\text{תלמידים}$$
+    <p>המכנה בשני הסעיפים יהיה 40. רק המונה משתנה.</p>
+    <p><strong>א.</strong> הקבוצה כאן היא עמודה אחת — התלמידים עם 2 אחים:</p>
+    <table class="dtable sol-table">
+      <tr><th>מספר האחים</th><td>0</td><td>1</td><td class="hl-group"><b>2</b></td><td>3</td><td>4</td></tr>
+      <tr><th>מספר התלמידים</th><td>6</td><td>10</td><td class="hl-group"><b>14</b></td><td>6</td><td>4</td></tr>
+    </table>
+    $$\frac{\underbrace{\textcolor{#1D6FA5}{14}}_{\textcolor{#1D6FA5}{\text{התלמידים עם 2 אחים}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{40}}_{\textcolor{#8A6D1B}{\text{כל תלמידי השכבה}}}}=\frac{14:2}{40:2}=\frac{7}{20}=\frac{7\cdot 5}{20\cdot 5}=\frac{35}{100}=\textcolor{#2E7D32}{35\%}$$
+    <p><strong>ב.</strong> "יותר משני אחים" פירושו 3 או 4 אחים, בלי העמודה של 2 עצמה.
+    <br>הקבוצה כאן היא שתי עמודות, אז קודם מסכמות אותן:</p>
+    <table class="dtable sol-table">
+      <tr><th>מספר האחים</th><td>0</td><td>1</td><td>2</td><td class="hl-group"><b>3</b></td><td class="hl-group"><b>4</b></td></tr>
+      <tr><th>מספר התלמידים</th><td>6</td><td>10</td><td>14</td><td class="hl-group"><b>6</b></td><td class="hl-group"><b>4</b></td></tr>
+    </table>
+    $$\frac{\underbrace{\textcolor{#1D6FA5}{6+4}}_{\textcolor{#1D6FA5}{\text{התלמידים עם 3 אחים ועם 4 אחים}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{40}}_{\textcolor{#8A6D1B}{\text{כל תלמידי השכבה}}}}=\frac{10}{40}=\frac{1}{4}=\frac{25}{100}=\textcolor{#2E7D32}{25\%}$$
+    <p><strong>בדיקה:</strong> נחשב את כל חמש השכיחויות היחסיות ונוודא שהן מסתכמות ל-100%:</p>
+    <table class="dtable sol-table">
+      <tr><th>מספר האחים</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><th>סך הכל</th></tr>
+      <tr><th>מספר התלמידים</th><td>6</td><td>10</td><td>14</td><td>6</td><td>4</td><th>40</th></tr>
+      <tr><th>שכיחות יחסית באחוזים</th><td>15%</td><td>25%</td><td>35%</td><td>15%</td><td>10%</td><th>100%</th></tr>
+    </table>
+    <p><span class="fi">\(15+25+35+15+10=100\)</span> ✓</p>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e33"> פתרתי את תרגיל 33</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">תרגיל 34</span><h4>השלמת טבלת שכיחויות יחסיות בשברים</h4></div>
+  <p class="q-text">
+    בסקר נשאלו תלמידים מהי הפעילות האהובה עליהם אחרי הלימודים.
+    התוצאות נרשמו כשכיחויות יחסיות בשברים, ותא אחד חסר:
+  </p>
+  <table class="dtable">
+    <tr><th>הפעילות</th><td>קריאה</td><td>ספורט</td><td>מוזיקה</td><td>אחר</td></tr>
+    <tr><th>שכיחות יחסית</th>
+        <td><span class="fi">\(\frac{1}{5}\)</span></td>
+        <td><span class="fi">\(\frac{1}{4}\)</span></td>
+        <td><span class="fi">\(\frac{3}{10}\)</span></td>
+        <td class="x-cell">?</td></tr>
+  </table>
+  <p class="q-text">
+    א. מהי השכיחות היחסית של "אחר", באחוזים?
+    <br>ב. בסקר השתתפו 80 תלמידים. כמה מהם בחרו "אחר"?
+  </p>
+  <div class="q-row"><span>א. באחוזים:</span>
+    <input class="q-input" data-answer="25" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ב. מספר התלמידים:</span>
+    <input class="q-input" data-answer="20" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p><strong>א.</strong> סכום כל השכיחויות היחסיות בטבלה שלמה הוא תמיד 1 —
+    כי יחד הן מכסות את כל הנשאלים.</p>
+    <p>כדי לחבר את שלושת השברים הידועים נביא אותם למכנה משותף 20:</p>
+    $$\frac{1}{5}=\frac{4}{20}\;,\qquad\frac{1}{4}=\frac{5}{20}\;,\qquad\frac{3}{10}=\frac{6}{20}$$
+    $$\underbrace{\frac{4}{20}+\frac{5}{20}+\frac{6}{20}}_{\text{שלוש הפעילויות הידועות}}=\frac{15}{20}$$
+    $$\textcolor{#2E7D32}{\text{השכיחות היחסית של הפעילות אחר}}=\underbrace{\textcolor{#8A6D1B}{1}}_{\textcolor{#8A6D1B}{\text{כל הנשאלים}}}-\frac{15}{20}=\frac{20}{20}-\frac{15}{20}=\frac{5}{20}=\frac{1}{4}$$
+    <p>ובאחוזים: <span class="fi">\(\frac{1}{4}=\frac{25}{100}=\textcolor{#2E7D32}{25\%}\)</span>.</p>
+    <table class="dtable sol-table">
+      <tr><th>הפעילות</th><td>קריאה</td><td>ספורט</td><td>מוזיקה</td><td>אחר</td><th>סך הכל</th></tr>
+      <tr><th>שכיחות יחסית</th>
+          <td><span class="fi">\(\frac{4}{20}\)</span></td>
+          <td><span class="fi">\(\frac{5}{20}\)</span></td>
+          <td><span class="fi">\(\frac{6}{20}\)</span></td>
+          <td class="hl-find"><b><span class="fi">\(\frac{5}{20}\)</span></b></td><th>1</th></tr>
+      <tr><th>באחוזים</th><td>20%</td><td>25%</td><td>30%</td><td class="hl-find"><b>25%</b></td><th>100%</th></tr>
+    </table>
+    <p><strong>בדיקה:</strong> <span class="fi">\(20+25+30+25=100\)</span> ✓</p>
+    <p><strong>ב.</strong> נתון הסך הכל ונתונה השכיחות היחסית ← כופלות:</p>
+    $$\textcolor{#2E7D32}{\text{הכמות}}=\underbrace{\textcolor{#8A6D1B}{80}}_{\textcolor{#8A6D1B}{\text{כל הנשאלים}}}\cdot\underbrace{\frac{1}{4}}_{\text{השכיחות היחסית של הפעילות אחר}}=\textcolor{#2E7D32}{20}\;\text{תלמידים}$$
+    <p><strong>בדיקה מלאה:</strong> קריאה 16, ספורט 20, מוזיקה 24, אחר 20 —
+    ויחד <span class="fi">\(16+20+24+20=80\)</span> ✓</p>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e34"> פתרתי את תרגיל 34</label>
+</article>
+
+<a class="backtop" href="#finder">↑ חזרה למאתר הסוגים</a>
+
+<!-- ==================================================================== -->
+<!-- ============ ח · קריאה מדיאגרמות ============ -->
+<!-- ==================================================================== -->
+<h2 id="g-charts"><span class="num">ח</span>קריאה מדיאגרמות</h2>
+<p class="gwhen">
+  <b>זה התרגיל שלך אם:</b> הנתונים מגיעים כציור ולא כטבלה.
+  <br>הצעד הראשון תמיד זהה: <strong>נעביר את הנתונים מהדיאגרמה לטבלה</strong> —
+  ומשם ממשיכות בדיוק כמו בכל תרגיל אחר.
+</p>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">תרגיל 35</span><h4>דיאגרמת עמודות — כל המדדים</h4></div>
+  <p class="q-text">
+    בסקר שינה נשאלו תלמידי כיתה כמה שעות הם ישנים בלילה,
+    והתוצאות הוצגו בדיאגרמה:
+  </p>
+  <figure>
+    <div class="axplot" style="max-width:396px">
+    <span class="ax-ylab">השכיחות — כמה תלמידים</span>
+    <svg viewBox="0 0 360 190" style="width:100%;height:auto" role="img" aria-label="דיאגרמת עמודות של שעות שינה: 3, 6, 8, 5, 2 תלמידים">
+      <line x1="24" y1="130" x2="336" y2="130" stroke="#E4E8EE" stroke-width="1"></line>
+      <line x1="24" y1="100" x2="336" y2="100" stroke="#E4E8EE" stroke-width="1"></line>
+      <line x1="24" y1="70" x2="336" y2="70" stroke="#E4E8EE" stroke-width="1"></line>
+      <line x1="24" y1="40" x2="336" y2="40" stroke="#E4E8EE" stroke-width="1"></line>
+      <rect x="35.2" y="115" width="40" height="45" rx="3" fill="#2E7D6B"></rect>
+      <rect x="97.6" y="70" width="40" height="90" rx="3" fill="#2E7D6B"></rect>
+      <rect x="160" y="40" width="40" height="120" rx="3" fill="#2E7D6B"></rect>
+      <rect x="222.4" y="85" width="40" height="75" rx="3" fill="#2E7D6B"></rect>
+      <rect x="284.8" y="130" width="40" height="30" rx="3" fill="#2E7D6B"></rect>
+      <text x="55.2" y="108" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">3</text>
+      <text x="117.6" y="63" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">6</text>
+      <text x="180" y="33" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">8</text>
+      <text x="242.4" y="78" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">5</text>
+      <text x="304.8" y="123" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">2</text>
+      <line x1="24" y1="160" x2="336" y2="160" stroke="#5A6875" stroke-width="1.5"></line>
+      <path d="M344 160 L336 156 L336 164 Z" fill="#5A6875"></path>
+      <line x1="24" y1="160" x2="24" y2="18" stroke="#5A6875" stroke-width="1.5"></line>
+      <path d="M24 10 L20 18 L28 18 Z" fill="#5A6875"></path>
+      <line x1="19" y1="130" x2="24" y2="130" stroke="#5A6875" stroke-width="1.5"></line>
+      <line x1="19" y1="100" x2="24" y2="100" stroke="#5A6875" stroke-width="1.5"></line>
+      <line x1="19" y1="70" x2="24" y2="70" stroke="#5A6875" stroke-width="1.5"></line>
+      <line x1="19" y1="40" x2="24" y2="40" stroke="#5A6875" stroke-width="1.5"></line>
+      <text x="16" y="164" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">0</text>
+      <text x="16" y="134" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">2</text>
+      <text x="16" y="104" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">4</text>
+      <text x="16" y="74" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">6</text>
+      <text x="16" y="44" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">8</text>
+      <line x1="55.2" y1="160" x2="55.2" y2="165" stroke="#5A6875" stroke-width="1"></line>
+      <line x1="117.6" y1="160" x2="117.6" y2="165" stroke="#5A6875" stroke-width="1"></line>
+      <line x1="180" y1="160" x2="180" y2="165" stroke="#5A6875" stroke-width="1"></line>
+      <line x1="242.4" y1="160" x2="242.4" y2="165" stroke="#5A6875" stroke-width="1"></line>
+      <line x1="304.8" y1="160" x2="304.8" y2="165" stroke="#5A6875" stroke-width="1"></line>
+      <text x="55.2" y="182" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">6</text>
+      <text x="117.6" y="182" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">7</text>
+      <text x="180" y="182" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">8</text>
+      <text x="242.4" y="182" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">9</text>
+      <text x="304.8" y="182" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">10</text>
+    </svg>
+    <span class="ax-xlab">הערכים — שעות שינה בלילה</span>
+    </div>
+    <figcaption>המספר שמעל כל עמודה — כמה תלמידים ישנים את מספר השעות הזה.</figcaption>
+  </figure>
+  <p class="q-text">
+    א. כמה תלמידים השתתפו בסקר?
+    <br>ב. מהו מספר השעות השכיח?
+    <br>ג. מהו החציון?
+    <br>ד. מהו הממוצע?
+    <br>ה. מהו הטווח?
+  </p>
+  <div class="q-row"><span>א.</span>
+    <input class="q-input" data-answer="24" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ב. השכיח:</span>
+    <input class="q-input" data-answer="8" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ג. החציון:</span>
+    <input class="q-input" data-answer="8" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ד. הממוצע:</span>
+    <input class="q-input" data-answer="7.875" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ה. הטווח:</span>
+    <input class="q-input" data-answer="4" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p><strong>נעביר את הנתונים מהדיאגרמה לטבלה.</strong>
+    גובה כל עמודה הוא השכיחות שלה:</p>
+    <table class="dtable sol-table">
+      <tr><th>שעות שינה</th><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr>
+      <tr><th>מספר התלמידים</th><td>3</td><td>6</td><td>8</td><td>5</td><td>2</td></tr>
+    </table>
+    <p><strong>א.</strong> מי זה <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> אצלנו?
+    כל תלמיד הוא נתון אחד, ולכן <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> הוא סכום השכיחויות:</p>
+    $$\textcolor{#8A6D1B}{N}=3+6+8+5+2=\textcolor{#8A6D1B}{24}\;\text{תלמידים}$$
+    <p><strong>ב.</strong> העמודה הגבוהה ביותר יושבת מעל הערך 8, וגובהה 8 ←
+    השכיח הוא <span class="mk mk-find"><strong>8 שעות</strong></span>.
+    <br>כאן במקרה גם הערך וגם השכיחות שלו הם 8: הערך 8 הוא מספר השעות,
+    והשכיחות 8 היא כמה תלמידים ישנים כך.</p>
+    <p><strong>ג.</strong> מספר הנתונים זוגי:</p>
+    $$\text{מיקום החציון}=\frac{\overbrace{\textcolor{#8A6D1B}{24}}^{\textcolor{#8A6D1B}{\text{סך התלמידים}}}+1}{2}=\underbrace{12.5}_{\text{בין מקום 12 למקום 13}}$$
+    <table class="dtable sol-table">
+      <tr><th>שעות שינה</th><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr>
+      <tr><th>מספר התלמידים</th><td>3</td><td>6</td><td>8</td><td>5</td><td>2</td></tr>
+      <tr><th>כמה ספרנו עד כאן (צבירה)</th>
+          <td>① 3</td>
+          <td>② <span dir="ltr">3+6=9</span></td>
+          <td style="background:#DFF0E1"><b style="color:#2E7D32">③ <span dir="ltr">9+8=17</span></b> ✋</td>
+          <td>—</td><td>—</td></tr>
+    </table>
+    <p class="tbl-note">⬅ כיוון ההליכה: מתחילות בעמודה הימנית (6 שעות) וצועדות שמאלה.</p>
+    <p class="tbl-note" style="color:#2E7D32;font-weight:700;margin-top:2px">✋ עברנו את 12.5 בתוך עמודת ה-8 — גם המקום ה-12 וגם המקום ה-13 יושבים בה.</p>
+    $$\text{החציון}=\frac{8+8}{2}=\textcolor{#2E7D32}{8}\;\text{שעות}$$
+    <p><strong>ד.</strong> שורת העבודה — מכפלה בכל עמודה:</p>
+    <table class="dtable sol-table">
+      <tr><th>שעות שינה</th><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr>
+      <tr><th>מספר התלמידים</th><td>3</td><td>6</td><td>8</td><td>5</td><td>2</td></tr>
+      <tr><th>ערך × שכיחות</th>
+          <td><span dir="ltr">6·3</span><br><b>18</b></td>
+          <td><span dir="ltr">7·6</span><br><b>42</b></td>
+          <td><span dir="ltr">8·8</span><br><b>64</b></td>
+          <td><span dir="ltr">9·5</span><br><b>45</b></td>
+          <td><span dir="ltr">10·2</span><br><b>20</b></td></tr>
+    </table>
+    $$\overline{x}=\frac{\underbrace{\textcolor{#1D6FA5}{18+42+64+45+20}}_{\textcolor{#1D6FA5}{\text{סכום שורת העבודה}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{24}}_{\textcolor{#8A6D1B}{\text{סך התלמידים}}}}=\frac{\textcolor{#1D6FA5}{189}}{\textcolor{#8A6D1B}{24}}=\textcolor{#2E7D32}{7.875}$$
+    <p><strong>ה.</strong> הערך הגדול ביותר שהתקבל הוא 10, הקטן ביותר 6:</p>
+    $$\text{טווח}=10-6=\textcolor{#2E7D32}{4}\;\text{שעות}$$
+    <p><strong>בדיקת היגיון:</strong> הממוצע 7.875 והחציון 8 קרובים מאוד זה לזה,
+    והדיאגרמה באמת נראית מאוזנת סביב העמודה של 8 ✓</p>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e35"> פתרתי את תרגיל 35</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">תרגיל 36</span><h4>דיאגרמה בלי מספרים מעל העמודות — קוראות מהציר</h4></div>
+  <p class="q-text">
+    בסקר נשאלו 80 משתתפים כמה צמחים יש להם בבית.
+    הפעם אין מספרים מעל העמודות — את הגבהים קוראים מהציר האנכי:
+  </p>
+  <figure>
+    <div class="axplot" style="max-width:396px">
+    <span class="ax-ylab">השכיחות — כמה משתתפים</span>
+    <svg viewBox="0 0 360 190" style="width:100%;height:auto" role="img" aria-label="דיאגרמת עמודות של מספר הצמחים, בלי מספרים מעל העמודות">
+      <line x1="24" y1="135" x2="336" y2="135" stroke="#E4E8EE" stroke-width="1"></line>
+      <line x1="24" y1="110" x2="336" y2="110" stroke="#E4E8EE" stroke-width="1"></line>
+      <line x1="24" y1="85" x2="336" y2="85" stroke="#E4E8EE" stroke-width="1"></line>
+      <line x1="24" y1="60" x2="336" y2="60" stroke="#E4E8EE" stroke-width="1"></line>
+      <line x1="24" y1="35" x2="336" y2="35" stroke="#E4E8EE" stroke-width="1"></line>
+      <rect x="35.2" y="110" width="40" height="50" rx="3" fill="#2E7D6B"></rect>
+      <rect x="97.6" y="35" width="40" height="125" rx="3" fill="#2E7D6B"></rect>
+      <rect x="160" y="60" width="40" height="100" rx="3" fill="#2E7D6B"></rect>
+      <rect x="222.4" y="85" width="40" height="75" rx="3" fill="#2E7D6B"></rect>
+      <rect x="284.8" y="110" width="40" height="50" rx="3" fill="#2E7D6B"></rect>
+      <line x1="24" y1="160" x2="336" y2="160" stroke="#5A6875" stroke-width="1.5"></line>
+      <path d="M344 160 L336 156 L336 164 Z" fill="#5A6875"></path>
+      <line x1="24" y1="160" x2="24" y2="23" stroke="#5A6875" stroke-width="1.5"></line>
+      <path d="M24 15 L20 23 L28 23 Z" fill="#5A6875"></path>
+      <line x1="19" y1="135" x2="24" y2="135" stroke="#5A6875" stroke-width="1.5"></line>
+      <line x1="19" y1="110" x2="24" y2="110" stroke="#5A6875" stroke-width="1.5"></line>
+      <line x1="19" y1="85" x2="24" y2="85" stroke="#5A6875" stroke-width="1.5"></line>
+      <line x1="19" y1="60" x2="24" y2="60" stroke="#5A6875" stroke-width="1.5"></line>
+      <line x1="19" y1="35" x2="24" y2="35" stroke="#5A6875" stroke-width="1.5"></line>
+      <text x="16" y="164" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">0</text>
+      <text x="16" y="139" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">5</text>
+      <text x="16" y="114" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">10</text>
+      <text x="16" y="89" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">15</text>
+      <text x="16" y="64" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">20</text>
+      <text x="16" y="39" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">25</text>
+      <line x1="55.2" y1="160" x2="55.2" y2="165" stroke="#5A6875" stroke-width="1"></line>
+      <line x1="117.6" y1="160" x2="117.6" y2="165" stroke="#5A6875" stroke-width="1"></line>
+      <line x1="180" y1="160" x2="180" y2="165" stroke="#5A6875" stroke-width="1"></line>
+      <line x1="242.4" y1="160" x2="242.4" y2="165" stroke="#5A6875" stroke-width="1"></line>
+      <line x1="304.8" y1="160" x2="304.8" y2="165" stroke="#5A6875" stroke-width="1"></line>
+      <text x="55.2" y="182" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">0</text>
+      <text x="117.6" y="182" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">1</text>
+      <text x="180" y="182" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">2</text>
+      <text x="242.4" y="182" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">3</text>
+      <text x="304.8" y="182" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">4</text>
+    </svg>
+    <span class="ax-xlab">הערכים — מספר הצמחים בבית</span>
+    </div>
+    <figcaption>כל סימון על הציר האנכי מייצג 5 משתתפים.</figcaption>
+  </figure>
+  <p class="q-text">
+    א. כמה משתתפים יש להם 2 צמחים?
+    <br>ב. באיזה מספר צמחים השכיחות היא 15?
+    <br>ג. לכמה משתתפים יש לכל היותר צמח אחד?
+  </p>
+  <div class="q-row"><span>א.</span>
+    <input class="q-input" data-answer="20" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ב. מספר הצמחים:</span>
+    <input class="q-input" data-answer="3" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ג.</span>
+    <input class="q-input" data-answer="35" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p><strong>קודם קוראות את קנה המידה של הציר.</strong>
+    <br>הסימונים על הציר האנכי הם 0, 5, 10, 15, 20, 25 —
+    כלומר כל מרווח בין שני סימונים שווה 5 משתתפים.</p>
+    <p><strong>נעביר את הנתונים מהדיאגרמה לטבלה.</strong>
+    נמדוד כל עמודה מול הסימונים:</p>
+    <table class="dtable sol-table">
+      <tr><th>מספר הצמחים</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+      <tr><th>מספר המשתתפים</th><td>10</td><td>25</td><td>20</td><td>15</td><td>10</td></tr>
+    </table>
+    <p><strong>בדיקה:</strong> <span class="fi">\(10+25+20+15+10=80\)</span> ✓ —
+    בדיוק מספר המשתתפים שנתון בשאלה. הקריאה מהציר נכונה.</p>
+    <p><strong>א.</strong> העמודה של הערך 2 מגיעה בדיוק לסימון 20 ←
+    <span class="mk mk-find"><strong>20 משתתפים</strong></span>.</p>
+    <p><strong>ב.</strong> הפעם ההליכה הפוכה: מחפשות בטבלה את השכיחות 15,
+    וקוראות את הערך שמעליה:</p>
+    <table class="dtable sol-table">
+      <tr><th>מספר הצמחים</th><td>0</td><td>1</td><td>2</td><td class="hl-find"><b>3</b></td><td>4</td></tr>
+      <tr><th>מספר המשתתפים</th><td>10</td><td>25</td><td>20</td><td class="hl-group"><b>15</b></td><td>10</td></tr>
+    </table>
+    <p>השכיחות 15 שייכת לערך <span class="mk mk-find"><strong>3 צמחים</strong></span>.</p>
+    <p><strong>ג.</strong> "לכל היותר צמח אחד" פירושו 0 צמחים או צמח אחד,
+    כולל הצמח האחד עצמו:</p>
+    <table class="dtable sol-table">
+      <tr><th>מספר הצמחים</th><td class="hl-group">0</td><td class="hl-group">1</td><td>2</td><td>3</td><td>4</td></tr>
+      <tr><th>מספר המשתתפים</th><td class="hl-group">10</td><td class="hl-group">25</td><td>20</td><td>15</td><td>10</td></tr>
+    </table>
+    $$\underbrace{\textcolor{#1D6FA5}{10+25}}_{\textcolor{#1D6FA5}{\text{שתי העמודות: 0 צמחים וצמח אחד}}}=\textcolor{#2E7D32}{35}\;\text{משתתפים}$$
+    <p><strong>בדיקה:</strong> השאר הם <span class="fi">\(20+15+10=45\)</span>,
+    ויחד <span class="fi">\(35+45=80\)</span> ✓</p>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e36"> פתרתי את תרגיל 36</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">תרגיל 37</span><h4>דיאגרמת עוגה — השלמה ל-100% ומעבר לכמויות</h4></div>
+  <p class="q-text">
+    בשכבת כיתות ט׳ כל תלמיד נרשם לחוג אחד בלבד.
+    הדיאגרמה מציגה את אחוז התלמידים בכל חוג, ואחוז אחד חסר:
+  </p>
+  <figure>
+    <svg viewBox="0 0 230 230" width="230" style="max-width:100%;height:auto" role="img" aria-label="דיאגרמת עוגה: מחשבים 40 אחוז, ספורט 25 אחוז, ציור 15 אחוז, ומחול לא ידוע">
+      <path d="M 115 115 L 115.0 20.0 A 95 95 0 0 1 170.8 191.9 Z" fill="#1D6FA5" stroke="#FFFFFF" stroke-width="2"></path>
+      <text x="169.2" y="103.4" text-anchor="middle" font-family="Arial" font-size="17" font-weight="800" fill="#FFFFFF">40%</text>
+      <path d="M 115 115 L 170.8 191.9 A 95 95 0 0 1 38.1 170.8 Z" fill="#2E7D6B" stroke="#FFFFFF" stroke-width="2"></path>
+      <text x="106.1" y="177.3" text-anchor="middle" font-family="Arial" font-size="17" font-weight="800" fill="#FFFFFF">25%</text>
+      <path d="M 115 115 L 38.1 170.8 A 95 95 0 0 1 24.6 85.6 Z" fill="#C2408C" stroke="#FFFFFF" stroke-width="2"></path>
+      <text x="58.7" y="129.9" text-anchor="middle" font-family="Arial" font-size="17" font-weight="800" fill="#FFFFFF">15%</text>
+      <path d="M 115 115 L 24.6 85.6 A 95 95 0 0 1 115.0 20.0 Z" fill="#C9CFD6" stroke="#FFFFFF" stroke-width="2"></path>
+      <text x="81.5" y="74.9" text-anchor="middle" font-family="Arial" font-size="17" font-weight="800" fill="#1C2733">?</text>
+    </svg>
+    <div class="mk-legend" style="justify-content:center;margin-top:10px">
+      <span><i class="sw" style="background:#1D6FA5"></i> מחשבים — 40%</span>
+      <span><i class="sw" style="background:#2E7D6B"></i> ספורט — 25%</span>
+      <span><i class="sw" style="background:#C2408C"></i> ציור — 15%</span>
+      <span><i class="sw" style="background:#C9CFD6"></i> מחול — ?</span>
+    </div>
+    <figcaption>כל תלמיד נספר פעם אחת בלבד, ולכן כל העוגה יחד היא 100% מהשכבה.</figcaption>
+  </figure>
+  <p class="q-text">
+    א. איזה אחוז מהתלמידים נרשמו לחוג מחול?
+    <br>ב. בשכבה 240 תלמידים. כמה מהם נרשמו לחוג מחשבים?
+    <br>ג. כמה תלמידים נרשמו לחוג מחול?
+  </p>
+  <div class="q-row"><span>א. באחוזים:</span>
+    <input class="q-input" data-answer="20" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ב. מחשבים:</span>
+    <input class="q-input" data-answer="96" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ג. מחול:</span>
+    <input class="q-input" data-answer="48" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p><strong>א.</strong> כל תלמיד נרשם לחוג אחד בלבד, ולכן ארבעת החלקים
+    מכסים יחד את כל השכבה — והאחוזים שלהם מסתכמים ל-100%.</p>
+    $$\textcolor{#2E7D32}{\text{אחוז המחול}}=\underbrace{\textcolor{#8A6D1B}{100\%}}_{\textcolor{#8A6D1B}{\text{כל השכבה}}}-\underbrace{(40\%+25\%+15\%)}_{\text{שלושת החוגים הידועים}}=100\%-80\%=\textcolor{#2E7D32}{20\%}$$
+    <p><strong>ב.</strong> עכשיו נתון גם הסך הכל — 240 תלמידים.
+    <br>נתון האחוז ונתון הסך הכל ← כופלות:</p>
+    $$\textcolor{#2E7D32}{\text{תלמידי המחשבים}}=\underbrace{\textcolor{#8A6D1B}{240}}_{\textcolor{#8A6D1B}{\text{כל השכבה}}}\cdot\underbrace{\frac{\textcolor{#C2408C}{40}}{100}}_{\textcolor{#C2408C}{\text{אחוז המחשבים}}}=\frac{9600}{100}=\textcolor{#2E7D32}{96}\;\text{תלמידים}$$
+    <p><strong>ג.</strong> אותו חישוב, עם האחוז שמצאנו בסעיף א:</p>
+    $$\textcolor{#2E7D32}{\text{תלמידי המחול}}=\underbrace{\textcolor{#8A6D1B}{240}}_{\textcolor{#8A6D1B}{\text{כל השכבה}}}\cdot\underbrace{\frac{\textcolor{#C2408C}{20}}{100}}_{\textcolor{#C2408C}{\text{אחוז המחול}}}=\frac{4800}{100}=\textcolor{#2E7D32}{48}\;\text{תלמידים}$$
+    <p><strong>נעביר את כל הדיאגרמה לטבלת שכיחויות ונבדוק:</strong></p>
+    <table class="dtable sol-table">
+      <tr><th>שם החוג</th><td>מחשבים</td><td>ספורט</td><td>ציור</td><td>מחול</td><th>סך הכל</th></tr>
+      <tr><th>אחוז התלמידים</th><td>40%</td><td>25%</td><td>15%</td><td class="hl-find"><b>20%</b></td><th>100%</th></tr>
+      <tr><th>מספר התלמידים</th><td class="hl-find"><b>96</b></td><td>60</td><td>36</td><td class="hl-find"><b>48</b></td><th>240</th></tr>
+    </table>
+    <p><span class="fi">\(96+60+36+48=240\)</span> ✓ — כל השכבה בטבלה.</p>
+    <p><strong>בדיקת היגיון:</strong> חלק המחשבים בדיאגרמה גדול מרבע העוגה
+    וקטן מחציה, ו-96 מתוך 240 הוא באמת בין רבע (60) לחצי (120) ✓</p>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e37"> פתרתי את תרגיל 37</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">תרגיל 38</span><h4>דיאגרמה עם שתי עמודות באותו גובה</h4></div>
+  <p class="q-text">
+    בסקר נשאלו תלמידי הכיתה כמה פעמים הזמינו אוכל מבחוץ בחודש האחרון:
+  </p>
+  <figure>
+    <div class="axplot" style="max-width:396px">
+    <span class="ax-ylab">השכיחות — כמה תלמידים</span>
+    <svg viewBox="0 0 360 190" style="width:100%;height:auto" role="img" aria-label="דיאגרמת עמודות של מספר ההזמנות: 3, 8, 6, 8, 5 תלמידים">
+      <line x1="24" y1="130" x2="336" y2="130" stroke="#E4E8EE" stroke-width="1"></line>
+      <line x1="24" y1="100" x2="336" y2="100" stroke="#E4E8EE" stroke-width="1"></line>
+      <line x1="24" y1="70" x2="336" y2="70" stroke="#E4E8EE" stroke-width="1"></line>
+      <line x1="24" y1="40" x2="336" y2="40" stroke="#E4E8EE" stroke-width="1"></line>
+      <rect x="35.2" y="115" width="40" height="45" rx="3" fill="#2E7D6B"></rect>
+      <rect x="97.6" y="40" width="40" height="120" rx="3" fill="#2E7D6B"></rect>
+      <rect x="160" y="70" width="40" height="90" rx="3" fill="#2E7D6B"></rect>
+      <rect x="222.4" y="40" width="40" height="120" rx="3" fill="#2E7D6B"></rect>
+      <rect x="284.8" y="85" width="40" height="75" rx="3" fill="#2E7D6B"></rect>
+      <text x="55.2" y="108" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">3</text>
+      <text x="117.6" y="33" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">8</text>
+      <text x="180" y="63" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">6</text>
+      <text x="242.4" y="33" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">8</text>
+      <text x="304.8" y="78" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">5</text>
+      <line x1="24" y1="160" x2="336" y2="160" stroke="#5A6875" stroke-width="1.5"></line>
+      <path d="M344 160 L336 156 L336 164 Z" fill="#5A6875"></path>
+      <line x1="24" y1="160" x2="24" y2="18" stroke="#5A6875" stroke-width="1.5"></line>
+      <path d="M24 10 L20 18 L28 18 Z" fill="#5A6875"></path>
+      <line x1="19" y1="130" x2="24" y2="130" stroke="#5A6875" stroke-width="1.5"></line>
+      <line x1="19" y1="100" x2="24" y2="100" stroke="#5A6875" stroke-width="1.5"></line>
+      <line x1="19" y1="70" x2="24" y2="70" stroke="#5A6875" stroke-width="1.5"></line>
+      <line x1="19" y1="40" x2="24" y2="40" stroke="#5A6875" stroke-width="1.5"></line>
+      <text x="16" y="164" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">0</text>
+      <text x="16" y="134" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">2</text>
+      <text x="16" y="104" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">4</text>
+      <text x="16" y="74" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">6</text>
+      <text x="16" y="44" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">8</text>
+      <line x1="55.2" y1="160" x2="55.2" y2="165" stroke="#5A6875" stroke-width="1"></line>
+      <line x1="117.6" y1="160" x2="117.6" y2="165" stroke="#5A6875" stroke-width="1"></line>
+      <line x1="180" y1="160" x2="180" y2="165" stroke="#5A6875" stroke-width="1"></line>
+      <line x1="242.4" y1="160" x2="242.4" y2="165" stroke="#5A6875" stroke-width="1"></line>
+      <line x1="304.8" y1="160" x2="304.8" y2="165" stroke="#5A6875" stroke-width="1"></line>
+      <text x="55.2" y="182" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">0</text>
+      <text x="117.6" y="182" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">1</text>
+      <text x="180" y="182" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">2</text>
+      <text x="242.4" y="182" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">3</text>
+      <text x="304.8" y="182" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">4</text>
+    </svg>
+    <span class="ax-xlab">הערכים — מספר ההזמנות בחודש</span>
+    </div>
+    <figcaption>המספר שמעל כל עמודה — כמה תלמידים הזמינו את מספר הפעמים הזה.</figcaption>
+  </figure>
+  <p class="q-text">
+    א. כמה תלמידים השתתפו בסקר?
+    <br>ב. מהם השכיחים?
+    <br>ג. מהו החציון?
+  </p>
+  <div class="q-row"><span>א.</span>
+    <input class="q-input" data-answer="30" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ב. השכיח הקטן:</span>
+    <input class="q-input" data-answer="1" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ב. השכיח הגדול:</span>
+    <input class="q-input" data-answer="3" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ג. החציון:</span>
+    <input class="q-input" data-answer="2" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p><strong>נעביר את הנתונים מהדיאגרמה לטבלה:</strong></p>
+    <table class="dtable sol-table">
+      <tr><th>מספר ההזמנות</th><td>0</td><td class="hl-find"><b>1</b></td><td>2</td><td class="hl-find"><b>3</b></td><td>4</td></tr>
+      <tr><th>מספר התלמידים</th><td>3</td><td class="hl-group"><b>8</b></td><td>6</td><td class="hl-group"><b>8</b></td><td>5</td></tr>
+    </table>
+    <p><strong>א.</strong> מי זה <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> אצלנו?
+    כל תלמיד הוא נתון אחד, ולכן <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> הוא סכום השכיחויות:</p>
+    $$\textcolor{#8A6D1B}{N}=3+8+6+8+5=\textcolor{#8A6D1B}{30}\;\text{תלמידים}$$
+    <p><strong>ב.</strong> השכיחות הגבוהה ביותר היא 8,
+    ובדיאגרמה יש <strong>שתי</strong> עמודות שמגיעות לגובה הזה: מעל הערך 1 ומעל הערך 3.
+    <br>לנתונים האלה שני שכיחים:
+    <span class="mk mk-find"><strong>הזמנה אחת</strong></span> ו-<span class="mk mk-find"><strong>3 הזמנות</strong></span>.</p>
+    <p><strong>ג.</strong> מספר הנתונים זוגי:</p>
+    $$\text{מיקום החציון}=\frac{\overbrace{\textcolor{#8A6D1B}{30}}^{\textcolor{#8A6D1B}{\text{סך התלמידים}}}+1}{2}=\underbrace{15.5}_{\text{בין מקום 15 למקום 16}}$$
+    <table class="dtable sol-table">
+      <tr><th>מספר ההזמנות</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+      <tr><th>מספר התלמידים</th><td>3</td><td>8</td><td>6</td><td>8</td><td>5</td></tr>
+      <tr><th>כמה ספרנו עד כאן (צבירה)</th>
+          <td>① 3</td>
+          <td>② <span dir="ltr">3+8=11</span></td>
+          <td style="background:#DFF0E1"><b style="color:#2E7D32">③ <span dir="ltr">11+6=17</span></b> ✋</td>
+          <td>—</td><td>—</td></tr>
+    </table>
+    <p class="tbl-note">⬅ כיוון ההליכה: מתחילות בעמודה הימנית (0 הזמנות) וצועדות שמאלה.</p>
+    <p class="tbl-note" style="color:#2E7D32;font-weight:700;margin-top:2px">✋ עברנו את 15.5 בתוך עמודת ה-2 — גם המקום ה-15 וגם המקום ה-16 יושבים בה.</p>
+    $$\text{החציון}=\frac{2+2}{2}=\textcolor{#2E7D32}{2}\;\text{הזמנות}$$
+    <p><strong>בדיקת היגיון:</strong> החציון 2 יושב בדיוק בין שני השכיחים (1 ו-3),
+    והדיאגרמה באמת סימטרית סביבו ✓</p>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e38"> פתרתי את תרגיל 38</label>
+</article>
+
+<a class="backtop" href="#finder">↑ חזרה למאתר הסוגים</a>
+
+<!-- ==================================================================== -->
+<!-- ============ ט · שאלות מילוליות ============ -->
+<!-- ==================================================================== -->
+<h2 id="g-words"><span class="num">ט</span>שאלות מילוליות</h2>
+<p class="gwhen">
+  <b>זה התרגיל שלך אם:</b> החישוב עצמו קל, והקושי הוא להבין <strong>אילו</strong>
+  עמודות או <strong>איזו</strong> קבוצה השאלה מבקשת.
+</p>
+<div class="box def">
+  <div class="box-title">מילון הניסוחים — מה כולל את מה</div>
+  <b>יותר מ-3</b> = ‏4 ומעלה — <strong>בלי</strong> ה-3.
+  <br><b>פחות מ-3</b> = עד 2 — <strong>בלי</strong> ה-3.
+  <br><b>לפחות 3</b> = ‏3 ומעלה — <strong>כולל</strong> ה-3.
+  <br><b>לכל היותר 3</b> = עד 3 — <strong>כולל</strong> ה-3.
+  <br>המילה שקובעת היא "כולל": בשתי הצורות הראשונות המספר עצמו נשאר בחוץ,
+  ובשתי האחרונות הוא נכנס פנימה.
+</div>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">תרגיל 39</span><h4>ארבעה ניסוחים על אותה טבלה</h4></div>
+  <p class="q-text">
+    לפניכן טבלה המתארת כמה ימים נעדר כל תלמיד בחודש האחרון:
+  </p>
+  <table class="dtable">
+    <tr><th>ימי היעדרות</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+    <tr><th>מספר התלמידים</th><td>9</td><td>7</td><td>6</td><td>4</td><td>3</td><td>1</td></tr>
+  </table>
+  <p class="q-text">
+    א. כמה תלמידים נעדרו לכל היותר יומיים?
+    <br>ב. כמה תלמידים נעדרו לפחות 3 ימים?
+    <br>ג. כמה תלמידים נעדרו פחות מיומיים?
+    <br>ד. כמה תלמידים נעדרו יותר מ-3 ימים?
+  </p>
+  <div class="q-row"><span>א.</span>
+    <input class="q-input" data-answer="22" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ב.</span>
+    <input class="q-input" data-answer="8" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ג.</span>
+    <input class="q-input" data-answer="16" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ד.</span>
+    <input class="q-input" data-answer="4" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p>קודם נסמן מהו הסך הכל, כדי שיהיה במה לבדוק את התשובות:</p>
+    $$\textcolor{#8A6D1B}{N}=9+7+6+4+3+1=\textcolor{#8A6D1B}{30}\;\text{תלמידים}$$
+    <p>עכשיו כל סעיף הוא אותה עבודה: מתרגמות את הניסוח לעמודות, ומסכמות.</p>
+    <table class="dtable sol-table">
+      <tr><th>הניסוח</th><th>אילו עמודות</th><th>החישוב</th><th>התשובה</th></tr>
+      <tr><td>לכל היותר יומיים</td><td>0, 1, 2</td><td><span dir="ltr">9+7+6</span></td><td><b>22</b></td></tr>
+      <tr><td>לפחות 3 ימים</td><td>3, 4, 5</td><td><span dir="ltr">4+3+1</span></td><td><b>8</b></td></tr>
+      <tr><td>פחות מיומיים</td><td>0, 1</td><td><span dir="ltr">9+7</span></td><td><b>16</b></td></tr>
+      <tr><td>יותר מ-3 ימים</td><td>4, 5</td><td><span dir="ltr">3+1</span></td><td><b>4</b></td></tr>
+    </table>
+    <p><strong>א.</strong> "לכל היותר יומיים" כולל את היומיים עצמם,
+    ולכן שלוש העמודות הימניות:</p>
+    <table class="dtable sol-table">
+      <tr><th>ימי היעדרות</th><td class="hl-group">0</td><td class="hl-group">1</td><td class="hl-group">2</td><td>3</td><td>4</td><td>5</td></tr>
+      <tr><th>מספר התלמידים</th><td class="hl-group">9</td><td class="hl-group">7</td><td class="hl-group">6</td><td>4</td><td>3</td><td>1</td></tr>
+    </table>
+    $$\underbrace{\textcolor{#1D6FA5}{9+7+6}}_{\textcolor{#1D6FA5}{\text{העמודות 0, 1, 2}}}=\textcolor{#2E7D32}{22}\;\text{תלמידים}$$
+    <p><strong>ב.</strong> "לפחות 3 ימים" כולל את ה-3 עצמו,
+    ולכן שלוש העמודות השמאליות:</p>
+    <table class="dtable sol-table">
+      <tr><th>ימי היעדרות</th><td>0</td><td>1</td><td>2</td><td class="hl-group">3</td><td class="hl-group">4</td><td class="hl-group">5</td></tr>
+      <tr><th>מספר התלמידים</th><td>9</td><td>7</td><td>6</td><td class="hl-group">4</td><td class="hl-group">3</td><td class="hl-group">1</td></tr>
+    </table>
+    $$\underbrace{\textcolor{#1D6FA5}{4+3+1}}_{\textcolor{#1D6FA5}{\text{העמודות 3, 4, 5}}}=\textcolor{#2E7D32}{8}\;\text{תלמידים}$$
+    <p><strong>בדיקה יפה:</strong> סעיפים א ו-ב מחלקים את הכיתה לשתי קבוצות
+    שאין ביניהן חפיפה, ויחד הן כל הכיתה:
+    <span class="fi">\(22+8=30\)</span> ✓</p>
+    <p><strong>ג.</strong> "פחות מיומיים" עוצר לפני היומיים,
+    ולכן רק העמודות 0 ו-1:</p>
+    $$\underbrace{\textcolor{#1D6FA5}{9+7}}_{\textcolor{#1D6FA5}{\text{העמודות 0, 1}}}=\textcolor{#2E7D32}{16}\;\text{תלמידים}$$
+    <p>ההבדל בין סעיף א לסעיף ג הוא בדיוק עמודה אחת — עמודת היומיים,
+    שיש בה 6 תלמידים: <span class="fi">\(22-6=16\)</span> ✓</p>
+    <p><strong>ד.</strong> "יותר מ-3 ימים" מתחיל אחרי ה-3,
+    ולכן רק העמודות 4 ו-5:</p>
+    $$\underbrace{\textcolor{#1D6FA5}{3+1}}_{\textcolor{#1D6FA5}{\text{העמודות 4, 5}}}=\textcolor{#2E7D32}{4}\;\text{תלמידים}$$
+    <p>וגם כאן ההבדל מסעיף ב הוא עמודה אחת — עמודת ה-3 ימים,
+    שיש בה 4 תלמידים: <span class="fi">\(8-4=4\)</span> ✓</p>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e39"> פתרתי את תרגיל 39</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">תרגיל 40</span><h4>ניסוח ואחוזים יחד</h4></div>
+  <p class="q-text">
+    בסקר השתתפו <span class="mk mk-total">‏250 בני נוער</span>, שנשאלו כמה ספרים
+    קראו בשנה האחרונה.
+    <span class="mk mk-given">‏40% מהם קראו לכל היותר 2 ספרים</span>.
+    <br><span class="mk mk-find">כמה בני נוער קראו לפחות 3 ספרים?</span>
+  </p>
+  <div class="q-row"><span>מספר בני הנוער:</span>
+    <input class="q-input" data-answer="150" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p><strong>שלב 1 — מזהות שהשאלה מדברת על שתי קבוצות משלימות.</strong>
+    <br>"לכל היותר 2 ספרים" הן הכמויות 0, 1, 2.
+    <br>"לפחות 3 ספרים" הן הכמויות 3 ומעלה.
+    <br>כל נשאל שייך לאחת מהן בדיוק, ולכן יחד הן כל 250 המשתתפים.</p>
+    <p><strong>שלב 2 — מחשבות את הקבוצה שנתונה באחוזים.</strong>
+    <br>הסך הכל אצלנו — 250 בני הנוער; האחוז אצלנו — 40%:</p>
+    $$\underbrace{\textcolor{#1D6FA5}{\text{קראו לכל היותר 2}}}_{}=\underbrace{\textcolor{#8A6D1B}{250}}_{\textcolor{#8A6D1B}{\text{כל המשתתפים}}}\cdot\underbrace{\frac{\textcolor{#C2408C}{40}}{100}}_{\textcolor{#C2408C}{\text{האחוז שנתון}}}=\frac{10000}{100}=\textcolor{#1D6FA5}{100}$$
+    <p><strong>שלב 3 — משלימות לכל הקבוצה.</strong></p>
+    $$\textcolor{#2E7D32}{\text{קראו לפחות 3}}=\underbrace{\textcolor{#8A6D1B}{250}}_{\textcolor{#8A6D1B}{\text{כל המשתתפים}}}-\underbrace{\textcolor{#1D6FA5}{100}}_{\textcolor{#1D6FA5}{\text{קראו לכל היותר 2}}}=\textcolor{#2E7D32}{150}\;\text{בני נוער}$$
+    <p><strong>בדיקה באחוזים:</strong> אם 40% קראו לכל היותר 2,
+    אז <span class="fi">\(100\%-40\%=60\%\)</span> קראו לפחות 3 —
+    ו-<span class="fi">\(250\cdot\frac{60}{100}=150\)</span> ✓ — אותה תשובה בדיוק.</p>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e40"> פתרתי את תרגיל 40</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">תרגיל 41</span><h4>שבר ואחוז באותו סיפור</h4></div>
+  <p class="q-text">
+    בכיתה <span class="mk mk-total">‏40 תלמידים</span>.
+    <span class="mk mk-given">רבע מהם לומדים צרפתית</span>,
+    ו<span class="mk mk-given2">‏40% מהם לומדים ספרדית</span>.
+    השאר אינם לומדים שפה נוספת.
+    <br>א. כמה תלמידים לומדים צרפתית?
+    <br>ב. כמה תלמידים אינם לומדים שפה נוספת?
+    <br>ג. איזה אחוז מהכיתה אינו לומד שפה נוספת?
+  </p>
+  <div class="q-row"><span>א. צרפתית:</span>
+    <input class="q-input" data-answer="10" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ב. ללא שפה נוספת:</span>
+    <input class="q-input" data-answer="14" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ג. באחוזים:</span>
+    <input class="q-input" data-answer="35" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p>הסך הכל אצלנו זהה בכל הסעיפים — 40 תלמידי הכיתה.</p>
+    <p><strong>א.</strong> "רבע מהם" הוא השבר <span class="fi">\(\frac{1}{4}\)</span>:</p>
+    $$\textcolor{#2E7D32}{\text{לומדי הצרפתית}}=\underbrace{\textcolor{#8A6D1B}{40}}_{\textcolor{#8A6D1B}{\text{כל הכיתה}}}\cdot\underbrace{\frac{1}{4}}_{\text{רבע}}=\textcolor{#2E7D32}{10}\;\text{תלמידים}$$
+    <p><strong>ב.</strong> קודם נחשב את לומדי הספרדית, לפי אותו עיקרון:</p>
+    $$\textcolor{#1D6FA5}{\text{לומדי הספרדית}}=\underbrace{\textcolor{#8A6D1B}{40}}_{\textcolor{#8A6D1B}{\text{כל הכיתה}}}\cdot\underbrace{\frac{\textcolor{#C2408C}{40}}{100}}_{\textcolor{#C2408C}{40\%}}=\textcolor{#1D6FA5}{16}\;\text{תלמידים}$$
+    <p>עכשיו נחסר את שתי הקבוצות מכל הכיתה:</p>
+    $$\textcolor{#2E7D32}{\text{ללא שפה נוספת}}=\underbrace{\textcolor{#8A6D1B}{40}}_{\textcolor{#8A6D1B}{\text{כל הכיתה}}}-\underbrace{10}_{\text{צרפתית}}-\underbrace{\textcolor{#1D6FA5}{16}}_{\textcolor{#1D6FA5}{\text{ספרדית}}}=\textcolor{#2E7D32}{14}\;\text{תלמידים}$$
+    <p><strong>ג.</strong> עכשיו נתונות שתי כמויות ומבקשים אחוז ← מחלקות:</p>
+    $$\frac{\underbrace{\textcolor{#1D6FA5}{14}}_{\textcolor{#1D6FA5}{\text{ללא שפה נוספת}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{40}}_{\textcolor{#8A6D1B}{\text{כל הכיתה}}}}=\frac{14:2}{40:2}=\frac{7}{20}=\frac{7\cdot 5}{20\cdot 5}=\frac{35}{100}=\textcolor{#2E7D32}{35\%}$$
+    <p><strong>בדיקה:</strong> נסכם את שלוש הקבוצות באחוזים —
+    צרפתית 25%, ספרדית 40%, ללא שפה 35%:</p>
+    <table class="dtable sol-table">
+      <tr><th>הקבוצה</th><td>צרפתית</td><td>ספרדית</td><td>ללא שפה נוספת</td><th>סך הכל</th></tr>
+      <tr><th>מספר התלמידים</th><td>10</td><td>16</td><td class="hl-find"><b>14</b></td><th>40</th></tr>
+      <tr><th>באחוזים</th><td>25%</td><td>40%</td><td class="hl-find"><b>35%</b></td><th>100%</th></tr>
+    </table>
+    <p><span class="fi">\(10+16+14=40\)</span> ו-<span class="fi">\(25+40+35=100\)</span> ✓</p>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e41"> פתרתי את תרגיל 41</label>
+</article>
+
+<a class="backtop" href="#finder">↑ חזרה למאתר הסוגים</a>
+
+<!-- ==================================================================== -->
+<!-- ============ י · אתגר ============ -->
+<!-- ==================================================================== -->
+<h2 id="g-challenge"><span class="num">י</span>אתגר</h2>
+<p class="gwhen">
+  <b>זה התרגיל שלך אם:</b> שואלים כמה מדדים על אותם נתונים, שואלים איזה מדד
+  מתאים לשאלה, או מערבבים שני שלבים בתרגיל אחד.
+  <br>אלה התרגילים שמופיעים בסוף מבחן — וכל אחד מהם בנוי מחתיכות
+  שכבר פתרת למעלה.
+</p>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">תרגיל 42</span><h4>כל המדדים על אותם נתונים — וערך חריג אחד</h4></div>
+  <p class="q-text">
+    בחברה קטנה בדקו כמה ימי חופשה לקח כל עובד בשנה:
+  </p>
+  <table class="dtable">
+    <tr><th>ימי חופשה</th><td>5</td><td>8</td><td>10</td><td>30</td></tr>
+    <tr><th>מספר העובדים</th><td>6</td><td>9</td><td>4</td><td>1</td></tr>
+  </table>
+  <p class="q-text">
+    א. מהו הממוצע?
+    <br>ב. מהו החציון?
+    <br>ג. מהו השכיח?
+    <br>ד. מהו הטווח?
+    <br>ה. איזה מדד מתאר טוב יותר את מספר ימי החופשה של עובד רגיל בחברה?
+  </p>
+  <div class="q-row"><span>א. הממוצע:</span>
+    <input class="q-input" data-answer="8.6" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ב. החציון:</span>
+    <input class="q-input" data-answer="8" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ג. השכיח:</span>
+    <input class="q-input" data-answer="8" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ד. הטווח:</span>
+    <input class="q-input" data-answer="25" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p>מי זה <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> אצלנו?
+    כל עובד הוא נתון אחד, ולכן <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> הוא סכום שורת השכיחות:</p>
+    $$\textcolor{#8A6D1B}{N}=6+9+4+1=\textcolor{#8A6D1B}{20}\;\text{עובדים}$$
+    <p><strong>א.</strong> שורת העבודה — מכפלה בכל עמודה:</p>
+    <table class="dtable sol-table">
+      <tr><th>ימי חופשה</th><td>5</td><td>8</td><td>10</td><td>30</td></tr>
+      <tr><th>מספר העובדים</th><td>6</td><td>9</td><td>4</td><td>1</td></tr>
+      <tr><th>ערך × שכיחות</th>
+          <td><span dir="ltr">5·6</span><br><b>30</b></td>
+          <td><span dir="ltr">8·9</span><br><b>72</b></td>
+          <td><span dir="ltr">10·4</span><br><b>40</b></td>
+          <td><span dir="ltr">30·1</span><br><b>30</b></td></tr>
+    </table>
+    $$\overline{x}=\frac{\underbrace{\textcolor{#1D6FA5}{30+72+40+30}}_{\textcolor{#1D6FA5}{\text{סכום שורת העבודה}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{20}}_{\textcolor{#8A6D1B}{\text{סך העובדים}}}}=\frac{\textcolor{#1D6FA5}{172}}{\textcolor{#8A6D1B}{20}}=\textcolor{#2E7D32}{8.6}\;\text{ימים}$$
+    <p><strong>ב.</strong> מספר הנתונים זוגי:</p>
+    $$\text{מיקום החציון}=\frac{\overbrace{\textcolor{#8A6D1B}{20}}^{\textcolor{#8A6D1B}{\text{סך העובדים}}}+1}{2}=\underbrace{10.5}_{\text{בין מקום 10 למקום 11}}$$
+    <table class="dtable sol-table">
+      <tr><th>ימי חופשה</th><td>5</td><td>8</td><td>10</td><td>30</td></tr>
+      <tr><th>מספר העובדים</th><td>6</td><td>9</td><td>4</td><td>1</td></tr>
+      <tr><th>כמה ספרנו עד כאן (צבירה)</th>
+          <td>① 6</td>
+          <td style="background:#DFF0E1"><b style="color:#2E7D32">② <span dir="ltr">6+9=15</span></b> ✋</td>
+          <td>—</td><td>—</td></tr>
+    </table>
+    <p class="tbl-note">⬅ כיוון ההליכה: מתחילות בעמודה הימנית (5 ימים) וצועדות שמאלה.</p>
+    <p class="tbl-note" style="color:#2E7D32;font-weight:700;margin-top:2px">✋ עברנו את 10.5 בתוך עמודת ה-8 — גם המקום ה-10 וגם המקום ה-11 יושבים בה.</p>
+    $$\text{החציון}=\frac{8+8}{2}=\textcolor{#2E7D32}{8}\;\text{ימים}$$
+    <p><strong>ג.</strong> השכיחות הגבוהה ביותר היא 9, והיא יושבת מתחת לערך 8 ←
+    השכיח הוא <span class="mk mk-find"><strong>8 ימים</strong></span>.</p>
+    <p><strong>ד.</strong></p>
+    $$\text{טווח}=\underbrace{30}_{\text{הגדול ביותר}}-\underbrace{5}_{\text{הקטן ביותר}}=\textcolor{#2E7D32}{25}\;\text{ימים}$$
+    <p><strong>ה.</strong> נשווה את שלושת המדדים:</p>
+    <table class="dtable sol-table">
+      <tr><th>המדד</th><td>ממוצע</td><td>חציון</td><td>שכיח</td><td>טווח</td></tr>
+      <tr><th>הערך</th><td><b>8.6</b></td><td><b>8</b></td><td><b>8</b></td><td><b>25</b></td></tr>
+    </table>
+    <p>‏19 מתוך 20 העובדים לקחו בין 5 ל-10 ימי חופשה,
+    ועובד אחד לקח 30 ימים.
+    <br>העובד הזה לבדו מושך את הממוצע כלפי מעלה: בלעדיו הממוצע היה
+    <span class="fi">\(\frac{142}{19}\approx 7.5\)</span>.
+    <br>החציון והשכיח לא זזים ממנו כלל — הם מסתכלים על מי שעומד באמצע
+    ועל מי שחוזר הכי הרבה, ולא על גודל הערכים.</p>
+    <div class="box def" style="margin:12px 0 2px">
+      <div class="box-title">התשובה</div>
+      <strong>החציון</strong> (‏8 ימים) מתאר טוב יותר את העובד הרגיל בחברה,
+      כי הוא לא מושפע מהערך החריג של 30 ימים.
+    </div>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e42"> פתרתי את תרגיל 42</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">תרגיל 43</span><h4>איזה מדד עונה על השאלה</h4></div>
+  <p class="q-text">
+    בחנות נעליים רשמו את מידות הנעליים שנמכרו בשבוע:
+  </p>
+  <table class="dtable">
+    <tr><th>מידת הנעל</th><td>36</td><td>37</td><td>38</td><td>39</td><td>40</td></tr>
+    <tr><th>מספר הזוגות</th><td>3</td><td>7</td><td>12</td><td>8</td><td>2</td></tr>
+  </table>
+  <p class="q-text">
+    בעלת החנות מזמינה סחורה חדשה, ורוצה לדעת <strong>איזו מידה להזמין
+    בכמות הגדולה ביותר</strong>.
+    <br>א. איזה מדד עונה על השאלה שלה, ומה ערכו?
+    <br>ב. מהו טווח המידות שנמכרו?
+  </p>
+  <div class="q-row"><span>א. המידה:</span>
+    <input class="q-input" data-answer="38" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ב. הטווח:</span>
+    <input class="q-input" data-answer="4" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p><strong>א.</strong> בעלת החנות שואלת איזו מידה נקנית הכי הרבה —
+    כלומר איזה ערך חוזר הכי הרבה פעמים.
+    <br>זו בדיוק ההגדרה של <strong>השכיח</strong>.</p>
+    <table class="dtable sol-table">
+      <tr><th>מידת הנעל</th><td>36</td><td>37</td><td class="hl-find"><b>38</b></td><td>39</td><td>40</td></tr>
+      <tr><th>מספר הזוגות</th><td>3</td><td>7</td><td class="hl-group"><b>12</b></td><td>8</td><td>2</td></tr>
+    </table>
+    <p>השכיחות הגבוהה ביותר היא 12, והיא יושבת מתחת למידה 38 ←
+    כדאי לה להזמין הכי הרבה זוגות במידה
+    <span class="mk mk-find"><strong>38</strong></span>.</p>
+    <p><strong>ב.</strong> המידה הגדולה ביותר שנמכרה היא 40, והקטנה ביותר 36:</p>
+    $$\text{טווח}=40-36=\textcolor{#2E7D32}{4}$$
+    <p><strong>למה לא מדד אחר?</strong></p>
+    <table class="dtable sol-table">
+      <tr><th>השאלה</th><th>המדד שעונה עליה</th></tr>
+      <tr><td>איזו מידה להזמין בכמות הגדולה ביותר?</td><td><b>שכיח</b> — הערך שנקנה הכי הרבה</td></tr>
+      <tr><td>מה המידה שמחלקת את הקונות לשני חצאים?</td><td><b>חציון</b> — הערך שבאמצע</td></tr>
+      <tr><td>אילו מידות בכלל צריך להחזיק על המדף?</td><td><b>טווח</b> — מ-36 עד 40</td></tr>
+      <tr><td>איך משתנה המידה הנמכרת משנה לשנה?</td><td><b>ממוצע</b> — רגיש לכל שינוי קטן</td></tr>
+    </table>
+    <p class="aside">החציון כאן יוצא גם הוא 38 (מיקום 16.5, בתוך עמודת ה-38),
+    והממוצע יוצא כ-37.97. שלושתם קרובים כי הנתונים מרוכזים סביב מידה אחת.</p>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e43"> פתרתי את תרגיל 43</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">תרגיל 44</span><h4>ממוצע לפני ואחרי — מי עזב</h4></div>
+  <p class="q-text">
+    בקבוצת ריצה <span class="mk mk-group">‏10 רצות</span>,
+    ו<span class="mk mk-given">המרחק הממוצע שהן רצות הוא 8 ק"מ</span>.
+    <br><span class="mk mk-change">רצה אחת עזבה את הקבוצה</span>,
+    ו<span class="mk mk-given2">הממוצע של 9 הנותרות ירד ל-7.5 ק"מ</span>.
+    <br><span class="mk mk-find">כמה ק"מ רצה מי שעזבה?</span>
+  </p>
+  <div class="q-row"><span>מספר הק"מ:</span>
+    <input class="q-input" data-answer="12.5" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p>הרעיון: ממוצע נותן לנו סכום. נחשב את הסכום פעמיים —
+    לפני ואחרי — וההפרש ביניהם הוא בדיוק מה שהעוזבת לקחה איתה.</p>
+    <p><strong>הסכום לפני.</strong> ‏10 רצות בממוצע 8 ק"מ:</p>
+    $$\underbrace{\textcolor{#8A6D1B}{10}}_{\textcolor{#8A6D1B}{\text{כמה רצות}}}\cdot\underbrace{\textcolor{#C2408C}{8}}_{\textcolor{#C2408C}{\text{הממוצע}}}=\textcolor{#1D6FA5}{80}\;\text{ק"מ}$$
+    <p><strong>הסכום אחרי.</strong> ‏9 רצות בממוצע 7.5 ק"מ:</p>
+    $$\underbrace{\textcolor{#8A6D1B}{9}}_{\textcolor{#8A6D1B}{\text{כמה נשארו}}}\cdot\underbrace{\textcolor{#C2408C}{7.5}}_{\textcolor{#C2408C}{\text{הממוצע החדש}}}=\textcolor{#1D6FA5}{67.5}\;\text{ק"מ}$$
+    <table class="dtable sol-table">
+      <tr><th>המצב</th><th>כמה רצות</th><th>הממוצע</th><th>סכום הק"מ</th></tr>
+      <tr><td>לפני</td><td>10</td><td>8</td><td><span dir="ltr">10·8=80</span></td></tr>
+      <tr><td>אחרי</td><td>9</td><td>7.5</td><td><span dir="ltr">9·7.5=67.5</span></td></tr>
+      <tr><td><b>ההפרש</b></td><td>‏1 רצה</td><td>—</td><td><b><span dir="ltr">80−67.5=12.5</span></b></td></tr>
+    </table>
+    $$\textcolor{#2E7D32}{\text{הרצה שעזבה}}=\underbrace{\textcolor{#1D6FA5}{80}}_{\textcolor{#1D6FA5}{\text{הסכום לפני}}}-\underbrace{\textcolor{#1D6FA5}{67.5}}_{\textcolor{#1D6FA5}{\text{הסכום אחרי}}}=\textcolor{#2E7D32}{12.5}\;\text{ק"מ}$$
+    <p><strong>בדיקה:</strong> נחזיר אותה לקבוצה —
+    <span class="fi">\(67.5+12.5=80\)</span> ק"מ ל-10 רצות,
+    כלומר <span class="fi">\(80:10=8\)</span> ק"מ בממוצע ✓ —
+    בדיוק הממוצע ההתחלתי.</p>
+    <p><strong>בדיקת היגיון:</strong> הממוצע ירד אחרי שהיא עזבה,
+    ולכן היא רצה יותר מהממוצע — ו-12.5 באמת גדול מ-8 ✓</p>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e44"> פתרתי את תרגיל 44</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">תרגיל 45</span><h4>קודם הנעלם, אחר כך החציון</h4></div>
+  <p class="q-text">
+    לפניכן טבלה המתארת כמה פעמים בשבוע אוכלים תלמידי הכיתה ארוחת ערב משפחתית:
+  </p>
+  <table class="dtable">
+    <tr><th>מספר הפעמים</th><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+    <tr><th>מספר התלמידים</th><td>4</td><td class="x-cell">x</td><td>5</td><td>3</td></tr>
+  </table>
+  <p class="q-text">
+    ידוע ש<span class="mk mk-given">הממוצע הוא 2.5</span>.
+    <br>א. מצאי את x.
+    <br>ב. כמה תלמידים יש בכיתה?
+    <br>ג. מהו החציון?
+  </p>
+  <div class="q-row"><span>א. ‏x =</span>
+    <input class="q-input" data-answer="2" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ב. מספר התלמידים:</span>
+    <input class="q-input" data-answer="14" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ג. החציון:</span>
+    <input class="q-input" data-answer="3" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p><strong>א.</strong> שורת העבודה, כולל העמודה של ה-x:</p>
+    <table class="dtable sol-table">
+      <tr><th>מספר הפעמים</th><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+      <tr><th>מספר התלמידים</th><td>4</td><td class="x-cell">x</td><td>5</td><td>3</td></tr>
+      <tr><th>ערך × שכיחות</th>
+          <td><span dir="ltr">1·4</span><br><b>4</b></td>
+          <td><span dir="ltr">2·x</span><br><b>2x</b></td>
+          <td><span dir="ltr">3·5</span><br><b>15</b></td>
+          <td><span dir="ltr">4·3</span><br><b>12</b></td></tr>
+    </table>
+    <p>סכום שורת העבודה: <span class="fi">\(4+2x+15+12=31+2x\)</span>.
+    <br>מספר התלמידים: <span class="fi">\(4+x+5+3=12+x\)</span>.</p>
+    $$\frac{\underbrace{\textcolor{#1D6FA5}{31+2x}}_{\textcolor{#1D6FA5}{\text{סכום שורת העבודה}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{12+x}}_{\textcolor{#8A6D1B}{\text{מספר התלמידים}}}}=\underbrace{\textcolor{#C2408C}{2.5}}_{\textcolor{#C2408C}{\text{הממוצע שנתון}}}$$
+    $$31+2x=2.5(12+x)\;\Longrightarrow\;31+2x=30+2.5x\;\Longrightarrow\;1=0.5x\;\Longrightarrow\;x=\textcolor{#2E7D32}{2}$$
+    <p><strong>ב.</strong> מספר התלמידים:
+    <span class="fi">\(12+2=\textcolor{#8A6D1B}{14}\)</span> תלמידים.</p>
+    <table class="dtable sol-table">
+      <tr><th>מספר הפעמים</th><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+      <tr><th>מספר התלמידים</th><td>4</td><td class="hl-find"><b>2</b></td><td>5</td><td>3</td></tr>
+    </table>
+    <p><strong>בדיקה:</strong> סכום שורת העבודה
+    <span class="fi">\(31+2\cdot 2=35\)</span>,
+    והממוצע <span class="fi">\(\frac{35}{14}=2.5\)</span> ✓</p>
+    <p><strong>ג.</strong> עכשיו הטבלה מלאה, וממשיכות כרגיל:</p>
+    $$\text{מיקום החציון}=\frac{\overbrace{\textcolor{#8A6D1B}{14}}^{\textcolor{#8A6D1B}{\text{סך התלמידים}}}+1}{2}=\underbrace{7.5}_{\text{בין מקום 7 למקום 8}}$$
+    <table class="dtable sol-table">
+      <tr><th>מספר הפעמים</th><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+      <tr><th>מספר התלמידים</th><td>4</td><td>2</td><td>5</td><td>3</td></tr>
+      <tr><th>כמה ספרנו עד כאן (צבירה)</th>
+          <td>① 4</td>
+          <td>② <span dir="ltr">4+2=6</span></td>
+          <td style="background:#DFF0E1"><b style="color:#2E7D32">③ <span dir="ltr">6+5=11</span></b> ✋</td>
+          <td>—</td></tr>
+    </table>
+    <p class="tbl-note">⬅ כיוון ההליכה: מתחילות בעמודה הימנית (פעם אחת) וצועדות שמאלה.</p>
+    <p class="tbl-note" style="color:#2E7D32;font-weight:700;margin-top:2px">✋ עברנו את 7.5 בתוך עמודת ה-3 — גם המקום ה-7 וגם המקום ה-8 יושבים בה.</p>
+    $$\text{החציון}=\frac{3+3}{2}=\textcolor{#2E7D32}{3}\;\text{פעמים}$$
+    <p><strong>בדיקת היגיון:</strong> ‏3 נמצא בין 1 ל-4, וגדול מהממוצע 2.5 —
+    סביר, כי בעמודות 3 ו-4 יחד יושבים 8 מתוך 14 התלמידים ✓</p>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e45"> פתרתי את תרגיל 45</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">תרגיל 46</span><h4>שתי דרגות שכר — ממוצע משוקלל הפוך</h4></div>
+  <p class="q-text">
+    במפעל שתי דרגות שכר.
+    <span class="mk mk-group">‏20 פועלים מקבלים שכר לפי הדרגה הנמוכה</span>,
+    ו<span class="mk mk-group">‏30 פועלים לפי הדרגה הגבוהה</span>.
+    <br><span class="mk mk-given">השכר בדרגה הגבוהה גדול ב-10 ש"ח לשעה מהשכר בדרגה הנמוכה</span>,
+    ו<span class="mk mk-given2">השכר הממוצע במפעל הוא 44 ש"ח לשעה</span>.
+    <br>א. מהו השכר לשעה בדרגה הנמוכה?
+    <br>ב. מהו השכר לשעה בדרגה הגבוהה?
+    <br>ג. מהו השכר השכיח לשעת עבודה?
+    <br>ד. מהו חציון השכר לשעת עבודה?
+  </p>
+  <div class="q-row"><span>א. הדרגה הנמוכה:</span>
+    <input class="q-input" data-answer="38" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ב. הדרגה הגבוהה:</span>
+    <input class="q-input" data-answer="48" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ג. השכיח:</span>
+    <input class="q-input" data-answer="48" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ד. החציון:</span>
+    <input class="q-input" data-answer="48" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <p><strong>א.</strong> נסמן ב-x את השכר לשעה בדרגה הנמוכה.
+    <br>אז השכר בדרגה הגבוהה הוא <span class="fi">\(x+10\)</span>.</p>
+    <p>הסיפור הזה הוא טבלת שכיחויות שנכתבה במילים — נעביר אותו לטבלה:</p>
+    <table class="dtable sol-table">
+      <tr><th>השכר לשעה</th><td><span class="fi">\(x\)</span></td><td><span class="fi">\(x+10\)</span></td></tr>
+      <tr><th>מספר הפועלים</th><td>20</td><td>30</td></tr>
+      <tr><th>שכר × מספר פועלים</th><td><b><span class="fi">\(20x\)</span></b></td><td><b><span class="fi">\(30(x+10)\)</span></b></td></tr>
+    </table>
+    <p>מי זה <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> אצלנו?
+    כל פועל הוא נתון אחד, ולכן
+    <span class="fi">\(\textcolor{#8A6D1B}{N}=20+30=50\)</span> פועלים.</p>
+    $$\frac{\underbrace{\textcolor{#1D6FA5}{20x+30(x+10)}}_{\textcolor{#1D6FA5}{\text{סכום השכר של כל הפועלים}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{50}}_{\textcolor{#8A6D1B}{\text{מספר הפועלים}}}}=\underbrace{\textcolor{#C2408C}{44}}_{\textcolor{#C2408C}{\text{הממוצע שנתון}}}$$
+    <p>נפתח סוגריים ונכפול את שני האגפים ב-50:</p>
+    $$20x+30x+300=2200\;\Longrightarrow\;50x=1900\;\Longrightarrow\;x=\textcolor{#2E7D32}{38}$$
+    <p>השכר בדרגה הנמוכה הוא <span class="mk mk-find"><strong>38 ש"ח לשעה</strong></span>.</p>
+    <p><strong>ב.</strong> השכר בדרגה הגבוהה:
+    <span class="fi">\(38+10=\textcolor{#2E7D32}{48}\)</span> ש"ח לשעה.</p>
+    <p><strong>בדיקה:</strong> נמלא את הטבלה במספרים —</p>
+    <table class="dtable sol-table">
+      <tr><th>השכר לשעה</th><td>38</td><td>48</td><th>סך הכל</th></tr>
+      <tr><th>מספר הפועלים</th><td>20</td><td>30</td><th>50</th></tr>
+      <tr><th>שכר × מספר פועלים</th><td><span dir="ltr">38·20=760</span></td><td><span dir="ltr">48·30=1440</span></td><th>2200</th></tr>
+    </table>
+    <p><span class="fi">\(\frac{2200}{50}=44\)</span> ✓ — בדיוק הממוצע שנתון.</p>
+    <p><strong>ג.</strong> השכיחות הגבוהה ביותר היא 30, והיא שייכת לשכר 48 ש"ח ←
+    השכר השכיח הוא <span class="mk mk-find"><strong>48 ש"ח לשעה</strong></span>.</p>
+    <p><strong>ד.</strong> מספר הנתונים זוגי:</p>
+    $$\text{מיקום החציון}=\frac{\overbrace{\textcolor{#8A6D1B}{50}}^{\textcolor{#8A6D1B}{\text{סך הפועלים}}}+1}{2}=\underbrace{25.5}_{\text{בין מקום 25 למקום 26}}$$
+    <table class="dtable sol-table">
+      <tr><th>השכר לשעה</th><td>38</td><td>48</td></tr>
+      <tr><th>מספר הפועלים</th><td>20</td><td>30</td></tr>
+      <tr><th>כמה ספרנו עד כאן (צבירה)</th>
+          <td>① 20</td>
+          <td style="background:#DFF0E1"><b style="color:#2E7D32">② <span dir="ltr">20+30=50</span></b> ✋</td></tr>
+    </table>
+    <p class="tbl-note">⬅ כיוון ההליכה: מתחילות בעמודה הימנית (38 ש"ח) וצועדות שמאלה.</p>
+    <p class="tbl-note" style="color:#2E7D32;font-weight:700;margin-top:2px">✋ עברנו את 25.5 בתוך עמודת ה-48 — גם המקום ה-25 וגם המקום ה-26 יושבים בה.</p>
+    $$\text{החציון}=\frac{48+48}{2}=\textcolor{#2E7D32}{48}\;\text{ש"ח לשעה}$$
+    <p><strong>בדיקת היגיון:</strong> ‏30 מתוך 50 הפועלים — יותר מחצי —
+    מקבלים 48 ש"ח, ולכן סביר שגם השכיח וגם החציון יהיו 48 ✓
+    <br>הממוצע (44) יוצא נמוך משניהם, כי הוא לוקח בחשבון גם את
+    ‏20 הפועלים שמשתכרים 38.</p>
+  </div></details>
+  <label class="mark"><input type="checkbox" data-k="e46"> פתרתי את תרגיל 46</label>
+</article>
+
+<a class="backtop" href="#finder">↑ חזרה למאתר הסוגים</a>
+
+<div class="box intuition" style="margin-top:30px">
+  <div class="box-title">נתקעת בתרגיל שאין לו כאן קרוב משפחה?</div>
+  רוב הסיכויים שהוא מורכב משניים מהסוגים שכן נמצאים כאן —
+  בדיוק כמו תרגילים 45 ו-46.
+  <br>מפרקות אותו לשני שלבים, מוצאות כל שלב במאתר הסוגים, ופותרות אחד-אחד.
+</div>
+
+<div class="progresswrap no-print">
+  <span class="progressbar"><i></i></span><span class="progress-label"></span>
+  <button class="all-sols" style="font-family:inherit;font-size:12px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:4px 10px;cursor:pointer">לפתוח את כל הפתרונות</button>
+</div>
+
+<nav class="pagenav">
+  <a href="08-self-quiz.html"><span class="dir">→ הקודם</span>בוחן הבית</a>
+  <a class="next" href="index.html"><span class="dir">←</span>חזרה למפה</a>
+</nav>
+
+<footer class="fin">חלק מהעולם של שירה · <a href="index.html">המפה</a> · <a href="../index.html">המרכז</a></footer>
+</main>
+</div>
+</body>
+</html>

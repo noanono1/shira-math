@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<!-- מסך הבית של האייפד/הטלפון -->
+<link rel="apple-touch-icon" href="../assets/icons/icon-180.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>אלגברה ופונקציות — המפה — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../css/shira.css">
+<style>
+:root{--accent:var(--alg)}
+/* רשימת תחנות — כמו במפת הסטטיסטיקה */
+.station{display:flex; gap:14px; align-items:flex-start; text-decoration:none;
+  background:var(--card); border:1px solid var(--line); border-radius:var(--r-lg);
+  padding:14px 16px; margin:10px 0; color:var(--ink);
+  box-shadow:0 10px 28px -26px var(--shadow); transition:.15s}
+.station:hover{border-color:var(--alg)}
+.station .n{flex:0 0 auto; width:34px; height:34px; border-radius:50%;
+  background:var(--alg); color:#fff; font-weight:800; font-size:15px;
+  display:flex; align-items:center; justify-content:center; margin-top:2px}
+.station.anchor .n{background:#7A4E8C}
+.station .t{min-width:0; flex:1}
+.station .t b{display:block; font-size:16.5px}
+.station .t span{font-size:13px; color:var(--soft); line-height:1.5}
+.station .st{flex:0 0 auto; font-size:11.5px; color:var(--soft); text-align:left;
+  margin-top:4px; min-width:74px}
+.station .st .okk{color:var(--alg); font-weight:700}
+.station .t .tm{display:block; margin-top:6px; font-size:11.5px; color:var(--soft)}
+.station .t .tm b{display:inline; font-size:inherit; color:var(--ink); font-weight:700}
+.groupt{margin:26px 0 4px; font-size:13px; font-weight:800; color:var(--soft);
+  letter-spacing:.06em}
+/* "שכחתי איך עושים…" — הגישה המהירה */
+.qt{display:grid; grid-template-columns:repeat(auto-fill,minmax(215px,1fr)); gap:8px; margin:12px 0 4px}
+.qt a{display:block; text-decoration:none; background:var(--card); color:var(--ink);
+  border:1px solid var(--line); border-radius:10px; padding:9px 12px; font-size:13px;
+  transition:.15s}
+.qt a:hover{border-color:var(--alg)}
+.qt a b{display:block; font-size:13.5px}
+.qt a span{color:var(--soft); font-size:11.5px}
+</style>
+<script defer src="../js/shira.js"></script>
+</head>
+<body data-page="alg:index">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../index.html">⌂ המרכז של שירה</a>
+    <span class="crumbs"><b>אלגברה ופונקציות</b> · המפה</span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">אלגברה ופונקציות · המפה</div>
+  <h1>שבע תחנות, מסלול אחד</h1>
+  <p class="lead">
+    מהשפה האלגברית, דרך משוואות ומערכות, ועד פונקציה קווית, משוואת ישר
+    ובעיות אחוזים — תחנה אחרי תחנה, ובסוף בוחן הבית.
+    ממהרת? "שכחתי איך עושים…" קופץ ישר לכלי הנכון.
+  </p>
+</header>
+
+<div class="groupt">שכחתי איך עושים…</div>
+<div class="qt">
+  <a href="02-equations.html#sec-solve"><b>פותרים משוואה</b><span>אותה פעולה על שני האגפים</span></a>
+  <a href="02-equations.html#sec-fractions"><b>משוואה עם שברים</b><span>כופלים הכל במכנה המשותף</span></a>
+  <a href="01-algebra-language.html#sec-collect"><b>מכנסים איברים דומים</b><span>x עם x, מספר עם מספר</span></a>
+  <a href="03-coordinates-function.html#sec-fx"><b>מציבים בפונקציה</b><span>‏f(3) = להחליף כל x ב-3</span></a>
+  <a href="04-linear-function.html#sec-slope"><b>מוצאים שיפוע</b><span>כמה עולים על כל צעד</span></a>
+  <a href="04-linear-function.html#sec-intercepts"><b>חיתוך עם הצירים</b><span>מציבים 0 בציר השני</span></a>
+  <a href="04-linear-function.html#sec-sign"><b>תחום חיוביות ושליליות</b><span>נקודת האפס + כיוון השיפוע</span></a>
+  <a href="05-line-equation.html#sec-draw"><b>משרטטים ישר</b><span>שיטת המדרגות: מתחילים ב-b, הולכים לפי m</span></a>
+  <a href="05-line-equation.html#sec-find-eq"><b>מוצאים משוואת ישר</b><span>שתי דרכים: משיפוע ונקודה, או משתי נקודות</span></a>
+  <a href="05-line-equation.html#sec-intersect"><b>חיתוך שני ישרים</b><span>משווים ופותרים</span></a>
+  <a href="05-line-equation.html#sec-compare"><b>מי מעל מי? ‏<span class="en">f(x)&gt;g(x)</span></b><span>פותרים כמו משוואה, הסימן מספר איזה צד</span></a>
+  <a href="06-systems.html#sec-method"><b>פותרים מערכת משוואות</b><span>מבודדים, מציבים, פותרים, בודקים</span></a>
+  <a href="07-percent.html#sec-multiplier"><b>הנחה או התייקרות</b><span>מקדם הכפל: <span class="en">−25%</span> = <span class="en">×0.75</span></span></a>
+</div>
+
+<div class="groupt">הבסיס האלגברי · תחנות 1–2</div>
+
+<a class="station" href="01-algebra-language.html">
+  <span class="n">1</span>
+  <span class="t"><b>🔤 השפה האלגברית והצבה</b>
+  <span>ביטויים, כינוס איברים דומים, חוק הפילוג — ואיך מציבים מספר בלי ליפול בסוגריים.</span><span class="tm"><b>≈ 20 דק׳</b> · 5 תרגילים</span></span>
+  <span class="st" data-st="alg:01-algebra-language"></span>
+</a>
+<a class="station" href="02-equations.html">
+  <span class="n">2</span>
+  <span class="t"><b>⚖️ משוואות ואי-שוויונות</b>
+  <span>המאזניים, פתרון מלא עם בדיקה, x בשני האגפים — והכלל שהופך את הסימן.</span><span class="tm"><b>≈ 30 דק׳</b> · 7 תרגילים</span></span>
+  <span class="st" data-st="alg:02-equations"></span>
+</a>
+
+<div class="groupt">פונקציות וישרים · תחנות 3–5</div>
+
+<a class="station" href="03-coordinates-function.html">
+  <span class="n">3</span>
+  <span class="t"><b>📍 מערכת צירים ומהי פונקציה</b>
+  <span>לקרוא נקודות, להבין את המכונה של f(x), ולראות פונקציה בשלוש שפות.</span><span class="tm"><b>≈ 15 דק׳</b> · 3 תרגילים</span></span>
+  <span class="st" data-st="alg:03-coordinates-function"></span>
+</a>
+<a class="station" href="04-linear-function.html">
+  <span class="n">4</span>
+  <span class="t"><b>📈 פונקציה קווית — שיפוע ונקודת חיתוך</b>
+  <span>האנטומיה של y=mx+b: מה השיפוע באמת אומר, ואיך מוצאים חיתוכים עם הצירים.</span><span class="tm"><b>≈ 30 דק׳</b> · 5 תרגילים</span></span>
+  <span class="st" data-st="alg:04-linear-function"></span>
+</a>
+<a class="station" href="05-line-equation.html">
+  <span class="n">5</span>
+  <span class="t"><b>📏 משוואת ישר, מקבילים וחיתוכים</b>
+  <span>לשרטט בשיטת המדרגות, למצוא משוואה בשתי דרכים, לזהות מקבילים — ולפתור בעיות מילוליות של שני תעריפים.</span><span class="tm"><b>≈ 30 דק׳</b> · 6 תרגילים</span></span>
+  <span class="st" data-st="alg:05-line-equation"></span>
+</a>
+
+<div class="groupt">הכלים הגדולים של חלק ב׳–ג׳ · תחנות 6–7</div>
+
+<a class="station" href="06-systems.html">
+  <span class="n">6</span>
+  <span class="t"><b>🔗 מערכת משוואות עם שני נעלמים — שיטת ההצבה</b>
+  <span>שתי משוואות, שני נעלמים: מבודדים, מציבים, פותרים ובודקים — עם המערכות האמיתיות מהעבודה.</span><span class="tm"><b>≈ 30 דק׳</b> · 5 תרגילים</span></span>
+  <span class="st" data-st="alg:06-systems"></span>
+</a>
+<a class="station" href="07-percent.html">
+  <span class="n">7</span>
+  <span class="t"><b>💯 בעיות אחוזים — הנחות והתייקרויות</b>
+  <span>מקדם הכפל, אחוז השינוי, שני שינויים ברצף (והמלכודת של ה-20%), והדרך חזרה למחיר המקורי.</span><span class="tm"><b>≈ 30 דק׳</b> · 6 תרגילים</span></span>
+  <span class="st" data-st="alg:07-percent"></span>
+</a>
+
+<div class="groupt">כשרוצים עוד תרגול</div>
+
+<a class="station" href="09-exercise-bank.html">
+  <span class="n" style="background:#7A4E8C">∑</span>
+  <span class="t"><b>🗂️ מחסן התרגילים</b>
+  <span>46 תרגילים מסודרים לפי סוג — כינוס והצבה, משוואות ושברים, בעיות מילוליות, אי-שוויונות, ישרים, מערכות ואחוזים. מוצאים את הסוג של התרגיל שלך, ורואים פתרון מלא.</span><span class="tm">‏46 תרגילים · <b>≈ 3 דק׳ לתרגיל</b> · אפשר לעשות בחלקים</span></span>
+  <span class="st" data-st="alg:09-exercise-bank"></span>
+</a>
+
+<div class="groupt">נספח · תרגילי החוברת עצמם</div>
+
+<a class="station anchor" href="11-booklet-functions.html">
+  <span class="n" style="background:#B7791F">א׳</span>
+  <span class="t"><b>📖 חלק א׳ — עשרת תרגילי הפונקציות</b>
+  <span>החלק הארוך בחוברת, עם התשובות המלאות של כל סעיף וסעיף — נקודות, שיפועים, תחומי סימן ושטחי משולשים.</span><span class="tm">‏10 תרגילים · <b>≈ 90 דק׳</b> · <b>חדש</b></span></span>
+  <span class="st" data-st="alg:11-booklet-functions"></span>
+</a>
+<a class="station anchor" href="10-booklet-drills.html">
+  <span class="n" style="background:#B7791F">ב״ג</span>
+  <span class="t"><b>📖 חלק ב׳ וחלק ג׳ — כל מה שנשאר, פתור</b>
+  <span>שלוש המשוואות עם השברים, ארבעת האי-שוויונות, עשר המערכות בשיטת ההצבה, ושלוש בעיות האחוזים האחרונות. עם זה שני החלקים סגורים לגמרי.</span><span class="tm">‏20 תת-סעיפים · <b>≈ 50 דק׳</b> · <b>חדש</b></span></span>
+  <span class="st" data-st="alg:10-booklet-drills"></span>
+</a>
+
+<div class="groupt">ולסיום</div>
+
+<a class="station" href="08-quiz.html" style="border-style:dashed">
+  <span class="n" style="background:var(--ink)">✓</span>
+  <span class="t"><b>📝 בוחן הבית</b>
+  <span>שישה תרגילים — אלגברה, פונקציות וגם קצת גאומטריה. בלי רמזים ובלי שלבים — הבדיקה שזה באמת שלך.</span><span class="tm"><b>≈ 30 דק׳</b> · 6 תרגילים</span></span>
+  <span class="st" data-st="alg:08-quiz"></span>
+</a>
+
+<div class="box intuition" style="margin-top:26px">
+  <div class="box-title">נתקעת בשאלה מעבודת הקיץ?</div>
+  חלק א׳ (פונקציה קווית וגרפים) — תחנות 3–5 · חלק ב׳ (משוואות, אי-שוויונות ומערכות) —
+  תחנות 2 ו-6 · חלק ג׳ (בעיות אחוזים) — תחנה 7 · חלק ד׳ (סטטיסטיקה) —
+  <a href="../statistics/index.html">המודול השכן</a> · חלק ה׳ (חפיפת משולשים) ושאלות
+  שטח — <a href="../geometry/index.html">מסלול הגאומטריה</a>.
+</div>
+
+<div class="box example" style="margin-top:14px">
+  <div class="box-title">ומה עוד מחכה בכיתה ט׳?</div>
+  לפי החומר של בית הספר, בהמשך השנה מגיעים: פירוק לגורמים, נוסחאות הכפל
+  המקוצר, משוואות ריבועיות ועוד. כשזה יגיע בכיתה — יתווספו לכאן תחנות.
+  סקרנית כבר עכשיו? <a href="../library.html">בספרייה</a> יש הצצה לעבודות של העולים לי׳.
+</div>
+
+<footer class="fin">חלק מהעולם של שירה · <a href="../index.html">חזרה למרכז</a></footer>
+</main>
+</div>
+
+<script>
+/* "איפה עצרת" — כמו במפת הסטטיסטיקה */
+document.addEventListener('DOMContentLoaded', function () {
+  var completed = 0;
+  document.querySelectorAll('.st[data-st]').forEach(function (el) {
+    try {
+      var d = JSON.parse(localStorage.getItem('shira:' + el.dataset.st) || 'null');
+      if (!d || !d.total) { el.textContent = ''; return; }
+      var n = Object.keys(d.done || {}).length;
+      if (n === 0) { el.textContent = ''; return; }
+      if (n >= d.total) { el.innerHTML = '<span class="okk">הושלמה ✓</span>'; completed++; }
+      else { el.innerHTML = '<span class="okk">' + n + '</span> מתוך ' + d.total + ' סומנו'; }
+    } catch (e) { el.textContent = ''; }
+  });
+  if (completed >= 9) {
+    var fin = document.createElement('div');
+    fin.className = 'box def';
+    fin.style.marginTop = '20px';
+    fin.innerHTML = '<div class="box-title">כל המסלול הושלם — כולל הבוחן 🎉</div>' +
+      'האלגברה והפונקציות של השנה — אצלך ביד. עבודת הקיץ כבר לא מפחידה.';
+    document.querySelector('main').insertBefore(fin, document.querySelector('footer.fin'));
+  }
+});
+</script>
+</body>
+</html>
