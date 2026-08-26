@@ -1,0 +1,535 @@
+/* ============================================================================
+   העולם של שירה · גיליון העיצוב המשותף
+   RTL עברית · Arial · KaTeX (מבודד LTR) · ערכת נייר בהירה כמו בתי הקורסים.
+
+   Bidi (הכלל הפרויקטלי, ראו core/design-system/guide.css): כל אטום LTR בתוך
+   פרוזה עברית — נוסחה, מונח אנגלי, מספר-עם-סימנים — מקבל
+   `direction:ltr; unicode-bidi:isolate`. עברית שחולקת שורה עם ריצת LTR
+   נעטפת ב-<bdi>. SVG תמיד direction:ltr.
+
+   צבעי הפירוק הסמנטיים (זהים בכל האתר — הצבע הוא השפה):
+     צהוב  = הסך-הכל (המכנה)          → --c-total
+     כחול  = הקבוצה שמדברים עליה      → --c-group
+     ירוק  = מה מבקשים למצוא           → --c-find
+     ורוד  = נתון חיצוני שנכנס למשחק   → --c-given
+     סגול  = אירוע שמשנה את הנתונים    → --c-change
+   אותם צבעים משמשים בתוך נוסחאות דרך ‎\textcolor{}‎ — מקרא ונוסחה מדברים
+   באותה שפה.
+   ========================================================================== */
+
+:root{
+  --paper:#F7F5F1; --card:#FFFFFF; --ink:#1C2733; --soft:#5A6875;
+  --line:#E9E4DA; --faint:#EFEAE0; --shadow:rgba(28,39,51,.10);
+
+  /* מבטאי נושא */
+  --stat:#2E7D6B;        /* סטטיסטיקה */
+  --alg:#2E6F8E;         /* אלגברה ופונקציות */
+  --accent:var(--stat);  /* כל עמוד מגדיר מחדש אם צריך */
+
+  /* צבעי הפירוק — הטקסט החזק (לשימוש גם בתוך \textcolor) */
+  --c-total:#8A6D1B; --c-group:#1D6FA5; --c-find:#2E7D32;
+  --c-given:#C2408C; --c-change:#6D28D9;
+  /* רקעי המרקר התואמים */
+  --b-total:#FBF0C9; --b-group:#DDEDF8; --b-find:#DFF0DC;
+  --b-given:#FADCEC; --b-change:#EAE0FA;
+
+  --r-sm:6px; --r-md:10px; --r-lg:14px;
+  --maxw:840px;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; scroll-padding-top:70px}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:Arial,"Arial Hebrew","Helvetica Neue",sans-serif;
+  font-size:16px; line-height:1.75; direction:rtl;
+  -webkit-font-smoothing:antialiased;
+}
+main{min-width:0}
+/* break-word ולא anywhere: מילה עברית ארוכה נשברת רק אם אין ברירה, לא באמצע המילה */
+section,li,p,figcaption,td,th{min-width:0; overflow-wrap:break-word}
+a{color:var(--accent)}
+strong{font-weight:700}
+
+/* ---------- bidi primitives ---------- */
+.en{direction:ltr; unicode-bidi:isolate}
+bdi{unicode-bidi:isolate}
+.katex,.katex-display{direction:ltr; unicode-bidi:isolate}
+.katex{font-size:1.06em}
+.katex-display{margin:14px 0; overflow-x:auto; overflow-y:hidden; padding:4px 0}
+.katex-display>.katex{white-space:nowrap}
+/* .f = שורת נוסחה עצמאית מחוץ ל-fbox · .fi = אי נוסחה בתוך שורה עברית */
+.f{direction:ltr; unicode-bidi:isolate; text-align:center; margin:6px 0}
+.fi{direction:ltr; unicode-bidi:isolate; display:inline-block}
+svg{direction:ltr}
+
+/* ---------- סרגל עליון ---------- */
+.topbar{position:sticky; top:0; z-index:50;
+  background:rgba(247,245,241,.94); backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line)}
+.topbar-in{max-width:var(--maxw); margin:0 auto; padding:9px 20px;
+  display:flex; align-items:center; gap:14px; flex-wrap:wrap}
+.topbar .home{font-weight:700; font-size:13.5px; text-decoration:none; color:var(--soft);
+  white-space:nowrap}
+.topbar .home:hover{color:var(--ink)}
+.topbar .crumbs{font-size:12.5px; color:var(--soft); display:flex; align-items:center;
+  gap:6px; flex-wrap:wrap; margin-inline-start:auto}
+.topbar .crumbs b{color:var(--ink); font-weight:700}
+
+.wrap{max-width:var(--maxw); margin:0 auto; padding:26px 20px 90px}
+
+/* ---------- כותרת עמוד ---------- */
+header.hero{padding:14px 0 18px; border-bottom:1px solid var(--line); margin-bottom:26px}
+header.hero .eyebrow{font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--accent); font-weight:700}
+header.hero h1{margin:6px 0 8px; font-size:31px; font-weight:800; letter-spacing:-.02em; line-height:1.15}
+header.hero p.lead{margin:0; color:var(--soft); font-size:15.5px; max-width:64ch}
+
+/* "בסוף העמוד תדעי" */
+.youknow{margin:14px 0 0; font-size:14px; color:var(--soft)}
+.youknow b{color:var(--ink)}
+
+h2{font-size:22px; font-weight:800; margin:44px 0 10px; letter-spacing:-.01em;
+  padding-bottom:6px; border-bottom:2px solid var(--line); scroll-margin-top:70px}
+h2 .num{color:var(--accent); margin-inline-end:8px}
+h3{font-size:17.5px; font-weight:700; margin:26px 0 6px}
+p{margin:10px 0}
+
+/* ---------- פס שלבים (בתוך עמודי העוגן) ---------- */
+.stagebar{display:flex; align-items:center; gap:8px; margin:30px 0 4px;
+  font-size:12.5px; color:var(--soft)}
+.stagebar .dots-s{display:inline-flex; gap:4px; direction:ltr}
+.stagebar .dots-s i{width:8px; height:8px; border-radius:50%; background:var(--line)}
+.stagebar .dots-s i.on{background:var(--accent)}
+.stagebar b{color:var(--accent); font-weight:700}
+
+/* ---------- קופסאות ---------- */
+.box{border:1px solid var(--line); border-radius:var(--r-lg); background:var(--card);
+  padding:14px 18px; margin:20px 0; border-inline-start:4px solid var(--accent);
+  box-shadow:0 10px 28px -26px var(--shadow)}
+.box .box-title{font-weight:800; margin-bottom:4px}
+.box.def{border-inline-start-color:var(--accent)}
+.box.def .box-title{color:var(--accent)}
+.box.intuition{border-inline-start-color:#B7791F; background:#FDFAF2}
+.box.intuition .box-title{color:#8A6D1B}
+.box.warn{border-inline-start-color:#C0392B; background:#FDF6F5}
+.box.warn .box-title{color:#C0392B}
+.box.example{border-inline-start-color:#5A6875; background:#FBFAF7}
+.box.example .box-title{color:#5A6875}
+.box.essence{border-inline-start-color:var(--c-change); background:#F9F6FE}
+.box.essence .box-title{color:var(--c-change)}
+
+/* ---------- קופסת נוסחה + מקרא ---------- */
+/* \boxed של KaTeX מגיע כ-span.fbox — מכאן ההיקף מוגבל ל-div, אחרת כרטיס
+   הנוסחה של האתר נמרח על תוצאה בתוך שורת מתמטיקה. */
+.katex .fbox,.katex .boxpad{border-radius:4px}
+.katex-display{padding:8px 0}
+div.fbox{border:1.5px solid var(--accent); border-radius:var(--r-lg); background:var(--card);
+  padding:12px 18px 10px; margin:20px 0; box-shadow:0 10px 28px -26px var(--shadow)}
+div.fbox .fbox-title{font-weight:800; color:var(--accent); font-size:13.5px; margin-bottom:2px}
+div.fbox .katex-display{margin:.45em 0}
+div.fbox .katex-display .katex{font-size:1.28em}
+.f-legend{direction:rtl; unicode-bidi:isolate; display:block; margin-top:6px;
+  padding-top:8px; border-top:1px dashed var(--line); font-size:13px; color:var(--soft)}
+.f-legend>span{unicode-bidi:isolate; display:inline-flex; align-items:center; gap:6px;
+  margin-inline-end:16px}
+.f-legend .sw{width:11px; height:11px; border-radius:3px; flex:0 0 auto; display:inline-block}
+
+/* ---------- מרקרים סמנטיים (פירוק שאלה בצבעים) ---------- */
+.mk{border-radius:4px; padding:0 3px; border-bottom:2px solid transparent}
+.mk-total {background:var(--b-total);  border-bottom-color:var(--c-total)}
+.mk-group {background:var(--b-group);  border-bottom-color:var(--c-group)}
+.mk-find  {background:var(--b-find);   border-bottom-color:var(--c-find)}
+.mk-given {background:var(--b-given);  border-bottom-color:var(--c-given)}
+.mk-given2{background:#F6E3F0; border-bottom-color:#D67BB0} /* גוון ורוד שני — נתון נפרד באותו משפט */
+.mk-change{background:var(--b-change); border-bottom-color:var(--c-change)}
+/* בתרגילי "לבד עם רשת" הפירוק חבוי עד לחיצה על "הציגי את הפירוק בצבעים" */
+.ex.hide-marks .mk{background:transparent; border-bottom-color:transparent; padding:0}
+
+/* מקרא הצבעים הקבוע */
+.mk-legend{display:flex; gap:12px; flex-wrap:wrap; font-size:12.5px; color:var(--soft);
+  margin:8px 0}
+.mk-legend span{display:inline-flex; align-items:center; gap:5px}
+.mk-legend .sw{width:11px; height:11px; border-radius:3px}
+
+/* ---------- תרגיל ---------- */
+article.ex{background:var(--card); border:1px solid var(--line); border-radius:var(--r-lg);
+  padding:16px 18px; margin:18px 0; box-shadow:0 10px 28px -26px var(--shadow)}
+article.ex .ex-head{display:flex; align-items:baseline; gap:10px; margin-bottom:6px; flex-wrap:wrap}
+article.ex .ex-head .lvl{font-size:10.5px; font-weight:800; letter-spacing:.12em;
+  text-transform:uppercase; color:#fff; background:var(--accent); border-radius:6px; padding:2px 8px}
+article.ex .ex-head .lvl.l1{background:#7FA98F}
+article.ex .ex-head .lvl.l2{background:#4E8D7C}
+article.ex .ex-head .lvl.l3{background:#2E6F5E}
+article.ex .ex-head h4{margin:0; font-size:15.5px; font-weight:800}
+.ex .q-text{margin:6px 0 10px}
+
+/* ---------- toggles: פתרון / ניסוחים חלופיים / שלב ---------- */
+details{margin:10px 0}
+details>summary{cursor:pointer; user-select:none; list-style:none;
+  display:inline-flex; align-items:center; gap:7px;
+  font-size:13.5px; font-weight:700; color:var(--soft);
+  border:1px solid var(--line); background:#FBFAF7; border-radius:8px; padding:7px 12px;
+  transition:.15s}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"▸"; font-size:10px; transition:transform .18s}
+details[open]>summary::before{transform:rotate(90deg)}
+details>summary:hover{color:var(--ink); border-color:#D8D1C4}
+details.sol>summary{color:var(--stat); border-color:#CFE3DD; background:#F4FAF8}
+details.sol[open]>summary{margin-bottom:8px}
+details.sol .sol-body{border:1px dashed #CFE3DD; border-radius:var(--r-md);
+  padding:10px 14px; background:#FDFEFD}
+details.alt>summary{color:var(--c-given); border-color:#EFD3E2; background:#FDF8FB}
+details.alt .alt-body{border:1px dashed #EFD3E2; border-radius:var(--r-md);
+  padding:10px 14px; background:#FEFCFE}
+details.alt .alt-body li{margin:5px 0}
+details.step>summary{color:var(--alg); border-color:#D2E0E8; background:#F7FAFC}
+details.step .step-body{padding:8px 14px}
+details.more-x>summary{color:var(--soft)}
+
+/* ---------- שלבים ממוספרים ---------- */
+ol.steps{counter-reset:st; list-style:none; padding:0; margin:14px 0}
+ol.steps>li{counter-increment:st; position:relative; padding:4px 40px 4px 0; margin:8px 0}
+ol.steps>li::before{content:counter(st); position:absolute; right:0; top:6px;
+  width:26px; height:26px; border-radius:50%; background:var(--accent); color:#fff;
+  font-weight:800; font-size:13px; display:flex; align-items:center; justify-content:center}
+
+/* ---------- טבלת נתונים ---------- */
+table.dtable{border-collapse:collapse; margin:14px auto; background:var(--card)}
+table.dtable th,table.dtable td{border:1.5px solid var(--ink); padding:6px 14px;
+  text-align:center; font-size:15px; min-width:52px}
+table.dtable th{background:var(--faint); font-weight:700; font-size:13.5px}
+table.dtable td.hl-total{background:var(--b-total)}
+table.dtable td.hl-group{background:var(--b-group)}
+table.dtable td.hl-find {background:var(--b-find)}
+table.dtable td.hl-given{background:var(--b-given)}
+/* גווני "עמודה↔חישוב": כל עמודה בטבלה מקבלת צבע, ואותו צבע חוזר בנוסחה
+   ובנקודות — כך רואים בעיניים מי שייך למי (c1 אפור, c2 כחול, c3 ירקרק,
+   c4 סגול, c5 ורוד — תואמים לעיגולים d1–d5) */
+table.dtable td.hl-c1{background:#E8EBEE}
+table.dtable td.hl-c2{background:#DDEDF8}
+table.dtable td.hl-c3{background:#DCEEE9}
+table.dtable td.hl-c4{background:#EAE0FA}
+table.dtable td.hl-c5{background:#FADCEC}
+table.dtable td.x-cell{color:var(--c-find); font-weight:800; font-size:16px}
+/* טבלת-עבודה קומפקטית בתוך פתרון: אותה dtable, קטנה וצרה יותר —
+   התשובה מראה את ההליכה על הטבלה בעצמה, בלי לגנוב את הבמה מטבלת הנתונים */
+table.dtable.sol-table{margin:10px auto}
+table.dtable.sol-table th,table.dtable.sol-table td{padding:3px 9px; font-size:12.5px; min-width:36px}
+table.dtable.sol-table th{font-size:11.5px}
+.tbl-note{text-align:center; font-size:12.5px; color:var(--soft); margin-top:-8px}
+
+/* ---------- המחשות: שורת נקודות (חציון!), רצועות, כנסת ---------- */
+.dotrow{direction:ltr; display:flex; flex-wrap:wrap; gap:5px; justify-content:center;
+  margin:14px 0; padding:12px; background:var(--card); border:1px solid var(--line);
+  border-radius:var(--r-md)}
+.dotrow.with-pos{padding-top:38px; row-gap:32px}
+.dot{width:17px; height:17px; border-radius:50%; position:relative; flex:0 0 auto}
+.dot.d1{background:#9AA5B1}.dot.d2{background:#1D6FA5}.dot.d3{background:#2E7D6B}
+.dot.d4{background:#6D28D9}.dot.d5{background:#C2408C}.dot.d6{background:#B7791F}
+/* עיגול עם הערך כתוב בפנים — כשחשוב לראות מה כל נקודה שווה */
+.dot.lg{width:27px; height:27px; display:inline-flex; align-items:center;
+  justify-content:center; font-size:12.5px; font-weight:800; color:#fff}
+.dot.lg.d1{background:#7C8794}
+.dot.ring{box-shadow:0 0 0 3px #fff, 0 0 0 6px var(--c-find)}
+.dot .pos{position:absolute; top:-22px; left:50%; transform:translateX(-50%);
+  font-size:10.5px; font-weight:800; color:var(--c-find); white-space:nowrap}
+.dot.lg .pos{top:-26px}
+.viz-cap{text-align:center; font-size:13px; color:var(--soft); margin:2px 0 16px}
+/* ערימות (למשל: כמה מטבעות לכל ילד → חלוקה שווה) */
+.stacks{direction:ltr; display:flex; gap:22px; justify-content:center; align-items:flex-end;
+  margin:14px 0; padding:14px; background:var(--card); border:1px solid var(--line);
+  border-radius:var(--r-md); flex-wrap:wrap}
+.stack{display:flex; flex-direction:column; gap:3px; align-items:center}
+.stack .pile{display:flex; flex-direction:column-reverse; gap:3px}
+.stack .lbl{font-size:11.5px; color:var(--soft); margin-top:4px}
+.stack .cnt{font-size:12px; font-weight:800}
+
+/* ---------- מיני-איורים: עמודת "כך זה נראה" + מיקרו-המחשות ---------- */
+.tbl-scroll{overflow-x:auto; margin:14px 0; -webkit-overflow-scrolling:touch}
+.tbl-scroll table.dtable{margin:0 auto}
+.mini-row{direction:ltr; display:flex; flex-wrap:wrap; gap:10px;
+  justify-content:center; align-items:center}
+.mini-row svg{flex:0 0 auto; display:block}
+.mini-fig{display:flex; flex-direction:column; align-items:center; gap:3px}
+.mini-fig .cap{direction:rtl; font-size:11.5px; color:var(--soft); line-height:1.5;
+  text-align:center; max-width:190px}
+td.viz-cell{padding:8px 8px}
+
+/* ---------- figures / צילומי תרגילים / וידאו ---------- */
+figure{margin:22px 0; text-align:center; background:var(--card);
+  border:1px solid var(--line); border-radius:var(--r-lg); padding:12px;
+  box-shadow:0 10px 28px -26px var(--shadow)}
+figure img{max-width:100%; height:auto; border-radius:var(--r-sm)}
+figure.shot img{border:1px solid var(--line)}
+figcaption{color:var(--soft); font-size:13px; margin-top:8px; line-height:1.6; direction:rtl}
+/* דרגות ערך: הערת-אגב. תוכן שולי באמת — הרגעה, תזכורת אגבית, מקרה-קצה
+   שכבר נלמד — לא שוקל כמו תוכן ליבה: קטן ואפור. לא למתמטיקה, להגדרות,
+   לאזהרות או לשלבי פתרון. */
+.aside{font-size:13px; color:var(--soft)}
+p.aside{margin:6px 0}
+.fig-row{display:flex; gap:12px; flex-wrap:wrap; margin:22px 0}
+.fig-row figure{flex:1 1 240px; margin:0}
+/* תוויות תפקיד-ציר צמודות לצירים (עברית נשארת ב-HTML, סביב ה-SVG):
+   העטיפה .axplot מקבלת את רוחב ה-SVG עצמו (max-width מוצהר עליה inline,
+   וה-SVG ממלא width:100%) — כך התוויות ממוקמות ביחס לקופסת הגרף,
+   לא ביחס לשולי הכרטיס. תווית y מסובבת צמוד למספרי הציר האנכי;
+   תווית x ממורכזת מתחת למספרי הציר האופקי, מעל ה-figcaption. */
+.axplot{position:relative; display:block; margin:0 auto; padding:0 0 18px 16px}
+.axplot svg{display:block; width:100%; height:auto}
+.axplot .ax-xlab,.axplot .ax-ylab{position:absolute; font-size:12px; font-weight:700;
+  color:var(--soft); white-space:nowrap; pointer-events:none}
+.axplot .ax-xlab{bottom:0; left:calc(50% + 8px); transform:translateX(-50%)}
+.axplot .ax-ylab{left:2px; top:46%; line-height:1.2;
+  transform:rotate(-90deg) translateX(-50%); transform-origin:0 0}
+/* וידאו = תמונת-תצוגה מקומית + לינק החוצה ליוטיוב.
+   (iframe של יוטיוב נחסם כשפותחים את הקובץ מקומית מ-file:// — שגיאה 153,
+   נבדק 2026-08-07 — לכן בכוונה אין כאן embed.) */
+.video-link{display:flex; gap:14px; align-items:center; text-decoration:none;
+  border:1px solid var(--line); border-radius:var(--r-md); background:#FBFAF7;
+  padding:10px 14px; margin:10px 0; color:var(--ink); transition:.15s}
+.video-link:hover{border-color:var(--accent)}
+.video-link img{width:150px; border-radius:var(--r-sm); border:1px solid var(--line); flex:0 0 auto}
+.video-link .vt{min-width:0}
+.video-link .vt b{display:block; font-size:14.5px}
+.video-link .vt span{font-size:12.5px; color:var(--soft)}
+.video-link .play{font-size:20px; color:var(--accent); flex:0 0 auto}
+
+/* אזור "רוצה לראות את זה מוסבר?" */
+.watch{border:1px solid var(--line); border-radius:var(--r-lg); background:var(--card);
+  padding:14px 18px; margin:22px 0}
+.watch h3{margin:0 0 4px; font-size:15px; color:var(--soft)}
+.watch p{font-size:13.5px; color:var(--soft); margin:6px 0}
+.watch a{font-weight:700}
+
+/* ---------- בוחן עצמי ---------- */
+.q-row{display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin:8px 0}
+.q-input{direction:ltr; unicode-bidi:isolate; width:110px; font-size:15px;
+  padding:7px 10px; border:1.5px solid var(--line); border-radius:8px; text-align:center;
+  font-family:inherit; background:#fff}
+.q-input:focus{outline:none; border-color:var(--accent)}
+.q-check{font-size:13px; font-weight:700; color:#fff; background:var(--accent);
+  border:none; border-radius:8px; padding:8px 14px; cursor:pointer; font-family:inherit}
+.q-check:hover{filter:brightness(1.08)}
+.q-feedback{font-size:13.5px; font-weight:700}
+.q-feedback.ok{color:var(--c-find)}
+.q-feedback.no{color:#C0392B}
+
+/* ---------- התקדמות ---------- */
+.mark{display:inline-flex; align-items:center; gap:7px; font-size:13px; color:var(--soft);
+  cursor:pointer; user-select:none}
+.mark input{width:16px; height:16px; accent-color:var(--stat); cursor:pointer}
+.progresswrap{display:flex; align-items:center; gap:8px; font-size:12px; color:var(--soft)}
+.progressbar{width:120px; height:7px; background:var(--faint); border-radius:99px; overflow:hidden}
+.progressbar i{display:block; height:100%; width:0; background:var(--stat); border-radius:99px;
+  transition:width .25s}
+
+/* ---------- ניווט תחתון בין עמודים ---------- */
+.pagenav{display:flex; justify-content:space-between; gap:12px; margin-top:56px;
+  padding-top:18px; border-top:1px solid var(--line)}
+.pagenav a{flex:0 1 48%; text-decoration:none; padding:12px 16px; background:var(--card);
+  border:1px solid var(--line); border-radius:var(--r-md); color:var(--ink);
+  box-shadow:0 10px 28px -26px var(--shadow)}
+.pagenav a:hover{border-color:var(--accent)}
+.pagenav .dir{color:var(--soft); font-size:12px; display:block}
+.pagenav .next{text-align:left}
+
+footer.fin{margin-top:44px; padding-top:14px; border-top:1px solid var(--line);
+  color:var(--soft); font-size:12.5px}
+
+/* ---------- print ---------- */
+.no-print{}
+@media print{
+  .topbar,.no-print,.q-check,.watch,.video-embed,figure.video,.pagenav,.mark,
+  .progresswrap{display:none !important}
+  body{background:#fff; font-size:13px}
+  .wrap{padding:0; max-width:none}
+  details>summary{display:none}
+  details:not([open])>*{display:block}
+  /* יחידות קטנות לא נשברות באמצע; תרגיל שלם — כן, אחרת עמוד שלם נשאר ריק
+     רק כדי שהוא ייכנס בשלמותו לעמוד הבא. */
+  .box,.fbox,figure,table.dtable,.dotrow,.nb-step,article.ex tr{break-inside:avoid}
+  article.ex,.nb,details,ol.steps,ol.parts{break-inside:auto; box-shadow:none}
+  article.ex,.box,.fbox,figure,table.dtable,.dotrow{box-shadow:none}
+  article.ex .ex-head,h2,h3,.nb-head,.stagebar{break-after:avoid}
+  article.ex{orphans:3; widows:3}
+  a{text-decoration:none; color:inherit}
+}
+
+@media (max-width:640px){
+  body{font-size:15px}
+  table.cmp th,table.cmp td{padding:7px 9px; font-size:13px}
+  table.cmp td.cap{width:31%; font-size:12.5px; line-height:1.4}
+  header.hero h1{font-size:25px}
+  .topbar .crumbs{width:100%; margin-inline-start:0}
+  /* טבלה רחבה מחליקה בתוך עצמה — ולא גוררת את כל העמוד הצידה */
+  table.dtable{display:block; width:max-content; max-width:100%; overflow-x:auto}
+  /* תוויות הצירים מתכווצות במסך צר, אחרת התווית המסובבת גבוהה מהתרשים עצמו */
+  .axplot .ax-xlab,.axplot .ax-ylab{font-size:10.5px}
+}
+/* שמות הקטגוריות יושבים על ציר ה-x עצמו (כמו במחברת), לא במקרא בצד */
+.axplot .plotbox{position:relative}
+.axplot .ax-cat{position:absolute; top:100%; margin-top:3px; transform:translateX(-50%);
+  font-size:11.5px; font-weight:700; color:var(--soft); white-space:nowrap}
+@media (max-width:640px){ .axplot .ax-cat{font-size:10px} }
+
+/* שלט "אפשר להחליק" — נשתל ב-JS רק כשבאמת יש מה לגלול */
+.scroll-hint{font-size:11.5px; color:var(--soft); margin:-4px 0 10px; text-align:center}
+@media print{ .scroll-hint{display:none} }
+
+/* ---------- "לא הבנתי" — סימון קטע שנתקעה בו ----------
+   נשתל ב-JS בראש כל <h2> בדף לימוד. זו הערת-שוליים ולא כפתור: קטן, אפור,
+   מסגרת מקווקוות — לא מתחרה בכותרת שלידה. הצף שמאלה כי הדף RTL, ולכן
+   שמאל הוא הקצה הרחוק של השורה. הוא נשתל ראשון בסדר המקור כדי לשבת על
+   השורה הראשונה של הכותרת גם כשהיא נשברת לשתיים.
+   אין כאן צבע חדש: מבוטל = --soft על שקוף, מסומן = --ink על --faint.
+   הצבעים הסמנטיים (mk-total/group/find/given/change) נשארים שפת התוכן. */
+.ask-btn{
+  float:left; margin:2px 0 0;
+  font-family:inherit; font-size:11.5px; font-weight:400; line-height:1.45;
+  letter-spacing:0; text-transform:none; white-space:nowrap;
+  color:var(--soft,#5A6875); background:transparent;
+  border:1px dashed var(--line,#E9E4DA); border-radius:99px;
+  padding:3px 11px; cursor:pointer; transition:.15s;
+}
+.ask-btn:hover{color:var(--ink,#1C2733); border-color:#D8D1C4; background:#FBFAF7}
+.ask-btn:focus-visible{outline:2px solid var(--soft,#5A6875); outline-offset:2px}
+.ask-btn[aria-pressed="true"]{
+  color:var(--ink,#1C2733); background:var(--faint,#EFEAE0);
+  border-style:solid; border-color:#D8D1C4; font-weight:700;
+}
+/* דף לימוד בלי h2 בכלל (בוחן הבית) — סימון אחד לכל הדף, בשורה משלו */
+.ask-page{margin:-14px 0 20px; text-align:left}   /* אותו קצה רחוק כמו בכותרות */
+.ask-page .ask-btn{float:none}
+
+/* אישור שקט — נעלם מעצמו, לא חוסם כלום */
+.ask-toast{
+  position:fixed; inset-inline:0; bottom:18px; margin:0 auto;
+  width:max-content; max-width:88vw;
+  background:var(--card,#fff); color:var(--ink,#1C2733);
+  border:1px solid var(--line,#E9E4DA); border-radius:99px;
+  padding:8px 16px; font-size:12.5px; line-height:1.5;
+  box-shadow:0 12px 30px -18px var(--shadow,rgba(28,39,51,.10));
+  z-index:200; opacity:0; transition:opacity .18s; pointer-events:none;
+}
+.ask-toast.on{opacity:1}
+
+/* ---------- הרשימה במרכז (index.html · <section id="ask-noa">) ----------
+   אותו ניב של המדף בבית: כרטיס לבן, שורות מופרדות בקו מקווקו, פעולה שקטה
+   בקצה. מוסתר לגמרי כשאין מה להראות. */
+#ask-noa .ask-head{margin:36px 0 12px; display:flex; align-items:baseline; gap:12px}
+#ask-noa .ask-head h3{margin:0; font-size:15px; font-weight:800; white-space:nowrap;
+  color:var(--soft,#5A6875)}
+#ask-noa .ask-head .bar{flex:1; height:1px; background:var(--line,#E9E4DA)}
+.ask-list{background:var(--card,#fff); border:1px solid var(--line,#E9E4DA);
+  border-radius:var(--r-md,12px); padding:2px 18px}
+.ask-item{display:flex; align-items:baseline; gap:10px; padding:10px 2px;
+  border-bottom:1px dashed var(--faint,#EFEAE0)}
+.ask-item:last-child{border-bottom:none}
+/* המרכז נותן לרשימה גם class="shelf" — ו-.shelf a הופך כל קישור לשורת-מדף
+   שלמה עם קו תחתון משלה. כאן מבטלים את זה: הקישור הוא טקסט בתוך השורה,
+   והקו התחתון שייך ל-.ask-item. */
+.ask-list .ask-item>a{display:inline; padding:0; min-height:0; border-bottom:none;
+  text-decoration:none; color:inherit; font-size:13.5px; min-width:0}
+.ask-item>a:hover{color:var(--stat,#2E7D6B)}
+.ask-item>a b{font-weight:700}
+.ask-item .ask-where{color:var(--soft,#5A6875); font-size:12px; margin-inline-start:6px}
+.ask-del{margin-inline-start:auto; flex:0 0 auto;
+  font-family:inherit; font-size:11.5px; color:var(--soft,#5A6875);
+  background:transparent; border:1px dashed var(--line,#E9E4DA);
+  border-radius:99px; padding:3px 10px; cursor:pointer; transition:.15s}
+.ask-del:hover{color:var(--ink,#1C2733); border-color:#D8D1C4; background:#FBFAF7}
+.ask-del:focus-visible{outline:2px solid var(--soft,#5A6875); outline-offset:2px}
+.ask-note{margin:8px 2px 0; font-size:12px; color:var(--soft,#5A6875)}
+
+@media print{ .ask-btn,.ask-page,.ask-toast,#ask-noa{display:none !important} }
+/* מובייל צר: הסרגל לא גוזל שליש מסך — בלי כפתור הדפסה, פירורים קטנים */
+@media (max-width:520px){
+  .topbar .no-print{display:none}
+  .topbar .crumbs{font-size:11px}
+  .topbar-in{padding:7px 14px; gap:8px}
+}
+
+/* ============================================================
+   "בונים ביחד במחברת" — הדף נבנה שלב-אחרי-שלב מול העיניים,
+   כמו מורה שממלאת מחברת על הלוח. השלבים מוסתרים ונפתחים
+   בלחיצה; בהדפסה כולם פתוחים. אין JS? כולם פתוחים מלכתחילה.
+   ============================================================ */
+.nb{border:1px solid var(--line); border-radius:var(--r-lg); background:var(--card);
+  margin:22px 0; overflow:hidden; box-shadow:0 10px 28px -26px var(--shadow)}
+.nb-head{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;
+  padding:10px 16px; background:#FBFAF7; border-bottom:1px solid var(--line)}
+.nb-head b{font-size:14px; font-weight:800}
+.nb-head .nb-count{margin-inline-start:auto; font-size:12px; color:var(--soft)}
+.nb-steps{list-style:none; margin:0; padding:4px 0}
+.nb-step{position:relative; padding:12px 54px 12px 18px; border-bottom:1px dashed var(--faint)}
+.nb-step:last-child{border-bottom:none}
+.nb-step::before{content:attr(data-n); position:absolute; right:16px; top:13px;
+  width:26px; height:26px; border-radius:50%; background:var(--accent); color:#fff;
+  font-weight:800; font-size:13px; display:flex; align-items:center; justify-content:center}
+.nb-step>b{display:block; font-size:14.5px; margin-bottom:2px}
+.nb-step>*:last-child{margin-bottom:0}
+.nb-step p{margin:6px 0}
+.nb-step.is-hidden{display:none}
+.nb-step.is-new{animation:nb-in .28s ease-out}
+@keyframes nb-in{from{opacity:0; transform:translateY(-6px)} to{opacity:1; transform:none}}
+.nb-acts{display:flex; gap:8px; flex-wrap:wrap; align-items:center;
+  padding:11px 16px; border-top:1px solid var(--line); background:#FBFAF7}
+.nb-next{font-family:inherit; font-size:13.5px; font-weight:700; color:#fff;
+  background:var(--accent); border:none; border-radius:9px; padding:9px 16px; cursor:pointer}
+.nb-next:hover{filter:brightness(1.08)}
+.nb-all{font-family:inherit; font-size:12.5px; font-weight:600; color:var(--soft);
+  background:transparent; border:1px solid var(--line); border-radius:8px;
+  padding:7px 12px; cursor:pointer}
+.nb-all:hover{color:var(--ink); border-color:#D8D1C4}
+.nb-done{font-size:12.5px; color:var(--c-find); font-weight:700}
+@media print{
+  .nb-step.is-hidden{display:block}
+  .nb-acts{display:none !important}
+  .nb{break-inside:avoid}
+}
+
+/* ============================================================
+   "מה יש בעמוד הזה" — תוכן העניינים של הדף עצמו.
+   נבנה אוטומטית מכותרות ה-h2, כדי שאף סעיף לא ייעלם בתוך קיר
+   של טקסט. במסך רחב הוא נשאר דבוק בצד; במסך צר הוא נפתח מכפתור.
+   ============================================================ */
+.pagemap{margin:18px 0 26px; border:1px solid var(--line); border-radius:var(--r-lg);
+  background:var(--card); box-shadow:0 10px 28px -26px var(--shadow); overflow:hidden}
+.pagemap>summary{cursor:pointer; user-select:none; list-style:none;
+  display:flex; align-items:center; gap:8px; padding:11px 16px;
+  font-size:13.5px; font-weight:800; color:var(--ink); background:#FBFAF7;
+  border:none; border-radius:0}
+.pagemap>summary::-webkit-details-marker{display:none}
+.pagemap>summary::before{content:"▸"; font-size:10px; color:var(--soft); transition:transform .18s}
+.pagemap[open]>summary::before{transform:rotate(90deg)}
+.pagemap>summary .pm-n{margin-inline-start:auto; font-size:12px; font-weight:600; color:var(--soft)}
+.pagemap ol{list-style:none; margin:0; padding:6px 0 10px; counter-reset:pmi}
+.pagemap li{counter-increment:pmi}
+.pagemap li a{display:flex; gap:9px; align-items:baseline; text-decoration:none;
+  color:var(--ink); font-size:13.5px; line-height:1.5; padding:7px 18px 7px 16px}
+.pagemap li a::before{content:counter(pmi); flex:0 0 auto; min-width:17px;
+  font-size:11px; font-weight:800; color:var(--soft); text-align:center}
+.pagemap li a:hover{background:var(--faint)}
+.pagemap li a.here{background:var(--faint); font-weight:700}
+.pagemap li a.here::before{color:var(--accent)}
+.pagemap li.lvl3 a{padding-inline-start:34px; font-size:12.5px; color:var(--soft)}
+.pagemap li.lvl3 a::before{content:"·"; font-size:14px}
+
+/* הכפתור הצף — פותח את מפת העמוד מכל מקום בגלילה (מסך צר בלבד) */
+/* כפתור מפת-העמוד: עיגול של 44px — קטן ככל האפשר, כי הוא צף מעל התוכן */
+.pm-fab{position:fixed; inset-inline-end:12px; bottom:14px; z-index:120;
+  width:44px; height:44px; border-radius:50%;
+  font-family:inherit; font-size:17px; line-height:1; color:var(--ink);
+  background:var(--card); border:1px solid var(--line); cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 12px 30px -14px var(--shadow); transition:.15s}
+.pm-fab:hover{border-color:#D8D1C4}
+.pm-fab:focus-visible{outline:2px solid var(--soft); outline-offset:2px}
+@media print{.pagemap,.pm-fab{display:none !important}}
+@media (min-width:1180px){
+  /* במסך רחב יש מקום אמיתי בצד — המפה נשארת גלויה בזמן הגלילה */
+  .pagemap.dock{position:fixed; top:86px; inset-inline-end:max(12px,calc(50vw - 620px));
+    width:232px; margin:0; max-height:calc(100vh - 120px); overflow-y:auto; z-index:40}
+  .pagemap.dock>summary{position:sticky; top:0; z-index:1}
+}

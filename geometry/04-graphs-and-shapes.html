@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<!-- מסך הבית של האייפד/הטלפון -->
+<link rel="apple-touch-icon" href="../assets/icons/icon-180.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>גאומטריה במערכת צירים — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../vendor/katex.min.css">
+<link rel="stylesheet" href="../css/shira.css">
+<style>:root{--accent:var(--alg)}</style>
+<script defer src="../vendor/katex.min.js"></script>
+<script defer src="../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../js/shira.js"></script>
+<style>
+/* מחוון פתיחה — כמה זמן, כמה תרגילים, ואיפה מתחילים לתרגל (מוסתר בהדפסה) */
+.pagemeta{display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px;
+  margin:12px 0 0; font-size:13px; color:var(--soft)}
+.pagemeta .pm-time{background:var(--faint); border-radius:999px; padding:3px 10px}
+.pagemeta .pm-time b{color:var(--ink); font-weight:700}
+.pagemeta .pm-jump{color:var(--accent); font-weight:700; text-decoration:none}
+.pagemeta .pm-jump:hover{text-decoration:underline}
+.pagemeta .pm-note{flex:1 1 100%; margin:0}
+#ex-first,#bank-map{scroll-margin-top:78px}
+</style>
+</head>
+<body data-page="geo:04-graphs-and-shapes">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">גאומטריה — המפה</a>
+    <span class="crumbs">תחנה <b>4</b> מתוך 8 · <b>גרפים וצורות</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">גאומטריה · תחנה 4 · המפגש עם האלגברה</div>
+  <h1>גאומטריה במערכת צירים — מהגרף לשטח</h1>
+  <p class="lead">
+    יש משפחה של תרגילים שמתחילה כמו פונקציות — "הנה ישר" — ואז, בסעיף האחרון,
+    שואלת פתאום על שטח של משולש או טרפז. בעמוד הזה נפרק את המשפחה הזאת עד הסוף:
+    איך גרף הופך לצורה, ואיך הצורה הופכת למספר.
+    החדשות הטובות — זו תמיד, אבל תמיד, אותה שרשרת של ארבעה צעדים.
+  </p>
+  <p class="youknow"><b>בסוף העמוד תדעי:</b> למצוא את קודקודי הצורה שישר יוצר עם הצירים ·
+  לחשב אורך של קטע אופקי או אנכי מהפרש שיעורים ·
+  לחשב שטח של משולש ושל טרפז ישר מתוך הגרף.</p>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>≈ 30 דק׳</b> · 5 תרגילים</span>
+    <a class="pm-jump" href="#ex-first">לקפוץ ישר לתרגיל הראשון ↓</a>
+  </p>
+</header>
+
+<!-- ============ שלב 1 · השיטה הקבועה ============ -->
+<div class="stagebar"><span class="dots-s"><i class="on"></i><i></i><i></i><i></i><i></i></span>
+  שלב <b>1</b> מתוך 5 · השיטה הקבועה</div>
+<h2 id="sec-method">השיטה הקבועה — ארבעה צעדים מהגרף לשטח</h2>
+
+<p>
+  לפני הדוגמאות — הנה כל השיטה במבט אחד.
+  שווה לקרוא אותה עכשיו בנחת, כי בהמשך העמוד נפעיל אותה שוב ושוב,
+  אותם צעדים בדיוק בכל תרגיל.
+</p>
+
+<ol class="steps">
+  <li><strong>מוצאים קודקודים.</strong>
+      חיתוך עם ציר ה-<span class="fi">\(y\)</span> — מציבים <span class="fi">\(x=0\)</span>.
+      חיתוך עם ציר ה-<span class="fi">\(x\)</span> — מציבים <span class="fi">\(y=0\)</span>.
+      חיתוך בין שני ישרים — משווים, כמו <a href="../algebra/05-line-equation.html#sec-intersect">בתחנה 5 של מסלול האלגברה</a>.
+      <br>כל קודקוד נכתב כנקודה מפורשת: <span class="fi">\((x,y)\)</span>.</li>
+  <li><strong>מוצאים אורכים.</strong>
+      אורך של קטע אופקי או אנכי הוא הפרש שיעורים — זה כל שלב 2 של העמוד.</li>
+  <li><strong>מזהים את הצורה.</strong>
+      משולש ישר-זווית? מלבן? טרפז? הזיהוי קובע באיזו נוסחה משתמשים.</li>
+  <li><strong>מציבים בנוסחה.</strong>
+      שטח או היקף — ועונים במשפט מסודר, עם יחידות.</li>
+</ol>
+
+<div class="box essence">
+  <div class="box-title">מי עושה מה</div>
+  צעד 1 הוא כולו אלגברה — הצבות ומשוואות מהתחנות הקודמות.
+  <br>מהצעד השני והלאה זו כבר גאומטריה נקייה.
+  <br>התרגיל נראה מאיים רק כי הוא מחבר את שני העולמות —
+  אבל כל חצי בנפרד את כבר יודעת לעשות.
+</div>
+
+<!-- ============ שלב 2 · אורך קטע ============ -->
+<div class="stagebar"><span class="dots-s"><i></i><i class="on"></i><i></i><i></i><i></i></span>
+  שלב <b>2</b> מתוך 5 · אורך קטע בצירים</div>
+<h2 id="sec-length">אורך קטע אנכי או אופקי — הפרש שיעורים</h2>
+
+<p>
+  לפני שמחשבים שטחים צריך כלי אחד קטן: לדעת כמה ארוך קטע שמצויר על מערכת הצירים.
+  הסתכלי על שני הקטעים שבשרטוט:
+</p>
+
+<figure>
+  <svg viewBox="0 0 520 330" style="width:100%;max-width:520px;height:auto" role="img" aria-label="מערכת צירים עם קטע אופקי מ-(1,2) עד (6,2) שאורכו 5, וקטע אנכי מ-(8,1) עד (8,4) שאורכו 3">
+    <path stroke="#E4E8EE" stroke-width="1" fill="none" d="M20 40V280 M60 40V280 M100 40V280 M140 40V280 M180 40V280 M220 40V280 M260 40V280 M300 40V280 M340 40V280 M380 40V280 M420 40V280 M460 40V280 M500 40V280 M20 40H500 M20 80H500 M20 120H500 M20 160H500 M20 200H500 M20 240H500 M20 280H500"/>
+    <line x1="20" y1="280" x2="498" y2="280" stroke="#5A6875" stroke-width="1.6"/>
+    <polygon points="510,280 496,273.5 496,286.5" fill="#5A6875"/>
+    <line x1="60" y1="300" x2="60" y2="54" stroke="#5A6875" stroke-width="1.6"/>
+    <polygon points="60,42 53.5,56 66.5,56" fill="#5A6875"/>
+    <g font-family="Arial" font-size="11" fill="#5A6875">
+      <text x="52" y="298" text-anchor="end">0</text>
+      <text x="100" y="298" text-anchor="middle">1</text><text x="140" y="298" text-anchor="middle">2</text>
+      <text x="180" y="298" text-anchor="middle">3</text><text x="220" y="298" text-anchor="middle">4</text>
+      <text x="260" y="298" text-anchor="middle">5</text><text x="300" y="298" text-anchor="middle">6</text>
+      <text x="340" y="298" text-anchor="middle">7</text><text x="380" y="298" text-anchor="middle">8</text>
+      <text x="420" y="298" text-anchor="middle">9</text><text x="460" y="298" text-anchor="middle">10</text>
+      <text x="52" y="244" text-anchor="end">1</text><text x="52" y="204" text-anchor="end">2</text>
+      <text x="52" y="164" text-anchor="end">3</text><text x="52" y="124" text-anchor="end">4</text>
+      <text x="52" y="84" text-anchor="end">5</text>
+    </g>
+    <line x1="100" y1="200" x2="300" y2="200" stroke="#2563EB" stroke-width="3.5"/>
+    <circle cx="100" cy="200" r="6" fill="#2563EB" stroke="#fff" stroke-width="2"/>
+    <circle cx="300" cy="200" r="6" fill="#2563EB" stroke="#fff" stroke-width="2"/>
+    <g font-family="Arial" font-size="12.5" font-weight="700" fill="#2563EB">
+      <text x="100" y="222" text-anchor="middle">(1, 2)</text>
+      <text x="300" y="222" text-anchor="middle">(6, 2)</text>
+      <text x="200" y="186" text-anchor="middle">6 − 1 = 5</text>
+    </g>
+    <line x1="380" y1="240" x2="380" y2="120" stroke="#7C3AED" stroke-width="3.5"/>
+    <circle cx="380" cy="240" r="6" fill="#7C3AED" stroke="#fff" stroke-width="2"/>
+    <circle cx="380" cy="120" r="6" fill="#7C3AED" stroke="#fff" stroke-width="2"/>
+    <g font-family="Arial" font-size="12.5" font-weight="700" fill="#7C3AED">
+      <text x="380" y="262" text-anchor="middle">(8, 1)</text>
+      <text x="380" y="106" text-anchor="middle">(8, 4)</text>
+      <text x="394" y="186" text-anchor="start">4 − 1 = 3</text>
+    </g>
+  </svg>
+  <figcaption>
+    בקטע האופקי הכחול הגובה זהה — האורך הוא הפרש ה-<span class="fi">\(x\)</span>;
+    בקטע האנכי הסגול ה-<span class="fi">\(x\)</span> זהה — האורך הוא הפרש ה-<span class="fi">\(y\)</span>.
+  </figcaption>
+</figure>
+
+<div class="fbox">
+  <div class="fbox-title">אורך קטע על מערכת הצירים</div>
+  $$\underbrace{\textcolor{#2563EB}{x_2-x_1}}_{\textcolor{#2563EB}{\text{אורך אופקי}}}=\textcolor{#2563EB}{6-1}=5$$
+  $$\underbrace{\textcolor{#7C3AED}{y_2-y_1}}_{\textcolor{#7C3AED}{\text{אורך אנכי}}}=\textcolor{#7C3AED}{4-1}=3$$
+  <span class="f-legend">
+    <span><i class="sw" style="background:#DBEAFE"></i> כחול — שיעורי ה-<span class="fi">\(x\)</span> של שתי הנקודות (בקטע אופקי רק הם משתנים)</span>
+    <span><i class="sw" style="background:#EDE9FE"></i> סגול — שיעורי ה-<span class="fi">\(y\)</span> (בקטע אנכי רק הם משתנים)</span>
+    <span>ותמיד הגדול פחות הקטן — אורך הוא מספר חיובי.</span>
+  </span>
+</div>
+
+<div class="box warn">
+  <div class="box-title">נקודה היא לא אורך</div>
+  נקודה היא <strong>זוג</strong> מספרים, כמו
+  <span class="fi">\((6,2)\)</span>; אורך הוא מספר <strong>אחד</strong>, תמיד חיובי.
+  <br>יצא לך אורך שלילי? פשוט הפכת את הסדר — מחסרים את הקטן מהגדול.
+  <br>(בספרים רואים לפעמים <span class="fi">\(\lvert x_2-x_1\rvert\)</span> —
+  הקווים האנכיים אומרים בדיוק את זה: קחי את התוצאה כחיובית.)
+</div>
+
+<p>
+  וברגע שיש אורכים — יש גם היקף ושטח.
+  <br>למשל, מלבן שקודקודיו <span class="fi">\((1,1),\;(6,1),\;(6,4),\;(1,4)\)</span>:
+  הצלע האופקית <span class="fi">\(6-1=5\)</span>, האנכית <span class="fi">\(4-1=3\)</span> —
+  ההיקף <span class="fi">\(2\cdot(5+3)=16\)</span> והשטח <span class="fi">\(5\cdot 3=15\)</span>.
+  בלי לספור משבצות: הכול יוצא מהפרשי שיעורים.
+</p>
+
+<!-- ============ שלב 3 · משולש ============ -->
+<div class="stagebar"><span class="dots-s"><i></i><i></i><i class="on"></i><i></i><i></i></span>
+  שלב <b>3</b> מתוך 5 · שטח משולש מהגרף</div>
+<h2 id="sec-triangle">המשולש שהישר יוצר עם הצירים</h2>
+
+<p>
+  עכשיו מחברים הכול. זה התרגיל הקלאסי של המשפחה —
+  ונפתור אותו ביחד, צעד-צעד, בדיוק לפי ארבעת הצעדים משלב 1.
+</p>
+
+<article id="ex-first" class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>המשולש של <span class="fi">\(y=-x+6\)</span></h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">נתון הישר <span class="fi">\(y=-x+6\)</span>, היוצר משולש עם שני הצירים</span>.
+    <span class="mk mk-find">חשבי את שטח המשולש.</span>
+  </p>
+
+  <figure>
+    <svg viewBox="0 0 400 380" style="width:100%;max-width:400px;height:auto" role="img" aria-label="הישר y=-x+6 יוצר עם הצירים משולש ישר-זווית שקודקודיו (0,0), (6,0) ו-(0,6)">
+      <path stroke="#E4E8EE" stroke-width="1" fill="none" d="M20 40V320 M60 40V320 M100 40V320 M140 40V320 M180 40V320 M220 40V320 M260 40V320 M300 40V320 M340 40V320 M380 40V320 M20 40H380 M20 80H380 M20 120H380 M20 160H380 M20 200H380 M20 240H380 M20 280H380 M20 320H380"/>
+      <polygon points="60,320 300,320 60,80" fill="#EDE9FE" opacity=".55"/>
+      <line x1="20" y1="320" x2="368" y2="320" stroke="#5A6875" stroke-width="1.6"/>
+      <polygon points="380,320 366,313.5 366,326.5" fill="#5A6875"/>
+      <line x1="60" y1="340" x2="60" y2="54" stroke="#5A6875" stroke-width="1.6"/>
+      <polygon points="60,42 53.5,56 66.5,56" fill="#5A6875"/>
+      <g font-family="Arial" font-size="11" fill="#5A6875">
+        <text x="52" y="338" text-anchor="end">0</text>
+        <text x="100" y="338" text-anchor="middle">1</text><text x="140" y="338" text-anchor="middle">2</text>
+        <text x="180" y="338" text-anchor="middle">3</text><text x="220" y="338" text-anchor="middle">4</text>
+        <text x="260" y="338" text-anchor="middle">5</text><text x="300" y="338" text-anchor="middle">6</text>
+        <text x="340" y="338" text-anchor="middle">7</text>
+        <text x="52" y="284" text-anchor="end">1</text><text x="52" y="244" text-anchor="end">2</text>
+        <text x="52" y="204" text-anchor="end">3</text><text x="52" y="164" text-anchor="end">4</text>
+        <text x="52" y="124" text-anchor="end">5</text><text x="52" y="84" text-anchor="end">6</text>
+      </g>
+      <line x1="40" y1="60" x2="320" y2="340" stroke="#7C3AED" stroke-width="3"/>
+      <text x="270" y="270" text-anchor="start" font-family="Arial" font-size="13" font-weight="700" fill="#7C3AED" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3">y=-x+6</text>
+      <line x1="60" y1="320" x2="300" y2="320" stroke="#059669" stroke-width="5"/>
+      <line x1="60" y1="320" x2="60" y2="80" stroke="#EA580C" stroke-width="5"/>
+      <path d="M60 300 H80 V320" fill="none" stroke="#9AA5B1" stroke-width="1.5"/>
+      <text x="180" y="306" text-anchor="middle" font-family="Arial" font-size="14" font-weight="700" fill="#059669">6</text>
+      <text x="76" y="204" text-anchor="start" font-family="Arial" font-size="14" font-weight="700" fill="#EA580C">6</text>
+      <circle cx="60" cy="320" r="6" fill="#1C2733" stroke="#fff" stroke-width="2"/>
+      <circle cx="300" cy="320" r="6" fill="#2563EB" stroke="#fff" stroke-width="2"/>
+      <circle cx="60" cy="80" r="6" fill="#7C3AED" stroke="#fff" stroke-width="2"/>
+      <text x="52" y="356" text-anchor="end" font-family="Arial" font-size="12.5" font-weight="700" fill="#1C2733">(0, 0)</text>
+      <text x="308" y="310" text-anchor="start" font-family="Arial" font-size="12.5" font-weight="700" fill="#2563EB">(6, 0)</text>
+      <text x="74" y="72" text-anchor="start" font-family="Arial" font-size="12.5" font-weight="700" fill="#7C3AED">(0, 6)</text>
+    </svg>
+    <figcaption>
+      הסקיצה — הדבר הראשון שמציירים במבחן: הישר והצירים כולאים משולש ישר-זווית —
+      הבסיס על ציר ה-<span class="fi">\(x\)</span> והגובה על ציר ה-<span class="fi">\(y\)</span>.
+    </figcaption>
+  </figure>
+
+  <p style="font-size:13px;color:var(--soft)">נסי לנחש את השלב הבא לפני שאת פותחת אותו.</p>
+  <details class="step"><summary>צעד ראשון — הקודקודים שעל הצירים</summary>
+    <div class="step-body">
+      חיתוך עם ציר ה-<span class="fi">\(y\)</span>: מציבים <span class="fi">\(x=0\)</span>
+      ומקבלים <span class="fi">\(y=6\)</span> — הנקודה <span class="fi">\((0,6)\)</span>.
+      <br>חיתוך עם ציר ה-<span class="fi">\(x\)</span>: מציבים <span class="fi">\(y=0\)</span> ופותרים:
+      $$\begin{aligned}0&=-x+6&&\textcolor{#C0392B}{/\;+x}\\[2pt]\textcolor{#2563EB}{x}&=6\end{aligned}$$
+      כלומר הנקודה <span class="fi">\((6,0)\)</span>.
+    </div>
+  </details>
+  <details class="step"><summary>צעד שני — הקודקוד השלישי</summary>
+    <div class="step-body">
+      איפה המשולש נסגר? בנקודה ששני הצירים נפגשים בה — ראשית הצירים,
+      <span class="fi">\((0,0)\)</span>.
+      <br>שלושת הקודקודים: <span class="fi">\((0,0),\;(6,0),\;(0,6)\)</span>.
+    </div>
+  </details>
+  <details class="step"><summary>צעד שלישי — אורכים וזיהוי הצורה</summary>
+    <div class="step-body">
+      הבסיס: קטע אופקי מ-<span class="fi">\((0,0)\)</span> עד <span class="fi">\((6,0)\)</span> —
+      אורך <span class="fi">\(\textcolor{#059669}{6-0=6}\)</span>.
+      <br>הגובה: קטע אנכי מ-<span class="fi">\((0,0)\)</span> עד <span class="fi">\((0,6)\)</span> —
+      אורך <span class="fi">\(\textcolor{#EA580C}{6-0=6}\)</span>.
+      <br>הצירים מאונכים זה לזה, ולכן זה משולש <strong>ישר-זווית</strong> —
+      ושני הניצבים שלו הם בדיוק הבסיס והגובה.
+    </div>
+  </details>
+  <details class="step"><summary>צעד רביעי — הנוסחה</summary>
+    <div class="step-body">
+      <div class="fbox" style="margin:10px 0">
+        <div class="fbox-title">שטח משולש — בסיס כפול גובה, חלקי 2</div>
+        $$S_{\triangle}=\frac{\textcolor{#059669}{b}\cdot\textcolor{#EA580C}{h}}{2}$$
+        $$S_{\triangle}=\frac{\underbrace{\textcolor{#059669}{6}}_{\textcolor{#059669}{\text{הבסיס}}}\cdot\underbrace{\textcolor{#EA580C}{6}}_{\textcolor{#EA580C}{\text{הגובה}}}\rule[-1.6em]{0pt}{0pt}}{2}=\frac{36}{2}=18$$
+        <span class="f-legend">
+          <span><i class="sw" style="background:#D1FAE5"></i> ירוק — הבסיס, הקטע שעל ציר ה-<span class="fi">\(x\)</span></span>
+          <span><i class="sw" style="background:#FFEDD5"></i> כתום — הגובה, הקטע שעל ציר ה-<span class="fi">\(y\)</span></span>
+        </span>
+      </div>
+      <p><strong>תשובה:</strong> שטח המשולש הוא 18 יחידות שטח.</p>
+    </div>
+  </details>
+  <details class="alt">
+    <summary>אותה שאלה בניסוחים אחרים — איך עוד מנסחים אותה</summary>
+    <div class="alt-body">
+      <ul>
+        <li>"הישר חותך את הצירים בנקודות A ו-B. חשבי את שטח המשולש AOB
+            (‏O — ראשית הצירים)."</li>
+        <li>"מצאי את שטח המשולש הכלוא בין הישר לבין הצירים."</li>
+        <li>"הישר תוחם עם הצירים משולש. חשבי את שטחו."</li>
+        <li>"מצאי את שטח המשולש שקודקודיו הם ראשית הצירים ונקודות החיתוך
+            של הישר עם הצירים."</li>
+      </ul>
+      <p>בכל הניסוחים מדובר באותם שלושה קודקודים בדיוק.
+      ברגע שציירת סקיצה — כל הגרסאות הן אותו תרגיל.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex1"> סיימתי את התרגיל הזה</label>
+</article>
+
+<div class="box warn">
+  <div class="box-title">הגובה חייב להיות מאונך לבסיס שבחרת</div>
+  מותר לבחור כל צלע כבסיס — אבל הגובה חייב להיות <strong>מאונך</strong> אליה.
+  <br>במשולש כזה הכי משתלם לקחת את שני הניצבים שעל הצירים:
+  הם כבר מאונכים זה לזה, ואת האורכים שלהם קוראים ישירות מהגרף.
+  <br>את הצלע המשופעת (זו שעל הישר) משאירים בחוץ —
+  לזווג אותה עם ניצב זו הטעות הקלאסית.
+</div>
+
+<article class="ex hide-marks">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>המשולש של <span class="fi">\(y=-2x+8\)</span></h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">הישר <span class="fi">\(y=-2x+8\)</span> יוצר משולש עם שני הצירים</span>.
+    <span class="mk mk-find">מהו שטח המשולש?</span>
+    (הפעם הבסיס והגובה שונים זה מזה — סקיצה קטנה תעזור.)
+  </p>
+  <div class="q-row">
+    <button class="marks-btn no-print" style="font-family:inherit;font-size:12.5px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:5px 10px;cursor:pointer">הציגי את הפירוק בצבעים</button>
+  </div>
+  <div class="q-row">
+    <span>התשובה שלי:</span>
+    <input class="q-input" data-answer="16" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p><strong>קודם כול — הסקיצה</strong> (זו שהשאלה רמזה עליה), עם כל מה שמצאנו כתוב עליה:</p>
+      <figure style="margin:12px auto">
+        <svg viewBox="0 0 400 380" style="width:100%;max-width:400px;height:auto" role="img" aria-label="הישר y=-2x+8 יוצר עם הצירים משולש ישר-זווית עם בסיס 4 וגובה 8">
+          <path stroke="#E4E8EE" stroke-width="1" fill="none" d="M20 40V320 M60 40V320 M100 40V320 M140 40V320 M180 40V320 M220 40V320 M260 40V320 M300 40V320 M340 40V320 M380 40V320 M20 80H380 M20 140H380 M20 200H380 M20 260H380 M20 320H380"/>
+          <polygon points="60,320 220,320 60,80" fill="#EDE9FE" opacity=".55"/>
+          <line x1="20" y1="320" x2="368" y2="320" stroke="#5A6875" stroke-width="1.6"/>
+          <polygon points="380,320 366,313.5 366,326.5" fill="#5A6875"/>
+          <line x1="60" y1="340" x2="60" y2="54" stroke="#5A6875" stroke-width="1.6"/>
+          <polygon points="60,42 53.5,56 66.5,56" fill="#5A6875"/>
+          <g font-family="Arial" font-size="11" fill="#5A6875">
+            <text x="52" y="338" text-anchor="end">0</text>
+            <text x="100" y="338" text-anchor="middle">1</text><text x="140" y="338" text-anchor="middle">2</text>
+            <text x="180" y="338" text-anchor="middle">3</text><text x="220" y="338" text-anchor="middle">4</text>
+            <text x="260" y="338" text-anchor="middle">5</text><text x="300" y="338" text-anchor="middle">6</text>
+            <text x="52" y="264" text-anchor="end">2</text><text x="52" y="204" text-anchor="end">4</text>
+            <text x="52" y="144" text-anchor="end">6</text><text x="52" y="84" text-anchor="end">8</text>
+          </g>
+          <line x1="40" y1="50" x2="233" y2="340" stroke="#7C3AED" stroke-width="3"/>
+          <text x="170" y="190" text-anchor="start" font-family="Arial" font-size="13" font-weight="700" fill="#7C3AED" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3">y=-2x+8</text>
+          <line x1="60" y1="320" x2="220" y2="320" stroke="#059669" stroke-width="5"/>
+          <line x1="60" y1="320" x2="60" y2="80" stroke="#EA580C" stroke-width="5"/>
+          <path d="M60 300 H80 V320" fill="none" stroke="#9AA5B1" stroke-width="1.5"/>
+          <text x="140" y="306" text-anchor="middle" font-family="Arial" font-size="14" font-weight="700" fill="#059669">4</text>
+          <text x="76" y="204" text-anchor="start" font-family="Arial" font-size="14" font-weight="700" fill="#EA580C">8</text>
+          <circle cx="60" cy="320" r="6" fill="#1C2733" stroke="#fff" stroke-width="2"/>
+          <circle cx="220" cy="320" r="6" fill="#2563EB" stroke="#fff" stroke-width="2"/>
+          <circle cx="60" cy="80" r="6" fill="#7C3AED" stroke="#fff" stroke-width="2"/>
+          <text x="52" y="356" text-anchor="end" font-family="Arial" font-size="12.5" font-weight="700" fill="#1C2733">(0, 0)</text>
+          <text x="228" y="310" text-anchor="start" font-family="Arial" font-size="12.5" font-weight="700" fill="#2563EB">(4, 0)</text>
+          <text x="74" y="72" text-anchor="start" font-family="Arial" font-size="12.5" font-weight="700" fill="#7C3AED">(0, 8)</text>
+        </svg>
+        <figcaption>הפעם הבסיס (4) והגובה (8) שונים זה מזה —
+        שימי לב שציר ה-<span class="fi">\(y\)</span> מסורגל בקפיצות של 2.</figcaption>
+      </figure>
+      <p>חיתוך עם ציר ה-<span class="fi">\(y\)</span>: מציבים <span class="fi">\(x=0\)</span> —
+      הנקודה <span class="fi">\((0,8)\)</span>.
+      <br>חיתוך עם ציר ה-<span class="fi">\(x\)</span>: מציבים <span class="fi">\(y=0\)</span>:</p>
+      $$\begin{aligned}0&=-2x+8&&\textcolor{#C0392B}{/\;+2x}\\[2pt]2x&=8&&\textcolor{#C0392B}{/\;:2}\\[2pt]\textcolor{#2563EB}{x}&=4\end{aligned}$$
+      <p>כלומר הנקודה <span class="fi">\((4,0)\)</span>.</p>
+      <div class="box warn" style="margin:8px 0">
+        <div class="box-title">רגע! שני מספרים, שני תפקידים</div>
+        אחרי <span class="fi">\(2x=8\)</span> יש עוד צעד אחד — חילוק ב-2.
+        <br>החיתוך עם ציר ה-<span class="fi">\(x\)</span> הוא
+        <strong style="color:var(--c-find)">4</strong>.
+        <br>המספר 8 בתרגיל הזה הוא החיתוך עם ציר ה-<span class="fi">\(y\)</span>.
+      </div>
+      <p>הבסיס על ציר ה-<span class="fi">\(x\)</span>:
+      <span class="fi">\(\textcolor{#059669}{4}\)</span>.
+      הגובה על ציר ה-<span class="fi">\(y\)</span>:
+      <span class="fi">\(\textcolor{#EA580C}{8}\)</span>.
+      הצירים מאונכים — משולש ישר-זווית, והנוסחה מהטבלה:</p>
+      $$S_{\triangle}=\frac{\textcolor{#059669}{b}\cdot\textcolor{#EA580C}{h}}{2}$$
+      <p><strong>מציבים:</strong></p>
+      $$S_{\triangle}=\frac{\textcolor{#059669}{4}\cdot\textcolor{#EA580C}{8}}{2}=\frac{32}{2}=16$$
+      <p><strong>תשובה:</strong> שטח המשולש 16 יחידות שטח.</p>
+      <p>בדיקת היגיון: המשולש נכנס בדיוק לתוך מלבן של 4 על 8, ששטחו 32 —
+      ומשולש ישר-זווית כזה הוא בדיוק חצי מהמלבן: 16 ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex2"> סיימתי את התרגיל הזה</label>
+</article>
+
+<!-- ============ שלב 4 · טרפז ============ -->
+<div class="stagebar"><span class="dots-s"><i></i><i></i><i></i><i class="on"></i><i></i></span>
+  שלב <b>4</b> מתוך 5 · שטח טרפז מהגרף</div>
+<h2 id="sec-trapezoid">טרפז מתחת לישר — כשהבסיסים דווקא עומדים</h2>
+
+<p>
+  עכשיו שינוי קטן. לוקחים את אותו ישר בדיוק — <span class="fi">\(y=-x+6\)</span> —
+  אבל הפעם לא נותנים לו להגיע עד ציר ה-<span class="fi">\(x\)</span>:
+  עוצרים אותו בישר האנכי <span class="fi">\(x=4\)</span>.
+  <br>בין הישר, שני הצירים והקו האנכי הזה נכלאת צורה עם ארבעה קודקודים:
+</p>
+
+<figure>
+  <svg viewBox="0 0 400 380" style="width:100%;max-width:400px;height:auto" role="img" aria-label="הישר y=-x+6 עוצר ב-x=4 וכולא עם הצירים טרפז שקודקודיו (0,0), (4,0), (4,2) ו-(0,6)">
+    <path stroke="#E4E8EE" stroke-width="1" fill="none" d="M20 40V320 M60 40V320 M100 40V320 M140 40V320 M180 40V320 M220 40V320 M260 40V320 M300 40V320 M340 40V320 M380 40V320 M20 40H380 M20 80H380 M20 120H380 M20 160H380 M20 200H380 M20 240H380 M20 280H380 M20 320H380"/>
+    <polygon points="60,320 220,320 220,240 60,80" fill="#EDE9FE" opacity=".55"/>
+    <line x1="20" y1="320" x2="368" y2="320" stroke="#5A6875" stroke-width="1.6"/>
+    <polygon points="380,320 366,313.5 366,326.5" fill="#5A6875"/>
+    <line x1="60" y1="340" x2="60" y2="54" stroke="#5A6875" stroke-width="1.6"/>
+    <polygon points="60,42 53.5,56 66.5,56" fill="#5A6875"/>
+    <g font-family="Arial" font-size="11" fill="#5A6875">
+      <text x="52" y="338" text-anchor="end">0</text>
+      <text x="100" y="338" text-anchor="middle">1</text><text x="140" y="338" text-anchor="middle">2</text>
+      <text x="180" y="338" text-anchor="middle">3</text><text x="220" y="338" text-anchor="middle">4</text>
+      <text x="260" y="338" text-anchor="middle">5</text><text x="300" y="338" text-anchor="middle">6</text>
+      <text x="340" y="338" text-anchor="middle">7</text>
+      <text x="52" y="284" text-anchor="end">1</text><text x="52" y="244" text-anchor="end">2</text>
+      <text x="52" y="204" text-anchor="end">3</text><text x="52" y="164" text-anchor="end">4</text>
+      <text x="52" y="124" text-anchor="end">5</text><text x="52" y="84" text-anchor="end">6</text>
+    </g>
+    <line x1="40" y1="60" x2="320" y2="340" stroke="#7C3AED" stroke-width="3"/>
+    <text x="270" y="270" text-anchor="start" font-family="Arial" font-size="13" font-weight="700" fill="#7C3AED" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3">y=-x+6</text>
+    <line x1="60" y1="320" x2="60" y2="80" stroke="#059669" stroke-width="5"/>
+    <line x1="220" y1="320" x2="220" y2="240" stroke="#059669" stroke-width="5"/>
+    <line x1="60" y1="320" x2="220" y2="320" stroke="#EA580C" stroke-width="5"/>
+    <path d="M60 300 H80 V320" fill="none" stroke="#9AA5B1" stroke-width="1.5"/>
+    <path d="M220 300 H200 V320" fill="none" stroke="#9AA5B1" stroke-width="1.5"/>
+    <text x="76" y="204" text-anchor="start" font-family="Arial" font-size="14" font-weight="700" fill="#059669">6</text>
+    <text x="234" y="284" text-anchor="start" font-family="Arial" font-size="14" font-weight="700" fill="#059669">2</text>
+    <text x="140" y="306" text-anchor="middle" font-family="Arial" font-size="14" font-weight="700" fill="#EA580C">4</text>
+    <circle cx="60" cy="320" r="6" fill="#1C2733" stroke="#fff" stroke-width="2"/>
+    <circle cx="220" cy="320" r="6" fill="#2563EB" stroke="#fff" stroke-width="2"/>
+    <circle cx="220" cy="240" r="6" fill="#7C3AED" stroke="#fff" stroke-width="2"/>
+    <circle cx="60" cy="80" r="6" fill="#7C3AED" stroke="#fff" stroke-width="2"/>
+    <text x="52" y="356" text-anchor="end" font-family="Arial" font-size="12.5" font-weight="700" fill="#1C2733">(0, 0)</text>
+    <text x="230" y="314" text-anchor="start" font-family="Arial" font-size="12.5" font-weight="700" fill="#2563EB">(4, 0)</text>
+    <text x="230" y="234" text-anchor="start" font-family="Arial" font-size="12.5" font-weight="700" fill="#7C3AED">(4, 2)</text>
+    <text x="74" y="72" text-anchor="start" font-family="Arial" font-size="12.5" font-weight="700" fill="#7C3AED">(0, 6)</text>
+  </svg>
+  <figcaption>
+    אותו ישר — אבל עוצרים ב-<span class="fi">\(x=4\)</span>.
+    הצלעות הירוקות האנכיות מקבילות — אלה הבסיסים;
+    הגובה הכתום ביניהן שוכב דווקא על ציר ה-<span class="fi">\(x\)</span>.
+  </figcaption>
+</figure>
+
+<p>מפעילים את אותם ארבעה צעדים:</p>
+
+<ol class="steps">
+  <li><strong>קודקודים.</strong>
+      <span class="fi">\((0,0)\)</span> — ראשית הצירים.
+      <span class="fi">\((4,0)\)</span> — המקום שבו הקו האנכי פוגש את ציר ה-<span class="fi">\(x\)</span>.
+      <br><span class="fi">\((4,2)\)</span> — מציבים <span class="fi">\(x=4\)</span> בישר:
+      <span class="fi">\(y=-4+6=2\)</span>.
+      <span class="fi">\((0,6)\)</span> — החיתוך עם ציר ה-<span class="fi">\(y\)</span>.</li>
+  <li><strong>אורכים.</strong>
+      הצלע השמאלית, על ציר ה-<span class="fi">\(y\)</span>: מ-<span class="fi">\((0,0)\)</span>
+      עד <span class="fi">\((0,6)\)</span> — אורך <span class="fi">\(\textcolor{#059669}{6}\)</span>.
+      <br>הצלע הימנית: מ-<span class="fi">\((4,0)\)</span> עד <span class="fi">\((4,2)\)</span> —
+      אורך <span class="fi">\(\textcolor{#059669}{2}\)</span>.
+      <br>והמרחק ביניהן, לאורך ציר ה-<span class="fi">\(x\)</span>: מ-0 עד 4 —
+      <span class="fi">\(\textcolor{#EA580C}{4}\)</span>.</li>
+  <li><strong>מזהים.</strong> שתי צלעות אנכיות — מקבילות זו לזו — ולכן זה <strong>טרפז</strong>.
+      שתי המקבילות הן הבסיסים, והגובה הוא המרחק המאונך ביניהן.</li>
+  <li><strong>נוסחה.</strong> סכום הבסיסים, כפול הגובה, חלקי 2:</li>
+</ol>
+
+<div class="fbox">
+  <div class="fbox-title">שטח טרפז — מהגרף</div>
+  $$S=\frac{(\underbrace{\textcolor{#059669}{6}}_{\textcolor{#059669}{\text{בסיס גדול}}}+\underbrace{\textcolor{#059669}{2}}_{\textcolor{#059669}{\text{בסיס קטן}}})\cdot\underbrace{\textcolor{#EA580C}{4}}_{\textcolor{#EA580C}{\text{הגובה}}}\rule[-1.6em]{0pt}{0pt}}{2}=\frac{8\cdot 4}{2}=16$$
+  <span class="f-legend">
+    <span><i class="sw" style="background:#D1FAE5"></i> ירוק — שני הבסיסים: הצלעות המקבילות (כאן שתיהן אנכיות)</span>
+    <span><i class="sw" style="background:#FFEDD5"></i> כתום — הגובה: המרחק המאונך בין הבסיסים</span>
+  </span>
+</div>
+
+<div class="box warn">
+  <div class="box-title">הגובה של טרפז הוא לא בהכרח הקטע האנכי</div>
+  גובה הוא לא "קו שעומד". גובה של טרפז הוא <strong>המרחק המאונך בין שני הבסיסים</strong> —
+  לא משנה לאיזה כיוון הוא מצביע.
+  <br>כשהבסיסים אנכיים, כמו כאן, הגובה יוצא דווקא <strong>אופקי</strong>.
+  מי שלוקחת מתוך הרגל את הקטע האנכי הארוך בתור "הגובה" —
+  מחשבת שטח של צורה אחרת.
+</div>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · כמו במבחן</span><h4>טרפז ומשולש על ישר אחד</h4></div>
+  <p class="q-text">
+    נתון הישר <span class="fi">\(y=-2x+10\)</span>, החותך את ציר ה-<span class="fi">\(y\)</span>
+    בנקודה A ואת ציר ה-<span class="fi">\(x\)</span> בנקודה B.
+    הנקודה <span class="fi">\(C(3,4)\)</span> נמצאת על הישר.
+    מהנקודה C מורידים אנך לציר ה-<span class="fi">\(x\)</span>, הפוגש אותו בנקודה D.
+    <br>א. מצאי את שיעורי הנקודות A ו-B.
+    <br>ב. הראי ש-C אכן נמצאת על הישר, ומצאי את שיעורי הנקודה D.
+    <br>ג. חשבי את שטח הטרפז AODC (‏O — ראשית הצירים).
+    <br>ד. חשבי את שטח המשולש CDB, ובדקי את עצמך: שני השטחים יחד
+    צריכים להשלים בדיוק את שטח המשולש הגדול AOB.
+  </p>
+  <details class="sol">
+    <summary>הצגי פתרון מלא (כמו שכותבים במחברת)</summary>
+    <div class="sol-body">
+      <p><strong>קודם כול — סקיצה.</strong> ככה נראה כל הסיפור:</p>
+      <figure style="margin:12px auto">
+        <svg viewBox="0 0 300 490" style="width:100%;max-width:300px;height:auto" role="img" aria-label="הישר y=-2x+10 עם הנקודות A(0,10), B(5,0), C(3,4) ו-D(3,0): הטרפז AODC והמשולש CDB">
+          <path stroke="#E4E8EE" stroke-width="1" fill="none" d="M20 40V440 M60 40V440 M100 40V440 M140 40V440 M180 40V440 M220 40V440 M260 40V440 M20 40H260 M20 80H260 M20 120H260 M20 160H260 M20 200H260 M20 240H260 M20 280H260 M20 320H260 M20 360H260 M20 400H260 M20 440H260"/>
+          <polygon points="60,440 60,40 180,280 180,440" fill="#EDE9FE" opacity=".55"/>
+          <polygon points="180,440 180,280 260,440" fill="#DBEAFE" opacity=".6"/>
+          <line x1="20" y1="440" x2="278" y2="440" stroke="#5A6875" stroke-width="1.6"/>
+          <polygon points="290,440 276,433.5 276,446.5" fill="#5A6875"/>
+          <line x1="60" y1="460" x2="60" y2="56" stroke="#5A6875" stroke-width="1.6"/>
+          <polygon points="60,44 53.5,58 66.5,58" fill="#5A6875"/>
+          <g font-family="Arial" font-size="11" fill="#5A6875">
+            <text x="52" y="458" text-anchor="end">0</text>
+            <text x="100" y="458" text-anchor="middle">1</text><text x="140" y="458" text-anchor="middle">2</text>
+            <text x="180" y="458" text-anchor="middle">3</text><text x="220" y="458" text-anchor="middle">4</text>
+            <text x="260" y="458" text-anchor="middle">5</text>
+            <text x="52" y="364" text-anchor="end">2</text><text x="52" y="284" text-anchor="end">4</text>
+            <text x="52" y="204" text-anchor="end">6</text><text x="52" y="124" text-anchor="end">8</text>
+            <text x="52" y="44" text-anchor="end">10</text>
+          </g>
+          <line x1="50" y1="20" x2="270" y2="460" stroke="#7C3AED" stroke-width="3"/>
+          <text x="140" y="190" text-anchor="start" font-family="Arial" font-size="12.5" font-weight="700" fill="#7C3AED" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3">y=-2x+10</text>
+          <line x1="60" y1="40" x2="60" y2="440" stroke="#059669" stroke-width="4.5"/>
+          <line x1="180" y1="280" x2="180" y2="440" stroke="#059669" stroke-width="4.5"/>
+          <line x1="60" y1="440" x2="180" y2="440" stroke="#EA580C" stroke-width="4.5"/>
+          <path d="M60 420 H80 V440" fill="none" stroke="#9AA5B1" stroke-width="1.5"/>
+          <path d="M180 420 H200 V440" fill="none" stroke="#9AA5B1" stroke-width="1.5"/>
+          <text x="72" y="240" text-anchor="start" font-family="Arial" font-size="14" font-weight="700" fill="#059669">10</text>
+          <text x="168" y="366" text-anchor="end" font-family="Arial" font-size="14" font-weight="700" fill="#059669">4</text>
+          <text x="120" y="430" text-anchor="middle" font-family="Arial" font-size="14" font-weight="700" fill="#EA580C">3</text>
+          <text x="220" y="430" text-anchor="middle" font-family="Arial" font-size="14" font-weight="700" fill="#1C2733">2</text>
+          <circle cx="60" cy="40" r="6" fill="#7C3AED" stroke="#fff" stroke-width="2"/>
+          <circle cx="180" cy="280" r="6" fill="#7C3AED" stroke="#fff" stroke-width="2"/>
+          <circle cx="60" cy="440" r="6" fill="#1C2733" stroke="#fff" stroke-width="2"/>
+          <circle cx="180" cy="440" r="6" fill="#1C2733" stroke="#fff" stroke-width="2"/>
+          <circle cx="260" cy="440" r="6" fill="#2563EB" stroke="#fff" stroke-width="2"/>
+          <text x="74" y="36" text-anchor="start" font-family="Arial" font-size="12.5" font-weight="700" fill="#7C3AED">A(0, 10)</text>
+          <text x="192" y="276" text-anchor="start" font-family="Arial" font-size="12.5" font-weight="700" fill="#7C3AED">C(3, 4)</text>
+          <text x="52" y="476" text-anchor="end" font-family="Arial" font-size="12.5" font-weight="700" fill="#1C2733">O(0, 0)</text>
+          <text x="180" y="478" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="700" fill="#1C2733">D(3, 0)</text>
+          <text x="260" y="478" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="700" fill="#2563EB">B(5, 0)</text>
+        </svg>
+        <figcaption>
+          הטרפז AODC והמשולש CDB ממלאים יחד
+          בדיוק את המשולש הגדול AOB.
+        </figcaption>
+      </figure>
+      <p><strong>א.</strong> הנקודה A על ציר ה-<span class="fi">\(y\)</span> —
+      מציבים <span class="fi">\(x=0\)</span>:
+      <br><span class="fi">\(y=10\)</span>, כלומר <span class="fi">\(A(0,10)\)</span>.
+      <br>הנקודה B על ציר ה-<span class="fi">\(x\)</span> —
+      מציבים <span class="fi">\(y=0\)</span>:</p>
+      $$\begin{aligned}0&=-2x+10&&\textcolor{#C0392B}{/\;+2x}\\[2pt]2x&=10&&\textcolor{#C0392B}{/\;:2}\\[2pt]x&=5\end{aligned}$$
+      <p>כלומר <span class="fi">\(B(5,0)\)</span>.</p>
+      <p><strong>ב.</strong> מציבים <span class="fi">\(x=3\)</span> בישר:
+      <br><span class="fi">\(y=-2\cdot 3+10=4\)</span> ✓
+      <br>בדיוק שיעור ה-<span class="fi">\(y\)</span> של C, ולכן C על הישר.
+      <br>האנך מ-C יורד ישר למטה: אותו <span class="fi">\(x\)</span>,
+      עד ציר ה-<span class="fi">\(x\)</span> — כלומר <span class="fi">\(D(3,0)\)</span>.</p>
+      <p><strong>ג.</strong> בטרפז AODC שתי צלעות אנכיות, ולכן מקבילות — אלה הבסיסים:
+      <br>‏AO על ציר ה-<span class="fi">\(y\)</span>, מ-0 עד 10 —
+      אורך <span class="fi">\(\textcolor{#059669}{10}\)</span>.
+      <br>‏DC מ-<span class="fi">\((3,0)\)</span> עד <span class="fi">\((3,4)\)</span> —
+      אורך <span class="fi">\(\textcolor{#059669}{4-0=4}\)</span>.
+      <br>הגובה — המרחק המאונך ביניהם, על ציר ה-<span class="fi">\(x\)</span>:
+      ‏OD, מ-0 עד 3 — אורך <span class="fi">\(\textcolor{#EA580C}{3}\)</span>.</p>
+      <p>הנוסחה — שטח טרפז — ואז ההצבה:</p>
+      $$S=\frac{(\textcolor{#059669}{b_1}+\textcolor{#059669}{b_2})\cdot\textcolor{#EA580C}{h}}{2}$$
+      $$S_{AODC}=\frac{(\textcolor{#059669}{10}+\textcolor{#059669}{4})\cdot\textcolor{#EA580C}{3}}{2}=\frac{14\cdot 3}{2}=\frac{42}{2}=21$$
+      <p>שטח הטרפז — 21 יחידות שטח.</p>
+      <p><strong>ד.</strong> במשולש CDB הזווית הישרה ב-D:
+      הבסיס <span class="fi">\(\textcolor{#059669}{DB}=5-3=\textcolor{#059669}{2}\)</span>,
+      הגובה <span class="fi">\(\textcolor{#EA580C}{CD}=\textcolor{#EA580C}{4}\)</span>.
+      שוב הנוסחה, ואז ההצבה:</p>
+      $$S_{\triangle}=\frac{\textcolor{#059669}{b}\cdot\textcolor{#EA580C}{h}}{2}$$
+      $$S_{CDB}=\frac{\textcolor{#059669}{2}\cdot\textcolor{#EA580C}{4}}{2}=\frac{8}{2}=4$$
+      <p>שטח המשולש — 4 יחידות שטח.</p>
+      <p><strong>הבדיקה:</strong> המשולש הגדול AOB — ניצבים
+      <span class="fi">\(AO=10\)</span> ו-<span class="fi">\(OB=5\)</span>:</p>
+      $$S_{AOB}=\frac{10\cdot 5}{2}=25$$
+      <p>ואכן: <span class="fi">\(21+4=25\)</span> ✓</p>
+      <p>שני החלקים ממלאים בדיוק את המשולש הגדול — סימן ששלושת החישובים מתאימים זה לזה.
+      זו בדיקה ששווה לאמץ בכל תרגיל כזה.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex3"> סיימתי את התרגיל הזה</label>
+</article>
+
+<!-- ============ שלב 5 · הנתונים משתנים + את המורה ============ -->
+<div class="stagebar"><span class="dots-s"><i></i><i></i><i></i><i></i><i class="on"></i></span>
+  שלב <b>5</b> מתוך 5 · הנתונים משתנים + את המורה</div>
+<h2 id="sec-changes">הנתונים משתנים — ואת כבר יודעת לנבא</h2>
+
+<article class="ex hide-marks">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>אותו תרגיל, ישר נמוך יותר</h4></div>
+  <p class="q-text">
+    <span class="mk mk-change">את הישר משלב 3 מחליפים בישר נמוך יותר:
+    <span class="fi">\(y=-x+4\)</span></span>.
+    <span class="mk mk-find">מה יהיה עכשיו שטח המשולש שהוא יוצר עם הצירים?</span>
+    נחשי קודם: הרבה פחות מ-18, או רק קצת פחות?
+  </p>
+  <div class="q-row">
+    <button class="marks-btn no-print" style="font-family:inherit;font-size:12.5px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:5px 10px;cursor:pointer">הציגי את הפירוק בצבעים</button>
+  </div>
+  <div class="q-row">
+    <span>התשובה שלי:</span>
+    <input class="q-input" data-answer="8" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p><strong>סקיצה קטנה קודם</strong> — הישר הנמוך והמשולש שהוא כולא:</p>
+      <figure style="margin:12px auto">
+        <svg viewBox="0 0 360 340" style="width:100%;max-width:360px;height:auto" role="img" aria-label="הישר y=-x+4 יוצר עם הצירים משולש ישר-זווית עם בסיס 4 וגובה 4">
+          <path stroke="#E4E8EE" stroke-width="1" fill="none" d="M20 40V280 M60 40V280 M100 40V280 M140 40V280 M180 40V280 M220 40V280 M260 40V280 M300 40V280 M340 40V280 M20 40H340 M20 80H340 M20 120H340 M20 160H340 M20 200H340 M20 240H340 M20 280H340"/>
+          <polygon points="60,280 220,280 60,120" fill="#EDE9FE" opacity=".55"/>
+          <line x1="20" y1="280" x2="328" y2="280" stroke="#5A6875" stroke-width="1.6"/>
+          <polygon points="340,280 326,273.5 326,286.5" fill="#5A6875"/>
+          <line x1="60" y1="300" x2="60" y2="54" stroke="#5A6875" stroke-width="1.6"/>
+          <polygon points="60,42 53.5,56 66.5,56" fill="#5A6875"/>
+          <g font-family="Arial" font-size="11" fill="#5A6875">
+            <text x="52" y="298" text-anchor="end">0</text>
+            <text x="100" y="298" text-anchor="middle">1</text><text x="140" y="298" text-anchor="middle">2</text>
+            <text x="180" y="298" text-anchor="middle">3</text><text x="220" y="298" text-anchor="middle">4</text>
+            <text x="260" y="298" text-anchor="middle">5</text><text x="300" y="298" text-anchor="middle">6</text>
+            <text x="52" y="244" text-anchor="end">1</text><text x="52" y="204" text-anchor="end">2</text>
+            <text x="52" y="164" text-anchor="end">3</text><text x="52" y="124" text-anchor="end">4</text>
+            <text x="52" y="84" text-anchor="end">5</text>
+          </g>
+          <line x1="40" y1="100" x2="240" y2="300" stroke="#7C3AED" stroke-width="3"/>
+          <text x="170" y="160" text-anchor="start" font-family="Arial" font-size="13" font-weight="700" fill="#7C3AED" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3">y=-x+4</text>
+          <line x1="60" y1="280" x2="220" y2="280" stroke="#059669" stroke-width="5"/>
+          <line x1="60" y1="280" x2="60" y2="120" stroke="#EA580C" stroke-width="5"/>
+          <path d="M60 260 H80 V280" fill="none" stroke="#9AA5B1" stroke-width="1.5"/>
+          <text x="140" y="266" text-anchor="middle" font-family="Arial" font-size="14" font-weight="700" fill="#059669">4</text>
+          <text x="76" y="204" text-anchor="start" font-family="Arial" font-size="14" font-weight="700" fill="#EA580C">4</text>
+          <circle cx="60" cy="280" r="6" fill="#1C2733" stroke="#fff" stroke-width="2"/>
+          <circle cx="220" cy="280" r="6" fill="#2563EB" stroke="#fff" stroke-width="2"/>
+          <circle cx="60" cy="120" r="6" fill="#7C3AED" stroke="#fff" stroke-width="2"/>
+          <text x="52" y="316" text-anchor="end" font-family="Arial" font-size="12.5" font-weight="700" fill="#1C2733">(0, 0)</text>
+          <text x="228" y="270" text-anchor="start" font-family="Arial" font-size="12.5" font-weight="700" fill="#2563EB">(4, 0)</text>
+          <text x="74" y="112" text-anchor="start" font-family="Arial" font-size="12.5" font-weight="700" fill="#7C3AED">(0, 4)</text>
+        </svg>
+        <figcaption>בסיס 4, גובה 4 — משולש קטן בהרבה מזה של
+        <span class="fi">\(y=-x+6\)</span>.</figcaption>
+      </figure>
+      <p>החיתוכים עכשיו: <span class="fi">\((0,4)\)</span> עם ציר ה-<span class="fi">\(y\)</span>,
+      ו-<span class="fi">\((4,0)\)</span> עם ציר ה-<span class="fi">\(x\)</span>
+      (‏<span class="fi">\(0=-x+4\)</span> נותן <span class="fi">\(x=4\)</span>).
+      הנוסחה קודם, ואז ההצבה:</p>
+      $$S_{\triangle}=\frac{\textcolor{#059669}{b}\cdot\textcolor{#EA580C}{h}}{2}=\frac{\textcolor{#059669}{4}\cdot\textcolor{#EA580C}{4}}{2}=\frac{16}{2}=8$$
+      <p><strong>תשובה:</strong> שטח המשולש 8 יחידות שטח.</p>
+      <p>שימי לב מה קרה: הורדנו את הישר "רק קצת" — מ-6 ל-4 —
+      אבל השטח צנח מ-18 ל-8, פחות מחצי.
+      <br>למה? כי גם הבסיס התקצר <strong>וגם</strong> הגובה.
+      כששני הממדים קטנים, השטח קטן כפליים — פעם בגלל הבסיס ופעם בגלל הגובה.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex4"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">עכשיו את המורה</span><h4>מצאי את הטעות של תום</h4></div>
+  <p class="q-text">
+    תום חישב את שטח הטרפז משלב 4 — בסיסים 6 ו-2, גובה 4 — וכתב:
+    <span class="fi">\(S=(6+2)\cdot 4=32\)</span>.
+    <span class="mk mk-find">מה השתבש — ואיך אפשר היה לתפוס את הטעות בלי לחשב בכלל?</span>
+  </p>
+  <details class="sol">
+    <summary>הצגי תשובה</summary>
+    <div class="sol-body">
+      <p>תום זכר לחבר את הבסיסים ולכפול בגובה — ושכח שנוסחת הטרפז
+      <strong>מחלקת ב-2</strong>:</p>
+      $$S=\frac{(\textcolor{#059669}{6}+\textcolor{#059669}{2})\cdot\textcolor{#EA580C}{4}}{2}=16$$
+      <p>ואפשר היה לחשוד גם בלי לזכור את הנוסחה: הטרפז כולו נכנס בתוך
+      מלבן של 4 על 6, ששטחו 24 — אז 32 פשוט לא ייתכן.
+      צורה לא יכולה להיות גדולה מהמלבן שחוסם אותה.
+      <strong>בדיקת היגיון כזו תופסת כמעט כל טעות חישוב.</strong></p>
+      <p>ודרך נחמדה לזכור את החלוקה ב-2:
+      <span class="fi">\(\tfrac{6+2}{2}=4\)</span> הוא "הבסיס הממוצע" —
+      טרפז שווה בשטחו למלבן שרוחבו הבסיס הממוצע וגובהו הגובה:
+      <span class="fi">\(4\cdot 4=16\)</span>.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex5"> סיימתי את התרגיל הזה</label>
+</article>
+
+<!-- ============ ניווט ============ -->
+<div class="progresswrap no-print">
+  <span class="progressbar"><i></i></span><span class="progress-label"></span>
+  <button class="all-sols" style="font-family:inherit;font-size:12px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:4px 10px;cursor:pointer">לפתוח את כל הפתרונות</button>
+</div>
+
+<nav class="pagenav">
+  <a href="03-quadrilaterals-areas.html"><span class="dir">→ התחנה הקודמת</span>מרובעים ושטחים</a>
+  <a class="next" href="05-proof-models.html"><span class="dir">התחנה הבאה ←</span>ספריית דגמי ההוכחה</a>
+</nav>
+
+<footer class="fin">חלק מהעולם של שירה · <a href="index.html">המפה</a> · <a href="../index.html">המרכז</a></footer>
+</main>
+</div>
+</body>
+</html>

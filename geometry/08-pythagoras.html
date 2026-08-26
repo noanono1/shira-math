@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<!-- מסך הבית של האייפד/הטלפון -->
+<link rel="apple-touch-icon" href="../assets/icons/icon-180.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>משפט פיתגורס — גאומטריה — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../vendor/katex.min.css">
+<link rel="stylesheet" href="../css/shira.css">
+<style>
+:root{--accent:var(--alg)}
+.eq-list{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 34px;margin:8px 0 2px;font-size:15px}
+table.dtable tr.tr-sep td{background:var(--faint);font-weight:800;font-size:12.5px;letter-spacing:.05em;padding:4px 10px}
+table.dtable tr.tr-qed td{background:var(--card);text-align:left;color:var(--accent);font-weight:800;font-size:13.5px;letter-spacing:.05em;padding:4px 14px}
+/* שני הכיוונים של פיתגורס, זה מול זה */
+.two-way{display:flex;flex-wrap:wrap;gap:12px;margin:18px 0}
+.two-way>div{flex:1 1 250px;border:1px solid var(--line);border-radius:var(--r-lg);
+  background:var(--card);padding:12px 16px;box-shadow:0 10px 28px -26px var(--shadow)}
+.two-way>div b{display:block;font-size:14.5px;margin-bottom:4px}
+.two-way .plus{border-inline-start:4px solid #2E7D32}
+.two-way .plus b{color:#2E7D32}
+.two-way .minus{border-inline-start:4px solid #C0392B}
+.two-way .minus b{color:#C0392B}
+.pagemeta{display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px;
+  margin:12px 0 0; font-size:13px; color:var(--soft)}
+.pagemeta .pm-time{background:var(--faint); border-radius:999px; padding:3px 10px}
+.pagemeta .pm-time b{color:var(--ink); font-weight:700}
+.pagemeta .pm-jump{color:var(--accent); font-weight:700; text-decoration:none}
+.pagemeta .pm-jump:hover{text-decoration:underline}
+#ex-first,#sec-booklet{scroll-margin-top:78px}
+</style>
+<script defer src="../vendor/katex.min.js"></script>
+<script defer src="../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../js/shira.js"></script>
+</head>
+<body data-page="geo:08-pythagoras">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">גאומטריה — המפה</a>
+    <span class="crumbs">תחנה <b>8</b> מתוך 8 · <b>משפט פיתגורס</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">גאומטריה · תחנה 8 · חלק ח׳ בעבודת הקיץ</div>
+  <h1>משפט פיתגורס</h1>
+  <p class="lead">
+    משפט אחד, שורה אחת — ובכל זאת הוא המשפט שתשתמשי בו יותר מכל אחר בגאומטריה.
+    הוא מקשר בין <strong>שלוש הצלעות</strong> של משולש ישר-זווית, וברגע ששתיים
+    מהן ידועות, השלישית כבר מחושבת. כאן נלמד את שני הכיוונים שלו, את המלכודות,
+    ונפתור עד הסוף את <strong>שלושת התרגילים של חלק ח׳ בעבודת הקיץ</strong>.
+  </p>
+  <p class="youknow"><b>בסוף העמוד תדעי:</b> לזהות בוודאות מי היתר ומי הניצבים ·
+  מתי מחברים ומתי מחסרים — הטעות הנפוצה ביותר במשפט הזה ·
+  להשאיר תשובה כשורש כשהיא לא יוצאת עגולה ·
+  לצרף פיתגורס לחישוב היקף ושטח של צורה מורכבת ·
+  לבדוק בעזרתו אם משולש הוא בכלל ישר-זווית.</p>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>≈ 30 דק׳</b> · 10 תרגילים</span>
+    <a class="pm-jump" href="#ex-first">לקפוץ ישר לתרגיל הראשון ↓</a>
+    <a class="pm-jump" href="#sec-booklet">ישר לתרגילי החוברת ↓</a>
+  </p>
+</header>
+
+<!-- ============ שלב 1 · המשפט ============ -->
+<div class="stagebar"><span class="dots-s"><i class="on"></i><i></i><i></i><i></i><i></i></span>
+  שלב <b>1</b> מתוך 5 · המשפט עצמו</div>
+<h2 id="sec-theorem">המשפט — ולמה הוא עובד</h2>
+
+<p>
+  במשולש ישר-זווית יש שני סוגי צלעות. השתיים שיוצרות את הזווית הישרה נקראות
+  <strong>ניצבים</strong>, והשלישית — זו שיושבת <em>מול</em> הזווית הישרה — נקראת
+  <strong>היתר</strong>. היתר הוא תמיד הצלע <strong>הארוכה ביותר</strong> במשולש,
+  בלי יוצא מן הכלל.
+</p>
+
+<div class="fbox">
+  <div class="fbox-title">משפט פיתגורס</div>
+  $$\textcolor{#2E7D32}{a^{2}}\;+\;\textcolor{#1D6FA5}{b^{2}}\;=\;\textcolor{#C2408C}{c^{2}}$$
+  <span class="f-legend">
+    <span><i class="sw" style="background:#DFF0DC"></i> <span class="fi">\(a\)</span> — ניצב</span>
+    <span><i class="sw" style="background:#DDEDF8"></i> <span class="fi">\(b\)</span> — הניצב השני</span>
+    <span><i class="sw" style="background:#FADCEC"></i> <span class="fi">\(c\)</span> — <b>היתר</b>, מול הזווית הישרה</span>
+  </span>
+</div>
+
+<figure>
+  <svg viewBox="0 0 240 280" style="width:100%;max-width:340px;height:auto" role="img" aria-label="משולש ישר זווית 3-4-5 ועל כל צלע ריבוע ששטחו 9, 16 ו-25">
+    <polygon points="10,114 76,114 76,180 10,180" fill="#DFF0DC" stroke="#2E7D32" stroke-width="2"/>
+    <polygon points="76,180 164,180 164,268 76,268" fill="#DDEDF8" stroke="#1D6FA5" stroke-width="2"/>
+    <polygon points="76,114 164,180 230,92 142,26" fill="#FADCEC" stroke="#C2408C" stroke-width="2"/>
+    <polygon points="76,114 76,180 164,180" fill="#FFFFFF" stroke="#334155" stroke-width="2.5"/>
+    <path d="M76,168 h12 v12" fill="none" stroke="#334155" stroke-width="2"/>
+    <text x="43" y="153" text-anchor="middle" font-size="17" font-weight="bold" fill="#2E7D32">9</text>
+    <text x="120" y="230" text-anchor="middle" font-size="17" font-weight="bold" fill="#1D6FA5">16</text>
+    <text x="153" y="110" text-anchor="middle" font-size="17" font-weight="bold" fill="#C2408C">25</text>
+    <text x="85" y="150" font-size="12.5" font-weight="bold" fill="#2E7D32">3</text>
+    <text x="118" y="174" font-size="12.5" font-weight="bold" fill="#1D6FA5">4</text>
+    <text x="126" y="140" font-size="12.5" font-weight="bold" fill="#C2408C">5</text>
+  </svg>
+  <figcaption>על כל צלע בנוי ריבוע. שטח הריבוע הירוק ועוד שטח הכחול —
+  <span class="fi">\(9+16=25\)</span> — הם בדיוק שטח הוורוד. זה כל המשפט,
+  ומכאן גם השם "בריבוע".</figcaption>
+</figure>
+
+<div class="box warn">
+  <div class="box-title">רק במשולש ישר-זווית. אין יוצאים מן הכלל.</div>
+  אם אין בשרטוט זווית של <span class="fi">\(90^\circ\)</span> — אין פיתגורס.
+  לפני שכותבים את הנוסחה, מחפשים את סימן הזווית הישרה בשרטוט, או משפט
+  שנותן אותה (גובה יורד תמיד בזווית ישרה; אלכסוני מעוין ניצבים; צלעות מלבן ניצבות).
+  <br>ואם אין — מחפשים דרך <em>לייצר</em> משולש ישר-זווית: כמעט תמיד על ידי
+  הורדת <strong>גובה</strong>.
+</div>
+
+<!-- ============ שלב 2 · שני הכיוונים ============ -->
+<div class="stagebar"><span class="dots-s"><i></i><i class="on"></i><i></i><i></i><i></i></span>
+  שלב <b>2</b> מתוך 5 · מחברים או מחסרים</div>
+<h2 id="sec-directions">מחברים או מחסרים? זו כל השאלה</h2>
+
+<p>
+  לפני שכותבים משהו, עונים על שאלה אחת: <strong>מה מחפשים — את היתר או ניצב?</strong>
+  התשובה קובעת אם מחברים או מחסרים, וזו הטעות הנפוצה ביותר במשפט הזה.
+</p>
+
+<div class="two-way">
+  <div class="plus">
+    <b>מחפשים את היתר ← מחברים</b>
+    <p style="margin:4px 0 0">שני הניצבים ידועים. היתר גדול משניהם, ולכן הגיוני שנחבר:</p>
+    $$c=\sqrt{a^{2}+b^{2}}$$
+    <p class="aside" style="margin:2px 0 0">לדוגמה: ניצבים 6 ו-8
+    <span class="fi">\(\Rightarrow c=\sqrt{36+64}=\sqrt{100}=10\)</span>.</p>
+  </div>
+  <div class="minus">
+    <b>מחפשים ניצב ← מחסרים</b>
+    <p style="margin:4px 0 0">היתר וניצב אחד ידועים. הניצב קטן מהיתר, ולכן מחסרים —
+    ותמיד <strong>היתר בריבוע פחות הניצב בריבוע</strong>:</p>
+    $$a=\sqrt{c^{2}-b^{2}}$$
+    <p class="aside" style="margin:2px 0 0">לדוגמה: יתר 13, ניצב 5
+    <span class="fi">\(\Rightarrow a=\sqrt{169-25}=\sqrt{144}=12\)</span>.</p>
+  </div>
+</div>
+
+<div class="box intuition">
+  <div class="box-title">בדיקה אחת שתופסת כמעט כל טעות</div>
+  התשובה שקיבלת עבור <strong>ניצב</strong> חייבת לצאת <em>קטנה</em> מהיתר.
+  התשובה שקיבלת עבור <strong>יתר</strong> חייבת לצאת <em>גדולה</em> משני הניצבים.
+  <br>יצא ניצב גדול מהיתר? חיברת במקום לחסר. שנייה אחת של בדיקה, וההבדל
+  בין תשובה נכונה לשגויה.
+</div>
+
+<h3>המשולשים שכדאי לזהות מיד</h3>
+<p>
+  יש כמה שלשות מספרים שחוזרות שוב ושוב בתרגילים, כי הן יוצאות עגולות.
+  כשאת מזהה אחת מהן — אין צורך בכלל לחשב:
+</p>
+
+<div class="tbl-scroll">
+<table class="dtable">
+  <tr><th>ניצב</th><th>ניצב</th><th>יתר</th><th>וכל כפולה שלה</th></tr>
+  <tr><td>3</td><td>4</td><td class="hl-find">5</td><td style="font-size:12.5px">6-8-10 · 9-12-15 · 30-40-50</td></tr>
+  <tr><td>5</td><td>12</td><td class="hl-find">13</td><td style="font-size:12.5px">10-24-26 · 15-36-39</td></tr>
+  <tr><td>8</td><td>15</td><td class="hl-find">17</td><td style="font-size:12.5px">16-30-34</td></tr>
+  <tr><td>7</td><td>24</td><td class="hl-find">25</td><td style="font-size:12.5px">14-48-50</td></tr>
+  <tr><td>20</td><td>21</td><td class="hl-find">29</td><td style="font-size:12.5px">40-42-58</td></tr>
+</table>
+</div>
+<p class="aside" style="text-align:center">
+  שתי השורות האחרונות הן בדיוק המספרים של תרגילי החוברת שבהמשך העמוד.
+</p>
+
+<div class="box def">
+  <div class="box-title">כשהתשובה לא יוצאת עגולה — משאירים שורש</div>
+  לא כל תרגיל נגמר במספר שלם, וזה בסדר גמור.
+  <span class="fi">\(\sqrt{59}\)</span> היא תשובה מלאה ומדויקת — מדויקת יותר מ-7.68.
+  <br>הכלל שנוח לעבוד לפיו: <strong>משאירים שורש כל עוד ממשיכים לחשב</strong>
+  (הוא נשאר מדויק), ורק בתשובה הסופית, אם ביקשו ערך מספרי, מעגלים —
+  ואז כותבים <span class="fi">\(\approx\)</span> ולא <span class="fi">\(=\)</span>.
+</div>
+
+<article class="ex" id="ex-first">
+  <div class="ex-head"><span class="lvl l1">חימום</span><h4>שני הכיוונים, אחד אחרי השני</h4></div>
+  <p class="q-text">
+    א. במשולש ישר-זווית הניצבים הם <span class="fi">\(9\)</span> ו-<span class="fi">\(12\)</span>.
+    מהו היתר?
+  </p>
+  <div class="q-row">
+    <label for="q-h1">היתר:</label>
+    <input class="q-input" id="q-h1" type="text" inputmode="decimal" data-answer="15" data-tol="0.01">
+    <button class="q-check">בדיקה</button>
+    <span class="q-feedback"></span>
+  </div>
+  <p class="q-text" style="margin-top:12px">
+    ב. במשולש ישר-זווית היתר הוא <span class="fi">\(26\)</span> וניצב אחד הוא
+    <span class="fi">\(10\)</span>. מהו הניצב השני?
+  </p>
+  <div class="q-row">
+    <label for="q-h2">הניצב השני:</label>
+    <input class="q-input" id="q-h2" type="text" inputmode="decimal" data-answer="24" data-tol="0.01">
+    <button class="q-check">בדיקה</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol"><summary>לראות את הפתרון</summary>
+    <div class="sol-body">
+      <p><strong>א.</strong> מחפשים יתר <span class="fi">\(\Rightarrow\)</span> מחברים:</p>
+      $$c=\sqrt{9^{2}+12^{2}}=\sqrt{81+144}=\sqrt{225}=\mathbf{15}$$
+      <p class="aside">זו השלשה 3-4-5 כפול 3.</p>
+      <p><strong>ב.</strong> מחפשים ניצב <span class="fi">\(\Rightarrow\)</span> מחסרים,
+      והיתר תמיד ראשון:</p>
+      $$a=\sqrt{26^{2}-10^{2}}=\sqrt{676-100}=\sqrt{576}=\mathbf{24}$$
+      <p class="aside">זו השלשה 5-12-13 כפול 2. ובדיקה:
+      <span class="fi">\(24<26\)</span> — ניצב קטן מהיתר ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex1"> סיימתי את התרגיל הזה</label>
+</article>
+
+<!-- ============ שלב 3 · המשפט ההפוך ============ -->
+<div class="stagebar"><span class="dots-s"><i></i><i></i><i class="on"></i><i></i><i></i></span>
+  שלב <b>3</b> מתוך 5 · המשפט ההפוך</div>
+<h2 id="sec-converse">המשפט ההפוך — לבדוק אם משולש הוא ישר-זווית</h2>
+
+<div class="box def">
+  <div class="box-title">משפט פיתגורס ההפוך</div>
+  אם במשולש כלשהו מתקיים <span class="fi">\(a^{2}+b^{2}=c^{2}\)</span>
+  (כאשר <span class="fi">\(c\)</span> היא הצלע הארוכה) —
+  <strong>אז המשולש ישר-זווית</strong>, והזווית הישרה יושבת מול
+  <span class="fi">\(c\)</span>.
+</div>
+
+<p>
+  זה הכלי שעונה על שאלות מסוג "האם המשולש שצלעותיו … הוא ישר-זווית?".
+  <strong>סדר הבדיקה קבוע:</strong> מזהים את הצלע הארוכה, מעלים אותה בריבוע,
+  מעלים את שתי האחרות בריבוע ומחברים — ומשווים.
+</p>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">תרגיל 2</span><h4>האם המשולש ישר-זווית?</h4></div>
+  <p class="q-text">
+    א. משולש שצלעותיו <span class="fi">\(9,\;40,\;41\)</span> —
+    ישר-זווית? ב. ומשולש שצלעותיו <span class="fi">\(6,\;7,\;9\)</span>?
+  </p>
+  <details class="sol"><summary>לראות את הפתרון</summary>
+    <div class="sol-body">
+      <p><strong>א.</strong> הצלע הארוכה היא 41:</p>
+      $$9^{2}+40^{2}=81+1600=1681
+        \qquad 41^{2}=1681$$
+      <p>שווים <span class="fi">\(\Rightarrow\)</span> <strong>כן, ישר-זווית</strong>,
+      והזווית הישרה מול הצלע 41.</p>
+      <p><strong>ב.</strong> הצלע הארוכה היא 9:</p>
+      $$6^{2}+7^{2}=36+49=85
+        \qquad 9^{2}=81$$
+      <p><span class="fi">\(85\neq 81\)</span> <span class="fi">\(\Rightarrow\)</span>
+      <strong>לא ישר-זווית.</strong></p>
+      <p class="aside">בסעיף ב סכום ריבועי הניצבים יצא <em>גדול</em> מריבוע הצלע
+      הארוכה — סימן שהזווית מולה קצת <em>קטנה</em> מ-<span class="fi">\(90^\circ\)</span>.
+      לא צריך לכתוב את זה בתשובה, אבל נחמד לדעת שהמספרים באמת אומרים משהו.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex2"> סיימתי את התרגיל הזה</label>
+</article>
+
+<!-- ============ שלב 4 · פיתגורס בתוך צורה ============ -->
+<div class="stagebar"><span class="dots-s"><i></i><i></i><i></i><i class="on"></i><i></i></span>
+  שלב <b>4</b> מתוך 5 · פיתגורס בתוך צורה</div>
+<h2 id="sec-inside">כשפיתגורס הוא רק השלב הראשון: היקף ושטח</h2>
+
+<p>
+  ברוב התרגילים האמיתיים לא מבקשים ממך "מצאי צלע". מבקשים <strong>היקף</strong> או
+  <strong>שטח</strong> — ופיתגורס הוא הצעד שמשיג את הצלע החסרה שבלעדיה אי אפשר.
+  לכן שווה לזכור את סדר העבודה:
+</p>
+
+<ol class="steps">
+  <li>מסמנים בשרטוט את כל הזוויות הישרות — הן אלה שמגדירות איפה מותר פיתגורס.</li>
+  <li>מחלקים את הצורה למשולשים ישרי-זווית (בדרך כלל אלכסון אחד עושה את העבודה).</li>
+  <li>פיתגורס בכל משולש — בסדר הנכון: קודם המשולש שיש בו שני נתונים.</li>
+  <li><strong>היקף</strong> = סכום הצלעות <em>החיצוניות</em> בלבד. האלכסון שהוספנו
+      איננו חלק מההיקף!</li>
+  <li><strong>שטח</strong> = סכום שטחי המשולשים, כל אחד
+      <span class="fi">\(\frac{\text{ניצב}\cdot\text{ניצב}}{2}\)</span>.</li>
+</ol>
+
+<div class="box warn">
+  <div class="box-title">שתי המלכודות של הסעיף הזה</div>
+  <strong>1. האלכסון בהיקף.</strong> ציירת אלכסון כדי לפרק את הצורה — הוא כלי עזר,
+  לא צלע. בהיקף סופרים רק את מה שנמצא <em>על הגבול</em>.
+  <br><strong>2. הגובה במקום הניצב.</strong> בנוסחת שטח המשולש הישר-זווית שני
+  הניצבים ממלאים את התפקיד של "בסיס × גובה" — אבל רק כי הם ניצבים זה לזה.
+  ברגע שהמשולש איננו ישר-זווית, צריך גובה אמיתי.
+</div>
+
+<!-- ============ שלב 5 · תרגילי החוברת ============ -->
+<div class="stagebar"><span class="dots-s"><i></i><i></i><i></i><i></i><i class="on"></i></span>
+  שלב <b>5</b> מתוך 5 · תרגילי החוברת</div>
+<h2 id="sec-booklet">חלק ח׳ בעבודת הקיץ — שלושת התרגילים, עד הסוף</h2>
+
+<article class="ex" id="bk1">
+  <div class="ex-head"><span class="lvl l2">חוברת · ח.1</span><h4>היקף ושטח של המרובע <span class="fi">\(ABCD\)</span></h4></div>
+  <p class="q-text">
+    חשבו את ההיקף ואת השטח של המרובע <span class="fi">\(ABCD\)</span>.
+    <br>נתון: <span class="fi">\(\angle ABC=90^\circ\)</span> ,
+    <span class="fi">\(\angle ACD=90^\circ\)</span> ,
+    <span class="fi">\(AB=21\)</span> ס״מ , <span class="fi">\(BC=20\)</span> ס״מ ,
+    <span class="fi">\(CD=\sqrt{59}\)</span> ס״מ.
+  </p>
+  <figure>
+    <svg viewBox="0 0 220 205" style="width:100%;max-width:360px;height:auto" role="img" aria-label="מרובע ABCD עם זווית ישרה ב-B ובין CD ל-CA, והאלכסון AC">
+      <polygon points="192,185 45,185 45,45 82,6" fill="#F7FAFC" stroke="#334155" stroke-width="2.5"/>
+      <line x1="45" y1="45" x2="192" y2="185" stroke="#6D28D9" stroke-width="2" stroke-dasharray="5 4"/>
+      <path d="M45,173 h12 v12" fill="none" stroke="#334155" stroke-width="2"/>
+      <path d="M53.5,53.1 l8.7,8.3 l-8.3,8.7" fill="none" stroke="#334155" stroke-width="1.8"/>
+      <text x="196" y="197" font-size="13" font-weight="bold" fill="#334155">A</text>
+      <text x="34" y="197" font-size="13" font-weight="bold" fill="#334155">B</text>
+      <text x="32" y="44" font-size="13" font-weight="bold" fill="#334155">C</text>
+      <text x="84" y="0" font-size="13" font-weight="bold" fill="#334155">D</text>
+      <text x="106" y="199" font-size="11.5" fill="#2E6F8E">21</text>
+      <text x="26" y="118" font-size="11.5" fill="#2E6F8E">20</text>
+      <text x="46" y="18" font-size="11.5" fill="#2E6F8E">√59</text>
+      <text x="126" y="112" font-size="11.5" fill="#6D28D9">?</text>
+    </svg>
+    <figcaption>האלכסון <span class="fi">\(AC\)</span> (הקו המקווקו) מפרק את המרובע
+    לשני משולשים ישרי-זווית — והוא הצלע המשותפת שלהם.</figcaption>
+  </figure>
+
+  <div class="nb" data-nb>
+    <div class="nb-head"><b>בונים ביחד במחברת</b><span class="nb-count"></span></div>
+    <ol class="nb-steps">
+      <li class="nb-step"><b>מסתכלים על השרטוט ומחליטים מאיפה מתחילים</b>
+        <p>יש שתי זוויות ישרות, ושתיהן נשענות על אותו קטע:
+        <span class="fi">\(AC\)</span>. במשולש <span class="fi">\(ABC\)</span>
+        נתונים <strong>שני</strong> אורכים, ובמשולש <span class="fi">\(ACD\)</span>
+        רק אחד — אז מתחילים משם. <span class="fi">\(AC\)</span> הוא הגשר בין השניים.</p>
+      </li>
+      <li class="nb-step"><b>משולש <span class="fi">\(ABC\)</span> — מחפשים את היתר <span class="fi">\(AC\)</span></b>
+        <p>הזווית הישרה ב-<span class="fi">\(B\)</span>, ולכן
+        <span class="fi">\(AB\)</span> ו-<span class="fi">\(BC\)</span> הם הניצבים
+        ו-<span class="fi">\(AC\)</span> הוא היתר. מחפשים יתר
+        <span class="fi">\(\Rightarrow\)</span> מחברים:</p>
+        $$AC=\sqrt{21^{2}+20^{2}}=\sqrt{441+400}=\sqrt{841}=\mathbf{29}\ \text{ס״מ}$$
+        <p class="aside">‏20-21-29 היא אחת השלשות מהטבלה למעלה.</p>
+      </li>
+      <li class="nb-step"><b>משולש <span class="fi">\(ACD\)</span> — עכשיו יש בו שני אורכים</b>
+        <p>הזווית הישרה היא <span class="fi">\(\angle ACD\)</span>, כלומר ב-<span class="fi">\(C\)</span>.
+        לכן <span class="fi">\(AC\)</span> ו-<span class="fi">\(CD\)</span> הם הניצבים,
+        ו-<span class="fi">\(AD\)</span> הוא היתר — שוב מחברים:</p>
+        $$AD=\sqrt{29^{2}+\left(\sqrt{59}\right)^{2}}=\sqrt{841+59}=\sqrt{900}=\mathbf{30}\ \text{ס״מ}$$
+        <p class="aside">שימי לב מה קרה ל-<span class="fi">\(\sqrt{59}\)</span>:
+        שורש בריבוע מחזיר את המספר עצמו. בדיוק בגלל זה נוח להשאיר שורשים
+        באמצע חישוב במקום לעגל אותם.</p>
+      </li>
+      <li class="nb-step"><b>היקף — רק הצלעות שעל הגבול</b>
+        <p>ההיקף הוא <span class="fi">\(AB+BC+CD+DA\)</span>. האלכסון
+        <span class="fi">\(AC\)</span> <strong>לא</strong> נכנס — הוא בתוך הצורה:</p>
+        $$P=21+20+\sqrt{59}+30=71+\sqrt{59}\ \text{ס״מ}\;\approx\;\mathbf{78.68}\ \text{ס״מ}$$
+      </li>
+      <li class="nb-step"><b>שטח — סוכמים את שני המשולשים</b>
+        <p>בכל אחד מהם השטח הוא מכפלת שני הניצבים חלקי 2:</p>
+        $$S_{\triangle ABC}=\frac{21\cdot 20}{2}=210\ \text{סמ״ר}$$
+        $$S_{\triangle ACD}=\frac{29\cdot\sqrt{59}}{2}=14.5\sqrt{59}\approx 111.38\ \text{סמ״ר}$$
+        $$S_{ABCD}=210+14.5\sqrt{59}\;\approx\;\mathbf{321.38}\ \text{סמ״ר}$$
+        <p class="aside">אפשר להשאיר גם את התשובה המדויקת
+        <span class="fi">\(210+14.5\sqrt{59}\)</span> — היא נכונה לגמרי,
+        ואפילו מדויקת יותר מהערך המעוגל.</p>
+      </li>
+    </ol>
+    <div class="nb-acts">
+      <button type="button" class="nb-next">השלב הבא ↓</button>
+      <button type="button" class="nb-all">להציג את כל השלבים</button>
+    </div>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="bk1"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="bk2">
+  <div class="ex-head"><span class="lvl l2">חוברת · ח.2</span><h4>מוצאים את <span class="fi">\(X\)</span>, ואת ההיקף והשטח</h4></div>
+  <p class="q-text">
+    מצאו את <span class="fi">\(X\)</span>, ואת ההיקף והשטח של המשולש
+    <span class="fi">\(DEF\)</span>.
+    <br>בשרטוט: <span class="fi">\(\angle E=90^\circ\)</span> ,
+    <span class="fi">\(EF=12\)</span> ס״מ , <span class="fi">\(DF=15\)</span> ס״מ ,
+    <span class="fi">\(AF=13\)</span> ס״מ , והנקודה <span class="fi">\(A\)</span> נמצאת
+    על <span class="fi">\(DE\)</span> כאשר <span class="fi">\(X=AD\)</span>.
+  </p>
+  <figure>
+    <svg viewBox="0 0 200 185" style="width:100%;max-width:330px;height:auto" role="img" aria-label="משולש DEF ישר זווית ב-E, עם נקודה A על DE">
+      <polygon points="45,61 45,160 177,160" fill="#F7FAFC" stroke="#334155" stroke-width="2.5"/>
+      <path d="M45,148 h12 v12" fill="none" stroke="#334155" stroke-width="2"/>
+      <line x1="45" y1="105" x2="177" y2="160" stroke="#6D28D9" stroke-width="2.5"/>
+      <line x1="41" y1="105" x2="49" y2="105" stroke="#6D28D9" stroke-width="2.5"/>
+      <text x="38" y="56" font-size="13" font-weight="bold" fill="#334155">D</text>
+      <text x="34" y="110" font-size="13" font-weight="bold" fill="#6D28D9">A</text>
+      <text x="34" y="174" font-size="13" font-weight="bold" fill="#334155">E</text>
+      <text x="181" y="174" font-size="13" font-weight="bold" fill="#334155">F</text>
+      <text x="30" y="86" font-size="11.5" fill="#C2408C">X</text>
+      <text x="100" y="176" font-size="11.5" fill="#2E6F8E">12</text>
+      <text x="124" y="98" font-size="11.5" fill="#2E6F8E">15</text>
+      <text x="112" y="128" font-size="11.5" fill="#6D28D9">13</text>
+    </svg>
+    <figcaption>שני משולשים ישרי-זווית שחולקים את הניצב <span class="fi">\(EF\)</span>:
+    הגדול <span class="fi">\(DEF\)</span> והקטן <span class="fi">\(AEF\)</span>.</figcaption>
+  </figure>
+
+  <div class="nb" data-nb>
+    <div class="nb-head"><b>בונים ביחד במחברת</b><span class="nb-count"></span></div>
+    <ol class="nb-steps">
+      <li class="nb-step"><b>רואים ששני משולשים מסתתרים כאן, לא אחד</b>
+        <p>הזווית הישרה ב-<span class="fi">\(E\)</span> משרתת <strong>שני</strong>
+        משולשים ישרי-זווית: <span class="fi">\(\triangle DEF\)</span> (עם היתר
+        <span class="fi">\(DF=15\)</span>) ו-<span class="fi">\(\triangle AEF\)</span>
+        (עם היתר <span class="fi">\(AF=13\)</span>). הניצב
+        <span class="fi">\(EF=12\)</span> משותף לשניהם — וזה הגשר.</p>
+      </li>
+      <li class="nb-step"><b>במשולש הקטן — מוצאים את <span class="fi">\(AE\)</span></b>
+        <p>מחפשים ניצב <span class="fi">\(\Rightarrow\)</span> מחסרים, היתר קודם:</p>
+        $$AE=\sqrt{13^{2}-12^{2}}=\sqrt{169-144}=\sqrt{25}=\mathbf{5}\ \text{ס״מ}$$
+      </li>
+      <li class="nb-step"><b>במשולש הגדול — מוצאים את <span class="fi">\(DE\)</span></b>
+        $$DE=\sqrt{15^{2}-12^{2}}=\sqrt{225-144}=\sqrt{81}=\mathbf{9}\ \text{ס״מ}$$
+      </li>
+      <li class="nb-step"><b>ו-<span class="fi">\(X\)</span> הוא ההפרש ביניהם</b>
+        <p>הנקודה <span class="fi">\(A\)</span> יושבת על הקטע
+        <span class="fi">\(DE\)</span>, ולכן
+        <span class="fi">\(DE=DA+AE\)</span>:</p>
+        $$X=AD=DE-AE=9-5=\mathbf{4}\ \text{ס״מ}$$
+        <p class="aside">כאן נופלים הרבה: מחשבים את <span class="fi">\(AE=5\)</span>
+        וכותבים אותו כתשובה. אבל השאלה ביקשה את <span class="fi">\(AD\)</span> —
+        החלק העליון. תמיד לחזור לשאלה ולבדוק <em>איזה</em> קטע ביקשו.</p>
+      </li>
+      <li class="nb-step"><b>היקף ושטח של <span class="fi">\(DEF\)</span></b>
+        <p>עכשיו כל שלוש הצלעות שלו ידועות:</p>
+        $$P_{\triangle DEF}=DE+EF+FD=9+12+15=\mathbf{36}\ \text{ס״מ}$$
+        <p>והשטח — מכפלת הניצבים חלקי 2:</p>
+        $$S_{\triangle DEF}=\frac{9\cdot 12}{2}=\mathbf{54}\ \text{סמ״ר}$$
+        <p class="aside">‏9-12-15 היא השלשה 3-4-5 כפול 3 — סימן טוב שלא טעינו.</p>
+      </li>
+    </ol>
+    <div class="nb-acts">
+      <button type="button" class="nb-next">השלב הבא ↓</button>
+      <button type="button" class="nb-all">להציג את כל השלבים</button>
+    </div>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="bk2"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="bk3">
+  <div class="ex-head"><span class="lvl l3">חוברת · ח.3</span><h4>גובה שמחשבים מהפרש שטחים</h4></div>
+  <p class="q-text">
+    <span class="fi">\(KM\)</span> הוא גובה במשולש <span class="fi">\(KLM\)</span>,
+    <span class="fi">\(LM=7\)</span> ס״מ , <span class="fi">\(MN=3\)</span> ס״מ.
+    שטח המשולש <span class="fi">\(KLM\)</span> גדול ב-<span class="fi">\(12\)</span> סמ״ר
+    משטח המשולש <span class="fi">\(KMN\)</span>.
+    מצאו את אורכי הקטעים <span class="fi">\(KM\)</span> ו-<span class="fi">\(KL\)</span>.
+  </p>
+  <figure>
+    <svg viewBox="0 0 260 195" style="width:100%;max-width:400px;height:auto" role="img" aria-label="הנקודות L M N על ישר אחד, K מעליהן, KM גובה">
+      <polygon points="30,170 170,170 170,50" fill="#EAE0FA" opacity=".5"/>
+      <polygon points="170,170 230,170 170,50" fill="#DFF0DC" opacity=".6"/>
+      <line x1="30" y1="170" x2="230" y2="170" stroke="#334155" stroke-width="2.5"/>
+      <line x1="30" y1="170" x2="170" y2="50" stroke="#334155" stroke-width="2.5"/>
+      <line x1="230" y1="170" x2="170" y2="50" stroke="#334155" stroke-width="2.5"/>
+      <line x1="170" y1="50" x2="170" y2="170" stroke="#6D28D9" stroke-width="2.5"/>
+      <path d="M170,158 h12 v12" fill="none" stroke="#6D28D9" stroke-width="2"/>
+      <text x="22" y="185" font-size="13" font-weight="bold" fill="#334155">L</text>
+      <text x="166" y="187" font-size="13" font-weight="bold" fill="#334155">M</text>
+      <text x="234" y="185" font-size="13" font-weight="bold" fill="#334155">N</text>
+      <text x="166" y="42" font-size="13" font-weight="bold" fill="#334155">K</text>
+      <text x="94" y="187" font-size="11.5" fill="#2E6F8E">7</text>
+      <text x="196" y="187" font-size="11.5" fill="#2E6F8E">3</text>
+      <text x="176" y="112" font-size="11.5" fill="#6D28D9">?</text>
+    </svg>
+    <figcaption>הגובה <span class="fi">\(KM\)</span> משרת את שני המשולשים גם יחד:
+    הסגול <span class="fi">\(KLM\)</span> (בסיס 7) והירוק
+    <span class="fi">\(KMN\)</span> (בסיס 3).</figcaption>
+  </figure>
+
+  <div class="nb" data-nb>
+    <div class="nb-head"><b>בונים ביחד במחברת</b><span class="nb-count"></span></div>
+    <ol class="nb-steps">
+      <li class="nb-step"><b>קודם רואים למה זה בכלל שייך לפיתגורס</b>
+        <p>הגובה יורד תמיד בזווית ישרה, ולכן <span class="fi">\(KM\perp LN\)</span> —
+        ומיד יש לנו משולש ישר-זווית <span class="fi">\(KML\)</span> עם ניצבים
+        <span class="fi">\(LM\)</span> ו-<span class="fi">\(KM\)</span>.
+        אבל את <span class="fi">\(KM\)</span> עוד לא יודעים, ולכן פיתגורס מחכה
+        לסוף. קודם — משוואה.</p>
+      </li>
+      <li class="nb-step"><b>כותבים את שני השטחים עם אותו נעלם</b>
+        <p><span class="fi">\(KM\)</span> הוא הגובה של <strong>שני</strong>
+        המשולשים, כי שניהם יושבים על אותו ישר. נסמן
+        <span class="fi">\(KM=h\)</span>:</p>
+        $$S_{\triangle KLM}=\frac{7\cdot h}{2}
+          \qquad\qquad
+          S_{\triangle KMN}=\frac{3\cdot h}{2}$$
+      </li>
+      <li class="nb-step"><b>מתרגמים את "גדול ב-12" למשוואה</b>
+        <p>"גדול ב-" פירושו הפרש, ולכן:</p>
+        $$\frac{7h}{2}-\frac{3h}{2}=12$$
+        <p>למכנה משותף כבר יש — פשוט מחסרים את המונים:</p>
+        $$\frac{4h}{2}=12\quad\Longrightarrow\quad 2h=12
+          \quad\Longrightarrow\quad h=KM=\mathbf{6}\ \text{ס״מ}$$
+      </li>
+      <li class="nb-step"><b>ורק עכשיו פיתגורס — למצוא את <span class="fi">\(KL\)</span></b>
+        <p>במשולש <span class="fi">\(KML\)</span> הזווית הישרה ב-<span class="fi">\(M\)</span>,
+        ולכן <span class="fi">\(KL\)</span> הוא היתר — מחברים:</p>
+        $$KL=\sqrt{LM^{2}+KM^{2}}=\sqrt{7^{2}+6^{2}}=\sqrt{49+36}=\sqrt{85}\ \text{ס״מ}\;\approx\;\mathbf{9.22}\ \text{ס״מ}$$
+        <p class="aside"><span class="fi">\(85\)</span> אינו ריבוע שלם, ולכן
+        <span class="fi">\(\sqrt{85}\)</span> היא התשובה המדויקת. אם המורה ביקשה
+        ערך מספרי — <span class="fi">\(\approx 9.22\)</span>, עם
+        <span class="fi">\(\approx\)</span>.</p>
+      </li>
+      <li class="nb-step"><b>בדיקה</b>
+        <p><span class="fi">\(KL\approx 9.22\)</span> גדול משני הניצבים
+        (<span class="fi">\(7\)</span> ו-<span class="fi">\(6\)</span>) — כמו שיתר
+        חייב להיות ✓. וגם: <span class="fi">\(S_{KLM}=\frac{7\cdot6}{2}=21\)</span> ,
+        <span class="fi">\(S_{KMN}=\frac{3\cdot6}{2}=9\)</span> ,
+        וההפרש <span class="fi">\(21-9=12\)</span> ✓</p>
+      </li>
+    </ol>
+    <div class="nb-acts">
+      <button type="button" class="nb-next">השלב הבא ↓</button>
+      <button type="button" class="nb-all">להציג את כל השלבים</button>
+    </div>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="bk3"> סיימתי את התרגיל הזה</label>
+</article>
+
+<!-- ============ עוד תרגול ============ -->
+<h2 id="sec-more">עוד תרגול — לבד</h2>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">תרגיל 3</span><h4>אלכסון של מלבן</h4></div>
+  <p class="q-text">
+    במלבן שאורכו <span class="fi">\(24\)</span> ס״מ ורוחבו <span class="fi">\(7\)</span> ס״מ.
+    מהו אורך האלכסון?
+  </p>
+  <div class="q-row">
+    <label for="q-diag">האלכסון (ס״מ):</label>
+    <input class="q-input" id="q-diag" type="text" inputmode="decimal" data-answer="25" data-tol="0.01">
+    <button class="q-check">בדיקה</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol"><summary>לראות את הפתרון</summary>
+    <div class="sol-body">
+      <p>האלכסון מפצל את המלבן לשני משולשים ישרי-זווית (הזווית של המלבן היא
+      <span class="fi">\(90^\circ\)</span>), והוא היתר בשניהם:</p>
+      $$d=\sqrt{24^{2}+7^{2}}=\sqrt{576+49}=\sqrt{625}=\mathbf{25}$$
+      <p class="aside">‏7-24-25 — מהטבלה.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex3"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">תרגיל 4</span><h4>גובה במשולש שווה-שוקיים</h4></div>
+  <p class="q-text">
+    במשולש שווה-שוקיים <span class="fi">\(ABC\)</span> השוקיים
+    <span class="fi">\(AB=AC=13\)</span> ס״מ והבסיס <span class="fi">\(BC=10\)</span> ס״מ.
+    מהו הגובה <span class="fi">\(AD\)</span> לבסיס? ומהו שטח המשולש?
+  </p>
+  <div class="q-row">
+    <label for="q-iso">הגובה (ס״מ):</label>
+    <input class="q-input" id="q-iso" type="text" inputmode="decimal" data-answer="12" data-tol="0.01">
+    <button class="q-check">בדיקה</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <label for="q-iso2">השטח (סמ״ר):</label>
+    <input class="q-input" id="q-iso2" type="text" inputmode="decimal" data-answer="60" data-tol="0.01">
+    <button class="q-check">בדיקה</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol"><summary>לראות את הפתרון</summary>
+    <div class="sol-body">
+      <p>הגובה לבסיס במשולש שווה-שוקיים הוא גם <strong>תיכון</strong> —
+      הוא חוצה את הבסיס. לכן:</p>
+      $$BD=DC=\frac{10}{2}=5$$
+      <p>במשולש <span class="fi">\(ABD\)</span> הזווית הישרה ב-<span class="fi">\(D\)</span>,
+      <span class="fi">\(AB=13\)</span> הוא היתר — מחפשים ניצב, מחסרים:</p>
+      $$AD=\sqrt{13^{2}-5^{2}}=\sqrt{169-25}=\sqrt{144}=\mathbf{12}$$
+      $$S=\frac{BC\cdot AD}{2}=\frac{10\cdot 12}{2}=\mathbf{60}\ \text{סמ״ר}$$
+      <p class="aside">זו התבנית הכי שימושית בכל הפרק: <strong>גובה במשולש
+      שווה-שוקיים חוצה את הבסיס</strong>, וכך נוצר משולש ישר-זווית שאפשר
+      להפעיל עליו פיתגורס. את התכונה הזאת פגשת
+      <a href="02-triangles-congruence.html#sec-isosceles">בתחנה 2</a>.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex4"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">תרגיל 5</span><h4>טרפז ישר-זווית</h4></div>
+  <p class="q-text">
+    בטרפז ישר-זווית הבסיסים הם <span class="fi">\(14\)</span> ו-<span class="fi">\(6\)</span> ס״מ,
+    והשוק הניצבת לשני הבסיסים היא <span class="fi">\(15\)</span> ס״מ.
+    מהו אורך השוק הנטויה? ומהו היקף הטרפז?
+  </p>
+  <div class="q-row">
+    <label for="q-trap">השוק הנטויה (ס״מ):</label>
+    <input class="q-input" id="q-trap" type="text" inputmode="decimal" data-answer="17" data-tol="0.01">
+    <button class="q-check">בדיקה</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <label for="q-trap2">ההיקף (ס״מ):</label>
+    <input class="q-input" id="q-trap2" type="text" inputmode="decimal" data-answer="52" data-tol="0.01">
+    <button class="q-check">בדיקה</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol"><summary>לראות את הפתרון</summary>
+    <div class="sol-body">
+      <p>מורידים גובה מקצה הבסיס הקצר — ונוצר משולש ישר-זווית שניצביו הם הגובה
+      וההפרש בין הבסיסים:</p>
+      $$14-6=8\ \text{ס״מ}$$
+      <p>השוק הנטויה היא היתר של המשולש הזה — מחברים:</p>
+      $$\sqrt{8^{2}+15^{2}}=\sqrt{64+225}=\sqrt{289}=\mathbf{17}\ \text{ס״מ}$$
+      $$P=14+6+15+17=\mathbf{52}\ \text{ס״מ}$$
+      <p class="aside">"הורדת גובה כדי לייצר משולש ישר-זווית" היא <em>המהלך</em>
+      של פיתגורס בצורות. מזהים אותו לפי זה שאין בשרטוט משולש ישר-זווית — אז
+      בונים אחד.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex5"> סיימתי את התרגיל הזה</label>
+</article>
+
+<div class="box intuition" style="margin-top:30px">
+  <div class="box-title">התקציר שכדאי להעתיק למחברת לפני מבחן</div>
+  <span class="fi">\(a^{2}+b^{2}=c^{2}\)</span> — ורק במשולש
+  <strong>ישר-זווית</strong>.
+  <br>היתר <span class="fi">\(c\)</span> = מול הזווית הישרה = הצלע הארוכה.
+  <br>מחפשים יתר ← <strong>מחברים</strong> · מחפשים ניצב ← <strong>מחסרים</strong>,
+  והיתר תמיד ראשון.
+  <br>אין משולש ישר-זווית בשרטוט? <strong>מורידים גובה</strong> ומייצרים אחד.
+  <br>בהיקף לא סופרים אלכסון עזר · לא יוצא עגול? משאירים שורש.
+  <br>ולבדוק אם משולש ישר-זווית: הצלע הארוכה בריבוע מול סכום ריבועי השתיים האחרות.
+</div>
+
+<div class="watch">
+  <h3>עוד תרגילי פיתגורס באתר</h3>
+  <p>
+    פיתגורס חוזר גם ב<a href="03-quadrilaterals-areas.html">תחנת המרובעים והשטחים</a>
+    (שם הוא מספק את הגובה החסר), וב<a href="07-similarity.html#bk1">תרגיל ז.1 של הדמיון</a>
+    הוא הצעד הראשון בפתרון. וב-<a href="https://school.walla.co.il/" target="_blank" rel="noopener">Walla! School</a>
+    יש שיעורי וידאו חינמיים על פיתגורס אם מתחשק לשמוע הסבר בקול.
+  </p>
+</div>
+
+<div class="pagenav">
+  <a href="07-similarity.html"><span class="dir">התחנה הקודמת</span>דמיון משולשים</a>
+  <a class="next" href="index.html"><span class="dir">סיימת את המסלול</span>חזרה למפת הגאומטריה ←</a>
+</div>
+
+<footer class="fin">חלק מהעולם של שירה · <a href="index.html">חזרה למפת הגאומטריה</a> ·
+<a href="../booklet.html">מפת החוברת</a></footer>
+</main>
+</div>
+</body>
+</html>

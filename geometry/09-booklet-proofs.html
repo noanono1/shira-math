@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<link rel="apple-touch-icon" href="../assets/icons/icon-180.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>תרגילי החוברת — חפיפה ושווה-שוקיים — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../vendor/katex.min.css">
+<link rel="stylesheet" href="../css/shira.css">
+<style>
+:root{--accent:var(--alg)}
+table.dtable tr.tr-sep td{background:var(--faint);font-weight:800;font-size:12.5px;letter-spacing:.05em;padding:4px 10px}
+table.dtable tr.tr-qed td{background:var(--card);text-align:left;color:var(--accent);font-weight:800;font-size:13.5px;letter-spacing:.05em;padding:4px 14px}
+table.dtable td.rt{text-align:right}
+.pagemeta{display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px;
+  margin:12px 0 0; font-size:13px; color:var(--soft)}
+.pagemeta .pm-time{background:var(--faint); border-radius:999px; padding:3px 10px}
+.pagemeta .pm-time b{color:var(--ink); font-weight:700}
+.pagemeta .pm-jump{color:var(--accent); font-weight:700; text-decoration:none}
+/* פס "נתון · צ"ל" בראש כל תרגיל — השלד שהמורה מבקשת */
+.gt{display:flex; flex-wrap:wrap; gap:8px 16px; margin:8px 0 4px; font-size:14px}
+.gt>span{display:inline-block}
+</style>
+<script defer src="../vendor/katex.min.js"></script>
+<script defer src="../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../js/shira.js"></script>
+</head>
+<body data-page="geo:09-booklet-proofs">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">גאומטריה — המפה</a>
+    <span class="crumbs">תרגילי החוברת · <b>חלקים ה׳ ו-ו׳</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">גאומטריה · נספח תרגילי החוברת</div>
+  <h1>שבעת התרגילים שנשארו — חפיפה ושווה-שוקיים</h1>
+  <p class="lead">
+    שלושת תרגילי החפיפה הראשונים של חלק ה׳ פתורים כבר
+    <a href="02-triangles-congruence.html#sec-school">בתחנה 2</a>.
+    כאן יושבים השאר: <strong>תרגילים 4 ו-5 של חלק ה׳</strong>, ו<strong>כל
+    חמשת התרגילים של חלק ו׳ — משולש שווה-שוקיים</strong>. שבעה, כולם עם
+    טבלת טענה ונימוק מלאה, בדיוק בפורמט שהמורה מבקשת.
+  </p>
+  <p class="youknow"><b>שני משפטים שכל הדף עומד עליהם:</b>
+  במשולש שווה-שוקיים <strong>זוויות הבסיס שוות</strong> — וגם ההפך:
+  שתי זוויות שוות במשולש עושות אותו שווה-שוקיים ·
+  ובמשולש שווה-שוקיים <strong>הגובה לבסיס, התיכון לבסיס וחוצה זווית הראש
+  הם אותו קטע בדיוק</strong>. את שניהם פגשת
+  <a href="02-triangles-congruence.html#sec-isosceles">בתחנה 2, שלב 2</a>.</p>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>≈ 40 דק׳</b> · 7 תרגילים</span>
+    <a class="pm-jump" href="#h4">חלק ה׳ ↓</a>
+    <a class="pm-jump" href="#v1">חלק ו׳ ↓</a>
+  </p>
+</header>
+
+<h2 id="h4">חלק ה׳ · תרגיל 4 — חיבור וחיסור קטעים</h2>
+
+<article class="ex" id="ex-h4">
+  <div class="ex-head"><span class="lvl l2">חוברת · ה.4</span><h4>שני משולשים ישרי-זווית משני עברי הישר</h4></div>
+  <p class="q-text">
+    הנקודות <span class="fi">\(B\)</span> ו-<span class="fi">\(C\)</span> נמצאות על הקטע
+    <span class="fi">\(AD\)</span>.
+  </p>
+  <p class="gt">
+    <span class="mk mk-given"><b>נתון:</b> <span class="fi">\(AB=CD\)</span> ,
+    <span class="fi">\(AE\perp AD\)</span> , <span class="fi">\(DF\perp AD\)</span> ,
+    <span class="fi">\(\angle C_1=\angle B_1\)</span></span>
+    <span class="mk mk-find"><b>צ"ל:</b> <span class="fi">\(\triangle AEC\cong\triangle DFB\)</span></span>
+  </p>
+  <figure>
+    <svg viewBox="0 0 270 210" style="width:100%;max-width:430px;height:auto" role="img" aria-label="ישר AD עם הנקודות B ו-C עליו, E מעל A ו-F מתחת ל-D">
+      <line x1="30" y1="110" x2="230" y2="110" stroke="#334155" stroke-width="2.5"/>
+      <line x1="30" y1="110" x2="30" y2="40" stroke="#334155" stroke-width="2.5"/>
+      <line x1="230" y1="110" x2="230" y2="180" stroke="#334155" stroke-width="2.5"/>
+      <line x1="30" y1="40" x2="175" y2="110" stroke="#334155" stroke-width="2.5"/>
+      <line x1="85" y1="110" x2="230" y2="180" stroke="#334155" stroke-width="2.5"/>
+      <path d="M30,98 h12 v12" fill="none" stroke="#334155" stroke-width="2"/>
+      <path d="M230,122 h-12 v-12" fill="none" stroke="#334155" stroke-width="2"/>
+      <line x1="57" y1="105" x2="57" y2="115" stroke="#C2408C" stroke-width="3"/>
+      <line x1="203" y1="105" x2="203" y2="115" stroke="#C2408C" stroke-width="3"/>
+      <path d="M151,110 A24,24 0 0 1 153.4,99.6" fill="none" stroke="#2E7D32" stroke-width="2.5"/>
+      <path d="M109,110 A24,24 0 0 1 106.6,120.4" fill="none" stroke="#2E7D32" stroke-width="2.5"/>
+      <text x="163" y="103" font-size="10" font-weight="bold" fill="#2E7D32">1</text>
+      <text x="97" y="127" font-size="10" font-weight="bold" fill="#2E7D32">1</text>
+      <text x="20" y="126" font-size="13" font-weight="bold" fill="#334155">A</text>
+      <text x="80" y="126" font-size="13" font-weight="bold" fill="#334155">B</text>
+      <text x="171" y="126" font-size="13" font-weight="bold" fill="#334155">C</text>
+      <text x="234" y="106" font-size="13" font-weight="bold" fill="#334155">D</text>
+      <text x="24" y="33" font-size="13" font-weight="bold" fill="#334155">E</text>
+      <text x="232" y="196" font-size="13" font-weight="bold" fill="#334155">F</text>
+    </svg>
+    <figcaption>הסימונים הוורודים הם <span class="fi">\(AB=CD\)</span>,
+    והקשתות הירוקות הן <span class="fi">\(\angle C_1\)</span> ו-<span class="fi">\(\angle B_1\)</span> —
+    הזווית ב-<span class="fi">\(C\)</span> שבתוך המשולש העליון, והזווית ב-<span class="fi">\(B\)</span>
+    שבתוך התחתון.</figcaption>
+  </figure>
+
+  <div class="nb" data-nb>
+    <div class="nb-head"><b>בונים ביחד במחברת</b><span class="nb-count"></span></div>
+    <ol class="nb-steps">
+      <li class="nb-step"><b>סופרים מה כבר יש</b>
+        <p>שני המשולשים ישרי-זווית — זו זווית אחת שווה. ו-<span class="fi">\(\angle C_1=\angle B_1\)</span>
+        נתון — זו זווית שנייה. חסרה <strong>צלע אחת</strong>, ואין אף אורך בשרטוט.
+        אז מאיפה משיגים אותה? מהקטעים על הישר.</p>
+      </li>
+      <li class="nb-step"><b>הצלע השלישית — מחיבור קטעים</b>
+        <p>הנקודות יושבות על הישר בסדר <span class="fi">\(A,B,C,D\)</span>, ולכן:</p>
+        $$AC=AB+BC\qquad\qquad DB=DC+CB$$
+        <p>נתון ש-<span class="fi">\(AB=CD\)</span>, והקטע <span class="fi">\(BC\)</span>
+        הוא אותו קטע בדיוק בשתי השורות — ולכן <span class="fi">\(AC=DB\)</span>.
+        זה בדיוק המהלך שנקרא <strong>חיבור קטעים</strong>.</p>
+      </li>
+      <li class="nb-step"><b>איפה יושבת הצלע הזאת בכל משולש?</b>
+        <p>במשולש <span class="fi">\(AEC\)</span> הצלע <span class="fi">\(AC\)</span>
+        כלואה בין <span class="fi">\(\angle A\)</span> (הישרה) לבין
+        <span class="fi">\(\angle C_1\)</span>. במשולש <span class="fi">\(DFB\)</span>
+        הצלע <span class="fi">\(DB\)</span> כלואה בין <span class="fi">\(\angle D\)</span>
+        (הישרה) לבין <span class="fi">\(\angle B_1\)</span>. צלע בין שתי זוויות —
+        זה <strong>ז.צ.ז</strong>.</p>
+      </li>
+      <li class="nb-step"><b>הטבלה</b>
+        <table class="dtable">
+          <tr><th></th><th>טענה</th><th>נימוק</th></tr>
+          <tr><td>1</td><td><span class="fi">\(\angle A=\angle D=90^\circ\)</span></td><td class="rt">נתון (<span class="fi">\(AE\perp AD\)</span> , <span class="fi">\(DF\perp AD\)</span>)</td></tr>
+          <tr><td>2</td><td class="hl-c5"><span class="fi">\(AB=CD\)</span></td><td class="rt">נתון</td></tr>
+          <tr><td>3</td><td><span class="fi">\(BC=CB\)</span></td><td class="rt">אותו קטע</td></tr>
+          <tr><td>4</td><td class="hl-c2"><span class="fi">\(AC=DB\)</span></td><td class="rt">חיבור קטעים: <span class="fi">\(AB+BC=CD+CB\)</span> (לפי 2, 3)</td></tr>
+          <tr><td>5</td><td class="hl-c3"><span class="fi">\(\angle C_1=\angle B_1\)</span></td><td class="rt">נתון</td></tr>
+          <tr><td>6</td><td><span class="fi">\(\triangle AEC\cong\triangle DFB\)</span></td><td class="rt">משפט חפיפה ז.צ.ז (לפי 1, 4, 5)</td></tr>
+          <tr class="tr-qed"><td colspan="3"><b>מש"ל</b></td></tr>
+        </table>
+      </li>
+      <li class="nb-step"><b>ואם בשרטוט שלך <span class="fi">\(\angle C_1\)</span> היא הזווית השנייה</b>
+        <p>יש חוברות שבהן ה-1 מסמן את הזווית <em>הצמודה</em> — זו שמעבר לישר.
+        זה לא משנה כלום, רק מוסיף שורה אחת: זוויות צמודות משלימות ל-<span class="fi">\(180^\circ\)</span>,
+        ולכן אם הצמודות שוות — גם הזוויות שבתוך המשולשים שוות, וממשיכים בדיוק אותו דבר.
+        <br>כשמסמנים בעצמך על השרטוט, תמיד כדאי לרשום בצד <em>איזו</em> זווית סימנת.</p>
+      </li>
+    </ol>
+    <div class="nb-acts">
+      <button type="button" class="nb-next">השלב הבא ↓</button>
+      <button type="button" class="nb-all">להציג את כל השלבים</button>
+    </div>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="h4"> סיימתי את התרגיל הזה</label>
+</article>
+
+<h2 id="h5">חלק ה׳ · תרגיל 5 — שתי חפיפות זו אחרי זו</h2>
+
+<article class="ex" id="ex-h5">
+  <div class="ex-head"><span class="lvl l3">חוברת · ה.5</span><h4>שני קטעים שנחתכים, שני סעיפים</h4></div>
+  <p class="q-text">
+    הקטעים <span class="fi">\(AC\)</span> ו-<span class="fi">\(BD\)</span> נחתכים בנקודה
+    <span class="fi">\(O\)</span>.
+  </p>
+  <p class="gt">
+    <span class="mk mk-given"><b>נתון:</b> <span class="fi">\(\alpha=\beta\)</span> ,
+    <span class="fi">\(\angle DAC=\angle CBD\)</span></span>
+    <span class="mk mk-find"><b>צ"ל:</b> א. <span class="fi">\(AD=BC\)</span> ·
+    ב. <span class="fi">\(DO=OC\)</span></span>
+  </p>
+  <figure>
+    <svg viewBox="0 0 250 220" style="width:100%;max-width:400px;height:auto" role="img" aria-label="מרובע עם אלכסונים שנחתכים בנקודה O">
+      <line x1="45" y1="40" x2="45" y2="175" stroke="#334155" stroke-width="2.5"/>
+      <line x1="45" y1="40" x2="190" y2="30" stroke="#334155" stroke-width="2.5"/>
+      <line x1="45" y1="175" x2="190" y2="190" stroke="#334155" stroke-width="2.5"/>
+      <line x1="45" y1="40" x2="190" y2="190" stroke="#334155" stroke-width="2.5"/>
+      <line x1="45" y1="175" x2="190" y2="30" stroke="#334155" stroke-width="2.5"/>
+      <path d="M45,66 A26,26 0 0 0 63.5,58.4" fill="none" stroke="#C2408C" stroke-width="2.5"/>
+      <path d="M45,149 A26,26 0 0 1 63.6,156.3" fill="none" stroke="#C2408C" stroke-width="2.5"/>
+      <path d="M62.4,38.7 A18,18 0 0 0 55.6,54" fill="none" stroke="#2E7D32" stroke-width="2.5"/>
+      <path d="M62.6,176.4 A18,18 0 0 1 55.4,161.3" fill="none" stroke="#2E7D32" stroke-width="2.5"/>
+      <circle cx="111.4" cy="108.6" r="3.5" fill="#6D28D9"/>
+      <text x="34" y="36" font-size="13" font-weight="bold" fill="#334155">A</text>
+      <text x="195" y="26" font-size="13" font-weight="bold" fill="#334155">D</text>
+      <text x="34" y="188" font-size="13" font-weight="bold" fill="#334155">B</text>
+      <text x="195" y="200" font-size="13" font-weight="bold" fill="#334155">C</text>
+      <text x="116" y="105" font-size="13" font-weight="bold" fill="#6D28D9">O</text>
+      <text x="66" y="70" font-size="12" font-weight="bold" fill="#C2408C">α</text>
+      <text x="66" y="152" font-size="12" font-weight="bold" fill="#C2408C">β</text>
+    </svg>
+    <figcaption>הוורודות הן <span class="fi">\(\alpha=\angle BAC\)</span> ו-<span class="fi">\(\beta=\angle ABD\)</span>,
+    והירוקות הן <span class="fi">\(\angle DAC\)</span> ו-<span class="fi">\(\angle CBD\)</span> —
+    שני זוגות שווים.</figcaption>
+  </figure>
+
+  <div class="nb" data-nb>
+    <div class="nb-head"><b>בונים ביחד במחברת</b><span class="nb-count"></span></div>
+    <ol class="nb-steps">
+      <li class="nb-step"><b>איזה זוג משולשים בכלל מכיל את <span class="fi">\(AD\)</span> ואת <span class="fi">\(BC\)</span>?</b>
+        <p>הצלע <span class="fi">\(AD\)</span> שייכת למשולש <span class="fi">\(DAB\)</span>,
+        והצלע <span class="fi">\(BC\)</span> שייכת למשולש <span class="fi">\(CBA\)</span>.
+        לשניהם יש צלע משותפת — <span class="fi">\(AB\)</span>. זה הזוג.</p>
+      </li>
+      <li class="nb-step"><b>הזווית הראשונה — חיבור זוויות</b>
+        <p>הזווית השלמה ב-<span class="fi">\(A\)</span> מורכבת משתי הזוויות המסומנות,
+        וכך גם השלמה ב-<span class="fi">\(B\)</span>:</p>
+        $$\angle DAB=\angle DAC+\alpha
+          \qquad
+          \angle ABC=\beta+\angle CBD$$
+        <p>שני הזוגות שווים לפי הנתון, ולכן גם הסכומים שווים:
+        <span class="fi">\(\angle DAB=\angle ABC\)</span>.</p>
+      </li>
+      <li class="nb-step"><b>סעיף א׳ — הטבלה</b>
+        <table class="dtable">
+          <tr><th></th><th>טענה</th><th>נימוק</th></tr>
+          <tr><td>1</td><td class="hl-c5"><span class="fi">\(\alpha=\beta\)</span></td><td class="rt">נתון</td></tr>
+          <tr><td>2</td><td class="hl-c3"><span class="fi">\(\angle DAC=\angle CBD\)</span></td><td class="rt">נתון</td></tr>
+          <tr><td>3</td><td class="hl-c4"><span class="fi">\(\angle DAB=\angle ABC\)</span></td><td class="rt">חיבור זוויות (לפי 1, 2)</td></tr>
+          <tr><td>4</td><td class="hl-c2"><span class="fi">\(AB=BA\)</span></td><td class="rt">צלע משותפת</td></tr>
+          <tr><td>5</td><td><span class="fi">\(\triangle DAB\cong\triangle CBA\)</span></td><td class="rt">משפט חפיפה ז.צ.ז (לפי 3, 4, 1)</td></tr>
+          <tr><td>6</td><td><span class="fi">\(AD=BC\)</span></td><td class="rt">צלעות מתאימות במשולשים חופפים שוות (לפי 5)</td></tr>
+          <tr class="tr-qed"><td colspan="3"><b>מש"ל א׳</b></td></tr>
+        </table>
+        <p class="aside">שימי לב לסדר <span class="fi">\(D\!\to\!C\)</span>,
+        <span class="fi">\(A\!\to\!B\)</span>, <span class="fi">\(B\!\to\!A\)</span> —
+        ממנו קוראים ש-<span class="fi">\(AD\)</span> מתאימה ל-<span class="fi">\(BC\)</span>.</p>
+      </li>
+      <li class="nb-step"><b>סעיף ב׳ — מהחפיפה נובע עוד דבר אחד</b>
+        <p>מאותה חפיפה מקבלים גם את הצלעות השלישיות:</p>
+        $$DB=CA$$
+      </li>
+      <li class="nb-step"><b>ומשולש שווה-שוקיים שהיה שם כל הזמן</b>
+        <p>נסתכל על המשולש <span class="fi">\(AOB\)</span>: שתי זוויות הבסיס שלו הן
+        בדיוק <span class="fi">\(\alpha\)</span> ו-<span class="fi">\(\beta\)</span>,
+        והן שוות. שתי זוויות שוות במשולש ⇐ המשולש שווה-שוקיים:</p>
+        $$OA=OB$$
+      </li>
+      <li class="nb-step"><b>ומחסרים</b>
+        <p>הנקודה <span class="fi">\(O\)</span> יושבת גם על <span class="fi">\(CA\)</span>
+        וגם על <span class="fi">\(DB\)</span>, ולכן:</p>
+        $$OC=CA-OA
+          \qquad\qquad
+          OD=DB-OB$$
+        <p>שני החסרים שווים (<span class="fi">\(CA=DB\)</span>) ושני המחוסרים שווים
+        (<span class="fi">\(OA=OB\)</span>) — ולכן:</p>
+        $$DO=OC$$
+        <table class="dtable">
+          <tr><th></th><th>טענה</th><th>נימוק</th></tr>
+          <tr><td>7</td><td><span class="fi">\(DB=CA\)</span></td><td class="rt">צלעות מתאימות במשולשים חופפים שוות (לפי 5)</td></tr>
+          <tr><td>8</td><td><span class="fi">\(OA=OB\)</span></td><td class="rt">במשולש <span class="fi">\(AOB\)</span> מול זוויות שוות (<span class="fi">\(\alpha=\beta\)</span>) מונחות צלעות שוות</td></tr>
+          <tr><td>9</td><td><span class="fi">\(DO=OC\)</span></td><td class="rt">חיסור קטעים (לפי 7, 8)</td></tr>
+          <tr class="tr-qed"><td colspan="3"><b>מש"ל ב׳</b></td></tr>
+        </table>
+      </li>
+    </ol>
+    <div class="nb-acts">
+      <button type="button" class="nb-next">השלב הבא ↓</button>
+      <button type="button" class="nb-all">להציג את כל השלבים</button>
+    </div>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="h5"> סיימתי את התרגיל הזה</label>
+</article>
+
+<h2 id="v1">חלק ו׳ · משולש שווה-שוקיים — חמשת התרגילים</h2>
+
+<div class="box def">
+  <div class="box-title">ארבע העובדות שכל התרגילים כאן נשענים עליהן</div>
+  <strong>1.</strong> במשולש שווה-שוקיים <strong>זוויות הבסיס שוות</strong>.
+  <br><strong>2.</strong> וההפך: אם שתי זוויות במשולש שוות — הצלעות שמולן שוות,
+  והמשולש שווה-שוקיים.
+  <br><strong>3.</strong> הגובה לבסיס, התיכון לבסיס וחוצה זווית הראש —
+  <strong>אותו קטע בדיוק</strong>. מספיק שאחד מהם נתון כדי לקבל את השניים האחרים.
+  <br><strong>4.</strong> וממילא, סכום הזוויות במשולש הוא <span class="fi">\(180^\circ\)</span>,
+  ולכן מזווית הראש מקבלים מיד את זוויות הבסיס:
+  <span class="fi">\(\angle B=\angle C=\dfrac{180^\circ-\angle A}{2}\)</span>.
+</div>
+
+<article class="ex" id="bv1">
+  <div class="ex-head"><span class="lvl l2">חוברת · ו.1</span><h4>שני שווי-שוקיים חופפים על ישר אחד</h4></div>
+  <p class="q-text">
+    <span class="fi">\(\triangle ABC\)</span> הוא משולש שווה-שוקיים
+    (<span class="fi">\(AB=AC\)</span>).
+    <span class="fi">\(\triangle EFB\)</span> הוא משולש שווה-שוקיים
+    (<span class="fi">\(EF=EB\)</span>).
+    <span class="fi">\(\triangle EFB\cong\triangle ABC\)</span>, והנקודות
+    <span class="fi">\(F,B,C\)</span> נמצאות על ישר אחד.
+    <br>א. חשבו את ערכו של <span class="fi">\(x\)</span>.
+    ב. חשבו את גודלה של <span class="fi">\(\angle F\)</span>.
+    ג. חשבו את גודלה של <span class="fi">\(\angle EBC\)</span>. הסבירו חישוביכם.
+  </p>
+  <figure>
+    <svg viewBox="0 0 265 195" style="width:100%;max-width:420px;height:auto" role="img" aria-label="שני משולשים שווי שוקיים חופפים שבסיסיהם על ישר אחד">
+      <line x1="15" y1="160" x2="248" y2="160" stroke="#94A3B8" stroke-width="1.5"/>
+      <polygon points="20,160 125,160 72.5,55" fill="#F7FAFC" stroke="#334155" stroke-width="2.5"/>
+      <polygon points="125,160 230,160 177.5,55" fill="#F7FAFC" stroke="#334155" stroke-width="2.5"/>
+      <path d="M64.6,72.8 A20,20 0 0 0 80.4,72.8" fill="none" stroke="#C2408C" stroke-width="2.5"/>
+      <path d="M169.6,72.8 A20,20 0 0 0 185.4,72.8" fill="none" stroke="#C2408C" stroke-width="2.5"/>
+      <text x="66" y="48" font-size="13" font-weight="bold" fill="#334155">E</text>
+      <text x="172" y="48" font-size="13" font-weight="bold" fill="#334155">A</text>
+      <text x="12" y="176" font-size="13" font-weight="bold" fill="#334155">F</text>
+      <text x="121" y="178" font-size="13" font-weight="bold" fill="#334155">B</text>
+      <text x="228" y="176" font-size="13" font-weight="bold" fill="#334155">C</text>
+      <text x="10" y="72" font-size="12" font-weight="bold" fill="#C2408C">x−6°</text>
+      <text x="196" y="72" font-size="12" font-weight="bold" fill="#C2408C">2x−46°</text>
+    </svg>
+    <figcaption>שני המשולשים חופפים, ולכן זווית הראש של האחד שווה לזווית הראש של השני —
+    וזו המשוואה שפותרת את הסעיף הראשון.</figcaption>
+  </figure>
+
+  <div class="nb" data-nb>
+    <div class="nb-head"><b>בונים ביחד במחברת</b><span class="nb-count"></span></div>
+    <ol class="nb-steps">
+      <li class="nb-step"><b>סעיף א׳ — מהחפיפה למשוואה</b>
+        <p><span class="fi">\(\triangle EFB\cong\triangle ABC\)</span>, ולפי סדר האותיות
+        <span class="fi">\(E\to A\)</span> — כלומר <span class="fi">\(\angle E=\angle A\)</span>.
+        שתי הזוויות האלה נתונות בביטויים, וזו כל המשוואה:</p>
+        $$x-6=2x-46$$
+        $$-6+46=2x-x\;\Longrightarrow\;x=\mathbf{40}$$
+      </li>
+      <li class="nb-step"><b>ומיד מציבים בחזרה — כמה זו זווית הראש?</b>
+        $$\angle E=x-6=40-6=34^\circ$$
+        <p>בדיקה בביטוי השני: <span class="fi">\(2\cdot 40-46=34^\circ\)</span> ✓
+        (שווה לעשות תמיד — היא תופסת טעות חשבון בשנייה).</p>
+      </li>
+      <li class="nb-step"><b>סעיף ב׳ — <span class="fi">\(\angle F\)</span> היא זווית בסיס</b>
+        <p>במשולש <span class="fi">\(EFB\)</span> נתון <span class="fi">\(EF=EB\)</span>,
+        כלומר הבסיס הוא <span class="fi">\(FB\)</span> ו-<span class="fi">\(\angle F\)</span>
+        ו-<span class="fi">\(\angle EBF\)</span> הן זוויות הבסיס — שוות. יחד עם
+        זווית הראש הן משלימות ל-<span class="fi">\(180^\circ\)</span>:</p>
+        $$\angle F=\frac{180^\circ-34^\circ}{2}=\frac{146^\circ}{2}=\mathbf{73^\circ}$$
+      </li>
+      <li class="nb-step"><b>סעיף ג׳ — וכאן הישר עושה את העבודה</b>
+        <p><span class="fi">\(\angle EBF\)</span> היא זווית הבסיס השנייה, ולכן גם היא
+        <span class="fi">\(73^\circ\)</span>. עכשיו שימי לב לנתון שנראה תמים:
+        <strong><span class="fi">\(F,B,C\)</span> על ישר אחד</strong>. לכן
+        <span class="fi">\(\angle EBF\)</span> ו-<span class="fi">\(\angle EBC\)</span>
+        הן <strong>זוויות צמודות</strong>, וסכומן <span class="fi">\(180^\circ\)</span>:</p>
+        $$\angle EBC=180^\circ-73^\circ=\mathbf{107^\circ}$$
+        <p class="aside">"הסבירו חישוביכם" מבקש בדיוק את שתי המילים האלה:
+        <em>זוויות צמודות</em>. בלעדיהן התשובה נכונה אבל לא מנומקת.</p>
+      </li>
+    </ol>
+    <div class="nb-acts">
+      <button type="button" class="nb-next">השלב הבא ↓</button>
+      <button type="button" class="nb-all">להציג את כל השלבים</button>
+    </div>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="v1"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="bv2">
+  <div class="ex-head"><span class="lvl l3">חוברת · ו.2</span><h4>שתי נקודות על השוקיים, ואמצע הבסיס</h4></div>
+  <p class="q-text">
+    <span class="fi">\(\triangle ABC\)</span> הוא משולש שווה-שוקיים,
+    <span class="fi">\(\angle A\)</span> היא זווית-הראש. נתון
+    <span class="fi">\(DB=EC\)</span> , ו-<span class="fi">\(F\)</span> אמצע צלע
+    <span class="fi">\(BC\)</span>.
+    <br>א. הוכיחו כי <span class="fi">\(\triangle DBF\cong\triangle ECF\)</span>
+    (רשמו: נתונים, צ"ל והוכחה מנומקת).
+    <br>ב. נתון <span class="fi">\(\angle BDF=66^\circ\)</span> ,
+    <span class="fi">\(\angle A=48^\circ\)</span>. חשבו את גודל
+    <span class="fi">\(\angle DFE\)</span>.
+    <br>ג. חברו נקודות <span class="fi">\(D\)</span> ו-<span class="fi">\(E\)</span>.
+    חשבו את גודל <span class="fi">\(\angle EDF\)</span>.
+  </p>
+  <figure>
+    <svg viewBox="0 0 280 200" style="width:100%;max-width:420px;height:auto" role="img" aria-label="משולש שווה שוקיים עם נקודות D ו-E על השוקיים ו-F אמצע הבסיס">
+      <polygon points="140,25 45,170 235,170" fill="#F7FAFC" stroke="#334155" stroke-width="2.5"/>
+      <line x1="97" y1="90" x2="140" y2="170" stroke="#2E6F8E" stroke-width="2.5"/>
+      <line x1="183" y1="90" x2="140" y2="170" stroke="#2E6F8E" stroke-width="2.5"/>
+      <line x1="97" y1="90" x2="183" y2="90" stroke="#6D28D9" stroke-width="2" stroke-dasharray="5 4"/>
+      <line x1="67" y1="126" x2="75" y2="132" stroke="#C2408C" stroke-width="2.5"/>
+      <line x1="72" y1="119" x2="80" y2="125" stroke="#C2408C" stroke-width="2.5"/>
+      <line x1="213" y1="126" x2="205" y2="132" stroke="#C2408C" stroke-width="2.5"/>
+      <line x1="208" y1="119" x2="200" y2="125" stroke="#C2408C" stroke-width="2.5"/>
+      <line x1="92" y1="165" x2="92" y2="175" stroke="#2E7D32" stroke-width="3"/>
+      <line x1="188" y1="165" x2="188" y2="175" stroke="#2E7D32" stroke-width="3"/>
+      <text x="135" y="18" font-size="13" font-weight="bold" fill="#334155">A</text>
+      <text x="34" y="184" font-size="13" font-weight="bold" fill="#334155">B</text>
+      <text x="240" y="184" font-size="13" font-weight="bold" fill="#334155">C</text>
+      <text x="84" y="88" font-size="13" font-weight="bold" fill="#334155">D</text>
+      <text x="190" y="88" font-size="13" font-weight="bold" fill="#334155">E</text>
+      <text x="136" y="188" font-size="13" font-weight="bold" fill="#334155">F</text>
+    </svg>
+    <figcaption>ורוד = <span class="fi">\(DB=EC\)</span> , ירוק =
+    <span class="fi">\(BF=FC\)</span> (‏<span class="fi">\(F\)</span> אמצע),
+    והמקווקו הוא הקטע <span class="fi">\(DE\)</span> שמוסיפים בסעיף ג׳.</figcaption>
+  </figure>
+
+  <div class="nb" data-nb>
+    <div class="nb-head"><b>בונים ביחד במחברת</b><span class="nb-count"></span></div>
+    <ol class="nb-steps">
+      <li class="nb-step"><b>סעיף א׳ — שתי צלעות יש, איפה הזווית?</b>
+        <p><span class="fi">\(DB=EC\)</span> נתון, ו-<span class="fi">\(BF=FC\)</span>
+        כי <span class="fi">\(F\)</span> אמצע. שתי צלעות. הזווית שביניהן היא
+        <span class="fi">\(\angle B\)</span> במשולש אחד ו-<span class="fi">\(\angle C\)</span>
+        בשני — ואלה בדיוק <strong>זוויות הבסיס</strong> של המשולש שווה-השוקיים
+        <span class="fi">\(ABC\)</span>, ולכן שוות. זה המקום היחיד שבו נעשה שימוש
+        בנתון שהמשולש שווה-שוקיים.</p>
+        <table class="dtable">
+          <tr><th></th><th>טענה</th><th>נימוק</th></tr>
+          <tr><td>1</td><td class="hl-c5"><span class="fi">\(DB=EC\)</span></td><td class="rt">נתון</td></tr>
+          <tr><td>2</td><td class="hl-c4"><span class="fi">\(\angle B=\angle C\)</span></td><td class="rt">זוויות הבסיס במשולש שווה-שוקיים שוות (<span class="fi">\(AB=AC\)</span>)</td></tr>
+          <tr><td>3</td><td class="hl-c3"><span class="fi">\(BF=FC\)</span></td><td class="rt">נתון (<span class="fi">\(F\)</span> אמצע <span class="fi">\(BC\)</span>)</td></tr>
+          <tr><td>4</td><td><span class="fi">\(\triangle DBF\cong\triangle ECF\)</span></td><td class="rt">משפט חפיפה צ.ז.צ (לפי 1, 2, 3)</td></tr>
+          <tr class="tr-qed"><td colspan="3"><b>מש"ל א׳</b></td></tr>
+        </table>
+      </li>
+      <li class="nb-step"><b>סעיף ב׳ — קודם זוויות הבסיס של המשולש הגדול</b>
+        $$\angle B=\angle C=\frac{180^\circ-48^\circ}{2}=\frac{132^\circ}{2}=66^\circ$$
+      </li>
+      <li class="nb-step"><b>ואז הזווית השלישית במשולש <span class="fi">\(DBF\)</span></b>
+        <p>יש בו כבר שתיים: <span class="fi">\(\angle BDF=66^\circ\)</span> (נתון)
+        ו-<span class="fi">\(\angle B=66^\circ\)</span>:</p>
+        $$\angle DFB=180^\circ-66^\circ-66^\circ=48^\circ$$
+        <p>ומהחפיפה של סעיף א׳ — <span class="fi">\(\angle EFC=\angle DFB=48^\circ\)</span>.</p>
+      </li>
+      <li class="nb-step"><b>הזווית <span class="fi">\(\angle DFE\)</span> — מה שנשאר על הישר</b>
+        <p><span class="fi">\(B,F,C\)</span> על ישר אחד, ושלוש הזוויות שיושבות עליו
+        בנקודה <span class="fi">\(F\)</span> משלימות יחד ל-<span class="fi">\(180^\circ\)</span>:</p>
+        $$\angle DFE=180^\circ-48^\circ-48^\circ=\mathbf{84^\circ}$$
+      </li>
+      <li class="nb-step"><b>סעיף ג׳ — ומשולש חדש שנולד מהחפיפה</b>
+        <p>מהחפיפה נובע גם <span class="fi">\(DF=EF\)</span> (צלעות מתאימות), ולכן
+        אחרי שמחברים את <span class="fi">\(D\)</span> ל-<span class="fi">\(E\)</span>
+        מקבלים משולש <span class="fi">\(DFE\)</span> ש<strong>הוא עצמו
+        שווה-שוקיים</strong>, וזווית הראש שלו היא זו שחישבנו:</p>
+        $$\angle EDF=\angle DEF=\frac{180^\circ-84^\circ}{2}=\frac{96^\circ}{2}=\mathbf{48^\circ}$$
+      </li>
+    </ol>
+    <div class="nb-acts">
+      <button type="button" class="nb-next">השלב הבא ↓</button>
+      <button type="button" class="nb-all">להציג את כל השלבים</button>
+    </div>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="v2"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="bv3">
+  <div class="ex-head"><span class="lvl l2">חוברת · ו.3</span><h4>נקודה על הגובה לבסיס</h4></div>
+  <p class="q-text">
+    המשולש <span class="fi">\(ABC\)</span> הוא שווה-שוקיים
+    (<span class="fi">\(AB=AC\)</span>). <span class="fi">\(AD\)</span> הוא הגובה לבסיס
+    <span class="fi">\(BC\)</span>. <span class="fi">\(E\)</span> היא נקודה על הגובה
+    <span class="fi">\(AD\)</span>.
+  </p>
+  <p class="gt"><span class="mk mk-find"><b>צ"ל:</b> <span class="fi">\(BE=CE\)</span></span></p>
+  <figure>
+    <svg viewBox="0 0 275 200" style="width:100%;max-width:400px;height:auto" role="img" aria-label="משולש שווה שוקיים עם גובה לבסיס ונקודה E עליו">
+      <polygon points="135,25 40,170 230,170" fill="#F7FAFC" stroke="#334155" stroke-width="2.5"/>
+      <line x1="135" y1="25" x2="135" y2="170" stroke="#6D28D9" stroke-width="2.5"/>
+      <line x1="40" y1="170" x2="135" y2="105" stroke="#2E6F8E" stroke-width="2.5"/>
+      <line x1="230" y1="170" x2="135" y2="105" stroke="#2E6F8E" stroke-width="2.5"/>
+      <path d="M135,158 h12 v12" fill="none" stroke="#6D28D9" stroke-width="2"/>
+      <path d="M123,158 h12" fill="none" stroke="#6D28D9" stroke-width="0"/>
+      <line x1="87" y1="165" x2="87" y2="175" stroke="#2E7D32" stroke-width="3"/>
+      <line x1="183" y1="165" x2="183" y2="175" stroke="#2E7D32" stroke-width="3"/>
+      <circle cx="135" cy="105" r="3.5" fill="#2E6F8E"/>
+      <text x="130" y="18" font-size="13" font-weight="bold" fill="#334155">A</text>
+      <text x="29" y="184" font-size="13" font-weight="bold" fill="#334155">B</text>
+      <text x="236" y="184" font-size="13" font-weight="bold" fill="#334155">C</text>
+      <text x="131" y="186" font-size="13" font-weight="bold" fill="#334155">D</text>
+      <text x="141" y="102" font-size="13" font-weight="bold" fill="#2E6F8E">E</text>
+    </svg>
+    <figcaption>הגובה <span class="fi">\(AD\)</span> (סגול) הוא גם תיכון — ולכן
+    <span class="fi">\(BD=DC\)</span> (ירוק). זה כל מה שצריך.</figcaption>
+  </figure>
+  <details class="sol"><summary>לראות את ההוכחה</summary>
+    <div class="sol-body">
+      <p>מחפשים זוג משולשים שמכיל את <span class="fi">\(BE\)</span> ואת
+      <span class="fi">\(CE\)</span>: אלה <span class="fi">\(\triangle BDE\)</span>
+      ו-<span class="fi">\(\triangle CDE\)</span>.</p>
+      <table class="dtable">
+        <tr><th></th><th>טענה</th><th>נימוק</th></tr>
+        <tr><td>1</td><td class="hl-c3"><span class="fi">\(BD=DC\)</span></td><td class="rt">הגובה לבסיס במשולש שווה-שוקיים הוא גם תיכון, ולכן חוצה את הבסיס</td></tr>
+        <tr><td>2</td><td class="hl-c4"><span class="fi">\(\angle BDE=\angle CDE=90^\circ\)</span></td><td class="rt">‏<span class="fi">\(AD\)</span> גובה, כלומר <span class="fi">\(AD\perp BC\)</span> (נתון)</td></tr>
+        <tr><td>3</td><td class="hl-c2"><span class="fi">\(DE=DE\)</span></td><td class="rt">צלע משותפת</td></tr>
+        <tr><td>4</td><td><span class="fi">\(\triangle BDE\cong\triangle CDE\)</span></td><td class="rt">משפט חפיפה צ.ז.צ (לפי 1, 2, 3)</td></tr>
+        <tr><td>5</td><td><span class="fi">\(BE=CE\)</span></td><td class="rt">צלעות מתאימות במשולשים חופפים שוות (לפי 4)</td></tr>
+        <tr class="tr-qed"><td colspan="3"><b>מש"ל</b></td></tr>
+      </table>
+      <p class="aside">שימי לב שהנתון <span class="fi">\(AB=AC\)</span> לא נכנס לטבלה
+      ישירות — הוא נכנס דרך שורה 1, כי רק בזכותו הגובה הוא גם תיכון. שווה לכתוב
+      את זה בנימוק במלואו, כמו בטבלה.</p>
+      <p><strong>ובלי חפיפה בכלל:</strong> <span class="fi">\(AD\)</span> ניצב ל-<span class="fi">\(BC\)</span>
+      ועובר דרך אמצעו — כלומר הוא <strong>האנך האמצעי</strong> של
+      <span class="fi">\(BC\)</span>. כל נקודה על האנך האמצעי נמצאת במרחק שווה
+      משני קצות הקטע, ולכן <span class="fi">\(BE=CE\)</span> בשורה אחת.
+      זו בדיוק הדרך שהתרגיל הבא דורש.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="v3"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="bv4">
+  <div class="ex-head"><span class="lvl l3">חוברת · ו.4</span><h4>מקבילים שיוצרים שווה-שוקיים חדש</h4></div>
+  <p class="q-text">
+    המשולש <span class="fi">\(ABC\)</span> הוא שווה-שוקיים
+    (<span class="fi">\(AB=AC\)</span>). נתון: <span class="fi">\(DE\parallel AC\)</span>.
+  </p>
+  <p class="gt"><span class="mk mk-find"><b>צ"ל:</b> <span class="fi">\(DB=DE\)</span></span></p>
+  <figure>
+    <svg viewBox="0 0 280 205" style="width:100%;max-width:400px;height:auto" role="img" aria-label="משולש שווה שוקיים עם קטע DE המקביל לשוק AC">
+      <polygon points="150,25 40,175 240,175" fill="#F7FAFC" stroke="#334155" stroke-width="2.5"/>
+      <line x1="95" y1="100" x2="140" y2="175" stroke="#6D28D9" stroke-width="2.5"/>
+      <path d="M77,159 A22,22 0 0 0 62.1,166.9" fill="none" stroke="#B7791F" stroke-width="2.5"/>
+      <path d="M162,175 A22,22 0 0 0 152.9,157" fill="none" stroke="#B7791F" stroke-width="2.5"/>
+      <path d="M218,175 A22,22 0 0 0 208.9,157" fill="none" stroke="#B7791F" stroke-width="2.5"/>
+      <text x="145" y="18" font-size="13" font-weight="bold" fill="#334155">A</text>
+      <text x="29" y="190" font-size="13" font-weight="bold" fill="#334155">B</text>
+      <text x="246" y="190" font-size="13" font-weight="bold" fill="#334155">C</text>
+      <text x="82" y="98" font-size="13" font-weight="bold" fill="#6D28D9">D</text>
+      <text x="136" y="192" font-size="13" font-weight="bold" fill="#6D28D9">E</text>
+    </svg>
+    <figcaption>שלוש הקשתות הענבריות הן אותה זווית בדיוק:
+    <span class="fi">\(\angle B\)</span> , <span class="fi">\(\angle DEB\)</span>
+    ו-<span class="fi">\(\angle C\)</span> — ומשם ההוכחה בת שורה אחת.</figcaption>
+  </figure>
+  <details class="sol"><summary>לראות את ההוכחה</summary>
+    <div class="sol-body">
+      <p>כאן <strong>אין</strong> שתי משולשים לחפוף. מוכיחים שהמשולש
+      <span class="fi">\(DBE\)</span> הוא בעצמו שווה-שוקיים, ומזה נובע שהצלעות שוות.</p>
+      <table class="dtable">
+        <tr><th></th><th>טענה</th><th>נימוק</th></tr>
+        <tr><td>1</td><td class="hl-c4"><span class="fi">\(\angle B=\angle C\)</span></td><td class="rt">זוויות הבסיס במשולש שווה-שוקיים שוות (<span class="fi">\(AB=AC\)</span>)</td></tr>
+        <tr><td>2</td><td class="hl-c4"><span class="fi">\(\angle DEB=\angle C\)</span></td><td class="rt">זוויות מתאימות בין ישרים מקבילים (<span class="fi">\(DE\parallel AC\)</span>, החותך <span class="fi">\(BC\)</span>)</td></tr>
+        <tr><td>3</td><td class="hl-c4"><span class="fi">\(\angle DEB=\angle DBE\)</span></td><td class="rt">שתיהן שוות ל-<span class="fi">\(\angle C\)</span> (לפי 1, 2)</td></tr>
+        <tr><td>4</td><td><span class="fi">\(DB=DE\)</span></td><td class="rt">במשולש <span class="fi">\(DBE\)</span> מול זוויות שוות מונחות צלעות שוות (לפי 3)</td></tr>
+        <tr class="tr-qed"><td colspan="3"><b>מש"ל</b></td></tr>
+      </table>
+      <p class="aside">שורה 4 היא <strong>הכיוון ההפוך</strong> של משפט שווה-השוקיים,
+      וזה בדיוק מה שהתרגיל בודק. שימי לב איזו צלע מונחת מול איזו זווית:
+      מול <span class="fi">\(\angle DBE\)</span> (ב-<span class="fi">\(B\)</span>)
+      מונחת <span class="fi">\(DE\)</span>, ומול <span class="fi">\(\angle DEB\)</span>
+      (ב-<span class="fi">\(E\)</span>) מונחת <span class="fi">\(DB\)</span> —
+      תמיד הצלע שלא נוגעת בקדקוד.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="v4"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="bv5">
+  <div class="ex-head"><span class="lvl l3">חוברת · ו.5</span><h4>בלי חפיפת משולשים — האנך האמצעי</h4></div>
+  <p class="q-text">
+    <span class="fi">\(AD\)</span> הוא התיכון לבסיס <span class="fi">\(BC\)</span>
+    במשולש שווה-שוקיים <span class="fi">\(ABC\)</span>
+    (<span class="fi">\(AB=AC\)</span>). הנקודה <span class="fi">\(E\)</span> נמצאת על
+    המשך הקטע <span class="fi">\(AD\)</span>.
+    <br><span class="aside">טיפ מהחוברת: אין צורך בחפיפת משולשים.</span>
+  </p>
+  <p class="gt"><span class="mk mk-find"><b>צ"ל:</b> המשולש <span class="fi">\(BEC\)</span> הוא שווה-שוקיים</span></p>
+  <figure>
+    <svg viewBox="0 0 270 235" style="width:100%;max-width:390px;height:auto" role="img" aria-label="משולש שווה שוקיים עם תיכון שממשיך אל נקודה E מתחת לבסיס">
+      <polygon points="135,25 45,150 225,150" fill="#F7FAFC" stroke="#334155" stroke-width="2.5"/>
+      <polygon points="45,150 225,150 135,205" fill="#EAE0FA" stroke="#6D28D9" stroke-width="2.5" opacity=".85"/>
+      <line x1="135" y1="25" x2="135" y2="205" stroke="#B7791F" stroke-width="2.5"/>
+      <path d="M135,138 h12 v12" fill="none" stroke="#B7791F" stroke-width="2"/>
+      <line x1="90" y1="145" x2="90" y2="155" stroke="#2E7D32" stroke-width="3"/>
+      <line x1="180" y1="145" x2="180" y2="155" stroke="#2E7D32" stroke-width="3"/>
+      <text x="130" y="18" font-size="13" font-weight="bold" fill="#334155">A</text>
+      <text x="34" y="146" font-size="13" font-weight="bold" fill="#334155">B</text>
+      <text x="231" y="146" font-size="13" font-weight="bold" fill="#334155">C</text>
+      <text x="142" y="146" font-size="13" font-weight="bold" fill="#334155">D</text>
+      <text x="130" y="222" font-size="13" font-weight="bold" fill="#6D28D9">E</text>
+    </svg>
+    <figcaption>הישר <span class="fi">\(AE\)</span> (ענברי) ניצב ל-<span class="fi">\(BC\)</span>
+    ועובר דרך אמצעו — כלומר הוא האנך האמצעי של <span class="fi">\(BC\)</span>.
+    ו-<span class="fi">\(E\)</span> יושבת עליו.</figcaption>
+  </figure>
+  <details class="sol"><summary>לראות את ההוכחה</summary>
+    <div class="sol-body">
+      <p>החוברת מרמזת "אין צורך בחפיפה" — כי יש משפט אחד שעושה את כל העבודה
+      בשורה אחת. צריך רק להראות ש-<span class="fi">\(E\)</span> יושבת על
+      <strong>האנך האמצעי</strong> של <span class="fi">\(BC\)</span>.</p>
+      <table class="dtable">
+        <tr><th></th><th>טענה</th><th>נימוק</th></tr>
+        <tr><td>1</td><td class="hl-c3"><span class="fi">\(BD=DC\)</span></td><td class="rt">נתון (<span class="fi">\(AD\)</span> תיכון לבסיס)</td></tr>
+        <tr><td>2</td><td class="hl-c4"><span class="fi">\(AD\perp BC\)</span></td><td class="rt">התיכון לבסיס במשולש שווה-שוקיים הוא גם גובה</td></tr>
+        <tr><td>3</td><td><span class="fi">\(AD\)</span> הוא האנך האמצעי של <span class="fi">\(BC\)</span></td><td class="rt">ניצב לקטע ועובר דרך אמצעו (לפי 1, 2)</td></tr>
+        <tr><td>4</td><td><span class="fi">\(E\)</span> נמצאת על האנך האמצעי של <span class="fi">\(BC\)</span></td><td class="rt">נתון (<span class="fi">\(E\)</span> על המשך <span class="fi">\(AD\)</span> — אותו ישר)</td></tr>
+        <tr><td>5</td><td class="hl-c2"><span class="fi">\(EB=EC\)</span></td><td class="rt">כל נקודה על האנך האמצעי של קטע נמצאת במרחק שווה מקצותיו (לפי 4)</td></tr>
+        <tr><td>6</td><td><span class="fi">\(\triangle BEC\)</span> שווה-שוקיים</td><td class="rt">שתי צלעות שוות (לפי 5)</td></tr>
+        <tr class="tr-qed"><td colspan="3"><b>מש"ל</b></td></tr>
+      </table>
+      <p class="aside">שורה 4 נראית מובנת מאליה וקל לדלג עליה — אבל היא השורה
+      שמצדיקה את כל השאר: "המשך הקטע <span class="fi">\(AD\)</span>" זה
+      <em>אותו ישר</em>, ולכן כל מה שנכון לישר <span class="fi">\(AD\)</span>
+      נכון גם ב-<span class="fi">\(E\)</span>.</p>
+    </div>
+  </details>
+  <details class="alt">
+    <summary>ואם בכל זאת רוצים בדרך של חפיפה?</summary>
+    <div class="alt-body">
+      <p>אפשר גם, וזה נכון לחלוטין — פשוט ארוך יותר: מוכיחים
+      <span class="fi">\(\triangle BDE\cong\triangle CDE\)</span> לפי צ.ז.צ
+      (<span class="fi">\(BD=DC\)</span> , <span class="fi">\(\angle BDE=\angle CDE=90^\circ\)</span> ,
+      <span class="fi">\(DE\)</span> משותפת) ומקבלים <span class="fi">\(EB=EC\)</span>.
+      זו בדיוק ההוכחה של <a href="#bv3">תרגיל ו.3</a>.
+      <br>הרמז בחוברת מכוון אותך לדרך הקצרה — ובמבחן, כשהזמן קצר, זה שווה נקודות.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="v5"> סיימתי את התרגיל הזה</label>
+</article>
+
+<div class="box intuition" style="margin-top:28px">
+  <div class="box-title">מה שחוזר בכל שבעת התרגילים</div>
+  כמעט תמיד יש רק <strong>שני</strong> נתונים ישירים, והשלישי מגיע מהשרטוט:
+  צלע משותפת · אמצע קטע · זווית משותפת · זוויות הבסיס בשווה-שוקיים ·
+  חיבור או חיסור של קטעים ושל זוויות.
+  <br>ואם השאלה מבקשת <em>שוויון</em> ולא חפיפה — כמעט תמיד הדרך היא
+  להוכיח קודם חפיפה, ורק אז לכתוב "צלעות מתאימות שוות".
+  <br>ואם אין מה לחפוף בכלל — מחפשים משולש שווה-שוקיים
+  (<a href="#bv4">ו.4</a>) או את האנך האמצעי (<a href="#bv5">ו.5</a>).
+</div>
+
+<div class="pagenav">
+  <a href="02-triangles-congruence.html"><span class="dir">שלושת הראשונים של חלק ה׳</span>תחנה 2 — משולשים וחפיפה</a>
+  <a class="next" href="06-proof-practice.html"><span class="dir">עוד 48 תרגילי הוכחה</span>בנק תרגילי ההוכחה ←</a>
+</div>
+
+<footer class="fin">חלק מהעולם של שירה · <a href="index.html">חזרה למפת הגאומטריה</a> ·
+<a href="../booklet.html">מפת החוברת</a></footer>
+</main>
+</div>
+</body>
+</html>

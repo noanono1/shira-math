@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<link rel="apple-touch-icon" href="assets/icons/icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>מפת החוברת — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="vendor/katex.min.css">
+<link rel="stylesheet" href="css/shira.css">
+<style>
+:root{--accent:var(--alg,#2E6F8E); --alg:#2E6F8E; --stat:#2E7D6B; --geo:#7A4E8C; --summer:#B7791F}
+.wrap{max-width:900px}
+
+/* מסנן — מצמצם את הדף לחלק אחד, כי הרוב הזמן מחפשים תרגיל אחד */
+.filters{display:flex; flex-wrap:wrap; gap:6px; margin:18px 0 4px}
+.filters button{font-family:inherit; font-size:12.5px; font-weight:700; color:var(--soft);
+  background:var(--card); border:1px solid var(--line); border-radius:99px;
+  padding:6px 13px; cursor:pointer; transition:.15s}
+.filters button:hover{border-color:#D8D1C4; color:var(--ink)}
+.filters button.on{background:var(--ink); color:#fff; border-color:var(--ink)}
+.filters .fnote{width:100%; font-size:12px; color:var(--soft); margin:4px 0 0}
+
+/* חלק בחוברת */
+.part{border:1px solid var(--line); border-radius:var(--r-lg); background:var(--card);
+  margin:16px 0; overflow:hidden; box-shadow:0 10px 28px -26px var(--shadow)}
+.part.hidden{display:none}
+.part>.ph{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;
+  padding:12px 18px; background:#FBFAF7; border-bottom:1px solid var(--line)}
+.part>.ph .pl{flex:0 0 auto; width:30px; height:30px; border-radius:8px;
+  background:var(--pc,#2E6F8E); color:#fff; font-weight:800; font-size:15px;
+  display:flex; align-items:center; justify-content:center; transform:translateY(3px)}
+.part>.ph b{font-size:16.5px}
+.part>.ph .pn{margin-inline-start:auto; font-size:12px; color:var(--soft)}
+.part>.ph .pwhere{flex:1 1 100%; font-size:13px; color:var(--soft); margin:2px 0 0}
+.part>.ph .pwhere a{font-weight:700}
+.part.geo{--pc:#7A4E8C} .part.stat{--pc:#2E7D6B} .part.alg{--pc:#2E6F8E}
+
+.qs{list-style:none; margin:0; padding:2px 0}
+.qs>li{display:flex; gap:11px; align-items:flex-start;
+  padding:11px 18px; border-bottom:1px dashed var(--faint)}
+.qs>li:last-child{border-bottom:none}
+.qs .qn{flex:0 0 auto; min-width:22px; font-weight:800; font-size:13.5px; color:var(--soft);
+  text-align:center; padding-top:1px}
+.qs .qb{flex:1; min-width:0}
+.qs .qb .qt{font-size:14px; line-height:1.55}
+.qs .qb .qsub{display:block; font-size:12.5px; color:var(--soft); line-height:1.5; margin-top:1px}
+.qs .qgo{flex:0 0 auto; align-self:center}
+.qs .qgo a{display:inline-block; text-decoration:none; font-size:12px; font-weight:700;
+  border-radius:8px; padding:6px 11px; white-space:nowrap; border:1px solid var(--line);
+  background:#FBFAF7; color:var(--soft); transition:.15s}
+.qs .qgo a:hover{border-color:#D8D1C4; color:var(--ink)}
+.qs .qgo a.solved{background:#F0F8F4; border-color:#BFE0CE; color:#2E7D32}
+.qs .qgo a.solved:hover{border-color:#8FC7A6}
+
+.legend{display:flex; flex-wrap:wrap; gap:8px 20px; font-size:12.5px; color:var(--soft);
+  margin:14px 0 0}
+.legend span{display:inline-flex; align-items:center; gap:7px}
+.legend i{width:13px; height:13px; border-radius:4px; display:inline-block; border:1px solid var(--line)}
+.legend i.s1{background:#F0F8F4; border-color:#BFE0CE}
+.legend i.s2{background:#FBFAF7}
+
+.tally{display:flex; flex-wrap:wrap; gap:10px; margin:16px 0 0}
+.tally div{flex:1 1 130px; background:var(--card); border:1px solid var(--line);
+  border-radius:var(--r-md); padding:11px 14px}
+.tally b{display:block; font-size:23px; font-weight:800; letter-spacing:-.02em}
+.tally span{font-size:12px; color:var(--soft); line-height:1.45}
+@media (max-width:560px){
+  .qs>li{flex-wrap:wrap}
+  .qs .qgo{width:100%; padding-inline-start:33px}
+}
+</style>
+<script defer src="vendor/katex.min.js"></script>
+<script defer src="vendor/contrib/auto-render.min.js"></script>
+<script defer src="js/shira.js"></script>
+</head>
+<body data-page="booklet:index">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="index.html">⌂ המרכז של שירה</a>
+    <span class="crumbs"><b>מפת החוברת</b> · עבודת הקיץ, תרגיל אחרי תרגיל</span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">עבודת הקיץ · הקבצה א1 · יוני 2026</div>
+  <h1>מפת החוברת</h1>
+  <p class="lead">
+    כל <strong>43 התרגילים</strong> של עבודת הקיץ שלך, שמונה החלקים לפי הסדר —
+    ולכל אחד מהם כפתור אחד שלוקח אותך בדיוק למקום שבו הוא נלמד באתר.
+    כשאת נתקעת בתרגיל, זה הדף שפותחים.
+  </p>
+  <p class="youknow"><b>איך קוראים את הדף:</b> ירוק = התרגיל <b>הזה ממש</b> פתור אצלנו
+  שלב-אחרי-שלב · אפור = השיטה המלאה, כי הנתונים של אותו תרגיל הם הסרטוט שבחוברת
+  עצמה. <b>42 מתוך 43</b> ירוקים.</p>
+</header>
+
+<div class="tally">
+  <div><b>43</b><span>תרגילים בחוברת, בשמונה חלקים</span></div>
+  <div><b>42</b><span>פתורים כאן שלב-אחרי-שלב, מילה במילה מהחוברת</span></div>
+  <div><b>299</b><span>תרגילים פתורים באתר בסך הכול, על אותם נושאים</span></div>
+</div>
+
+<div class="filters" role="group" aria-label="סינון לפי חלק">
+  <button type="button" class="on" data-f="all">כל החלקים</button>
+  <button type="button" data-f="alg">אלגברה ופונקציות · א׳ ב׳ ג׳</button>
+  <button type="button" data-f="stat">סטטיסטיקה · ד׳</button>
+  <button type="button" data-f="geo">גאומטריה · ה׳ ו׳ ז׳ ח׳</button>
+  <p class="fnote">לחיצה מצמצמת את הדף לחלקים הרלוונטיים בלבד.</p>
+</div>
+
+<div class="legend">
+  <span><i class="s1"></i> התרגיל הזה פתור באתר, עד הסוף</span>
+  <span><i class="s2"></i> הנושא והשיטה — עם תרגילים מאותו סוג</span>
+</div>
+
+<!-- ============================ חלק א׳ ============================ -->
+<section class="part alg" data-p="alg">
+  <div class="ph">
+    <span class="pl">א׳</span>
+    <b>פונקציה קווית וקריאת גרפים</b>
+    <span class="pn">10 תרגילים · 9 פתורים כאן + 1 שיטה</span>
+    <p class="pwhere">כל עשרת התרגילים פתורים ב<a href="algebra/11-booklet-functions.html">נספח תרגילי החוברת</a>
+    (בתרגיל 2 — השיטה המלאה, כי הנתונים שלו הם הסרטוט שבחוברת שלך).
+    השיטה עצמה: תחנות <a href="algebra/04-linear-function.html">4</a>,
+    <a href="algebra/05-line-equation.html">5</a> ו<a href="geometry/04-graphs-and-shapes.html">שטח מתוך גרף</a>.</p>
+  </div>
+  <ol class="qs">
+    <li><span class="qn">1</span><span class="qb"><span class="qt"><span class="fi">\(y=-4x+4\)</span> — סרטוט הגרף</span>
+      <span class="qsub">חיתוך עם ציר <span class="fi">\(y\)</span> ועם ציר <span class="fi">\(x\)</span> · תחום חיוביות ושליליות · ישר בשיפוע 2 דרך נקודת החיתוך עם <span class="fi">\(x\)</span></span></span>
+      <span class="qgo"><a class="solved" href="algebra/11-booklet-functions.html#a1">פתור כאן ✓</a></span></li>
+    <li><span class="qn">2</span><span class="qb"><span class="qt">שני גרפים <span class="fi">\(f(x)\)</span> ו-<span class="fi">\(g(x)\)</span> בסרטוט</span>
+      <span class="qsub">נקודות אפס · תחומי סימן · משוואות שני הישרים · מתי <span class="fi">\(f>g\)</span> · נקודת החיתוך</span></span>
+      <span class="qgo"><a href="algebra/11-booklet-functions.html#a2">השיטה המלאה ←</a></span></li>
+    <li><span class="qn">3</span><span class="qb"><span class="qt"><span class="fi">\(y=-\tfrac{x}{5}+5\)</span> ו-<span class="fi">\(y=x+2\)</span></span>
+      <span class="qsub">התאמת משוואה לגרף · שיעורי <span class="fi">\(A,B,C\)</span> · שטח המשולש <span class="fi">\(ACB\)</span></span></span>
+      <span class="qgo"><a class="solved" href="algebra/11-booklet-functions.html#a3">פתור כאן ✓</a></span></li>
+    <li><span class="qn">4</span><span class="qb"><span class="qt">משוואת ישר דרך <span class="fi">\((-10,4)\)</span> ו-<span class="fi">\((20,7)\)</span></span>
+      <span class="qsub">האם <span class="fi">\((30,8)\)</span> נמצאת עליו · ישר מקביל לו דרך חיתוך ה-<span class="fi">\(y\)</span> של <span class="fi">\(y=-x-\tfrac13\)</span></span></span>
+      <span class="qgo"><a class="solved" href="algebra/11-booklet-functions.html#a4">פתור כאן ✓</a></span></li>
+    <li><span class="qn">5</span><span class="qb"><span class="qt">משוואת ישר דרך <span class="fi">\((2,-10)\)</span> ו-<span class="fi">\((-1,-1)\)</span></span>
+      <span class="qsub">ואז ישר מקביל לו העובר בנקודה <span class="fi">\((2,3)\)</span></span></span>
+      <span class="qgo"><a class="solved" href="algebra/11-booklet-functions.html#a5">פתור כאן ✓</a></span></li>
+    <li><span class="qn">6</span><span class="qb"><span class="qt"><span class="fi">\(y=3x-1\)</span> ו-<span class="fi">\(y=-x+7\)</span> — הסרטוט עם <span class="fi">\(A\)</span> עד <span class="fi">\(E\)</span></span>
+      <span class="qsub">התאמה עם נימוקים · שיעורי חמש הנקודות · שטחי <span class="fi">\(ABD\)</span> ו-<span class="fi">\(AOC\)</span> · תחומי סימן</span></span>
+      <span class="qgo"><a class="solved" href="algebra/11-booklet-functions.html#a6">פתור כאן ✓</a></span></li>
+    <li><span class="qn">7</span><span class="qb"><span class="qt">שלושה ישרים: <span class="fi">\(f=\tfrac34x+3\)</span> , <span class="fi">\(g=-\tfrac12x+5\)</span> , <span class="fi">\(h=1\)</span></span>
+      <span class="qsub">התאמה · נקודות <span class="fi">\(A,B,C\)</span> · ישר דרך <span class="fi">\(F\)</span> מקביל ל-<span class="fi">\(GC\)</span> · תחומי סימן · שטח <span class="fi">\(ABC\)</span> · מקביל ל-<span class="fi">\(BC\)</span> דרך <span class="fi">\(F\)</span> · הנקודה <span class="fi">\(M\)</span> ושטח <span class="fi">\(AFM\)</span> · סוג המרובע <span class="fi">\(BFMC\)</span> ושטחו — התרגיל הארוך בחוברת</span></span>
+      <span class="qgo"><a class="solved" href="algebra/11-booklet-functions.html#a7">פתור כאן ✓</a></span></li>
+    <li><span class="qn">8</span><span class="qb"><span class="qt"><span class="fi">\(f=-\tfrac12x-3\)</span> ו-<span class="fi">\(g=2x-8\)</span></span>
+      <span class="qsub">התאמה · <span class="fi">\(f(0)\)</span> ו-<span class="fi">\(g(0)\)</span> · נקודות אפס · נקודת החיתוך · ישר דרך הראשית ודרך <span class="fi">\(D\)</span> · ישר דרך הראשית מקביל ל-<span class="fi">\(g\)</span></span></span>
+      <span class="qgo"><a class="solved" href="algebra/11-booklet-functions.html#a8">פתור כאן ✓</a></span></li>
+    <li><span class="qn">9</span><span class="qb"><span class="qt">שתי המשאיות — גרף מרחק-זמן</span>
+      <span class="qsub">משמעות חמש הנקודות · מהירות כל משאית · מתי ואיפה נפגשו · שתי הפונקציות</span></span>
+      <span class="qgo"><a class="solved" href="algebra/11-booklet-functions.html#a9">פתור כאן ✓</a></span></li>
+    <li><span class="qn">10</span><span class="qb"><span class="qt">שלושה כלים מתחממים — שלושה גרפים</span>
+      <span class="qsub">התאמת גרף לכלי · ייצוג אלגברי לכל כלי · מתי כלי א׳ = כלי ב׳ · הטמפרטורה אחרי 5 דקות · טווח</span></span>
+      <span class="qgo"><a class="solved" href="algebra/11-booklet-functions.html#a10">פתור כאן ✓</a></span></li>
+  </ol>
+</section>
+
+<!-- ============================ חלק ב׳ ============================ -->
+<section class="part alg" data-p="alg">
+  <div class="ph">
+    <span class="pl">ב׳</span>
+    <b>משוואות, אי-שוויונות ומערכת משוואות</b>
+    <span class="pn">4 תרגילים · 23 תת-סעיפים · כולם פתורים כאן</span>
+    <p class="pwhere">שלושת הראשונים ב<a href="algebra/10-booklet-drills.html">נספח תרגילי החוברת</a>
+    ותרגיל 2 ב<a href="algebra/02-equations.html#sec-domain">תחנה 2</a>. השיטה עצמה:
+    <a href="algebra/02-equations.html">משוואות ואי-שוויונות</a> ו<a href="algebra/06-systems.html">מערכת בשיטת ההצבה</a>.</p>
+  </div>
+  <ol class="qs">
+    <li><span class="qn">1</span><span class="qb"><span class="qt">משוואות עם שברים — שלושה סעיפים</span>
+      <span class="qsub">מכנה משותף, כפל כל האגף, סוגריים אחרי הכפל</span></span>
+      <span class="qgo"><a class="solved" href="algebra/10-booklet-drills.html#sec-b1">פתור כאן ✓</a></span></li>
+    <li><span class="qn">2</span><span class="qb"><span class="qt">תחום הצבה ופתרון — <span class="fi">\(x\)</span> במכנה, שישה סעיפים</span>
+      <span class="qsub">התרגיל הזה מופיע באתר בצילום מהחוברת ופתור סעיף-סעיף</span></span>
+      <span class="qgo"><a class="solved" href="algebra/02-equations.html#sec-domain">פתור כאן ✓</a></span></li>
+    <li><span class="qn">3</span><span class="qb"><span class="qt">אי-שוויונות — ארבעה סעיפים</span>
+      <span class="qsub">כולל חילוק במספר שלילי — הסימן מתהפך</span></span>
+      <span class="qgo"><a class="solved" href="algebra/10-booklet-drills.html#sec-b3">פתור כאן ✓</a></span></li>
+    <li><span class="qn">4</span><span class="qb"><span class="qt">עשר מערכות משוואות — בשיטת ההצבה</span>
+      <span class="qsub">חלקן עם <span class="fi">\(y\)</span> כבר מבודד, וחלקן דורשות בידוד קודם</span></span>
+      <span class="qgo"><a class="solved" href="algebra/10-booklet-drills.html#sec-b4">פתור כאן ✓</a></span></li>
+  </ol>
+</section>
+
+<!-- ============================ חלק ג׳ ============================ -->
+<section class="part alg" data-p="alg">
+  <div class="ph">
+    <span class="pl">ג׳</span>
+    <b>בעיות אחוזים</b>
+    <span class="pn">8 תרגילים · כולם פתורים כאן</span>
+    <p class="pwhere">חמישה פתורים ב<a href="algebra/07-percent.html">תחנת האחוזים</a>, ושלושת הנותרים (4, 7, 8) ב<a href="algebra/10-booklet-drills.html#sec-c">נספח תרגילי החוברת</a>.</p>
+  </div>
+  <ol class="qs">
+    <li><span class="qn">1</span><span class="qb"><span class="qt">הכורסה — 1500 ₪, הנחה של 25%</span>
+      <span class="qsub">המחיר באמצע החודש · ובכמה אחוזים ירד המחיר מ-1500 ל-1050</span></span>
+      <span class="qgo"><a class="solved" href="algebra/07-percent.html#sec-school">פתור כאן ✓</a></span></li>
+    <li><span class="qn">2</span><span class="qb"><span class="qt">הבריכה — הוסיפו 160 ל׳, הקטינו ב-10%, הוציאו 195 ל׳, נשארו 255</span>
+      <span class="qsub">הכמות ההתחלתית · והאם בסוף התהליך יש יותר או פחות, ובכמה אחוזים</span></span>
+      <span class="qgo"><a class="solved" href="algebra/07-percent.html#sec-change">פתור כאן ✓</a></span></li>
+    <li><span class="qn">3</span><span class="qb"><span class="qt">שלושת האחים — 40% לבכור, 60% מהנותר לשני, 1200 ₪ לשלישי</span>
+      <span class="qsub">מהו הסכום הכולל</span></span>
+      <span class="qgo"><a class="solved" href="algebra/07-percent.html#sec-school">פתור כאן ✓</a></span></li>
+    <li><span class="qn">4</span><span class="qb"><span class="qt">התיק — התייקר ב-40% ואחר כך ב-25%, ואז עלה 210 ₪</span>
+      <span class="qsub">המחיר לפני שתי ההתייקרויות · ובכמה אחוזים התייקר בסך הכול</span></span>
+      <span class="qgo"><a class="solved" href="algebra/10-booklet-drills.html#c4">פתור כאן ✓</a></span></li>
+    <li><span class="qn">5</span><span class="qb"><span class="qt">עלה ב-20% ואז ירד ב-20% — האם המחיר השתנה?</span>
+      <span class="qsub">מנמקים בעזרת דוגמה פרטית. באתר זה "החבר שבטוח שזה מתקזז"</span></span>
+      <span class="qgo"><a class="solved" href="algebra/07-percent.html#sec-successive">פתור כאן ✓</a></span></li>
+    <li><span class="qn">6</span><span class="qb"><span class="qt">מחשב ומדפסת — 7500 ₪ ביחד, ‎+20%‎ ו-‎−20%‎ נותנים 8400</span>
+      <span class="qsub">מהו מחיר כל אחד מהם בנפרד</span></span>
+      <span class="qgo"><a class="solved" href="algebra/07-percent.html#sec-school">פתור כאן ✓</a></span></li>
+    <li><span class="qn">7</span><span class="qb"><span class="qt">חולצה ומכנסיים — הפרש 25 ₪, הנחות 12% ו-8% נותנות 158 ₪</span>
+      <span class="qsub">מהו מחיר כל פריט עכשיו</span></span>
+      <span class="qgo"><a class="solved" href="algebra/10-booklet-drills.html#c7">פתור כאן ✓</a></span></li>
+    <li><span class="qn">8</span><span class="qb"><span class="qt">תפוזים ותפוחים — ק״ג מכל אחד עולה ביחד 6 ₪</span>
+      <span class="qsub">תפוזים ‎+50%‎, תפוחים ‎−25%‎ — כמה יעלו 2 ק״ג תפוזים ו-4 ק״ג תפוחים</span></span>
+      <span class="qgo"><a class="solved" href="algebra/10-booklet-drills.html#c8">פתור כאן ✓</a></span></li>
+  </ol>
+</section>
+
+<!-- ============================ חלק ד׳ ============================ -->
+<section class="part stat" data-p="stat">
+  <div class="ph">
+    <span class="pl">ד׳</span>
+    <b>סטטיסטיקה</b>
+    <span class="pn">5 תרגילים · כולם פתורים כאן</span>
+    <p class="pwhere">מסלול ה<a href="statistics/index.html">סטטיסטיקה</a> נבנה סביב חמשת התרגילים האלה — כל אחד מהם פתור באתר, במלואו.</p>
+  </div>
+  <ol class="qs">
+    <li><span class="qn">1</span><span class="qb"><span class="qt">השכר במפעל — 25 פועלים ו-80 פועלים, הפרש 15 ₪, ממוצע 35 ₪</span>
+      <span class="qsub">השכר בכל דרגה · השכר השכיח · חציון השכר, עם נימוק</span></span>
+      <span class="qgo"><a class="solved" href="statistics/03-median-mode.html">פתור כאן ✓</a></span></li>
+    <li><span class="qn">2</span><span class="qb"><span class="qt">המכוניות ביישוב — טבלה עם <span class="fi">\(x\)</span>, ועשירית מהמשפחות עם 4 מכוניות</span>
+      <span class="qsub">מציאת <span class="fi">\(x\)</span> · שכיח · חציון · ממוצע</span></span>
+      <span class="qgo"><a class="solved" href="statistics/06-table-with-hole.html">פתור כאן ✓</a></span></li>
+    <li><span class="qn">3</span><span class="qb"><span class="qt">הכדורסלן — ממוצע 24 ב-11 משחקים, ובמשחק ה-12 קלע 16</span>
+      <span class="qsub">האם הממוצע יעלה או ירד, ולמה · הממוצע ב-12 המשחקים</span></span>
+      <span class="qgo"><a class="solved" href="statistics/02-mean.html">פתור כאן ✓</a></span></li>
+    <li><span class="qn">4</span><span class="qb"><span class="qt">גילים וממוצעים — שלושה סעיפים</span>
+      <span class="qsub">מצטרפת לקבוצה · שני מצטרפים והממוצע עולה · השלמת גילים לממוצע נתון</span></span>
+      <span class="qgo"><a class="solved" href="statistics/02-mean.html">פתור כאן ✓</a></span></li>
+    <li><span class="qn">5</span><span class="qb"><span class="qt">דיאגרמת הציונים בכיתה ח׳ — והערעור</span>
+      <span class="qsub">העברה לטבלה · שכיח · מספר התלמידים · ממוצע · חציון · והשינוי אחרי שלושה ערעורים שהתקבלו</span></span>
+      <span class="qgo"><a class="solved" href="statistics/01-basics.html">פתור כאן ✓</a></span></li>
+  </ol>
+</section>
+
+<!-- ============================ חלק ה׳ ============================ -->
+<section class="part geo" data-p="geo">
+  <div class="ph">
+    <span class="pl">ה׳</span>
+    <b>חפיפת משולשים</b>
+    <span class="pn">5 תרגילים · כולם פתורים כאן</span>
+    <p class="pwhere">תחנה <a href="geometry/02-triangles-congruence.html">2 — משולשים וחפיפה</a>.
+    שלושת הראשונים פתורים שם עד הסוף, ותרגילים 4 ו-5 ב<a href="geometry/09-booklet-proofs.html">נספח תרגילי החוברת</a>.
+    לכתיבת ההוכחה עצמה יש <a href="geometry/05-proof-models.html">ספריית 23 דגמים</a>
+    ו<a href="geometry/06-proof-practice.html">בנק של 48 תרגילי הוכחה</a>.</p>
+  </div>
+  <ol class="qs">
+    <li><span class="qn">1</span><span class="qb"><span class="qt">המקבילית — <span class="fi">\(AD\parallel BC\)</span> , <span class="fi">\(AB\parallel DC\)</span></span>
+      <span class="qsub">להוכיח <span class="fi">\(\triangle ADB\cong\triangle CBD\)</span> · ולרשום את השוויונות הנובעים</span></span>
+      <span class="qgo"><a class="solved" href="geometry/02-triangles-congruence.html#sec-school">פתור כאן ✓</a></span></li>
+    <li><span class="qn">2</span><span class="qb"><span class="qt">שני ישרי-הזווית שנפגשים ב-<span class="fi">\(E\)</span></span>
+      <span class="qsub">להוכיח <span class="fi">\(\triangle EFG\cong\triangle EDB\)</span> · ולחשב את <span class="fi">\(\angle G\)</span> מתוך <span class="fi">\(\angle BED=33^\circ\)</span></span></span>
+      <span class="qgo"><a class="solved" href="geometry/02-triangles-congruence.html#sec-school">פתור כאן ✓</a></span></li>
+    <li><span class="qn">3</span><span class="qb"><span class="qt">הריבוע <span class="fi">\(ABCD\)</span> עם <span class="fi">\(P\)</span> ו-<span class="fi">\(R\)</span></span>
+      <span class="qsub">להוכיח <span class="fi">\(\triangle ABP\cong\triangle CBR\)</span> · ולחשב את <span class="fi">\(\angle BRC\)</span> ו-<span class="fi">\(\angle RBC\)</span></span></span>
+      <span class="qgo"><a class="solved" href="geometry/02-triangles-congruence.html#sec-school">פתור כאן ✓</a></span></li>
+    <li><span class="qn">4</span><span class="qb"><span class="qt"><span class="fi">\(B\)</span> ו-<span class="fi">\(C\)</span> על <span class="fi">\(AD\)</span> , <span class="fi">\(AB=CD\)</span> , <span class="fi">\(AE\perp AD\)</span> , <span class="fi">\(DF\perp AD\)</span> , <span class="fi">\(\angle C_1=\angle B_1\)</span></span>
+      <span class="qsub">להוכיח <span class="fi">\(\triangle AEC\cong\triangle DFB\)</span> — תרגיל של חיבור וחיסור קטעים</span></span>
+      <span class="qgo"><a class="solved" href="geometry/09-booklet-proofs.html#ex-h4">פתור כאן ✓</a></span></li>
+    <li><span class="qn">5</span><span class="qb"><span class="qt"><span class="fi">\(AC\)</span> ו-<span class="fi">\(BD\)</span> נחתכים ב-<span class="fi">\(O\)</span> , <span class="fi">\(\alpha=\beta\)</span> , <span class="fi">\(\angle DAC=\angle CBD\)</span></span>
+      <span class="qsub">להוכיח <span class="fi">\(AD=BC\)</span> · ואז <span class="fi">\(DO=OC\)</span> — שתי חפיפות זו אחרי זו</span></span>
+      <span class="qgo"><a class="solved" href="geometry/09-booklet-proofs.html#ex-h5">פתור כאן ✓</a></span></li>
+  </ol>
+</section>
+
+<!-- ============================ חלק ו׳ ============================ -->
+<section class="part geo" data-p="geo">
+  <div class="ph">
+    <span class="pl">ו׳</span>
+    <b>משולש שווה-שוקיים</b>
+    <span class="pn">5 תרגילים · כולם פתורים כאן</span>
+    <p class="pwhere">חמשת התרגילים פתורים ב<a href="geometry/09-booklet-proofs.html#v1">נספח תרגילי החוברת</a>.
+    המשפטים עצמם ב<a href="geometry/02-triangles-congruence.html#sec-isosceles">תחנה 2, שלב 2</a>,
+    ותרגול נוסף ב<a href="geometry/06-proof-practice.html#fam-basis">בנק ההוכחות</a>.</p>
+  </div>
+  <ol class="qs">
+    <li><span class="qn">1</span><span class="qb"><span class="qt">שני שווי-השוקיים החופפים על ישר אחד — <span class="fi">\(x-6^\circ\)</span> ו-<span class="fi">\(2x-46^\circ\)</span></span>
+      <span class="qsub">מציאת <span class="fi">\(x\)</span> · <span class="fi">\(\angle F\)</span> · <span class="fi">\(\angle EBC\)</span></span></span>
+      <span class="qgo"><a class="solved" href="geometry/09-booklet-proofs.html#bv1">פתור כאן ✓</a></span></li>
+    <li><span class="qn">2</span><span class="qb"><span class="qt"><span class="fi">\(DB=EC\)</span> , <span class="fi">\(F\)</span> אמצע <span class="fi">\(BC\)</span></span>
+      <span class="qsub">להוכיח <span class="fi">\(\triangle DBF\cong\triangle ECF\)</span> · ולחשב <span class="fi">\(\angle DFE\)</span> ו-<span class="fi">\(\angle EDF\)</span></span></span>
+      <span class="qgo"><a class="solved" href="geometry/09-booklet-proofs.html#bv2">פתור כאן ✓</a></span></li>
+    <li><span class="qn">3</span><span class="qb"><span class="qt"><span class="fi">\(AD\)</span> גובה לבסיס, <span class="fi">\(E\)</span> נקודה עליו</span>
+      <span class="qsub">להוכיח <span class="fi">\(BE=CE\)</span></span></span>
+      <span class="qgo"><a class="solved" href="geometry/09-booklet-proofs.html#bv3">פתור כאן ✓</a></span></li>
+    <li><span class="qn">4</span><span class="qb"><span class="qt"><span class="fi">\(DE\parallel AC\)</span> במשולש שווה-שוקיים</span>
+      <span class="qsub">להוכיח <span class="fi">\(DB=DE\)</span> — הכיוון ההפוך: מזוויות שוות לצלעות שוות</span></span>
+      <span class="qgo"><a class="solved" href="geometry/09-booklet-proofs.html#bv4">פתור כאן ✓</a></span></li>
+    <li><span class="qn">5</span><span class="qb"><span class="qt"><span class="fi">\(AD\)</span> תיכון לבסיס, <span class="fi">\(E\)</span> על המשך <span class="fi">\(AD\)</span></span>
+      <span class="qsub">להוכיח ש-<span class="fi">\(\triangle BEC\)</span> שווה-שוקיים — <em>בלי</em> חפיפת משולשים (רמז מהחוברת)</span></span>
+      <span class="qgo"><a class="solved" href="geometry/09-booklet-proofs.html#bv5">פתור כאן ✓</a></span></li>
+  </ol>
+</section>
+
+<!-- ============================ חלק ז׳ ============================ -->
+<section class="part geo" data-p="geo">
+  <div class="ph">
+    <span class="pl">ז׳</span>
+    <b>משולשים דומים</b>
+    <span class="pn">3 תרגילים · כולם פתורים כאן</span>
+    <p class="pwhere">תחנה <a href="geometry/07-similarity.html">7 — דמיון משולשים</a>,
+    תחנה שלמה שנבנתה סביב שלושת התרגילים האלה.</p>
+  </div>
+  <ol class="qs">
+    <li><span class="qn">1</span><span class="qb"><span class="qt">שני ישרי-זווית דומים — <span class="fi">\(2.5\)</span> ו-<span class="fi">\(6.5\)</span> מול <span class="fi">\(5\)</span> ו-<span class="fi">\(12\)</span></span>
+      <span class="qsub">כתיבת הדמיון לפי סדר הקדקודים · הצלעות החסרות · יחס הדמיון · יחס השטחים</span></span>
+      <span class="qgo"><a class="solved" href="geometry/07-similarity.html#bk1">פתור כאן ✓</a></span></li>
+    <li><span class="qn">2</span><span class="qb"><span class="qt"><span class="fi">\(AB\perp BC\)</span> , <span class="fi">\(EM\perp AC\)</span> , <span class="fi">\(AE=5\)</span> , <span class="fi">\(AM=12\)</span> , <span class="fi">\(MC=3\)</span></span>
+      <span class="qsub">להראות דמיון · יחס הדמיון · יחס השטחים — בשתי דרכים</span></span>
+      <span class="qgo"><a class="solved" href="geometry/07-similarity.html#bk2">פתור כאן ✓</a></span></li>
+    <li><span class="qn">3</span><span class="qb"><span class="qt">שעון החול — <span class="fi">\(AE\)</span> ו-<span class="fi">\(BD\)</span> נחתכים ב-<span class="fi">\(C\)</span> , <span class="fi">\(AB\parallel DE\)</span></span>
+      <span class="qsub">האם חופפים · האם דומים · וחישוב <span class="fi">\(AB\)</span> , <span class="fi">\(BC\)</span> , <span class="fi">\(DC\)</span></span></span>
+      <span class="qgo"><a class="solved" href="geometry/07-similarity.html#bk3">פתור כאן ✓</a></span></li>
+  </ol>
+</section>
+
+<!-- ============================ חלק ח׳ ============================ -->
+<section class="part geo" data-p="geo">
+  <div class="ph">
+    <span class="pl">ח׳</span>
+    <b>משפט פיתגורס</b>
+    <span class="pn">3 תרגילים · כולם פתורים כאן</span>
+    <p class="pwhere">תחנה <a href="geometry/08-pythagoras.html">8 — משפט פיתגורס</a>.</p>
+  </div>
+  <ol class="qs">
+    <li><span class="qn">1</span><span class="qb"><span class="qt">המרובע <span class="fi">\(ABCD\)</span> — <span class="fi">\(21\)</span> , <span class="fi">\(20\)</span> , <span class="fi">\(\sqrt{59}\)</span></span>
+      <span class="qsub">היקף ושטח, דרך האלכסון <span class="fi">\(AC\)</span> שמפרק אותו לשני ישרי-זווית</span></span>
+      <span class="qgo"><a class="solved" href="geometry/08-pythagoras.html#bk1">פתור כאן ✓</a></span></li>
+    <li><span class="qn">2</span><span class="qb"><span class="qt">המשולש <span class="fi">\(DEF\)</span> — <span class="fi">\(12\)</span> , <span class="fi">\(15\)</span> , <span class="fi">\(13\)</span></span>
+      <span class="qsub">מציאת <span class="fi">\(X\)</span> · היקף ושטח המשולש</span></span>
+      <span class="qgo"><a class="solved" href="geometry/08-pythagoras.html#bk2">פתור כאן ✓</a></span></li>
+    <li><span class="qn">3</span><span class="qb"><span class="qt"><span class="fi">\(KM\)</span> גובה, <span class="fi">\(LM=7\)</span> , <span class="fi">\(MN=3\)</span> , הפרש שטחים 12</span>
+      <span class="qsub">מציאת <span class="fi">\(KM\)</span> ו-<span class="fi">\(KL\)</span> — קודם משוואה, ורק אז פיתגורס</span></span>
+      <span class="qgo"><a class="solved" href="geometry/08-pythagoras.html#bk3">פתור כאן ✓</a></span></li>
+  </ol>
+</section>
+
+<div class="box intuition" style="margin-top:26px">
+  <div class="box-title">איך הכי נוח לעבוד עם החוברת</div>
+  פתחי את ה-<a href="assets/pdf/summer-work-a1.pdf" target="_blank" rel="noopener">PDF</a>
+  במסך אחד ואת הדף הזה במסך שני (או פשוט החליפי ביניהם).
+  פתרי במחברת, וכשנתקעת — חפשי כאן את מספר התרגיל ולחצי על הכפתור שלו.
+  <br>ואם את מחפשת מושג ולא תרגיל, שורת החיפוש
+  <a href="index.html#search-wrap">במרכז</a> מגיעה ישר לסעיף הנכון בכל דף.
+</div>
+
+<footer class="fin">חלק מהעולם של שירה ·
+<a href="index.html">חזרה למרכז</a> ·
+<a href="library.html">לספרייה</a></footer>
+</main>
+</div>
+
+<script>
+/* מסנן החלקים — ניווט, לא תוכן. בלי JS פשוט רואים את כל החלקים. */
+document.addEventListener('DOMContentLoaded', function () {
+  var btns = document.querySelectorAll('.filters button[data-f]');
+  var parts = document.querySelectorAll('.part[data-p]');
+  btns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var f = b.dataset.f;
+      btns.forEach(function (x) { x.classList.toggle('on', x === b); });
+      parts.forEach(function (p) {
+        p.classList.toggle('hidden', f !== 'all' && p.dataset.p !== f);
+      });
+    });
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<!-- מסך הבית של האייפד/הטלפון -->
+<link rel="apple-touch-icon" href="../assets/icons/icon-180.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>נתונים ושכיחות — סטטיסטיקה — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../vendor/katex.min.css">
+<link rel="stylesheet" href="../css/shira.css">
+<script defer src="../vendor/katex.min.js"></script>
+<script defer src="../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../js/shira.js"></script>
+<style>
+/* מחוון פתיחה — כמה זמן, כמה תרגילים, ואיפה מתחילים לתרגל (מוסתר בהדפסה) */
+.pagemeta{display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px;
+  margin:12px 0 0; font-size:13px; color:var(--soft)}
+.pagemeta .pm-time{background:var(--faint); border-radius:999px; padding:3px 10px}
+.pagemeta .pm-time b{color:var(--ink); font-weight:700}
+.pagemeta .pm-jump{color:var(--accent); font-weight:700; text-decoration:none}
+.pagemeta .pm-jump:hover{text-decoration:underline}
+.pagemeta .pm-note{flex:1 1 100%; margin:0}
+#ex-first,#bank-map{scroll-margin-top:78px}
+</style>
+</head>
+<body data-page="stat:01-basics">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">סטטיסטיקה — המפה</a>
+    <span class="crumbs">תחנה <b>1</b> מתוך 7 · <b>נתונים ושכיחות</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">סטטיסטיקה · תחנה 1</div>
+  <h1>נתונים, שכיחות וטבלה שמספרת סיפור</h1>
+  <p class="lead">
+    סטטיסטיקה מתחילה משאלה אמיתית — ובערימה של תשובות מבולגנות.
+    בעמוד הזה נלמד את הצעד הראשון והחשוב מכולם: איך מסדרים את הערימה
+    כך שפתאום רואים בה סיפור.
+  </p>
+  <p class="youknow"><b>בסוף העמוד תדעי:</b> לארגן רשימת תשובות בטבלת שכיחויות ·
+  לחשב טווח · לקרוא דיאגרמת עמודות · להבדיל בין נתונים מספריים לנתונים שמיים.</p>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>≈ 20 דק׳</b> · 6 תרגילים</span>
+    <a class="pm-jump" href="#sec-practice">לקפוץ ישר לתרגילים ↓</a>
+  </p>
+</header>
+
+<!-- ============ 1. מה זו סטטיסטיקה ============ -->
+<h2><span class="num">1</span>מה זו בכלל סטטיסטיקה?</h2>
+
+<p>
+  אוספים נתונים כדי לענות על שאלות אמיתיות: איזה ציון הכי נפוץ במבחן?
+  כמה שעות ישנים בני נוער? מי תנצח בבחירות?
+  השלב הראשון תמיד אותו שלב — שואלים הרבה אנשים, ומקבלים הרבה תשובות.
+</p>
+<p>
+  למשל: בכיתה ח׳ שאלו את כל 20 התלמידים באיזו עונה נולדו.
+  כך נראו התשובות, בדיוק בסדר שבו נאמרו:
+</p>
+
+<div class="box example">
+  <div class="box-title">20 תשובות, כפי שנרשמו</div>
+  קיץ, חורף, אביב, קיץ, סתיו, חורף, קיץ, אביב, קיץ, חורף,
+  סתיו, קיץ, אביב, חורף, קיץ, אביב, סתיו, חורף, קיץ, אביב
+</div>
+
+<p>
+  נסי לענות מהרשימה הזו על שאלה פשוטה — באיזו עונה נולדו הכי הרבה תלמידים?
+  אי אפשר לראות כלום, העיניים הולכות לאיבוד.
+  הנתונים נכונים, אבל הם עדיין לא מספרים סיפור — בשביל זה צריך לסדר אותם.
+</p>
+
+<!-- ============ 2. שכיחות וטבלת שכיחויות ============ -->
+<h2><span class="num">2</span>שכיחות וטבלת שכיחויות</h2>
+
+<div class="box def">
+  <div class="box-title">הגדרה</div>
+  <strong>שכיחות</strong> של ערך = כמה פעמים הערך הזה מופיע ברשימת הנתונים.
+  <br><strong>טבלת שכיחויות</strong> = טבלה שבה שורה אחת מציגה את הערכים השונים,
+  והשורה שמתחתיה — את השכיחות של כל ערך.
+  <br>ככה זה בדיוק גם בדפי העבודה של בית הספר: השורה התחתונה נקראת שם תמיד
+  "שכיחות", והשורה העליונה נקראת על שם מה שמדדו — "ציון", "מידת הנעליים", "חודשים".
+</div>
+
+<p>נספור כמה פעמים מופיעה כל עונה ברשימה שלמעלה, ונסדר בטבלה:</p>
+
+<table class="dtable">
+  <tr><th>העונה</th><td>קיץ</td><td>חורף</td><td>סתיו</td><td>אביב</td></tr>
+  <tr><th>מספר התלמידים (השכיחות)</th><td>7</td><td>5</td><td>3</td><td>5</td></tr>
+</table>
+<p class="tbl-note">בדיקה: <span class="fi">\(7+5+3+5=20\)</span> — כל 20 התשובות נמצאות בטבלה.</p>
+
+<p>
+  הטבלה היא אותם נתונים בדיוק, רק מסודרים כך שרואים את הסיפור:
+  קיץ הוא העונה הנפוצה ביותר, וסתיו — הנדירה ביותר.
+  מה שלקח דקה של ספירה ברשימה, קופץ לעין תוך שנייה בטבלה.
+</p>
+
+<p>
+  זה עובד באותה צורה גם כשהנתונים הם מספרים.
+  מדדו את הגובה של 17 תלמידים, וסידרו את התוצאות בטבלת שכיחויות:
+</p>
+
+<table class="dtable">
+  <tr><th>הגובה בס"מ</th><td>120</td><td>121</td><td>125</td><td>128</td><td>130</td><td>134</td></tr>
+  <tr><th>מספר התלמידים</th><td>2</td><td>3</td><td>1</td><td>2</td><td>4</td><td>5</td></tr>
+</table>
+<p class="tbl-note">השורה העליונה — הערכים (כאן: הגובה) · השורה התחתונה — השכיחות (כמה תלמידים).</p>
+
+<p>שאלות שהטבלה עונה עליהן מיד, בלי לחשב כמעט כלום:</p>
+<ul>
+  <li><strong>כמה תלמידים נמדדו?</strong> מחברים את שורת השכיחויות:
+      <span class="fi">\(2+3+1+2+4+5=17\)</span>.</li>
+  <li><strong>מהו הגובה הנפוץ ביותר?</strong> מחפשים את השכיחות הגדולה ביותר —
+      היא 5, ולכן הגובה הנפוץ ביותר הוא 134 ס"מ.</li>
+</ul>
+
+<!-- ============ 3. טווח ============ -->
+<h2><span class="num">3</span>טווח — כמה הנתונים מפוזרים</h2>
+
+<div class="box def">
+  <div class="box-title">הגדרה</div>
+  <strong>הטווח</strong> של הנתונים = ההפרש בין הערך הגדול ביותר לערך הקטן ביותר.
+</div>
+
+<p>
+  בטבלת הגבהים: הערך הגדול ביותר הוא 134, והקטן ביותר הוא 120.
+  מחסרים — וזה כל החישוב:
+</p>
+
+<div class="fbox">
+  <div class="fbox-title">חישוב הטווח</div>
+  $$\text{טווח}=\underbrace{134}_{\text{הערך הגדול ביותר}}-\underbrace{120}_{\text{הערך הקטן ביותר}}=\textcolor{#2E7D32}{14}$$
+  <span class="f-legend">
+    <span><i class="sw" style="background:#DFF0DC"></i> ירוק — הטווח, מה שחיפשנו</span>
+  </span>
+</div>
+
+<p>
+  המספר הזה אומר כמה הנתונים מפוזרים: טווח גדול = הנתונים רחוקים זה מזה,
+  טווח קטן = כולם צפופים באזור אחד.
+  כאן הטווח הוא 14 ס"מ — כל הכיתה נמצאת ברצועת גבהים די צרה.
+</p>
+
+<!-- ============ 4. דיאגרמת עמודות ============ -->
+<h2><span class="num">4</span>קריאת דיאגרמת עמודות</h2>
+
+<p>
+  דרך שנייה להציג טבלת שכיחויות היא לצייר אותה: כל ערך מקבל עמודה,
+  וגובה העמודה הוא השכיחות שלו.
+  כך נראית התפלגות הציונים במבחן של כיתה ח׳:
+</p>
+
+<figure>
+  <div class="axplot" style="max-width:576px">
+  <span class="ax-ylab">השכיחות — כמה תלמידים</span>
+  <svg viewBox="0 0 530 238" style="width:100%;height:auto" role="img" aria-label="דיאגרמת עמודות של התפלגות הציונים">
+    <line x1="25" y1="150" x2="518" y2="150" stroke="#E4E8EE" stroke-width="1"></line>
+    <line x1="25" y1="90"  x2="518" y2="90"  stroke="#E4E8EE" stroke-width="1"></line>
+    <line x1="25" y1="30"  x2="518" y2="30"  stroke="#E4E8EE" stroke-width="1"></line>
+    <rect x="30"  y="150" width="40" height="60"  rx="3" fill="#2E7D6B"></rect>
+    <rect x="86"  y="110" width="40" height="100" rx="3" fill="#2E7D6B"></rect>
+    <rect x="142" y="90"  width="40" height="120" rx="3" fill="#2E7D6B"></rect>
+    <rect x="198" y="90"  width="40" height="120" rx="3" fill="#2E7D6B"></rect>
+    <rect x="254" y="50"  width="40" height="160" rx="3" fill="#2E7D6B"></rect>
+    <rect x="310" y="30"  width="40" height="180" rx="3" fill="#2E7D6B"></rect>
+    <rect x="366" y="70"  width="40" height="140" rx="3" fill="#2E7D6B"></rect>
+    <rect x="422" y="130" width="40" height="80"  rx="3" fill="#2E7D6B"></rect>
+    <rect x="478" y="170" width="40" height="40"  rx="3" fill="#2E7D6B"></rect>
+    <text x="50"  y="143" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">3</text>
+    <text x="106" y="103" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">5</text>
+    <text x="162" y="83"  text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">6</text>
+    <text x="218" y="83"  text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">6</text>
+    <text x="274" y="43"  text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">8</text>
+    <text x="330" y="23"  text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">9</text>
+    <text x="386" y="63"  text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">7</text>
+    <text x="442" y="123" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">4</text>
+    <text x="498" y="163" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">2</text>
+    <line x1="25" y1="210" x2="518" y2="210" stroke="#5A6875" stroke-width="1.5"></line>
+    <path d="M526 210 L518 206 L518 214 Z" fill="#5A6875"></path>
+    <line x1="25" y1="210" x2="25" y2="16" stroke="#5A6875" stroke-width="1.5"></line>
+    <path d="M25 8 L21 16 L29 16 Z" fill="#5A6875"></path>
+    <line x1="20" y1="150" x2="25" y2="150" stroke="#5A6875" stroke-width="1.5"></line>
+    <line x1="20" y1="90"  x2="25" y2="90"  stroke="#5A6875" stroke-width="1.5"></line>
+    <line x1="20" y1="30"  x2="25" y2="30"  stroke="#5A6875" stroke-width="1.5"></line>
+    <text x="17" y="214" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">0</text>
+    <text x="17" y="154" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">3</text>
+    <text x="17" y="94"  text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">6</text>
+    <text x="17" y="34"  text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">9</text>
+    <line x1="50"  y1="210" x2="50"  y2="215" stroke="#5A6875" stroke-width="1"></line>
+    <line x1="106" y1="210" x2="106" y2="215" stroke="#5A6875" stroke-width="1"></line>
+    <line x1="162" y1="210" x2="162" y2="215" stroke="#5A6875" stroke-width="1"></line>
+    <line x1="218" y1="210" x2="218" y2="215" stroke="#5A6875" stroke-width="1"></line>
+    <line x1="274" y1="210" x2="274" y2="215" stroke="#5A6875" stroke-width="1"></line>
+    <line x1="330" y1="210" x2="330" y2="215" stroke="#5A6875" stroke-width="1"></line>
+    <line x1="386" y1="210" x2="386" y2="215" stroke="#5A6875" stroke-width="1"></line>
+    <line x1="442" y1="210" x2="442" y2="215" stroke="#5A6875" stroke-width="1"></line>
+    <line x1="498" y1="210" x2="498" y2="215" stroke="#5A6875" stroke-width="1"></line>
+    <text x="50"  y="230" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">60</text>
+    <text x="106" y="230" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">65</text>
+    <text x="162" y="230" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">70</text>
+    <text x="218" y="230" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">75</text>
+    <text x="274" y="230" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">80</text>
+    <text x="330" y="230" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">85</text>
+    <text x="386" y="230" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">90</text>
+    <text x="442" y="230" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">95</text>
+    <text x="498" y="230" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">100</text>
+  </svg>
+  <span class="ax-xlab">הערכים — הציון</span>
+  </div>
+  <figcaption>התפלגות הציונים בכיתה ח׳. את גובה כל עמודה קוראים על הציר האנכי;
+  המספר שמעליה — כמה תלמידים קיבלו את הציון הזה.</figcaption>
+</figure>
+
+<div class="box example">
+  <div class="box-title">מהגרף לטבלה — אותם נתונים בדיוק</div>
+  <div class="tbl-scroll">
+  <table class="dtable">
+    <tr><th style="background:#EEF1F4">הציון</th><td>60</td><td>65</td><td>70</td><td>75</td><td>80</td><td>85</td><td>90</td><td>95</td><td>100</td></tr>
+    <tr><th style="background:#E3F0EC">מספר התלמידים</th><td>3</td><td>5</td><td>6</td><td>6</td><td>8</td><td>9</td><td>7</td><td>4</td><td>2</td></tr>
+  </table>
+  </div>
+  <p class="tbl-note" style="margin-top:2px">
+    <span style="color:#44525F;font-weight:700">השורה הראשונה</span> — הערכים, מה שכתוב על הציר האופקי;
+    <span style="color:#22624F;font-weight:700">השורה השנייה</span> — השכיחות, גובה העמודות.
+  </p>
+</div>
+
+<p>קוראים דיאגרמה כזו בדיוק כמו טבלה:</p>
+<ul>
+  <li><strong>מה הציון הנפוץ ביותר?</strong> מחפשים את העמודה הגבוהה ביותר —
+      זו העמודה של 85, עם 9 תלמידים.</li>
+  <li><strong>כמה תלמידים בכיתה?</strong> מחברים את כל העמודות:
+      <span class="fi">\(3+5+6+6+8+9+7+4+2=50\)</span>.</li>
+</ul>
+
+<div class="box warn">
+  <div class="box-title">שימי לב</div>
+  העמודה הכי <strong>גבוהה</strong> היא לא הציון הכי <strong>גבוה</strong>.
+  הציון הגבוה ביותר בדיאגרמה הוא 100 — אבל העמודה שלו דווקא נמוכה (רק 2 תלמידים).
+  עמודה גבוהה אומרת "ציון נפוץ", לא "ציון טוב".
+</div>
+
+<!-- ============ 5. שני סוגי נתונים ============ -->
+<h2><span class="num">5</span>שני סוגי נתונים</h2>
+
+<p>שימי לב שפגשנו בעמוד הזה שני עולמות שונים של נתונים:</p>
+
+<div class="box essence">
+  <div class="box-title">ההבחנה שמארגנת את כל הפרק</div>
+  <strong>נתונים מספריים</strong> — יש להם סדר טבעי: גבהים, ציונים, מידות נעליים.
+  אפשר לשאול עליהם "מה הגדול ביותר?", לחשב טווח, ובתחנות הבאות — גם ממוצע וחציון.
+  <br><strong>נתונים שמיים</strong> (בבית הספר קוראים להם לפעמים "נתונים איכותיים") — שמות בלי סדר: עונות השנה, חיות מחמד, מפלגות.
+  אין "עונה גדולה יותר", ולכן אין ממוצע ואין חציון —
+  אפשר רק לספור: שכיחות, והערך הנפוץ ביותר (השכיח).
+</div>
+
+<p>
+  את ההבדל הזה שווה לזכור: הוא יחזור בגדול בליל המנדטים (תחנה 5),
+  כשנצטרך להחליט מה בכלל מותר לחשב על קולות למפלגות.
+</p>
+
+<!-- ============ 6. תרגול ============ -->
+<h2 id="sec-practice"><span class="num">6</span>✏️ תרגול — משלב לשלב</h2>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>מרשימה לטבלת שכיחויות</h4></div>
+  <p class="q-text">
+    <span class="mk mk-group">שאלו 15 תלמידים איזו חיית מחמד יש להם, והתשובות נרשמו כסדרן:
+    כלב, חתול, כלב, אין, דג, כלב, חתול, כלב, אין, חתול, כלב, דג, חתול, כלב, אין</span>.
+    <span class="mk mk-find">בני מהרשימה טבלת שכיחויות.</span>
+  </p>
+  <p style="font-size:13px;color:var(--soft)">נסי לנחש את השלב הבא לפני שאת פותחת אותו.</p>
+  <details class="step"><summary>שלב ראשון — סופרים</summary>
+    <div class="step-body">עוברים על הרשימה תשובה-תשובה, ומסמנים קו ליד כל ערך שפוגשים.
+    בסוף הספירה: כלב — 6, חתול — 4, דג — 2, אין — 3.</div>
+  </details>
+  <details class="step"><summary>שלב שני — בונים טבלה</summary>
+    <div class="step-body">
+      שורה עליונה — הערכים השונים; שורה תחתונה — השכיחות של כל אחד:
+      <table class="dtable">
+        <tr><th>חיית המחמד</th><td>כלב</td><td>חתול</td><td>דג</td><td>אין</td></tr>
+        <tr><th>מספר התלמידים</th><td>6</td><td>4</td><td>2</td><td>3</td></tr>
+      </table>
+    </div>
+  </details>
+  <details class="step"><summary>שלב שלישי — בודקים את הסכום</summary>
+    <div class="step-body">מחברים את השכיחויות:
+    <br><span class="fi">\(6+4+2+3=15\)</span> — בדיוק כמספר הנשאלים ✓.
+    <br>אם הסכום לא יוצא נכון, סימן שפספסנו תשובה או ספרנו אחת פעמיים.</div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex1"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex hide-marks">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>מידות נעליים</h4></div>
+  <p class="q-text">
+    <span class="mk mk-group">עשר בנות נשאלו מה מידת הנעליים שלהן, והתשובות נרשמו כסדרן:
+    36, 38, 37, 38, 39, 36, 38, 40, 37, 38</span>.
+    <span class="mk mk-find">בני במחברת טבלת שכיחויות מהרשימה, וחשבי את הטווח.</span>
+  </p>
+  <div class="q-row">
+    <button class="marks-btn no-print" style="font-family:inherit;font-size:12.5px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:5px 10px;cursor:pointer">הציגי את הפירוק בצבעים</button>
+  </div>
+  <div class="q-row">
+    <span>מה השכיחות של מידה 38?</span>
+    <input class="q-input" data-answer="4" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <span>מה הטווח?</span>
+    <input class="q-input" data-answer="4" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p><strong>שלב 1 — סופרים ובונים טבלה.</strong> עוברים על הרשימה מידה-מידה:</p>
+      <table class="dtable">
+        <tr><th>המידה</th><td>36</td><td>37</td><td>38</td><td>39</td><td>40</td></tr>
+        <tr><th>מספר הבנות</th><td>2</td><td>2</td><td>4</td><td>1</td><td>1</td></tr>
+      </table>
+      <p><strong>שלב 2 — בודקים שהשורה נסגרת.</strong>
+      <span class="fi">\(2+2+4+1+1=10\)</span> — כל עשר התשובות בפנים ✓</p>
+      <p><strong>שלב 3 — קוראים מהטבלה.</strong>
+      השכיחות של מידה 38 היא <strong>4</strong> — ולכן 38 היא המידה השכיחה ברשימה.</p>
+      <p><strong>שלב 4 — הטווח.</strong> קודם הכלל: הטווח הוא הערך הגדול ביותר פחות הקטן ביותר —
+      ואז המספרים:</p>
+      $$\text{טווח}=\underbrace{40}_{\text{הערך הגדול ביותר}}-\underbrace{36}_{\text{הערך הקטן ביותר}}=\textcolor{#2E7D32}{4}$$
+      <p><strong>בדיקת היגיון:</strong> כל המידות ברשימה נמצאות בין 36 ל-40 —
+      חמש מידות שונות, והמרחק מהקצה לקצה הוא 4 ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex2"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>טבלה עם עמודת סה"כ</h4></div>
+  <p class="q-text">
+    בכיתה בדקו איך מגיעים לבית הספר, אבל מספר אחד נמחק בטעות:
+  </p>
+  <table class="dtable">
+    <tr><th>איך מגיעים</th><td>הליכה</td><td>אופניים</td><td>הסעה</td><td>אוטובוס</td><td>סה"כ</td></tr>
+    <tr><th>מספר התלמידים</th><td>12</td><td class="x-cell">?</td><td>9</td><td>5</td><td>34</td></tr>
+  </table>
+  <p class="q-text">כמה תלמידים מגיעים באופניים?</p>
+  <div class="q-row">
+    <span>התשובה שלי:</span>
+    <input class="q-input" data-answer="8" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p><strong>שלב 1 — הכלל.</strong> עמודת הסה"כ היא סכום כל שאר העמודות —
+      אז הנעלם הוא הסה"כ פחות כל מה שכן ידוע:</p>
+      $$\textcolor{#2E7D32}{\text{אופניים}}=\textcolor{#8A6D1B}{\text{הסכום הכולל}}-\textcolor{#1D6FA5}{\text{כל השאר}}$$
+      <p><strong>שלב 2 — מציבים.</strong></p>
+      $$\textcolor{#2E7D32}{\text{אופניים}}=\textcolor{#8A6D1B}{34}-\textcolor{#1D6FA5}{12}-\textcolor{#1D6FA5}{9}-\textcolor{#1D6FA5}{5}=\textcolor{#2E7D32}{8}$$
+      <p>‏8 תלמידים מגיעים באופניים. נרשום את הטבלה המלאה:</p>
+      <table class="dtable sol-table">
+        <tr><th>איך מגיעים</th><td>הליכה</td><td>אופניים</td><td>הסעה</td><td>אוטובוס</td><td>סה"כ</td></tr>
+        <tr><th>מספר התלמידים</th><td>12</td><td class="hl-find"><b>8</b></td><td>9</td><td>5</td><td class="hl-total">34</td></tr>
+      </table>
+      <p><strong>בדיקת היגיון:</strong> <span class="fi">\(12+8+9+5=34\)</span> ✓ —
+      השורה נסגרת בדיוק על הסה"כ.</p>
+      <p>כאן לא צריך משוואות ולא כפל בהצלבה — רק חיסור. חשוב לזהות מתי השאלה
+      קלה באמת, ולא לסבך אותה.</p>
+      <p>ועוד דבר חשוב לגבי עמודת סה"כ: היא <strong>סיכום</strong> של הטבלה,
+      לא עוד קבוצה — אז לעולם לא מחברים אותה יחד עם שאר העמודות.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex4"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>הכיוון ההפוך — מטבלה לדיאגרמה</h4></div>
+  <p class="q-text">
+    עד עכשיו קראנו דיאגרמות; בעבודות מבקשים גם <strong>לסרטט</strong>.
+    לפנייך טבלה — סרטטי במחברת דיאגרמת עמודות מתאימה:
+  </p>
+  <table class="dtable">
+    <tr><th>ספרים שנקראו בחופשה</th><td>0</td><td>1</td><td>2</td><td>3</td></tr>
+    <tr><th>מספר התלמידים</th><td>4</td><td>7</td><td>6</td><td>3</td></tr>
+  </table>
+  <details class="sol">
+    <summary>הצגי פתרון מלא — ומה מורה בודקת בדיאגרמה</summary>
+    <div class="sol-body">
+      <figure class="plain" style="border:none;box-shadow:none;background:transparent">
+        <div class="axplot" style="max-width:356px">
+        <span class="ax-ylab">השכיחות — כמה תלמידים</span>
+        <svg viewBox="0 0 300 148" style="width:100%;height:auto">
+          <line x1="30" y1="95" x2="285" y2="95" stroke="#E4E8EE" stroke-width="1"/>
+          <line x1="30" y1="65" x2="285" y2="65" stroke="#E4E8EE" stroke-width="1"/>
+          <line x1="30" y1="35" x2="285" y2="35" stroke="#E4E8EE" stroke-width="1"/>
+          <line x1="30" y1="16" x2="30" y2="125" stroke="#5A6875" stroke-width="1.5"/>
+          <path d="M30 8 L26.5 16 L33.5 16 Z" fill="#5A6875"/>
+          <line x1="30" y1="125" x2="288" y2="125" stroke="#5A6875" stroke-width="1.5"/>
+          <path d="M296 125 L288 121.5 L288 128.5 Z" fill="#5A6875"/>
+          <line x1="26" y1="95" x2="30" y2="95" stroke="#5A6875" stroke-width="1.5"/>
+          <line x1="26" y1="65" x2="30" y2="65" stroke="#5A6875" stroke-width="1.5"/>
+          <line x1="26" y1="35" x2="30" y2="35" stroke="#5A6875" stroke-width="1.5"/>
+          <text x="22" y="129" text-anchor="end" font-size="11" fill="#5A6875">0</text>
+          <text x="22" y="99"  text-anchor="end" font-size="11" fill="#5A6875">2</text>
+          <text x="22" y="69"  text-anchor="end" font-size="11" fill="#5A6875">4</text>
+          <text x="22" y="39"  text-anchor="end" font-size="11" fill="#5A6875">6</text>
+          <line x1="72"  y1="125" x2="72"  y2="129" stroke="#5A6875" stroke-width="1"/>
+          <line x1="132" y1="125" x2="132" y2="129" stroke="#5A6875" stroke-width="1"/>
+          <line x1="192" y1="125" x2="192" y2="129" stroke="#5A6875" stroke-width="1"/>
+          <line x1="252" y1="125" x2="252" y2="129" stroke="#5A6875" stroke-width="1"/>
+          <rect x="55"  y="65" width="34" height="60" fill="#2E7D6B"/>
+          <rect x="115" y="20" width="34" height="105" fill="#2E7D6B"/>
+          <rect x="175" y="35" width="34" height="90" fill="#2E7D6B"/>
+          <rect x="235" y="80" width="34" height="45" fill="#2E7D6B"/>
+          <text x="72"  y="58"  text-anchor="middle" font-size="12" fill="#1C2733">4</text>
+          <text x="132" y="13"  text-anchor="middle" font-size="12" fill="#1C2733">7</text>
+          <text x="192" y="28"  text-anchor="middle" font-size="12" fill="#1C2733">6</text>
+          <text x="252" y="73"  text-anchor="middle" font-size="12" fill="#1C2733">3</text>
+          <text x="72"  y="140" text-anchor="middle" font-size="12" fill="#5A6875">0</text>
+          <text x="132" y="140" text-anchor="middle" font-size="12" fill="#5A6875">1</text>
+          <text x="192" y="140" text-anchor="middle" font-size="12" fill="#5A6875">2</text>
+          <text x="252" y="140" text-anchor="middle" font-size="12" fill="#5A6875">3</text>
+        </svg>
+        <span class="ax-xlab">הערכים — מספר הספרים</span>
+        </div>
+      </figure>
+      <p>מה שמורה בודקת בסרטוט (וזה מה ששווה נקודות):</p>
+      <ul>
+        <li>שני הצירים עם <strong>כותרות</strong> — מה מודדים בכל ציר.</li>
+        <li>מספרים על הציר האנכי <strong>במרווחים שווים</strong> (כאן: 0, 2, 4, 6) —
+            מהם קוראים את הגבהים.</li>
+        <li>מרווחים <strong>שווים</strong> בין העמודות, ורוחב אחיד.</li>
+        <li>גובה כל עמודה בדיוק לפי השכיחות — עוזר לסרטט על משבצות.</li>
+      </ul>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex5"> סרטטתי במחברת</label>
+</article>
+
+<article class="ex hide-marks">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>גרף בלי מספרים — קוראים מהציר</h4></div>
+  <p class="q-text">
+    <span class="mk mk-group">אלה נתוני הגובה מסעיף 2 — הפעם כדיאגרמת עמודות</span>.
+    שימי לב: הפעם <strong>אין</strong> מספר מעל כל עמודה —
+    בדיוק כמו בהרבה תרגילים בספר. את הגובה של כל עמודה קוראים מהציר האנכי:
+    מסתכלות איפה העמודה נגמרת, וממשיכות עם העיניים שמאלה עד המספר שעל הציר.
+  </p>
+  <figure>
+    <div class="axplot" style="max-width:436px">
+    <span class="ax-ylab">השכיחות — כמה תלמידים</span>
+    <svg viewBox="0 0 400 200" style="width:100%;height:auto" role="img" aria-label="דיאגרמת עמודות של גובהי התלמידים, בלי מספרים מעל העמודות">
+      <line x1="24" y1="146" x2="384" y2="146" stroke="#E4E8EE" stroke-width="1"></line>
+      <line x1="24" y1="122" x2="384" y2="122" stroke="#E4E8EE" stroke-width="1"></line>
+      <line x1="24" y1="98"  x2="384" y2="98"  stroke="#E4E8EE" stroke-width="1"></line>
+      <line x1="24" y1="74"  x2="384" y2="74"  stroke="#E4E8EE" stroke-width="1"></line>
+      <line x1="24" y1="50"  x2="384" y2="50"  stroke="#E4E8EE" stroke-width="1"></line>
+      <rect x="42"  y="122" width="38" height="48"  rx="3" fill="#2E7D6B"></rect>
+      <rect x="98"  y="98"  width="38" height="72"  rx="3" fill="#2E7D6B"></rect>
+      <rect x="154" y="146" width="38" height="24"  rx="3" fill="#2E7D6B"></rect>
+      <rect x="210" y="122" width="38" height="48"  rx="3" fill="#2E7D6B"></rect>
+      <rect x="266" y="74"  width="38" height="96"  rx="3" fill="#2E7D6B"></rect>
+      <rect x="322" y="50"  width="38" height="120" rx="3" fill="#2E7D6B"></rect>
+      <line x1="24" y1="170" x2="384" y2="170" stroke="#5A6875" stroke-width="1.5"></line>
+      <path d="M392 170 L384 166 L384 174 Z" fill="#5A6875"></path>
+      <line x1="24" y1="170" x2="24" y2="40" stroke="#5A6875" stroke-width="1.5"></line>
+      <path d="M24 32 L20 40 L28 40 Z" fill="#5A6875"></path>
+      <line x1="19" y1="146" x2="24" y2="146" stroke="#5A6875" stroke-width="1.5"></line>
+      <line x1="19" y1="122" x2="24" y2="122" stroke="#5A6875" stroke-width="1.5"></line>
+      <line x1="19" y1="98"  x2="24" y2="98"  stroke="#5A6875" stroke-width="1.5"></line>
+      <line x1="19" y1="74"  x2="24" y2="74"  stroke="#5A6875" stroke-width="1.5"></line>
+      <line x1="19" y1="50"  x2="24" y2="50"  stroke="#5A6875" stroke-width="1.5"></line>
+      <text x="16" y="174" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">0</text>
+      <text x="16" y="150" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">1</text>
+      <text x="16" y="126" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">2</text>
+      <text x="16" y="102" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">3</text>
+      <text x="16" y="78"  text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">4</text>
+      <text x="16" y="54"  text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">5</text>
+      <line x1="61"  y1="170" x2="61"  y2="175" stroke="#5A6875" stroke-width="1"></line>
+      <line x1="117" y1="170" x2="117" y2="175" stroke="#5A6875" stroke-width="1"></line>
+      <line x1="173" y1="170" x2="173" y2="175" stroke="#5A6875" stroke-width="1"></line>
+      <line x1="229" y1="170" x2="229" y2="175" stroke="#5A6875" stroke-width="1"></line>
+      <line x1="285" y1="170" x2="285" y2="175" stroke="#5A6875" stroke-width="1"></line>
+      <line x1="341" y1="170" x2="341" y2="175" stroke="#5A6875" stroke-width="1"></line>
+      <text x="61"  y="192" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">120</text>
+      <text x="117" y="192" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">121</text>
+      <text x="173" y="192" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">125</text>
+      <text x="229" y="192" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">128</text>
+      <text x="285" y="192" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">130</text>
+      <text x="341" y="192" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">134</text>
+    </svg>
+    <span class="ax-xlab">הערכים — הגובה בס"מ</span>
+    </div>
+    <figcaption>גובהי התלמידים מסעיף 2, כדיאגרמה. את גובה כל עמודה קוראים מהציר האנכי.</figcaption>
+  </figure>
+  <div class="q-row">
+    <button class="marks-btn no-print" style="font-family:inherit;font-size:12.5px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:5px 10px;cursor:pointer">הציגי את הפירוק בצבעים</button>
+  </div>
+  <div class="q-row">
+    <span>כמה תלמידים בגובה 130 ס"מ?</span>
+    <input class="q-input" data-answer="4" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <span>מהו הגובה השכיח?</span>
+    <input class="q-input" data-answer="134" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <span>כמה תלמידים נמדדו בסך הכל?</span>
+    <input class="q-input" data-answer="17" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>קוראים את הגובה של כל עמודה מהציר האנכי, ומעבירים את הנתונים לטבלה — זו תמיד ההתחלה:</p>
+      <table class="dtable sol-table">
+        <tr><th>הגובה בס"מ</th><td>120</td><td>121</td><td>125</td><td>128</td><td class="hl-group">130</td><td class="hl-find">134</td></tr>
+        <tr><th>מספר התלמידים</th><td>2</td><td>3</td><td>1</td><td>2</td><td class="hl-group"><b>4</b></td><td class="hl-find"><b>5</b></td></tr>
+      </table>
+      <p>העמודה של 130 נגמרת בדיוק על הקו של ה-4 — <strong>4 תלמידים</strong>.</p>
+      <p>הגובה השכיח: העמודה הגבוהה ביותר היא של 134, ומגיעה עד הקו של ה-5 —
+      השכיח הוא <strong style="color:var(--c-find)">134 ס"מ</strong>.
+      <br>השכיח הוא הגובה שחוזר הכי הרבה פעמים — כאן 134 ס"מ.
+      <br>המספר 5 הוא כמה תלמידים בגובה הזה.</p>
+      <p>סך התלמידים — מחברים את כל הגבהים של העמודות:
+      <span class="fi">\(2+3+1+2+4+5=17\)</span>.</p>
+      <p><strong>בדיקה:</strong> זו בדיוק טבלת הגבהים מסעיף 2 — אותם נתונים, פעם בטבלה ופעם בגרף ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex6"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · כמו במבחן</span><h4>מעבודת הקיץ שלך — תרגיל 5, סעיפים א–ג</h4></div>
+  <p class="q-text">
+    דיאגרמת העמודות מתארת את התפלגות הציונים שקיבלו תלמידים בכיתה ח׳ —
+    זו בדיוק הדיאגרמה מסעיף 4 למעלה, אותם ציונים ואותן עמודות.
+    <br>א. העבירי את הנתונים לטבלה.
+    <br>ב. מהו הציון השכיח?
+    <br>ג. מהו מספר התלמידים שלומדים בכיתה?
+  </p>
+  <details class="sol">
+    <summary>הצגי פתרון מלא (כמו שכותבים במחברת)</summary>
+    <div class="sol-body">
+      <p><strong>א.</strong> קוראים מכל עמודה את הציון ואת הגובה שלה, ומסדרים בטבלה:</p>
+      <div class="tbl-scroll">
+      <table class="dtable">
+        <tr><th>הציון</th><td>60</td><td>65</td><td>70</td><td>75</td><td>80</td><td>85</td><td>90</td><td>95</td><td>100</td></tr>
+        <tr><th>מספר התלמידים</th><td>3</td><td>5</td><td>6</td><td>6</td><td>8</td><td>9</td><td>7</td><td>4</td><td>2</td></tr>
+      </table>
+      </div>
+      <p><strong>ב.</strong> השכיח הוא הציון עם השכיחות הגבוהה ביותר —
+      מחפשים בשורת התלמידים את המספר הגדול ביותר:</p>
+      <table class="dtable sol-table">
+        <tr><th>הציון</th><td>60</td><td>65</td><td>70</td><td>75</td><td>80</td><td class="hl-find"><b>85</b></td><td>90</td><td>95</td><td>100</td></tr>
+        <tr><th>מספר התלמידים</th><td>3</td><td>5</td><td>6</td><td>6</td><td>8</td><td class="hl-group"><b>9</b></td><td>7</td><td>4</td><td>2</td></tr>
+      </table>
+      <p>השכיחות הגבוהה ביותר היא 9, ולכן השכיח הוא <strong>85</strong>.
+      <br>שימי לב: התשובה היא הציון (85), לא השכיחות (9).</p>
+      <p><strong>ג.</strong> מחברים את כל השכיחויות:
+      <br><span class="fi">\(3+5+6+6+8+9+7+4+2=50\)</span>
+      <br>בכיתה לומדים <strong>50</strong> תלמידים.</p>
+    </div>
+  </details>
+  <p style="font-size:13px;color:var(--soft)">את סעיפי הממוצע והחציון של התרגיל הזה (ד–ז) נפתור עד הסוף בתחנה 3.</p>
+  <label class="mark"><input type="checkbox" data-k="ex3"> סיימתי את התרגיל הזה</label>
+</article>
+
+<!-- ============ 7. סרטונים ============ -->
+<h2><span class="num">7</span>🎬 רוצה לראות את זה מוסבר בקול?</h2>
+<div class="watch">
+  <p>הסרטונים הם תגבור, לא חובה — כל אחד מכסה את החומר של העמוד הזה מזווית קצת אחרת:</p>
+  <a class="video-link" href="https://www.youtube.com/watch?v=xZrcSBtpg1w">
+    <img src="../assets/stats/xZrcSBtpg1w/04_t0190.jpg" alt="מבוא לסטטיסטיקה — שקף מהסרטון" loading="lazy">
+    <span class="vt"><b>מבוא לסטטיסטיקה</b><span>נתונים, שכיחות וטבלאות מההתחלה · 9:14</span></span>
+    <span class="play">▶</span>
+  </a>
+  <a class="video-link" href="https://www.youtube.com/watch?v=Hj8to0kELv4">
+    <img src="../assets/stats/Hj8to0kELv4/02_t0090.jpg" alt="שכיח ושכיחות — שקף מהסרטון" loading="lazy">
+    <span class="vt"><b>שכיח ושכיחות על רגל אחת</b><span>ההבדל בין הערך לבין כמה פעמים הוא מופיע · 5:12</span></span>
+    <span class="play">▶</span>
+  </a>
+  <a class="video-link" href="https://www.youtube.com/watch?v=BkTQDzOkcHY">
+    <img src="../assets/stats/BkTQDzOkcHY/04_t0110.jpg" alt="שיעור מסכם לכיתה ח — שקף מהסרטון" loading="lazy">
+    <span class="vt"><b>סטטיסטיקה לכיתה ח׳ — שיעור מסכם</b><span>חזרה מסודרת על כל מושגי היסוד · 7:08</span></span>
+    <span class="play">▶</span>
+  </a>
+</div>
+
+<!-- ============ ניווט ============ -->
+<div class="progresswrap no-print">
+  <span class="progressbar"><i></i></span><span class="progress-label"></span>
+  <button class="all-sols" style="font-family:inherit;font-size:12px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:4px 10px;cursor:pointer">לפתוח את כל הפתרונות</button>
+</div>
+
+<nav class="pagenav">
+  <a href="index.html"><span class="dir">→ חזרה למפה</span>סטטיסטיקה — המפה</a>
+  <a class="next" href="02-mean.html"><span class="dir">התחנה הבאה ←</span>ממוצע</a>
+</nav>
+
+<footer class="fin">חלק מהעולם של שירה · <a href="index.html">המפה</a> · <a href="../index.html">המרכז</a></footer>
+</main>
+</div>
+</body>
+</html>

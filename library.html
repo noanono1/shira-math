@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<!-- מסך הבית של האייפד/הטלפון -->
+<link rel="apple-touch-icon" href="assets/icons/icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>הספרייה — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="css/shira.css">
+<style>
+:root{--accent:var(--stat)}
+/* כרטיסי PDF גדולים ונוחים לנגיעה (iPad-friendly) */
+.lib{display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:12px; margin:12px 0 6px}
+.lib a{display:flex; flex-direction:column; gap:6px; text-decoration:none;
+  background:var(--card); color:var(--ink); border:1px solid var(--line);
+  border-radius:var(--r-lg); padding:16px 16px 14px; min-height:92px;
+  box-shadow:0 10px 28px -26px var(--shadow); transition:.15s}
+.lib a:hover{border-color:var(--accent)}
+.lib a b{font-size:15.5px; line-height:1.35}
+.lib a span{font-size:12.5px; color:var(--soft); line-height:1.45}
+.lib a .tag{margin-top:auto; align-self:flex-start; font-size:10.5px; font-weight:800;
+  letter-spacing:.1em; color:var(--accent); border:1px solid var(--line);
+  border-radius:6px; padding:2px 8px; background:#FBFAF7}
+.groupt{margin:26px 0 4px; font-size:13px; font-weight:800; color:var(--soft); letter-spacing:.06em}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="index.html">⌂ המרכז של שירה</a>
+    <span class="crumbs"><b>הספרייה</b> · כל החוברות וה-PDFים</span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">הספרייה</div>
+  <h1>כל חוברת, בנגיעה אחת</h1>
+  <p class="lead">
+    כל ה-PDFים במקום אחד — העבודות שלך, החוברות מאתר בית הספר, וגם הצצה
+    לשנה הבאה. נגיעה על כרטיס פותחת את הקובץ, ומשם אפשר לשמור או להדפיס.
+  </p>
+</header>
+
+<div class="groupt">📘 העבודות שלך · הקיץ הזה</div>
+<div class="lib">
+  <a href="assets/pdf/summer-work-a1.pdf" target="_blank" rel="noopener">
+    <b>עבודת הקיץ — עולים לט׳ (הקבצה א1)</b>
+    <span>החוברת הרשמית שלך. כל חלק בה מכוסה באתר — המפות ינווטו אותך.</span>
+    <span class="tag">החוברת המרכזית</span>
+  </a>
+  <a href="assets/pdf/stats-practice-grade8.pdf" target="_blank" rel="noopener">
+    <b>חוברת תרגול בסטטיסטיקה</b>
+    <span>תרגול נוסף על טבלאות, דיאגרמות ומדדים — מתאים אחרי מודול הסטטיסטיקה.</span>
+    <span class="tag">תרגול</span>
+  </a>
+  <a href="assets/pdf/stats-summary-sheets.pdf" target="_blank" rel="noopener">
+    <b>דפי סיכום בסטטיסטיקה</b>
+    <span>סיכומים רשמיים של המושגים — טוב לרענון מהיר לפני מבחן.</span>
+    <span class="tag">סיכום</span>
+  </a>
+  <a href="assets/pdf/summer-work-excellence.pdf" target="_blank" rel="noopener">
+    <b>עבודת קיץ למצוינות</b>
+    <span>העשרה מעל רמת א1 — רק אם מתחשק לך אתגר נוסף.</span>
+    <span class="tag">העשרה</span>
+  </a>
+</div>
+
+<div class="groupt">🏫 מאתר בית הספר · השכבה שלך</div>
+<div class="lib">
+  <a href="assets/pdf/math-summer-to9-a2.pdf" target="_blank" rel="noopener">
+    <b>עבודת הקיץ של הקבצה א2</b>
+    <span>אותם נושאים ברמה מעט אחרת — מקור מצוין לעוד תרגילים מאותו סוג.</span>
+    <span class="tag">עוד תרגול</span>
+  </a>
+  <a href="assets/pdf/booklist-grade9.pdf" target="_blank" rel="noopener">
+    <b>רשימת ספרי הלימוד — כיתה ט׳</b>
+    <span>מה צריך לקנות ולהכין לשנה — הרשימה הרשמית מהאתר.</span>
+    <span class="tag">לשנה החדשה</span>
+  </a>
+</div>
+
+<div class="groupt">🏫 מהכיתה שלך · דפי עזר וחזרות</div>
+<div class="lib">
+  <a href="assets/pdf/ref-geometry-theorems.pdf" target="_blank" rel="noopener">
+    <b>המשפטים בגיאומטריה — הנימוקים החוזרים</b>
+    <span>הרשימה שכל הוכחת טענה-ונימוק נשענת עליה. שווה להכיר בעל-פה.</span>
+    <span class="tag">חובה להוכחות</span>
+  </a>
+  <a href="assets/pdf/ref-proof-examples.pdf" target="_blank" rel="noopener">
+    <b>דוגמאות טענה ונימוק — מהמורה</b>
+    <span>כך נראית הוכחה כתובה נכון, בדיוק בפורמט שמצפים לו בכיתה.</span>
+    <span class="tag">פורמט ההוכחה</span>
+  </a>
+  <a href="assets/pdf/ref-proofs-booklet.pdf" target="_blank" rel="noopener">
+    <b>חוברת הוכחות — חפיפה, קטעים וזוויות</b>
+    <span>מלא תרגילי טענה-ונימוק מלאים — הרפרנס לאיך כותבים הוכחה שמקבלת 100.</span>
+    <span class="tag">תרגול הוכחות</span>
+  </a>
+  <a href="assets/pdf/ref-geometry-concepts-9.pdf" target="_blank" rel="noopener">
+    <b>סיכום מושגים בגיאומטריה לכיתה ט׳</b>
+    <span>כל ההגדרות והמושגים של השנה — רענון מהיר לפני כל מבחן.</span>
+    <span class="tag">סיכום</span>
+  </a>
+  <a href="assets/pdf/review-exam-a1-dec1.pdf" target="_blank" rel="noopener">
+    <b>חזרה למבחן א1 — חלק 1</b>
+    <span>דפי החזרה האמיתיים מהכיתה — תרגול בפורמט של המבחנים שלך.</span>
+    <span class="tag">חזרה למבחן</span>
+  </a>
+  <a href="assets/pdf/review-exam-a1-dec2.pdf" target="_blank" rel="noopener">
+    <b>חזרה למבחן א1 — חלק 2</b>
+    <span>ההמשך — עוד תרגילים באותו פורמט.</span>
+    <span class="tag">חזרה למבחן</span>
+  </a>
+</div>
+
+<div class="groupt">🔭 הצצה קדימה · מה לומדים אחרייך</div>
+<div class="lib">
+  <a href="grade9/index.html">
+    <b>מה מחכה בכיתה ט׳ — הרשימה המלאה</b>
+    <span>אחת-עשרה התחנות של השנה הבאה, כל אחת בכמה שורות. נקרא מתוך החוברות שכאן.</span>
+    <span class="tag">דף באתר</span>
+  </a>
+</div>
+<div class="lib">
+  <a href="assets/pdf/math-summer-to10-4u.pdf" target="_blank" rel="noopener">
+    <b>עבודת הקיץ של העולים לי׳ — 4 יח"ל</b>
+    <span>מה מצפים שתדעי בסוף ט׳: פירוק לגורמים, משוואות ריבועיות ועוד. הצצה, לא חובה.</span>
+    <span class="tag">שנה הבאה</span>
+  </a>
+  <a href="assets/pdf/math-summer-to10-5u.pdf" target="_blank" rel="noopener">
+    <b>עבודת הקיץ של העולים לי׳ — 5 יח"ל</b>
+    <span>המסלול המוגבר — כדאי להציץ כשמחליטים על יחידות.</span>
+    <span class="tag">שנה הבאה</span>
+  </a>
+</div>
+
+<div class="box intuition" style="margin-top:24px">
+  <div class="box-title">טיפ ל-iPad</div>
+  כל קובץ שנפתח אפשר לשמור אצלך: כפתור השיתוף ↑ ואז "שמירה בקבצים",
+  או לפתוח ישר באפליקציית הספרים — ואז הוא זמין גם בלי האתר.
+</div>
+
+<footer class="fin">חלק מהעולם של שירה · <a href="index.html">חזרה למרכז</a></footer>
+</main>
+</div>
+</body>
+</html>

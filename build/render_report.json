@@ -1,0 +1,266 @@
+[
+  {
+    "page": "index.html",
+    "errors": [],
+    "bad_imgs": [],
+    "katex": 0,
+    "katex_errors": 0,
+    "leftover_dollar": 0
+  },
+  {
+    "page": "statistics/01-basics.html",
+    "errors": [],
+    "bad_imgs": [],
+    "katex": 12,
+    "katex_errors": 0,
+    "leftover_dollar": 0
+  },
+  {
+    "page": "statistics/02-mean.html",
+    "errors": [],
+    "bad_imgs": [],
+    "katex": 24,
+    "katex_errors": 0,
+    "leftover_dollar": 0
+  },
+  {
+    "page": "statistics/03-median-mode.html",
+    "errors": [],
+    "bad_imgs": [],
+    "katex": 61,
+    "katex_errors": 0,
+    "leftover_dollar": 0
+  },
+  {
+    "page": "statistics/04-relative-frequency.html",
+    "errors": [],
+    "bad_imgs": [],
+    "katex": 35,
+    "katex_errors": 0,
+    "leftover_dollar": 0
+  },
+  {
+    "page": "statistics/05-elections.html",
+    "errors": [],
+    "bad_imgs": [],
+    "katex": 19,
+    "katex_errors": 0,
+    "leftover_dollar": 0
+  },
+  {
+    "page": "statistics/06-table-with-hole.html",
+    "errors": [],
+    "bad_imgs": [],
+    "katex": 33,
+    "katex_errors": 0,
+    "leftover_dollar": 0
+  },
+  {
+    "page": "statistics/07-music-year.html",
+    "errors": [],
+    "bad_imgs": [],
+    "katex": 21,
+    "katex_errors": 0,
+    "leftover_dollar": 0
+  },
+  {
+    "page": "statistics/08-self-quiz.html",
+    "errors": [],
+    "bad_imgs": [],
+    "katex": 28,
+    "katex_errors": 0,
+    "leftover_dollar": 0
+  },
+  {
+    "page": "statistics/09-exercise-bank.html",
+    "errors": [],
+    "bad_imgs": [],
+    "katex": 249,
+    "katex_errors": 0,
+    "leftover_dollar": 0
+  },
+  {
+    "page": "statistics/index.html",
+    "errors": [],
+    "bad_imgs": [],
+    "katex": 0,
+    "katex_errors": 0,
+    "leftover_dollar": 0
+  },
+  {
+    "page": "algebra/01-algebra-language.html",
+    "errors": [],
+    "bad_imgs": [],
+    "katex": 91,
+    "katex_errors": 0,
+    "leftover_dollar": 0
+  },
+  {
+    "page": "algebra/02-equations.html",
+    "errors": [],
+    "bad_imgs": [],
+    "katex": 172,
+    "katex_errors": 0,
+    "leftover_dollar": 0
+  },
+  {
+    "page": "algebra/03-coordinates-function.html",
+    "errors": [],
+    "bad_imgs": [],
+    "katex": 104,
+    "katex_errors": 0,
+    "leftover_dollar": 0
+  },
+  {
+    "page": "algebra/04-linear-function.html",
+    "errors": [],
+    "bad_imgs": [],
+    "katex": 209,
+    "katex_errors": 0,
+    "leftover_dollar": 0
+  },
+  {
+    "page": "algebra/05-line-equation.html",
+    "errors": [],
+    "bad_imgs": [],
+    "katex": 220,
+    "katex_errors": 0,
+    "leftover_dollar": 0
+  },
+  {
+    "page": "algebra/06-systems.html",
+    "errors": [],
+    "bad_imgs": [],
+    "katex": 143,
+    "katex_errors": 0,
+    "leftover_dollar": 0
+  },
+  {
+    "page": "algebra/07-percent.html",
+    "errors": [],
+    "bad_imgs": [],
+    "katex": 61,
+    "katex_errors": 0,
+    "leftover_dollar": 0
+  },
+  {
+    "page": "algebra/08-quiz.html",
+    "errors": [],
+    "bad_imgs": [],
+    "katex": 85,
+    "katex_errors": 0,
+    "leftover_dollar": 0
+  },
+  {
+    "page": "algebra/09-exercise-bank.html",
+    "errors": [],
+    "bad_imgs": [],
+    "katex": 542,
+    "katex_errors": 0,
+    "leftover_dollar": 0
+  },
+  {
+    "page": "algebra/10-booklet-drills.html",
+    "errors": [],
+    "bad_imgs": [],
+    "katex": 161,
+    "katex_errors": 0,
+    "leftover_dollar": 0
+  },
+  {
+    "page": "algebra/11-booklet-functions.html",
+    "errors": [],
+    "bad_imgs": [],
+    "katex": 338,
+    "katex_errors": 0,
+    "leftover_dollar": 0
+  },
+  {
+    "page": "algebra/index.html",
+    "errors": [],
+    "bad_imgs": [],
+    "katex": 0,
+    "katex_errors": 0,
+    "leftover_dollar": 0
+  },
+  {
+    "page": "geometry/01-angles.html",
+    "errors": [],
+    "bad_imgs": [],
+    "katex": 199,
+    "katex_errors": 0,
+    "leftover_dollar": 0
+  },
+  {
+    "page": "geometry/02-triangles-congruence.html",
+    "errors": [],
+    "bad_imgs": [],
+    "katex": 201,
+    "katex_errors": 0,
+    "leftover_dollar": 0
+  },
+  {
+    "page": "geometry/03-quadrilaterals-areas.html",
+    "errors": [],
+    "bad_imgs": [],
+    "katex": 71,
+    "katex_errors": 0,
+    "leftover_dollar": 0
+  },
+  {
+    "page": "geometry/04-graphs-and-shapes.html",
+    "errors": [],
+    "bad_imgs": [],
+    "katex": 134,
+    "katex_errors": 0,
+    "leftover_dollar": 0
+  },
+  {
+    "page": "geometry/05-proof-models.html",
+    "errors": [],
+    "bad_imgs": [],
+    "katex": 714,
+    "katex_errors": 0,
+    "leftover_dollar": 0
+  },
+  {
+    "page": "geometry/06-proof-practice.html",
+    "errors": [],
+    "bad_imgs": [],
+    "katex": 1472,
+    "katex_errors": 0,
+    "leftover_dollar": 0
+  },
+  {
+    "page": "geometry/07-similarity.html",
+    "errors": [],
+    "bad_imgs": [],
+    "katex": 396,
+    "katex_errors": 0,
+    "leftover_dollar": 0
+  },
+  {
+    "page": "geometry/08-pythagoras.html",
+    "errors": [],
+    "bad_imgs": [],
+    "katex": 162,
+    "katex_errors": 0,
+    "leftover_dollar": 0
+  },
+  {
+    "page": "geometry/09-booklet-proofs.html",
+    "errors": [],
+    "bad_imgs": [],
+    "katex": 246,
+    "katex_errors": 0,
+    "leftover_dollar": 0
+  },
+  {
+    "page": "geometry/index.html",
+    "errors": [],
+    "bad_imgs": [],
+    "katex": 0,
+    "katex_errors": 0,
+    "leftover_dollar": 0
+  }
+]

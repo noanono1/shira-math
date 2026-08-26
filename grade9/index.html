@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<link rel="apple-touch-icon" href="../assets/icons/icon-180.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>מה מחכה בכיתה ט׳ — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../vendor/katex.min.css">
+<link rel="stylesheet" href="../css/shira.css">
+<style>
+:root{--accent:#B7791F}
+.wrap{max-width:880px}
+header.hero .eyebrow{color:#8A6D1B}
+
+/* כרטיס נושא של השנה הבאה */
+.topic{border:1px solid var(--line); border-radius:var(--r-lg); background:var(--card);
+  margin:18px 0; overflow:hidden; box-shadow:0 10px 28px -26px var(--shadow)}
+.topic>.th{display:flex; align-items:baseline; gap:11px; flex-wrap:wrap;
+  padding:13px 18px 11px; background:#FDFAF2; border-bottom:1px solid #F0E6CF}
+.topic>.th .tn{flex:0 0 auto; width:29px; height:29px; border-radius:8px;
+  background:#B7791F; color:#fff; font-weight:800; font-size:14px;
+  display:flex; align-items:center; justify-content:center; transform:translateY(3px)}
+.topic>.th h3{margin:0; font-size:18px; font-weight:800; letter-spacing:-.01em}
+.topic>.th .when{margin-inline-start:auto; font-size:11.5px; font-weight:700; color:#8A6D1B;
+  background:#FBF0C9; border-radius:99px; padding:3px 10px; white-space:nowrap}
+.topic>.tb{padding:14px 18px 16px}
+.topic>.tb>p:first-child{margin-top:0}
+.topic .built{margin:12px 0 0; padding:9px 13px; border-inline-start:3px solid var(--line);
+  background:#FBFAF7; border-radius:0 var(--r-md) var(--r-md) 0;
+  font-size:13px; color:var(--soft); line-height:1.55}
+.topic .built b{color:var(--ink)}
+.topic .built a{font-weight:700}
+.taste{border:1px dashed #E0D6BE; border-radius:var(--r-md); background:#FDFCF8;
+  padding:10px 15px 8px; margin:13px 0 0}
+.taste .tt{font-size:11.5px; font-weight:800; letter-spacing:.08em; color:#8A6D1B;
+  text-transform:uppercase; margin-bottom:2px}
+.taste .katex-display{margin:.4em 0}
+
+.grid2{display:flex; flex-wrap:wrap; gap:12px}
+.grid2>div{flex:1 1 260px; min-width:0}
+
+/* מיני-מפה של השנה */
+.year{display:flex; flex-wrap:wrap; gap:7px; margin:14px 0 0}
+.year a{text-decoration:none; font-size:12.5px; font-weight:700; color:var(--soft);
+  background:var(--card); border:1px solid var(--line); border-radius:99px;
+  padding:6px 13px; transition:.15s}
+.year a:hover{border-color:#D8D1C4; color:var(--ink)}
+</style>
+<script defer src="../vendor/katex.min.js"></script>
+<script defer src="../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../js/shira.js"></script>
+</head>
+<body data-page="grade9:index">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../index.html">⌂ המרכז של שירה</a>
+    <span class="crumbs"><b>כיתה ט׳</b> · מה מחכה בשנה הבאה</span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">הצצה קדימה · לא לעכשיו</div>
+  <h1>מה מחכה בכיתה ט׳</h1>
+  <p class="lead">
+    כל שאר האתר הוא מה שאת <em>כבר</em> צריכה לדעת. הדף הזה הוא הפוך —
+    הוא מה ש<strong>עוד לא למדת</strong>, ולכן הוא יושב בנפרד: אחת-עשרה
+    התחנות של כיתה ט׳, כל אחת בכמה שורות, עם טעימה אחת קטנה
+    כדי שתדעי איך זה נראה. אין כאן שיעורי בית ואין מה לפתור. רק מפה.
+  </p>
+  <p class="youknow"><b>למה זה מדויק:</b> הרשימה לא נוחשה — היא נקראה מתוך
+  <a href="../library.html">עבודת הקיץ של מסיימי ט׳ באותו בית ספר</a> ומתוך
+  מבחני מפמ"ר ארציים לכיתה ט׳. זה בדיוק מה שיצפו ממך לדעת בסוף השנה הבאה.</p>
+  <div class="year">
+    <a href="#t1">חוקי חזקות</a><a href="#t2">כפל מקוצר</a><a href="#t3">פירוק לגורמים</a>
+    <a href="#t4">משוואה ריבועית</a><a href="#t5">שברים אלגבריים</a><a href="#t6">פרבולה</a>
+    <a href="#t7">גאומטריה אנליטית</a><a href="#t8">דמיון</a><a href="#t9">הסתברות</a>
+    <a href="#t10">בעיות מילוליות</a><a href="#t11">גופים ונפחים</a>
+  </div>
+</header>
+
+<div class="box intuition">
+  <div class="box-title">שורה אחת שמסכמת את כל השנה הבאה</div>
+  בכיתה ח׳ למדת לעבוד עם <span class="fi">\(x\)</span> בחזקה ראשונה. בכיתה ט׳
+  נכנס <span class="fi">\(x^{2}\)</span> — וכמעט כל נושא בשנה הוא עוד צד של אותו
+  שינוי: איך פותחים ביטוי עם ריבוע, איך מפרקים אותו בחזרה, איך פותרים משוואה
+  שיש בה ריבוע, ואיך נראה הגרף שלה.
+</div>
+
+<!-- ============================== 1 ============================== -->
+<section class="topic" id="t1">
+  <div class="th"><span class="tn">1</span><h3>חוקי חזקות</h3><span class="when">תחילת השנה</span></div>
+  <div class="tb">
+    <p>
+      כשמכפילים חזקות של אותו בסיס — <strong>מחברים</strong> את המעריכים; כשמחלקים —
+      <strong>מחסרים</strong>. זה מקצר עבודה שהיום היית עושה באריכות, והוא הכלי
+      שכל הפירוק לגורמים יישען עליו.
+    </p>
+    <div class="taste">
+      <div class="tt">טעימה</div>
+      $$a^{m}\cdot a^{n}=a^{m+n}\qquad
+        \frac{a^{m}}{a^{n}}=a^{m-n}\qquad
+        (a^{m})^{n}=a^{m\cdot n}$$
+      $$a^{0}=1\qquad a^{-n}=\frac{1}{a^{n}}$$
+      <p style="margin:6px 0 0;font-size:13.5px">
+        למשל <span class="fi">\(\dfrac{12a^{7}}{6a^{4}}=2a^{3}\)</span> —
+        המקדמים מתחלקים, והמעריכים נחסרים.
+      </p>
+    </div>
+    <p class="built">נשען על מה שכבר יש לך: <b>כינוס איברים דומים</b> —
+    <a href="../algebra/01-algebra-language.html">שפת האלגברה</a>.
+    ההבדל: שם חיברת <span class="fi">\(3x+5x\)</span>, וכאן מכפילים
+    <span class="fi">\(x^{3}\cdot x^{5}\)</span>. שני דברים שונים לגמרי, וזו בדיוק
+    הטעות שהכי הרבה נופלים בה בהתחלה.</p>
+  </div>
+</section>
+
+<!-- ============================== 2 ============================== -->
+<section class="topic" id="t2">
+  <div class="th"><span class="tn">2</span><h3>נוסחאות הכפל המקוצר</h3><span class="when">תחילת השנה</span></div>
+  <div class="tb">
+    <p>
+      שלוש נוסחאות שחוסכות פתיחת סוגריים ידנית — ובעיקר, שאותן קוראים גם
+      <strong>מימין לשמאל</strong>, וזה כבר פירוק לגורמים.
+    </p>
+    <div class="taste">
+      <div class="tt">שלוש הנוסחאות</div>
+      $$(a+b)^{2}=a^{2}+2ab+b^{2}$$
+      $$(a-b)^{2}=a^{2}-2ab+b^{2}$$
+      $$(a+b)(a-b)=a^{2}-b^{2}$$
+      <p style="margin:6px 0 0;font-size:13.5px">
+        השלישית היא החביבה על המבחנים:
+        <span class="fi">\((x+8)(x-8)=x^{2}-64\)</span> — האיבר האמצעי נעלם.
+      </p>
+    </div>
+    <p class="built">נשען על: <b>פתיחת סוגריים וחוק הפילוג</b> —
+    <a href="../algebra/01-algebra-language.html#sec-distribute">שם למדת אותו</a>.
+    הנוסחאות אינן חוק חדש; הן קיצור למה שכבר את יודעת לעשות ידנית.</p>
+  </div>
+</section>
+
+<!-- ============================== 3 ============================== -->
+<section class="topic" id="t3">
+  <div class="th"><span class="tn">3</span><h3>פירוק לגורמים</h3><span class="when">הנושא המרכזי של הסתיו</span></div>
+  <div class="tb">
+    <p>
+      הכיוון ההפוך של פתיחת סוגריים: לקחת ביטוי ארוך ולכתוב אותו בחזרה
+      כ<strong>מכפלה</strong>. שלוש דרכים, ובודקים אותן בסדר הזה:
+    </p>
+    <ol class="steps">
+      <li><strong>הוצאת גורם משותף</strong> — <span class="fi">\(6x^{2}+9x=3x(2x+3)\)</span></li>
+      <li><strong>נוסחאות הכפל המקוצר</strong> — <span class="fi">\(x^{2}-49=(x-7)(x+7)\)</span></li>
+      <li><strong>טרינום</strong> — <span class="fi">\(x^{2}+5x+6=(x+2)(x+3)\)</span>:
+          מחפשים שני מספרים שמכפלתם 6 וסכומם 5</li>
+    </ol>
+    <p>
+      ולמה זה הנושא המרכזי? כי הוא הכלי היחיד לפתור משוואה ריבועית, לצמצם שבר
+      אלגברי ולמצוא את החיתוכים של פרבולה. כמעט כל שאר השנה עומדת עליו.
+    </p>
+    <p class="built">נשען על: <b>חוק הפילוג</b> וגם על <b>מחלק משותף</b>. אם היום
+    את יודעת לפתוח <span class="fi">\((x+2)(x+3)\)</span> ולקבל
+    <span class="fi">\(x^{2}+5x+6\)</span> — בכיתה ט׳ פשוט תלכי באותה דרך אחורה.</p>
+  </div>
+</section>
+
+<!-- ============================== 4 ============================== -->
+<section class="topic" id="t4">
+  <div class="th"><span class="tn">4</span><h3>המשוואה הריבועית</h3><span class="when">חורף</span></div>
+  <div class="tb">
+    <p>
+      משוואה שיש בה <span class="fi">\(x^{2}\)</span>. שלא כמו המשוואות שאת פותרת
+      היום, לרוב יש לה <strong>שני פתרונות</strong> — ולפעמים אחד, ולפעמים אף אחד.
+      הכול נשען על טריק אחד פשוט:
+    </p>
+    <div class="taste">
+      <div class="tt">הרעיון</div>
+      <p style="margin:0 0 4px;font-size:13.5px">אם מכפלה שווה אפס, אחד הגורמים חייב להיות אפס:</p>
+      $$(x-6)(x+5)=0\;\Longrightarrow\;x=6\ \ \text{או}\ \ x=-5$$
+      <p style="margin:8px 0 4px;font-size:13.5px">וכשלא מצליחים לפרק — יש נוסחה שתמיד עובדת:</p>
+      $$x_{1,2}=\frac{-b\pm\sqrt{b^{2}-4ac}}{2a}$$
+    </div>
+    <p class="built">נשען על: <b>פתרון משוואה</b> —
+    <a href="../algebra/02-equations.html">תחנת המשוואות</a> — ועל
+    <b>פיתגורס</b>, כי גם שם כבר פתרת משהו בריבוע ולקחת שורש.
+    החידוש היחיד הוא שכאן יכולות לצאת שתי תשובות, וצריך לבדוק אם שתיהן הגיוניות
+    בשאלה (במבחן מפמ"ר ט׳ יש בדיוק שאלה כזאת: גובה של משולש שיצא "2 או 14",
+    ורק אחד מהם אפשרי).</p>
+  </div>
+</section>
+
+<!-- ============================== 5 ============================== -->
+<section class="topic" id="t5">
+  <div class="th"><span class="tn">5</span><h3>שברים אלגבריים</h3><span class="when">חורף</span></div>
+  <div class="tb">
+    <p>
+      שברים שבמונה ובמכנה שלהם יש <span class="fi">\(x\)</span>. כל מה שאת יודעת
+      על שברים רגילים נשאר נכון — צמצום, מכנה משותף, כפל וחילוק — רק שכדי לצמצם
+      צריך <strong>קודם לפרק לגורמים</strong>.
+    </p>
+    <div class="taste">
+      <div class="tt">טעימה</div>
+      $$\frac{x^{2}-25}{x+5}=\frac{(x-5)\cancel{(x+5)}}{\cancel{(x+5)}}=x-5$$
+      <p style="margin:6px 0 0;font-size:13.5px">
+        ותמיד עם <strong>תחום הצבה</strong>: כאן <span class="fi">\(x\neq-5\)</span>,
+        אחרת המכנה מתאפס.
+      </p>
+    </div>
+    <p class="built">נשען ישירות על: <b>תחום הצבה ומשוואות עם <span class="fi">\(x\)</span> במכנה</b> —
+    <a href="../algebra/02-equations.html#sec-domain">בדיוק תרגיל 2 של חלק ב׳ בעבודת הקיץ שלך</a>.
+    זו אותה מיומנות, רק שהמכנים נעשים ארוכים יותר.</p>
+  </div>
+</section>
+
+<!-- ============================== 6 ============================== -->
+<section class="topic" id="t6">
+  <div class="th"><span class="tn">6</span><h3>הפונקציה הריבועית — הפרבולה</h3><span class="when">אביב · הנושא הגדול</span></div>
+  <div class="tb">
+    <p>
+      עד היום כל גרף שראית היה <strong>ישר</strong>. הפונקציה
+      <span class="fi">\(y=x^{2}\)</span> נותנת עקומה בצורת חיוך — פרבולה —
+      ואיתה מגיעות מילים חדשות: <strong>קדקוד</strong> (הנקודה הכי נמוכה או הכי גבוהה),
+      <strong>ציר סימטריה</strong>, ותחומי עלייה וירידה.
+    </p>
+    <figure style="margin:14px 0 4px">
+      <svg viewBox="0 0 300 208" style="width:100%;max-width:340px;height:auto" role="img" aria-label="פרבולה שקדקודה מתחת לציר x, עם ציר סימטריה ושתי נקודות חיתוך עם הציר">
+        <line x1="20" y1="120" x2="285" y2="120" stroke="#94A3B8" stroke-width="1.5"/>
+        <line x1="150" y1="18" x2="150" y2="185" stroke="#B7791F" stroke-width="1.5" stroke-dasharray="4 4"/>
+        <path d="M70,25 Q150,315 230,25" fill="none" stroke="#2E6F8E" stroke-width="3"/>
+        <circle cx="150" cy="170" r="4.5" fill="#B7791F"/>
+        <circle cx="120" cy="120" r="4" fill="#2E7D32"/>
+        <circle cx="180" cy="120" r="4" fill="#2E7D32"/>
+        <text x="150" y="192" text-anchor="middle" font-size="11" font-weight="bold" fill="#B7791F">קדקוד</text>
+        <text x="98" y="112" text-anchor="middle" font-size="11" fill="#2E7D32">אפס</text>
+        <text x="202" y="112" text-anchor="middle" font-size="11" fill="#2E7D32">אפס</text>
+        <text x="288" y="116" font-size="12" font-style="italic" fill="#5A6875">x</text>
+        <text x="139" y="17" font-size="12" font-style="italic" fill="#5A6875">y</text>
+      </svg>
+      <figcaption>הקדקוד (ענברי), ציר הסימטריה (המקווקו) ושתי נקודות האפס (ירוק) —
+      שלושת הדברים שכל שאלה על פרבולה מבקשת.</figcaption>
+    </figure>
+    <div class="taste">
+      <div class="tt">הצורה שהכי נוח לקרוא ממנה</div>
+      $$y=(x-p)^{2}+k\qquad\text{הקדקוד: }(p,\;k)$$
+      <p style="margin:6px 0 0;font-size:13.5px">
+        למשל ל-<span class="fi">\(m(x)=(x-3)^{2}-4\)</span> הקדקוד הוא
+        <span class="fi">\((3,-4)\)</span> — קוראים אותו ישר מהנוסחה, בלי לצייר.
+      </p>
+    </div>
+    <p class="built">נשען על: כל <b>מסלול הפונקציה הקווית</b> —
+    <a href="../algebra/04-linear-function.html">תחומי חיוביות ושליליות, נקודות חיתוך, קריאת גרף</a>.
+    השאלות יהיו מנוסחות בדיוק באותן מילים, רק על עקומה במקום על ישר.</p>
+  </div>
+</section>
+
+<!-- ============================== 7 ============================== -->
+<section class="topic" id="t7">
+  <div class="th"><span class="tn">7</span><h3>גאומטריה אנליטית</h3><span class="when">אביב</span></div>
+  <div class="tb">
+    <p>
+      גאומטריה שנפגשת עם מערכת הצירים: מרובע שנתון בשיעורי הקדקודים שלו,
+      ומוכיחים עליו דברים בעזרת חשבון במקום בעזרת טענה ונימוק.
+    </p>
+    <div class="grid2">
+      <div class="taste">
+        <div class="tt">מרחק בין שתי נקודות</div>
+        $$d=\sqrt{(x_{2}-x_{1})^{2}+(y_{2}-y_{1})^{2}}$$
+        <p style="margin:6px 0 0;font-size:13px">זה פיתגורס, בתחפושת.</p>
+      </div>
+      <div class="taste">
+        <div class="tt">אמצע קטע · ניצבות</div>
+        $$M=\left(\frac{x_{1}+x_{2}}{2},\;\frac{y_{1}+y_{2}}{2}\right)$$
+        $$m_{1}\cdot m_{2}=-1$$
+      </div>
+    </div>
+    <p class="built">נשען על: <b>שיפוע ומשוואת ישר</b>
+    (<a href="../algebra/05-line-equation.html">תחנה 5</a>),
+    <b>ישרים מקבילים</b>, <b>שטח מתוך גרף</b>
+    (<a href="../geometry/04-graphs-and-shapes.html">תחנת הגרפים והצורות</a>)
+    ו<b>פיתגורס</b> (<a href="../geometry/08-pythagoras.html">תחנה 8</a>).
+    זה הנושא שבו כל מה שלמדת השנה נפגש במקום אחד.</p>
+  </div>
+</section>
+
+<!-- ============================== 8 ============================== -->
+<section class="topic" id="t8">
+  <div class="th"><span class="tn">8</span><h3>דמיון משולשים — וההמשך שלו</h3><span class="when">כבר התחלת ✓</span></div>
+  <div class="tb">
+    <p>
+      את הבסיס כבר יש לך — <a href="../geometry/07-similarity.html">תחנה 7 באתר</a>
+      מכסה בדיוק את מה שנדרש בחלק ז׳ של עבודת הקיץ. בכיתה ט׳ ממשיכים מאותה נקודה:
+      משפט תאלס במלואו, יחסים בין קטעים על מקבילים, והגובה ליתר במשולש
+      ישר-זווית שיוצר שני משולשים דומים למקורי.
+    </p>
+    <p class="built">זה הנושא היחיד ברשימה הזאת ש<b>כבר מלמד אותך באתר</b> —
+    <a href="../geometry/07-similarity.html">דמיון משולשים</a>. אם רוצים להתחיל
+    להתקדם לקראת ט׳, זו הנקודה הכי טבעית.</p>
+  </div>
+</section>
+
+<!-- ============================== 9 ============================== -->
+<section class="topic" id="t9">
+  <div class="th"><span class="tn">9</span><h3>הסתברות</h3><span class="when">לאורך השנה</span></div>
+  <div class="tb">
+    <p>
+      מה הסיכוי שמשהו יקרה. מתחילים מניסוי אחד ("מה הסיכוי לקבל מספר חיובי
+      בסיבוב אחד"), וממשיכים לשני שלבים ברצף — שם מציירים
+      <strong>עץ הסתברויות</strong> ומכפילים לאורך הענפים.
+    </p>
+    <div class="taste">
+      <div class="tt">שני הכללים</div>
+      $$P=\frac{\text{מספר המקרים הרצויים}}{\text{מספר כל המקרים}}$$
+      $$P(\text{גם וגם})=P_{1}\cdot P_{2}$$
+    </div>
+    <p class="built">נשען על: <b>שכיחות יחסית ואחוזים</b> —
+    <a href="../statistics/04-relative-frequency.html">מודול הסטטיסטיקה</a>.
+    הסתברות היא בדיוק אותו שבר "חלק מתוך שלם", רק שהוא מסתכל קדימה על מה
+    <em>יקרה</em> במקום אחורה על מה שנמדד.</p>
+  </div>
+</section>
+
+<!-- ============================== 10 ============================== -->
+<section class="topic" id="t10">
+  <div class="th"><span class="tn">10</span><h3>בעיות מילוליות מתקדמות</h3><span class="when">לאורך השנה</span></div>
+  <div class="tb">
+    <p>
+      אותן בעיות שאת פותרת היום, אבל עם משוואות גדולות יותר: בעיות
+      <strong>תנועה</strong> (מרחק = מהירות × זמן), בעיות <strong>הספק</strong>
+      (שני פועלים שעובדים יחד), בעיות קנייה-מכירה ורווח — ולא מעט מהן
+      מגיעות בסוף למשוואה ריבועית.
+    </p>
+    <div class="taste">
+      <div class="tt">הטבלה שפותרת כמעט כל בעיית תנועה</div>
+      <table class="dtable" style="margin:6px auto">
+        <tr><th></th><th>מרחק</th><th>מהירות</th><th>זמן</th></tr>
+        <tr><td>הלוך</td><td><span class="fi">\(120\)</span></td><td><span class="fi">\(v\)</span></td><td><span class="fi">\(\frac{120}{v}\)</span></td></tr>
+        <tr><td>חזור</td><td><span class="fi">\(120\)</span></td><td><span class="fi">\(v+20\)</span></td><td><span class="fi">\(\frac{120}{v+20}\)</span></td></tr>
+      </table>
+      <p style="margin:6px 0 0;font-size:13px">ואז הנתון על הפרש הזמנים הופך לשורה אחת של משוואה.</p>
+    </div>
+    <p class="built">נשען על: <b>בעיות מילוליות ומערכת משוואות</b> —
+    <a href="../algebra/06-systems.html#sec-model">מבעיה למערכת</a> ו<b>אחוזים</b>
+    (<a href="../algebra/07-percent.html">תחנה 7</a>). השיטה זהה לגמרי: טבלה,
+    נעלם אחד, ומשוואה שנבנית מהמשפט האחרון בשאלה.</p>
+  </div>
+</section>
+
+<!-- ============================== 11 ============================== -->
+<section class="topic" id="t11">
+  <div class="th"><span class="tn">11</span><h3>גופים ונפחים</h3><span class="when">סוף השנה</span></div>
+  <div class="tb">
+    <p>
+      מהמישור אל המרחב: תיבה, קובייה, מנסרה וגליל. הנוסחאות נראות חדשות אבל
+      כולן אותו רעיון — <strong>שטח הבסיס כפול הגובה</strong>.
+    </p>
+    <div class="taste">
+      <div class="tt">אותה נוסחה, שלוש פעמים</div>
+      $$V_{\text{תיבה}}=a\cdot b\cdot h\qquad
+        V_{\text{מנסרה}}=S_{\text{בסיס}}\cdot h\qquad
+        V_{\text{גליל}}=\pi r^{2}h$$
+    </div>
+    <p class="built">נשען על: <b>נוסחאות השטח</b> —
+    <a href="../geometry/03-quadrilaterals-areas.html">תחנה 3</a>. אם את יודעת
+    לחשב את שטח הבסיס, קיבלת את הנפח בכפל אחד.</p>
+  </div>
+</section>
+
+<div class="box def" style="margin-top:30px">
+  <div class="box-title">רוצה להציץ בחומר האמיתי?</div>
+  ב<a href="../library.html">ספרייה</a> יושבת <strong>עבודת הקיץ של מסיימי ט׳</strong>
+  (4 ו-5 יחידות) — בדיוק החוברת שהרשימה הזאת נקראה ממנה. היא לא מיועדת לך עכשיו,
+  אבל אם מתחשק להסתכל איך זה נראה בעוד שנה — היא שם.
+</div>
+
+<div class="box warn" style="margin-top:14px">
+  <div class="box-title">ומשהו אחד לזכור</div>
+  אף אחד לא מצפה ממך לדעת שום דבר מהדף הזה עכשיו — הוא נכתב כדי ש<strong>לא
+  תופתעי</strong>, לא כדי להקדים. מה שכן שווה לעשות בקיץ זה לוודא ששלושת
+  הדברים שהשנה הבאה נשענת עליהם באמת יושבים:
+  <a href="../algebra/02-equations.html">פתרון משוואות</a>,
+  <a href="../algebra/01-algebra-language.html#sec-distribute">פתיחת סוגריים</a>
+  ו<a href="../algebra/04-linear-function.html">קריאת גרף של ישר</a>.
+  שלושתם באתר, ושלושתם כבר שלך.
+</div>
+
+<footer class="fin">חלק מהעולם של שירה ·
+<a href="../index.html">חזרה למרכז</a> ·
+<a href="../booklet.html">מפת החוברת</a> ·
+<a href="../library.html">לספרייה</a></footer>
+</main>
+</div>
+</body>
+</html>

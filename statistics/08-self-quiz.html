@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<!-- מסך הבית של האייפד/הטלפון -->
+<link rel="apple-touch-icon" href="../assets/icons/icon-180.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>בוחן הבית — סטטיסטיקה — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../vendor/katex.min.css">
+<link rel="stylesheet" href="../css/shira.css">
+<script defer src="../vendor/katex.min.js"></script>
+<script defer src="../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../js/shira.js"></script>
+<style>
+/* מחוון פתיחה — כמה זמן, כמה תרגילים, ואיפה מתחילים לתרגל (מוסתר בהדפסה) */
+.pagemeta{display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px;
+  margin:12px 0 0; font-size:13px; color:var(--soft)}
+.pagemeta .pm-time{background:var(--faint); border-radius:999px; padding:3px 10px}
+.pagemeta .pm-time b{color:var(--ink); font-weight:700}
+.pagemeta .pm-jump{color:var(--accent); font-weight:700; text-decoration:none}
+.pagemeta .pm-jump:hover{text-decoration:underline}
+.pagemeta .pm-note{flex:1 1 100%; margin:0}
+#ex-first,#bank-map{scroll-margin-top:78px}
+</style>
+</head>
+<body data-page="stat:08-self-quiz">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">סטטיסטיקה — המפה</a>
+    <span class="crumbs">בוחן הבית · <b>אחרי 7 התחנות</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">סטטיסטיקה · הגמר</div>
+  <h1>בוחן הבית</h1>
+  <p class="lead">
+    שישה תרגילים שלא ראית בשום מקום באתר — מספרים חדשים, בלי צבעים, בלי רמזים
+    ובלי שלבים. בדיוק כמו בכיתה. מחברת ליד, פותרים הכל, ורק בסוף בודקים.
+  </p>
+  <p class="youknow"><b>בסוף העמוד תדעי:</b> למצוא נעלם בטבלת שכיחויות — גם דרך שכיחות יחסית וגם דרך ממוצע נתון ·
+  לחלץ שכיח, חציון וממוצע מטבלה מלאה ·
+  לנבא מה קורה למדדים כשמצטרפים נתונים ·
+  להפוך תוצאות סקר לאחוזים ולמנדטים ·
+  לקרוא דיאגרמת עמודות ולפתור ממנה — בלי רמזים ובלי שלבים.</p>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>≈ 30 דק׳</b> · 6 תרגילים · העמוד כולו תרגול</span>
+  </p>
+</header>
+
+<div class="box intuition">
+  <div class="box-title">איך עובדים</div>
+  כל תרגיל פותרים במחברת עד הסוף, מקלידים תשובה לבדיקה — והפתרונות המלאים
+  מחכים בקופסה אחת בתחתית העמוד, רק אחרי שניסית הכל.
+</div>
+
+<!-- ============ 1 ============ -->
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">תרגיל 1</span><h4>טבלה עם נעלם</h4></div>
+  <p class="q-text">
+    בשכבה ט׳ בדקו כמה אחים ואחיות יש לכל תלמיד:
+  </p>
+  <table class="dtable">
+    <tr><th>מספר האחים</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+    <tr><th>מספר התלמידים</th><td>6</td><td class="x-cell">x</td><td>9</td><td>4</td><td>3</td></tr>
+  </table>
+  <p class="q-text">
+    ידוע שהשכיחות היחסית של תלמידים עם 2 אחים היא רבע.
+    <br>א. מצאי את x. &nbsp; ב. כמה תלמידים בשכבה? &nbsp; ג. מהו השכיח? &nbsp; ד. מהו החציון?
+  </p>
+  <div class="q-row"><span>א. ‏x =</span>
+    <input class="q-input" data-answer="14" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ב. מספר התלמידים:</span>
+    <input class="q-input" data-answer="36" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ג. השכיח:</span>
+    <input class="q-input" data-answer="1" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ד. החציון:</span>
+    <input class="q-input" data-answer="1" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="q1"> פתרתי את תרגיל 1 במחברת</label>
+</article>
+
+<!-- ============ 2 ============ -->
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">תרגיל 2</span><h4>נעלם דרך ממוצע נתון — סוג השאלה של כיתה ט׳</h4></div>
+  <p class="q-text">
+    בבוחן קיבלו התלמידים ציונים בין 5 ל-8:
+  </p>
+  <table class="dtable">
+    <tr><th>הציון</th><td>5</td><td>6</td><td>7</td><td>8</td></tr>
+    <tr><th>מספר התלמידים</th><td>2</td><td class="x-cell">x</td><td>5</td><td>3</td></tr>
+  </table>
+  <p class="q-text">
+    ידוע שממוצע הציונים בכיתה הוא 6.5. מצאי את x.
+  </p>
+  <div class="q-row"><span>‏x =</span>
+    <input class="q-input" data-answer="8" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="q2"> פתרתי את תרגיל 2 במחברת</label>
+</article>
+
+<!-- ============ 3 ============ -->
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">תרגיל 3</span><h4>טבלה מלאה — כל המדדים</h4></div>
+  <p class="q-text">
+    ‏30 בני נוער נשאלו כמה שעות ספורט הם עושים בשבוע:
+  </p>
+  <table class="dtable">
+    <tr><th>שעות ספורט</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+    <tr><th>מספר בני הנוער</th><td>3</td><td>9</td><td>7</td><td>7</td><td>4</td></tr>
+  </table>
+  <p class="q-text">
+    א. כמה מתאמנים <strong>פחות מ-2</strong> שעות?
+    &nbsp; ב. כמה מתאמנים <strong>לפחות 3</strong> שעות?
+    &nbsp; ג. מהו החציון? &nbsp; ד. מהו הממוצע?
+  </p>
+  <div class="q-row"><span>א.</span>
+    <input class="q-input" data-answer="12" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ב.</span>
+    <input class="q-input" data-answer="11" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ג. החציון:</span>
+    <input class="q-input" data-answer="2" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ד. הממוצע:</span>
+    <input class="q-input" data-answer="2" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="q3"> פתרתי את תרגיל 3 במחברת</label>
+</article>
+
+<!-- ============ 4 ============ -->
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">תרגיל 4</span><h4>הנתונים משתנים</h4></div>
+  <p class="q-text">
+    לקבוצה מהתרגיל הקודם הצטרפו שני בני נוער חדשים, וכל אחד מהם מתאמן 4 שעות בשבוע.
+    <br>א. בלי לחשב — הממוצע יעלה, יירד או יישאר? &nbsp; ב. חשבי את הממוצע החדש.
+  </p>
+  <div class="q-row"><span>ב. הממוצע החדש:</span>
+    <input class="q-input" data-answer="2.125" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="q4"> פתרתי את תרגיל 4 במחברת</label>
+</article>
+
+<!-- ============ 5 ============ -->
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">תרגיל 5</span><h4>מהאולפן</h4></div>
+  <p class="q-text">
+    בסקר בחירות השתתפו 400 נשאלים. ‏90 מהם ענו שיצביעו למפלגת הגשר.
+    <br>א. מה אחוז התומכים במפלגת הגשר? &nbsp; ב. כמה מנדטים (מתוך 120) היא צפויה לקבל?
+  </p>
+  <div class="q-row"><span>א. באחוזים:</span>
+    <input class="q-input" data-answer="22.5" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ב. מנדטים:</span>
+    <input class="q-input" data-answer="27" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="q5"> פתרתי את תרגיל 5 במחברת</label>
+</article>
+
+<!-- ============ 6 ============ -->
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">תרגיל 6</span><h4>הכל מתוך דיאגרמה</h4></div>
+  <p class="q-text">
+    ‏20 תלמידות נשאלו לכמה חוגים הן הולכות אחרי הלימודים.
+    הפעם אין טבלה — כל הנתונים בדיאגרמה:
+  </p>
+  <figure>
+    <div class="axplot" style="max-width:396px">
+    <span class="ax-ylab">השכיחות — כמה תלמידות</span>
+    <svg viewBox="0 0 360 190" style="width:100%;height:auto" role="img" aria-label="דיאגרמת עמודות של מספר החוגים">
+      <line x1="24" y1="120" x2="336" y2="120" stroke="#E4E8EE" stroke-width="1"></line>
+      <line x1="24" y1="80"  x2="336" y2="80"  stroke="#E4E8EE" stroke-width="1"></line>
+      <line x1="24" y1="40"  x2="336" y2="40"  stroke="#E4E8EE" stroke-width="1"></line>
+      <rect x="40"  y="100" width="40" height="60"  rx="3" fill="#2E7D6B"></rect>
+      <rect x="100" y="40"  width="40" height="120" rx="3" fill="#2E7D6B"></rect>
+      <rect x="160" y="60"  width="40" height="100" rx="3" fill="#2E7D6B"></rect>
+      <rect x="220" y="80"  width="40" height="80"  rx="3" fill="#2E7D6B"></rect>
+      <rect x="280" y="120" width="40" height="40"  rx="3" fill="#2E7D6B"></rect>
+      <text x="60"  y="93"  text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">3</text>
+      <text x="120" y="33"  text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">6</text>
+      <text x="180" y="53"  text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">5</text>
+      <text x="240" y="73"  text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">4</text>
+      <text x="300" y="113" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">2</text>
+      <line x1="24" y1="160" x2="336" y2="160" stroke="#5A6875" stroke-width="1.5"></line>
+      <path d="M344 160 L336 156 L336 164 Z" fill="#5A6875"></path>
+      <line x1="24" y1="160" x2="24" y2="26" stroke="#5A6875" stroke-width="1.5"></line>
+      <path d="M24 18 L20 26 L28 26 Z" fill="#5A6875"></path>
+      <line x1="19" y1="120" x2="24" y2="120" stroke="#5A6875" stroke-width="1.5"></line>
+      <line x1="19" y1="80"  x2="24" y2="80"  stroke="#5A6875" stroke-width="1.5"></line>
+      <line x1="19" y1="40"  x2="24" y2="40"  stroke="#5A6875" stroke-width="1.5"></line>
+      <text x="16" y="164" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">0</text>
+      <text x="16" y="124" text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">2</text>
+      <text x="16" y="84"  text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">4</text>
+      <text x="16" y="44"  text-anchor="end" font-family="Arial" font-size="12" fill="#5A6875">6</text>
+      <line x1="60"  y1="160" x2="60"  y2="165" stroke="#5A6875" stroke-width="1"></line>
+      <line x1="120" y1="160" x2="120" y2="165" stroke="#5A6875" stroke-width="1"></line>
+      <line x1="180" y1="160" x2="180" y2="165" stroke="#5A6875" stroke-width="1"></line>
+      <line x1="240" y1="160" x2="240" y2="165" stroke="#5A6875" stroke-width="1"></line>
+      <line x1="300" y1="160" x2="300" y2="165" stroke="#5A6875" stroke-width="1"></line>
+      <text x="60"  y="182" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">0</text>
+      <text x="120" y="182" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">1</text>
+      <text x="180" y="182" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">2</text>
+      <text x="240" y="182" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">3</text>
+      <text x="300" y="182" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">4</text>
+    </svg>
+    <span class="ax-xlab">הערכים — מספר החוגים</span>
+    </div>
+  </figure>
+  <p class="q-text">
+    א. העבירי את הנתונים לטבלה במחברת, ובדקי שהגעת ל-20 תלמידות.
+    &nbsp; ב. מהו השכיח? &nbsp; ג. מהו החציון? &nbsp; ד. מהו הממוצע?
+  </p>
+  <div class="q-row"><span>ב. השכיח:</span>
+    <input class="q-input" data-answer="1" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ג. החציון:</span>
+    <input class="q-input" data-answer="2" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ד. הממוצע:</span>
+    <input class="q-input" data-answer="1.8" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="q6"> פתרתי את תרגיל 6 במחברת</label>
+</article>
+
+<!-- ============ הפתרונות ============ -->
+<details class="sol" style="margin-top:30px">
+  <summary>הפתרונות המלאים — לפתוח רק אחרי שניסית הכל</summary>
+  <div class="sol-body">
+
+    <h3>תרגיל 1</h3>
+    <p><strong>א.</strong> שכיחות יחסית = החלק חלקי השלם, והשלם כולל את x:</p>
+    $$\frac{\underbrace{\textcolor{#1D6FA5}{9}}_{\textcolor{#1D6FA5}{\text{עם 2 אחים}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{22+x}}_{6+x+9+4+3\text{ — כל התלמידים}}}=\frac{1}{4}$$
+    <p>כפל בהצלבה:</p>
+    $$9\cdot 4=22+x\;\Longrightarrow\;36=22+x\;\Longrightarrow\;x=14$$
+    <p><strong>ב.</strong> <span class="fi">\(22+14=\textcolor{#8A6D1B}{36}\)</span> תלמידים.
+    <br><strong>בדיקה:</strong> <span class="fi">\(\tfrac{9}{36}=\tfrac{1}{4}\)</span> ✓ —
+    בדיוק הנתון.</p>
+    <p><strong>ג.</strong> השכיחות הגבוהה ביותר היא 14 ←
+    השכיח הוא הערך: <span class="mk mk-find"><strong>אח אחד</strong></span>.
+    <br>השכיח הוא הערך שחוזר הכי הרבה פעמים — כאן 1.
+    <br>המספר 14 הוא כמה תלמידים יש להם אח אחד.</p>
+    <p><strong>ד.</strong> ‏<span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> כבר בידינו מסעיף ב — סכום שורת השכיחות, 36 תלמידים:</p>
+    $$\text{מיקום החציון}=\frac{\overbrace{\textcolor{#8A6D1B}{36}}^{\textcolor{#8A6D1B}{\text{סך התלמידים — סכום השכיחויות}}}+1}{2}=\underbrace{18.5}_{\text{בין מקום 18 למקום 19}}$$
+    <p>צוברים בטבלה, מהעמודה הימנית שמאלה, עד שעוברים את 18.5:</p>
+    <table class="dtable sol-table">
+      <tr><th>מספר האחים</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+      <tr><th>מספר התלמידים</th><td>6</td><td><b>14</b></td><td>9</td><td>4</td><td>3</td></tr>
+      <tr><th>כמה ספרנו עד כאן (צבירה)</th>
+          <td>① 6</td>
+          <td style="background:#DFF0E1"><b style="color:#2E7D32">② <span dir="ltr">6+14=20</span></b> ✋</td>
+          <td>—</td><td>—</td><td>—</td></tr>
+    </table>
+    <p class="tbl-note">⬅ כיוון ההליכה: מתחילים בעמודה הימנית (0 אחים) וצועדים שמאלה — ① ואז ②.</p>
+    <p class="tbl-note" style="color:#2E7D32;font-weight:700;margin-top:2px">✋ עברנו את 18.5 — המקומות 18 ו-19 יושבים בעמודה של "אח אחד".</p>
+    <p>שני המקומות בגוש ה"אח אחד" ← החציון <strong>1</strong>.</p>
+
+    <h3>תרגיל 2</h3>
+    <p>ממוצע = הסכום חלקי הכמות — כותבים את שניהם עם x.
+    <br>שורת העבודה בטבלה עושה מכפלה בכל עמודה — גם בעמודה של ה-x:</p>
+    <table class="dtable sol-table">
+      <tr><th>הציון</th><td>5</td><td>6</td><td>7</td><td>8</td></tr>
+      <tr><th>מספר התלמידים</th><td>2</td><td class="x-cell">x</td><td>5</td><td>3</td></tr>
+      <tr><th>ציון × שכיחות</th>
+          <td><span dir="ltr">5·2</span><br><b>10</b></td><td><span dir="ltr">6·x</span><br><b>6x</b></td>
+          <td><span dir="ltr">7·5</span><br><b>35</b></td><td><span dir="ltr">8·3</span><br><b>24</b></td></tr>
+    </table>
+    $$\frac{\underbrace{\textcolor{#1D6FA5}{5\cdot 2+6\cdot x+7\cdot 5+8\cdot 3}}_{\textcolor{#1D6FA5}{\text{כל ציון כפול השכיחות שלו}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{2+x+5+3}}_{\textcolor{#8A6D1B}{\text{כל התלמידים}}}}=6.5
+    \;\;\Longrightarrow\;\; \frac{\textcolor{#1D6FA5}{69+6x}}{\textcolor{#8A6D1B}{10+x}}=6.5$$
+    <p>כופלים את שני האגפים במכנה:</p>
+    $$69+6x=6.5(10+x)$$
+    $$69+6x=65+6.5x\;\Longrightarrow\;4=0.5x\;\Longrightarrow\;x=8$$
+    <p><strong>בדיקה:</strong> הסכום <span class="fi">\(69+48=117\)</span>, התלמידים
+    <span class="fi">\(10+8=18\)</span>, ואכן <span class="fi">\(117:18=6.5\)</span> ✓
+    <br>שימי לב: ה-x הופיע גם במונה וגם במכנה — זה בדיוק סוג השאלות של כיתה ט׳,
+    ועכשיו יש לך את התבנית.</p>
+
+    <h3>תרגיל 3</h3>
+    <p><strong>א.</strong> "פחות מ-2" = ‏0 או 1 בלבד (בלי ה-2!):
+    <span class="fi">\(3+9=12\)</span> בני נוער.</p>
+    <p><strong>ב.</strong> "לפחות 3" = ‏3 או 4 (כולל את ה-3):
+    <span class="fi">\(7+4=11\)</span> בני נוער.</p>
+    <p><strong>ג.</strong> ‏<span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> נתון כבר בשאלה — 30 בני נוער
+    (ובדיקה מהטבלה: <span class="fi">\(3+9+7+7+4=30\)</span> ✓):</p>
+    $$\text{מיקום החציון}=\frac{\overbrace{\textcolor{#8A6D1B}{30}}^{\textcolor{#8A6D1B}{\text{סך בני הנוער}}}+1}{2}=\underbrace{15.5}_{\text{בין מקום 15 למקום 16}}$$
+    <p>צוברים בטבלה, מהעמודה הימנית שמאלה, עד שעוברים את 15.5:</p>
+    <table class="dtable sol-table">
+      <tr><th>שעות ספורט</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+      <tr><th>מספר בני הנוער</th><td>3</td><td>9</td><td>7</td><td>7</td><td>4</td></tr>
+      <tr><th>כמה ספרנו עד כאן (צבירה)</th>
+          <td>① 3</td>
+          <td>② <span dir="ltr">3+9=12</span></td>
+          <td style="background:#DFF0E1"><b style="color:#2E7D32">③ <span dir="ltr">12+7=19</span></b> ✋</td>
+          <td>—</td><td>—</td></tr>
+    </table>
+    <p class="tbl-note">⬅ כיוון ההליכה: מתחילים בעמודה הימנית (0 שעות) וצועדים שמאלה — ① ואז ② ואז ③.</p>
+    <p class="tbl-note" style="color:#2E7D32;font-weight:700;margin-top:2px">✋ עברנו את 15.5 — המקומות 15 ו-16 יושבים בעמודה של שעתיים.</p>
+    <p>שני המקומות בגוש ה-2 ← החציון <strong>2</strong>.</p>
+    <p><strong>ד.</strong> שורת העבודה — מכפלה בכל עמודה:</p>
+    <table class="dtable sol-table">
+      <tr><th>שעות ספורט</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+      <tr><th>מספר בני הנוער</th><td>3</td><td>9</td><td>7</td><td>7</td><td>4</td></tr>
+      <tr><th>ערך × שכיחות</th>
+          <td><span dir="ltr">0·3</span><br><b>0</b></td><td><span dir="ltr">1·9</span><br><b>9</b></td><td><span dir="ltr">2·7</span><br><b>14</b></td>
+          <td><span dir="ltr">3·7</span><br><b>21</b></td><td><span dir="ltr">4·4</span><br><b>16</b></td></tr>
+    </table>
+    $$\overline{x}=\frac{\underbrace{\textcolor{#1D6FA5}{0+9+14+21+16}}_{\textcolor{#1D6FA5}{\text{סכום שורת העבודה — כל ערך כפול השכיחות שלו}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{30}}_{\textcolor{#8A6D1B}{\text{סך בני הנוער}}}}=\frac{\textcolor{#1D6FA5}{60}}{\textcolor{#8A6D1B}{30}}=2$$
+    <p><strong>בדיקת היגיון:</strong> 2 נמצא בין 0 ל-4 ✓
+    <br>(ויצא בדיוק כמו החציון — קורה כשהנתונים מאוזנים, בלי יום מטורף.)</p>
+
+    <h3>תרגיל 4</h3>
+    <p><strong>א.</strong> מצטרפים שני ערכים של 4 — מעל הממוצע (2) —
+    אז הממוצע <strong>יעלה</strong>.</p>
+    <p><strong>ב.</strong> זהירות מהמלכודת: גם הסכום השתנה <em>וגם</em> הכמות:</p>
+    $$\overline{x}_{\text{חדש}}=\frac{\underbrace{\textcolor{#1D6FA5}{60}}_{\textcolor{#1D6FA5}{\text{הסכום הישן}}}+\underbrace{\textcolor{#6D28D9}{4+4}}_{\textcolor{#6D28D9}{\text{שני החדשים}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{30+2}}_{\textcolor{#8A6D1B}{\text{גם הכמות גדלה}}}}=\frac{\textcolor{#1D6FA5}{68}}{\textcolor{#8A6D1B}{32}}=2.125$$
+    <p><strong>בדיקת היגיון:</strong> הערכים החדשים מעל הממוצע ←
+    הממוצע באמת עלה, מ-2 ל-2.125 — בדיוק כמו שניבאנו בסעיף א ✓</p>
+
+    <h3>תרגיל 5</h3>
+    <p><strong>א.</strong> אחוז התומכים = החלק חלקי השלם — ואז מביאים את השבר למכנה 100:</p>
+    $$\frac{\underbrace{\textcolor{#1D6FA5}{90}}_{\textcolor{#1D6FA5}{\text{תומכי הגשר}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{400}}_{\textcolor{#8A6D1B}{\text{כל הנשאלים}}}}=\frac{90:\textcolor{#2E7D6B}{4}}{400:\textcolor{#2E7D6B}{4}}=\frac{22.5}{100}=22.5\%$$
+    <p><strong>ב.</strong></p>
+    $$\underbrace{\textcolor{#8A6D1B}{120}}_{\textcolor{#8A6D1B}{\text{המושבים}}}\cdot\underbrace{\frac{22.5}{100}}_{\text{האחוז שמצאנו}}=\textcolor{#2E7D32}{27}\;\text{מנדטים}$$
+    <p><strong>בדיקה הפוכה:</strong> <span class="fi">\(\tfrac{27}{120}=22.5\%\)</span> ✓
+    <br>ובדיקת היגיון: 22.5% זה קצת פחות מרבע, ורבע מ-120 הוא 30 — אז 27 מתאים ✓</p>
+
+    <h3>תרגיל 6</h3>
+    <p><strong>א.</strong> נקרא את הנתונים מכל עמודה בדיאגרמה, ונרשום אותם בטבלה:</p>
+    <table class="dtable sol-table">
+      <tr><th>מספר החוגים</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+      <tr><th>מספר התלמידות</th><td>3</td><td>6</td><td>5</td><td>4</td><td>2</td></tr>
+    </table>
+    <p><strong>בדיקה:</strong> <span class="fi">\(3+6+5+4+2=20\)</span> ✓ — כל 20 התלמידות בטבלה.</p>
+    <p><strong>ב.</strong> העמודה הגבוהה ביותר היא של הערך 1, וגובהה 6 ←
+    השכיח הוא <span class="mk mk-find"><strong>חוג אחד</strong></span>.
+    <br>השכיח הוא הערך שחוזר הכי הרבה פעמים — כאן 1.
+    <br>המספר 6 הוא כמה תלמידות הולכות לחוג אחד.</p>
+    <p><strong>ג.</strong> מי זה <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> אצלנו?
+    כל תלמידה היא נתון אחד — אז <span class="fi">\(\textcolor{#8A6D1B}{N}\)</span> הוא
+    סכום השכיחויות, שכבר חישבנו: <span class="fi">\(\textcolor{#8A6D1B}{N}=20\)</span>.</p>
+    $$\text{מיקום החציון}=\frac{\overbrace{\textcolor{#8A6D1B}{20}}^{\textcolor{#8A6D1B}{\text{סך התלמידות — סכום השכיחויות}}}+1}{2}=\underbrace{10.5}_{\text{בין מקום 10 למקום 11}}$$
+    <p>צוברים בטבלה, מהעמודה הימנית שמאלה, עד שעוברים את 10.5:</p>
+    <table class="dtable sol-table">
+      <tr><th>מספר החוגים</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+      <tr><th>מספר התלמידות</th><td>3</td><td>6</td><td>5</td><td>4</td><td>2</td></tr>
+      <tr><th>כמה ספרנו עד כאן (צבירה)</th>
+          <td>① 3</td>
+          <td>② <span dir="ltr">3+6=9</span></td>
+          <td style="background:#DFF0E1"><b style="color:#2E7D32">③ <span dir="ltr">9+5=14</span></b> ✋</td>
+          <td>—</td><td>—</td></tr>
+    </table>
+    <p class="tbl-note">⬅ כיוון ההליכה: מתחילים בעמודה הימנית (0 חוגים) וצועדים שמאלה — ① ואז ② ואז ③.</p>
+    <p class="tbl-note" style="color:#2E7D32;font-weight:700;margin-top:2px">✋ עברנו את 10.5 בתוך עמודת ה-2 — גם המקום ה-10 וגם המקום ה-11 יושבים בה.</p>
+    <p>שני המקומות באותה עמודה ← החציון הוא הערך שלה: <strong>2</strong>.</p>
+    <p><strong>ד.</strong> שורת העבודה — מכפלה בכל עמודה:</p>
+    <table class="dtable sol-table">
+      <tr><th>מספר החוגים</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+      <tr><th>מספר התלמידות</th><td>3</td><td>6</td><td>5</td><td>4</td><td>2</td></tr>
+      <tr><th>ערך × שכיחות</th>
+          <td><span dir="ltr">0·3</span><br><b>0</b></td><td><span dir="ltr">1·6</span><br><b>6</b></td><td><span dir="ltr">2·5</span><br><b>10</b></td>
+          <td><span dir="ltr">3·4</span><br><b>12</b></td><td><span dir="ltr">4·2</span><br><b>8</b></td></tr>
+    </table>
+    $$\overline{x}=\frac{\underbrace{\textcolor{#1D6FA5}{0+6+10+12+8}}_{\textcolor{#1D6FA5}{\text{סכום שורת העבודה — כל ערך כפול השכיחות שלו}}}\rule[-1.6em]{0pt}{0pt}}{\underbrace{\textcolor{#8A6D1B}{20}}_{\textcolor{#8A6D1B}{\text{סך התלמידות}}}}=\frac{\textcolor{#1D6FA5}{36}}{\textcolor{#8A6D1B}{20}}=1.8$$
+    <p><strong>בדיקת היגיון:</strong> 1.8 בין 0 ל-4 ✓ — וקרוב לחציון (2), כי אין כאן ערך חריג.</p>
+
+  </div>
+</details>
+
+<div class="box def" style="margin-top:26px">
+  <div class="box-title">עברת? כל הכבוד.</div>
+  זה היה תרגול בלי שום עזרה — בדיוק מה שיקרה בכיתה. אם משהו התפספס,
+  חזרי דרך המפה לתחנה המתאימה, ואז נסי שוב כאן עם ראש נקי.
+</div>
+
+<div class="progresswrap no-print">
+  <span class="progressbar"><i></i></span><span class="progress-label"></span>
+</div>
+
+<nav class="pagenav">
+  <a href="07-music-year.html"><span class="dir">→ התחנה הקודמת</span>השנה שלך במוזיקה</a>
+  <a class="next" href="index.html"><span class="dir">←</span>חזרה למפה</a>
+</nav>
+
+<footer class="fin">חלק מהעולם של שירה · <a href="index.html">המפה</a> · <a href="../index.html">המרכז</a></footer>
+</main>
+</div>
+</body>
+</html>

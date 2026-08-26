@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<!-- מסך הבית של האייפד/הטלפון -->
+<link rel="apple-touch-icon" href="../assets/icons/icon-180.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>דגמי הוכחה — גאומטריה — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../vendor/katex.min.css">
+<link rel="stylesheet" href="../css/shira.css">
+<style>
+:root{--accent:var(--alg)}
+/* שורת הפרדה של סעיף בתוך טבלת טענה ונימוק */
+table.dtable tr.tr-sep td{background:var(--faint);font-weight:800;font-size:12.5px;letter-spacing:.05em;padding:4px 10px}
+/* שורת מש"ל — חתימת סוף הוכחה, כמו במחברת */
+table.dtable tr.tr-qed td{background:var(--card);text-align:left;color:var(--accent);font-weight:800;font-size:13.5px;letter-spacing:.05em;padding:4px 14px}
+/* שורת תשובה — סיומת של סעיף מחשב, שונה בעליל מסיומת של הוכחה */
+table.dtable tr.tr-ans td{background:#DFF0DC;color:#2E7D32;font-weight:800;font-size:13.5px;text-align:right;padding:6px 14px}
+/* המאתר — רשת קטנה של כרטיסים עם עוגנים */
+.fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:9px;margin:12px 0 4px}
+.fcard{background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);padding:9px 12px}
+.fcard>b{display:block;font-size:13.5px;margin-bottom:6px}
+.chips{display:flex;flex-wrap:wrap;gap:5px}
+.chips a{font-size:12px;line-height:1.5;text-decoration:none;color:var(--ink);background:#F4F7F9;
+  border:1px solid var(--line);border-radius:999px;padding:2px 9px;transition:.15s}
+.chips a b{color:var(--alg);font-weight:800;margin-inline-end:3px}
+.chips a:hover{border-color:var(--alg);background:#EAF2F7}
+/* כרטיס דגם */
+article.ex.model{scroll-margin-top:74px}
+article.ex .sig{background:#FDFAF2;border:1px solid #F0E4C4;border-radius:var(--r-md);
+  padding:7px 11px;margin:2px 0 10px;font-size:13.5px}
+article.ex .sig b{color:#8A6D1B}
+ul.plan{margin:4px 0 0;padding-inline-start:18px}
+ul.plan li{margin:5px 0}
+p.usedth{font-size:12.5px;color:var(--soft);margin:10px 0 4px}
+p.usedth b{color:var(--ink)}
+a.backup{display:inline-block;font-size:12px;text-decoration:none;color:var(--soft);
+  border:1px solid var(--line);border-radius:7px;padding:3px 9px;margin-top:4px}
+a.backup:hover{border-color:var(--alg);color:var(--alg)}
+ol.rules{counter-reset:rl;list-style:none;padding:0;margin:8px 0 0}
+ol.rules>li{counter-increment:rl;position:relative;padding:3px 32px 3px 0;margin:7px 0}
+.fcard>b .en{white-space:nowrap}
+ol.rules>li::before{content:counter(rl);position:absolute;right:0;top:3px;width:21px;height:21px;
+  border-radius:50%;background:var(--accent);color:#fff;font-size:12px;font-weight:800;
+  display:flex;align-items:center;justify-content:center}
+</style>
+<script defer src="../vendor/katex.min.js"></script>
+<script defer src="../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../js/shira.js"></script>
+<style>
+/* מחוון פתיחה — כמה זמן, כמה תרגילים, ואיפה מתחילים לתרגל (מוסתר בהדפסה) */
+.pagemeta{display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px;
+  margin:12px 0 0; font-size:13px; color:var(--soft)}
+.pagemeta .pm-time{background:var(--faint); border-radius:999px; padding:3px 10px}
+.pagemeta .pm-time b{color:var(--ink); font-weight:700}
+.pagemeta .pm-jump{color:var(--accent); font-weight:700; text-decoration:none}
+.pagemeta .pm-jump:hover{text-decoration:underline}
+.pagemeta .pm-note{flex:1 1 100%; margin:0}
+#ex-first,#bank-map{scroll-margin-top:78px}
+</style>
+</head>
+<body data-page="geo:05-proof-models">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">גאומטריה — המפה</a>
+    <span class="crumbs">תחנה <b>5</b> מתוך 8 · <b>ספריית דגמי ההוכחה</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">גאומטריה · ספריית דגמים</div>
+  <h1>דגמי הוכחה — טענה ונימוק, כמו שצריך להיראות</h1>
+  <p class="lead">
+    יש לך תרגיל הוכחה מולך ואת לא יודעת איך מתחילים לכתוב אותו?
+    כאן יושבים עשרים ושלושה <strong>דגמים</strong> — הוכחות שלמות וכתובות עד הסוף,
+    כל אחת מהן מקרה טיפוסי אחר, לפי המשפחות של חוברת ההוכחות של הכיתה.
+    מוצאים את המקרה שדומה לתרגיל שלך,
+    ומעתיקים את המבנה: אותן שורות, אותם נימוקים, אותה חתימה.
+  </p>
+  <p class="youknow"><b>בסוף העמוד תדעי:</b> לזהות לאיזו משפחה התרגיל שלך שייך ·
+  לכתוב טבלת טענה ונימוק שאין בה שורה בלי נימוק ·
+  לדעת מתי חותמים מש"ל ומתי כותבים תשובה.</p>
+  <p class="pagemeta no-print">
+    <span class="pm-time">‏23 דגמים · <b>≈ 3 דק׳ לדגם</b></span>
+    <a class="pm-jump" href="#finder">לקפוץ ישר למאתר הדגמים ↓</a>
+    <span class="pm-note">לא קוראים ברצף — מחפשים את הדגם שדומה לתרגיל שלך.</span>
+  </p>
+</header>
+
+<div class="box def">
+  <div class="box-title">כללי הכתיבה — מה הופך טבלה לתשובה מלאה</div>
+  <ol class="rules">  <li>כל טענה מקבלת נימוק. שורה בלי נימוק לא נחשבת, גם אם היא נכונה.</li>
+  <li><b>נתון</b> הוא נימוק מלא ולגיטימי, והנתונים הם שפותחים את הטבלה.</li>
+  <li>נימוק חוקי הוא אחד משלושה: נתון · משפט שלמדנו · שורה קודמת בטבלה ("לפי 3"). "רואים בשרטוט" אינו נימוק.</li>
+  <li>סדר האותיות בחפיפה הוא ההתאמה: <span class="fi">\(\triangle ABC\cong\triangle DEF\)</span> אומר <span class="fi">\(A\leftrightarrow D,\; B\leftrightarrow E,\; C\leftrightarrow F\)</span> — ומכאן קוראים כל שוויון נובע בלי להסתכל בשרטוט.</li>
+  <li>כל חלק שהוכחת נחתם ב-<b>מש"ל</b>. כמה סעיפים ← מש"ל א׳, מש"ל ב׳.</li>
+  <li>סעיף שהוא חישוב נגמר ב<b>תשובה מודגשת</b>, לא במש"ל.</li>
+  <li>קו שאת מוסיפה לשרטוט בעצמך (אלכסון, גובה) הוא שורה בטבלה, והנימוק שלו הוא <b>בנייה</b>.</li>
+  <li><b>מסרטטים מחדש בגדול</b> ומסמנים כל נתון על השרטוט — לפני שכותבים שורה אחת.</li></ol>
+</div>
+
+<details class="more-x">
+  <summary>הנימוקים המותרים — הרשימה שכמעט כל הוכחה נשענת עליה</summary>
+  <div class="step-body">
+    <ul>      <li>נתון</li>
+      <li>צלע משותפת · קטע משותף · זווית משותפת</li>
+      <li>זוויות קודקודיות שוות</li>
+      <li>סכום זוויות צמודות <span class="fi">\(180^\circ\)</span></li>
+      <li>סכום הזוויות במשולש <span class="fi">\(180^\circ\)</span></li>
+      <li>זווית חיצונית למשולש שווה לסכום שתי הזוויות הפנימיות שאינן צמודות לה</li>
+      <li>זוויות מתחלפות שוות בין ישרים מקבילים</li>
+      <li>זוויות מתאימות שוות בין ישרים מקבילים</li>
+      <li>סכום זוויות חד-צדדיות בין ישרים מקבילים <span class="fi">\(180^\circ\)</span></li>
+      <li>אם זוג זוויות מתחלפות (או מתאימות) שוות אז הישרים מקבילים — המשפט ההפוך</li>
+      <li>במשולש שווה-שוקיים זוויות הבסיס שוות</li>
+      <li>אם במשולש שתי זוויות שוות זו לזו אז המשולש שווה-שוקיים — המשפט ההפוך</li>
+      <li>משפט חפיפה צ.ז.צ · ז.צ.ז · צ.צ.צ · צ.צ.ז</li>
+      <li>צלעות מתאימות במשולשים חופפים שוות</li>
+      <li>זוויות מתאימות במשולשים חופפים שוות</li>
+      <li>כלל המעבר — שני דברים ששווים לאותו דבר שווים זה לזה</li>
+      <li>חיבור קטעים שווים · חיסור קטעים שווים · חיבור זוויות שוות · חיסור זוויות שוות</li>
+      <li>שלם שווה לסכום חלקיו</li>
+      <li>הגדרת אמצע קטע · הגדרת אנך · הגדרת אנך אמצעי · הגדרת חוצה זווית</li>
+      <li>כל צלעות הריבוע שוות · כל זוויות הריבוע ישרות · כל זוויות המלבן ישרות</li>
+      <li>משפט פיתגורס</li>
+      <li>בנייה</li></ul>
+    <p>הרשימה המלאה, עם שרטוט וכתיב מתמטי לכל משפט, נמצאת בחוברת
+    "המשפטים בגיאומטריה" — <a href="../library.html">בספרייה</a>.</p>
+  </div>
+</details>
+
+<div class="box example">
+  <div class="box-title">מקרא הסימונים בשרטוטים שלמטה</div>
+  קו צבעוני קצר באמצע צלע = הצלע הזו שווה לצלע שמסומנת באותו צבע ובאותו מספר קווים קטנים.
+  <br>קשת צבעונית = זווית; ריבוע קטן = זווית של <span class="fi">\(90^\circ\)</span>;
+  חיצים על שני ישרים = הישרים מקבילים.
+  <br>סימון <strong>מלא</strong> = נתון. סימון <strong>מקווקו</strong> = מה שצריך להוכיח או לחשב.
+  <br>הצבעים בשרטוט הם אותם צבעים של השורות בטבלה — כך רואים לאיזו שורה שייך כל סימון.
+</div>
+
+<h2 id="finder">איפה הדגם שלי?</h2>
+
+<p>
+  שלוש דרכים למצוא. אם התרגיל לקוח מחוברת ההוכחות של הכיתה — הכי מהר לפי
+  <strong>שם המשפחה</strong>, בשורה השלישית.
+  ואם לא — התחילי מ<strong>מה שנתון</strong>, כי את זה תמיד רואים בשרטוט.
+</p>
+
+<h3>לפי מה שנתון לך</h3>
+<div class="fgrid">
+  <div class="fcard"><b>שני ישרים מקבילים וחותך</b><span class="chips"><a href="#m01"><b>1</b> מקבילים — זווית חסרה</a><a href="#m07"><b>7</b> חפיפה ז.צ.ז</a><a href="#m16"><b>16</b> הוכחה ואז חישוב</a></span></div>
+  <div class="fcard"><b>שני ישרים נחתכים (זוויות קודקודיות)</b><span class="chips"><a href="#m02"><b>2</b> קודקודיות עם נעלם</a><a href="#m06"><b>6</b> חפיפה צ.ז.צ</a><a href="#m07"><b>7</b> חפיפה ז.צ.ז</a></span></div>
+  <div class="fcard"><b>משולש שווה-שוקיים</b><span class="chips"><a href="#m03"><b>3</b> שווה-שוקיים ← זוויות</a><a href="#m04"><b>4</b> זוויות ← שווה-שוקיים</a><a href="#m09"><b>9</b> קטעים שווים דרך חפיפה</a><a href="#m14"><b>14</b> מוכיחים מקבילות</a><a href="#m15"><b>15</b> שני סעיפים</a></span></div>
+  <div class="fcard"><b>שתי צלעות שוות בשני משולשים</b><span class="chips"><a href="#m05"><b>5</b> חפיפה צ.צ.צ</a><a href="#m06"><b>6</b> חפיפה צ.ז.צ</a><a href="#m08"><b>8</b> ישר-זווית: יתר וניצב</a><a href="#m09"><b>9</b> קטעים שווים דרך חפיפה</a></span></div>
+  <div class="fcard"><b>שתי זוויות שוות בשני משולשים</b><span class="chips"><a href="#m04"><b>4</b> זוויות ← שווה-שוקיים</a><a href="#m07"><b>7</b> חפיפה ז.צ.ז</a><a href="#m16"><b>16</b> הוכחה ואז חישוב</a><a href="#m17"><b>17</b> חיבור וחיסור זוויות</a></span></div>
+  <div class="fcard"><b>קטע שמשותף לשני המשולשים</b><span class="chips"><a href="#m19"><b>19</b> צלע משותפת</a><a href="#m05"><b>5</b> חפיפה צ.צ.צ</a><a href="#m10"><b>10</b> זוויות שוות + אלכסון</a><a href="#m12"><b>12</b> חוצה זווית</a><a href="#m13"><b>13</b> אנך אמצעי</a><a href="#m15"><b>15</b> שני סעיפים</a><a href="#m16"><b>16</b> הוכחה ואז חישוב</a></span></div>
+  <div class="fcard"><b>חוצה זווית</b><span class="chips"><a href="#m12"><b>12</b> חוצה זווית</a><a href="#m15"><b>15</b> שני סעיפים</a></span></div>
+  <div class="fcard"><b>אנך אמצעי · אמצע קטע · אנך</b><span class="chips"><a href="#m13"><b>13</b> אנך אמצעי</a><a href="#m15"><b>15</b> שני סעיפים</a></span></div>
+  <div class="fcard"><b>משולש ישר-זווית</b><span class="chips"><a href="#m08"><b>8</b> ישר-זווית: יתר וניצב</a><a href="#m13"><b>13</b> אנך אמצעי</a></span></div>
+  <div class="fcard"><b>נקודות על ישר אחד</b><span class="chips"><a href="#m11"><b>11</b> חיבור וחיסור קטעים</a><a href="#m02"><b>2</b> קודקודיות עם נעלם</a><a href="#m21"><b>21</b> חופפים ומקבילים</a></span></div>
+  <div class="fcard"><b>שני משולשים שמכסים זה את זה</b><span class="chips"><a href="#m18"><b>18</b> כיסוי חלקי</a><a href="#m09"><b>9</b> קטעים שווים דרך חפיפה</a></span></div>
+  <div class="fcard"><b>מרובע (עם אלכסון או בלי)</b><span class="chips"><a href="#m05"><b>5</b> חפיפה צ.צ.צ</a><a href="#m10"><b>10</b> זוויות שוות + אלכסון</a><a href="#m16"><b>16</b> הוכחה ואז חישוב</a></span></div>
+</div>
+
+<h3>לפי מה שצריך להוכיח</h3>
+<div class="fgrid">
+  <div class="fcard"><b>שני משולשים חופפים</b><span class="chips"><a href="#m19"><b>19</b> צלע משותפת</a><a href="#m18"><b>18</b> כיסוי חלקי</a><a href="#m05"><b>5</b> חפיפה צ.צ.צ</a><a href="#m06"><b>6</b> חפיפה צ.ז.צ</a><a href="#m07"><b>7</b> חפיפה ז.צ.ז</a><a href="#m08"><b>8</b> ישר-זווית: יתר וניצב</a><a href="#m15"><b>15</b> שני סעיפים</a><a href="#m16"><b>16</b> הוכחה ואז חישוב</a></span></div>
+  <div class="fcard"><b>שני קטעים או שתי צלעות שווים</b><span class="chips"><a href="#m09"><b>9</b> קטעים שווים דרך חפיפה</a><a href="#m20"><b>20</b> שתי חפיפות</a><a href="#m11"><b>11</b> חיבור וחיסור קטעים</a><a href="#m12"><b>12</b> חוצה זווית</a><a href="#m13"><b>13</b> אנך אמצעי</a><a href="#m04"><b>4</b> זוויות ← שווה-שוקיים</a></span></div>
+  <div class="fcard"><b>שתי זוויות שוות</b><span class="chips"><a href="#m03"><b>3</b> שווה-שוקיים ← זוויות</a><a href="#m10"><b>10</b> זוויות שוות + אלכסון</a><a href="#m01"><b>1</b> מקבילים — זווית חסרה</a></span></div>
+  <div class="fcard"><b>שני ישרים מקבילים</b><span class="chips"><a href="#m14"><b>14</b> מוכיחים מקבילות</a><a href="#m21"><b>21</b> חופפים ומקבילים</a></span></div>
+  <div class="fcard"><b>שהמשולש שווה-שוקיים</b><span class="chips"><a href="#m04"><b>4</b> זוויות ← שווה-שוקיים</a></span></div>
+  <div class="fcard"><b>אנך · חוצה זווית</b><span class="chips"><a href="#m15"><b>15</b> שני סעיפים</a><a href="#m13"><b>13</b> אנך אמצעי</a><a href="#m12"><b>12</b> חוצה זווית</a></span></div>
+  <div class="fcard"><b>גודל של זווית (חישוב)</b><span class="chips"><a href="#m01"><b>1</b> מקבילים — זווית חסרה</a><a href="#m02"><b>2</b> קודקודיות עם נעלם</a><a href="#m03"><b>3</b> שווה-שוקיים ← זוויות</a><a href="#m16"><b>16</b> הוכחה ואז חישוב</a></span></div>
+</div>
+
+<h3>לפי סוג התרגיל בחוברת ההוכחות של הכיתה</h3>
+<div class="fgrid">
+  <div class="fcard"><b>1 · הוכחה בסיסית <span class="en">(1–10)</span></b><span class="chips"><a href="#m05"><b>5</b> חפיפה צ.צ.צ</a><a href="#m06"><b>6</b> חפיפה צ.ז.צ</a><a href="#m07"><b>7</b> חפיפה ז.צ.ז</a><a href="#m22"><b>22</b> סדר הקודקודים</a></span></div>
+  <div class="fcard"><b>2 · צלע משותפת <span class="en">(11–18)</span></b><span class="chips"><a href="#m19"><b>19</b> צלע משותפת</a><a href="#m05"><b>5</b> חפיפה צ.צ.צ</a><a href="#m23"><b>23</b> קבע אם ההוכחה נכונה</a></span></div>
+  <div class="fcard"><b>3 · חיבור וחיסור קטעים <span class="en">(19–28)</span></b><span class="chips"><a href="#m11"><b>11</b> חיבור וחיסור קטעים</a><a href="#m09"><b>9</b> קטעים שווים דרך חפיפה</a></span></div>
+  <div class="fcard"><b>4 · חיבור וחיסור זוויות <span class="en">(29–36)</span></b><span class="chips"><a href="#m17"><b>17</b> חיבור וחיסור זוויות</a><a href="#m02"><b>2</b> קודקודיות עם נעלם</a></span></div>
+  <div class="fcard"><b>5 · כיסוי חלקי <span class="en">(37–48)</span></b><span class="chips"><a href="#m18"><b>18</b> כיסוי חלקי</a><a href="#m09"><b>9</b> קטעים שווים דרך חפיפה</a></span></div>
+  <div class="fcard"><b>6 · שתי חפיפות <span class="en">(49–60)</span></b><span class="chips"><a href="#m20"><b>20</b> שתי חפיפות</a><a href="#m15"><b>15</b> שני סעיפים</a></span></div>
+  <div class="fcard"><b>7 · תרגילי סיכום <span class="en">(61–72)</span></b><span class="chips"><a href="06-proof-practice.html">לבנק התרגילים</a><a href="#m15"><b>15</b> שני סעיפים</a><a href="#m16"><b>16</b> הוכחה ואז חישוב</a></span></div>
+  <div class="fcard"><b>8 · תרגילי חזרה <span class="en">(73–84)</span></b><span class="chips"><a href="06-proof-practice.html">לבנק התרגילים</a><a href="#m20"><b>20</b> שתי חפיפות</a><a href="#m08"><b>8</b> ישר-זווית: יתר וניצב</a></span></div>
+  <div class="fcard"><b>9 · משולשים חופפים וישרים מקבילים <span class="en">(85–96)</span></b><span class="chips"><a href="#m21"><b>21</b> חופפים ומקבילים</a><a href="#m14"><b>14</b> מוכיחים מקבילות</a><a href="#m07"><b>7</b> חפיפה ז.צ.ז</a></span></div>
+  <div class="fcard"><b>״רשום את החפיפה עפ״י סדר הקודקודים״</b><span class="chips"><a href="#m22"><b>22</b> סדר הקודקודים</a></span></div>
+  <div class="fcard"><b>״קבע אם ההוכחה נכונה — נמק״</b><span class="chips"><a href="#m23"><b>23</b> קבע אם ההוכחה נכונה</a></span></div>
+</div>
+
+<div class="box intuition">
+  <div class="box-title">לא מצאת התאמה מדויקת?</div>
+  זה בסדר — כמעט כל תרגיל הוא הרכבה של שניים-שלושה דגמים.
+  קחי את הדגם שנותן לך את השורה הראשונה, ואת השורות הבאות חפשי בדגם אחר.
+  <br>ורוב תרגילי החפיפה נפתחים באותן שלוש שורות: שני נתונים, ואיבר שלישי
+  שהשרטוט נותן בחינם — צלע משותפת, זוויות קודקודיות או זוויות מתחלפות בין מקבילים.
+</div>
+
+<h2 id="models">עשרים ושלושה הדגמים</h2>
+<article class="ex model" id="m01">
+<div class="ex-head"><span class="lvl l1">דגם 1</span><h4>מוצאים זווית בין מקבילים — שרשרת Z / F / C</h4></div>
+<p class="sig"><b>מתי זה הדגם שלך:</b> בשרטוט שני ישרים מקבילים וישר אחד שחותך אותם, ונתונה זווית אחת — ומבקשים זווית אחרת.</p>
+<p class="q-text">הישרים <span class="fi">\(AB\)</span> ו-<span class="fi">\(CD\)</span> מקבילים. הישר <span class="fi">\(EF\)</span> חותך את <span class="fi">\(AB\)</span> בנקודה <span class="fi">\(G\)</span> ואת <span class="fi">\(CD\)</span> בנקודה <span class="fi">\(H\)</span>.<br>נתון: <span class="fi">\(\angle EGB=65^\circ\)</span>.<br>חשבי את <span class="fi">\(\angle GHD\)</span> ואת <span class="fi">\(\angle CHG\)</span>, ונמקי כל שלב.</p>
+<figure><svg viewBox="0 0 370 262" style="width:100%;max-width:470px;height:auto" role="img" aria-label="two parallel lines cut by a transversal, one angle of 65 degrees given"><line x1="32" y1="70" x2="338" y2="70" stroke="#5A6875" stroke-width="3"/><line x1="32" y1="190" x2="338" y2="190" stroke="#5A6875" stroke-width="3"/><line x1="232" y1="22.9" x2="132.1" y2="237.1" stroke="#334155" stroke-width="2.5"/><path d="M289.2,63 L295.2,70 L289.2,77" fill="none" stroke="#5A6875" stroke-width="2.5"/><path d="M289.2,183 L295.2,190 L289.2,197" fill="none" stroke="#5A6875" stroke-width="2.5"/><circle cx="210" cy="70" r="3.5" fill="#334155"/><circle cx="154" cy="190" r="3.5" fill="#334155"/><path d="M238,70 A28,28 0 0 0 221.8,44.6" fill="none" stroke="#C2408C" stroke-width="3.5"/><text x="248.8" y="50.3" text-anchor="middle" font-size="14" font-weight="bold" fill="#C2408C">65°</text><path d="M182,70 A28,28 0 0 0 198.2,95.4" fill="none" stroke="#C2408C" stroke-width="3.5"/><text x="171.2" y="99.7" text-anchor="middle" font-size="14" font-weight="bold" fill="#C2408C">65°</text><path d="M182,190 A28,28 0 0 0 165.9,164.6" fill="none" stroke="#C2408C" stroke-width="3.5"/><text x="192.8" y="170.3" text-anchor="middle" font-size="14" font-weight="bold" fill="#C2408C">65°</text><path d="M114,190 A40,40 0 0 1 170.9,153.7" fill="none" stroke="#B7791F" stroke-width="3.5" stroke-dasharray="6 4"/><text x="121.8" y="144.4" text-anchor="middle" font-size="16" font-weight="bold" fill="#B7791F" font-style="italic">x</text><text x="22" y="66" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">A</text><text x="350" y="66" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">B</text><text x="22" y="186" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">C</text><text x="350" y="186" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">D</text><text x="244" y="18.9" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">E</text><text x="120.1" y="251.1" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">F</text><text x="196" y="60" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">G</text><text x="130" y="212" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">H</text></svg><figcaption>הזווית הנתונה מסומנת בקשת מלאה, והזווית המבוקשת <span class="fi">\(x\)</span> — בקשת מקווקוות. כל קשת ורודה בשרטוט היא אותו מספר.</figcaption></figure>
+<div class="box intuition"><div class="box-title">איך חושבים</div>
+<ul class="plan">
+  <li>מסמנות על השרטוט את הזווית הנתונה, ובודקות איזו אות היא יוצרת עם הזווית המבוקשת.</li>
+  <li><span class="fi">\(\angle EGB\)</span> ו-<span class="fi">\(\angle GHD\)</span> יושבות באותה פינה בשני המפגשים ← מתאימות, ולכן שוות.</li>
+  <li>מ-<span class="fi">\(\angle GHD\)</span> אל <span class="fi">\(\angle CHG\)</span> נשארת דרך אחת קצרה: הן צמודות על הישר <span class="fi">\(CD\)</span>.</li>
+</ul></div>
+<table class="dtable">
+<tr><th></th><th>טענה</th><th>נימוק</th></tr>
+<tr><td>1</td><td><span class="fi">\(AB\parallel CD\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>2</td><td class="hl-c5"><span class="fi">\(\angle EGB=65^\circ\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>3</td><td class="hl-c5"><span class="fi">\(\angle GHD=\angle EGB=65^\circ\)</span></td><td style="text-align:right">זוויות מתאימות שוות בין ישרים מקבילים (החותך <span class="fi">\(EF\)</span>; לפי 1, 2)</td></tr>
+<tr><td>4</td><td style="background:#FBF0C9"><span class="fi">\(\angle CHG=180^\circ-65^\circ=115^\circ\)</span></td><td style="text-align:right">סכום זוויות צמודות <span class="fi">\(180^\circ\)</span> (על הישר <span class="fi">\(CD\)</span>; לפי 3)</td></tr>
+<tr class="tr-ans"><td colspan="3"><b>תשובה:</b> <span class="fi">\(\angle GHD=65^\circ,\qquad \angle CHG=115^\circ\)</span></td></tr>
+</table>
+<p class="aside">אותה שאלה בדיוק אפשר לפתור גם דרך מתחלפות: <span class="fi">\(\angle AGH\)</span> ו-<span class="fi">\(\angle GHD\)</span> יוצרות צורת <span class="en">Z</span> ולכן שוות. שתי הדרכים נכונות — כותבים את זו שרואים ראשונה.</p>
+<p class="usedth"><b>המשפטים שהשתמשנו בהם:</b> זוויות מתאימות שוות בין ישרים מקבילים · סכום זוויות צמודות <span class="fi">\(180^\circ\)</span></p>
+<a class="backup no-print" href="#finder">↑ חזרה לחיפוש הדגמים</a>
+</article>
+
+<article class="ex model" id="m02">
+<div class="ex-head"><span class="lvl l1">דגם 2</span><h4>זוויות קודקודיות עם נעלם</h4></div>
+<p class="sig"><b>מתי זה הדגם שלך:</b> שני ישרים נחתכים, ובמקום מספרים כתובים בשרטוט ביטויים עם <span class="fi">\(x\)</span>.</p>
+<p class="q-text">הישרים <span class="fi">\(AB\)</span> ו-<span class="fi">\(CD\)</span> נחתכים בנקודה <span class="fi">\(O\)</span>.<br>נתון: <span class="fi">\(\angle AOC=3x+10^\circ\)</span> וגם <span class="fi">\(\angle BOD=5x-30^\circ\)</span>.<br>חשבי את <span class="fi">\(x\)</span>, את <span class="fi">\(\angle AOC\)</span> ואת הזווית <span class="fi">\(y\)</span> המסומנת בשרטוט.</p>
+<figure><svg viewBox="0 0 360 236" style="width:100%;max-width:450px;height:auto" role="img" aria-label="two straight lines crossing at O with two marked vertical angles"><line x1="76.6" y1="31.2" x2="283.4" y2="204.8" stroke="#334155" stroke-width="2.5"/><line x1="63.1" y1="185.5" x2="296.9" y2="50.5" stroke="#334155" stroke-width="2.5"/><circle cx="180" cy="118" r="3.5" fill="#334155"/><path d="M157,98.7 A30,30 0 0 0 154,133" fill="none" stroke="#C2408C" stroke-width="3.5"/><text x="124.2" y="118.1" text-anchor="middle" font-size="14" font-weight="bold" fill="#C2408C">3x+10°</text><path d="M203,137.3 A30,30 0 0 0 206,103" fill="none" stroke="#C2408C" stroke-width="3.5"/><text x="235.8" y="127.9" text-anchor="middle" font-size="14" font-weight="bold" fill="#C2408C">5x-30°</text><path d="M146.3,89.7 A44,44 0 0 1 218.1,96" fill="none" stroke="#B7791F" stroke-width="3" stroke-dasharray="6 4"/><text x="185.6" y="59.2" text-anchor="middle" font-size="16" font-weight="bold" fill="#B7791F" font-style="italic">y</text><text x="66" y="24" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">A</text><text x="294" y="220" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">B</text><text x="52" y="200" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">C</text><text x="308" y="44" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">D</text><text x="184" y="148" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">O</text></svg><figcaption>שתי הזוויות הוורודות יושבות זו מול זו בנקודת החיתוך. הזווית <span class="fi">\(y\)</span> — בקשת מקווקוות, כי היא מה שמחפשים.</figcaption></figure>
+<div class="box intuition"><div class="box-title">איך חושבים</div>
+<ul class="plan">
+  <li><span class="fi">\(\angle AOC\)</span> ו-<span class="fi">\(\angle BOD\)</span> יושבות זו מול זו בנקודת החיתוך ← קודקודיות, ולכן שוות.</li>
+  <li>שני ביטויים ששווים זה לזה ← משוואה אחת עם נעלם אחד.</li>
+  <li>אחרי ש-<span class="fi">\(x\)</span> ידוע מציבות אותו חזרה בביטוי, ואת <span class="fi">\(y\)</span> משלימות ל-<span class="fi">\(180^\circ\)</span>.</li>
+</ul></div>
+<table class="dtable">
+<tr><th></th><th>טענה</th><th>נימוק</th></tr>
+<tr><td>1</td><td class="hl-c5"><span class="fi">\(\angle AOC=3x+10^\circ\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>2</td><td class="hl-c5"><span class="fi">\(\angle BOD=5x-30^\circ\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>3</td><td><span class="fi">\(\angle AOC=\angle BOD\)</span></td><td style="text-align:right">זוויות קודקודיות שוות</td></tr>
+<tr><td>4</td><td><span class="fi">\(3x+10=5x-30\)</span></td><td style="text-align:right">הצבה (לפי 1, 2, 3)</td></tr>
+<tr><td>5</td><td><span class="fi">\(2x=40\;\Rightarrow\;x=20\)</span></td><td style="text-align:right">פתרון המשוואה (לפי 4)</td></tr>
+<tr><td>6</td><td><span class="fi">\(\angle AOC=3\cdot 20+10=70^\circ\)</span></td><td style="text-align:right">הצבה (לפי 1, 5)</td></tr>
+<tr><td>7</td><td style="background:#FBF0C9"><span class="fi">\(y=\angle AOD=180^\circ-70^\circ=110^\circ\)</span></td><td style="text-align:right">סכום זוויות צמודות <span class="fi">\(180^\circ\)</span> (על הישר <span class="fi">\(CD\)</span>; לפי 6)</td></tr>
+<tr class="tr-ans"><td colspan="3"><b>תשובה:</b> <span class="fi">\(x=20,\qquad \angle AOC=70^\circ,\qquad y=110^\circ\)</span></td></tr>
+</table>
+<p class="aside">בדיקה שכדאי לעשות תמיד: מציבות <span class="fi">\(x=20\)</span> גם בביטוי השני — <span class="fi">\(5\cdot 20-30=70^\circ\)</span>. שתי הזוויות באמת יצאו שוות.</p>
+<p class="usedth"><b>המשפטים שהשתמשנו בהם:</b> זוויות קודקודיות שוות · סכום זוויות צמודות <span class="fi">\(180^\circ\)</span></p>
+<a class="backup no-print" href="#finder">↑ חזרה לחיפוש הדגמים</a>
+</article>
+
+<article class="ex model" id="m03">
+<div class="ex-head"><span class="lvl l1">דגם 3</span><h4>שווה-שוקיים: מהשוקיים לזוויות הבסיס</h4></div>
+<p class="sig"><b>מתי זה הדגם שלך:</b> כתוב שהמשולש שווה-שוקיים, או שמסומנות בו שתי צלעות שוות — ומבקשים משהו על הזוויות.</p>
+<p class="q-text">במשולש <span class="fi">\(ABC\)</span> נתון: <span class="fi">\(AB=AC\)</span> וגם <span class="fi">\(\angle A=40^\circ\)</span>.<br>א. הוכיחי כי <span class="fi">\(\angle B=\angle C\)</span>.<br>ב. חשבי את <span class="fi">\(\angle B\)</span>.</p>
+<figure><svg viewBox="0 0 360 230" style="width:100%;max-width:440px;height:auto" role="img" aria-label="isosceles triangle ABC with AB equal AC and apex angle 40 degrees"><polygon points="180,28 48,198 312,198" fill="#FBFAF7" stroke="#334155" stroke-width="2.5"/><line x1="140.4" y1="79" x2="87.6" y2="147" stroke="#2563EB" stroke-width="5"/><line x1="117.9" y1="116.1" x2="110.1" y2="109.9" stroke="#2563EB" stroke-width="2.5"/><line x1="219.6" y1="79" x2="272.4" y2="147" stroke="#2563EB" stroke-width="5"/><line x1="249.9" y1="109.9" x2="242.1" y2="116.1" stroke="#2563EB" stroke-width="2.5"/><path d="M161.6,51.7 A30,30 0 0 0 198.4,51.7" fill="none" stroke="#B7791F" stroke-width="3.5"/><text x="180" y="83" text-anchor="middle" font-size="14" font-weight="bold" fill="#B7791F">40°</text><path d="M78,198 A30,30 0 0 0 66.4,174.3" fill="none" stroke="#C2408C" stroke-width="3.5" stroke-dasharray="6 4"/><path d="M293.6,174.3 A30,30 0 0 0 282,198" fill="none" stroke="#C2408C" stroke-width="3.5" stroke-dasharray="6 4"/><text x="180" y="15" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">A</text><text x="31.5" y="210.1" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">B</text><text x="328.5" y="210.1" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">C</text></svg><figcaption>הקשתות הוורודות המקווקוות הן שתי זוויות הבסיס — מה שצריך להוכיח שהן שוות.
+<br>הסימון הכחול באמצע כל שוק אומר ששתי אלה שוות זו לזו. הבסיס הוא הצלע שאין עליה סימון — <span class="fi">\(BC\)</span> — ושתי הזוויות שיושבות עליו הן זוויות הבסיס.</figcaption></figure>
+<div class="box intuition"><div class="box-title">איך חושבים</div>
+<ul class="plan">
+  <li>שתי צלעות שוות במשולש ← זוויות הבסיס שוות. זה משפט, ומותר לצטט אותו בשמו.</li>
+  <li>הבסיס הוא הצלע שאין לה סימון, והזוויות שיושבות עליו הן <span class="fi">\(\angle B\)</span> ו-<span class="fi">\(\angle C\)</span>.</li>
+  <li>בסעיף ב יש שלוש זוויות שסכומן <span class="fi">\(180^\circ\)</span>, ושתיים מהן כבר ידועות כשוות ← משוואה אחת עם נעלם אחד.</li>
+</ul></div>
+<table class="dtable">
+<tr><th></th><th>טענה</th><th>נימוק</th></tr>
+<tr><td>1</td><td class="hl-c2"><span class="fi">\(AB=AC\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>2</td><td class="hl-c5"><span class="fi">\(\angle B=\angle C\)</span></td><td style="text-align:right">במשולש שווה-שוקיים זוויות הבסיס שוות (לפי 1)</td></tr>
+<tr class="tr-qed"><td colspan="3"><b>מש"ל א׳</b></td></tr>
+<tr class="tr-sep"><td colspan="3">סעיף ב — חישוב זוויות הבסיס</td></tr>
+<tr><td>3</td><td style="background:#FBF0C9"><span class="fi">\(\angle A=40^\circ\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>4</td><td><span class="fi">\(\angle A+\angle B+\angle C=180^\circ\)</span></td><td style="text-align:right">סכום הזוויות במשולש <span class="fi">\(180^\circ\)</span></td></tr>
+<tr><td>5</td><td><span class="fi">\(40^\circ+2\cdot\angle B=180^\circ\)</span></td><td style="text-align:right">הצבה (לפי 2, 3, 4)</td></tr>
+<tr><td>6</td><td><span class="fi">\(\angle B=\frac{180^\circ-40^\circ}{2}=70^\circ\)</span></td><td style="text-align:right">פתרון המשוואה (לפי 5)</td></tr>
+<tr class="tr-ans"><td colspan="3"><b>תשובה:</b> <span class="fi">\(\angle B=\angle C=70^\circ\)</span></td></tr>
+</table>
+<p class="aside">שימי לב לשני הסיומים בטבלה אחת: סעיף א הוא הוכחה ולכן נחתם ב-<b>מש"ל</b>, וסעיף ב הוא חישוב ולכן נגמר בתשובה מודגשת.</p>
+<p class="usedth"><b>המשפטים שהשתמשנו בהם:</b> במשולש שווה-שוקיים זוויות הבסיס שוות · סכום הזוויות במשולש <span class="fi">\(180^\circ\)</span></p>
+<a class="backup no-print" href="#finder">↑ חזרה לחיפוש הדגמים</a>
+</article>
+
+<article class="ex model" id="m04">
+<div class="ex-head"><span class="lvl l2">דגם 4</span><h4>שווה-שוקיים, הכיוון ההפוך: מזוויות שוות לצלעות שוות</h4></div>
+<p class="sig"><b>מתי זה הדגם שלך:</b> נתונות זוויות בלבד, ומבקשים להוכיח ששתי צלעות שוות — או שהמשולש שווה-שוקיים.</p>
+<p class="q-text">במשולש <span class="fi">\(KLM\)</span> נתון: <span class="fi">\(\angle K=70^\circ\)</span> וגם <span class="fi">\(\angle L=55^\circ\)</span>.<br>הוכיחי כי <span class="fi">\(KL=KM\)</span>.</p>
+<figure><svg viewBox="0 0 360 230" style="width:100%;max-width:440px;height:auto" role="img" aria-label="triangle KLM with two given angles, the two legs marked as the goal"><polygon points="180,28 44,198 316,198" fill="#FBFAF7" stroke="#334155" stroke-width="2.5"/><line x1="139.2" y1="79" x2="84.8" y2="147" stroke="#7C3AED" stroke-width="4" stroke-dasharray="7 5"/><line x1="115.9" y1="116.1" x2="108.1" y2="109.9" stroke="#7C3AED" stroke-width="2.5"/><line x1="220.8" y1="79" x2="275.2" y2="147" stroke="#7C3AED" stroke-width="4" stroke-dasharray="7 5"/><line x1="251.9" y1="109.9" x2="244.1" y2="116.1" stroke="#7C3AED" stroke-width="2.5"/><path d="M161.3,51.4 A30,30 0 0 0 198.7,51.4" fill="none" stroke="#B7791F" stroke-width="3.5"/><text x="180" y="83" text-anchor="middle" font-size="14" font-weight="bold" fill="#B7791F">70°</text><path d="M74,198 A30,30 0 0 0 62.7,174.6" fill="none" stroke="#C2408C" stroke-width="3.5"/><text x="89.1" y="181.3" text-anchor="middle" font-size="14" font-weight="bold" fill="#C2408C">55°</text><path d="M297.3,174.6 A30,30 0 0 0 286,198" fill="none" stroke="#C2408C" stroke-width="3" stroke-dasharray="6 4"/><text x="270.9" y="181.3" text-anchor="middle" font-size="16" font-weight="bold" fill="#C2408C">?</text><text x="180" y="15" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">K</text><text x="27.4" y="209.9" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">L</text><text x="332.6" y="209.9" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">M</text></svg><figcaption>הזוויות הנתונות בקשתות מלאות; מה שצריך להוכיח — הזווית ב-<span class="fi">\(M\)</span> ושתי השוקיים — מקווקו.</figcaption></figure>
+<div class="box intuition"><div class="box-title">איך חושבים</div>
+<ul class="plan">
+  <li>אין כאן אף צלע נתונה ← הדרך היחידה אל הצלעות עוברת דרך הזוויות.</li>
+  <li>הזווית השלישית מחושבת תמיד מ-<span class="fi">\(180^\circ\)</span>.</li>
+  <li>שתי זוויות שוות במשולש ← המשפט ההפוך נותן שהמשולש שווה-שוקיים.</li>
+</ul></div>
+<table class="dtable">
+<tr><th></th><th>טענה</th><th>נימוק</th></tr>
+<tr><td>1</td><td style="background:#FBF0C9"><span class="fi">\(\angle K=70^\circ\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>2</td><td class="hl-c5"><span class="fi">\(\angle L=55^\circ\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>3</td><td><span class="fi">\(\angle M=180^\circ-70^\circ-55^\circ=55^\circ\)</span></td><td style="text-align:right">סכום הזוויות במשולש <span class="fi">\(180^\circ\)</span> (לפי 1, 2)</td></tr>
+<tr><td>4</td><td class="hl-c5"><span class="fi">\(\angle L=\angle M\)</span></td><td style="text-align:right">כלל המעבר — שתיהן שוות ל-<span class="fi">\(55^\circ\)</span> (לפי 2, 3)</td></tr>
+<tr><td>5</td><td class="hl-c4"><span class="fi">\(KL=KM\)</span></td><td style="text-align:right">אם במשולש שתי זוויות שוות זו לזו, המשולש שווה-שוקיים (המשפט ההפוך; לפי 4)</td></tr>
+<tr class="tr-qed"><td colspan="3"><b>מש"ל</b></td></tr>
+</table>
+<p class="aside">שימי לב איזו צלע יוצאת שווה לאיזו: הצלע שמול <span class="fi">\(\angle L\)</span> היא <span class="fi">\(KM\)</span>, והצלע שמול <span class="fi">\(\angle M\)</span> היא <span class="fi">\(KL\)</span> — ולכן <span class="fi">\(\angle L=\angle M\)</span> נותן <span class="fi">\(KM=KL\)</span>.</p>
+<p class="usedth"><b>המשפטים שהשתמשנו בהם:</b> סכום הזוויות במשולש <span class="fi">\(180^\circ\)</span> · כלל המעבר · אם במשולש שתי זוויות שוות זו לזו אז המשולש שווה-שוקיים (המשפט ההפוך)</p>
+<a class="backup no-print" href="#finder">↑ חזרה לחיפוש הדגמים</a>
+</article>
+
+<article class="ex model" id="m05">
+<div class="ex-head"><span class="lvl l2">דגם 5</span><h4>חפיפה לפי צ.צ.צ — שלוש צלעות</h4></div>
+<p class="sig"><b>מתי זה הדגם שלך:</b> בכל אחד משני המשולשים מסומנות שתי צלעות, והצלע השלישית משותפת לשניהם.</p>
+<p class="q-text">במרובע <span class="fi">\(ABCD\)</span> נתון: <span class="fi">\(AB=AD\)</span> וגם <span class="fi">\(CB=CD\)</span>.<br>הוכיחי כי <span class="fi">\(\triangle ABC\cong\triangle ADC\)</span>.</p>
+<figure><svg viewBox="0 0 360 244" style="width:100%;max-width:400px;height:auto" role="img" aria-label="kite ABCD with diagonal AC, two pairs of equal adjacent sides"><polygon points="180,24 58,122 180,216 302,122" fill="#FBFAF7" stroke="#334155" stroke-width="2.5"/><line x1="180" y1="24" x2="180" y2="216" stroke="#334155" stroke-width="2.5"/><line x1="143.4" y1="53.4" x2="94.6" y2="92.6" stroke="#2563EB" stroke-width="5"/><line x1="122.1" y1="76.9" x2="115.9" y2="69.1" stroke="#2563EB" stroke-width="2.5"/><line x1="216.6" y1="53.4" x2="265.4" y2="92.6" stroke="#2563EB" stroke-width="5"/><line x1="244.1" y1="69.1" x2="237.9" y2="76.9" stroke="#2563EB" stroke-width="2.5"/><line x1="143.4" y1="187.8" x2="94.6" y2="150.2" stroke="#059669" stroke-width="5"/><line x1="119.5" y1="175.7" x2="125.6" y2="167.8" stroke="#059669" stroke-width="2.5"/><line x1="112.4" y1="170.2" x2="118.5" y2="162.3" stroke="#059669" stroke-width="2.5"/><line x1="216.6" y1="187.8" x2="265.4" y2="150.2" stroke="#059669" stroke-width="5"/><line x1="234.4" y1="167.8" x2="240.5" y2="175.7" stroke="#059669" stroke-width="2.5"/><line x1="241.5" y1="162.3" x2="247.6" y2="170.2" stroke="#059669" stroke-width="2.5"/><line x1="180" y1="91.2" x2="180" y2="148.8" stroke="#EA580C" stroke-width="5"/><line x1="185" y1="111" x2="175" y2="111" stroke="#EA580C" stroke-width="2.5"/><line x1="185" y1="120" x2="175" y2="120" stroke="#EA580C" stroke-width="2.5"/><line x1="185" y1="129" x2="175" y2="129" stroke="#EA580C" stroke-width="2.5"/><text x="180" y="13" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">A</text><text x="42" y="127.1" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">B</text><text x="180" y="237" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">C</text><text x="318" y="127.1" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">D</text></svg><figcaption>כחול — הזוג <span class="fi">\(AB=AD\)</span>; ירוק — הזוג <span class="fi">\(CB=CD\)</span>; כתום — <span class="fi">\(AC\)</span>, הצלע שהמשולשים חולקים. מספר הקווים הקטנים אומר איזה זוג הוא איזה.</figcaption></figure>
+<div class="box intuition"><div class="box-title">איך חושבים</div>
+<ul class="plan">
+  <li>מסמנות על השרטוט את שני הזוגות הנתונים. יש שתי צלעות בכל משולש — חסר איבר שלישי.</li>
+  <li>שני המשולשים נשענים על אותו קטע בדיוק — <span class="fi">\(AC\)</span>.</li>
+  <li>קטע שווה לעצמו, ו״צלע משותפת״ הוא נימוק לגיטימי לגמרי ← שלוש צלעות ← צ.צ.צ.</li>
+</ul></div>
+<table class="dtable">
+<tr><th></th><th>טענה</th><th>נימוק</th></tr>
+<tr><td>1</td><td class="hl-c2"><span class="fi">\(AB=AD\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>2</td><td class="hl-c3"><span class="fi">\(CB=CD\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>3</td><td style="background:#FBE3D0"><span class="fi">\(AC=AC\)</span></td><td style="text-align:right">צלע משותפת לשני המשולשים</td></tr>
+<tr><td>4</td><td><span class="fi">\(\triangle ABC\cong\triangle ADC\)</span></td><td style="text-align:right">משפט חפיפה צ.צ.צ (לפי 1, 2, 3)</td></tr>
+<tr class="tr-qed"><td colspan="3"><b>מש"ל</b></td></tr>
+</table>
+<p class="aside">בדיקת סדר האותיות: <span class="fi">\(A\leftrightarrow A,\; B\leftrightarrow D,\; C\leftrightarrow C\)</span>. מכאן קוראים ישר את כל השוויונות הנובעים — למשל <span class="fi">\(\angle B=\angle D\)</span> ו-<span class="fi">\(\angle BAC=\angle DAC\)</span>.</p>
+<p class="usedth"><b>המשפטים שהשתמשנו בהם:</b> משפט חפיפה צ.צ.צ · צלע משותפת</p>
+<a class="backup no-print" href="#finder">↑ חזרה לחיפוש הדגמים</a>
+</article>
+
+<article class="ex model" id="m06">
+<div class="ex-head"><span class="lvl l2">דגם 6</span><h4>חפיפה לפי צ.ז.צ — צלע, זווית כלואה, צלע</h4></div>
+<p class="sig"><b>מתי זה הדגם שלך:</b> שני קטעים נחתכים בנקודה אחת, וכל אחד מהם נחצה שם.</p>
+<p class="q-text">הקטעים <span class="fi">\(AD\)</span> ו-<span class="fi">\(BC\)</span> נחתכים בנקודה <span class="fi">\(O\)</span>.<br>נתון: <span class="fi">\(AO=OD\)</span> וגם <span class="fi">\(BO=OC\)</span>.<br>הוכיחי כי <span class="fi">\(\triangle AOB\cong\triangle DOC\)</span>.</p>
+<figure><svg viewBox="0 0 360 240" style="width:100%;max-width:440px;height:auto" role="img" aria-label="segments AD and BC crossing at O, both bisected there"><line x1="50" y1="38" x2="310" y2="208" stroke="#334155" stroke-width="2.5"/><line x1="310" y1="38" x2="50" y2="208" stroke="#334155" stroke-width="2.5"/><line x1="50" y1="38" x2="310" y2="38" stroke="#334155" stroke-width="2.5"/><line x1="50" y1="208" x2="310" y2="208" stroke="#334155" stroke-width="2.5"/><circle cx="180" cy="123" r="3.5" fill="#334155"/><line x1="89" y1="63.5" x2="141" y2="97.5" stroke="#2563EB" stroke-width="5"/><line x1="117.7" y1="76.3" x2="112.3" y2="84.7" stroke="#2563EB" stroke-width="2.5"/><line x1="219" y1="148.5" x2="271" y2="182.5" stroke="#2563EB" stroke-width="5"/><line x1="247.7" y1="161.3" x2="242.3" y2="169.7" stroke="#2563EB" stroke-width="2.5"/><line x1="271" y1="63.5" x2="219" y2="97.5" stroke="#059669" stroke-width="5"/><line x1="251.5" y1="82.2" x2="246" y2="73.9" stroke="#059669" stroke-width="2.5"/><line x1="244" y1="87.1" x2="238.5" y2="78.8" stroke="#059669" stroke-width="2.5"/><line x1="141" y1="148.5" x2="89" y2="182.5" stroke="#059669" stroke-width="5"/><line x1="121.5" y1="167.2" x2="116" y2="158.9" stroke="#059669" stroke-width="2.5"/><line x1="114" y1="172.1" x2="108.5" y2="163.8" stroke="#059669" stroke-width="2.5"/><path d="M158.2,108.8 A26,26 0 0 1 201.8,108.8" fill="none" stroke="#C2408C" stroke-width="3.5"/><path d="M201.8,137.2 A26,26 0 0 1 158.2,137.2" fill="none" stroke="#C2408C" stroke-width="3.5"/><text x="40" y="32" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">A</text><text x="320" y="32" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">B</text><text x="40" y="220" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">C</text><text x="320" y="220" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">D</text><text x="196" y="128" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">O</text></svg><figcaption>שני הזוגות הנתונים — כחול וירוק — והזוויות הקודקודיות ב-<span class="fi">\(O\)</span>, שיושבות בדיוק בין שתי הצלעות המסומנות בכל משולש.</figcaption></figure>
+<div class="box intuition"><div class="box-title">איך חושבים</div>
+<ul class="plan">
+  <li>בכל משולש יש שתי צלעות מסומנות: <span class="fi">\(AO\)</span> ו-<span class="fi">\(BO\)</span> באחד, <span class="fi">\(DO\)</span> ו-<span class="fi">\(CO\)</span> בשני.</li>
+  <li>האיבר השלישי מגיע מנקודת החיתוך: <span class="fi">\(\angle AOB\)</span> ו-<span class="fi">\(\angle DOC\)</span> הן קודקודיות ולכן שוות.</li>
+  <li>והזווית הזו יושבת בין שתי הצלעות המסומנות בכל משולש — כלואה. זה בדיוק התנאי של צ.ז.צ.</li>
+</ul></div>
+<table class="dtable">
+<tr><th></th><th>טענה</th><th>נימוק</th></tr>
+<tr><td>1</td><td class="hl-c2"><span class="fi">\(AO=OD\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>2</td><td class="hl-c3"><span class="fi">\(BO=OC\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>3</td><td class="hl-c5"><span class="fi">\(\angle AOB=\angle DOC\)</span></td><td style="text-align:right">זוויות קודקודיות שוות</td></tr>
+<tr><td>4</td><td><span class="fi">\(\triangle AOB\cong\triangle DOC\)</span></td><td style="text-align:right">משפט חפיפה צ.ז.צ (לפי 1, 3, 2)</td></tr>
+<tr class="tr-qed"><td colspan="3"><b>מש"ל</b></td></tr>
+</table>
+<p class="aside">סדר הסימוכין בשורה האחרונה מספר את הסיפור: 1 (צלע), 3 (הזווית שביניהן), 2 (צלע). ככה בודקים שהזווית באמת כלואה.</p>
+<p class="usedth"><b>המשפטים שהשתמשנו בהם:</b> זוויות קודקודיות שוות · משפט חפיפה צ.ז.צ</p>
+<a class="backup no-print" href="#finder">↑ חזרה לחיפוש הדגמים</a>
+</article>
+
+<article class="ex model" id="m07">
+<div class="ex-head"><span class="lvl l2">דגם 7</span><h4>חפיפה לפי ז.צ.ז — זווית, צלע כלואה, זווית</h4></div>
+<p class="sig"><b>מתי זה הדגם שלך:</b> בשרטוט יש זוג ישרים מקבילים, ואחת הצלעות משותפת לשני המשולשים או נחצית ביניהם.</p>
+<p class="q-text">בשרטוט: <span class="fi">\(AB\parallel DC\)</span>, והקטעים <span class="fi">\(AC\)</span> ו-<span class="fi">\(BD\)</span> נחתכים בנקודה <span class="fi">\(O\)</span> שהיא אמצע <span class="fi">\(AC\)</span>.<br>הוכיחי כי <span class="fi">\(\triangle AOB\cong\triangle COD\)</span>.</p>
+<figure><svg viewBox="0 0 360 236" style="width:100%;max-width:440px;height:auto" role="img" aria-label="AB parallel to DC, diagonals AC and BD crossing at the midpoint O of AC"><line x1="58" y1="42" x2="302" y2="42" stroke="#334155" stroke-width="2.5"/><line x1="58" y1="202" x2="302" y2="202" stroke="#334155" stroke-width="2.5"/><line x1="58" y1="42" x2="302" y2="202" stroke="#334155" stroke-width="2.5"/><line x1="302" y1="42" x2="58" y2="202" stroke="#334155" stroke-width="2.5"/><circle cx="180" cy="122" r="3.5" fill="#334155"/><path d="M242.3,35 L248.3,42 L242.3,49" fill="none" stroke="#5A6875" stroke-width="2.5"/><path d="M242.3,195 L248.3,202 L242.3,209" fill="none" stroke="#5A6875" stroke-width="2.5"/><line x1="94.6" y1="66" x2="143.4" y2="98" stroke="#2563EB" stroke-width="5"/><line x1="121.7" y1="77.8" x2="116.3" y2="86.2" stroke="#2563EB" stroke-width="2.5"/><line x1="216.6" y1="146" x2="265.4" y2="178" stroke="#2563EB" stroke-width="5"/><line x1="243.7" y1="157.8" x2="238.3" y2="166.2" stroke="#2563EB" stroke-width="2.5"/><path d="M88,42 A30,30 0 0 1 83.1,58.5" fill="none" stroke="#C2408C" stroke-width="3.5"/><path d="M272,202 A30,30 0 0 1 276.9,185.5" fill="none" stroke="#C2408C" stroke-width="3.5"/><path d="M159.9,108.8 A24,24 0 0 1 200.1,108.8" fill="none" stroke="#B7791F" stroke-width="3.5"/><path d="M200.1,135.2 A24,24 0 0 1 159.9,135.2" fill="none" stroke="#B7791F" stroke-width="3.5"/><text x="48" y="36" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">A</text><text x="312" y="36" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">B</text><text x="312" y="214" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">C</text><text x="48" y="214" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">D</text><text x="196" y="127" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">O</text></svg><figcaption>החיצים מסמנים את המקבילים. ורוד — זוג הזוויות המתחלפות שהאלכסון <span class="fi">\(AC\)</span> יוצר; ענברי — הזוויות הקודקודיות ב-<span class="fi">\(O\)</span>; כחול — הצלע הכלואה ביניהן.</figcaption></figure>
+<div class="box intuition"><div class="box-title">איך חושבים</div>
+<ul class="plan">
+  <li>הנתון על המקבילים לא נשאר לבד — הוא נועד לתת זוג זוויות שוות.</li>
+  <li><span class="fi">\(AC\)</span> חותך את שני המקבילים ← <span class="fi">\(\angle BAO\)</span> ו-<span class="fi">\(\angle DCO\)</span> הן מתחלפות (צורת <span class="en">Z</span>) ולכן שוות.</li>
+  <li>ב-<span class="fi">\(O\)</span> יש זוג קודקודיות, ובין שתי הזוויות האלה יושבת בדיוק הצלע <span class="fi">\(AO=OC\)</span>.</li>
+  <li>זווית, צלע, זווית ← ז.צ.ז.</li>
+</ul></div>
+<table class="dtable">
+<tr><th></th><th>טענה</th><th>נימוק</th></tr>
+<tr><td>1</td><td><span class="fi">\(AB\parallel DC\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>2</td><td class="hl-c2"><span class="fi">\(AO=OC\)</span></td><td style="text-align:right">נתון (<span class="fi">\(O\)</span> אמצע <span class="fi">\(AC\)</span>)</td></tr>
+<tr><td>3</td><td class="hl-c5"><span class="fi">\(\angle BAO=\angle DCO\)</span></td><td style="text-align:right">זוויות מתחלפות שוות בין ישרים מקבילים (החותך <span class="fi">\(AC\)</span>; לפי 1)</td></tr>
+<tr><td>4</td><td style="background:#FBF0C9"><span class="fi">\(\angle AOB=\angle COD\)</span></td><td style="text-align:right">זוויות קודקודיות שוות</td></tr>
+<tr><td>5</td><td><span class="fi">\(\triangle AOB\cong\triangle COD\)</span></td><td style="text-align:right">משפט חפיפה ז.צ.ז (לפי 3, 2, 4)</td></tr>
+<tr class="tr-qed"><td colspan="3"><b>מש"ל</b></td></tr>
+</table>
+<p class="aside">הצלע <span class="fi">\(AO\)</span> באמת כלואה: בקצה אחד שלה <span class="fi">\(\angle BAO\)</span> ובקצה השני <span class="fi">\(\angle AOB\)</span> — ובדיוק אותו דבר ב-<span class="fi">\(\triangle COD\)</span> עם <span class="fi">\(OC\)</span>.</p>
+<p class="usedth"><b>המשפטים שהשתמשנו בהם:</b> זוויות מתחלפות שוות בין ישרים מקבילים · זוויות קודקודיות שוות · משפט חפיפה ז.צ.ז</p>
+<a class="backup no-print" href="#finder">↑ חזרה לחיפוש הדגמים</a>
+</article>
+
+<article class="ex model" id="m08">
+<div class="ex-head"><span class="lvl l3">דגם 8</span><h4>שני משולשים ישרי-זווית — יתר וניצב שווים</h4></div>
+<p class="sig"><b>מתי זה הדגם שלך:</b> בשני המשולשים מסומן ריבוע של זווית ישרה, ושווים בהם היתר וניצב אחד.</p>
+<p class="q-text">בשרטוט: <span class="fi">\(\angle B=\angle E=90^\circ\)</span>.<br>נתון גם: <span class="fi">\(AC=DF\)</span> (היתרים), וגם <span class="fi">\(BC=EF\)</span> (ניצב).<br>הוכיחי כי <span class="fi">\(\triangle ABC\cong\triangle DEF\)</span>.</p>
+<figure><svg viewBox="0 0 358 196" style="width:100%;max-width:460px;height:auto" role="img" aria-label="two right triangles with equal hypotenuse and equal leg"><polygon points="34,62 34,156 150,156" fill="#FBFAF7" stroke="#334155" stroke-width="2.5"/><polygon points="208,62 208,156 324,156" fill="#FBFAF7" stroke="#334155" stroke-width="2.5"/><path d="M34,141 L49,141 L49,156" fill="none" stroke="#C2408C" stroke-width="2.5"/><path d="M208,141 L223,141 L223,156" fill="none" stroke="#C2408C" stroke-width="2.5"/><line x1="68.8" y1="156" x2="115.2" y2="156" stroke="#2563EB" stroke-width="5"/><line x1="92" y1="151" x2="92" y2="161" stroke="#2563EB" stroke-width="2.5"/><line x1="242.8" y1="156" x2="289.2" y2="156" stroke="#2563EB" stroke-width="5"/><line x1="266" y1="151" x2="266" y2="161" stroke="#2563EB" stroke-width="2.5"/><line x1="68.8" y1="90.2" x2="115.2" y2="127.8" stroke="#059669" stroke-width="5"/><line x1="91.7" y1="102.3" x2="85.4" y2="110.1" stroke="#059669" stroke-width="2.5"/><line x1="98.6" y1="107.9" x2="92.3" y2="115.7" stroke="#059669" stroke-width="2.5"/><line x1="242.8" y1="90.2" x2="289.2" y2="127.8" stroke="#059669" stroke-width="5"/><line x1="265.7" y1="102.3" x2="259.4" y2="110.1" stroke="#059669" stroke-width="2.5"/><line x1="272.6" y1="107.9" x2="266.3" y2="115.7" stroke="#059669" stroke-width="2.5"/><text x="26.1" y="54.2" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">A</text><text x="22.3" y="170.4" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">B</text><text x="163.9" y="166.6" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">C</text><text x="200.1" y="54.2" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">D</text><text x="196.3" y="170.4" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">E</text><text x="337.9" y="166.6" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">F</text></svg><figcaption>ירוק — היתרים <span class="fi">\(AC=DF\)</span>; כחול — הניצבים <span class="fi">\(BC=EF\)</span>; והריבועים הוורודים מסמנים את הזוויות הישרות, שיושבות בדיוק מול היתרים.</figcaption></figure>
+<div class="box intuition"><div class="box-title">איך חושבים</div>
+<ul class="plan">
+  <li>היתר הוא הצלע שמול הזווית הישרה, והוא הארוך ביותר במשולש ישר-זווית.</li>
+  <li>כאן יש שתי צלעות שוות, והזווית השווה יושבת מול הגדולה מביניהן ← זה בדיוק משפט החפיפה הרביעי, צ.צ.ז.</li>
+  <li>ובכיתה שעובדת רק עם שלושת המשפטים הראשונים — פיתגורס משלים את הניצב השלישי, ומשם צ.צ.צ.</li>
+</ul></div>
+<table class="dtable">
+<tr><th></th><th>טענה</th><th>נימוק</th></tr>
+<tr><td>1</td><td class="hl-c5"><span class="fi">\(\angle B=\angle E=90^\circ\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>2</td><td class="hl-c3"><span class="fi">\(AC=DF\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>3</td><td class="hl-c2"><span class="fi">\(BC=EF\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>4</td><td><span class="fi">\(AC>BC,\qquad DF>EF\)</span></td><td style="text-align:right">היתר הוא הצלע הארוכה ביותר במשולש ישר-זווית (לפי 1)</td></tr>
+<tr><td>5</td><td><span class="fi">\(\triangle ABC\cong\triangle DEF\)</span></td><td style="text-align:right">משפט חפיפה צ.צ.ז — שתי צלעות והזווית שמול הגדולה מביניהן (לפי 2, 3, 1, 4)</td></tr>
+<tr class="tr-qed"><td colspan="3"><b>מש"ל</b></td></tr>
+</table>
+<div class="box example"><div class="box-title">אותה חפיפה עם שלושת המשפטים הראשונים בלבד</div><p>אם בכיתה עובדים רק עם צ.צ.צ, צ.ז.צ ו-ז.צ.ז — פיתגורס משלים את הניצב החסר, ומשם זו חפיפה רגילה לפי צ.צ.צ:</p><table class="dtable">
+<tr><th></th><th>טענה</th><th>נימוק</th></tr>
+<tr><td>4</td><td><span class="fi">\(AB^{2}=AC^{2}-BC^{2}\)</span></td><td style="text-align:right">משפט פיתגורס (במשולש <span class="fi">\(ABC\)</span>; לפי 1)</td></tr>
+<tr><td>5</td><td><span class="fi">\(DE^{2}=DF^{2}-EF^{2}\)</span></td><td style="text-align:right">משפט פיתגורס (במשולש <span class="fi">\(DEF\)</span>; לפי 1)</td></tr>
+<tr><td>6</td><td><span class="fi">\(AB=DE\)</span></td><td style="text-align:right">כלל המעבר — שני הביטויים שווים (לפי 2, 3, 4, 5)</td></tr>
+<tr><td>7</td><td><span class="fi">\(\triangle ABC\cong\triangle DEF\)</span></td><td style="text-align:right">משפט חפיפה צ.צ.צ (לפי 2, 3, 6)</td></tr>
+<tr class="tr-qed"><td colspan="3"><b>מש"ל</b></td></tr>
+</table></div>
+<p class="usedth"><b>המשפטים שהשתמשנו בהם:</b> משפט חפיפה צ.צ.ז (שתי צלעות והזווית שמול הצלע הגדולה) · היתר הוא הצלע הארוכה במשולש ישר-זווית</p>
+<a class="backup no-print" href="#finder">↑ חזרה לחיפוש הדגמים</a>
+</article>
+
+<article class="ex model" id="m09">
+<div class="ex-head"><span class="lvl l2">דגם 9</span><h4>מוכיחים ששני קטעים שווים — דרך חפיפה</h4></div>
+<p class="sig"><b>מתי זה הדגם שלך:</b> מבקשים להוכיח ששני קטעים שווים, ואין אף משפט שנותן אותם ישירות.</p>
+<p class="q-text">במשולש <span class="fi">\(ABC\)</span> נתון: <span class="fi">\(AB=AC\)</span>.<br>על הצלע <span class="fi">\(AB\)</span> סומנה הנקודה <span class="fi">\(D\)</span> ועל הצלע <span class="fi">\(AC\)</span> סומנה הנקודה <span class="fi">\(E\)</span>, כך ש-<span class="fi">\(AD=AE\)</span>.<br>הוכיחי כי <span class="fi">\(BE=CD\)</span>.</p>
+<figure><svg viewBox="0 0 360 240" style="width:100%;max-width:440px;height:auto" role="img" aria-label="isosceles triangle with equal segments marked on both legs and two cevians"><polygon points="180,26 52,206 308,206" fill="#FBFAF7" stroke="#334155" stroke-width="2.5"/><line x1="52" y1="206" x2="226.1" y2="90.8" stroke="#334155" stroke-width="2.5"/><line x1="308" y1="206" x2="133.9" y2="90.8" stroke="#334155" stroke-width="2.5"/><line x1="168.5" y1="42.2" x2="145.4" y2="74.6" stroke="#059669" stroke-width="5"/><line x1="161" y1="61.3" x2="152.9" y2="55.5" stroke="#059669" stroke-width="2.5"/><line x1="191.5" y1="42.2" x2="214.6" y2="74.6" stroke="#059669" stroke-width="5"/><line x1="207.1" y1="55.5" x2="199" y2="61.3" stroke="#059669" stroke-width="2.5"/><line x1="92" y1="158.4" x2="83.8" y2="152.6" stroke="#2563EB" stroke-width="2.5"/><line x1="86.7" y1="165.8" x2="78.6" y2="160" stroke="#2563EB" stroke-width="2.5"/><line x1="100.6" y1="137.6" x2="69.9" y2="180.8" stroke="#2563EB" stroke-width="5"/><line x1="276.2" y1="152.6" x2="268" y2="158.4" stroke="#2563EB" stroke-width="2.5"/><line x1="281.4" y1="160" x2="273.3" y2="165.8" stroke="#2563EB" stroke-width="2.5"/><line x1="259.4" y1="137.6" x2="290.1" y2="180.8" stroke="#2563EB" stroke-width="5"/><path d="M164.9,47.2 A26,26 0 0 0 195.1,47.2" fill="none" stroke="#B7791F" stroke-width="3.5"/><line x1="112.9" y1="165.7" x2="165.2" y2="131.1" stroke="#7C3AED" stroke-width="4" stroke-dasharray="7 5"/><line x1="247.1" y1="165.7" x2="194.8" y2="131.1" stroke="#7C3AED" stroke-width="4" stroke-dasharray="7 5"/><circle cx="133.9" cy="90.8" r="3" fill="#334155"/><circle cx="226.1" cy="90.8" r="3" fill="#334155"/><text x="180" y="15" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">A</text><text x="37.5" y="217.8" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">B</text><text x="322.5" y="217.8" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">C</text><text x="117.9" y="88.8" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">D</text><text x="242.1" y="88.8" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">E</text></svg><figcaption>ירוק — הזוג הנתון <span class="fi">\(AD=AE\)</span>; כחול (שני קווים) — החלקים שנשארו על השוקיים, ויחד עם הירוקים הם מראים את הנתון <span class="fi">\(AB=AC\)</span>; ענברי — הזווית ב-<span class="fi">\(A\)</span> ששני המשולשים חולקים. מה שצריך להוכיח מקווקו.</figcaption></figure>
+<div class="box intuition"><div class="box-title">איך חושבים</div>
+<ul class="plan">
+  <li>הקטעים <span class="fi">\(BE\)</span> ו-<span class="fi">\(CD\)</span> אינם צלעות של אותו משולש ← אי אפשר להשוות אותם ישירות.</li>
+  <li>מחפשות שני משולשים שבכל אחד מהם יושב אחד מהם: <span class="fi">\(BE\)</span> ב-<span class="fi">\(\triangle ABE\)</span>, ו-<span class="fi">\(CD\)</span> ב-<span class="fi">\(\triangle ACD\)</span>.</li>
+  <li>לשני המשולשים האלה יש בדיוק את אותה זווית <span class="fi">\(\angle A\)</span> ← זווית משותפת, וזה נימוק.</li>
+  <li>קודם מוכיחות חפיפה, ורק ממנה קוראות את שוויון הקטעים.</li>
+</ul></div>
+<table class="dtable">
+<tr><th></th><th>טענה</th><th>נימוק</th></tr>
+<tr><td>1</td><td class="hl-c2"><span class="fi">\(AB=AC\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>2</td><td class="hl-c3"><span class="fi">\(AD=AE\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>3</td><td style="background:#FBF0C9"><span class="fi">\(\angle BAE=\angle CAD\)</span></td><td style="text-align:right">זווית משותפת לשני המשולשים</td></tr>
+<tr><td>4</td><td><span class="fi">\(\triangle ABE\cong\triangle ACD\)</span></td><td style="text-align:right">משפט חפיפה צ.ז.צ (לפי 1, 3, 2)</td></tr>
+<tr><td>5</td><td class="hl-c4"><span class="fi">\(BE=CD\)</span></td><td style="text-align:right">צלעות מתאימות במשולשים חופפים שוות (לפי 4)</td></tr>
+<tr class="tr-qed"><td colspan="3"><b>מש"ל</b></td></tr>
+</table>
+<p class="aside">ההתאמה היא <span class="fi">\(A\leftrightarrow A,\; B\leftrightarrow C,\; E\leftrightarrow D\)</span> — ולכן דווקא <span class="fi">\(BE\)</span> מול <span class="fi">\(CD\)</span>.</p>
+<p class="usedth"><b>המשפטים שהשתמשנו בהם:</b> זווית משותפת · משפט חפיפה צ.ז.צ · צלעות מתאימות במשולשים חופפים שוות</p>
+<a class="backup no-print" href="#finder">↑ חזרה לחיפוש הדגמים</a>
+</article>
+
+<article class="ex model" id="m10">
+<div class="ex-head"><span class="lvl l3">דגם 10</span><h4>מוכיחים ששתי זוויות שוות — ומעבירים אלכסון</h4></div>
+<p class="sig"><b>מתי זה הדגם שלך:</b> מרובע שנתונות בו צלעות ומבקשים ממנו זוויות. אין בשרטוט אף משולש — צריך ליצור אותם.</p>
+<p class="q-text">במרובע <span class="fi">\(ABCD\)</span> נתון: <span class="fi">\(AB=DC\)</span> וגם <span class="fi">\(BC=AD\)</span>.<br>הוכיחי כי <span class="fi">\(\angle B=\angle D\)</span>.</p>
+<figure><svg viewBox="0 0 360 226" style="width:100%;max-width:440px;height:auto" role="img" aria-label="quadrilateral with two pairs of equal opposite sides and the diagonal AC added"><polygon points="62,42 252,42 302,192 112,192" fill="#FBFAF7" stroke="#334155" stroke-width="2.5"/><line x1="62" y1="42" x2="302" y2="192" stroke="#7C3AED" stroke-width="2.5"/><line x1="119" y1="42" x2="195" y2="42" stroke="#2563EB" stroke-width="5"/><line x1="157" y1="37" x2="157" y2="47" stroke="#2563EB" stroke-width="2.5"/><line x1="169" y1="192" x2="245" y2="192" stroke="#2563EB" stroke-width="5"/><line x1="207" y1="187" x2="207" y2="197" stroke="#2563EB" stroke-width="2.5"/><line x1="267" y1="87" x2="287" y2="147" stroke="#059669" stroke-width="5"/><line x1="280.3" y1="111.1" x2="270.8" y2="114.3" stroke="#059669" stroke-width="2.5"/><line x1="283.2" y1="119.7" x2="273.7" y2="122.9" stroke="#059669" stroke-width="2.5"/><line x1="77" y1="87" x2="97" y2="147" stroke="#059669" stroke-width="5"/><line x1="90.3" y1="111.1" x2="80.8" y2="114.3" stroke="#059669" stroke-width="2.5"/><line x1="93.2" y1="119.7" x2="83.7" y2="122.9" stroke="#059669" stroke-width="2.5"/><line x1="150.8" y1="97.5" x2="213.2" y2="136.5" stroke="#7C3AED" stroke-width="4"/><line x1="177" y1="108" x2="171.7" y2="116.5" stroke="#7C3AED" stroke-width="2.5"/><line x1="184.6" y1="112.8" x2="179.4" y2="121.2" stroke="#7C3AED" stroke-width="2.5"/><line x1="192.3" y1="117.5" x2="187" y2="126" stroke="#7C3AED" stroke-width="2.5"/><path d="M226,42 A26,26 0 0 0 260.2,66.7" fill="none" stroke="#C2408C" stroke-width="3" stroke-dasharray="6 4"/><text x="226.3" y="82.7" text-anchor="middle" font-size="15" font-weight="bold" fill="#C2408C">?</text><path d="M138,192 A26,26 0 0 0 103.8,167.3" fill="none" stroke="#C2408C" stroke-width="3" stroke-dasharray="6 4"/><text x="137.7" y="161.3" text-anchor="middle" font-size="15" font-weight="bold" fill="#C2408C">?</text><text x="48.4" y="38.5" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">A</text><text x="262.9" y="35.3" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">B</text><text x="315.6" y="205.5" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">C</text><text x="101.1" y="208.7" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">D</text></svg><figcaption>האלכסון הסגול הוא קו שהוספנו בעצמנו — בנייה. שתי הזוויות המקווקוות הן מה שצריך להוכיח.</figcaption></figure>
+<div class="box intuition"><div class="box-title">איך חושבים</div>
+<ul class="plan">
+  <li>במרובע אין משפטי חפיפה. מעבירות אלכסון, והמרובע מתפרק לשני משולשים.</li>
+  <li>האלכסון <span class="fi">\(AC\)</span> הופך מיד לצלע משותפת ← האיבר השלישי מגיע בלי מאמץ.</li>
+  <li><span class="fi">\(\angle B\)</span> ו-<span class="fi">\(\angle D\)</span> הן זוויות שלמות של המרובע, ולכן הן יוצאות ישירות מהחפיפה.</li>
+</ul></div>
+<table class="dtable">
+<tr><th></th><th>טענה</th><th>נימוק</th></tr>
+<tr><td>1</td><td class="hl-c2"><span class="fi">\(AB=DC\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>2</td><td class="hl-c3"><span class="fi">\(BC=AD\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>3</td><td class="hl-c4">מעבירים את האלכסון <span class="fi">\(AC\)</span></td><td style="text-align:right">בנייה</td></tr>
+<tr><td>4</td><td class="hl-c4"><span class="fi">\(AC=CA\)</span></td><td style="text-align:right">צלע משותפת לשני המשולשים (לפי 3)</td></tr>
+<tr><td>5</td><td><span class="fi">\(\triangle ABC\cong\triangle CDA\)</span></td><td style="text-align:right">משפט חפיפה צ.צ.צ (לפי 1, 2, 4)</td></tr>
+<tr><td>6</td><td class="hl-c5"><span class="fi">\(\angle B=\angle D\)</span></td><td style="text-align:right">זוויות מתאימות במשולשים חופפים שוות (לפי 5)</td></tr>
+<tr class="tr-qed"><td colspan="3"><b>מש"ל</b></td></tr>
+</table>
+<p class="aside">קו שאת מוסיפה לשרטוט בעצמך הוא שורה מלאה בטבלה, והנימוק שלו הוא <b>בנייה</b>. בלי השורה הזו הקורא לא יודע מאיפה הופיע <span class="fi">\(AC\)</span>.</p>
+<p class="usedth"><b>המשפטים שהשתמשנו בהם:</b> בנייה · צלע משותפת · משפט חפיפה צ.צ.צ · זוויות מתאימות במשולשים חופפים שוות</p>
+<a class="backup no-print" href="#finder">↑ חזרה לחיפוש הדגמים</a>
+</article>
+
+<article class="ex model" id="m11">
+<div class="ex-head"><span class="lvl l1">דגם 11</span><h4>קטעים על ישר אחד — חיבור וחיסור</h4></div>
+<p class="sig"><b>מתי זה הדגם שלך:</b> כמה נקודות יושבות על ישר אחד, ונתון ששני קטעים ״קיצוניים״ שווים.</p>
+<p class="q-text">הנקודות <span class="fi">\(A,\;B,\;C,\;D\)</span> נמצאות על ישר אחד, בסדר הזה.<br>נתון: <span class="fi">\(AB=CD\)</span>.<br>הוכיחי כי <span class="fi">\(AC=BD\)</span>.</p>
+<figure><svg viewBox="0 0 346 234" style="width:100%;max-width:440px;height:auto" role="img" aria-label="four points A B C D in order on one straight line with spans marked"><line x1="24" y1="118" x2="322" y2="118" stroke="#334155" stroke-width="2.5"/><circle cx="48" cy="118" r="3.5" fill="#334155"/><circle cx="118" cy="118" r="3.5" fill="#334155"/><circle cx="218" cy="118" r="3.5" fill="#334155"/><circle cx="288" cy="118" r="3.5" fill="#334155"/><text x="48" y="143" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">A</text><text x="118" y="143" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">B</text><text x="218" y="143" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">C</text><text x="288" y="143" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">D</text><line x1="48" y1="82" x2="118" y2="82" stroke="#2563EB" stroke-width="3"/><line x1="48" y1="75" x2="48" y2="89" stroke="#2563EB" stroke-width="3"/><line x1="118" y1="75" x2="118" y2="89" stroke="#2563EB" stroke-width="3"/><text x="83" y="74" text-anchor="middle" font-size="13" font-weight="bold" fill="#2563EB">AB</text><line x1="83" y1="77.5" x2="83" y2="86.5" stroke="#2563EB" stroke-width="2.5"/><line x1="218" y1="82" x2="288" y2="82" stroke="#2563EB" stroke-width="3"/><line x1="218" y1="75" x2="218" y2="89" stroke="#2563EB" stroke-width="3"/><line x1="288" y1="75" x2="288" y2="89" stroke="#2563EB" stroke-width="3"/><text x="253" y="74" text-anchor="middle" font-size="13" font-weight="bold" fill="#2563EB">CD</text><line x1="253" y1="77.5" x2="253" y2="86.5" stroke="#2563EB" stroke-width="2.5"/><line x1="118" y1="48" x2="218" y2="48" stroke="#059669" stroke-width="3"/><line x1="118" y1="41" x2="118" y2="55" stroke="#059669" stroke-width="3"/><line x1="218" y1="41" x2="218" y2="55" stroke="#059669" stroke-width="3"/><text x="168" y="40" text-anchor="middle" font-size="13" font-weight="bold" fill="#059669">BC</text><line x1="164" y1="43.5" x2="164" y2="52.5" stroke="#059669" stroke-width="2.5"/><line x1="172" y1="43.5" x2="172" y2="52.5" stroke="#059669" stroke-width="2.5"/><line x1="48" y1="176" x2="218" y2="176" stroke="#7C3AED" stroke-width="3" stroke-dasharray="7 5"/><line x1="48" y1="169" x2="48" y2="183" stroke="#7C3AED" stroke-width="3"/><line x1="218" y1="169" x2="218" y2="183" stroke="#7C3AED" stroke-width="3"/><text x="133" y="168" text-anchor="middle" font-size="13" font-weight="bold" fill="#7C3AED">AC</text><line x1="118" y1="208" x2="288" y2="208" stroke="#7C3AED" stroke-width="3" stroke-dasharray="7 5"/><line x1="118" y1="201" x2="118" y2="215" stroke="#7C3AED" stroke-width="3"/><line x1="288" y1="201" x2="288" y2="215" stroke="#7C3AED" stroke-width="3"/><text x="203" y="200" text-anchor="middle" font-size="13" font-weight="bold" fill="#7C3AED">BD</text></svg><figcaption>למעלה — שני הקטעים הנתונים (כחול) והקטע <span class="fi">\(BC\)</span> שמשותף לשניהם (ירוק). למטה — שני הקטעים שצריך להוכיח, מקווקווים.</figcaption></figure>
+<div class="box intuition"><div class="box-title">איך חושבים</div>
+<ul class="plan">
+  <li>מסמנות על השרטוט את שני הקטעים הנתונים, ואת שני הקטעים המבוקשים.</li>
+  <li>בתוך שניהם יושב אותו קטע בדיוק — <span class="fi">\(BC\)</span>, והוא שווה לעצמו.</li>
+  <li>מוסיפות את <span class="fi">\(BC\)</span> לשני אגפי הנתון ← מקבלות את הקטעים המבוקשים בשלמותם.</li>
+</ul></div>
+<table class="dtable">
+<tr><th></th><th>טענה</th><th>נימוק</th></tr>
+<tr><td>1</td><td class="hl-c2"><span class="fi">\(AB=CD\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>2</td><td class="hl-c3"><span class="fi">\(BC=BC\)</span></td><td style="text-align:right">קטע משותף</td></tr>
+<tr><td>3</td><td><span class="fi">\(AB+BC=CD+BC\)</span></td><td style="text-align:right">חיבור קטעים שווים (לפי 1, 2)</td></tr>
+<tr><td>4</td><td><span class="fi">\(AC=AB+BC\)</span></td><td style="text-align:right">שלם שווה לסכום חלקיו (<span class="fi">\(A,\;B,\;C\)</span> על ישר אחד)</td></tr>
+<tr><td>5</td><td><span class="fi">\(BD=BC+CD\)</span></td><td style="text-align:right">שלם שווה לסכום חלקיו (<span class="fi">\(B,\;C,\;D\)</span> על ישר אחד)</td></tr>
+<tr><td>6</td><td class="hl-c4"><span class="fi">\(AC=BD\)</span></td><td style="text-align:right">כלל המעבר (לפי 3, 4, 5)</td></tr>
+<tr class="tr-qed"><td colspan="3"><b>מש"ל</b></td></tr>
+</table>
+<p class="aside">והכיוון ההפוך עובד בדיוק אותו דבר: אם נתון <span class="fi">\(AC=BD\)</span> ומבקשים <span class="fi">\(AB=CD\)</span>, מחסרים את <span class="fi">\(BC\)</span> משני האגפים, והנימוק הוא <b>חיסור קטעים שווים</b>. אותו מהלך בדיוק עובד גם על זוויות — חיבור וחיסור זוויות שוות.</p>
+<p class="usedth"><b>המשפטים שהשתמשנו בהם:</b> חיבור קטעים שווים · שלם שווה לסכום חלקיו · כלל המעבר</p>
+<a class="backup no-print" href="#finder">↑ חזרה לחיפוש הדגמים</a>
+</article>
+
+<article class="ex model" id="m12">
+<div class="ex-head"><span class="lvl l2">דגם 12</span><h4>חוצה זווית</h4></div>
+<p class="sig"><b>מתי זה הדגם שלך:</b> כתוב שקטע ״חוצה את הזווית״, או שמסומנות שתי זוויות שוות שיוצאות מאותו קודקוד.</p>
+<p class="q-text">הקרן <span class="fi">\(OC\)</span> חוצה את <span class="fi">\(\angle AOB\)</span>.<br>הנקודה <span class="fi">\(A\)</span> נמצאת על שוק אחת והנקודה <span class="fi">\(B\)</span> על השוק השנייה, כך ש-<span class="fi">\(OA=OB\)</span>.<br>הוכיחי כי <span class="fi">\(CA=CB\)</span>.</p>
+<figure><svg viewBox="0 0 380 300" style="width:100%;max-width:470px;height:auto" role="img" aria-label="an angle at O with its bisector, equal segments OA and OB, and the point C"><line x1="40" y1="150" x2="304.9" y2="9.2" stroke="#334155" stroke-width="2.5"/><line x1="40" y1="150" x2="304.9" y2="290.8" stroke="#334155" stroke-width="2.5"/><line x1="40" y1="150" x2="348" y2="150" stroke="#334155" stroke-width="2.5"/><line x1="255" y1="150" x2="185.7" y2="72.6" stroke="#334155" stroke-width="2.5"/><line x1="255" y1="150" x2="185.7" y2="227.4" stroke="#334155" stroke-width="2.5"/><line x1="83.7" y1="126.8" x2="142" y2="95.8" stroke="#2563EB" stroke-width="5"/><line x1="110.5" y1="106.9" x2="115.2" y2="115.7" stroke="#2563EB" stroke-width="2.5"/><line x1="83.7" y1="173.2" x2="142" y2="204.2" stroke="#2563EB" stroke-width="5"/><line x1="115.2" y1="184.3" x2="110.5" y2="193.1" stroke="#2563EB" stroke-width="2.5"/><line x1="115.2" y1="150" x2="179.8" y2="150" stroke="#059669" stroke-width="5"/><line x1="143" y1="145" x2="143" y2="155" stroke="#059669" stroke-width="2.5"/><line x1="152" y1="145" x2="152" y2="155" stroke="#059669" stroke-width="2.5"/><path d="M77.1,130.3 A42,42 0 0 1 81.8,146.3" fill="none" stroke="#C2408C" stroke-width="3.5"/><path d="M81.8,153.7 A42,42 0 0 1 77.1,169.7" fill="none" stroke="#C2408C" stroke-width="3.5"/><line x1="230.7" y1="122.9" x2="210" y2="99.7" stroke="#7C3AED" stroke-width="4" stroke-dasharray="7 5"/><line x1="230.7" y1="177.1" x2="210" y2="200.3" stroke="#7C3AED" stroke-width="4" stroke-dasharray="7 5"/><circle cx="185.7" cy="72.6" r="3" fill="#334155"/><circle cx="185.7" cy="227.4" r="3" fill="#334155"/><circle cx="255" cy="150" r="3" fill="#334155"/><text x="24" y="155" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">O</text><text x="179.7" y="60.6" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">A</text><text x="179.7" y="249.4" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">B</text><text x="259" y="136" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">C</text></svg><figcaption>שתי הזוויות הוורודות הן התרגום של ״חוצה זווית״ לשוויון. ירוק — הקרן <span class="fi">\(OC\)</span> שמשותפת לשני המשולשים. מה שצריך להוכיח מקווקו.</figcaption></figure>
+<div class="box intuition"><div class="box-title">איך חושבים</div>
+<ul class="plan">
+  <li>״חוצה זווית״ הוא נתון שמתורגם מיד לשוויון: <span class="fi">\(\angle AOC=\angle BOC\)</span>.</li>
+  <li>שני המשולשים <span class="fi">\(AOC\)</span> ו-<span class="fi">\(BOC\)</span> יושבים על אותה קרן <span class="fi">\(OC\)</span> ← צלע משותפת.</li>
+  <li>צלע, זווית כלואה, צלע ← צ.ז.צ, ומהחפיפה קוראים את שוויון הקטעים.</li>
+</ul></div>
+<table class="dtable">
+<tr><th></th><th>טענה</th><th>נימוק</th></tr>
+<tr><td>1</td><td class="hl-c2"><span class="fi">\(OA=OB\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>2</td><td class="hl-c5"><span class="fi">\(\angle AOC=\angle BOC\)</span></td><td style="text-align:right">נתון — <span class="fi">\(OC\)</span> חוצה את <span class="fi">\(\angle AOB\)</span></td></tr>
+<tr><td>3</td><td class="hl-c3"><span class="fi">\(OC=OC\)</span></td><td style="text-align:right">צלע משותפת לשני המשולשים</td></tr>
+<tr><td>4</td><td><span class="fi">\(\triangle AOC\cong\triangle BOC\)</span></td><td style="text-align:right">משפט חפיפה צ.ז.צ (לפי 1, 2, 3)</td></tr>
+<tr><td>5</td><td class="hl-c4"><span class="fi">\(CA=CB\)</span></td><td style="text-align:right">צלעות מתאימות במשולשים חופפים שוות (לפי 4)</td></tr>
+<tr class="tr-qed"><td colspan="3"><b>מש"ל</b></td></tr>
+</table>
+<p class="aside">בשרטוט שלך חוצה הזווית יסומן לרוב בשתי קשתות זהות שיוצאות מאותו קודקוד, בלי שאף מילה תיכתב. זה אותו נתון.</p>
+<p class="usedth"><b>המשפטים שהשתמשנו בהם:</b> הגדרת חוצה זווית · צלע משותפת · משפט חפיפה צ.ז.צ · צלעות מתאימות במשולשים חופפים שוות</p>
+<a class="backup no-print" href="#finder">↑ חזרה לחיפוש הדגמים</a>
+</article>
+
+<article class="ex model" id="m13">
+<div class="ex-head"><span class="lvl l2">דגם 13</span><h4>אנך אמצעי לקטע</h4></div>
+<p class="sig"><b>מתי זה הדגם שלך:</b> ישר שעובר דרך אמצע קטע ומאונך לו, ושואלים על מרחקים מקצות הקטע.</p>
+<p class="q-text">הישר <span class="fi">\(k\)</span> הוא אנך אמצעי לקטע <span class="fi">\(AB\)</span>, והוא חותך אותו בנקודה <span class="fi">\(M\)</span>.<br>הנקודה <span class="fi">\(P\)</span> נמצאת על <span class="fi">\(k\)</span>.<br>הוכיחי כי <span class="fi">\(PA=PB\)</span>.</p>
+<figure><svg viewBox="0 0 360 226" style="width:100%;max-width:450px;height:auto" role="img" aria-label="segment AB with its perpendicular bisector k through M and a point P on it"><line x1="22" y1="178" x2="338" y2="178" stroke="#334155" stroke-width="2.5"/><line x1="180" y1="22" x2="180" y2="212" stroke="#5A6875" stroke-width="2.5"/><line x1="180" y1="46" x2="58" y2="178" stroke="#334155" stroke-width="2.5"/><line x1="180" y1="46" x2="302" y2="178" stroke="#334155" stroke-width="2.5"/><path d="M165,178 L165,163 L180,163" fill="none" stroke="#C2408C" stroke-width="2.5"/><path d="M195,178 L195,163 L180,163" fill="none" stroke="#C2408C" stroke-width="2.5"/><line x1="94.6" y1="178" x2="143.4" y2="178" stroke="#2563EB" stroke-width="5"/><line x1="119" y1="173" x2="119" y2="183" stroke="#2563EB" stroke-width="2.5"/><line x1="216.6" y1="178" x2="265.4" y2="178" stroke="#2563EB" stroke-width="5"/><line x1="241" y1="173" x2="241" y2="183" stroke="#2563EB" stroke-width="2.5"/><line x1="180" y1="90.9" x2="180" y2="133.1" stroke="#059669" stroke-width="5"/><line x1="185" y1="107.5" x2="175" y2="107.5" stroke="#059669" stroke-width="2.5"/><line x1="185" y1="116.5" x2="175" y2="116.5" stroke="#059669" stroke-width="2.5"/><line x1="137.3" y1="92.2" x2="100.7" y2="131.8" stroke="#7C3AED" stroke-width="4" stroke-dasharray="7 5"/><line x1="222.7" y1="92.2" x2="259.3" y2="131.8" stroke="#7C3AED" stroke-width="4" stroke-dasharray="7 5"/><circle cx="58" cy="178" r="3" fill="#334155"/><circle cx="302" cy="178" r="3" fill="#334155"/><circle cx="180" cy="178" r="3" fill="#334155"/><circle cx="180" cy="46" r="3" fill="#334155"/><text x="52" y="200" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">A</text><text x="308" y="200" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">B</text><text x="194" y="200" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">M</text><text x="162" y="38" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">P</text><text x="202" y="36" text-anchor="middle" font-size="15" font-weight="bold" fill="#5A6875" font-style="italic">k</text></svg><figcaption>״אנך אמצעי״ הוא שני נתונים באריזה אחת: הריבועים הוורודים (האנך) והסימון הכחול (האמצע). ירוק — <span class="fi">\(PM\)</span>, המשותף לשני המשולשים.</figcaption></figure>
+<div class="box intuition"><div class="box-title">איך חושבים</div>
+<ul class="plan">
+  <li>״אנך אמצעי״ נפרק לשני נתונים: <span class="fi">\(AM=MB\)</span> וגם <span class="fi">\(k\perp AB\)</span>.</li>
+  <li>האנך נותן שתי זוויות של <span class="fi">\(90^\circ\)</span>, והאמצע נותן שתי צלעות שוות.</li>
+  <li><span class="fi">\(PM\)</span> שייך לשני המשולשים ← צלע משותפת, וזה האיבר השלישי.</li>
+</ul></div>
+<table class="dtable">
+<tr><th></th><th>טענה</th><th>נימוק</th></tr>
+<tr><td>1</td><td class="hl-c2"><span class="fi">\(AM=MB\)</span></td><td style="text-align:right">נתון — <span class="fi">\(k\)</span> אנך אמצעי לקטע <span class="fi">\(AB\)</span></td></tr>
+<tr><td>2</td><td><span class="fi">\(k\perp AB\)</span></td><td style="text-align:right">נתון — <span class="fi">\(k\)</span> אנך אמצעי לקטע <span class="fi">\(AB\)</span></td></tr>
+<tr><td>3</td><td class="hl-c5"><span class="fi">\(\angle PMA=\angle PMB=90^\circ\)</span></td><td style="text-align:right">הגדרת אנך: שני ישרים מאונכים יוצרים זווית של <span class="fi">\(90^\circ\)</span> (לפי 2)</td></tr>
+<tr><td>4</td><td class="hl-c3"><span class="fi">\(PM=PM\)</span></td><td style="text-align:right">צלע משותפת לשני המשולשים</td></tr>
+<tr><td>5</td><td><span class="fi">\(\triangle PMA\cong\triangle PMB\)</span></td><td style="text-align:right">משפט חפיפה צ.ז.צ (לפי 1, 3, 4)</td></tr>
+<tr><td>6</td><td class="hl-c4"><span class="fi">\(PA=PB\)</span></td><td style="text-align:right">צלעות מתאימות במשולשים חופפים שוות (לפי 5)</td></tr>
+<tr class="tr-qed"><td colspan="3"><b>מש"ל</b></td></tr>
+</table>
+<p class="aside">בנספח המשפטים זה מופיע גם כמשפט מוכן — ״כל נקודה הנמצאת על האנך האמצעי של קטע נמצאת במרחקים שווים מקצות הקטע״ — ואז זו שורה אחת. את החפיפה המלאה כותבים כשמבקשים הוכחה.</p>
+<p class="usedth"><b>המשפטים שהשתמשנו בהם:</b> הגדרת אנך אמצעי · הגדרת אנך · משפט חפיפה צ.ז.צ · צלעות מתאימות במשולשים חופפים שוות</p>
+<a class="backup no-print" href="#finder">↑ חזרה לחיפוש הדגמים</a>
+</article>
+
+<article class="ex model" id="m14">
+<div class="ex-head"><span class="lvl l3">דגם 14</span><h4>מוכיחים ששני ישרים מקבילים — הכיוון ההפוך</h4></div>
+<p class="sig"><b>מתי זה הדגם שלך:</b> המקבילוּת מופיעה בצ״ל — היא היעד של ההוכחה, והשרטוט מגיע בלי חיצי מקבילים.</p>
+<p class="q-text">במשולש <span class="fi">\(ABC\)</span> נתון: <span class="fi">\(AB=AC\)</span>.<br>על <span class="fi">\(AB\)</span> סומנה הנקודה <span class="fi">\(D\)</span> ועל <span class="fi">\(AC\)</span> סומנה הנקודה <span class="fi">\(E\)</span>, כך ש-<span class="fi">\(AD=AE\)</span>.<br>הוכיחי כי <span class="fi">\(DE\parallel BC\)</span>.</p>
+<figure><svg viewBox="0 0 360 244" style="width:100%;max-width:440px;height:auto" role="img" aria-label="isosceles triangle with equal segments on the legs and the segment DE"><polygon points="180,26 48,210 312,210" fill="#FBFAF7" stroke="#334155" stroke-width="2.5"/><line x1="135.1" y1="88.6" x2="224.9" y2="88.6" stroke="#334155" stroke-width="2.5"/><line x1="168.8" y1="41.6" x2="146.3" y2="72.9" stroke="#059669" stroke-width="5"/><line x1="164.2" y1="56.5" x2="156.1" y2="50.7" stroke="#059669" stroke-width="2.5"/><line x1="159" y1="63.9" x2="150.9" y2="58" stroke="#059669" stroke-width="2.5"/><line x1="191.2" y1="41.6" x2="213.7" y2="72.9" stroke="#059669" stroke-width="5"/><line x1="203.9" y1="50.7" x2="195.8" y2="56.5" stroke="#059669" stroke-width="2.5"/><line x1="209.1" y1="58" x2="201" y2="63.9" stroke="#059669" stroke-width="2.5"/><line x1="89" y1="161.4" x2="80.9" y2="155.6" stroke="#2563EB" stroke-width="2.5"/><line x1="100.8" y1="136.4" x2="69.1" y2="180.6" stroke="#2563EB" stroke-width="5"/><line x1="279.1" y1="155.6" x2="271" y2="161.4" stroke="#2563EB" stroke-width="2.5"/><line x1="259.2" y1="136.4" x2="290.9" y2="180.6" stroke="#2563EB" stroke-width="5"/><path d="M149.1,69.1 A24,24 0 0 1 159.1,88.6" fill="none" stroke="#B7791F" stroke-width="3.5" stroke-dasharray="6 4"/><path d="M65.5,185.6 A30,30 0 0 1 78,210" fill="none" stroke="#B7791F" stroke-width="3.5" stroke-dasharray="6 4"/><path d="M192,81.6 L198,88.6 L192,95.6" fill="none" stroke="#7C3AED" stroke-width="2.5"/><path d="M205.7,203 L211.7,210 L205.7,217" fill="none" stroke="#7C3AED" stroke-width="2.5"/><circle cx="135.1" cy="88.6" r="3" fill="#334155"/><circle cx="224.9" cy="88.6" r="3" fill="#334155"/><text x="180" y="15" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">A</text><text x="33.5" y="221.7" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">B</text><text x="326.5" y="221.7" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">C</text><text x="119.1" y="90.6" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">D</text><text x="240.9" y="90.6" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">E</text></svg><figcaption>ירוק (שני קווים) — הזוג הנתון <span class="fi">\(AD=AE\)</span>; כחול — החלקים שנשארו על השוקיים, ויחד עם הירוקים הם מראים את הנתון <span class="fi">\(AB=AC\)</span>.
+<br>שתי הקשתות הענבריות המקווקוות הן זוג המתאימות שיוצא מהחישוב, ועליו נשענת המסקנה. חיצי המקבילים הסגולים הם מה שצריך להוכיח, ולכן הם מופיעים רק בסוף.</figcaption></figure>
+<div class="box intuition"><div class="box-title">איך חושבים</div>
+<ul class="plan">
+  <li>כדי להוכיח מקבילות צריך זוג זוויות: מתחלפות שוות, מתאימות שוות, או חד-צדדיות שסכומן <span class="fi">\(180^\circ\)</span>.</li>
+  <li>הנתונים נותנים שני משולשים שווי-שוקיים עם אותה זווית ראש: <span class="fi">\(ABC\)</span> ו-<span class="fi">\(ADE\)</span>.</li>
+  <li>בשני המשולשים סכום הזוויות <span class="fi">\(180^\circ\)</span>, וזווית הראש משותפת ← מה שנשאר מתחלק בין זוויות הבסיס באותו אופן.</li>
+  <li><span class="fi">\(\angle ADE\)</span> ו-<span class="fi">\(\angle ABC\)</span> יושבות באותה פינה על החותך <span class="fi">\(AB\)</span> ← מתאימות, ומכאן המסקנה.</li>
+</ul></div>
+<table class="dtable">
+<tr><th></th><th>טענה</th><th>נימוק</th></tr>
+<tr><td>1</td><td class="hl-c2"><span class="fi">\(AB=AC\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>2</td><td class="hl-c3"><span class="fi">\(AD=AE\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>3</td><td><span class="fi">\(\angle ABC=\angle ACB\)</span></td><td style="text-align:right">במשולש שווה-שוקיים זוויות הבסיס שוות (במשולש <span class="fi">\(ABC\)</span>; לפי 1)</td></tr>
+<tr><td>4</td><td><span class="fi">\(\angle ADE=\angle AED\)</span></td><td style="text-align:right">במשולש שווה-שוקיים זוויות הבסיס שוות (במשולש <span class="fi">\(ADE\)</span>; לפי 2)</td></tr>
+<tr><td>5</td><td><span class="fi">\(\angle A+\angle ABC+\angle ACB=180^\circ\)</span></td><td style="text-align:right">סכום הזוויות במשולש <span class="fi">\(180^\circ\)</span> (במשולש <span class="fi">\(ABC\)</span>)</td></tr>
+<tr><td>6</td><td><span class="fi">\(\angle A+\angle ADE+\angle AED=180^\circ\)</span></td><td style="text-align:right">סכום הזוויות במשולש <span class="fi">\(180^\circ\)</span> (במשולש <span class="fi">\(ADE\)</span>)</td></tr>
+<tr><td>7</td><td><span class="fi">\(\angle ABC+\angle ACB=\angle ADE+\angle AED\)</span></td><td style="text-align:right">כלל המעבר — שני הסכומים שווים ל-<span class="fi">\(180^\circ-\angle A\)</span> (לפי 5, 6)</td></tr>
+<tr><td>8</td><td style="background:#FBF0C9"><span class="fi">\(2\cdot\angle ABC=2\cdot\angle ADE\;\Rightarrow\;\angle ADE=\angle ABC\)</span></td><td style="text-align:right">הצבה וחילוק ב-2 (לפי 3, 4, 7)</td></tr>
+<tr><td>9</td><td class="hl-c4"><span class="fi">\(DE\parallel BC\)</span></td><td style="text-align:right">אם זוג זוויות מתאימות שוות אז הישרים מקבילים (המשפט ההפוך; החותך <span class="fi">\(AB\)</span>; לפי 8)</td></tr>
+<tr class="tr-qed"><td colspan="3"><b>מש"ל</b></td></tr>
+</table>
+<p class="aside">שורות 5–8 הן בדיוק המהלך שהמורה הראתה בכיתה כשהוכיחה <span class="fi">\(\angle C=\angle F\)</span>: כששני משולשים חולקים זווית, מה שנשאר מ-<span class="fi">\(180^\circ\)</span> מתחלק ביניהם באותו אופן.</p>
+<p class="usedth"><b>המשפטים שהשתמשנו בהם:</b> במשולש שווה-שוקיים זוויות הבסיס שוות · סכום הזוויות במשולש <span class="fi">\(180^\circ\)</span> · כלל המעבר · אם זוג זוויות מתאימות שוות אז הישרים מקבילים (המשפט ההפוך)</p>
+<a class="backup no-print" href="#finder">↑ חזרה לחיפוש הדגמים</a>
+</article>
+
+<article class="ex model" id="m15">
+<div class="ex-head"><span class="lvl l3">דגם 15</span><h4>הוכחה בשני סעיפים — מש"ל א׳ ומש"ל ב׳</h4></div>
+<p class="sig"><b>מתי זה הדגם שלך:</b> השאלה מחולקת לסעיפים: קודם מוכיחים חפיפה, ואז מוציאים ממנה עוד מסקנות.</p>
+<p class="q-text">במשולש <span class="fi">\(ABC\)</span> נתון: <span class="fi">\(AB=AC\)</span>. הנקודה <span class="fi">\(D\)</span> היא אמצע <span class="fi">\(BC\)</span>.<br>א. הוכיחי כי <span class="fi">\(\triangle ABD\cong\triangle ACD\)</span>.<br>ב. הוכיחי כי <span class="fi">\(AD\perp BC\)</span> וכי <span class="fi">\(AD\)</span> חוצה את <span class="fi">\(\angle BAC\)</span>.</p>
+<figure><svg viewBox="0 0 360 240" style="width:100%;max-width:440px;height:auto" role="img" aria-label="isosceles triangle with the median AD to the base"><polygon points="180,26 52,204 308,204" fill="#FBFAF7" stroke="#334155" stroke-width="2.5"/><line x1="180" y1="26" x2="180" y2="204" stroke="#334155" stroke-width="2.5"/><line x1="141.6" y1="79.4" x2="90.4" y2="150.6" stroke="#2563EB" stroke-width="5"/><line x1="120.1" y1="117.9" x2="111.9" y2="112.1" stroke="#2563EB" stroke-width="2.5"/><line x1="218.4" y1="79.4" x2="269.6" y2="150.6" stroke="#2563EB" stroke-width="5"/><line x1="248.1" y1="112.1" x2="239.9" y2="117.9" stroke="#2563EB" stroke-width="2.5"/><line x1="90.4" y1="204" x2="141.6" y2="204" stroke="#059669" stroke-width="5"/><line x1="111.5" y1="199" x2="111.5" y2="209" stroke="#059669" stroke-width="2.5"/><line x1="120.5" y1="199" x2="120.5" y2="209" stroke="#059669" stroke-width="2.5"/><line x1="218.4" y1="204" x2="269.6" y2="204" stroke="#059669" stroke-width="5"/><line x1="239.5" y1="199" x2="239.5" y2="209" stroke="#059669" stroke-width="2.5"/><line x1="248.5" y1="199" x2="248.5" y2="209" stroke="#059669" stroke-width="2.5"/><line x1="180" y1="88.3" x2="180" y2="141.7" stroke="#EA580C" stroke-width="5"/><line x1="185" y1="106" x2="175" y2="106" stroke="#EA580C" stroke-width="2.5"/><line x1="185" y1="115" x2="175" y2="115" stroke="#EA580C" stroke-width="2.5"/><line x1="185" y1="124" x2="175" y2="124" stroke="#EA580C" stroke-width="2.5"/><path d="M160.1,53.6 A34,34 0 0 0 177,59.7" fill="none" stroke="#7C3AED" stroke-width="3" stroke-dasharray="6 4"/><text x="164.7" y="78.6" text-anchor="middle" font-size="15" font-weight="bold" fill="#7C3AED">?</text><path d="M183,59.7 A34,34 0 0 0 199.9,53.6" fill="none" stroke="#7C3AED" stroke-width="3" stroke-dasharray="6 4"/><text x="195.3" y="78.6" text-anchor="middle" font-size="15" font-weight="bold" fill="#7C3AED">?</text><path d="M195,204 L195,189 L180,189" fill="none" stroke="#7C3AED" stroke-width="2.5" stroke-dasharray="5 3"/><text x="180" y="15" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">A</text><text x="37.5" y="215.7" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">B</text><text x="322.5" y="215.7" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">C</text><text x="176" y="226" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">D</text></svg><figcaption>כחול — השוקיים; ירוק — שני חצאי הבסיס; כתום — <span class="fi">\(AD\)</span>, הצלע המשותפת. הזווית הישרה ושתי הזוויות ב-<span class="fi">\(A\)</span> מקווקווות: הן סעיף ב.</figcaption></figure>
+<div class="box intuition"><div class="box-title">איך חושבים</div>
+<ul class="plan">
+  <li>סעיף ב תמיד נשען על סעיף א ← לא פותחים טבלה חדשה, ממשיכים את אותה טבלה אחרי שורת הפרדה.</li>
+  <li>בסעיף א: שתי צלעות נתונות ועוד <span class="fi">\(AD\)</span> המשותפת ← צ.צ.צ.</li>
+  <li>בסעיף ב: מהחפיפה יוצאות שתי זוויות שוות ב-<span class="fi">\(D\)</span>, והן צמודות על הישר <span class="fi">\(BC\)</span> ← כל אחת <span class="fi">\(90^\circ\)</span>.</li>
+  <li>שוויון הזוויות ב-<span class="fi">\(A\)</span> הוא בדיוק ההגדרה של חוצה זווית.</li>
+</ul></div>
+<table class="dtable">
+<tr><th></th><th>טענה</th><th>נימוק</th></tr>
+<tr><td>1</td><td class="hl-c2"><span class="fi">\(AB=AC\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>2</td><td class="hl-c3"><span class="fi">\(BD=DC\)</span></td><td style="text-align:right">נתון — <span class="fi">\(D\)</span> אמצע <span class="fi">\(BC\)</span></td></tr>
+<tr><td>3</td><td style="background:#FBE3D0"><span class="fi">\(AD=AD\)</span></td><td style="text-align:right">צלע משותפת לשני המשולשים</td></tr>
+<tr><td>4</td><td><span class="fi">\(\triangle ABD\cong\triangle ACD\)</span></td><td style="text-align:right">משפט חפיפה צ.צ.צ (לפי 1, 2, 3)</td></tr>
+<tr class="tr-qed"><td colspan="3"><b>מש"ל א׳</b></td></tr>
+<tr class="tr-sep"><td colspan="3">סעיף ב — האנך וחוצה הזווית</td></tr>
+<tr><td>5</td><td><span class="fi">\(\angle ADB=\angle ADC\)</span></td><td style="text-align:right">זוויות מתאימות במשולשים חופפים שוות (לפי 4)</td></tr>
+<tr><td>6</td><td><span class="fi">\(\angle ADB+\angle ADC=180^\circ\)</span></td><td style="text-align:right">סכום זוויות צמודות <span class="fi">\(180^\circ\)</span> (<span class="fi">\(B,\;D,\;C\)</span> על ישר אחד)</td></tr>
+<tr><td>7</td><td class="hl-c4"><span class="fi">\(\angle ADB=\angle ADC=90^\circ\)</span></td><td style="text-align:right">לפי 5, 6</td></tr>
+<tr><td>8</td><td class="hl-c4"><span class="fi">\(AD\perp BC\)</span></td><td style="text-align:right">הגדרת אנך: שני ישרים היוצרים זווית של <span class="fi">\(90^\circ\)</span> מאונכים זה לזה (לפי 7)</td></tr>
+<tr><td>9</td><td><span class="fi">\(\angle BAD=\angle CAD\)</span></td><td style="text-align:right">זוויות מתאימות במשולשים חופפים שוות (לפי 4)</td></tr>
+<tr><td>10</td><td class="hl-c4"><span class="fi">\(AD\)</span> חוצה את <span class="fi">\(\angle BAC\)</span></td><td style="text-align:right">הגדרת חוצה זווית (לפי 9)</td></tr>
+<tr class="tr-qed"><td colspan="3"><b>מש"ל ב׳</b></td></tr>
+</table>
+<p class="aside">הרגע הוכחת משפט שלם מהחוברת: במשולש שווה-שוקיים התיכון לבסיס, הגובה לבסיס וחוצה זווית הראש מתלכדים — כולם אותו קטע.</p>
+<p class="usedth"><b>המשפטים שהשתמשנו בהם:</b> משפט חפיפה צ.צ.צ · צלע משותפת · זוויות מתאימות במשולשים חופפים שוות · סכום זוויות צמודות <span class="fi">\(180^\circ\)</span> · הגדרת אנך · הגדרת חוצה זווית</p>
+<a class="backup no-print" href="#finder">↑ חזרה לחיפוש הדגמים</a>
+</article>
+
+<article class="ex model" id="m16">
+<div class="ex-head"><span class="lvl l3">דגם 16</span><h4>קודם מוכיחים, אחר כך מחשבים</h4></div>
+<p class="sig"><b>מתי זה הדגם שלך:</b> סעיף א מבקש הוכחה, וסעיף ב נותן מספרים ומבקש לחשב.</p>
+<p class="q-text">במרובע <span class="fi">\(ABCD\)</span> נתון: <span class="fi">\(AB\parallel DC\)</span> וגם <span class="fi">\(AB=DC\)</span>.<br>א. הוכיחי כי <span class="fi">\(\triangle ABD\cong\triangle CDB\)</span>.<br>ב. נתון: <span class="fi">\(\angle ABD=40^\circ\)</span> ו-<span class="fi">\(\angle ADB=65^\circ\)</span>. חשבי את <span class="fi">\(\angle BAD\)</span> ואת <span class="fi">\(\angle DBC\)</span>.</p>
+<figure><svg viewBox="0 0 370 230" style="width:100%;max-width:450px;height:auto" role="img" aria-label="parallelogram ABCD with the diagonal BD and three marked angles"><polygon points="70,46 284,46 330,196 116,196" fill="#FBFAF7" stroke="#334155" stroke-width="2.5"/><line x1="284" y1="46" x2="116" y2="196" stroke="#334155" stroke-width="2.5"/><path d="M235.2,39 L241.2,46 L235.2,53" fill="none" stroke="#5A6875" stroke-width="2.5"/><path d="M281.2,189 L287.2,196 L281.2,203" fill="none" stroke="#5A6875" stroke-width="2.5"/><line x1="134.2" y1="46" x2="219.8" y2="46" stroke="#2563EB" stroke-width="5"/><line x1="177" y1="41" x2="177" y2="51" stroke="#2563EB" stroke-width="2.5"/><line x1="180.2" y1="196" x2="265.8" y2="196" stroke="#2563EB" stroke-width="5"/><line x1="223" y1="191" x2="223" y2="201" stroke="#2563EB" stroke-width="2.5"/><line x1="221.8" y1="101.5" x2="178.2" y2="140.5" stroke="#EA580C" stroke-width="5"/><line x1="210" y1="118.7" x2="203.4" y2="111.3" stroke="#EA580C" stroke-width="2.5"/><line x1="203.3" y1="124.7" x2="196.7" y2="117.3" stroke="#EA580C" stroke-width="2.5"/><line x1="196.6" y1="130.7" x2="190" y2="123.3" stroke="#EA580C" stroke-width="2.5"/><path d="M254,46 A30,30 0 0 0 261.6,66" fill="none" stroke="#C2408C" stroke-width="3.5"/><text x="237.3" y="68.8" text-anchor="middle" font-size="14" font-weight="bold" fill="#C2408C">40°</text><path d="M146,196 A30,30 0 0 0 138.4,176" fill="none" stroke="#C2408C" stroke-width="3.5"/><text x="162.7" y="183.2" text-anchor="middle" font-size="14" font-weight="bold" fill="#C2408C">40°</text><path d="M138.4,176 A30,30 0 0 0 107.2,167.3" fill="none" stroke="#B7791F" stroke-width="3.5"/><text x="129.4" y="152.8" text-anchor="middle" font-size="14" font-weight="bold" fill="#B7791F">65°</text><path d="M261.6,66 A30,30 0 0 0 292.8,74.7" fill="none" stroke="#7C3AED" stroke-width="3" stroke-dasharray="6 4"/><text x="270.6" y="99.2" text-anchor="middle" font-size="15" font-weight="bold" fill="#7C3AED">?</text><path d="M100,46 A30,30 0 0 1 78.8,74.7" fill="none" stroke="#7C3AED" stroke-width="3" stroke-dasharray="6 4"/><text x="110.2" y="80.7" text-anchor="middle" font-size="15" font-weight="bold" fill="#7C3AED">?</text><text x="56.1" y="43" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">A</text><text x="295.9" y="40.3" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">B</text><text x="343.9" y="209" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">C</text><text x="104.1" y="211.7" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">D</text></svg><figcaption>ורוד — זוג המתחלפות שהאלכסון <span class="fi">\(BD\)</span> יוצר; כתום — <span class="fi">\(BD\)</span> עצמו, הצלע המשותפת; ענברי — הזווית הנתונה בסעיף ב. שתי הזוויות המקווקוות הן מה שמחשבים.</figcaption></figure>
+<div class="box intuition"><div class="box-title">איך חושבים</div>
+<ul class="plan">
+  <li>האלכסון <span class="fi">\(BD\)</span> חותך את שני המקבילים ← <span class="fi">\(\angle ABD\)</span> ו-<span class="fi">\(\angle CDB\)</span> מתחלפות, ולכן שוות.</li>
+  <li>הוא גם הצלע המשותפת לשני המשולשים ← האיבר השלישי.</li>
+  <li>בסעיף ב אין הוכחה חדשה: מציבות בסכום הזוויות של המשולש, וזווית אחת קוראים מההתאמה בחפיפה.</li>
+  <li>הסעיף המחשב נגמר בתשובה מודגשת, לא במש"ל.</li>
+</ul></div>
+<table class="dtable">
+<tr><th></th><th>טענה</th><th>נימוק</th></tr>
+<tr><td>1</td><td><span class="fi">\(AB\parallel DC\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>2</td><td class="hl-c2"><span class="fi">\(AB=DC\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>3</td><td style="background:#FBE3D0"><span class="fi">\(BD=DB\)</span></td><td style="text-align:right">צלע משותפת לשני המשולשים</td></tr>
+<tr><td>4</td><td class="hl-c5"><span class="fi">\(\angle ABD=\angle CDB\)</span></td><td style="text-align:right">זוויות מתחלפות שוות בין ישרים מקבילים (החותך <span class="fi">\(BD\)</span>; לפי 1)</td></tr>
+<tr><td>5</td><td><span class="fi">\(\triangle ABD\cong\triangle CDB\)</span></td><td style="text-align:right">משפט חפיפה צ.ז.צ (לפי 2, 4, 3)</td></tr>
+<tr class="tr-qed"><td colspan="3"><b>מש"ל א׳</b></td></tr>
+<tr class="tr-sep"><td colspan="3">סעיף ב — חישוב הזוויות</td></tr>
+<tr><td>6</td><td class="hl-c5"><span class="fi">\(\angle ABD=40^\circ\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>7</td><td style="background:#FBF0C9"><span class="fi">\(\angle ADB=65^\circ\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>8</td><td class="hl-c4"><span class="fi">\(\angle BAD=180^\circ-40^\circ-65^\circ=75^\circ\)</span></td><td style="text-align:right">סכום הזוויות במשולש <span class="fi">\(180^\circ\)</span> (במשולש <span class="fi">\(ABD\)</span>; לפי 6, 7)</td></tr>
+<tr><td>9</td><td class="hl-c4"><span class="fi">\(\angle DBC=\angle ADB=65^\circ\)</span></td><td style="text-align:right">זוויות מתאימות במשולשים חופפים שוות (לפי 5, 7)</td></tr>
+<tr class="tr-ans"><td colspan="3"><b>תשובה:</b> <span class="fi">\(\angle BAD=75^\circ,\qquad \angle DBC=65^\circ\)</span></td></tr>
+</table>
+<p class="aside">ההתאמה בחפיפה היא <span class="fi">\(A\leftrightarrow C,\; B\leftrightarrow D,\; D\leftrightarrow B\)</span> — ולכן <span class="fi">\(\angle ADB\)</span> (שיושבת ב-<span class="fi">\(D\)</span>) עוברת דווקא אל <span class="fi">\(\angle CBD\)</span> (שיושבת ב-<span class="fi">\(B\)</span>).</p>
+<p class="usedth"><b>המשפטים שהשתמשנו בהם:</b> זוויות מתחלפות שוות בין ישרים מקבילים · צלע משותפת · משפט חפיפה צ.ז.צ · זוויות מתאימות במשולשים חופפים שוות · סכום הזוויות במשולש <span class="fi">\(180^\circ\)</span></p>
+<a class="backup no-print" href="#finder">↑ חזרה לחיפוש הדגמים</a>
+</article>
+
+<article class="ex model" id="m17">
+<div class="ex-head"><span class="lvl l2">דגם 17</span><h4>חיבור וחיסור זוויות</h4></div>
+<p class="sig"><b>מתי זה הדגם שלך:</b> שתי זוויות שנתון עליהן שוויון חולקות אותה קרן. הזווית שאת צריכה היא מה שנשאר אחרי שמורידים את החלק המשותף — או מה שמתקבל כשמוסיפים אותו.</p>
+<p class="q-text">הנקודה <span class="fi">\(B\)</span> היא אמצע הקטע <span class="fi">\(AC\)</span>.<br>מ-<span class="fi">\(B\)</span> יוצאות שתי קרניים מעל הקטע: <span class="fi">\(BE\)</span> ו-<span class="fi">\(BD\)</span>.<br>מחברים את <span class="fi">\(E\)</span> ל-<span class="fi">\(A\)</span> ואת <span class="fi">\(D\)</span> ל-<span class="fi">\(C\)</span>.<br>נתון: <span class="fi">\(\angle ABD=\angle CBE\)</span>, וגם <span class="fi">\(\angle A=\angle C\)</span> (הזווית ב-<span class="fi">\(A\)</span> היא <span class="fi">\(\angle BAE\)</span>, והזווית ב-<span class="fi">\(C\)</span> היא <span class="fi">\(\angle BCD\)</span>).<br>הוכיחי כי <span class="fi">\(\triangle ABE\cong\triangle CBD\)</span>.</p>
+<figure><svg viewBox="0 0 360 240" style="width:100%;max-width:450px;height:auto" role="img" aria-label="points A B C on one line with B the midpoint, rays BE and BD above it"><line x1="58" y1="206" x2="302" y2="206" stroke="#334155" stroke-width="2.5"/><line x1="66" y1="44" x2="58" y2="206" stroke="#334155" stroke-width="2.5"/><line x1="66" y1="44" x2="180" y2="206" stroke="#334155" stroke-width="2.5"/><line x1="294" y1="44" x2="302" y2="206" stroke="#334155" stroke-width="2.5"/><line x1="294" y1="44" x2="180" y2="206" stroke="#334155" stroke-width="2.5"/><line x1="81.2" y1="206" x2="120.2" y2="206" stroke="#2563EB" stroke-width="5"/><line x1="100.7" y1="201" x2="100.7" y2="211" stroke="#2563EB" stroke-width="2.5"/><line x1="239.8" y1="206" x2="278.8" y2="206" stroke="#2563EB" stroke-width="5"/><line x1="259.3" y1="201" x2="259.3" y2="211" stroke="#2563EB" stroke-width="2.5"/><path d="M206.5,168.4 A46,46 0 0 0 134,206" fill="none" stroke="#B7791F" stroke-width="3.5"/><text x="148.5" y="133.1" text-anchor="middle" font-size="13" font-weight="bold" fill="#B7791F">&#8736;ABD</text><path d="M242,206 A62,62 0 0 0 144.3,155.3" fill="none" stroke="#B7791F" stroke-width="3.5"/><text x="217.5" y="118.3" text-anchor="middle" font-size="13" font-weight="bold" fill="#B7791F">&#8736;CBE</text><path d="M197.3,181.5 A30,30 0 0 0 162.7,181.5" fill="none" stroke="#059669" stroke-width="3.5"/><path d="M88,206 A30,30 0 0 0 59.5,176" fill="none" stroke="#C2408C" stroke-width="3.5"/><path d="M300.5,176 A30,30 0 0 0 272,206" fill="none" stroke="#C2408C" stroke-width="3.5"/><circle cx="58" cy="206" r="3" fill="#334155"/><circle cx="180" cy="206" r="3" fill="#334155"/><circle cx="302" cy="206" r="3" fill="#334155"/><circle cx="66" cy="44" r="3" fill="#334155"/><circle cx="294" cy="44" r="3" fill="#334155"/><text x="39.9" y="219.5" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">A</text><text x="180" y="231" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">B</text><text x="320.1" y="219.5" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">C</text><text x="57" y="33.4" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">E</text><text x="303" y="33.4" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">D</text></svg><figcaption>כחול — שני חצאי הקטע, כי <span class="fi">\(B\)</span> היא האמצע. שתי הקשתות הענבריות הן זוג הזוויות הנתון, <span class="fi">\(\angle ABD\)</span> ו-<span class="fi">\(\angle CBE\)</span>. הקשת הירוקה היא <span class="fi">\(\angle DBE\)</span>, החלק שיושב בתוך שתיהן. ורוד — <span class="fi">\(\angle A\)</span> ו-<span class="fi">\(\angle C\)</span>.</figcaption></figure>
+<div class="box intuition"><div class="box-title">איך חושבים</div>
+<ul class="plan">
+  <li>מסתכלות על <span class="fi">\(\angle ABD\)</span> ורואות שהקרן <span class="fi">\(BE\)</span> עוברת בתוכה ומחלקת אותה לשתיים: <span class="fi">\(\angle ABE\)</span> ו-<span class="fi">\(\angle EBD\)</span>.</li>
+  <li>אותו דבר קורה ב-<span class="fi">\(\angle CBE\)</span>: הקרן <span class="fi">\(BD\)</span> מחלקת אותה ל-<span class="fi">\(\angle CBD\)</span> ול-<span class="fi">\(\angle DBE\)</span>.</li>
+  <li><span class="fi">\(\angle DBE\)</span> יושבת בשתיהן — היא החלק המשותף.</li>
+  <li>מורידות אותה משני האגפים, ומה שנשאר הוא בדיוק זוג הזוויות שצריך לחפיפה.</li>
+  <li>עכשיו יש זווית ב-<span class="fi">\(B\)</span>, והצלע <span class="fi">\(AB\)</span> יושבת בינה לבין הזווית ב-<span class="fi">\(A\)</span> ← ז.צ.ז.</li>
+</ul></div>
+<table class="dtable">
+<tr><th></th><th>טענה</th><th>נימוק</th></tr>
+<tr><td>1</td><td style="background:#FBF0C9"><span class="fi">\(\angle ABD=\angle CBE\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>2</td><td><span class="fi">\(\angle ABD=\angle ABE+\angle EBD\)</span></td><td style="text-align:right">שלם שווה לסכום חלקיו (הקרן <span class="fi">\(BE\)</span> עוברת בתוך <span class="fi">\(\angle ABD\)</span>)</td></tr>
+<tr><td>3</td><td><span class="fi">\(\angle CBE=\angle CBD+\angle DBE\)</span></td><td style="text-align:right">שלם שווה לסכום חלקיו (הקרן <span class="fi">\(BD\)</span> עוברת בתוך <span class="fi">\(\angle CBE\)</span>)</td></tr>
+<tr><td>4</td><td><span class="fi">\(\angle ABE+\angle EBD=\angle CBD+\angle DBE\)</span></td><td style="text-align:right">כלל המעבר (לפי 1, 2, 3)</td></tr>
+<tr><td>5</td><td class="hl-c3"><span class="fi">\(\angle ABE=\angle CBD\)</span></td><td style="text-align:right">חיסור זוויות שוות — הורדנו משני האגפים את <span class="fi">\(\angle EBD\)</span> (לפי 4)</td></tr>
+<tr><td>6</td><td class="hl-c2"><span class="fi">\(AB=CB\)</span></td><td style="text-align:right">נתון — <span class="fi">\(B\)</span> אמצע <span class="fi">\(AC\)</span></td></tr>
+<tr><td>7</td><td class="hl-c5"><span class="fi">\(\angle A=\angle C\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>8</td><td><span class="fi">\(\triangle ABE\cong\triangle CBD\)</span></td><td style="text-align:right">משפט חפיפה ז.צ.ז (לפי 7, 6, 5)</td></tr>
+<tr class="tr-qed"><td colspan="3"><b>מש"ל</b></td></tr>
+</table>
+<div class="box example"><div class="box-title">אותו מהלך, כיוון החיבור</div><p>אם הנתון הוא דווקא זוג הזוויות הקטנות, מוסיפים את החלק המשותף במקום להוריד אותו:</p><table class="dtable">
+<tr><th></th><th>טענה</th><th>נימוק</th></tr>
+<tr><td>1</td><td><span class="fi">\(\angle ABE=\angle CBD\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>2</td><td><span class="fi">\(\angle EBD=\angle EBD\)</span></td><td style="text-align:right">זווית משותפת</td></tr>
+<tr><td>3</td><td><span class="fi">\(\angle ABD=\angle CBE\)</span></td><td style="text-align:right">חיבור זוויות שוות (לפי 1, 2)</td></tr>
+</table>
+<p>בחוברת זה מופיע גם בגרסה של שני זוגות (תרגיל 29): אם <span class="fi">\(\angle O_1=\angle O_2\)</span> וגם <span class="fi">\(\angle O_3=\angle O_4\)</span>, אז גם <span class="fi">\(\angle AOE=\angle BOF\)</span> — מחברים זוג אל זוג.</p></div>
+<p class="aside">יש עוד גרסה של אותו רעיון, כשהזוויות צמודות (תרגיל 36 בחוברת): <span class="fi">\(\angle AOB=180^\circ-\angle AOD\)</span> וגם <span class="fi">\(\angle COD=180^\circ-\angle COB\)</span>, ולכן מ-<span class="fi">\(\angle AOD=\angle COB\)</span> נובע <span class="fi">\(\angle AOB=\angle COD\)</span>. וכשהקרניים ממשיכות זו את זו, הזוויות שזו מול זו הן קודקודיות — שם השוויון מגיע בלי חיבור ובלי חיסור.</p>
+<p class="usedth"><b>המשפטים שהשתמשנו בהם:</b> שלם שווה לסכום חלקיו · חיסור זוויות שוות · חיבור זוויות שוות · כלל המעבר · משפט חפיפה ז.צ.ז</p>
+<a class="backup no-print" href="#finder">↑ חזרה לחיפוש הדגמים</a>
+</article>
+
+<article class="ex model" id="m18">
+<div class="ex-head"><span class="lvl l3">דגם 18</span><h4>כיסוי חלקי — שני משולשים שיושבים זה על זה</h4></div>
+<p class="sig"><b>מתי זה הדגם שלך:</b> שני המשולשים חולקים חלק מהשרטוט — קודקוד, זווית או פיסת צלע — ולכן קשה בכלל לראות מי הם. מסמנות קודם את החלק המשותף, ואז בודקות איזה משולש יושב על איזה.</p>
+<p class="q-text">הנקודה <span class="fi">\(B\)</span> נמצאת על הצלע <span class="fi">\(AD\)</span>, והנקודה <span class="fi">\(C\)</span> נמצאת על הצלע <span class="fi">\(AE\)</span>.<br>מחברים את <span class="fi">\(B\)</span> ל-<span class="fi">\(E\)</span> ואת <span class="fi">\(C\)</span> ל-<span class="fi">\(D\)</span>.<br>נתון: <span class="fi">\(AD=AE\)</span>, וגם <span class="fi">\(\angle ADC=\angle AEB\)</span>.<br>א. הוכיחי כי <span class="fi">\(\triangle ADC\cong\triangle AEB\)</span>.<br>ב. הוכיחי כי <span class="fi">\(\angle DCE=\angle EBD\)</span>.</p>
+<figure><svg viewBox="0 0 360 250" style="width:100%;max-width:440px;height:auto" role="img" aria-label="triangle with apex A, points B on AD and C on AE, segments BE and CD crossing"><line x1="180" y1="28" x2="56" y2="216" stroke="#334155" stroke-width="2.5"/><line x1="180" y1="28" x2="304" y2="216" stroke="#334155" stroke-width="2.5"/><line x1="124.2" y1="112.6" x2="304" y2="216" stroke="#334155" stroke-width="2.5"/><line x1="235.8" y1="112.6" x2="56" y2="216" stroke="#334155" stroke-width="2.5"/><line x1="156.6" y1="12.6" x2="32.6" y2="200.6" stroke="#059669" stroke-width="3"/><line x1="162.5" y1="16.4" x2="150.8" y2="8.7" stroke="#059669" stroke-width="3"/><line x1="38.5" y1="204.4" x2="26.8" y2="196.7" stroke="#059669" stroke-width="3"/><line x1="101.3" y1="105.6" x2="92.9" y2="100.1" stroke="#059669" stroke-width="2.5"/><line x1="96.3" y1="113.1" x2="88" y2="107.6" stroke="#059669" stroke-width="2.5"/><text x="74.6" y="98.4" text-anchor="middle" font-size="13" font-weight="bold" fill="#059669">AD</text><line x1="203.4" y1="12.6" x2="327.4" y2="200.6" stroke="#059669" stroke-width="3"/><line x1="197.5" y1="16.4" x2="209.2" y2="8.7" stroke="#059669" stroke-width="3"/><line x1="321.5" y1="204.4" x2="333.2" y2="196.7" stroke="#059669" stroke-width="3"/><line x1="258.7" y1="105.6" x2="267.1" y2="100.1" stroke="#059669" stroke-width="2.5"/><line x1="263.7" y1="113.1" x2="272" y2="107.6" stroke="#059669" stroke-width="2.5"/><text x="285.4" y="98.4" text-anchor="middle" font-size="13" font-weight="bold" fill="#059669">AE</text><path d="M158,61.4 A40,40 0 0 0 202,61.4" fill="none" stroke="#B7791F" stroke-width="3.5"/><path d="M90.7,196.1 A40,40 0 0 0 78,182.6" fill="none" stroke="#C2408C" stroke-width="3.5"/><path d="M282,182.6 A40,40 0 0 0 269.3,196.1" fill="none" stroke="#C2408C" stroke-width="3.5"/><path d="M213.3,125.6 A26,26 0 0 0 250.1,134.3" fill="none" stroke="#7C3AED" stroke-width="3" stroke-dasharray="6 4"/><text x="226.1" y="158.5" text-anchor="middle" font-size="15" font-weight="bold" fill="#7C3AED">?</text><path d="M109.9,134.3 A26,26 0 0 0 146.7,125.6" fill="none" stroke="#7C3AED" stroke-width="3" stroke-dasharray="6 4"/><text x="133.9" y="158.5" text-anchor="middle" font-size="15" font-weight="bold" fill="#7C3AED">?</text><circle cx="180" cy="28" r="3" fill="#334155"/><circle cx="56" cy="216" r="3" fill="#334155"/><circle cx="304" cy="216" r="3" fill="#334155"/><circle cx="124.2" cy="112.6" r="3" fill="#334155"/><circle cx="235.8" cy="112.6" r="3" fill="#334155"/><text x="180" y="15" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">A</text><text x="39.6" y="232.5" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">D</text><text x="320.4" y="232.5" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">E</text><text x="105.8" y="112.7" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">B</text><text x="254.2" y="112.7" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">C</text></svg><figcaption>ירוק — הזוג הנתון <span class="fi">\(AD=AE\)</span>. הסוגריים הירוקים מודדים את הצלעות השלמות, מ-<span class="fi">\(A\)</span> עד <span class="fi">\(D\)</span> ומ-<span class="fi">\(A\)</span> עד <span class="fi">\(E\)</span>, ולא את החלקים. ורוד — הזוג הנתון <span class="fi">\(\angle ADC=\angle AEB\)</span>. ענברי — הזווית ב-<span class="fi">\(A\)</span>, שנמצאת בשני המשולשים. שתי הקשתות המקווקוות הן סעיף ב.</figcaption></figure>
+<div class="box intuition"><div class="box-title">איך חושבים</div>
+<ul class="plan">
+  <li>עוברות על כל משולש בנפרד בעיפרון: אחד נשען על <span class="fi">\(D\)</span> ומגיע עד <span class="fi">\(C\)</span>, והשני נשען על <span class="fi">\(E\)</span> ומגיע עד <span class="fi">\(B\)</span>.</li>
+  <li>הזווית ב-<span class="fi">\(A\)</span> שייכת לשניהם במלואה: הקרן <span class="fi">\(AC\)</span> היא אותה קרן כמו <span class="fi">\(AE\)</span>, והקרן <span class="fi">\(AB\)</span> היא אותה קרן כמו <span class="fi">\(AD\)</span>.</li>
+  <li>לכן <span class="fi">\(\angle DAC\)</span> ו-<span class="fi">\(\angle EAB\)</span> הן אותה זווית ← זווית משותפת, וזה האיבר השלישי.</li>
+  <li>הצלעות שנכנסות לחפיפה הן <span class="fi">\(AD\)</span> ו-<span class="fi">\(AE\)</span> השלמות, לא החלקים <span class="fi">\(AB\)</span> ו-<span class="fi">\(AC\)</span>.</li>
+  <li>בסעיף ב: <span class="fi">\(\angle ACD\)</span> ו-<span class="fi">\(\angle DCE\)</span> צמודות על הישר <span class="fi">\(AE\)</span>, וכך גם <span class="fi">\(\angle ABE\)</span> ו-<span class="fi">\(\angle EBD\)</span> על הישר <span class="fi">\(AD\)</span>.</li>
+</ul></div>
+<table class="dtable">
+<tr><th></th><th>טענה</th><th>נימוק</th></tr>
+<tr><td>1</td><td class="hl-c3"><span class="fi">\(AD=AE\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>2</td><td class="hl-c5"><span class="fi">\(\angle ADC=\angle AEB\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>3</td><td style="background:#FBF0C9"><span class="fi">\(\angle DAC=\angle EAB\)</span></td><td style="text-align:right">זווית משותפת — שתיהן אותה זווית <span class="fi">\(\angle DAE\)</span>, כי <span class="fi">\(C\)</span> על <span class="fi">\(AE\)</span> ו-<span class="fi">\(B\)</span> על <span class="fi">\(AD\)</span></td></tr>
+<tr><td>4</td><td><span class="fi">\(\triangle ADC\cong\triangle AEB\)</span></td><td style="text-align:right">משפט חפיפה ז.צ.ז (לפי 2, 1, 3)</td></tr>
+<tr class="tr-qed"><td colspan="3"><b>מש"ל א׳</b></td></tr>
+<tr class="tr-sep"><td colspan="3">סעיף ב — הזוויות שנשארו מחוץ למשולשים</td></tr>
+<tr><td>5</td><td><span class="fi">\(\angle ACD=\angle ABE\)</span></td><td style="text-align:right">זוויות מתאימות במשולשים חופפים שוות (לפי 4)</td></tr>
+<tr><td>6</td><td><span class="fi">\(\angle ACD+\angle DCE=180^\circ\)</span></td><td style="text-align:right">סכום זוויות צמודות <span class="fi">\(180^\circ\)</span> (<span class="fi">\(A,\;C,\;E\)</span> על ישר אחד)</td></tr>
+<tr><td>7</td><td><span class="fi">\(\angle ABE+\angle EBD=180^\circ\)</span></td><td style="text-align:right">סכום זוויות צמודות <span class="fi">\(180^\circ\)</span> (<span class="fi">\(A,\;B,\;D\)</span> על ישר אחד)</td></tr>
+<tr><td>8</td><td class="hl-c4"><span class="fi">\(\angle DCE=\angle EBD\)</span></td><td style="text-align:right">חיסור זוויות שוות (לפי 5, 6, 7)</td></tr>
+<tr class="tr-qed"><td colspan="3"><b>מש"ל ב׳</b></td></tr>
+</table>
+<p class="aside">הצימוד כאן הפוך ממה שהעין מצפה: המשולש שנשען על <span class="fi">\(D\)</span> הוא זה שמכיל את <span class="fi">\(C\)</span>, והמשולש שנשען על <span class="fi">\(E\)</span> מכיל את <span class="fi">\(B\)</span>. סדר האותיות בחפיפה — <span class="fi">\(A\leftrightarrow A,\; D\leftrightarrow E,\; C\leftrightarrow B\)</span> — הוא זה שמחזיק את זה.</p>
+<p class="usedth"><b>המשפטים שהשתמשנו בהם:</b> זווית משותפת · משפט חפיפה ז.צ.ז · זוויות מתאימות במשולשים חופפים שוות · סכום זוויות צמודות <span class="fi">\(180^\circ\)</span> · חיסור זוויות שוות</p>
+<a class="backup no-print" href="#finder">↑ חזרה לחיפוש הדגמים</a>
+</article>
+
+<article class="ex model" id="m19">
+<div class="ex-head"><span class="lvl l1">דגם 19</span><h4>צלע משותפת — האיבר השלישי שכבר נמצא בשרטוט</h4></div>
+<p class="sig"><b>מתי זה הדגם שלך:</b> שני המשולשים נשענים על אותו קטע. הקטע הזה שווה לעצמו, ו״צלע משותפת״ הוא נימוק מלא — כך משלימים את האיבר השלישי בלי אף נתון נוסף.</p>
+<p class="q-text">בציור נתון: <span class="fi">\(AB=CD\)</span>, וגם <span class="fi">\(\angle BAC=\angle DCA\)</span>.<br>א. הוכיחי כי שני המשולשים שבציור חופפים, ורשמי את החפיפה לפי סדר הקודקודים.<br>ב. רשמי את שלושת השוויונים הנוספים שנובעים מהחפיפה.</p>
+<figure><svg viewBox="0 0 340 250" style="width:100%;max-width:420px;height:auto" role="img" aria-label="quadrilateral ABCD with the shared side AC drawn as a diagonal"><line x1="70" y1="124" x2="214" y2="32" stroke="#334155" stroke-width="2.5"/><line x1="214" y1="32" x2="286" y2="124" stroke="#334155" stroke-width="2.5"/><line x1="70" y1="124" x2="286" y2="124" stroke="#334155" stroke-width="2.5"/><line x1="70" y1="124" x2="142" y2="218" stroke="#334155" stroke-width="2.5"/><line x1="142" y1="218" x2="286" y2="124" stroke="#334155" stroke-width="2.5"/><line x1="113.2" y1="96.4" x2="170.8" y2="59.6" stroke="#2563EB" stroke-width="5"/><line x1="139.3" y1="73.8" x2="144.7" y2="82.2" stroke="#2563EB" stroke-width="2.5"/><line x1="242.8" y1="152.2" x2="185.2" y2="189.8" stroke="#2563EB" stroke-width="5"/><line x1="216.7" y1="175.2" x2="211.3" y2="166.8" stroke="#2563EB" stroke-width="2.5"/><line x1="149.9" y1="124" x2="206.1" y2="124" stroke="#EA580C" stroke-width="5"/><line x1="169" y1="119" x2="169" y2="129" stroke="#EA580C" stroke-width="2.5"/><line x1="178" y1="119" x2="178" y2="129" stroke="#EA580C" stroke-width="2.5"/><line x1="187" y1="119" x2="187" y2="129" stroke="#EA580C" stroke-width="2.5"/><path d="M114,124 A44,44 0 0 0 107.1,100.3" fill="none" stroke="#C2408C" stroke-width="3.5"/><path d="M242,124 A44,44 0 0 0 249.2,148.1" fill="none" stroke="#C2408C" stroke-width="3.5"/><circle cx="70" cy="124" r="3" fill="#334155"/><circle cx="214" cy="32" r="3" fill="#334155"/><circle cx="286" cy="124" r="3" fill="#334155"/><circle cx="142" cy="218" r="3" fill="#334155"/><text x="51" y="128.3" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">A</text><text x="224.3" y="22.3" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">B</text><text x="305" y="128.3" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">C</text><text x="135.5" y="240.9" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">D</text></svg><figcaption>כתום (שלושה קווים) — <span class="fi">\(AC\)</span>, הצלע שהמשולשים חולקים. כחול — הזוג הנתון <span class="fi">\(AB=CD\)</span>. ורוד — הזוג הנתון <span class="fi">\(\angle BAC=\angle DCA\)</span>, ושתי הזוויות יושבות בדיוק בין הצלע הכחולה לצלע הכתומה.</figcaption></figure>
+<div class="box intuition"><div class="box-title">איך חושבים</div>
+<ul class="plan">
+  <li>מחפשות קודם כול את הקטע שמופיע בשני המשולשים — כאן <span class="fi">\(AC\)</span> — ורושמות אותו כשורה: <span class="fi">\(AC=CA\)</span>, צלע משותפת.</li>
+  <li>בודקות איפה יושבת הזווית הנתונה: <span class="fi">\(\angle BAC\)</span> בין <span class="fi">\(AB\)</span> ל-<span class="fi">\(AC\)</span>, ו-<span class="fi">\(\angle DCA\)</span> בין <span class="fi">\(CD\)</span> ל-<span class="fi">\(CA\)</span>. כלואה בשתיהן ← צ.ז.צ.</li>
+  <li>את סדר הקודקודים בונות מהזוגות: <span class="fi">\(A\)</span> מתאים ל-<span class="fi">\(C\)</span> (שם יושבות הזוויות השוות), <span class="fi">\(B\)</span> מתאים ל-<span class="fi">\(D\)</span>, ו-<span class="fi">\(C\)</span> מתאים ל-<span class="fi">\(A\)</span>.</li>
+</ul></div>
+<table class="dtable">
+<tr><th></th><th>טענה</th><th>נימוק</th></tr>
+<tr><td>1</td><td class="hl-c2"><span class="fi">\(AB=CD\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>2</td><td class="hl-c5"><span class="fi">\(\angle BAC=\angle DCA\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>3</td><td style="background:#FBE3D0"><span class="fi">\(AC=CA\)</span></td><td style="text-align:right">צלע משותפת לשני המשולשים</td></tr>
+<tr><td>4</td><td><span class="fi">\(\triangle ABC\cong\triangle CDA\)</span></td><td style="text-align:right">משפט חפיפה צ.ז.צ (לפי 1, 2, 3)</td></tr>
+<tr class="tr-qed"><td colspan="3"><b>מש"ל א׳</b></td></tr>
+<tr class="tr-sep"><td colspan="3">סעיף ב — מה נובע מהחפיפה</td></tr>
+<tr><td>5</td><td class="hl-c4"><span class="fi">\(BC=DA\)</span></td><td style="text-align:right">צלעות מתאימות במשולשים חופפים שוות (לפי 4)</td></tr>
+<tr><td>6</td><td class="hl-c4"><span class="fi">\(\angle ABC=\angle CDA\)</span></td><td style="text-align:right">זוויות מתאימות במשולשים חופפים שוות (לפי 4)</td></tr>
+<tr><td>7</td><td class="hl-c4"><span class="fi">\(\angle BCA=\angle DAC\)</span></td><td style="text-align:right">זוויות מתאימות במשולשים חופפים שוות (לפי 4)</td></tr>
+<tr class="tr-qed"><td colspan="3"><b>מש"ל ב׳</b></td></tr>
+</table>
+<p class="aside">זו המשפחה שהחוברת קוראת לה ״צלע משותפת״ (תרגילים 11–18). הצלע המשותפת מופיעה גם בהרבה תרגילים מהמשפחות האחרות — לכן כדאי לחפש אותה תמיד, עוד לפני שקוראים את הנתונים עד הסוף.</p>
+<p class="usedth"><b>המשפטים שהשתמשנו בהם:</b> צלע משותפת · משפט חפיפה צ.ז.צ · צלעות מתאימות במשולשים חופפים שוות · זוויות מתאימות במשולשים חופפים שוות</p>
+<a class="backup no-print" href="#finder">↑ חזרה לחיפוש הדגמים</a>
+</article>
+
+<article class="ex model" id="m20">
+<div class="ex-head"><span class="lvl l3">דגם 20</span><h4>שתי חפיפות — הראשונה מספקת את הנתון החסר לשנייה</h4></div>
+<p class="sig"><b>מתי זה הדגם שלך:</b> מה שמבקשים לא יוצא מחפיפה אחת. מוכיחים חפיפה אחת, קוראים ממנה שוויון, והשוויון הזה הוא הנתון שחסר לחפיפה השנייה.</p>
+<p class="q-text">הנקודה <span class="fi">\(E\)</span> נמצאת על הקטע <span class="fi">\(AB\)</span>.<br>נתון: <span class="fi">\(AC=AD\)</span>, וגם <span class="fi">\(BC=BD\)</span>.<br>א. הוכיחי כי <span class="fi">\(\triangle ACB\cong\triangle ADB\)</span>.<br>ב. הוכיחי כי <span class="fi">\(CE=DE\)</span>.</p>
+<figure><svg viewBox="0 0 340 266" style="width:100%;max-width:430px;height:auto" role="img" aria-label="kite ACBD with point E on AB and segments CE and DE"><line x1="40" y1="132" x2="288" y2="132" stroke="#334155" stroke-width="2.5"/><line x1="40" y1="132" x2="154" y2="36" stroke="#334155" stroke-width="2.5"/><line x1="154" y1="36" x2="288" y2="132" stroke="#334155" stroke-width="2.5"/><line x1="40" y1="132" x2="154" y2="228" stroke="#334155" stroke-width="2.5"/><line x1="154" y1="228" x2="288" y2="132" stroke="#334155" stroke-width="2.5"/><line x1="154" y1="36" x2="126" y2="132" stroke="#334155" stroke-width="2.5"/><line x1="154" y1="228" x2="126" y2="132" stroke="#334155" stroke-width="2.5"/><line x1="87.9" y1="91.7" x2="124.4" y2="61" stroke="#2563EB" stroke-width="5"/><line x1="102.9" y1="72.5" x2="109.3" y2="80.1" stroke="#2563EB" stroke-width="2.5"/><line x1="87.9" y1="172.3" x2="124.4" y2="203" stroke="#2563EB" stroke-width="5"/><line x1="109.3" y1="183.9" x2="102.9" y2="191.5" stroke="#2563EB" stroke-width="2.5"/><line x1="199.6" y1="68.6" x2="242.4" y2="99.4" stroke="#059669" stroke-width="5"/><line x1="220.3" y1="77.3" x2="214.4" y2="85.4" stroke="#059669" stroke-width="2.5"/><line x1="227.6" y1="82.6" x2="221.7" y2="90.7" stroke="#059669" stroke-width="2.5"/><line x1="199.6" y1="195.4" x2="242.4" y2="164.6" stroke="#059669" stroke-width="5"/><line x1="214.4" y1="178.6" x2="220.3" y2="186.7" stroke="#059669" stroke-width="2.5"/><line x1="221.7" y1="173.3" x2="227.6" y2="181.4" stroke="#059669" stroke-width="2.5"/><path d="M87.6,126.2 A48,48 0 0 0 80.2,105.8" fill="none" stroke="#C2408C" stroke-width="3.5" stroke-dasharray="6 4"/><path d="M80.2,158.2 A48,48 0 0 0 87.6,137.8" fill="none" stroke="#C2408C" stroke-width="3.5" stroke-dasharray="6 4"/><line x1="145.6" y1="64.8" x2="134.4" y2="103.2" stroke="#7C3AED" stroke-width="4" stroke-dasharray="7 5"/><line x1="144.8" y1="85.4" x2="135.2" y2="82.6" stroke="#7C3AED" stroke-width="2.5"/><line x1="145.6" y1="199.2" x2="134.4" y2="160.8" stroke="#7C3AED" stroke-width="4" stroke-dasharray="7 5"/><line x1="135.2" y1="181.4" x2="144.8" y2="178.6" stroke="#7C3AED" stroke-width="2.5"/><circle cx="40" cy="132" r="3" fill="#334155"/><circle cx="288" cy="132" r="3" fill="#334155"/><circle cx="154" cy="36" r="3" fill="#334155"/><circle cx="154" cy="228" r="3" fill="#334155"/><circle cx="126" cy="132" r="3" fill="#334155"/><text x="21" y="137" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">A</text><text x="307" y="137" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">B</text><text x="154" y="23" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">C</text><text x="154" y="253" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">D</text><text x="119.7" y="162.2" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">E</text></svg><figcaption>כחול — הזוג הנתון <span class="fi">\(AC=AD\)</span>; ירוק (שני קווים) — הזוג הנתון <span class="fi">\(BC=BD\)</span>. שתי הקשתות הוורודות המקווקוות ב-<span class="fi">\(A\)</span> הן שוויון הזוויות שיוצא מהחפיפה הראשונה. סגול מקווקו — <span class="fi">\(CE\)</span> ו-<span class="fi">\(DE\)</span>, מה שצריך להוכיח.</figcaption></figure>
+<div class="box intuition"><div class="box-title">איך חושבים</div>
+<ul class="plan">
+  <li>מסתכלות על <span class="fi">\(CE\)</span> ו-<span class="fi">\(DE\)</span> ומחפשות שני משולשים שמכילים אותם: <span class="fi">\(\triangle ACE\)</span> ו-<span class="fi">\(\triangle ADE\)</span>.</li>
+  <li>בשני המשולשים האלה כבר יש <span class="fi">\(AC=AD\)</span> ו-<span class="fi">\(AE\)</span> המשותפת — חסרה רק הזווית שביניהן.</li>
+  <li>את הזווית הזו מקבלים מחפיפה גדולה יותר: <span class="fi">\(\triangle ACB\)</span> ו-<span class="fi">\(\triangle ADB\)</span>, שבהן יש שלוש צלעות.</li>
+  <li>לכן מוכיחות קודם את החפיפה הגדולה, לוקחות ממנה את <span class="fi">\(\angle CAB=\angle DAB\)</span>, וממשיכות לחפיפה הקטנה.</li>
+  <li><span class="fi">\(E\)</span> נמצאת על <span class="fi">\(AB\)</span>, ולכן <span class="fi">\(\angle CAE\)</span> היא בדיוק <span class="fi">\(\angle CAB\)</span> — אותה זווית בשם אחר.</li>
+</ul></div>
+<table class="dtable">
+<tr><th></th><th>טענה</th><th>נימוק</th></tr>
+<tr><td>1</td><td class="hl-c2"><span class="fi">\(AC=AD\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>2</td><td class="hl-c3"><span class="fi">\(BC=BD\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>3</td><td style="background:#FBE3D0"><span class="fi">\(AB=AB\)</span></td><td style="text-align:right">צלע משותפת לשני המשולשים</td></tr>
+<tr><td>4</td><td><span class="fi">\(\triangle ACB\cong\triangle ADB\)</span></td><td style="text-align:right">משפט חפיפה צ.צ.צ (לפי 1, 2, 3)</td></tr>
+<tr class="tr-qed"><td colspan="3"><b>מש"ל א׳</b></td></tr>
+<tr class="tr-sep"><td colspan="3">סעיף ב — החפיפה השנייה, שנשענת על מה שיצא מהראשונה</td></tr>
+<tr><td>5</td><td class="hl-c5"><span class="fi">\(\angle CAB=\angle DAB\)</span></td><td style="text-align:right">זוויות מתאימות במשולשים חופפים שוות (לפי 4)</td></tr>
+<tr><td>6</td><td class="hl-c5"><span class="fi">\(\angle CAE=\angle DAE\)</span></td><td style="text-align:right"><span class="fi">\(E\)</span> נמצאת על <span class="fi">\(AB\)</span>, ולכן <span class="fi">\(\angle CAE\)</span> ו-<span class="fi">\(\angle CAB\)</span> הן אותה זווית (לפי 5)</td></tr>
+<tr><td>7</td><td style="background:#FBE3D0"><span class="fi">\(AE=AE\)</span></td><td style="text-align:right">צלע משותפת לשני המשולשים</td></tr>
+<tr><td>8</td><td><span class="fi">\(\triangle ACE\cong\triangle ADE\)</span></td><td style="text-align:right">משפט חפיפה צ.ז.צ (לפי 1, 6, 7)</td></tr>
+<tr><td>9</td><td class="hl-c4"><span class="fi">\(CE=DE\)</span></td><td style="text-align:right">צלעות מתאימות במשולשים חופפים שוות (לפי 8)</td></tr>
+<tr class="tr-qed"><td colspan="3"><b>מש"ל ב׳</b></td></tr>
+</table>
+<p class="aside">זה הסימן המובהק של המשפחה: הנתונים רחוקים ממה שמבקשים, ובדרך חסר בדיוק שוויון אחד. השאלה שמובילה היא תמיד — איזו זווית או צלע חסרה לי, ומאיזו חפיפה אפשר לקבל אותה.</p>
+<p class="usedth"><b>המשפטים שהשתמשנו בהם:</b> משפט חפיפה צ.צ.צ · צלע משותפת · זוויות מתאימות במשולשים חופפים שוות · משפט חפיפה צ.ז.צ · צלעות מתאימות במשולשים חופפים שוות</p>
+<a class="backup no-print" href="#finder">↑ חזרה לחיפוש הדגמים</a>
+</article>
+
+<article class="ex model" id="m21">
+<div class="ex-head"><span class="lvl l3">דגם 21</span><h4>חופפים ומקבילים — שני הכיוונים</h4></div>
+<p class="sig"><b>מתי זה הדגם שלך:</b> מקבילים בנתון נותנים זוג זוויות שוות שנכנס לחפיפה; מקבילים במה שצריך להוכיח מתקבלים מזוג זוויות שוות שיוצא מהחפיפה. אותו משפט, פעם בכיוון הישר ופעם בכיוון ההפוך.</p>
+<p class="q-text">הנקודה <span class="fi">\(C\)</span> היא אמצע הקטע <span class="fi">\(AE\)</span>.<br>הנקודה <span class="fi">\(B\)</span> נמצאת מעל <span class="fi">\(AC\)</span> והנקודה <span class="fi">\(D\)</span> מעל <span class="fi">\(CE\)</span>.<br>נתון: <span class="fi">\(AB=CD\)</span>, וגם <span class="fi">\(AB\parallel CD\)</span>.<br>א. הוכיחי כי <span class="fi">\(BC=DE\)</span>.<br>ב. הוכיחי כי <span class="fi">\(BC\parallel DE\)</span>.</p>
+<figure><svg viewBox="0 0 360 246" style="width:100%;max-width:450px;height:auto" role="img" aria-label="points A C E on one line, AB parallel to CD, segments BC and DE"><line x1="42" y1="206" x2="318" y2="206" stroke="#334155" stroke-width="2.5"/><line x1="42" y1="206" x2="107" y2="86" stroke="#334155" stroke-width="2.5"/><line x1="107" y1="86" x2="180" y2="206" stroke="#334155" stroke-width="2.5"/><line x1="180" y1="206" x2="245" y2="86" stroke="#334155" stroke-width="2.5"/><line x1="245" y1="86" x2="318" y2="206" stroke="#334155" stroke-width="2.5"/><line x1="90.3" y1="206" x2="131.7" y2="206" stroke="#059669" stroke-width="5"/><line x1="106.5" y1="201" x2="106.5" y2="211" stroke="#059669" stroke-width="2.5"/><line x1="115.5" y1="201" x2="115.5" y2="211" stroke="#059669" stroke-width="2.5"/><line x1="228.3" y1="206" x2="269.7" y2="206" stroke="#059669" stroke-width="5"/><line x1="244.5" y1="201" x2="244.5" y2="211" stroke="#059669" stroke-width="2.5"/><line x1="253.5" y1="201" x2="253.5" y2="211" stroke="#059669" stroke-width="2.5"/><line x1="59.5" y1="173.6" x2="79" y2="137.6" stroke="#2563EB" stroke-width="5"/><line x1="64.9" y1="153.2" x2="73.7" y2="158" stroke="#2563EB" stroke-width="2.5"/><line x1="197.6" y1="173.6" x2="217.1" y2="137.6" stroke="#2563EB" stroke-width="5"/><line x1="202.9" y1="153.2" x2="211.7" y2="158" stroke="#2563EB" stroke-width="2.5"/><path d="M82.4,116.6 L91.4,114.8 L94.8,123.4" fill="none" stroke="#5A6875" stroke-width="3"/><path d="M220.4,116.6 L229.4,114.8 L232.8,123.4" fill="none" stroke="#5A6875" stroke-width="3"/><path d="M82,206 A40,40 0 0 0 61.1,170.8" fill="none" stroke="#C2408C" stroke-width="3.5"/><path d="M220,206 A40,40 0 0 0 199.1,170.8" fill="none" stroke="#C2408C" stroke-width="3.5"/><line x1="138.4" y1="137.6" x2="160.3" y2="173.6" stroke="#7C3AED" stroke-width="4" stroke-dasharray="7 5"/><line x1="153.6" y1="153" x2="145.1" y2="158.2" stroke="#7C3AED" stroke-width="2.5"/><line x1="276.4" y1="137.6" x2="298.3" y2="173.6" stroke="#7C3AED" stroke-width="4" stroke-dasharray="7 5"/><line x1="291.6" y1="153" x2="283.1" y2="158.2" stroke="#7C3AED" stroke-width="2.5"/><path d="M129.6,99.6 L124.5,114.8 L108.7,112.4" fill="none" stroke="#7C3AED" stroke-width="3" stroke-dasharray="22 4"/><path d="M267.6,99.6 L262.5,114.8 L246.7,112.4" fill="none" stroke="#7C3AED" stroke-width="3" stroke-dasharray="22 4"/><circle cx="42" cy="206" r="3" fill="#334155"/><circle cx="180" cy="206" r="3" fill="#334155"/><circle cx="318" cy="206" r="3" fill="#334155"/><circle cx="107" cy="86" r="3" fill="#334155"/><circle cx="245" cy="86" r="3" fill="#334155"/><text x="25.9" y="224.5" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">A</text><text x="180.7" y="232" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">C</text><text x="334.1" y="224.5" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">E</text><text x="103.7" y="72.3" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">B</text><text x="248.3" y="72.3" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">D</text></svg><figcaption>ירוק (שני קווים) — <span class="fi">\(AC=CE\)</span>, כי <span class="fi">\(C\)</span> היא האמצע. כחול וחיצי המקבילים האפורים — הזוג הנתון <span class="fi">\(AB=CD\)</span> ו-<span class="fi">\(AB\parallel CD\)</span>. ורוד — זוג הזוויות המתאימות שהחותך <span class="fi">\(AE\)</span> יוצר. סגול מקווקו — <span class="fi">\(BC\)</span> ו-<span class="fi">\(DE\)</span>: גם השוויון וגם המקבילוּת הם מה שצריך להוכיח.</figcaption></figure>
+<div class="box intuition"><div class="box-title">איך חושבים</div>
+<ul class="plan">
+  <li>הנתון על המקבילים לא נשאר לבד — הוא נועד לתת זוג זוויות שוות. החותך כאן הוא הישר <span class="fi">\(AE\)</span>.</li>
+  <li><span class="fi">\(\angle BAC\)</span> ו-<span class="fi">\(\angle DCE\)</span> יושבות באותה פינה בשני המפגשים ← מתאימות, ולכן שוות.</li>
+  <li>עם <span class="fi">\(AB=CD\)</span> ועם <span class="fi">\(AC=CE\)</span> יש כבר צלע, זווית כלואה, צלע ← צ.ז.צ.</li>
+  <li>בסעיף ב הולכים בכיוון ההפוך: מהחפיפה מקבלות <span class="fi">\(\angle BCA=\angle DEC\)</span>.</li>
+  <li>שתי הזוויות האלה הן זוג מתאימות של הישרים <span class="fi">\(BC\)</span> ו-<span class="fi">\(DE\)</span> עם אותו חותך <span class="fi">\(AE\)</span> — ולכן הישרים מקבילים, לפי המשפט ההפוך.</li>
+</ul></div>
+<table class="dtable">
+<tr><th></th><th>טענה</th><th>נימוק</th></tr>
+<tr><td>1</td><td class="hl-c3"><span class="fi">\(AC=CE\)</span></td><td style="text-align:right">נתון — <span class="fi">\(C\)</span> אמצע <span class="fi">\(AE\)</span></td></tr>
+<tr><td>2</td><td class="hl-c2"><span class="fi">\(AB=CD\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>3</td><td><span class="fi">\(AB\parallel CD\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>4</td><td class="hl-c5"><span class="fi">\(\angle BAC=\angle DCE\)</span></td><td style="text-align:right">זוויות מתאימות שוות בין ישרים מקבילים (החותך <span class="fi">\(AE\)</span>; לפי 3)</td></tr>
+<tr><td>5</td><td><span class="fi">\(\triangle ABC\cong\triangle CDE\)</span></td><td style="text-align:right">משפט חפיפה צ.ז.צ (לפי 2, 4, 1)</td></tr>
+<tr><td>6</td><td class="hl-c4"><span class="fi">\(BC=DE\)</span></td><td style="text-align:right">צלעות מתאימות במשולשים חופפים שוות (לפי 5)</td></tr>
+<tr class="tr-qed"><td colspan="3"><b>מש"ל א׳</b></td></tr>
+<tr class="tr-sep"><td colspan="3">סעיף ב — מהחפיפה חזרה אל המקבילוּת</td></tr>
+<tr><td>7</td><td><span class="fi">\(\angle BCA=\angle DEC\)</span></td><td style="text-align:right">זוויות מתאימות במשולשים חופפים שוות (לפי 5)</td></tr>
+<tr><td>8</td><td class="hl-c4"><span class="fi">\(BC\parallel DE\)</span></td><td style="text-align:right">אם זוג זוויות מתאימות שוות אז הישרים מקבילים (המשפט ההפוך; החותך <span class="fi">\(AE\)</span>; לפי 7)</td></tr>
+<tr class="tr-qed"><td colspan="3"><b>מש"ל ב׳</b></td></tr>
+</table>
+<div class="box example"><div class="box-title">מרובע עם שני זוגות מקבילים — וההדרכה של החוברת</div><p>במרובע <span class="fi">\(ABCD\)</span> נתון: <span class="fi">\(AB\parallel DC\)</span> וגם <span class="fi">\(AD\parallel BC\)</span>.<br>הוכיחי כי <span class="fi">\(AB=DC\)</span> וגם <span class="fi">\(AD=BC\)</span>.</p><p><b>ההדרכה שרשומה בחוברת:</b> ״העבר אחד מהאלכסונים וחפוף את שני המשולשים שהתקבלו.״</p><table class="dtable">
+<tr><th></th><th>טענה</th><th>נימוק</th></tr>
+<tr><td>1</td><td><span class="fi">\(AB\parallel DC\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>2</td><td><span class="fi">\(AD\parallel BC\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>3</td><td>מעבירים את האלכסון <span class="fi">\(AC\)</span></td><td style="text-align:right">בנייה</td></tr>
+<tr><td>4</td><td><span class="fi">\(AC=CA\)</span></td><td style="text-align:right">צלע משותפת לשני המשולשים (לפי 3)</td></tr>
+<tr><td>5</td><td><span class="fi">\(\angle BAC=\angle DCA\)</span></td><td style="text-align:right">זוויות מתחלפות שוות בין ישרים מקבילים (החותך <span class="fi">\(AC\)</span>; לפי 1)</td></tr>
+<tr><td>6</td><td><span class="fi">\(\angle BCA=\angle DAC\)</span></td><td style="text-align:right">זוויות מתחלפות שוות בין ישרים מקבילים (החותך <span class="fi">\(AC\)</span>; לפי 2)</td></tr>
+<tr><td>7</td><td><span class="fi">\(\triangle ABC\cong\triangle CDA\)</span></td><td style="text-align:right">משפט חפיפה ז.צ.ז (לפי 5, 4, 6)</td></tr>
+<tr><td>8</td><td><span class="fi">\(AB=CD,\qquad BC=DA\)</span></td><td style="text-align:right">צלעות מתאימות במשולשים חופפים שוות (לפי 7)</td></tr>
+<tr class="tr-qed"><td colspan="3"><b>מש"ל</b></td></tr>
+</table>
+</div>
+<p class="aside">ההדרכה הזו חוזרת בחוברת פעם אחר פעם. במרובע אין משפטי חפיפה, ולכן כמעט תמיד השורה הראשונה היא בנייה: מעבירים אלכסון, ומקבלים שני משולשים ועוד צלע משותפת במתנה.</p>
+<p class="usedth"><b>המשפטים שהשתמשנו בהם:</b> זוויות מתאימות שוות בין ישרים מקבילים · זוויות מתחלפות שוות בין ישרים מקבילים · צלע משותפת · בנייה · משפט חפיפה צ.ז.צ · משפט חפיפה ז.צ.ז · צלעות מתאימות במשולשים חופפים שוות · זוויות מתאימות במשולשים חופפים שוות · אם זוג זוויות מתאימות שוות אז הישרים מקבילים (המשפט ההפוך)</p>
+<a class="backup no-print" href="#finder">↑ חזרה לחיפוש הדגמים</a>
+</article>
+
+<article class="ex model" id="m22">
+<div class="ex-head"><span class="lvl l1">דגם 22</span><h4>סדר הקודקודים — איך רושמים חפיפה ואיך קוראים ממנה</h4></div>
+<p class="sig"><b>מתי זה הדגם שלך:</b> הוכחת שהמשולשים חופפים וצריך לרשום את החפיפה, או שקיבלת חפיפה כתובה וצריך להוציא ממנה שוויונים. בחוברת זה חוזר בניסוח ״רשום את החפיפה עפ״י סדר הקודקודים״.</p>
+<p class="q-text">בשרטוט שני משולשים: <span class="fi">\(ABC\)</span> ו-<span class="fi">\(DEF\)</span>.<br>נתון: <span class="fi">\(AB=EF\)</span>, <span class="fi">\(BC=DE\)</span>, וגם <span class="fi">\(\angle B=\angle E\)</span>.<br>א. הוכיחי שהמשולשים חופפים, ורשמי את החפיפה לפי סדר הקודקודים.<br>ב. רשמי את שלושת השוויונים הנוספים שנובעים ממנה.</p>
+<figure><svg viewBox="0 0 470 220" style="width:100%;max-width:470px;height:auto" role="img" aria-label="two separate congruent triangles ABC and DEF with matching marks"><polygon points="36,162 96,42 198,162" fill="#FBFAF7" stroke="#334155" stroke-width="2.5"/><polygon points="418.2,94.7 317.6,183.5 268,34" fill="#FBFAF7" stroke="#334155" stroke-width="2.5"/><line x1="54" y1="126" x2="78" y2="78" stroke="#2563EB" stroke-width="5"/><line x1="61.5" y1="99.8" x2="70.5" y2="104.2" stroke="#2563EB" stroke-width="2.5"/><line x1="388" y1="121.3" x2="347.8" y2="156.8" stroke="#2563EB" stroke-width="5"/><line x1="371.2" y1="142.8" x2="364.6" y2="135.3" stroke="#2563EB" stroke-width="2.5"/><line x1="126.6" y1="78" x2="167.4" y2="126" stroke="#059669" stroke-width="5"/><line x1="147.9" y1="95.3" x2="140.3" y2="101.8" stroke="#059669" stroke-width="2.5"/><line x1="153.7" y1="102.2" x2="146.1" y2="108.7" stroke="#059669" stroke-width="2.5"/><line x1="302.7" y1="138.6" x2="282.9" y2="78.8" stroke="#059669" stroke-width="5"/><line x1="289.5" y1="114.6" x2="299" y2="111.4" stroke="#059669" stroke-width="2.5"/><line x1="286.6" y1="106" x2="296.1" y2="102.9" stroke="#059669" stroke-width="2.5"/><path d="M115.4,64.9 A30,30 0 0 1 82.6,68.8" fill="none" stroke="#C2408C" stroke-width="3.5"/><path d="M308.2,155 A30,30 0 0 1 340.1,163.6" fill="none" stroke="#C2408C" stroke-width="3.5"/><text x="18.1" y="173.5" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">A</text><text x="92.7" y="28.3" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">B</text><text x="215.9" y="173.5" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">C</text><text x="437.1" y="97.6" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">F</text><text x="313.6" y="207.1" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">E</text><text x="254.9" y="25.2" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">D</text></svg><figcaption>כחול — הזוג <span class="fi">\(AB=EF\)</span>; ירוק (שני קווים) — הזוג <span class="fi">\(BC=DE\)</span>; ורוד — <span class="fi">\(\angle B=\angle E\)</span>, והיא יושבת בשני המשולשים בין הצלע הכחולה לצלע הירוקה.</figcaption></figure>
+<div class="box intuition"><div class="box-title">איך חושבים</div>
+<ul class="plan">
+  <li>הזוויות השוות נותנות את ההתאמה הראשונה: <span class="fi">\(B\)</span> מתאים ל-<span class="fi">\(E\)</span>.</li>
+  <li>לוקחות שוויון צלעות: <span class="fi">\(AB=EF\)</span>. בתוך <span class="fi">\(AB\)</span> יושב <span class="fi">\(B\)</span>, ובתוך <span class="fi">\(EF\)</span> יושב <span class="fi">\(E\)</span> — ולכן <span class="fi">\(A\)</span> מתאים ל-<span class="fi">\(F\)</span>.</li>
+  <li>לוקחות את השני: <span class="fi">\(BC=DE\)</span>. שוב <span class="fi">\(B\)</span> מול <span class="fi">\(E\)</span> — ולכן <span class="fi">\(C\)</span> מתאים ל-<span class="fi">\(D\)</span>.</li>
+  <li>כותבות את שני המשולשים באותו סדר בדיוק: <span class="fi">\(\triangle ABC\cong\triangle FED\)</span>.</li>
+  <li>מכאן קוראים הכול בלי להסתכל בשרטוט: אות ראשונה מול ראשונה, שנייה מול שנייה, והצלע שבין שתי אותיות מול הצלע שבין שתי האותיות המתאימות.</li>
+</ul></div>
+<table class="dtable">
+<tr><th></th><th>טענה</th><th>נימוק</th></tr>
+<tr><td>1</td><td class="hl-c2"><span class="fi">\(AB=EF\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>2</td><td class="hl-c3"><span class="fi">\(BC=DE\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>3</td><td class="hl-c5"><span class="fi">\(\angle B=\angle E\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>4</td><td><span class="fi">\(\triangle ABC\cong\triangle FED\)</span></td><td style="text-align:right">משפט חפיפה צ.ז.צ (לפי 1, 3, 2)</td></tr>
+<tr class="tr-qed"><td colspan="3"><b>מש"ל א׳</b></td></tr>
+<tr class="tr-sep"><td colspan="3">סעיף ב — קוראים מההתאמה</td></tr>
+<tr><td>5</td><td class="hl-c4"><span class="fi">\(\angle A=\angle F\)</span></td><td style="text-align:right">זוויות מתאימות במשולשים חופפים שוות (לפי 4)</td></tr>
+<tr><td>6</td><td class="hl-c4"><span class="fi">\(\angle C=\angle D\)</span></td><td style="text-align:right">זוויות מתאימות במשולשים חופפים שוות (לפי 4)</td></tr>
+<tr><td>7</td><td class="hl-c4"><span class="fi">\(AC=FD\)</span></td><td style="text-align:right">צלעות מתאימות במשולשים חופפים שוות (לפי 4)</td></tr>
+<tr class="tr-qed"><td colspan="3"><b>מש"ל ב׳</b></td></tr>
+</table>
+<div class="box example"><div class="box-title">טבלת ההתאמה שנוצרת מהסדר</div><table class="dtable">
+<tr><th>ב-<span class="fi">\(\triangle ABC\)</span></th><th>ב-<span class="fi">\(\triangle FED\)</span></th></tr>
+<tr><td><span class="fi">\(\angle A\)</span></td><td><span class="fi">\(\angle F\)</span></td></tr>
+<tr><td><span class="fi">\(\angle B\)</span></td><td><span class="fi">\(\angle E\)</span></td></tr>
+<tr><td><span class="fi">\(\angle C\)</span></td><td><span class="fi">\(\angle D\)</span></td></tr>
+<tr><td><span class="fi">\(AB\)</span></td><td><span class="fi">\(FE\)</span></td></tr>
+<tr><td><span class="fi">\(BC\)</span></td><td><span class="fi">\(ED\)</span></td></tr>
+<tr><td><span class="fi">\(CA\)</span></td><td><span class="fi">\(DF\)</span></td></tr>
+</table>
+<p>כל שורה כאן היא שוויון מוכן. בשביל לרשום שוויון נוסף מספיק לקרוא שורה.</p></div>
+<p class="aside">הסדר הוא הבטחה. אילו היינו רושמות <span class="fi">\(\triangle ABC\cong\triangle DEF\)</span>, האותיות היו מבטיחות <span class="fi">\(AB=DE\)</span> — ואת זה לא הוכחנו. לכן אחרי שרושמים חפיפה כדאי לעבור על שלושת השוויונים שהוכחת ולוודא שכל אחד מהם באמת נקרא מהסדר.</p>
+<p class="usedth"><b>המשפטים שהשתמשנו בהם:</b> משפט חפיפה צ.ז.צ · צלעות מתאימות במשולשים חופפים שוות · זוויות מתאימות במשולשים חופפים שוות</p>
+<a class="backup no-print" href="#finder">↑ חזרה לחיפוש הדגמים</a>
+</article>
+
+<article class="ex model" id="m23">
+<div class="ex-head"><span class="lvl l2">דגם 23</span><h4>קבע אם ההוכחה נכונה — ואיך בודקים</h4></div>
+<p class="sig"><b>מתי זה הדגם שלך:</b> השאלה נותנת לך הוכחה כתובה ומבקשת לקבוע אם היא נכונה ולנמק. עוברים על שלוש בדיקות קבועות, ומצביעים על השורה שבה הבדיקה נעצרת.</p>
+<p class="q-text">הקטע <span class="fi">\(AC\)</span> חוצה את הקטע <span class="fi">\(BD\)</span> בנקודה <span class="fi">\(E\)</span>.<br>נתון: <span class="fi">\(AE=EC\)</span>.<br>לפנייך ההוכחה שנכתבה. קבעי אם היא נכונה, ונמקי.</p>
+<figure><svg viewBox="0 0 320 230" style="width:100%;max-width:340px;height:auto" role="img" aria-label="segments AC and BD crossing at E with AE and EC marked equal"><line x1="40" y1="66" x2="280" y2="154" stroke="#334155" stroke-width="2.5"/><line x1="66" y1="196" x2="254" y2="24" stroke="#334155" stroke-width="2.5"/><line x1="40" y1="66" x2="66" y2="196" stroke="#334155" stroke-width="2.5"/><line x1="254" y1="24" x2="280" y2="154" stroke="#334155" stroke-width="2.5"/><line x1="98.9" y1="165.9" x2="130.9" y2="136.7" stroke="#059669" stroke-width="5"/><line x1="108.2" y1="150.6" x2="114.9" y2="158" stroke="#059669" stroke-width="2.5"/><line x1="114.8" y1="144.6" x2="121.6" y2="151.9" stroke="#059669" stroke-width="2.5"/><line x1="189.1" y1="83.3" x2="221.1" y2="54.1" stroke="#059669" stroke-width="5"/><line x1="198.4" y1="68.1" x2="205.2" y2="75.4" stroke="#059669" stroke-width="2.5"/><line x1="205.1" y1="62" x2="211.8" y2="69.4" stroke="#059669" stroke-width="2.5"/><line x1="74.8" y1="78.8" x2="115.6" y2="93.7" stroke="#2563EB" stroke-width="5"/><line x1="96.9" y1="81.5" x2="93.5" y2="90.9" stroke="#2563EB" stroke-width="2.5"/><line x1="204.4" y1="126.3" x2="245.2" y2="141.2" stroke="#2563EB" stroke-width="5"/><line x1="226.5" y1="129.1" x2="223.1" y2="138.5" stroke="#2563EB" stroke-width="2.5"/><path d="M133.7,100.4 A28,28 0 0 0 139.3,128.9" fill="none" stroke="#C2408C" stroke-width="3"/><text x="117.8" y="123.3" text-anchor="middle" font-size="14" font-weight="bold" fill="#C2408C">1</text><path d="M186.3,119.6 A28,28 0 0 0 180.7,91.1" fill="none" stroke="#C2408C" stroke-width="3"/><text x="202.2" y="106.7" text-anchor="middle" font-size="14" font-weight="bold" fill="#C2408C">2</text><circle cx="40" cy="66" r="3" fill="#334155"/><circle cx="280" cy="154" r="3" fill="#334155"/><circle cx="66" cy="196" r="3" fill="#334155"/><circle cx="254" cy="24" r="3" fill="#334155"/><circle cx="160" cy="110" r="3" fill="#334155"/><text x="24.4" y="62" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">A</text><text x="297.9" y="160.6" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">C</text><text x="52.2" y="212.6" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">B</text><text x="266.7" y="16.3" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">D</text><text x="167.5" y="135.7" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">E</text></svg><figcaption>ירוק (שני קווים) — <span class="fi">\(BE=ED\)</span>, מפני ש-<span class="fi">\(AC\)</span> חוצה את <span class="fi">\(BD\)</span>. כחול — הזוג הנתון <span class="fi">\(AE=EC\)</span>. ורוד — זוג הזוויות הקודקודיות ב-<span class="fi">\(E\)</span>.</figcaption></figure>
+<div class="box intuition"><div class="box-title">איך חושבים</div>
+<ul class="plan">
+  <li><b>בדיקה 1</b> — לכל שורה יש נימוק חוקי: נתון, משפט שלמדנו, או שורה קודמת בטבלה.</li>
+  <li><b>בדיקה 2</b> — בכל שורה שני האיברים השווים הם איברים מתאימים: אחד מהמשולש הראשון ואחד מהשני, לפי סדר הקודקודים שנרשם בסוף.</li>
+  <li><b>בדיקה 3</b> — משפט החפיפה שנרשם מתאים לשלוש השורות: ב-צ.ז.צ הזווית יושבת בין שתי הצלעות, וב-ז.צ.ז הצלע יושבת בין שתי הזוויות.</li>
+</ul></div>
+<table class="dtable">
+<tr><th></th><th>טענה</th><th>נימוק</th></tr>
+<tr><td>1</td><td class="hl-c3"><span class="fi">\(BE=ED\)</span></td><td style="text-align:right">נתון — <span class="fi">\(E\)</span> אמצע <span class="fi">\(BD\)</span></td></tr>
+<tr><td>2</td><td class="hl-c5"><span class="fi">\(\angle E_1=\angle E_2\)</span></td><td style="text-align:right">זוויות קודקודיות שוות</td></tr>
+<tr><td>3</td><td class="hl-c2"><span class="fi">\(AE=EC\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>4</td><td><span class="fi">\(\triangle ABE\cong\triangle CDE\)</span></td><td style="text-align:right">משפט חפיפה צ.ז.צ (לפי 1, 2, 3)</td></tr>
+<tr class="tr-ans"><td colspan="3"><b>תשובה:</b> ההוכחה נכונה.</td></tr>
+</table>
+<p>וכך נראית הבדיקה עצמה, שורה-שורה:</p><ul class="plan"><li>לכל אחת מארבע השורות יש נימוק חוקי: נתון, משפט, נתון, משפט חפיפה.</li><li>סדר הקודקודים <span class="fi">\(\triangle ABE\cong\triangle CDE\)</span> אומר <span class="fi">\(A\leftrightarrow C,\; B\leftrightarrow D,\; E\leftrightarrow E\)</span>. לפיו <span class="fi">\(AE\)</span> מתאימה ל-<span class="fi">\(CE\)</span> ו-<span class="fi">\(BE\)</span> מתאימה ל-<span class="fi">\(DE\)</span> — בדיוק הזוגות שבשורות 3 ו-1.</li><li><span class="fi">\(\angle AEB\)</span> יושבת בין <span class="fi">\(EA\)</span> ל-<span class="fi">\(EB\)</span>, ו-<span class="fi">\(\angle CED\)</span> יושבת בין <span class="fi">\(EC\)</span> ל-<span class="fi">\(ED\)</span>. כלואה בשתיהן ← צ.ז.צ עומד.</li></ul>
+<div class="box example"><div class="box-title">אותו שרטוט, נתון אחר — ואיפה הבדיקה נעצרת</div><p>הקטע <span class="fi">\(AC\)</span> חוצה את הקטע <span class="fi">\(BD\)</span> בנקודה <span class="fi">\(E\)</span>.<br>נתון: <span class="fi">\(AE=DC\)</span>.<br>לפנייך ההוכחה שנכתבה. קבעי אם היא נכונה, ונמקי.</p><figure><svg viewBox="0 0 320 230" style="width:100%;max-width:340px;height:auto" role="img" aria-label="segments AC and BD crossing at E with AE and DC marked equal"><line x1="40" y1="66" x2="280" y2="154" stroke="#334155" stroke-width="2.5"/><line x1="66" y1="196" x2="254" y2="24" stroke="#334155" stroke-width="2.5"/><line x1="40" y1="66" x2="66" y2="196" stroke="#334155" stroke-width="2.5"/><line x1="254" y1="24" x2="280" y2="154" stroke="#334155" stroke-width="2.5"/><line x1="98.9" y1="165.9" x2="130.9" y2="136.7" stroke="#059669" stroke-width="5"/><line x1="108.2" y1="150.6" x2="114.9" y2="158" stroke="#059669" stroke-width="2.5"/><line x1="114.8" y1="144.6" x2="121.6" y2="151.9" stroke="#059669" stroke-width="2.5"/><line x1="189.1" y1="83.3" x2="221.1" y2="54.1" stroke="#059669" stroke-width="5"/><line x1="198.4" y1="68.1" x2="205.2" y2="75.4" stroke="#059669" stroke-width="2.5"/><line x1="205.1" y1="62" x2="211.8" y2="69.4" stroke="#059669" stroke-width="2.5"/><line x1="74.8" y1="78.8" x2="115.6" y2="93.7" stroke="#2563EB" stroke-width="5"/><line x1="96.9" y1="81.5" x2="93.5" y2="90.9" stroke="#2563EB" stroke-width="2.5"/><line x1="261.8" y1="63" x2="272.2" y2="115" stroke="#2563EB" stroke-width="5"/><line x1="271.9" y1="88" x2="262.1" y2="90" stroke="#2563EB" stroke-width="2.5"/><path d="M133.7,100.4 A28,28 0 0 0 139.3,128.9" fill="none" stroke="#C2408C" stroke-width="3"/><text x="117.8" y="123.3" text-anchor="middle" font-size="14" font-weight="bold" fill="#C2408C">1</text><path d="M186.3,119.6 A28,28 0 0 0 180.7,91.1" fill="none" stroke="#C2408C" stroke-width="3"/><text x="202.2" y="106.7" text-anchor="middle" font-size="14" font-weight="bold" fill="#C2408C">2</text><circle cx="40" cy="66" r="3" fill="#334155"/><circle cx="280" cy="154" r="3" fill="#334155"/><circle cx="66" cy="196" r="3" fill="#334155"/><circle cx="254" cy="24" r="3" fill="#334155"/><circle cx="160" cy="110" r="3" fill="#334155"/><text x="24.4" y="62" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">A</text><text x="297.9" y="160.6" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">C</text><text x="52.2" y="212.6" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">B</text><text x="266.7" y="16.3" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">D</text><text x="167.5" y="135.7" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">E</text></svg><figcaption>הפעם הסימון הכחול יושב על <span class="fi">\(AE\)</span> ועל <span class="fi">\(DC\)</span>.</figcaption></figure>
+<table class="dtable">
+<tr><th></th><th>טענה</th><th>נימוק</th></tr>
+<tr><td>1</td><td class="hl-c3"><span class="fi">\(BE=ED\)</span></td><td style="text-align:right">נתון — <span class="fi">\(E\)</span> אמצע <span class="fi">\(BD\)</span></td></tr>
+<tr><td>2</td><td class="hl-c5"><span class="fi">\(\angle E_1=\angle E_2\)</span></td><td style="text-align:right">זוויות קודקודיות שוות</td></tr>
+<tr><td>3</td><td class="hl-c2"><span class="fi">\(AE=DC\)</span></td><td style="text-align:right">נתון</td></tr>
+<tr><td>4</td><td><span class="fi">\(\triangle ABE\cong\triangle CDE\)</span></td><td style="text-align:right">משפט חפיפה צ.ז.צ (לפי 1, 2, 3)</td></tr>
+<tr class="tr-ans"><td colspan="3"><b>תשובה:</b> הבדיקה נעצרת בשורה 3.</td></tr>
+</table>
+<p>משפט צ.ז.צ דורש ששתי הצלעות ייצאו מקודקוד הזווית, והזווית כאן היא הזווית ב-<span class="fi">\(E\)</span>.<br>במשולש <span class="fi">\(ABE\)</span> הצלעות שיוצאות מ-<span class="fi">\(E\)</span> הן <span class="fi">\(EA\)</span> ו-<span class="fi">\(EB\)</span>.<br>במשולש <span class="fi">\(CDE\)</span> הצלעות שיוצאות מ-<span class="fi">\(E\)</span> הן <span class="fi">\(EC\)</span> ו-<span class="fi">\(ED\)</span>.<br>שורה 1 ממלאת את הזוג <span class="fi">\(EB\)</span> ו-<span class="fi">\(ED\)</span>.<br>המקום שנשאר פנוי הוא <span class="fi">\(EA\)</span> מול <span class="fi">\(EC\)</span>, והנתון שממלא אותו הוא <span class="fi">\(AE=EC\)</span>.<br>הצלע <span class="fi">\(DC\)</span> היא אמנם צלע של <span class="fi">\(\triangle CDE\)</span>, אבל לפי סדר הקודקודים היא זו שמתאימה ל-<span class="fi">\(AB\)</span> — ולכן מקומה בשורה אחרת.</p><p><b>מה משנים:</b> מחליפים את הנתון <span class="fi">\(AE=DC\)</span> בנתון <span class="fi">\(AE=EC\)</span>, ואז ההוכחה שלמעלה עומדת מילה במילה.</p></div>
+<p class="aside">הבדיקה השלישית תופסת גם את התקלה הנפוצה השנייה. בתרגילים 15 ו-16 בחוברת נרשמת חפיפה עפ״י צ.ז.צ, אבל הזווית שמופיעה בשורה יושבת מול אחת הצלעות במקום בין שתיהן. אותה שאלה בדיוק: איפה יושבת הזווית ביחס לשתי הצלעות שנרשמו.</p>
+<p class="usedth"><b>המשפטים שהשתמשנו בהם:</b> זוויות קודקודיות שוות · הגדרת אמצע קטע · משפט חפיפה צ.ז.צ</p>
+<a class="backup no-print" href="#finder">↑ חזרה לחיפוש הדגמים</a>
+</article>
+
+
+<div class="box def">
+  <div class="box-title">ואם התרגיל שלך לא נראה כמו אף אחד מהם</div>
+  קראי את השאלה פעם אחת ורשמי בצד רק שני דברים: מה נתון, ומה צריך להוכיח.
+  <br>אחר כך העתיקי את השרטוט בגדול וסמני עליו כל נתון בצבע.
+  <br>ברוב המקרים, ברגע שהשרטוט מסומן, שם הדגם מופיע לבד.
+</div>
+
+<nav class="pagenav">
+  <a href="04-graphs-and-shapes.html"><span class="dir">→ התחנה הקודמת</span>גרפים וצורות</a>
+  <a class="next" href="06-proof-practice.html"><span class="dir">התחנה הבאה ←</span>בנק תרגילי ההוכחה</a>
+</nav>
+
+<footer class="fin">חלק מהעולם של שירה · <a href="index.html">המפה</a> · <a href="../index.html">המרכז</a></footer>
+</main>
+</div>
+</body>
+</html>

@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<!-- מסך הבית של האייפד/הטלפון -->
+<link rel="apple-touch-icon" href="../assets/icons/icon-180.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>מערכת משוואות עם שני נעלמים — אלגברה ופונקציות — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../vendor/katex.min.css">
+<link rel="stylesheet" href="../css/shira.css">
+<style>:root{--accent:var(--alg)}</style>
+<script defer src="../vendor/katex.min.js"></script>
+<script defer src="../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../js/shira.js"></script>
+<style>
+/* מחוון פתיחה — כמה זמן, כמה תרגילים, ואיפה מתחילים לתרגל (מוסתר בהדפסה) */
+.pagemeta{display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px;
+  margin:12px 0 0; font-size:13px; color:var(--soft)}
+.pagemeta .pm-time{background:var(--faint); border-radius:999px; padding:3px 10px}
+.pagemeta .pm-time b{color:var(--ink); font-weight:700}
+.pagemeta .pm-jump{color:var(--accent); font-weight:700; text-decoration:none}
+.pagemeta .pm-jump:hover{text-decoration:underline}
+.pagemeta .pm-note{flex:1 1 100%; margin:0}
+#ex-first,#bank-map{scroll-margin-top:78px}
+</style>
+</head>
+<body data-page="alg:06-systems">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">אלגברה ופונקציות — המפה</a>
+    <span class="crumbs">תחנה <b>6</b> מתוך 7 · <b>מערכת משוואות</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">אלגברה ופונקציות · תחנה 6</div>
+  <h1>מערכת משוואות עם שני נעלמים — שיטת ההצבה</h1>
+  <p class="lead">
+    בתחנה 5 מצאת נקודת חיתוך של שני ישרים מתוך המשוואות שלהם.
+    היום עושים בדיוק את אותו הדבר — רק בלי גרף בכלל:
+    שתי משוואות, שני נעלמים, ושיטה אחת מסודרת שנקראת <strong>הצבה</strong>.
+  </p>
+  <p class="youknow"><b>בסוף העמוד תדעי:</b> לבדוק אם זוג מספרים הוא פתרון של מערכת ·
+  לבחור בחוכמה איזה נעלם לבודד · לפתור בשיטת ההצבה צעד-צעד, עם בדיקה בשתי המשוואות ·
+  לתרגם בעיה מילולית למערכת.</p>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>≈ 30 דק׳</b> · 5 תרגילים</span>
+    <a class="pm-jump" href="#sec-practice">לקפוץ ישר לתרגילים ↓</a>
+  </p>
+</header>
+
+<!-- ============ 1. מה זו מערכת ============ -->
+<h2 id="sec-what"><span class="num">1</span>מה זו בכלל מערכת משוואות?</h2>
+
+<p>
+  תסתכלי על המשוואה <span class="fi">\(\textcolor{#7C3AED}{y}-\textcolor{#2563EB}{x}=1\)</span>.
+  יש בה <strong>שני</strong> נעלמים — ולכן אין לה פתרון אחד, יש לה אינסוף:
+  הזוג <span class="fi">\((0,\,1)\)</span> מתאים, וגם <span class="fi">\((1,\,2)\)</span>,
+  וגם <span class="fi">\((5,\,6)\)</span> — כל זוג שבו ה-<span class="fi">\(\textcolor{#7C3AED}{y}\)</span>
+  גדול מה-<span class="fi">\(\textcolor{#2563EB}{x}\)</span> באחד.
+</p>
+<p>
+  כדי לקבל תשובה אחת ויחידה צריך <strong>עוד</strong> דרישה.
+  כשכותבים שתי משוואות יחד, עם סוגר מסולסל שמחבר אותן, מקבלים מערכת:
+</p>
+
+$$\begin{cases}\textcolor{#7C3AED}{y}-\textcolor{#2563EB}{x}=1\\[2pt] 2\textcolor{#2563EB}{x}-5\textcolor{#7C3AED}{y}=-8\end{cases}$$
+
+<p>
+  הסוגר אומר: אנחנו מחפשות זוג <span class="fi">\((\textcolor{#2563EB}{x},\,\textcolor{#7C3AED}{y})\)</span>
+  שמקיים את <strong>שתי</strong> המשוואות בו-זמנית — לא רק אחת מהן.
+</p>
+<p>
+  נבדוק שני מועמדים, כדי להרגיש את ההבדל.
+  <br>הזוג <span class="fi">\((4,\,5)\)</span>: במשוואה הראשונה
+  <span class="fi">\(5-4=1\)</span> ✓ — אבל בשנייה
+  <span class="fi">\(2\cdot 4-5\cdot 5=8-25=-17\)</span>, ממש לא <span class="fi">\(-8\)</span> ✗.
+  מקיים רק אחת — <strong>לא פתרון</strong> של המערכת.
+  <br>הזוג <span class="fi">\((1,\,2)\)</span>: בראשונה
+  <span class="fi">\(2-1=1\)</span> ✓, ובשנייה
+  <span class="fi">\(2\cdot 1-5\cdot 2=2-10=-8\)</span> ✓.
+  מקיים את שתיהן — <strong>זה הפתרון</strong>.
+</p>
+
+<div class="box def">
+  <div class="box-title">הגדרה</div>
+  פתרון של מערכת משוואות הוא זוג <span class="fi">\((\textcolor{#2563EB}{x},\,\textcolor{#7C3AED}{y})\)</span>
+  שמקיים את <strong>כל</strong> המשוואות במערכת בו-זמנית.
+  <br>לכן בסוף כל תרגיל התשובה היא <strong>זוג</strong> — גם
+  <span class="fi">\(\textcolor{#2563EB}{x}\)</span> וגם <span class="fi">\(\textcolor{#7C3AED}{y}\)</span>,
+  לא מספר אחד.
+</div>
+
+<p>
+  ולמה זה מרגיש מוכר? כי כל משוואה כזו היא בעצם ישר —
+  <a href="05-line-equation.html#sec-intersect">בדיוק כמו בתחנה 5</a>.
+  כל הזוגות שמקיימים את המשוואה הראשונה יושבים על ישר אחד,
+  כל הזוגות של השנייה — על ישר שני, והפתרון של המערכת הוא הנקודה היחידה
+  שיושבת על שניהם:
+</p>
+
+<figure>
+  <svg viewBox="0 0 640 320" style="width:100%;max-width:640px;height:auto" role="img" aria-label="שני ישרים נחתכים בנקודה אחת">
+    <!-- axes -->
+    <line x1="70" y1="238" x2="575" y2="238" stroke="#5A6875" stroke-width="2"/>
+    <polygon points="582,238 570,233 570,243" fill="#5A6875"/>
+    <polygon points="63,238 75,233 75,243" fill="#5A6875"/>
+    <line x1="260" y1="300" x2="260" y2="26" stroke="#5A6875" stroke-width="2"/>
+    <polygon points="260,19 255,31 265,31" fill="#5A6875"/>
+    <polygon points="260,307 255,295 265,295" fill="#5A6875"/>
+    <!-- x ticks -->
+    <line x1="140" y1="233" x2="140" y2="243" stroke="#5A6875" stroke-width="2"/>
+    <line x1="200" y1="233" x2="200" y2="243" stroke="#5A6875" stroke-width="2"/>
+    <line x1="320" y1="233" x2="320" y2="243" stroke="#5A6875" stroke-width="2"/>
+    <line x1="380" y1="233" x2="380" y2="243" stroke="#5A6875" stroke-width="2"/>
+    <line x1="440" y1="233" x2="440" y2="243" stroke="#5A6875" stroke-width="2"/>
+    <line x1="500" y1="233" x2="500" y2="243" stroke="#5A6875" stroke-width="2"/>
+    <text x="140" y="260" text-anchor="middle" font-size="12" fill="#5A6875">−2</text>
+    <text x="200" y="260" text-anchor="middle" font-size="12" fill="#5A6875">−1</text>
+    <text x="252" y="260" text-anchor="middle" font-size="12" fill="#5A6875">0</text>
+    <text x="320" y="260" text-anchor="middle" font-size="14" font-weight="800" fill="#1C2733">1</text>
+    <text x="380" y="260" text-anchor="middle" font-size="12" fill="#5A6875">2</text>
+    <text x="440" y="260" text-anchor="middle" font-size="12" fill="#5A6875">3</text>
+    <text x="500" y="260" text-anchor="middle" font-size="12" fill="#5A6875">4</text>
+    <!-- y ticks -->
+    <line x1="255" y1="186" x2="265" y2="186" stroke="#5A6875" stroke-width="2"/>
+    <line x1="255" y1="134" x2="265" y2="134" stroke="#5A6875" stroke-width="2"/>
+    <line x1="255" y1="82" x2="265" y2="82" stroke="#5A6875" stroke-width="2"/>
+    <text x="248" y="190" text-anchor="end" font-size="12" fill="#5A6875">1</text>
+    <text x="248" y="139" text-anchor="end" font-size="14" font-weight="800" fill="#1C2733">2</text>
+    <text x="248" y="86" text-anchor="end" font-size="12" fill="#5A6875">3</text>
+    <!-- dashed guides to the intersection -->
+    <line x1="320" y1="134" x2="320" y2="238" stroke="#9AA5B1" stroke-width="1.5" stroke-dasharray="5 5"/>
+    <line x1="320" y1="134" x2="260" y2="134" stroke="#9AA5B1" stroke-width="1.5" stroke-dasharray="5 5"/>
+    <!-- line 1: y = x + 1 (teal) -->
+    <line x1="140" y1="290" x2="440" y2="30" stroke="#2E7D6B" stroke-width="4"/>
+    <text x="452" y="40" font-size="14" font-weight="800" fill="#2E7D6B" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3">y−x=1</text>
+    <!-- line 2: 2x - 5y = -8 (orange) -->
+    <line x1="80" y1="217" x2="560" y2="51" stroke="#EA580C" stroke-width="4"/>
+    <text x="480" y="108" text-anchor="middle" font-size="14" font-weight="800" fill="#EA580C" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3">2x−5y=−8</text>
+    <!-- intersection point -->
+    <circle cx="320" cy="134" r="8" fill="#1C2733" stroke="#FFFFFF" stroke-width="3"/>
+    <text x="345" y="120" font-size="16" font-weight="800" fill="#1C2733">(1, 2)</text>
+  </svg>
+  <figcaption>
+    ‏<span class="fi">\((1,\,2)\)</span> — הנקודה היחידה שעל שני הישרים: הפתרון של המערכת.
+  </figcaption>
+</figure>
+
+<!-- ============ 2. שיטת ההצבה ============ -->
+<h2 id="sec-method"><span class="num">2</span>שיטת ההצבה — ארבעה צעדים קבועים</h2>
+
+<p>
+  הרעיון של השיטה פשוט ויפה: אם יודעים להגיד את
+  <span class="fi">\(\textcolor{#7C3AED}{y}\)</span> באמצעות
+  <span class="fi">\(\textcolor{#2563EB}{x}\)</span>, אפשר <strong>להציב</strong> את הביטוי הזה
+  במשוואה השנייה — ופתאום נשארת משוואה עם נעלם <strong>אחד</strong>,
+  מהסוג שאת פותרת מתחנה 2 בעיניים עצומות.
+</p>
+
+<ol class="steps">
+  <li><strong>מבודדים נעלם</strong> מאחת המשוואות — ובוחרים את הקל!
+      (נעלם עם מקדם 1 או <span class="fi">\(-1\)</span>, ותכף נדבר על זה.)</li>
+  <li><strong>מציבים</strong> את הביטוי שקיבלנו במשוואה <strong>השנייה</strong> —
+      תמיד בתוך סוגריים.</li>
+  <li><strong>פותרים</strong> את המשוואה שנוצרה — יש בה עכשיו נעלם אחד בלבד.</li>
+  <li><strong>מציבים חזרה</strong> ומוצאים את הנעלם השני —
+      ובודקים את הזוג <strong>בשתי המשוואות המקוריות</strong>.</li>
+</ol>
+
+<p>
+  שימי לב לצעד 2: מציבים במשוואה <strong>השנייה</strong>, זו שעוד לא השתמשנו בה.
+  הצבה חזרה באותה משוואה שממנה בודדנו תיתן משפט אמת ריק כמו
+  <span class="fi">\(1=1\)</span> — נכון, אבל לא מקדם אותנו.
+  ועכשיו נראה את כל ארבעת הצעדים על מערכת אמיתית.
+</p>
+
+<!-- ============ 3. דוגמה מלאה ============ -->
+<h2 id="sec-worked"><span class="num">3</span>דוגמה מלאה, צעד אחרי צעד</h2>
+
+<p>נפתור יחד את המערכת שכבר הכרנו — הפעם בלי לדעת את התשובה מראש:</p>
+
+$$\begin{cases}\textcolor{#7C3AED}{y}-\textcolor{#2563EB}{x}=1\\[2pt] 2\textcolor{#2563EB}{x}-5\textcolor{#7C3AED}{y}=-8\end{cases}$$
+
+<p>
+  <strong>צעד 1 — מבודדים נעלם.</strong>
+  במשוואה הראשונה ה-<span class="fi">\(\textcolor{#7C3AED}{y}\)</span> עומד עם מקדם 1 —
+  הוא הקל ביותר לבידוד, בצעד יחיד:
+</p>
+
+<div class="fbox">
+  <div class="fbox-title">צעד 1 — בידוד y מהמשוואה הראשונה</div>
+  $$\begin{aligned}
+  \textcolor{#7C3AED}{y}-\textcolor{#2563EB}{x} &amp;= 1 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{+x}}\\[2pt]
+  \textcolor{#7C3AED}{y} &amp;= \textcolor{#2563EB}{x}+1
+  \end{aligned}$$
+  <span class="f-legend">
+    <span><i class="sw" style="background:#7C3AED"></i> <bdi>סגול — <span class="fi">\(y\)</span>, הנעלם שבודדנו</bdi></span>
+    <span><i class="sw" style="background:#C0392B"></i> אדום — הפעולה, על שני האגפים כרגיל</span>
+  </span>
+</div>
+
+<p>
+  <strong>צעד 2 — מציבים בשנייה.</strong>
+  עכשיו אנחנו יודעות ש-<span class="fi">\(\textcolor{#7C3AED}{y}\)</span> זה בדיוק
+  <span class="fi">\(\textcolor{#7C3AED}{x+1}\)</span> —
+  אז בכל מקום שבו המשוואה השנייה אומרת <span class="fi">\(\textcolor{#7C3AED}{y}\)</span>,
+  נכניס במקומו את הביטוי, בתוך סוגריים:
+</p>
+
+<div class="fbox">
+  <div class="fbox-title">צעד 2 — הביטוי הסגול נכנס במקום ה-y</div>
+  $$2\textcolor{#2563EB}{x}-5(\underbrace{\textcolor{#7C3AED}{x+1}}_{\textcolor{#7C3AED}{y}})=-8$$
+  <span class="f-legend">
+    <span><i class="sw" style="background:#7C3AED"></i> <bdi>סגול — הביטוי שהחליף את ה-<span class="fi">\(y\)</span>; הסוגריים שומרים עליו שלם</bdi></span>
+    <span><i class="sw" style="background:#2563EB"></i> <bdi>כחול — נשאר נעלם אחד בלבד: <span class="fi">\(x\)</span></bdi></span>
+  </span>
+</div>
+
+<div class="box warn">
+  <div class="box-title">מציבים עם סוגריים — תמיד!</div>
+  ה-<span class="fi">\(-5\)</span> כופל את <strong>כל</strong> הביטוי שנכנס:
+  $$-5(\textcolor{#7C3AED}{x+1})=-5\textcolor{#2563EB}{x}-5$$
+  מי שמציבה בלי סוגריים מקבלת <span class="fi">\(-5\textcolor{#2563EB}{x}+1\)</span> —
+  היא כפלה רק את האיבר הראשון, וכל ההמשך מתקלקל.
+</div>
+
+<p>
+  <strong>צעד 3 — פותרים.</strong> נשארה משוואה רגילה עם נעלם אחד,
+  ופותרים אותה בדיוק כמו בתחנה 2:
+</p>
+
+<div class="fbox">
+  <div class="fbox-title">צעד 3 — משוואה עם נעלם אחד</div>
+  $$\begin{aligned}
+  2\textcolor{#2563EB}{x}-5(\textcolor{#7C3AED}{x+1}) &amp;= -8 &amp;&amp;\qquad\textcolor{#C0392B}{\text{פותחים סוגריים}}\\[2pt]
+  2\textcolor{#2563EB}{x}-5\textcolor{#2563EB}{x}-5 &amp;= -8 &amp;&amp;\qquad\textcolor{#C0392B}{\text{מכנסים איברים}}\\[2pt]
+  -3\textcolor{#2563EB}{x}-5 &amp;= -8 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{+5}}\\[2pt]
+  -3\textcolor{#2563EB}{x} &amp;= -3 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{:}\,({-3})}\\[2pt]
+  \textcolor{#2563EB}{x} &amp;= \mathbf{1}
+  \end{aligned}$$
+  <span class="f-legend">
+    <span><i class="sw" style="background:#2563EB"></i> כחול — הנעלם היחיד שנשאר</span>
+    <span><i class="sw" style="background:#C0392B"></i> אדום — כל פעולה, שורה אחר שורה, על שני האגפים</span>
+  </span>
+</div>
+
+<p>
+  <strong>צעד 4 — מציבים חזרה.</strong>
+  מצאנו את <span class="fi">\(\textcolor{#2563EB}{x}\)</span> — אבל התשובה היא זוג,
+  אז חוזרים לביטוי המבודד מצעד 1 ומחלצות ממנו את
+  <span class="fi">\(\textcolor{#7C3AED}{y}\)</span>:
+</p>
+
+$$\textcolor{#7C3AED}{y}=\textcolor{#2563EB}{x}+1=\textcolor{#2563EB}{1}+1=\mathbf{2}$$
+
+<p>קיבלנו את הזוג <span class="fi">\((1,\,2)\)</span> — בדיוק נקודת החיתוך מהציור למעלה. ועכשיו הבדיקה:</p>
+
+<div class="box intuition">
+  <div class="box-title">הבדיקה — בשתי המשוואות, לא רק באחת</div>
+  מציבות את הזוג <span class="fi">\((1,\,2)\)</span> בשתי המשוואות <strong>המקוריות</strong>:
+  <br>הראשונה: <span class="fi">\(\textcolor{#7C3AED}{2}-\textcolor{#2563EB}{1}=1\)</span> ✓
+  <br>השנייה: <span class="fi">\(2\cdot\textcolor{#2563EB}{1}-5\cdot\textcolor{#7C3AED}{2}=2-10=-8\)</span> ✓
+  <br>זוג שעובר רק משוואה אחת הוא לא פתרון — ראינו את זה עם
+  <span class="fi">\((4,\,5)\)</span> בתחילת העמוד. לכן בודקים תמיד את <strong>שתיהן</strong>.
+</div>
+
+<!-- ============ 4. איזה נעלם לבודד ============ -->
+<h2 id="sec-choose"><span class="num">4</span>איזה נעלם לבודד? בוחרים את הקל</h2>
+
+<p>
+  בצעד 1 יש לך חופש בחירה: ארבעה נעלמים בשתי המשוואות, ואפשר לבודד כל אחד מהם.
+  כולם יובילו לאותה תשובה — אבל לא באותו מאמץ.
+  ההשוואה הזו אומרת הכל:
+</p>
+<p>
+  לבודד את <span class="fi">\(\textcolor{#7C3AED}{y}\)</span> מ-<span class="fi">\(y-x=1\)</span> —
+  צעד אחד נקי: <span class="fi">\(\textcolor{#7C3AED}{y}=\textcolor{#2563EB}{x}+1\)</span>.
+  <br>לבודד את <span class="fi">\(\textcolor{#2563EB}{x}\)</span> מ-<span class="fi">\(2x-5y=-8\)</span> —
+  מקבלים <span class="fi">\(\textcolor{#2563EB}{x}=\dfrac{-8+5\textcolor{#7C3AED}{y}}{2}\)</span>:
+  שבר שילווה אותנו בכל שאר התרגיל, ואיתו הרבה מקומות לטעות.
+</p>
+
+<div class="box intuition">
+  <div class="box-title">הכלל המעשי</div>
+  מחפשות נעלם עם מקדם <strong>1</strong> או <strong>‏<span class="fi">\(-1\)</span></strong> —
+  אותו הכי קל לבודד, בלי שברים.
+  <br>ואם אחת המשוואות כבר כתובה בצורה
+  <span class="fi">\(\textcolor{#7C3AED}{y}=\ldots\)</span> —
+  חצי מהעבודה כבר נעשתה בשבילך: מדלגות ישר לצעד ההצבה.
+</div>
+
+<!-- ============ 5. דוגמה שנייה ============ -->
+<h2 id="sec-worked2"><span class="num">5</span>דוגמה שנייה — כשהנעלם כבר מבודד</h2>
+
+<p>בדיוק מקרה כזה — במשוואה השנייה ה-<span class="fi">\(\textcolor{#7C3AED}{y}\)</span> כבר עומד לבד:</p>
+
+$$\begin{cases}\textcolor{#2563EB}{x}+\textcolor{#7C3AED}{y}=5\\[2pt] \textcolor{#7C3AED}{y}=3\textcolor{#2563EB}{x}-3\end{cases}$$
+
+<p>
+  צעד 1 מיותר — מישהו כבר בודד בשבילנו.
+  מציבות את <span class="fi">\(\textcolor{#7C3AED}{3x-3}\)</span> במקום
+  ה-<span class="fi">\(\textcolor{#7C3AED}{y}\)</span> שבמשוואה הראשונה, וממשיכות כרגיל:
+</p>
+
+<div class="fbox">
+  <div class="fbox-title">הצבה ופתרון — הכל בשורה אחת של עבודה</div>
+  $$\begin{aligned}
+  \textcolor{#2563EB}{x}+(\underbrace{\textcolor{#7C3AED}{3x-3}}_{\textcolor{#7C3AED}{y}}) &amp;= 5 &amp;&amp;\qquad\textcolor{#C0392B}{\text{הצבה במשוואה הראשונה}}\\[4pt]
+  4\textcolor{#2563EB}{x}-3 &amp;= 5 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{+3}}\\[2pt]
+  4\textcolor{#2563EB}{x} &amp;= 8 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{:}\,4}\\[2pt]
+  \textcolor{#2563EB}{x} &amp;= \mathbf{2}
+  \end{aligned}$$
+  <span class="f-legend">
+    <span><i class="sw" style="background:#7C3AED"></i> <bdi>סגול — הביטוי שנכנס במקום <span class="fi">\(y\)</span>, בסוגריים</bdi></span>
+    <span><i class="sw" style="background:#C0392B"></i> אדום — הפעולות על שני האגפים</span>
+  </span>
+</div>
+
+<p>
+  ומציבות חזרה בביטוי המבודד:
+  <span class="fi">\(\textcolor{#7C3AED}{y}=3\cdot\textcolor{#2563EB}{2}-3=3\)</span>.
+  הזוג: <span class="fi">\((2,\,3)\)</span>.
+  <br>בדיקה בשתיהן — הראשונה: <span class="fi">\(2+3=5\)</span> ✓,
+  השנייה: <span class="fi">\(3\cdot 2-3=3\)</span> ✓.
+</p>
+
+<!-- ============ 6. מערכת מתוך סיפור ============ -->
+<h2 id="sec-model"><span class="num">6</span>מערכת מתוך סיפור — הגשר לבעיות מילוליות</h2>
+
+<p>
+  בתחנה הבאה נצלול לבעיות מילוליות — אבל את הגשר אפשר לחצות כבר עכשיו,
+  כי הרבה סיפורים הם בדיוק מערכת בתחפושת. למשל:
+</p>
+
+<p class="q-text">
+  <span class="mk mk-total">סכום שני מספרים הוא 20</span>,
+  <span class="mk mk-given">וההפרש ביניהם הוא 4</span>.
+  <span class="mk mk-find">מהם שני המספרים?</span>
+</p>
+
+<p>
+  נסמן את המספר הגדול ב-<span class="fi">\(\textcolor{#2563EB}{x}\)</span>.
+  <br>את המספר הקטן נסמן ב-<span class="fi">\(\textcolor{#7C3AED}{y}\)</span>.
+  <br>"סכום" נותן משוואה אחת, "הפרש" נותן שנייה — וכל משפט בסיפור הפך לשורה במערכת:
+</p>
+
+$$\begin{cases}\textcolor{#2563EB}{x}+\textcolor{#7C3AED}{y}=20\\[2pt] \textcolor{#2563EB}{x}-\textcolor{#7C3AED}{y}=4\end{cases}$$
+
+<p>
+  מכאן זו כבר דרך סלולה. מבודדות את <span class="fi">\(\textcolor{#2563EB}{x}\)</span>
+  מהמשוואה השנייה (מקדם 1 — הבחירה הקלה):
+  <span class="fi">\(\textcolor{#2563EB}{x}=\textcolor{#7C3AED}{y}+4\)</span>,
+  ומציבות בראשונה:
+</p>
+
+<div class="fbox">
+  <div class="fbox-title">פתרון הסיפור בשיטת ההצבה</div>
+  $$\begin{aligned}
+  (\underbrace{\textcolor{#7C3AED}{y}+4}_{\textcolor{#2563EB}{x}})+\textcolor{#7C3AED}{y} &amp;= 20 &amp;&amp;\qquad\textcolor{#C0392B}{\text{הצבה במשוואה הראשונה}}\\[4pt]
+  2\textcolor{#7C3AED}{y}+4 &amp;= 20 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{-4}}\\[2pt]
+  2\textcolor{#7C3AED}{y} &amp;= 16 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{:}\,2}\\[2pt]
+  \textcolor{#7C3AED}{y} &amp;= \mathbf{8}
+  \end{aligned}$$
+  <span class="f-legend">
+    <span><i class="sw" style="background:#2563EB"></i> <bdi>כחול — ה-<span class="fi">\(x\)</span> שמתחת לסוגר: הביטוי שבסוגריים נכנס במקומו</bdi></span>
+    <span><i class="sw" style="background:#C0392B"></i> אדום — הפעולות, על שני האגפים</span>
+  </span>
+</div>
+
+<p>
+  ואז חזרה: <span class="fi">\(\textcolor{#2563EB}{x}=\textcolor{#7C3AED}{8}+4=12\)</span>.
+  המספרים הם <strong>12 ו-8</strong>.
+  <br>בדיקה מול הסיפור עצמו: הסכום <span class="fi">\(12+8=20\)</span> ✓,
+  ההפרש <span class="fi">\(12-8=4\)</span> ✓ — שני הנתונים מתקיימים.
+</p>
+
+<!-- ============ 7. תרגול ============ -->
+<h2 id="sec-practice"><span class="num">7</span>תרגול — משלב לשלב</h2>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>מערכת עם נעלם מבודד</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">נתונה המערכת</span>
+  </p>
+  $$\begin{cases}\textcolor{#7C3AED}{y}=\textcolor{#2563EB}{x}+1\\[2pt] \textcolor{#2563EB}{x}+2\textcolor{#7C3AED}{y}=8\end{cases}$$
+  <p class="q-text"><span class="mk mk-find">מצאי את זוג הפתרון <span class="fi">\((x,\,y)\)</span></span> — ובדקי בשתי המשוואות.</p>
+  <p style="font-size:13px;color:var(--soft)">נסי לנחש את השלב הבא לפני שאת פותחת אותו.</p>
+  <details class="step"><summary>שלב ראשון — מה כבר מבודד?</summary>
+    <div class="step-body">המשוואה הראשונה כבר בצורה
+    <span class="fi">\(\textcolor{#7C3AED}{y}=\textcolor{#2563EB}{x}+1\)</span> —
+    חצי מהעבודה נעשתה. מדלגות ישר להצבה במשוואה <strong>השנייה</strong>.</div>
+  </details>
+  <details class="step"><summary>שלב שני — ההצבה, עם סוגריים</summary>
+    <div class="step-body">במקום ה-<span class="fi">\(\textcolor{#7C3AED}{y}\)</span> נכנס הביטוי, שלם ובסוגריים:
+    $$\textcolor{#2563EB}{x}+2(\textcolor{#7C3AED}{x+1})=8\qquad\Longrightarrow\qquad \textcolor{#2563EB}{x}+2\textcolor{#2563EB}{x}+2=8$$
+    שימי לב: ה-2 כפל את <strong>שני</strong> האיברים שבסוגריים.</div>
+  </details>
+  <details class="step"><summary>שלב שלישי — פותרים את מה שנשאר</summary>
+    <div class="step-body">מכנסות איברים ופותרות:
+    $$3\textcolor{#2563EB}{x}+2=8\;\;\textcolor{#C0392B}{/\;{-2}}\qquad\Longrightarrow\qquad 3\textcolor{#2563EB}{x}=6\;\;\textcolor{#C0392B}{/\;{:}\,3}\qquad\Longrightarrow\qquad \textcolor{#2563EB}{x}=2$$</div>
+  </details>
+  <details class="step"><summary>שלב רביעי — הנעלם השני והבדיקה</summary>
+    <div class="step-body">מציבות חזרה:
+    <br><span class="fi">\(\textcolor{#7C3AED}{y}=\textcolor{#2563EB}{2}+1=3\)</span>
+    <br>הזוג: <span class="fi">\((2,\,3)\)</span>.
+    <br>בדיקה בשתיהן — הראשונה: <span class="fi">\(3=2+1\)</span> ✓,
+    השנייה: <span class="fi">\(2+2\cdot 3=8\)</span> ✓.
+    <figure style="max-width:280px;margin:12px auto">
+      <svg viewBox="0 0 250 200" style="width:100%;height:auto" role="img" aria-label="שני הישרים של המערכת נחתכים בנקודה 2 3">
+        <line x1="14" y1="170" x2="232" y2="170" stroke="#5A6875" stroke-width="1.6"/>
+        <polygon points="240,170 228,164.5 228,175.5" fill="#5A6875"/>
+        <line x1="45" y1="196" x2="45" y2="16" stroke="#5A6875" stroke-width="1.6"/>
+        <polygon points="45,8 39.5,20 50.5,20" fill="#5A6875"/>
+        <g font-family="Arial" font-size="11" fill="#5A6875">
+          <text x="37" y="184" text-anchor="end">0</text>
+          <text x="97" y="186" text-anchor="middle" font-size="12" font-weight="800" fill="#1C2733">2</text>
+          <text x="37" y="96" text-anchor="end" font-size="12" font-weight="800" fill="#1C2733">3</text>
+        </g>
+        <path d="M97 92V170 M97 92H45" stroke="#9AA5B1" stroke-width="1.4" stroke-dasharray="5 5" fill="none"/>
+        <line x1="24" y1="165" x2="133" y2="56" stroke="#2E7D6B" stroke-width="3"/>
+        <text x="139" y="52" text-anchor="start" font-family="Arial" font-size="11.5" font-weight="700" fill="#2E7D6B" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3">y=x+1</text>
+        <line x1="32" y1="60" x2="214" y2="151" stroke="#EA580C" stroke-width="3"/>
+        <text x="210" y="168" text-anchor="end" font-family="Arial" font-size="11.5" font-weight="700" fill="#EA580C" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3">x+2y=8</text>
+        <circle cx="97" cy="92" r="6.5" fill="#1C2733" stroke="#fff" stroke-width="2.2"/>
+        <text x="114" y="90" text-anchor="start" font-family="Arial" font-size="12" font-weight="700" fill="#1C2733">(2, 3)</text>
+      </svg>
+      <figcaption>המערכת בציור: כל משוואה היא ישר, והזוג
+      <span class="fi">(2, 3)</span> הוא הנקודה היחידה שיושבת על שניהם —
+      לכן הוא מקיים את שתי המשוואות בבת אחת.</figcaption>
+    </figure></div>
+  </details>
+  <details class="alt">
+    <summary>אותה שאלה בתחפושות — איך עוד מנסחים "פתרי מערכת"?</summary>
+    <div class="alt-body">
+      <ul>
+        <li>"פתרי את מערכת המשוואות בשיטת ההצבה."</li>
+        <li>"מצאי את נקודת החיתוך של הישרים <span class="fi">\(y=x+1\)</span>
+            ו-<span class="fi">\(x+2y=8\)</span>" — תחפושת גרפית, אותו חישוב בדיוק.</li>
+        <li>"מצאי זוג מספרים שמקיים את שתי המשוואות בו-זמנית."</li>
+        <li>"בדקי האם הזוג <span class="fi">\((2,\,3)\)</span> הוא פתרון המערכת" —
+            התחפושת ההפוכה: לא פותרים, רק מציבים בשתי המשוואות ובודקים.</li>
+      </ul>
+      <p>הניסוח מתחלף — הדרך זהה: לבודד, להציב, לפתור, ולבדוק בשתיהן.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex1"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex hide-marks">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>מהדף מבית הספר — מינוס לפני הסוגריים</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">נתונה המערכת</span>
+  </p>
+  $$\begin{cases}3\textcolor{#2563EB}{x}-\textcolor{#7C3AED}{y}=-5\\[2pt] \textcolor{#7C3AED}{y}=-4\textcolor{#2563EB}{x}-9\end{cases}$$
+  <p class="q-text"><span class="mk mk-find">פתרי בשיטת ההצבה ומצאי את שני הנעלמים.</span></p>
+  <div class="q-row">
+    <button class="marks-btn no-print" style="font-family:inherit;font-size:12.5px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:5px 10px;cursor:pointer">הציגי את הפירוק בצבעים</button>
+  </div>
+  <div class="q-row">
+    <span>‏<span class="fi">\(x=\)</span></span>
+    <input class="q-input" data-answer="-2" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <span>‏<span class="fi">\(y=\)</span></span>
+    <input class="q-input" data-answer="-1" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>ה-<span class="fi">\(\textcolor{#7C3AED}{y}\)</span> כבר מבודד במשוואה השנייה,
+      אז מציבות אותו בראשונה — והפעם יש מינוס לפני הביטוי הנכנס:</p>
+      $$\begin{aligned}
+      3\textcolor{#2563EB}{x}-(\textcolor{#7C3AED}{-4x-9}) &amp;= -5 &amp;&amp;\qquad\textcolor{#C0392B}{\text{הצבה בסוגריים}}\\[2pt]
+      3\textcolor{#2563EB}{x}+4\textcolor{#2563EB}{x}+9 &amp;= -5 &amp;&amp;\qquad\textcolor{#C0392B}{\text{מינוס על מינוס = פלוס}}\\[2pt]
+      7\textcolor{#2563EB}{x}+9 &amp;= -5 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{-9}}\\[2pt]
+      7\textcolor{#2563EB}{x} &amp;= -14 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{:}\,7}\\[2pt]
+      \textcolor{#2563EB}{x} &amp;= \mathbf{-2}
+      \end{aligned}$$
+      <p>מציבות חזרה בביטוי המבודד:
+      <br><span class="fi">\(\textcolor{#7C3AED}{y}=-4\cdot(\textcolor{#2563EB}{-2})-9=8-9=-1\)</span>
+      <br>הזוג: <span class="fi">\((-2,\,-1)\)</span>.</p>
+      <p>בדיקה בשתיהן — הראשונה:
+      <span class="fi">\(3\cdot(-2)-(-1)=-6+1=-5\)</span> ✓,
+      השנייה: <span class="fi">\(-4\cdot(-2)-9=-1\)</span> ✓.</p>
+      <p>המינוס לפני הסוגריים הוא כל התרגיל הזה:
+      <span class="fi">\(-(-4x-9)=+4x+9\)</span> — המינוס הופך את <strong>שני</strong> הסימנים שבפנים.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex2"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex hide-marks">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>מהדף מבית הספר — עוד אחת לביטחון</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">נתונה המערכת</span>
+  </p>
+  $$\begin{cases}\textcolor{#7C3AED}{y}=-2\textcolor{#2563EB}{x}-1\\[2pt] 3\textcolor{#2563EB}{x}-7\textcolor{#7C3AED}{y}=-44\end{cases}$$
+  <p class="q-text"><span class="mk mk-find">פתרי בשיטת ההצבה ומצאי את שני הנעלמים.</span></p>
+  <div class="q-row">
+    <button class="marks-btn no-print" style="font-family:inherit;font-size:12.5px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:5px 10px;cursor:pointer">הציגי את הפירוק בצבעים</button>
+  </div>
+  <div class="q-row">
+    <span>‏<span class="fi">\(x=\)</span></span>
+    <input class="q-input" data-answer="-3" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <span>‏<span class="fi">\(y=\)</span></span>
+    <input class="q-input" data-answer="5" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>שוב הנעלם כבר מבודד — מציבות את
+      <span class="fi">\(\textcolor{#7C3AED}{-2x-1}\)</span> במשוואה השנייה:</p>
+      $$\begin{aligned}
+      3\textcolor{#2563EB}{x}-7(\textcolor{#7C3AED}{-2x-1}) &amp;= -44 &amp;&amp;\qquad\textcolor{#C0392B}{\text{הצבה בסוגריים}}\\[2pt]
+      3\textcolor{#2563EB}{x}+14\textcolor{#2563EB}{x}+7 &amp;= -44 &amp;&amp;\qquad\textcolor{#C0392B}{\text{פתחנו סוגריים}}\\[2pt]
+      17\textcolor{#2563EB}{x}+7 &amp;= -44 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{-7}}\\[2pt]
+      17\textcolor{#2563EB}{x} &amp;= -51 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{:}\,17}\\[2pt]
+      \textcolor{#2563EB}{x} &amp;= \mathbf{-3}
+      \end{aligned}$$
+      <p>שימי לב לפתיחת הסוגריים:
+      <span class="fi">\(-7\cdot(-2x)=+14x\)</span> וגם
+      <span class="fi">\(-7\cdot(-1)=+7\)</span> — שני פלוסים.</p>
+      <p>מציבות חזרה:
+      <br><span class="fi">\(\textcolor{#7C3AED}{y}=-2\cdot(\textcolor{#2563EB}{-3})-1=6-1=5\)</span>
+      <br>הזוג: <span class="fi">\((-3,\,5)\)</span>.</p>
+      <p>בדיקה בשתיהן — הראשונה:
+      <span class="fi">\(5=-2\cdot(-3)-1\)</span> ✓,
+      השנייה: <span class="fi">\(3\cdot(-3)-7\cdot 5=-9-35=-44\)</span> ✓.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex3"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · כמו במבחן</span><h4>מהדף האמיתי מבית הספר — תרגיל 4</h4></div>
+  <p class="q-text">
+    זה הדף שאת מקבלת בכיתה. את המערכת הראשונה משמאל
+    (<span class="fi">\(2x-5y=-8\)</span> עם <span class="fi">\(y-x=1\)</span>)
+    כבר פתרנו יחד בסעיף 3 — עכשיו תורך: פתרי במחברת שתי מערכות נוספות מהדף,
+    ואז השווי לפתרון המלא כאן למטה.
+  </p>
+  <figure class="shot">
+    <img src="../assets/school/school-ex-systems.png" alt="תרגיל 4 מהדף — פתרו את המערכות הבאות בשיטת ההצבה" loading="lazy">
+    <figcaption>תרגיל 4 מהדף: עשר מערכות לפתרון בשיטת ההצבה. בפתרון למטה —
+    המערכת עם <span class="fi">\(y=-3x+11\)</span> והמערכת עם <span class="fi">\(y=5x+6\)</span>.</figcaption>
+  </figure>
+  <details class="sol">
+    <summary>הצגי פתרון מלא (כמו שכותבים במחברת)</summary>
+    <div class="sol-body">
+      <p><strong>המערכת</strong> <span class="fi">\(-3x-7y=-5\)</span>
+      <strong>עם</strong> <span class="fi">\(y=-3x+11\)</span>:
+      ה-<span class="fi">\(\textcolor{#7C3AED}{y}\)</span> מבודד, מציבות בראשונה:</p>
+      $$\begin{aligned}
+      -3\textcolor{#2563EB}{x}-7(\textcolor{#7C3AED}{-3x+11}) &amp;= -5 &amp;&amp;\qquad\textcolor{#C0392B}{\text{הצבה בסוגריים}}\\[2pt]
+      -3\textcolor{#2563EB}{x}+21\textcolor{#2563EB}{x}-77 &amp;= -5 &amp;&amp;\qquad\textcolor{#C0392B}{\text{פתחנו סוגריים}}\\[2pt]
+      18\textcolor{#2563EB}{x} &amp;= 72 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{:}\,18}\\[2pt]
+      \textcolor{#2563EB}{x} &amp;= \mathbf{4}
+      \end{aligned}$$
+      <p>מציבות חזרה:
+      <br><span class="fi">\(\textcolor{#7C3AED}{y}=-3\cdot\textcolor{#2563EB}{4}+11=-12+11=-1\)</span>
+      <br>הזוג: <span class="fi">\((4,\,-1)\)</span>.
+      <br>בדיקה בשתיהן:
+      <span class="fi">\(-3\cdot 4-7\cdot(-1)=-12+7=-5\)</span> ✓,
+      וגם <span class="fi">\(-3\cdot 4+11=-1\)</span> ✓.</p>
+      <p><strong>המערכת</strong> <span class="fi">\(2x+7y=5\)</span>
+      <strong>עם</strong> <span class="fi">\(y=5x+6\)</span>:
+      שוב ה-<span class="fi">\(\textcolor{#7C3AED}{y}\)</span> מבודד, מציבות בראשונה:</p>
+      $$\begin{aligned}
+      2\textcolor{#2563EB}{x}+7(\textcolor{#7C3AED}{5x+6}) &amp;= 5 &amp;&amp;\qquad\textcolor{#C0392B}{\text{הצבה בסוגריים}}\\[2pt]
+      2\textcolor{#2563EB}{x}+35\textcolor{#2563EB}{x}+42 &amp;= 5 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{-42}}\\[2pt]
+      37\textcolor{#2563EB}{x} &amp;= -37 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{:}\,37}\\[2pt]
+      \textcolor{#2563EB}{x} &amp;= \mathbf{-1}
+      \end{aligned}$$
+      <p>מציבות חזרה:
+      <br><span class="fi">\(\textcolor{#7C3AED}{y}=5\cdot(\textcolor{#2563EB}{-1})+6=1\)</span>
+      <br>הזוג: <span class="fi">\((-1,\,1)\)</span>.
+      <br>בדיקה בשתיהן:
+      <span class="fi">\(2\cdot(-1)+7\cdot 1=-2+7=5\)</span> ✓,
+      וגם <span class="fi">\(5\cdot(-1)+6=1\)</span> ✓.</p>
+      <p>שמת לב? בשתי המערכות המקדם של ה-<span class="fi">\(x\)</span> יצא גדול
+      (18, 37) — וזה דווקא נוח: חילוק אחד והתרגיל נגמר.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex4"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">עכשיו את המורה</span><h4>מצאי את הטעות של דנה</h4></div>
+  <p class="q-text">
+    דנה רצתה לבודד את ה-<span class="fi">\(x\)</span> מהמשוואה
+    <span class="fi">\(2x-5y=-8\)</span>, וכתבה במחברת:
+    $$2x=-8+5y\;\;/\;{:}\,2\qquad\Longrightarrow\qquad x=-8+\frac{5y}{2}$$
+    <span class="mk mk-find">השורה הראשונה נכונה — אבל בשנייה מסתתרת טעות. מצאי אותה, וכתבי את הבידוד הנכון.</span>
+  </p>
+  <details class="sol">
+    <summary>הצגי תשובה</summary>
+    <div class="sol-body">
+      <p>קודם בדיקת מורה מהירה, שחושפת שמשהו לא תקין עוד לפני שמבינים מה:
+      ניקח <span class="fi">\(\textcolor{#7C3AED}{y}=0\)</span>.
+      <br>לפי דנה יוצא <span class="fi">\(\textcolor{#2563EB}{x}=-8\)</span> —
+      אבל במשוואה המקורית: <span class="fi">\(2\cdot(-8)-5\cdot 0=-16\)</span>,
+      וזה ממש לא <span class="fi">\(-8\)</span> ✗.
+      <br>הזוג של דנה לא מקיים את המשוואה שלה עצמה.</p>
+      <p><strong>הטעות:</strong> חילוק ב-2 הוא פעולה על <strong>כל האגף</strong> —
+      כל איבר ואיבר מתחלק. דנה חילקה רק את ה-<span class="fi">\(5y\)</span>,
+      וה-<span class="fi">\(-8\)</span> נשאר שלם. הבידוד הנכון:</p>
+      $$\begin{aligned}
+      2\textcolor{#2563EB}{x}-5\textcolor{#7C3AED}{y} &amp;= -8 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{+5y}}\\[2pt]
+      2\textcolor{#2563EB}{x} &amp;= -8+5\textcolor{#7C3AED}{y} &amp;&amp;\qquad\textcolor{#C0392B}{/\;{:}\,2}\\[2pt]
+      \textcolor{#2563EB}{x} &amp;= \frac{-8+5\textcolor{#7C3AED}{y}}{2}=-4+\frac{5\textcolor{#7C3AED}{y}}{2}
+      \end{aligned}$$
+      <p>ובדיקה עם אותו <span class="fi">\(\textcolor{#7C3AED}{y}=0\)</span>:
+      <br>עכשיו יוצא <span class="fi">\(\textcolor{#2563EB}{x}=-4\)</span>,
+      ובמקור: <span class="fi">\(2\cdot(-4)-0=-8\)</span> ✓.</p>
+      <p>ורגע של חוכמת בחירה: כל השברים האלה היו נחסכים אילו דנה הייתה מבודדת
+      נעלם עם מקדם 1 — בדיוק כמו שעשינו בסעיף 3, כשבחרנו את
+      ה-<span class="fi">\(\textcolor{#7C3AED}{y}\)</span> מ-<span class="fi">\(y-x=1\)</span>.
+      הבחירה החכמה בצעד 1 היא חצי מהפתרון.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex5"> סיימתי את התרגיל הזה</label>
+</article>
+
+<!-- ============ ניווט ============ -->
+<h2>🎬 רוצה לראות את זה מוסבר בקול?</h2>
+<div class="watch">
+  <p>הסרטונים הם תגבור, לא חובה:</p>
+  <a class="video-link" href="https://www.youtube.com/watch?v=UaUgGWJKo9w">
+    <img src="../assets/alg-vids/UaUgGWJKo9w.jpg" alt="מערכת משוואות בשיטת ההצבה — תמונת הסרטון" loading="lazy">
+    <span class="vt"><b>מערכת משוואות בשיטת ההצבה</b><span>פתרון פשוט · 10:15</span></span>
+    <span class="play">▶</span>
+  </a>
+  <a class="video-link" href="https://www.youtube.com/watch?v=Fz7GMKbLPh4">
+    <img src="../assets/alg-vids/Fz7GMKbLPh4.jpg" alt="שיטת ההצבה על קצה המזלג — תמונת הסרטון" loading="lazy">
+    <span class="vt"><b>שיטת ההצבה על קצה המזלג</b><span>‏Ask Dani · 5:31</span></span>
+    <span class="play">▶</span>
+  </a>
+  <a class="video-link" href="https://www.youtube.com/watch?v=BOIB86Eez1Q">
+    <img src="../assets/alg-vids/BOIB86Eez1Q.jpg" alt="מערכת משוואות — תרגול מלא על לוח — תמונת הסרטון" loading="lazy">
+    <span class="vt"><b>מערכת משוואות — תרגול מלא על לוח</b><span>עובד לב ארי · 10:47</span></span>
+    <span class="play">▶</span>
+  </a>
+</div>
+
+<div class="progresswrap no-print">
+  <span class="progressbar"><i></i></span><span class="progress-label"></span>
+  <button class="all-sols" style="font-family:inherit;font-size:12px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:4px 10px;cursor:pointer">לפתוח את כל הפתרונות</button>
+</div>
+
+<nav class="pagenav">
+  <a href="05-line-equation.html"><span class="dir">→ התחנה הקודמת</span>משוואת ישר וחיתוכים</a>
+  <a class="next" href="07-percent.html"><span class="dir">התחנה הבאה ←</span>בעיות אחוזים</a>
+</nav>
+
+<footer class="fin">חלק מהעולם של שירה · <a href="index.html">המפה</a> · <a href="../index.html">המרכז</a></footer>
+</main>
+</div>
+</body>
+</html>

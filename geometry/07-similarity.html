@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<!-- מסך הבית של האייפד/הטלפון -->
+<link rel="apple-touch-icon" href="../assets/icons/icon-180.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>דמיון משולשים — גאומטריה — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../vendor/katex.min.css">
+<link rel="stylesheet" href="../css/shira.css">
+<style>
+:root{--accent:var(--alg)}
+/* רשימת שוויונות צבעונית — רווח רחב במקום נקודת-אמצע (שנקראת בטעות ככפל) */
+.eq-list{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 34px;margin:8px 0 2px;font-size:15px}
+table.dtable tr.tr-sep td{background:var(--faint);font-weight:800;font-size:12.5px;letter-spacing:.05em;padding:4px 10px}
+table.dtable tr.tr-qed td{background:var(--card);text-align:left;color:var(--accent);font-weight:800;font-size:13.5px;letter-spacing:.05em;padding:4px 14px}
+/* טבלת ההשוואה חפיפה↔דמיון — עמודה ימנית היא "מה משווים" */
+table.cmp{border-collapse:collapse;margin:16px auto;background:var(--card);width:100%;max-width:640px}
+table.cmp th,table.cmp td{border:1px solid var(--line);padding:8px 12px;font-size:14px;text-align:right;vertical-align:top}
+table.cmp th{background:var(--faint);font-weight:800;font-size:13px}
+table.cmp td.cap{background:#FBFAF7;font-weight:700;width:26%}
+/* "שרשרת היחסים" — שלושת השברים השווים, גדול וברור */
+.chain{text-align:center;margin:10px 0 2px}
+.chain .katex{font-size:1.2em}
+.pagemeta{display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px;
+  margin:12px 0 0; font-size:13px; color:var(--soft)}
+.pagemeta .pm-time{background:var(--faint); border-radius:999px; padding:3px 10px}
+.pagemeta .pm-time b{color:var(--ink); font-weight:700}
+.pagemeta .pm-jump{color:var(--accent); font-weight:700; text-decoration:none}
+.pagemeta .pm-jump:hover{text-decoration:underline}
+#ex-first,#sec-booklet,#sec-family{scroll-margin-top:78px}
+/* "מה נובע מהדמיון" — שני הדברים זה לצד זה, כל שורה בצבע של הזוג שלה */
+.fan{border:1px solid var(--line);border-radius:var(--r-lg);background:var(--card);
+  padding:14px 18px 16px;margin:18px 0;box-shadow:0 10px 28px -26px var(--shadow)}
+.fan>.fan-h{font-size:14.5px;font-weight:800;margin-bottom:10px}
+.fan-cols{display:flex;flex-wrap:wrap;gap:14px}
+.fan-col{flex:1 1 260px;min-width:0;background:#FBFAF7;border:1px solid var(--faint);
+  border-radius:var(--r-md);padding:11px 14px}
+.fan-col>b{display:block;font-size:13.5px;margin-bottom:6px}
+.fan-list{list-style:none;margin:0;padding:0}
+.fan-list li{display:flex;align-items:center;gap:9px;padding:5px 0;font-size:15px}
+.fan-list .sw{width:13px;height:13px;border-radius:4px;flex:0 0 auto}
+.fan-note{margin:10px 0 0;font-size:13px;color:var(--soft)}
+/* טבלת כיוון-היחס */
+table.dirt{border-collapse:collapse;margin:14px 0;width:100%}
+table.dirt th,table.dirt td{border:1px solid var(--line);padding:8px 11px;font-size:13.5px;text-align:right}
+table.dirt th{background:var(--faint);font-weight:800;font-size:12.5px}
+table.dirt td.v{text-align:center;font-weight:800}
+@media (max-width:640px){table.dirt th,table.dirt td{padding:6px 8px;font-size:12.5px}}
+</style>
+<script defer src="../vendor/katex.min.js"></script>
+<script defer src="../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../js/shira.js"></script>
+</head>
+<body data-page="geo:07-similarity">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">גאומטריה — המפה</a>
+    <span class="crumbs">תחנה <b>7</b> מתוך 8 · <b>דמיון משולשים</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">גאומטריה · תחנה 7 · חלק ז׳ בעבודת הקיץ</div>
+  <h1>דמיון משולשים</h1>
+  <p class="lead">
+    חפיפה אמרה: <strong>אותה צורה, אותו גודל</strong>. דמיון אומר משהו רך יותר וחזק
+    יותר — <strong>אותה צורה, גודל אחר</strong>. זו הצורה שקיבלה זום. וברגע שיודעים
+    ששני משולשים דומים, מספיק לדעת צלע אחת בכל אחד כדי לפענח את כל השאר.
+    בסוף העמוד נפתור עד הסוף את <strong>שלושת התרגילים של חלק ז׳ בעבודת הקיץ שלך</strong>.
+  </p>
+  <p class="youknow"><b>בסוף העמוד תדעי:</b> להגיד מתי שני משולשים דומים ולפי איזה משפט —
+  ז.ז, צ.צ.צ, צ.ז.צ ·
+  לכתוב את הדמיון בסדר האותיות הנכון ולקרוא ממנו איזו צלע מתאימה לאיזו ·
+  למצוא צלע חסרה דרך יחס הדמיון ·
+  לזהות את שתי התבניות שחוזרות כמעט בכל תרגיל — "משולש בתוך משולש" ו"שעון החול" ·
+  לחשב יחס היקפים ויחס שטחים.</p>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>≈ 35 דק׳</b> · 11 תרגילים</span>
+    <a class="pm-jump" href="#ex-first">לקפוץ ישר לתרגיל הראשון ↓</a>
+    <a class="pm-jump" href="#sec-booklet">ישר לתרגילי החוברת ↓</a>
+  </p>
+</header>
+
+<!-- ============ שלב 1 · מה זה דמיון ============ -->
+<div class="stagebar"><span class="dots-s"><i class="on"></i><i></i><i></i><i></i><i></i><i></i></span>
+  שלב <b>1</b> מתוך 6 · מה זה בכלל דמיון</div>
+<h2 id="sec-what">אותה צורה, גודל אחר</h2>
+
+<p>
+  קחי תמונה בטלפון ותמתחי אותה החוצה בשתי אצבעות. הפרצופים לא התעוותו — הכול פשוט
+  <strong>גדל פי אותו מספר</strong>. הזוויות בתמונה נשארו בדיוק כפי שהיו, והמרחקים
+  כולם הוכפלו באותו גורם. זה בדיוק דמיון.
+</p>
+
+<figure>
+  <svg viewBox="0 0 400 190" style="width:100%;max-width:520px;height:auto" role="img" aria-label="משולש קטן ולידו אותו משולש בדיוק, מוגדל פי שתיים">
+    <polygon points="20,150 110,150 78,92" fill="#F7FAFC" stroke="#334155" stroke-width="2.5"/>
+    <polygon points="170,150 350,150 286,34" fill="#F7FAFC" stroke="#334155" stroke-width="2.5"/>
+    <path d="M42,150 A22,22 0 0 0 35.6,134.4" fill="none" stroke="#C2408C" stroke-width="3"/>
+    <path d="M192,150 A22,22 0 0 0 185.6,134.4" fill="none" stroke="#C2408C" stroke-width="3"/>
+    <path d="M90,150 A20,20 0 0 1 100.3,132.5" fill="none" stroke="#B7791F" stroke-width="3"/>
+    <path d="M330,150 A20,20 0 0 1 340.3,132.5" fill="none" stroke="#B7791F" stroke-width="3"/>
+    <text x="14" y="167" font-size="14" font-weight="bold" fill="#334155">A</text>
+    <text x="112" y="167" font-size="14" font-weight="bold" fill="#334155">B</text>
+    <text x="74" y="84" font-size="14" font-weight="bold" fill="#334155">C</text>
+    <text x="163" y="167" font-size="14" font-weight="bold" fill="#334155">D</text>
+    <text x="352" y="167" font-size="14" font-weight="bold" fill="#334155">E</text>
+    <text x="282" y="26" font-size="14" font-weight="bold" fill="#334155">F</text>
+    <text x="65" y="163" font-size="12.5" fill="#2E6F8E">4</text>
+    <text x="258" y="163" font-size="12.5" fill="#2E6F8E">8</text>
+    <text x="140" y="100" font-size="19" fill="#5A6875">∼</text>
+  </svg>
+  <figcaption>הזוויות זהות (הקשתות הוורודות והענבריות חוזרות בשני המשולשים),
+  וכל צלע גדלה בדיוק <strong>פי 2</strong>. הסימן
+  <span class="fi">\(\sim\)</span> נקרא "דומה ל־".</figcaption>
+</figure>
+
+<div class="box def">
+  <div class="box-title">ההגדרה — שני תנאים שהולכים ביחד</div>
+  שני משולשים <strong>דומים</strong> אם:
+  <br>1. <strong>כל הזוויות המתאימות שוות</strong> — הצורה נשמרה, וגם
+  <br>2. <strong>כל הצלעות המתאימות פרופורציוניות</strong> — כולן גדלו פי אותו מספר.
+  <br>המספר הזה נקרא <strong>יחס הדמיון</strong> ומסמנים אותו
+  <span class="fi">\(k\)</span>.
+</div>
+
+<div class="box intuition">
+  <div class="box-title">חפיפה היא בסך הכול דמיון עם <span class="fi">\(k=1\)</span></div>
+  כשיחס הדמיון הוא בדיוק 1, כל צלע שווה לזו שמתאימה לה — וזו כבר חפיפה.
+  כלומר <strong>כל שני משולשים חופפים הם גם דומים</strong>, אבל לא להפך:
+  משולש שהוגדל פי 3 דומה למקור ולגמרי לא חופף לו. אם שאלו אותך "האם הם חופפים?"
+  ואת רואה שהם רק דומים — התשובה היא לא, ובדיוק את זה שואלים בסעיף א׳ של
+  <a href="#bk3">תרגיל 3 בחוברת</a>.
+</div>
+
+<table class="cmp">
+  <tr><th>מה משווים</th><th>חפיפה <span class="fi">\(\cong\)</span></th><th>דמיון <span class="fi">\(\sim\)</span></th></tr>
+  <tr><td class="cap">זוויות מתאימות</td><td>שוות</td><td>שוות — בדיוק אותו דבר</td></tr>
+  <tr><td class="cap">צלעות מתאימות</td><td>שוות</td><td>ביחס קבוע: כולן כפול <span class="fi">\(k\)</span></td></tr>
+  <tr><td class="cap">שטחים</td><td>שווים</td><td>ביחס <span class="fi">\(k^2\)</span></td></tr>
+  <tr><td class="cap">היקפים</td><td>שווים</td><td>ביחס <span class="fi">\(k\)</span></td></tr>
+  <tr><td class="cap">מתי מספיקות זוויות בלבד?</td><td>אף פעם — זוויות שוות לא מספיקות לחפיפה</td><td><strong>תמיד</strong> — שתי זוויות שוות כבר מספיקות לדמיון</td></tr>
+</table>
+
+<p class="aside">
+  השורה האחרונה היא ההבדל שמרגישים בתרגילים: בחפיפה תמיד רודפים אחרי צלע, ובדמיון
+  אפשר להסתדר בלי שום צלע. לכן משפט <strong>ז.ז</strong> הוא הכלי שתשתמשי בו הכי הרבה.
+</p>
+
+<!-- ============ שלב 2 · סדר האותיות ============ -->
+<div class="stagebar"><span class="dots-s"><i></i><i class="on"></i><i></i><i></i><i></i><i></i></span>
+  שלב <b>2</b> מתוך 6 · סדר האותיות</div>
+<h2 id="sec-order">כותבים את הדמיון — וסדר האותיות הוא כל התשובה</h2>
+
+<p>
+  כשכותבים <span class="fi">\(\triangle ABC\sim\triangle DEF\)</span>, לא בחרנו
+  את הסדר סתם. הוא אומר: <span class="fi">\(A\)</span> מקבילה ל-<span class="fi">\(D\)</span>,
+  <span class="fi">\(B\)</span> ל-<span class="fi">\(E\)</span>,
+  <span class="fi">\(C\)</span> ל-<span class="fi">\(F\)</span>. מכאן קוראים <em>הכול</em>
+  בלי להסתכל בשרטוט בכלל:
+</p>
+
+<figure>
+  <svg viewBox="-40 -176.3 574.8 216.3" style="width:100%;max-width:520px;height:auto" role="img" aria-label="שני משולשים דומים — שלוש הזוויות המתאימות מסומנות באותם צבעים, ושלוש הצלעות המתאימות צבועות באותם צבעים"><polygon points="61.4,-85.2 0,0 168,0" fill="#F7FAFC" stroke="#334155" stroke-width="2.6"/><polygon points="324.2,-136.3 226,0 494.8,0" fill="#F7FAFC" stroke="#334155" stroke-width="2.6"/><line x1="61.4" y1="-85.2" x2="0" y2="0" stroke="#C2408C" stroke-width="5"/><line x1="0" y1="0" x2="168" y2="0" stroke="#B7791F" stroke-width="5"/><line x1="168" y1="0" x2="61.4" y2="-85.2" stroke="#2E7D32" stroke-width="5"/><line x1="324.2" y1="-136.3" x2="226" y2="0" stroke="#C2408C" stroke-width="5"/><line x1="226" y1="0" x2="494.8" y2="0" stroke="#B7791F" stroke-width="5"/><line x1="494.8" y1="0" x2="324.2" y2="-136.3" stroke="#2E7D32" stroke-width="5"/><path d="M49.7,-69 A20,20 0 0 0 77,-72.7" fill="none" stroke="#C2408C" stroke-width="3.2"/><path d="M17,0 A17,17 0 0 0 9.9,-13.8" fill="none" stroke="#B7791F" stroke-width="3.2"/><path d="M152.4,-12.5 A20,20 0 0 0 148,0" fill="none" stroke="#2E7D32" stroke-width="3.2"/><path d="M312.5,-120.1 A20,20 0 0 0 339.8,-123.8" fill="none" stroke="#C2408C" stroke-width="3.2"/><path d="M243,0 A17,17 0 0 0 235.9,-13.8" fill="none" stroke="#B7791F" stroke-width="3.2"/><path d="M479.2,-12.5 A20,20 0 0 0 474.8,0" fill="none" stroke="#2E7D32" stroke-width="3.2"/><text x="57" y="-96.6" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">A</text><text x="-15.9" y="10.9" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">B</text><text x="184.2" y="10" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">C</text><text x="319.8" y="-147.8" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">A′</text><text x="210.1" y="10.9" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">B′</text><text x="511" y="10" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">C′</text><text x="152.9" y="-61.4" text-anchor="middle" font-size="22" fill="#5A6875">∼</text></svg>
+  <figcaption>אותו צבע = אותו תפקיד בשני המשולשים. הקשת הוורודה היא זווית <span class="fi">\(A\)</span> בשניהם, הצלע הוורודה היא <span class="fi">\(AB\)</span> בשניהם — וכן הלאה. המשולש הימני גדול פי <span class="fi">\(1.6\)</span>, והזוויות שלו לא זזו במילימטר.</figcaption>
+</figure>
+
+<div class="fan">
+  <div class="fan-h">מ-<span class="fi">\(\triangle ABC\sim\triangle A'B'C'\)</span> נובעים שני דברים — ותמיד שניהם ביחד:</div>
+  <div class="fan-cols">
+    <div class="fan-col">
+      <b>① שלוש הזוויות המתאימות שוות</b>
+      <ul class="fan-list">
+        <li><i class="sw" style="background:#C2408C"></i><span class="fi">\(\angle A=\angle A'\)</span></li>
+        <li><i class="sw" style="background:#B7791F"></i><span class="fi">\(\angle B=\angle B'\)</span></li>
+        <li><i class="sw" style="background:#2E7D32"></i><span class="fi">\(\angle C=\angle C'\)</span></li>
+      </ul>
+    </div>
+    <div class="fan-col">
+      <b>② ושלוש הצלעות המתאימות ביחס קבוע</b>
+      $$\frac{\textcolor{#C2408C}{AB}}{\textcolor{#C2408C}{A'B'}}=
+        \frac{\textcolor{#B7791F}{BC}}{\textcolor{#B7791F}{B'C'}}=
+        \frac{\textcolor{#2E7D32}{CA}}{\textcolor{#2E7D32}{C'A'}}=k$$
+    </div>
+  </div>
+  <p class="fan-note">שימי לב שכל שבר בנוי אותו דבר: הצלע מהמשולש הראשון למעלה, והצלע
+  שמתאימה לה בשני למטה — ובאותו צבע. שלושת השברים חייבים לצאת <strong>אותו מספר</strong>;
+  אם אחד יצא שונה, ההתאמה שגויה.</p>
+</div>
+
+<div class="fbox">
+  <div class="fbox-title">שרשרת יחס הדמיון</div>
+  <div class="chain">
+  $$\frac{\textcolor{#2563EB}{AB}}{\textcolor{#2563EB}{DE}}\;=\;\frac{\textcolor{#059669}{BC}}{\textcolor{#059669}{EF}}\;=\;\frac{\textcolor{#B7791F}{CA}}{\textcolor{#B7791F}{FD}}\;=\;k$$
+  </div>
+  <span class="f-legend">
+    <span>כל שבר בנוי אותו דבר: <b>צלע מהמשולש הראשון</b> חלקי <b>הצלע שמתאימה לה בשני</b>.</span>
+  </span>
+</div>
+
+<p>
+  שימי לב איך כל שבר נבנה: לוקחים שתי אותיות עוקבות מהשם הראשון
+  (<span class="fi">\(AB\)</span>) ואת שתי האותיות שיושבות באותם מקומות בשם השני
+  (<span class="fi">\(DE\)</span>). זהו. אין כאן שום דבר לזכור מלבד
+  <strong>לספור מקומות</strong>.
+</p>
+
+<div class="box warn">
+  <div class="box-title">הטעות שהכי קל ליפול בה</div>
+  לכתוב <span class="fi">\(\triangle ABC\sim\triangle ECD\)</span> כשהתשובה הנכונה היא
+  <span class="fi">\(\triangle ABC\sim\triangle EDC\)</span>. שתי האותיות התחלפו במקום,
+  וכל שרשרת היחסים אחריהן קורסת — היא תשווה צלעות שאין ביניהן שום קשר.
+  <br><strong>הבדיקה:</strong> אחרי שכתבת, עברי אות-אות ושאלי "האם הזווית הזאת באמת
+  שווה לזו?". זה בדיוק מה שמבקשים ממך בסעיף א׳ של
+  <a href="#bk1">תרגיל 1 בחוברת</a>: "רשמו את דמיון המשולשים תוך הקפדה על סדר האותיות".
+</div>
+
+<article class="ex" id="ex-first">
+  <div class="ex-head"><span class="lvl l1">חימום</span><h4>קוראים צלע חסרה מתוך היחס</h4></div>
+  <p class="q-text">
+    נתון <span class="fi">\(\triangle ABC\sim\triangle DEF\)</span>, וגם
+    <span class="fi">\(AB=6\)</span>, <span class="fi">\(DE=9\)</span>,
+    <span class="fi">\(BC=8\)</span>.
+    מהו <span class="fi">\(EF\)</span>?
+  </p>
+  <figure>
+  <svg viewBox="-40 -200.1 558 240.1" style="width:100%;max-width:480px;height:auto" role="img" aria-label="שני משולשים דומים: בראשון AB=6 ו-BC=8, בשני DE=9 ו-EF לא ידוע"><polygon points="66.9,-106.7 0,0 168,0" fill="#F7FAFC" stroke="#334155" stroke-width="2.6"/><polygon points="326.4,-160.1 226,0 478,0" fill="#F7FAFC" stroke="#334155" stroke-width="2.6"/><line x1="66.9" y1="-106.7" x2="0" y2="0" stroke="#C2408C" stroke-width="5"/><line x1="0" y1="0" x2="168" y2="0" stroke="#B7791F" stroke-width="5"/><line x1="326.4" y1="-160.1" x2="226" y2="0" stroke="#C2408C" stroke-width="5"/><line x1="226" y1="0" x2="478" y2="0" stroke="#B7791F" stroke-width="5"/><text x="64.3" y="-118.5" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">A</text><text x="-15.5" y="12" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">B</text><text x="183.8" y="11.3" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">C</text><text x="323.7" y="-171.9" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">D</text><text x="210.5" y="12" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">E</text><text x="493.8" y="11.3" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">F</text><text x="46.2" y="-41.4" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#C2408C">6</text><text x="84" y="20" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#B7791F">8</text><text x="288.9" y="-68.1" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#C2408C">9</text><text x="352" y="20" text-anchor="middle" font-size="15" font-weight="bold" fill="#6D28D9">?</text><text x="154.8" y="-70.7" text-anchor="middle" font-size="20" fill="#5A6875">∼</text></svg>
+  <figcaption>הצלעות שיש עליהן נתון צבועות באותו צבע בשני המשולשים — ורודה מול ורודה, ענברית מול ענברית. הסגולה היא מה שמחפשים.</figcaption>
+  </figure>
+  <div class="q-row">
+    <label for="q-warm"><span class="fi">\(EF=\)</span></label>
+    <input class="q-input" id="q-warm" type="text" inputmode="decimal" data-answer="12" data-tol="0.01">
+    <button class="q-check">בדיקה</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol"><summary>לראות את הפתרון</summary>
+    <div class="sol-body">
+      <p>קודם כותבים את השרשרת בדיוק לפי סדר האותיות:</p>
+      $$\frac{AB}{DE}=\frac{BC}{EF}$$
+      <p>מציבים את מה שיש:</p>
+      $$\frac{6}{9}=\frac{8}{EF}$$
+      <p>כפל בהצלבה:</p>
+      $$6\cdot EF=9\cdot 8=72\quad\Longrightarrow\quad EF=\frac{72}{6}=\mathbf{12}$$
+      <p class="aside">בדיקה הגיונית: <span class="fi">\(k=\frac{6}{9}=\frac{2}{3}\)</span>,
+      כלומר המשולש השני <em>גדול</em> יותר — ובאמת יצא
+      <span class="fi">\(12>8\)</span>. אם הצלע החסרה יוצאת בכיוון ההפוך למה שהיחס אומר,
+      כנראה הפכת את השבר.</p>
+    </div>
+  </details>
+</article>
+
+<!-- ============ שלב 3 · שלושת המשפטים ============ -->
+<div class="stagebar"><span class="dots-s"><i></i><i></i><i class="on"></i><i></i><i></i><i></i></span>
+  שלב <b>3</b> מתוך 6 · שלושת המשפטים</div>
+<h2 id="sec-theorems">שלושת משפטי הדמיון</h2>
+
+<p>
+  בחפיפה היו ארבעה משפטים. בדמיון יש רק <strong>שלושה</strong>, והראשון שבהם עושה
+  את רוב העבודה.
+</p>
+
+<div class="fbox">
+  <div class="fbox-title">משפט 1 · ז.ז — שתי זוויות</div>
+  אם <strong>שתי זוויות</strong> של משולש אחד שוות לשתי זוויות של המשולש השני,
+  המשולשים דומים.
+  <figure style="margin:12px 0 6px;border:none;box-shadow:none;padding:0;background:transparent">
+    <svg viewBox="0 0 340 150" style="width:100%;max-width:400px;height:auto" role="img" aria-label="שני משולשים בגדלים שונים עם שתי זוויות מסומנות זהות">
+      <polygon points="18,120 118,120 82,58" fill="#F7FAFC" stroke="#334155" stroke-width="2.5"/>
+      <polygon points="180,120 330,120 276,27" fill="#F7FAFC" stroke="#334155" stroke-width="2.5"/>
+      <path d="M38,120 A20,20 0 0 0 30.4,104.6" fill="none" stroke="#C2408C" stroke-width="3"/>
+      <path d="M200,120 A20,20 0 0 0 192.4,104.6" fill="none" stroke="#C2408C" stroke-width="3"/>
+      <path d="M100,120 A18,18 0 0 1 109.5,104.7" fill="none" stroke="#B7791F" stroke-width="3"/>
+      <path d="M312,120 A18,18 0 0 1 321.5,104.7" fill="none" stroke="#B7791F" stroke-width="3"/>
+      <text x="152" y="98" font-size="18" fill="#5A6875">∼</text>
+    </svg>
+  </figure>
+  <span class="f-legend">
+    <span>אין צורך באף צלע. בכלל.</span>
+  </span>
+</div>
+
+<p>
+  למה שתיים מספיקות? כי סכום הזוויות במשולש הוא תמיד
+  <span class="fi">\(180^\circ\)</span>, ולכן ברגע ששתיים שוות —
+  <strong>גם השלישית שווה מעצמה</strong>. אין לה ברירה. לכן מספיק למצוא בשרטוט
+  שתי זוויות שוות, וזה כמעט תמיד קורה מאחד משני מקורות: זוויות קודקודיות,
+  או זוויות בין ישרים מקבילים.
+</p>
+
+<div class="fbox">
+  <div class="fbox-title">משפט 2 · צ.צ.צ — שלוש צלעות ביחס קבוע</div>
+  אם <strong>שלוש הצלעות</strong> של משולש אחד פרופורציוניות לשלוש הצלעות של השני —
+  כלומר כולן חלוקות באותו מספר — המשולשים דומים.
+  $$\frac{AB}{DE}=\frac{BC}{EF}=\frac{CA}{FD}\;\;\Longrightarrow\;\;\triangle ABC\sim\triangle DEF$$
+  <span class="f-legend">
+    <span>שימי לב שכאן צריך לבדוק <b>שלושה</b> שברים ולוודא שכולם יוצאים אותו מספר.</span>
+  </span>
+</div>
+
+<div class="fbox">
+  <div class="fbox-title">משפט 3 · צ.ז.צ — שתי צלעות והזווית שביניהן</div>
+  אם <strong>שתי צלעות</strong> פרופורציוניות <strong>והזווית הכלואה ביניהן</strong> שווה,
+  המשולשים דומים.
+  $$\frac{AB}{DE}=\frac{AC}{DF}\quad\text{וגם}\quad \angle A=\angle D$$
+  <span class="f-legend">
+    <span>"כלואה" פירושו: הזווית יושבת בדיוק בין שתי הצלעות שכתבת — כמו בצ.ז.צ של חפיפה.</span>
+  </span>
+</div>
+
+<div class="box intuition">
+  <div class="box-title">איך בוחרים משפט? מסתכלים מה נתון</div>
+  נתונות רק <strong>זוויות</strong> (או מקבילים, או קודקודיות)? ← <strong>ז.ז</strong>. זה הרוב המוחלט.
+  <br>נתונים רק <strong>אורכי צלעות</strong> — שלושה בכל משולש? ← <strong>צ.צ.צ</strong>: מחלקים ובודקים שיוצא אותו יחס.
+  <br>נתונות <strong>שתי צלעות בכל משולש וזווית ביניהן</strong>? ← <strong>צ.ז.צ</strong>.
+  <br>ובקיצור: אם יש בשרטוט מקבילים או ישרים שנחתכים — לכי ישר על ז.ז ואל תחפשי צלעות.
+</div>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">תרגיל 2</span><h4>האם המשולשים דומים? לפי איזה משפט?</h4></div>
+  <p class="q-text">
+    במשולש אחד הצלעות הן <span class="fi">\(3,\;4,\;5\)</span>, ובשני
+    <span class="fi">\(9,\;12,\;15\)</span>. האם הם דומים? מהו יחס הדמיון?
+  </p>
+  <figure>
+  <svg viewBox="-142 -116 330 154" style="width:100%;max-width:470px;height:auto" role="img" aria-label="שני משולשים ישרי-זווית דומים: ניצבים 3 ו-4 עם יתר 5, מול ניצבים 9 ו-12 עם יתר 15"><polygon points="0,-78 -104,0 0,0" fill="#F7FAFC" stroke="#334155" stroke-width="2.6"/><polygon points="150,-78 46,0 150,0" fill="#F7FAFC" stroke="#334155" stroke-width="2.6"/><path d="M0,-12 L-12,-12 L-12,0" fill="none" stroke="#334155" stroke-width="2"/><path d="M150,-12 L138,-12 L138,0" fill="none" stroke="#334155" stroke-width="2"/><text x="-52" y="21" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#5A6875">4</text><text x="-15" y="-35" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#5A6875">3</text><text x="-42.4" y="-22.2" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#5A6875">5</text><text x="98" y="21" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#5A6875">12</text><text x="133" y="-35" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#5A6875">9</text><text x="108.2" y="-21.4" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#5A6875">15</text></svg>
+  <figcaption>שני המשולשים ישרי-זווית, וכל שלוש הצלעות נתונות בשניהם — זה בדיוק המצב שבו בודקים <strong>צ.צ.צ</strong>: מחלקים צלע בצלע, שלוש פעמים.</figcaption>
+  </figure>
+  <details class="sol"><summary>לראות את הפתרון</summary>
+    <div class="sol-body">
+      <p>בודקים את שלושת השברים — כל צלע קטנה מול הצלע שבאותו מקום בגודל:</p>
+      $$\frac{3}{9}=\frac{1}{3}\qquad \frac{4}{12}=\frac{1}{3}\qquad \frac{5}{15}=\frac{1}{3}$$
+      <p>שלושתם יצאו אותו מספר, ולכן המשולשים דומים לפי <strong>צ.צ.צ</strong>,
+      ויחס הדמיון הוא <span class="fi">\(k=\tfrac{1}{3}\)</span>.</p>
+      <p class="aside">כדי להשוות נכון תמיד מסדרים קודם את שתי הרשימות מהקטן לגדול,
+      ורק אז מחלקים אחת לאחת. אחרת מחלקים צלעות שאינן מתאימות ומקבלים מספרים שונים
+      גם כששני המשולשים באמת דומים.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex2"> סיימתי את התרגיל הזה</label>
+</article>
+
+<!-- ============ שלב 4 · שתי התבניות ============ -->
+<div class="stagebar"><span class="dots-s"><i></i><i></i><i></i><i class="on"></i><i></i><i></i></span>
+  שלב <b>4</b> מתוך 6 · שתי התבניות שחוזרות</div>
+<h2 id="sec-patterns">שתי התבניות שתפגשי כמעט בכל תרגיל</h2>
+
+<p>
+  אחרי כמה תרגילים מגלים משהו נחמד: השרטוטים חוזרים על עצמם. יש שתי תבניות שמופיעות
+  שוב ושוב, ואם את מזהה אותן — הנימוק כבר כתוב מראש.
+</p>
+
+<h3>תבנית א׳ · "משולש בתוך משולש" — קו מקביל לצלע</h3>
+
+<figure>
+  <svg viewBox="0 0 320 195" style="width:100%;max-width:420px;height:auto" role="img" aria-label="משולש ABC ובתוכו קטע DE המקביל לצלע BC ויוצר משולש קטן דומה">
+    <polygon points="150,25 30,165 280,165" fill="#F7FAFC" stroke="#334155" stroke-width="2.5"/>
+    <polygon points="150,25 90,95 215,95" fill="#EAE0FA" stroke="#6D28D9" stroke-width="2.5"/>
+    <line x1="90" y1="95" x2="215" y2="95" stroke="#6D28D9" stroke-width="3.5"/>
+    <path d="M136,42 A22,22 0 0 0 163,43" fill="none" stroke="#C2408C" stroke-width="3"/>
+    <path d="M112,95 A18,18 0 0 1 105.5,110.9" fill="none" stroke="#B7791F" stroke-width="3"/>
+    <path d="M52,165 A18,18 0 0 1 45.5,180.9" fill="none" stroke="#B7791F" stroke-width="3" opacity="0"/>
+    <path d="M48,165 A18,18 0 0 0 40.5,149.7" fill="none" stroke="#B7791F" stroke-width="3"/>
+    <text x="145" y="18" font-size="14" font-weight="bold" fill="#334155">A</text>
+    <text x="20" y="180" font-size="14" font-weight="bold" fill="#334155">B</text>
+    <text x="286" y="180" font-size="14" font-weight="bold" fill="#334155">C</text>
+    <text x="76" y="92" font-size="14" font-weight="bold" fill="#6D28D9">D</text>
+    <text x="221" y="92" font-size="14" font-weight="bold" fill="#6D28D9">E</text>
+  </svg>
+  <figcaption>הקטע <span class="fi">\(DE\)</span> מקביל לצלע
+  <span class="fi">\(BC\)</span>, ולכן המשולש הסגול הקטן דומה למשולש הגדול:
+  <span class="fi">\(\triangle ADE\sim\triangle ABC\)</span>.</figcaption>
+</figure>
+
+<div class="box def">
+  <div class="box-title">הנימוק, מילה במילה</div>
+  <span class="fi">\(\angle A\)</span> — <strong>זווית משותפת</strong> לשני המשולשים.
+  <br><span class="fi">\(\angle ADE=\angle ABC\)</span> — <strong>זוויות מתאימות בין
+  ישרים מקבילים</strong> (<span class="fi">\(DE\parallel BC\)</span>, החותך
+  <span class="fi">\(AB\)</span>).
+  <br>ומכאן <span class="fi">\(\triangle ADE\sim\triangle ABC\)</span> לפי <strong>ז.ז</strong>.
+  <br><span class="aside">שימי לב לסדר: <span class="fi">\(A\)</span> מול
+  <span class="fi">\(A\)</span>, <span class="fi">\(D\)</span> מול
+  <span class="fi">\(B\)</span> (שתיהן על אותה צלע), <span class="fi">\(E\)</span> מול
+  <span class="fi">\(C\)</span>.</span>
+</div>
+
+<h3>תבנית ב׳ · "שעון החול" — שני ישרים שנחתכים בין מקבילים</h3>
+
+<figure>
+  <svg viewBox="0 0 300 210" style="width:100%;max-width:400px;height:auto" role="img" aria-label="שני קטעים מקבילים ושני ישרים שנחתכים ביניהם ויוצרים שני משולשים דומים">
+    <line x1="90" y1="30" x2="270" y2="180" stroke="#334155" stroke-width="2.5"/>
+    <line x1="220" y1="30" x2="10" y2="180" stroke="#334155" stroke-width="2.5"/>
+    <line x1="90" y1="30" x2="220" y2="30" stroke="#2563EB" stroke-width="3.5"/>
+    <line x1="10" y1="180" x2="270" y2="180" stroke="#2563EB" stroke-width="3.5"/>
+    <polygon points="90,30 220,30 150,80" fill="#EAE0FA" opacity=".65"/>
+    <polygon points="10,180 270,180 150,80" fill="#DFF0DC" opacity=".55"/>
+    <path d="M112,30 A22,22 0 0 1 104.6,45.9" fill="none" stroke="#C2408C" stroke-width="3"/>
+    <path d="M248,180 A22,22 0 0 0 255.4,164.1" fill="none" stroke="#C2408C" stroke-width="3"/>
+    <path d="M132,66 A20,20 0 0 1 167.9,64.6" fill="none" stroke="#B7791F" stroke-width="3"/>
+    <path d="M132,94 A20,20 0 0 0 167.9,95.4" fill="none" stroke="#B7791F" stroke-width="3"/>
+    <text x="80" y="24" font-size="14" font-weight="bold" fill="#334155">A</text>
+    <text x="224" y="24" font-size="14" font-weight="bold" fill="#334155">B</text>
+    <text x="156" y="76" font-size="14" font-weight="bold" fill="#334155">C</text>
+    <text x="2" y="196" font-size="14" font-weight="bold" fill="#334155">D</text>
+    <text x="272" y="196" font-size="14" font-weight="bold" fill="#334155">E</text>
+  </svg>
+  <figcaption>שני הישרים <span class="fi">\(AE\)</span> ו-<span class="fi">\(BD\)</span>
+  נחתכים ב-<span class="fi">\(C\)</span>, ו-<span class="fi">\(AB\parallel DE\)</span>.
+  מתקבלים שני משולשים "הפוכים" זה לזה — והם דומים.</figcaption>
+</figure>
+
+<div class="box def">
+  <div class="box-title">הנימוק, מילה במילה</div>
+  <span class="fi">\(\angle ACB=\angle ECD\)</span> — <strong>זוויות קודקודיות</strong> שוות.
+  <br><span class="fi">\(\angle BAC=\angle DEC\)</span> — <strong>זוויות מתחלפות בין
+  ישרים מקבילים</strong> (<span class="fi">\(AB\parallel DE\)</span>, החותך
+  <span class="fi">\(AE\)</span>).
+  <br>ומכאן <span class="fi">\(\triangle ABC\sim\triangle EDC\)</span> לפי <strong>ז.ז</strong>.
+  <br><span class="aside">זו בדיוק התבנית של <a href="#bk3">תרגיל 3 בעבודת הקיץ</a> —
+  שווה להכיר אותה בעל-פה.</span>
+</div>
+
+<div class="box warn">
+  <div class="box-title">בשעון החול הסדר הוא <span class="fi">\(EDC\)</span>, לא <span class="fi">\(ECD\)</span></div>
+  קל להסתכל בשרטוט, לראות "המשולש למטה הוא <span class="fi">\(ECD\)</span>" ולכתוב את זה.
+  אבל השם נקבע לפי <strong>ההתאמה</strong>, לא לפי כיוון הקריאה בציור:
+  <span class="fi">\(A\)</span> מתאימה ל-<span class="fi">\(E\)</span>,
+  <span class="fi">\(B\)</span> ל-<span class="fi">\(D\)</span>,
+  <span class="fi">\(C\)</span> ל-<span class="fi">\(C\)</span> — ולכן
+  <span class="fi">\(\triangle ABC\sim\triangle EDC\)</span>.
+</div>
+
+<h3>תבנית ג׳ · אותה זווית חדה בשני משולשים ישרי-זווית</h3>
+<p>
+  כששני משולשים ישרי-זווית חולקים זווית חדה (למשל כי יש להם קודקוד משותף), כבר יש
+  שתי זוויות שוות: הישרה והמשותפת — ולכן הם דומים לפי ז.ז. זו בדיוק התבנית של
+  <a href="#bk2">תרגיל 2 בעבודת הקיץ</a>.
+</p>
+
+<h3>ובונוס · קטע אמצעים</h3>
+<figure>
+  <svg viewBox="0 0 290 190" style="width:100%;max-width:380px;height:auto" role="img" aria-label="משולש עם קטע המחבר את אמצעי שתי הצלעות">
+    <polygon points="140,25 30,165 250,165" fill="#F7FAFC" stroke="#334155" stroke-width="2.5"/>
+    <line x1="85" y1="95" x2="195" y2="95" stroke="#059669" stroke-width="3.5"/>
+    <line x1="109" y1="53" x2="117" y2="63" stroke="#334155" stroke-width="2.5"/>
+    <line x1="55" y1="123" x2="63" y2="133" stroke="#334155" stroke-width="2.5"/>
+    <line x1="171" y1="53" x2="163" y2="63" stroke="#334155" stroke-width="2.5"/>
+    <line x1="225" y1="123" x2="217" y2="133" stroke="#334155" stroke-width="2.5"/>
+    <text x="134" y="18" font-size="14" font-weight="bold" fill="#334155">A</text>
+    <text x="20" y="180" font-size="14" font-weight="bold" fill="#334155">B</text>
+    <text x="256" y="180" font-size="14" font-weight="bold" fill="#334155">C</text>
+    <text x="72" y="92" font-size="14" font-weight="bold" fill="#059669">M</text>
+    <text x="200" y="92" font-size="14" font-weight="bold" fill="#059669">N</text>
+  </svg>
+  <figcaption>הקטע המחבר את <strong>אמצעי שתי צלעות</strong> מקביל לצלע השלישית
+  ושווה ל<strong>חצי</strong> ממנה: <span class="fi">\(MN\parallel BC\)</span> וגם
+  <span class="fi">\(MN=\tfrac{1}{2}BC\)</span>.</figcaption>
+</figure>
+<p>
+  זה בעצם המקרה הפרטי של תבנית א׳ עם <span class="fi">\(k=\tfrac12\)</span>:
+  <span class="fi">\(\triangle AMN\sim\triangle ABC\)</span>, ולכן גם
+  <span class="fi">\(MN\)</span> הוא חצי מ-<span class="fi">\(BC\)</span>.
+  ההפך גם נכון, ולפעמים הוא מה שנותן את הפתרון: קטע שיוצא מאמצע צלע אחת
+  <em>ומקביל</em> לצלע אחרת — חייב להגיע בדיוק לאמצע הצלע השלישית.
+</p>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">תרגיל 3</span><h4>קו מקביל בתוך משולש</h4></div>
+  <p class="q-text">
+    במשולש <span class="fi">\(ABC\)</span>, הנקודה <span class="fi">\(D\)</span> על
+    <span class="fi">\(AB\)</span> והנקודה <span class="fi">\(E\)</span> על
+    <span class="fi">\(AC\)</span>, וגם <span class="fi">\(DE\parallel BC\)</span>.
+    נתון <span class="fi">\(AD=4\)</span>, <span class="fi">\(DB=6\)</span>,
+    <span class="fi">\(DE=5\)</span>. חשבי את <span class="fi">\(BC\)</span>.
+  </p>
+  <figure>
+  <svg viewBox="-38 -159.2 288.5 197.2" style="width:100%;max-width:440px;height:auto" role="img" aria-label="משולש ABC עם DE מקביל ל-BC: AD=4, DB=6, DE=5, ו-BC הוא הנעלם"><polygon points="119.2,-121.2 0,0 212.5,0" fill="#F7FAFC" stroke="#334155" stroke-width="2.6"/><polygon points="119.2,-121.2 71.5,-72.7 156.5,-72.7" fill="#EAE0FA" stroke="#6D28D9" stroke-width="2.4" opacity=".9"/><line x1="71.5" y1="-72.7" x2="156.5" y2="-72.7" stroke="#6D28D9" stroke-width="4"/><line x1="0" y1="0" x2="212.5" y2="0" stroke="#2563EB" stroke-width="4"/><text x="121" y="-133.1" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">A</text><text x="-16" y="10.8" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">B</text><text x="228.3" y="11.3" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">C</text><text x="59.9" y="-77.3" text-anchor="middle" font-size="14" font-weight="bold" fill="#6D28D9">D</text><text x="168.8" y="-76.4" text-anchor="middle" font-size="14" font-weight="bold" fill="#6D28D9">E</text><text x="104.6" y="-83.9" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#5A6875">4</text><text x="45" y="-23.3" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#5A6875">6</text><text x="114" y="-80.7" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#6D28D9">5</text><text x="106.2" y="22" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#2563EB">?</text></svg>
+  <figcaption>הקטע הסגול <span class="fi">\(DE\)</span> מקביל לכחול <span class="fi">\(BC\)</span>, ולכן המשולש הסגול הקטן דומה לגדול. שימי לב ש-<span class="fi">\(AB\)</span> היא <span class="fi">\(4+6\)</span>, לא <span class="fi">\(4\)</span>.</figcaption>
+  </figure>
+  <div class="q-row">
+    <label for="q-par"><span class="fi">\(BC=\)</span></label>
+    <input class="q-input" id="q-par" type="text" inputmode="decimal" data-answer="12.5" data-tol="0.01">
+    <button class="q-check">בדיקה</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol"><summary>לראות את הפתרון</summary>
+    <div class="sol-body">
+      <p>ראשית — <span class="fi">\(AB\)</span> היא הצלע השלמה, לא
+      <span class="fi">\(AD\)</span>:</p>
+      $$AB=AD+DB=4+6=10$$
+      <p>לפי תבנית א׳ מתקיים <span class="fi">\(\triangle ADE\sim\triangle ABC\)</span>
+      (זווית <span class="fi">\(A\)</span> משותפת, ו-<span class="fi">\(\angle ADE=\angle ABC\)</span>
+      זוויות מתאימות בין מקבילים), ולכן:</p>
+      $$\frac{AD}{AB}=\frac{DE}{BC}\quad\Longrightarrow\quad \frac{4}{10}=\frac{5}{BC}$$
+      $$4\cdot BC=50\quad\Longrightarrow\quad BC=\mathbf{12.5}$$
+      <p class="aside">המלכודת כאן היא לכתוב <span class="fi">\(\frac{4}{6}\)</span>
+      במקום <span class="fi">\(\frac{4}{10}\)</span>. יחס הדמיון תמיד מודד
+      <strong>צלע שלמה מול צלע שלמה</strong>, לא חלק מול חלק.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex3"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">תרגיל 4</span><h4>גובה העץ לפי הצל</h4></div>
+  <p class="q-text">
+    שירה בגובה <span class="fi">\(1.6\)</span> מ׳ מטילה צל באורך <span class="fi">\(2\)</span> מ׳.
+    באותו רגע בדיוק עץ שעומד לידה מטיל צל באורך <span class="fi">\(15\)</span> מ׳.
+    מה גובה העץ?
+  </p>
+  <figure>
+    <svg viewBox="0 0 300 195" style="width:100%;max-width:400px;height:auto" role="img" aria-label="אדם ועץ מטילים צל, שני משולשים ישרי זווית דומים">
+      <line x1="10" y1="170" x2="292" y2="170" stroke="#334155" stroke-width="2.5"/>
+      <line x1="30" y1="170" x2="30" y2="122" stroke="#2563EB" stroke-width="4"/>
+      <line x1="30" y1="122" x2="90" y2="170" stroke="#B7791F" stroke-width="2.5"/>
+      <line x1="130" y1="170" x2="130" y2="50" stroke="#059669" stroke-width="4"/>
+      <line x1="130" y1="50" x2="280" y2="170" stroke="#B7791F" stroke-width="2.5"/>
+      <path d="M76,170 A18,18 0 0 0 68.8,155.6" fill="none" stroke="#C2408C" stroke-width="2.5"/>
+      <path d="M262,170 A18,18 0 0 0 254.8,155.6" fill="none" stroke="#C2408C" stroke-width="2.5"/>
+      <text x="16" y="112" font-size="11.5" fill="#2563EB">1.6</text>
+      <text x="52" y="184" font-size="11.5" fill="#5A6875">2</text>
+      <text x="112" y="42" font-size="11.5" fill="#059669">?</text>
+      <text x="196" y="184" font-size="11.5" fill="#5A6875">15</text>
+    </svg>
+    <figcaption>קרני השמש מגיעות בזווית זהה לשניהם (הקשתות הוורודות), ושניהם עומדים
+    זקופים על הקרקע — שתי זוויות שוות, ולכן שני המשולשים דומים.</figcaption>
+  </figure>
+  <div class="q-row">
+    <label for="q-tree">גובה העץ במטרים:</label>
+    <input class="q-input" id="q-tree" type="text" inputmode="decimal" data-answer="12" data-tol="0.01">
+    <button class="q-check">בדיקה</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol"><summary>לראות את הפתרון</summary>
+    <div class="sol-body">
+      <p>שני המשולשים ישרי-זווית (הגוף ניצב לקרקע), וזווית השמש משותפת — ולכן הם
+      דומים לפי <strong>ז.ז</strong>. עכשיו כותבים גובה מול גובה, צל מול צל:</p>
+      $$\frac{\text{גובה}}{\text{צל}}:\qquad \frac{1.6}{2}=\frac{h}{15}$$
+      $$2h=1.6\cdot 15=24\quad\Longrightarrow\quad h=\mathbf{12}\ \text{מ׳}$$
+      <p class="aside">ככה באמת מדדו את גובה הפירמידות. הכלל שעוזר לא להתבלבל:
+      <strong>מה שאותו סוג — באותה קומה בשבר</strong>. גבהים למעלה, צללים למטה,
+      בשני השברים.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex4"> סיימתי את התרגיל הזה</label>
+</article>
+
+<!-- ============ שלב 5 · היקף ושטח ============ -->
+<div class="stagebar"><span class="dots-s"><i></i><i></i><i></i><i></i><i class="on"></i><i></i></span>
+  שלב <b>5</b> מתוך 6 · היקף ושטח</div>
+<h2 id="sec-area">היקף גדל פי <span class="fi">\(k\)</span> · שטח גדל פי <span class="fi">\(k^2\)</span></h2>
+
+<p>
+  אם כל צלע גדלה פי 2 — ההיקף גדל פי 2, כי הוא סכום של צלעות. אבל השטח
+  <strong>לא</strong> גדל פי 2. הוא גדל פי 4. זו הנקודה שהכי הרבה תלמידים
+  מפספסים במבחן, והיא נראית מיד ברגע שמציירים אותה:
+</p>
+
+<figure>
+  <svg viewBox="0 0 300 180" style="width:100%;max-width:400px;height:auto" role="img" aria-label="משולש גדול מחולק לארבעה משולשים קטנים חופפים">
+    <polygon points="20,155 260,155 170,25" fill="#F7FAFC" stroke="#334155" stroke-width="2.5"/>
+    <polygon points="20,155 140,155 95,90" fill="#EAE0FA" stroke="#6D28D9" stroke-width="2"/>
+    <polygon points="140,155 215,90 95,90" fill="#FBFAF7" stroke="#6D28D9" stroke-width="2"/>
+    <polygon points="140,155 260,155 215,90" fill="#EAE0FA" stroke="#6D28D9" stroke-width="2"/>
+    <polygon points="95,90 215,90 170,25" fill="#EAE0FA" stroke="#6D28D9" stroke-width="2"/>
+    <text x="70" y="140" font-size="13" font-weight="bold" fill="#6D28D9">1</text>
+    <text x="148" y="118" font-size="13" font-weight="bold" fill="#6D28D9">2</text>
+    <text x="196" y="140" font-size="13" font-weight="bold" fill="#6D28D9">3</text>
+    <text x="152" y="70" font-size="13" font-weight="bold" fill="#6D28D9">4</text>
+  </svg>
+  <figcaption>הצלעות של המשולש הגדול כפולות מהצלעות של כל משולש קטן
+  (<span class="fi">\(k=2\)</span>) — ובתוכו נכנסים בדיוק
+  <strong>ארבעה</strong> משולשים קטנים. <span class="fi">\(2^2=4\)</span>.</figcaption>
+</figure>
+
+<div class="fbox">
+  <div class="fbox-title">שתי הנוסחאות שצריך לדעת בעל-פה</div>
+  $$\frac{P_{\triangle ABC}}{P_{\triangle A'B'C'}}=k
+    \qquad\qquad
+    \frac{S_{\triangle ABC}}{S_{\triangle A'B'C'}}=k^{2}$$
+  <span class="f-legend">
+    <span><span class="fi">\(P\)</span> — היקף · <span class="fi">\(S\)</span> — שטח ·
+    <span class="fi">\(k\)</span> — יחס הדמיון בין <b>הצלעות</b>, ובאותו סדר שבו כתובים שני המשולשים</span>
+  </span>
+</div>
+
+<div class="box warn">
+  <div class="box-title">שני כיווני הטעות</div>
+  <strong>מהצלעות לשטח:</strong> יחס צלעות <span class="fi">\(1:3\)</span> נותן יחס שטחים
+  <span class="fi">\(1:9\)</span> — <em>מעלים בריבוע</em>.
+  <br><strong>מהשטח לצלעות:</strong> יחס שטחים <span class="fi">\(1:16\)</span> נותן יחס צלעות
+  <span class="fi">\(1:4\)</span> — <em>מוציאים שורש</em>.
+  <br>מי שמעלה בריבוע כשצריך שורש מקבל מספר ענק, ולהפך. אם התשובה נראית מוזרה בגודלה —
+  זו כמעט תמיד הסיבה.
+</div>
+
+
+<h3 id="sec-dir">כיוון היחס — מה חלקי מה</h3>
+
+<figure>
+  <svg viewBox="-44 -153.6 534 197.6" style="width:100%;max-width:470px;height:auto" role="img" aria-label="שני משולשים דומים עם חץ כפול 1.5 מהקטן לגדול וחץ חלקי 1.5 בחזרה"><polygon points="52.6,-73 0,0 144,0" fill="#F7FAFC" stroke="#334155" stroke-width="2.6"/><polygon points="308.9,-109.6 230,0 446,0" fill="#F7FAFC" stroke="#334155" stroke-width="2.6"/><text x="48.7" y="-82.5" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#334155">A</text><text x="-14.1" y="10.2" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#334155">B</text><text x="158.3" y="9.4" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#334155">C</text><text x="305" y="-119" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#334155">A′</text><text x="215.9" y="10.2" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#334155">B′</text><text x="460.3" y="9.4" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#334155">C′</text><defs><marker id="ah" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#2563EB"/></marker><marker id="ah2" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#6D28D9"/></marker></defs><line x1="152" y1="-89" x2="220" y2="-89" stroke="#2563EB" stroke-width="2.4" marker-end="url(#ah)"/><text x="187" y="-97" text-anchor="middle" font-size="13" font-weight="bold" fill="#2563EB">× 1.5</text><line x1="220" y1="22" x2="152" y2="22" stroke="#6D28D9" stroke-width="2.4" marker-end="url(#ah2)"/><text x="187" y="37" text-anchor="middle" font-size="13" font-weight="bold" fill="#6D28D9">÷ 1.5</text></svg>
+  <figcaption>אותו זוג משולשים, שני כיוונים. מהקטן לגדול כופלים ב-<span class="fi">\(1.5\)</span>, ומהגדול לקטן מחלקים בו — וזה בדיוק אותו מידע, כתוב הפוך.</figcaption>
+</figure>
+
+<div class="box warn">
+  <div class="box-title">היחס הוא שבר, ולשבר יש כיוון</div>
+  <span class="fi">\(k\)</span> אינו מספר שמגיע עם המשולשים — הוא תלוי ב<strong>מה חילקת במה</strong>.
+  אותו זוג משולשים ייתן <span class="fi">\(\tfrac{2}{3}\)</span> או
+  <span class="fi">\(\tfrac{3}{2}\)</span>, ושניהם נכונים.
+  <br><strong>הכלל היחיד:</strong> הסדר בתשובה חייב להיות הסדר <em>שבשאלה</em>.
+  שאלו "יחס הקטן לגדול"? הקטן במונה. שאלו "הגדול לקטן"? הגדול במונה.
+</div>
+
+<div class="tbl-scroll">
+<table class="dirt">
+  <tr><th>מה שואלים</th><th>איך כותבים</th><th>בדוגמה שלמעלה</th></tr>
+  <tr><td>יחס הדמיון של <strong>הקטן לגדול</strong></td><td><span class="fi">\(\frac{\text{צלע בקטן}}{\text{הצלע שמתאימה לה בגדול}}\)</span></td><td class="v"><span class="fi">\(\frac{2}{3}\)</span></td></tr>
+  <tr><td>יחס הדמיון של <strong>הגדול לקטן</strong></td><td><span class="fi">\(\frac{\text{צלע בגדול}}{\text{הצלע שמתאימה לה בקטן}}\)</span></td><td class="v"><span class="fi">\(\frac{3}{2}=1.5\)</span></td></tr>
+  <tr><td>יחס ה<strong>היקפים</strong> (קטן לגדול)</td><td>אותו כיוון כמו הצלעות — <span class="fi">\(k\)</span></td><td class="v"><span class="fi">\(\frac{2}{3}\)</span></td></tr>
+  <tr><td>יחס ה<strong>שטחים</strong> (קטן לגדול)</td><td>אותו כיוון, בריבוע — <span class="fi">\(k^{2}\)</span></td><td class="v"><span class="fi">\(\frac{4}{9}\)</span></td></tr>
+</table>
+</div>
+
+<p class="aside">
+  המלכודת הנפוצה: מוצאים <span class="fi">\(k=\tfrac32\)</span> מהצלעות, ואז השאלה מבקשת
+  את יחס השטחים <em>של הקטן לגדול</em> — ועונים <span class="fi">\(\tfrac94\)</span> במקום
+  <span class="fi">\(\tfrac49\)</span>. לפני שכותבים תשובה, קוראים שוב את השאלה ובודקים
+  מי נזכר בה ראשון.
+</p>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">תרגיל 5</span><h4>היקף ושטח מתוך היחס</h4></div>
+  <p class="q-text">
+    יחס הדמיון בין שני משולשים דומים הוא <span class="fi">\(2:5\)</span>.
+    היקף המשולש הקטן הוא <span class="fi">\(18\)</span> ס״מ, ושטחו
+    <span class="fi">\(12\)</span> סמ״ר.
+  </p>
+  <figure>
+  <svg viewBox="-36 -208.4 618 244.4" style="width:100%;max-width:470px;height:auto" role="img" aria-label="שני משולשים דומים ביחס 2 ל-5, ABC הקטן עם היקף 18 ושטח 12"><polygon points="49.7,-69 0,0 136,0" fill="#DFF0DC" stroke="#334155" stroke-width="2.6"/><polygon points="330.2,-172.4 206,0 546,0" fill="#FBF0C9" stroke="#334155" stroke-width="2.6"/><text x="45.6" y="-79.4" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">A</text><text x="-15" y="10.6" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">B</text><text x="151.3" y="9.7" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">C</text><text x="326.1" y="-182.9" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">A′</text><text x="191" y="10.6" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">B′</text><text x="561.3" y="9.7" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">C′</text><text x="61.9" y="-26" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#2E7D32">P = 18</text><text x="61.9" y="-11" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#2E7D32">S = 12</text><text x="360.7" y="-62.5" text-anchor="middle" font-size="14" font-weight="bold" fill="#B7791F">P = ?</text><text x="360.7" y="-42.5" text-anchor="middle" font-size="14" font-weight="bold" fill="#B7791F">S = ?</text><text x="211.3" y="-86.2" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#5A6875">k = 2 : 5</text></svg>
+  <figcaption>יחס הצלעות <span class="fi">\(2:5\)</span>. ההיקף ילך אחרי היחס עצמו, והשטח אחרי הריבוע שלו — שני מספרים שונים לגמרי מאותו נתון.</figcaption>
+  </figure>
+  <div class="q-row">
+    <label for="q-per">היקף הגדול (ס״מ):</label>
+    <input class="q-input" id="q-per" type="text" inputmode="decimal" data-answer="45" data-tol="0.01">
+    <button class="q-check">בדיקה</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <label for="q-ar">שטח הגדול (סמ״ר):</label>
+    <input class="q-input" id="q-ar" type="text" inputmode="decimal" data-answer="75" data-tol="0.01">
+    <button class="q-check">בדיקה</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol"><summary>לראות את הפתרון</summary>
+    <div class="sol-body">
+      <p><strong>היקף</strong> — גדל פי <span class="fi">\(k\)</span> בלבד:</p>
+      $$\frac{P_{\triangle A'B'C'}}{P_{\triangle ABC}}=\frac{5}{2}
+        \quad\Longrightarrow\quad
+        P_{\triangle A'B'C'}=18\cdot\frac{5}{2}=\mathbf{45}$$
+      <p><strong>שטח</strong> — גדל פי <span class="fi">\(k^2\)</span>:</p>
+      $$k^{2}=\left(\frac{5}{2}\right)^{2}=\frac{25}{4}
+        \quad\Longrightarrow\quad
+        S_{\triangle A'B'C'}=12\cdot\frac{25}{4}=\mathbf{75}$$
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex5"> סיימתי את התרגיל הזה</label>
+</article>
+
+<!-- ============ שלב 6 · הוכחה ============ -->
+<div class="stagebar"><span class="dots-s"><i></i><i></i><i></i><i></i><i></i><i class="on"></i></span>
+  שלב <b>6</b> מתוך 6 · כותבים הוכחת דמיון</div>
+<h2 id="sec-proof">הוכחת דמיון במחברת — טענה ונימוק</h2>
+
+<p>
+  אותו שלד בדיוק כמו בחפיפה: <strong>נתון ← צ"ל ← טבלת טענה ונימוק ← מש"ל</strong>.
+  ההבדל היחיד הוא בשורה האחרונה: במקום "משפט חפיפה" כותבים <strong>"משפט דמיון ז.ז"</strong>,
+  והמסקנות שנובעות אינן שוויונות אלא <strong>יחסים</strong>.
+</p>
+
+<div class="nb" data-nb>
+  <div class="nb-head"><b>בונים ביחד במחברת</b>
+    <span class="nb-count"></span></div>
+  <ol class="nb-steps">
+    <li class="nb-step"><b>מה נתון ומה מבקשים</b>
+      <p>במשולש <span class="fi">\(ABC\)</span>, נקודה <span class="fi">\(D\)</span>
+      על <span class="fi">\(AB\)</span> ונקודה <span class="fi">\(E\)</span> על
+      <span class="fi">\(AC\)</span>, וגם <span class="fi">\(DE\parallel BC\)</span>.
+      <br><span class="mk mk-given">נתון: <span class="fi">\(DE\parallel BC\)</span></span> ·
+      <span class="mk mk-find">צ"ל: <span class="fi">\(\triangle ADE\sim\triangle ABC\)</span></span></p>
+    </li>
+    <li class="nb-step"><b>מסמנים על השרטוט ומחפשים זוויות — לא צלעות</b>
+      <p>אין לנו שום אורך. אז מיד יודעות: הולכות על <strong>ז.ז</strong>, וכל מה
+      שצריך הוא שתי זוויות שוות.</p>
+    </li>
+    <li class="nb-step"><b>הזווית הראשונה — במתנה</b>
+      <p>הזווית <span class="fi">\(\angle A\)</span> נמצאת בשני המשולשים גם יחד.
+      הנימוק שכותבים: <strong>זווית משותפת</strong>. זו הזווית הכי זולה שיש, ותמיד
+      כדאי לחפש אותה ראשונה.</p>
+    </li>
+    <li class="nb-step"><b>הזווית השנייה — מהמקבילים</b>
+      <p>מכיוון ש-<span class="fi">\(DE\parallel BC\)</span> והישר
+      <span class="fi">\(AB\)</span> חותך את שניהם,
+      <span class="fi">\(\angle ADE\)</span> ו-<span class="fi">\(\angle ABC\)</span>
+      הן <strong>זוויות מתאימות</strong> — ולכן שוות.</p>
+    </li>
+    <li class="nb-step"><b>כותבים את הטבלה</b>
+      <table class="dtable">
+        <tr><th></th><th>טענה</th><th>נימוק</th></tr>
+        <tr><td>1</td><td class="hl-c5"><span class="fi">\(\angle A=\angle A\)</span></td><td style="text-align:right">זווית משותפת</td></tr>
+        <tr><td>2</td><td class="hl-c4"><span class="fi">\(\angle ADE=\angle ABC\)</span></td><td style="text-align:right">זוויות מתאימות בין מקבילים (<span class="fi">\(DE\parallel BC\)</span>)</td></tr>
+        <tr><td>3</td><td><span class="fi">\(\triangle ADE\sim\triangle ABC\)</span></td><td style="text-align:right">משפט דמיון ז.ז (לפי 1, 2)</td></tr>
+        <tr class="tr-qed"><td colspan="3"><b>מש"ל</b></td></tr>
+      </table>
+    </li>
+    <li class="nb-step"><b>ומה נובע מזה — אם ביקשו המשך</b>
+      <p>מהדמיון נובעת שרשרת היחסים, והנימוק שלה קבוע:
+      <strong>"צלעות מתאימות במשולשים דומים פרופורציוניות"</strong>:</p>
+      $$\frac{AD}{AB}=\frac{DE}{BC}=\frac{AE}{AC}$$
+      <p>וזו כבר משוואה — שממנה מוצאים כל אורך חסר.</p>
+    </li>
+  </ol>
+  <div class="nb-acts">
+    <button type="button" class="nb-next">השלב הבא ↓</button>
+    <button type="button" class="nb-all">להציג את כל השלבים</button>
+  </div>
+</div>
+
+<div class="box def">
+  <div class="box-title">שלושת הנימוקים שתכתבי הכי הרבה</div>
+  <strong>"זווית משותפת"</strong> — כשאותה זווית שייכת לשני המשולשים.
+  <br><strong>"זוויות קודקודיות שוות"</strong> — בשעון החול.
+  <br><strong>"זוויות מתאימות / מתחלפות בין ישרים מקבילים"</strong> — כשיש מקבילים בשרטוט.
+  <br>ואחריהם תמיד: <strong>"משפט דמיון ז.ז"</strong>, ואם ממשיכים —
+  <strong>"צלעות מתאימות במשולשים דומים פרופורציוניות"</strong>.
+</div>
+
+<!-- ============ תרגילי החוברת ============ -->
+<h2 id="sec-booklet">חלק ז׳ בעבודת הקיץ — שלושת התרגילים, עד הסוף</h2>
+
+<p>
+  אלה התרגילים האמיתיים מהחוברת שלך, בדיוק כפי שהם מנוסחים שם. כל אחד פתור במלואו.
+  נסי קודם לבד — ורק אז פתחי.
+</p>
+
+<article class="ex" id="bk1">
+  <div class="ex-head"><span class="lvl l2">חוברת · ז.1</span><h4>שני משולשים ישרי-זווית דומים</h4></div>
+  <p class="q-text">
+    נתונים שני משולשים דומים.
+    <br>א. רשמו את דמיון המשולשים תוך הקפדה על סדר האותיות של הקדקודים.
+    <br>ב. השלימו את אורכי הצלעות החסרות:
+    <span class="fi">\(AM=\underline{\ \ \ \ }\)</span> ,
+    <span class="fi">\(AB=\underline{\ \ \ \ }\)</span>
+    <br>ג. מהו יחס הדמיון?
+    <br>ד. מהו היחס <span class="fi">\(\dfrac{S_{\triangle AMT}}{S_{\triangle BCA}}\)</span>?
+  </p>
+  <figure>
+    <svg viewBox="0 0 280 185" style="width:100%;max-width:440px;height:auto" role="img" aria-label="שני משולשים ישרי זווית: הקטן עם ניצב 2.5 ויתר 6.5, הגדול עם ניצבים 5 ו-12">
+      <polygon points="25,83 25,155 55,155" fill="#F7FAFC" stroke="#334155" stroke-width="2.5"/>
+      <path d="M25,145 h10 v10" fill="none" stroke="#334155" stroke-width="2"/>
+      <polygon points="112,119 160,155 246,40" fill="#F7FAFC" stroke="#334155" stroke-width="2.5"/>
+      <path d="M154.3,147.3 l7.7,-5.8 l5.8,7.7" fill="none" stroke="#334155" stroke-width="2"/>
+      <text x="14" y="78" font-size="13" font-weight="bold" fill="#334155">A</text>
+      <text x="12" y="168" font-size="13" font-weight="bold" fill="#334155">M</text>
+      <text x="58" y="168" font-size="13" font-weight="bold" fill="#334155">T</text>
+      <text x="100" y="116" font-size="13" font-weight="bold" fill="#334155">A</text>
+      <text x="156" y="171" font-size="13" font-weight="bold" fill="#334155">C</text>
+      <text x="250" y="34" font-size="13" font-weight="bold" fill="#334155">B</text>
+      <text x="34" y="168" font-size="11.5" fill="#2E6F8E">2.5</text>
+      <text x="46" y="112" font-size="11.5" fill="#2E6F8E">6.5</text>
+      <text x="6" y="122" font-size="11.5" fill="#C2408C">?</text>
+      <text x="122" y="146" font-size="11.5" fill="#2E6F8E">5</text>
+      <text x="212" y="105" font-size="11.5" fill="#2E6F8E">12</text>
+      <text x="168" y="76" font-size="11.5" fill="#C2408C">?</text>
+    </svg>
+    <figcaption>הזווית הישרה בקטן יושבת ב-<span class="fi">\(M\)</span>,
+    ובגדול ב-<span class="fi">\(C\)</span>. בחוברת סעיף ב׳ מודפס
+    "<span class="fi">\(EB\)</span>" — אין נקודה <span class="fi">\(E\)</span> בשרטוט,
+    והכוונה ל-<span class="fi">\(AB\)</span>, היתר של המשולש הגדול.</figcaption>
+  </figure>
+
+  <div class="nb" data-nb>
+    <div class="nb-head"><b>בונים ביחד במחברת</b><span class="nb-count"></span></div>
+    <ol class="nb-steps">
+      <li class="nb-step"><b>סעיף ב׳ קודם — כי בלי האורכים אי אפשר להתאים</b>
+        <p>שני המשולשים ישרי-זווית, אז שתי הצלעות החסרות הן פשוט פיתגורס.
+        <br>במשולש הקטן <span class="fi">\(AM\)</span> הוא ניצב, ו-<span class="fi">\(AT=6.5\)</span> הוא היתר:</p>
+        $$AM=\sqrt{6.5^{2}-2.5^{2}}=\sqrt{42.25-6.25}=\sqrt{36}=\mathbf{6}$$
+        <p>במשולש הגדול <span class="fi">\(AB\)</span> הוא היתר, ושני הניצבים נתונים:</p>
+        $$AB=\sqrt{5^{2}+12^{2}}=\sqrt{25+144}=\sqrt{169}=\mathbf{13}$$
+      </li>
+      <li class="nb-step"><b>מסדרים את שתי הרשימות מהקטן לגדול</b>
+        <p>קטן: <span class="fi">\(2.5,\;6,\;6.5\)</span> · גדול: <span class="fi">\(5,\;12,\;13\)</span>.
+        <br>מחלקים אחת מול אחת:</p>
+        $$\frac{2.5}{5}=\frac12\qquad \frac{6}{12}=\frac12\qquad \frac{6.5}{13}=\frac12$$
+        <p>שלושתם אותו מספר — באמת דומים, ויחס הדמיון הוא <span class="fi">\(\tfrac12\)</span>.</p>
+      </li>
+      <li class="nb-step"><b>סעיף א׳ — עכשיו מתאימים קדקוד לקדקוד</b>
+        <p>כל צלע קטנה יודעת מי בת-זוגה, וממנה קוראים את התאמת הקדקודים:</p>
+        <table class="dtable">
+          <tr><th>במשולש הקטן</th><th>מתאימה ל…</th><th>ומכאן</th></tr>
+          <tr><td><span class="fi">\(MT=2.5\)</span></td><td><span class="fi">\(CA=5\)</span></td><td><span class="fi">\(M\to C\)</span>, <span class="fi">\(T\to A\)</span></td></tr>
+          <tr><td><span class="fi">\(AM=6\)</span></td><td><span class="fi">\(BC=12\)</span></td><td><span class="fi">\(A\to B\)</span></td></tr>
+          <tr><td><span class="fi">\(AT=6.5\)</span></td><td><span class="fi">\(BA=13\)</span></td><td>מאשר את שתי השורות</td></tr>
+        </table>
+        <p>שלוש השורות מסכימות: <span class="fi">\(A\to B\)</span>,
+        <span class="fi">\(M\to C\)</span>, <span class="fi">\(T\to A\)</span>. ולכן:</p>
+        $$\boxed{\triangle AMT\sim\triangle BCA}$$
+        <p class="aside">ובדיקה אחת שסוגרת את זה: הזווית הישרה ב-<span class="fi">\(M\)</span> חייבת
+        ליפול על הזווית הישרה ב-<span class="fi">\(C\)</span> — וזה בדיוק מה שיצא.</p>
+      </li>
+      <li class="nb-step"><b>סעיף ג׳ — יחס הדמיון</b>
+        $$k=\frac{2.5}{5}=\frac{6}{12}=\frac{6.5}{13}=\frac{1}{2}$$
+        <p>כלומר <span class="fi">\(1:2\)</span> — המשולש <span class="fi">\(AMT\)</span>
+        קטן פי שניים.</p>
+      </li>
+      <li class="nb-step"><b>סעיף ד׳ — יחס השטחים</b>
+        <p>שטחים לא הולכים לפי <span class="fi">\(k\)</span> אלא לפי
+        <span class="fi">\(k^{2}\)</span>:</p>
+        $$\frac{S_{\triangle AMT}}{S_{\triangle BCA}}=k^{2}=\left(\frac12\right)^{2}=\boxed{\frac14}$$
+        <p>ואפשר גם פשוט לחשב ולוודא — שני המשולשים ישרי-זווית, אז השטח הוא מכפלת הניצבים חלקי 2:</p>
+        $$S_{\triangle AMT}=\frac{6\cdot 2.5}{2}=7.5
+          \qquad
+          S_{\triangle BCA}=\frac{12\cdot 5}{2}=30
+          \qquad
+          \frac{7.5}{30}=\frac14\ \checkmark$$
+      </li>
+    </ol>
+    <div class="nb-acts">
+      <button type="button" class="nb-next">השלב הבא ↓</button>
+      <button type="button" class="nb-all">להציג את כל השלבים</button>
+    </div>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="bk1"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="bk2">
+  <div class="ex-head"><span class="lvl l3">חוברת · ז.2</span><h4>שני ישרי-זווית עם זווית משותפת</h4></div>
+  <p class="q-text">
+    נתון: <span class="fi">\(AB\perp BC\)</span> , <span class="fi">\(EM\perp AC\)</span> ,
+    <span class="fi">\(AE=5\)</span> ס״מ , <span class="fi">\(AM=12\)</span> ס״מ ,
+    <span class="fi">\(MC=3\)</span> ס״מ.
+    <br>א. הראו כי המשולשים דומים.
+    <br>ב. מהו יחס הדמיון?
+    <br>ג. מהו היחס בין שטח המשולש <span class="fi">\(AME\)</span> לבין שטח המשולש
+    <span class="fi">\(ABC\)</span>? הסבירו בשתי דרכים.
+  </p>
+  <figure>
+    <svg viewBox="0 0 280 210" style="width:100%;max-width:380px;height:auto" role="img" aria-label="משולש ישר זווית ABC עם נקודה E על AB ונקודה M על AC והקטע EM">
+      <polygon points="60,25 60,185 230,185" fill="#F7FAFC" stroke="#334155" stroke-width="2.5"/>
+      <path d="M60,175 h10 v10" fill="none" stroke="#334155" stroke-width="2"/>
+      <line x1="60" y1="95" x2="128" y2="89" stroke="#6D28D9" stroke-width="3"/>
+      <path d="M124.2,79.5 l9.3,4.4 l-4.4,9.3" fill="none" stroke="#6D28D9" stroke-width="1.8"/>
+      <text x="54" y="18" font-size="13" font-weight="bold" fill="#334155">A</text>
+      <text x="48" y="199" font-size="13" font-weight="bold" fill="#334155">B</text>
+      <text x="234" y="199" font-size="13" font-weight="bold" fill="#334155">C</text>
+      <text x="46" y="99" font-size="13" font-weight="bold" fill="#6D28D9">E</text>
+      <text x="132" y="84" font-size="13" font-weight="bold" fill="#6D28D9">M</text>
+    </svg>
+    <figcaption>הקטע <span class="fi">\(EM\)</span> ניצב ל-<span class="fi">\(AC\)</span>,
+    ולכן <span class="fi">\(\angle AME=90^\circ\)</span> — בדיוק כמו
+    <span class="fi">\(\angle ABC\)</span>. השרטוט אינו לפי קנה מידה.</figcaption>
+  </figure>
+
+  <div class="nb" data-nb>
+    <div class="nb-head"><b>בונים ביחד במחברת</b><span class="nb-count"></span></div>
+    <ol class="nb-steps">
+      <li class="nb-step"><b>סעיף א׳ — מזהים את שני המשולשים</b>
+        <p>המשולשים שמדובר בהם הם <span class="fi">\(\triangle AME\)</span>
+        (הקטן, ליד <span class="fi">\(A\)</span>) ו-<span class="fi">\(\triangle ABC\)</span>
+        (הגדול). מה משותף להם? הקדקוד <span class="fi">\(A\)</span>.</p>
+      </li>
+      <li class="nb-step"><b>שתי הזוויות — וזה כל מה שצריך</b>
+        <table class="dtable">
+          <tr><th></th><th>טענה</th><th>נימוק</th></tr>
+          <tr><td>1</td><td class="hl-c5"><span class="fi">\(\angle A=\angle A\)</span></td><td style="text-align:right">זווית משותפת</td></tr>
+          <tr><td>2</td><td class="hl-c4"><span class="fi">\(\angle AME=\angle ABC=90^\circ\)</span></td><td style="text-align:right">נתון (<span class="fi">\(EM\perp AC\)</span> , <span class="fi">\(AB\perp BC\)</span>)</td></tr>
+          <tr><td>3</td><td><span class="fi">\(\triangle AME\sim\triangle ABC\)</span></td><td style="text-align:right">משפט דמיון ז.ז (לפי 1, 2)</td></tr>
+          <tr class="tr-qed"><td colspan="3"><b>מש"ל א׳</b></td></tr>
+        </table>
+        <p class="aside">סדר האותיות: <span class="fi">\(A\to A\)</span>,
+        <span class="fi">\(M\to B\)</span> (שתי הזוויות הישרות),
+        <span class="fi">\(E\to C\)</span>.</p>
+      </li>
+      <li class="nb-step"><b>סעיף ב׳ — קודם משלימים את <span class="fi">\(AC\)</span></b>
+        <p>הנקודה <span class="fi">\(M\)</span> יושבת על הקטע
+        <span class="fi">\(AC\)</span>, ולכן:</p>
+        $$AC=AM+MC=12+3=15$$
+        <p>עכשיו יש בידינו זוג צלעות מתאימות שלם: <span class="fi">\(AE\)</span>
+        (במשולש הקטן) מול <span class="fi">\(AC\)</span> (בגדול) — כי
+        <span class="fi">\(E\to C\)</span>.</p>
+      </li>
+      <li class="nb-step"><b>ומכאן יחס הדמיון</b>
+        $$k=\frac{AE}{AC}=\frac{5}{15}=\boxed{\frac13}$$
+        <p>כלומר <span class="fi">\(\triangle AME\)</span> קטן פי שלושה מ-<span class="fi">\(\triangle ABC\)</span>.</p>
+      </li>
+      <li class="nb-step"><b>סעיף ג׳ · דרך ראשונה — הנוסחה</b>
+        $$\frac{S_{\triangle AME}}{S_{\triangle ABC}}=k^{2}=\left(\frac13\right)^{2}=\boxed{\frac19}$$
+      </li>
+      <li class="nb-step"><b>סעיף ג׳ · דרך שנייה — מחשבים שטח מול שטח</b>
+        <p>שני המשולשים ישרי-זווית, ולכן שטחם הוא מכפלת שני הניצבים חלקי 2:</p>
+        $$S_{\triangle AME}=\frac{AM\cdot ME}{2}\qquad
+          S_{\triangle ABC}=\frac{AB\cdot BC}{2}$$
+        <p>מהדמיון כל צלע קטנה היא שליש מזו שמתאימה לה, כלומר
+        <span class="fi">\(AM=\tfrac13 AB\)</span> וגם
+        <span class="fi">\(ME=\tfrac13 BC\)</span>. נציב:</p>
+        $$\frac{S_{\triangle AME}}{S_{\triangle ABC}}
+          =\frac{\tfrac13 AB\cdot\tfrac13 BC}{AB\cdot BC}
+          =\frac13\cdot\frac13=\frac19$$
+        <p>אותה תשובה — וזה בדיוק ההסבר <em>למה</em> מעלים את
+        <span class="fi">\(k\)</span> בריבוע: השטח מורכב משתי מידות אורך, וכל אחת
+        מהן התכווצה פי <span class="fi">\(k\)</span>.</p>
+      </li>
+    </ol>
+    <div class="nb-acts">
+      <button type="button" class="nb-next">השלב הבא ↓</button>
+      <button type="button" class="nb-all">להציג את כל השלבים</button>
+    </div>
+  </div>
+
+  <div class="box warn">
+    <div class="box-title">אל תמדדי מהשרטוט של החוברת</div>
+    בשרטוט הזה הנתונים המספריים לא מסתדרים עם הציור: במשולש
+    <span class="fi">\(AME\)</span> הצלע <span class="fi">\(AE\)</span> היא היתר
+    (היא מול הזווית הישרה), ולכן היא אמורה להיות <em>הארוכה</em> מבין השלוש —
+    אבל נתון <span class="fi">\(AE=5\)</span> לצד <span class="fi">\(AM=12\)</span>.
+    זו טעות דפוס בחוברת.
+    <br>מה שהתרגיל מבקש עדיין ניתן לפתרון, ולכן פותרים כך:
+    <span class="fi">\(AM\)</span> ו-<span class="fi">\(MC\)</span> נועדו לתת את
+    <span class="fi">\(AC=15\)</span>, ויחס הדמיון נקרא מהזוג שיש עליו את שני הנתונים —
+    <span class="fi">\(AE\)</span> מול <span class="fi">\(AC\)</span>.
+    <br><strong>הכלל הכללי, וגם במבחן:</strong> סומכים על <strong>הנתונים הכתובים</strong>,
+    לא על איך שהשרטוט נראה. שרטוט בגאומטריה הוא סכמה, לא מדידה.
+  </div>
+  <label class="mark"><input type="checkbox" data-k="bk2"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="bk3">
+  <div class="ex-head"><span class="lvl l3">חוברת · ז.3</span><h4>שעון החול — חופפים? דומים? ומה האורכים</h4></div>
+  <p class="q-text">
+    הישרים <span class="fi">\(AE\)</span> ו-<span class="fi">\(BD\)</span> נחתכים בנקודה
+    <span class="fi">\(C\)</span>. נתון: <span class="fi">\(AB\parallel DE\)</span>.
+    <br>א. האם <span class="fi">\(\triangle ABC\)</span> ו-<span class="fi">\(\triangle ECD\)</span> חופפים? נמקו.
+    <br>ב. האם <span class="fi">\(\triangle ABC\)</span> ו-<span class="fi">\(\triangle ECD\)</span> דומים? נמקו.
+    <br>ג. נתון: <span class="fi">\(AC=3\)</span> ס״מ, <span class="fi">\(CE=6\)</span> ס״מ,
+    <span class="fi">\(DE=10\)</span> ס״מ, <span class="fi">\(DB=12\)</span> ס״מ.
+    חשבו את אורך הצלעות <span class="fi">\(AB,\;BC,\;DC\)</span>.
+  </p>
+  <figure>
+    <svg viewBox="0 0 300 215" style="width:100%;max-width:420px;height:auto" role="img" aria-label="שעון חול: AB מקביל ל-DE, הישרים AE ו-BD נחתכים בנקודה C">
+      <line x1="90" y1="30" x2="270" y2="180" stroke="#334155" stroke-width="2.5"/>
+      <line x1="220" y1="30" x2="10" y2="180" stroke="#334155" stroke-width="2.5"/>
+      <line x1="90" y1="30" x2="220" y2="30" stroke="#2563EB" stroke-width="3.5"/>
+      <line x1="10" y1="180" x2="270" y2="180" stroke="#2563EB" stroke-width="3.5"/>
+      <polygon points="90,30 220,30 150,80" fill="#EAE0FA" opacity=".6"/>
+      <polygon points="10,180 270,180 150,80" fill="#DFF0DC" opacity=".5"/>
+      <text x="80" y="24" font-size="13" font-weight="bold" fill="#334155">A</text>
+      <text x="224" y="24" font-size="13" font-weight="bold" fill="#334155">B</text>
+      <text x="156" y="76" font-size="13" font-weight="bold" fill="#334155">C</text>
+      <text x="2" y="196" font-size="13" font-weight="bold" fill="#334155">D</text>
+      <text x="274" y="196" font-size="13" font-weight="bold" fill="#334155">E</text>
+      <text x="104" y="62" font-size="11.5" fill="#2E6F8E">3</text>
+      <text x="210" y="140" font-size="11.5" fill="#2E6F8E">6</text>
+      <text x="132" y="193" font-size="11.5" fill="#2E6F8E">10</text>
+      <text x="150" y="24" font-size="11.5" fill="#C2408C">?</text>
+    </svg>
+    <figcaption>שני משולשים "הפוכים" סביב נקודת החיתוך
+    <span class="fi">\(C\)</span> — התבנית שכבר ראית בשלב 4.
+    הצלע <span class="fi">\(BD\)</span> (מ-<span class="fi">\(B\)</span> דרך
+    <span class="fi">\(C\)</span> עד <span class="fi">\(D\)</span>) שווה 12.</figcaption>
+  </figure>
+
+  <div class="nb" data-nb>
+    <div class="nb-head"><b>בונים ביחד במחברת</b><span class="nb-count"></span></div>
+    <ol class="nb-steps">
+      <li class="nb-step"><b>סעיף ב׳ קודם — כי הוא זה שפותח את התרגיל</b>
+        <p>שואלים אם דומים, ובשרטוט יש בדיוק שני הדברים שנותנים ז.ז:</p>
+        <table class="dtable">
+          <tr><th></th><th>טענה</th><th>נימוק</th></tr>
+          <tr><td>1</td><td class="hl-c5"><span class="fi">\(\angle ACB=\angle ECD\)</span></td><td style="text-align:right">זוויות קודקודיות שוות</td></tr>
+          <tr><td>2</td><td class="hl-c4"><span class="fi">\(\angle BAC=\angle DEC\)</span></td><td style="text-align:right">זוויות מתחלפות בין מקבילים (<span class="fi">\(AB\parallel DE\)</span>, החותך <span class="fi">\(AE\)</span>)</td></tr>
+          <tr><td>3</td><td><span class="fi">\(\triangle ABC\sim\triangle EDC\)</span></td><td style="text-align:right">משפט דמיון ז.ז (לפי 1, 2)</td></tr>
+          <tr class="tr-qed"><td colspan="3"><b>מש"ל ב׳</b></td></tr>
+        </table>
+        <p><strong>שימי לב לסדר:</strong> בחוברת כתוב "<span class="fi">\(\triangle ECD\)</span>",
+        אבל ההתאמה הנכונה היא <span class="fi">\(A\to E\)</span>,
+        <span class="fi">\(B\to D\)</span>, <span class="fi">\(C\to C\)</span> — ולכן
+        כותבים <span class="fi">\(\triangle ABC\sim\triangle EDC\)</span>.
+        זו בדיוק הסיבה שסעיף א׳ של תרגיל 1 מבקש "הקפדה על סדר האותיות".</p>
+      </li>
+      <li class="nb-step"><b>סעיף א׳ — ועכשיו קל לענות: לא חופפים</b>
+        <p>לחפיפה צריך שהצלעות יהיו <em>שוות</em>, ולא ניתן לנו שום נתון כזה — רק
+        זוויות. וכשמגיעים לסעיף ג׳ רואים את זה שחור על גבי לבן:
+        <span class="fi">\(AC=3\)</span> בעוד ש-<span class="fi">\(CE=6\)</span>,
+        כלומר המשולש התחתון גדול פי שניים. <strong>דומים — כן; חופפים — לא.</strong></p>
+      </li>
+      <li class="nb-step"><b>סעיף ג׳ — יחס הדמיון</b>
+        <p>לוקחים את הזוג שיש עליו שני נתונים. הצלע <span class="fi">\(AC\)</span>
+        במשולש הראשון מתאימה ל-<span class="fi">\(EC\)</span> בשני (כי
+        <span class="fi">\(A\to E\)</span> ו-<span class="fi">\(C\to C\)</span>):</p>
+        $$k=\frac{AC}{EC}=\frac{3}{6}=\frac12$$
+      </li>
+      <li class="nb-step"><b>מוצאים את <span class="fi">\(AB\)</span></b>
+        <p>הצלע <span class="fi">\(AB\)</span> מתאימה ל-<span class="fi">\(ED\)</span>:</p>
+        $$\frac{AB}{ED}=k=\frac12\quad\Longrightarrow\quad \frac{AB}{10}=\frac12
+          \quad\Longrightarrow\quad AB=\mathbf{5}\ \text{ס״מ}$$
+      </li>
+      <li class="nb-step"><b>מוצאים את <span class="fi">\(BC\)</span> ואת <span class="fi">\(DC\)</span> — יחד</b>
+        <p>כאן יש טוויסט קטן: אף אחת מהשתיים לא נתונה, אבל נתון <strong>הסכום</strong>
+        שלהן. הנקודה <span class="fi">\(C\)</span> נמצאת על הקטע
+        <span class="fi">\(BD\)</span>, ולכן:</p>
+        $$BC+CD=BD=12$$
+        <p>והדמיון אומר ש-<span class="fi">\(BC\)</span> מתאימה ל-<span class="fi">\(DC\)</span>:</p>
+        $$\frac{BC}{DC}=\frac12\quad\Longrightarrow\quad DC=2\,BC$$
+        <p>נציב את זה בסכום — משוואה אחת עם נעלם אחד:</p>
+        $$BC+2BC=12\;\Longrightarrow\;3BC=12\;\Longrightarrow\;BC=\mathbf{4}\ \text{ס״מ}$$
+        $$DC=2\cdot 4=\mathbf{8}\ \text{ס״מ}$$
+      </li>
+      <li class="nb-step"><b>בדיקה — כל השרשרת באותו יחס</b>
+        $$\frac{AC}{EC}=\frac36=\frac12\qquad
+          \frac{AB}{ED}=\frac{5}{10}=\frac12\qquad
+          \frac{BC}{DC}=\frac48=\frac12\ \checkmark$$
+        <p>שלושת השברים יצאו זהים — סימן שההתאמה נכונה ושלא התבלבלנו בכיוון.</p>
+      </li>
+    </ol>
+    <div class="nb-acts">
+      <button type="button" class="nb-next">השלב הבא ↓</button>
+      <button type="button" class="nb-all">להציג את כל השלבים</button>
+    </div>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="bk3"> סיימתי את התרגיל הזה</label>
+</article>
+
+<!-- ============ משפחת הקטעים המתאימים ============ -->
+<h2 id="sec-family">לא רק הצלעות: <span class="fi">\(k\)</span> שולט על <em>כל</em> אורך במשולש</h2>
+
+<p>
+  עד עכשיו השתמשנו ב-<span class="fi">\(k\)</span> רק על צלעות. אבל במשולש יש עוד קטעים —
+  גובה, תיכון, חוצה זווית — והם <strong>גדלים בדיוק באותו יחס</strong>. זה לא צירוף מקרים,
+  וזו הנקודה שהופכת את הדמיון לכלי חזק באמת:
+</p>
+
+<div class="fbox">
+  <div class="fbox-title">הכלל האחד שמאחד את הכול</div>
+  $$\text{כל מה שנמדד ב}\textbf{אורך}\;\longrightarrow\;\times k
+    \qquad\qquad
+    \text{כל מה שנמדד ב}\textbf{שטח}\;\longrightarrow\;\times k^{2}$$
+  <span class="f-legend">
+    <span>צלע · היקף · גובה · תיכון · חוצה זווית — כולם אורכים, כולם <span class="fi">\(\times k\)</span></span>
+  </span>
+</div>
+
+<h3>גבהים מתאימים</h3>
+<figure>
+  <svg viewBox="-38 -171.6 581 209.6" style="width:100%;max-width:500px;height:auto" role="img" aria-label="שני משולשים דומים, בכל אחד מצויר הגובה לצלע התחתונה עם סימון זווית ישרה"><polygon points="70.2,-89.1 0,0 176.4,0" fill="#F7FAFC" stroke="#334155" stroke-width="2.6"/><polygon points="345.7,-133.6 240.4,0 505,0" fill="#F7FAFC" stroke="#334155" stroke-width="2.6"/><line x1="70.2" y1="-89.1" x2="70.2" y2="0" stroke="#6D28D9" stroke-width="3.2"/><path d="M80.2,0 L80.2,-10 L70.2,-10" fill="none" stroke="#6D28D9" stroke-width="2"/><text x="66.8" y="-100.7" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">A</text><text x="-16" y="10.8" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">B</text><text x="192.6" y="10.1" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">C</text><text x="70.2" y="17" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#6D28D9">M</text><line x1="345.7" y1="-133.6" x2="345.7" y2="0" stroke="#6D28D9" stroke-width="3.2"/><path d="M355.7,0 L355.7,-10 L345.7,-10" fill="none" stroke="#6D28D9" stroke-width="2"/><text x="342.3" y="-145.3" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">A′</text><text x="224.4" y="10.8" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">B′</text><text x="521.2" y="10.1" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">C′</text><text x="345.7" y="17" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#6D28D9">M′</text></svg>
+  <figcaption>הגובה <span class="fi">\(AM\)</span> במשולש הקטן והגובה <span class="fi">\(A'M'\)</span> בגדול — שניהם יורדים בזווית ישרה לצלע המתאימה.</figcaption>
+</figure>
+
+<div class="box def">
+  <div class="box-title">המשפט</div>
+  גבהים מתאימים במשולשים דומים מתייחסים זה לזה כיחס הצלעות המתאימות:
+  <span class="fi">\(\dfrac{AM}{A'M'}=k\)</span>.
+</div>
+
+<p>וזו ההוכחה — קצרה, ומראה בדיוק למה זה עובד:</p>
+
+<table class="dtable">
+  <tr><th></th><th>טענה</th><th>נימוק</th></tr>
+  <tr><td>1</td><td><span class="fi">\(\triangle ABC\sim\triangle A'B'C'\)</span></td><td style="text-align:right">נתון</td></tr>
+  <tr><td>2</td><td class="hl-c5"><span class="fi">\(\angle C=\angle C'\)</span></td><td style="text-align:right">זוויות מתאימות במשולשים דומים שוות (לפי 1)</td></tr>
+  <tr><td>3</td><td class="hl-c4"><span class="fi">\(\angle AMC=\angle A'M'C'=90^\circ\)</span></td><td style="text-align:right">נתון (<span class="fi">\(AM\)</span> ו-<span class="fi">\(A'M'\)</span> גבהים)</td></tr>
+  <tr><td>4</td><td><span class="fi">\(\triangle AMC\sim\triangle A'M'C'\)</span></td><td style="text-align:right">משפט דמיון ז.ז (לפי 2, 3)</td></tr>
+  <tr><td>5</td><td class="hl-c2"><span class="fi">\(\dfrac{AM}{A'M'}=\dfrac{AC}{A'C'}\)</span></td><td style="text-align:right">צלעות מתאימות במשולשים דומים פרופורציוניות (לפי 4)</td></tr>
+  <tr><td>6</td><td><span class="fi">\(\dfrac{AC}{A'C'}=k\)</span></td><td style="text-align:right">מהדמיון הנתון (לפי 1)</td></tr>
+  <tr><td>7</td><td><span class="fi">\(\dfrac{AM}{A'M'}=k\)</span></td><td style="text-align:right">שני האגפים שווים לאותו דבר (לפי 5, 6)</td></tr>
+  <tr class="tr-qed"><td colspan="3"><b>מש"ל</b></td></tr>
+</table>
+
+<p class="aside">
+  הרעיון בשורה אחת: הגובה עצמו יושב בתוך משולש קטן יותר
+  (<span class="fi">\(AMC\)</span>), וגם <em>הוא</em> דומה למקבילו — כי יש לו זווית ישרה
+  וזווית משותפת עם המשולש הגדול. אותו טריק בדיוק כמו
+  <a href="#sec-patterns">תבנית ג׳</a>.
+</p>
+
+<h3>תיכונים מתאימים</h3>
+<figure>
+  <svg viewBox="-38 -171.6 581 209.6" style="width:100%;max-width:500px;height:auto" role="img" aria-label="שני משולשים דומים, בכל אחד מצויר התיכון לצלע התחתונה עם סימוני אמצע"><polygon points="70.2,-89.1 0,0 176.4,0" fill="#F7FAFC" stroke="#334155" stroke-width="2.6"/><polygon points="345.7,-133.6 240.4,0 505,0" fill="#F7FAFC" stroke="#334155" stroke-width="2.6"/><line x1="70.2" y1="-89.1" x2="88.2" y2="0" stroke="#6D28D9" stroke-width="3.2"/><line x1="44.1" y1="4.5" x2="44.1" y2="-4.5" stroke="#6D28D9" stroke-width="2.6"/><line x1="132.3" y1="4.5" x2="132.3" y2="-4.5" stroke="#6D28D9" stroke-width="2.6"/><text x="66.8" y="-100.7" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">A</text><text x="-16" y="10.8" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">B</text><text x="192.6" y="10.1" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">C</text><text x="88.2" y="17" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#6D28D9">M</text><line x1="345.7" y1="-133.6" x2="372.7" y2="0" stroke="#6D28D9" stroke-width="3.2"/><line x1="306.6" y1="4.5" x2="306.6" y2="-4.5" stroke="#6D28D9" stroke-width="2.6"/><line x1="438.9" y1="4.5" x2="438.9" y2="-4.5" stroke="#6D28D9" stroke-width="2.6"/><text x="342.3" y="-145.3" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">A′</text><text x="224.4" y="10.8" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">B′</text><text x="521.2" y="10.1" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">C′</text><text x="372.7" y="17" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#6D28D9">M′</text></svg>
+  <figcaption>התיכון מגיע לאמצע הצלע — הסימונים מראים ששני החצאים שווים. גם כאן <span class="fi">\(\frac{AM}{A'M'}=k\)</span>.</figcaption>
+</figure>
+
+<h3>חוצי זווית מתאימים</h3>
+<figure>
+  <svg viewBox="-38 -171.6 581 209.6" style="width:100%;max-width:500px;height:auto" role="img" aria-label="שני משולשים דומים, בכל אחד מצויר חוצה הזווית מהקדקוד העליון"><polygon points="70.2,-89.1 0,0 176.4,0" fill="#F7FAFC" stroke="#334155" stroke-width="2.6"/><polygon points="345.7,-133.6 240.4,0 505,0" fill="#F7FAFC" stroke="#334155" stroke-width="2.6"/><line x1="70.2" y1="-89.1" x2="79.4" y2="0" stroke="#6D28D9" stroke-width="3.2"/><path d="M59.1,-74.9 A18,18 0 0 0 72,-71.2" fill="none" stroke="#6D28D9" stroke-width="2.4"/><path d="M72.7,-65.2 A24,24 0 0 0 88.6,-73.6" fill="none" stroke="#6D28D9" stroke-width="2.4"/><text x="66.8" y="-100.7" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">A</text><text x="-16" y="10.8" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">B</text><text x="192.6" y="10.1" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">C</text><text x="79.4" y="17" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#6D28D9">M</text><line x1="345.7" y1="-133.6" x2="359.5" y2="0" stroke="#6D28D9" stroke-width="3.2"/><path d="M334.6,-119.5 A18,18 0 0 0 347.5,-115.7" fill="none" stroke="#6D28D9" stroke-width="2.4"/><path d="M348.2,-109.7 A24,24 0 0 0 364.1,-118.2" fill="none" stroke="#6D28D9" stroke-width="2.4"/><text x="342.3" y="-145.3" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">A′</text><text x="224.4" y="10.8" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">B′</text><text x="521.2" y="10.1" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">C′</text><text x="359.5" y="17" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#6D28D9">M′</text></svg>
+  <figcaption>חוצה הזווית מפצל את זווית הראש לשתי זוויות שוות (שתי הקשתות). והיחס בין שני חוצי-הזווית — שוב <span class="fi">\(k\)</span>.</figcaption>
+</figure>
+
+<div class="box intuition">
+  <div class="box-title">למה זה תמיד יוצא <span class="fi">\(k\)</span> — ולמה השטח יוצא <span class="fi">\(k^{2}\)</span></div>
+  כל אחד מהקטעים האלה מוגדר לגמרי על ידי הזוויות והצלעות של המשולש. ברגע שהזוויות
+  זהות וכל הצלעות הוכפלו ב-<span class="fi">\(k\)</span>, גם הם נגררים —
+  <strong>אין להם ברירה</strong>.
+  <br>ומכאן גם השטח: הוא בסיס כפול גובה חלקי 2, ו<em>שניהם</em> גדלו פי
+  <span class="fi">\(k\)</span>:
+  $$S'=\frac{(k\cdot\text{בסיס})\cdot(k\cdot\text{גובה})}{2}=k^{2}\cdot S$$
+  זו אותה תשובה שקיבלת ב<a href="#sec-area">שלב 5</a>, רק שעכשיו רואים מאיפה הריבוע מגיע.
+</div>
+
+<div class="box warn">
+  <div class="box-title">ומשפט רביעי, שכמעט לא מלמדים — אבל כדאי להכיר</div>
+  יש גם <strong>צ.צ.ז</strong> בדמיון: שתי צלעות פרופורציוניות, והזוויות שמול הצלע
+  <em>הגדולה</em> מבין השתיים שוות. בדיוק כמו בחפיפה, התנאי "מול הגדולה" הוא מה שהופך
+  אותו לנכון. ברוב הספרים מסתדרים בלעדיו — אם את רואה שתי צלעות וזווית שאינה ביניהן,
+  כמעט תמיד יש דרך קצרה יותר דרך ז.ז.
+</div>
+
+<!-- ============ עוד תרגול ============ -->
+<h2 id="sec-more">עוד תרגול — לבד</h2>
+
+<p>
+  ארבעה תרגילים קצרים באותם סוגים בדיוק. כתבי את התשובה, לחצי "בדיקה",
+  ורק אם נתקעת — פתחי את הפתרון.
+</p>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">תרגיל 6</span><h4>שעון חול משלך</h4></div>
+  <p class="q-text">
+    הישרים <span class="fi">\(AE\)</span> ו-<span class="fi">\(BD\)</span> נחתכים ב-<span class="fi">\(C\)</span>,
+    ונתון <span class="fi">\(AB\parallel DE\)</span>.
+    נתון <span class="fi">\(AC=4\)</span>, <span class="fi">\(CE=10\)</span>,
+    <span class="fi">\(AB=6\)</span>. מהו <span class="fi">\(DE\)</span>?
+  </p>
+  <figure>
+  <svg viewBox="-186.8 -105.5 343.9 312.3" style="width:100%;max-width:430px;height:auto" role="img" aria-label="שעון חול: AB מקביל ל-DE, AC=4, CE=10, AB=6 ו-DE לא ידוע"><line x1="-47.6" y1="-54" x2="119.1" y2="135" stroke="#334155" stroke-width="2.6"/><line x1="59.5" y1="-67.5" x2="-148.8" y2="168.8" stroke="#334155" stroke-width="2.6"/><polygon points="-47.6,-54 59.5,-67.5 0,0" fill="#EAE0FA" stroke="none" stroke-width="2.6" opacity=".6"/><polygon points="-148.8,168.8 119.1,135 0,0" fill="#DFF0DC" stroke="none" stroke-width="2.6" opacity=".55"/><line x1="-47.6" y1="-54" x2="59.5" y2="-67.5" stroke="#2563EB" stroke-width="4.5"/><line x1="-148.8" y1="168.8" x2="119.1" y2="135" stroke="#2563EB" stroke-width="4.5"/><line x1="-47.6" y1="-54" x2="0" y2="0" stroke="#2E7D32" stroke-width="4"/><line x1="0" y1="0" x2="119.1" y2="135" stroke="#2E7D32" stroke-width="4"/><text x="-54" y="-63.7" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">A</text><text x="67.4" y="-76.4" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">B</text><text x="-161" y="184.1" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">D</text><text x="132" y="149.4" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">E</text><text x="13" y="-5" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">C</text><text x="-14.1" y="-31.6" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#2E7D32">4</text><text x="69.3" y="62.9" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#2E7D32">10</text><text x="4.3" y="-69.6" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#2563EB">6</text><text x="-12.9" y="171.7" text-anchor="middle" font-size="16" font-weight="bold" fill="#6D28D9">?</text></svg>
+  <figcaption>הירוקות הן הזוג שיש עליו שני נתונים — <span class="fi">\(AC\)</span> ו-<span class="fi">\(CE\)</span> — ומהן מגיע יחס הדמיון. הכחולות הן הזוג שאחת מהן חסרה.</figcaption>
+  </figure>
+  <div class="q-row">
+    <label for="q-bow"><span class="fi">\(DE=\)</span></label>
+    <input class="q-input" id="q-bow" type="text" inputmode="decimal" data-answer="15" data-tol="0.01">
+    <button class="q-check">בדיקה</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol"><summary>לראות את הפתרון</summary>
+    <div class="sol-body">
+      <p><span class="fi">\(\triangle ABC\sim\triangle EDC\)</span> לפי ז.ז
+      (קודקודיות + מתחלפות), ולכן:</p>
+      $$\frac{AB}{ED}=\frac{AC}{EC}\quad\Longrightarrow\quad\frac{6}{DE}=\frac{4}{10}$$
+      $$4\cdot DE=60\quad\Longrightarrow\quad DE=\mathbf{15}$$
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex6"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">תרגיל 7</span><h4>יחס קטעים על צלע (משפט תאלס)</h4></div>
+  <p class="q-text">
+    במשולש <span class="fi">\(ABC\)</span> מתקיים <span class="fi">\(DE\parallel BC\)</span>,
+    כאשר <span class="fi">\(D\)</span> על <span class="fi">\(AB\)</span> ו-<span class="fi">\(E\)</span>
+    על <span class="fi">\(AC\)</span>. נתון <span class="fi">\(AD=6\)</span>,
+    <span class="fi">\(DB=9\)</span>, <span class="fi">\(AE=8\)</span>.
+    מהו <span class="fi">\(EC\)</span>?
+  </p>
+  <figure>
+  <svg viewBox="-38 -283.1 382 321.1" style="width:100%;max-width:440px;height:auto" role="img" aria-label="משולש ABC עם DE מקביל ל-BC: AD=6, DB=9, AE=8, ו-EC הוא הנעלם"><polygon points="70.4,-245.1 0,0 306,0" fill="#F7FAFC" stroke="#334155" stroke-width="2.6"/><polygon points="70.4,-245.1 42.2,-147.1 164.6,-147.1" fill="#EAE0FA" stroke="#6D28D9" stroke-width="2.4" opacity=".9"/><line x1="42.2" y1="-147.1" x2="164.6" y2="-147.1" stroke="#6D28D9" stroke-width="4"/><line x1="0" y1="0" x2="306" y2="0" stroke="#2563EB" stroke-width="4"/><text x="64.9" y="-256.2" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">A</text><text x="-14.2" y="14.3" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">B</text><text x="321.5" y="12" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">C</text><text x="30.4" y="-151.3" text-anchor="middle" font-size="14" font-weight="bold" fill="#6D28D9">D</text><text x="172.3" y="-154.9" text-anchor="middle" font-size="14" font-weight="bold" fill="#6D28D9">E</text><text x="68.8" y="-188.5" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#5A6875">6</text><text x="33.6" y="-65.9" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#5A6875">9</text><text x="107.4" y="-182.4" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#5A6875">8</text><text x="224.5" y="-59.1" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#6D28D9">?</text></svg>
+  <figcaption>הקו המקביל חותך את שתי הצלעות האחרות — ו<strong>באותו יחס</strong>. מה שקורה בצלע השמאלית קורה בדיוק גם בימנית.</figcaption>
+  </figure>
+  <div class="q-row">
+    <label for="q-thales"><span class="fi">\(EC=\)</span></label>
+    <input class="q-input" id="q-thales" type="text" inputmode="decimal" data-answer="12" data-tol="0.01">
+    <button class="q-check">בדיקה</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol"><summary>לראות את הפתרון</summary>
+    <div class="sol-body">
+      <p>קו מקביל לצלע חותך את שתי הצלעות האחרות <strong>באותו יחס</strong> —
+      זה נקרא <strong>משפט תאלס</strong>, והוא נובע ישירות מהדמיון:</p>
+      $$\frac{AD}{DB}=\frac{AE}{EC}\quad\Longrightarrow\quad\frac{6}{9}=\frac{8}{EC}$$
+      $$6\cdot EC=72\quad\Longrightarrow\quad EC=\mathbf{12}$$
+      <p class="aside">אפשר גם דרך היחס השלם:
+      <span class="fi">\(\frac{AD}{AB}=\frac{6}{15}=\frac25\)</span>, ולכן
+      <span class="fi">\(AC=8\cdot\frac52=20\)</span> ומכאן
+      <span class="fi">\(EC=20-8=12\)</span>. אותה תשובה — רק שימי לב לא לערבב
+      את שתי הדרכים באמצע.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex7"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">תרגיל 8</span><h4>מהשטח בחזרה לצלעות</h4></div>
+  <p class="q-text">
+    שני משולשים דומים. שטח הקטן <span class="fi">\(9\)</span> סמ״ר, שטח הגדול
+    <span class="fi">\(144\)</span> סמ״ר. צלע אחת במשולש הקטן היא
+    <span class="fi">\(5\)</span> ס״מ. מה אורך הצלע שמתאימה לה בגדול?
+  </p>
+  <figure>
+  <svg viewBox="-34 -353.1 791 387.1" style="width:100%;max-width:470px;height:auto" role="img" aria-label="שני משולשים דומים ששטחיהם 9 ו-144, צלע אחת בקטן 5 והמתאימה לה בגדול לא ידועה"><polygon points="51.6,-79.8 0,0 133,0" fill="#DFF0DC" stroke="#334155" stroke-width="2.6"/><polygon points="397.3,-319.1 191,0 723,0" fill="#FADCEC" stroke="#334155" stroke-width="2.6"/><text x="61.5" y="-22.6" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#2E7D32">S = 9</text><text x="437.1" y="-102.4" text-anchor="middle" font-size="15" font-weight="bold" fill="#C2408C">S = 144</text><text x="66.5" y="19" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#5A6875">5</text><text x="457" y="22" text-anchor="middle" font-size="16" font-weight="bold" fill="#6D28D9">?</text></svg>
+  <figcaption>כאן הנתון הוא <em>שטחים</em>, והשאלה על <em>צלע</em> — ולכן הדרך עוברת דרך שורש, לא דרך ריבוע.</figcaption>
+  </figure>
+  <div class="q-row">
+    <label for="q-back">הצלע בגדול (ס״מ):</label>
+    <input class="q-input" id="q-back" type="text" inputmode="decimal" data-answer="20" data-tol="0.01">
+    <button class="q-check">בדיקה</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol"><summary>לראות את הפתרון</summary>
+    <div class="sol-body">
+      <p>הנתון הוא <em>שטחים</em>, ולכן קודם חוזרים ממנו ליחס הצלעות — בשורש:</p>
+      $$k^{2}=\frac{144}{9}=16\quad\Longrightarrow\quad k=\sqrt{16}=4$$
+      <p>כלומר כל צלע בגדול היא פי 4 מזו שמתאימה לה בקטן:</p>
+      $$5\cdot 4=\mathbf{20}\ \text{ס״מ}$$
+      <p class="aside">המלכודת: לכפול ישר ב-16 ולקבל 80. יחס השטחים הוא
+      <span class="fi">\(k^2\)</span>, לא <span class="fi">\(k\)</span> —
+      ומ-<span class="fi">\(k^2\)</span> חוזרים ל-<span class="fi">\(k\)</span> בשורש.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex8"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">תרגיל 9</span><h4>קטע אמצעים</h4></div>
+  <p class="q-text">
+    במשולש <span class="fi">\(ABC\)</span>, הנקודה <span class="fi">\(M\)</span> היא אמצע
+    <span class="fi">\(AB\)</span> והנקודה <span class="fi">\(N\)</span> היא אמצע
+    <span class="fi">\(AC\)</span>. נתון <span class="fi">\(MN=7\)</span> ס״מ, והיקף
+    המשולש <span class="fi">\(AMN\)</span> הוא <span class="fi">\(18\)</span> ס״מ.
+    מהו היקף המשולש <span class="fi">\(ABC\)</span>?
+  </p>
+  <figure>
+  <svg viewBox="-38 -187.2 328 225.2" style="width:100%;max-width:420px;height:auto" role="img" aria-label="משולש ABC עם M אמצע AB ו-N אמצע AC, והקטע MN באורך 7"><polygon points="104.2,-149.2 0,0 252,0" fill="#F7FAFC" stroke="#334155" stroke-width="2.6"/><polygon points="104.2,-149.2 52.1,-74.6 178.1,-74.6" fill="#DFF0DC" stroke="#2E7D32" stroke-width="2.4" opacity=".9"/><line x1="52.1" y1="-74.6" x2="178.1" y2="-74.6" stroke="#2E7D32" stroke-width="4.5"/><line x1="74.5" y1="-114.5" x2="81.9" y2="-109.3" stroke="#334155" stroke-width="2.6"/><line x1="22.4" y1="-39.9" x2="29.7" y2="-34.7" stroke="#334155" stroke-width="2.6"/><line x1="136.2" y1="-110.5" x2="142.6" y2="-116.8" stroke="#334155" stroke-width="2.6"/><line x1="139.7" y1="-107" x2="146.1" y2="-113.3" stroke="#334155" stroke-width="2.6"/><line x1="210.1" y1="-35.9" x2="216.5" y2="-42.2" stroke="#334155" stroke-width="2.6"/><line x1="213.6" y1="-32.4" x2="220" y2="-38.7" stroke="#334155" stroke-width="2.6"/><text x="101.8" y="-161" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">A</text><text x="-15.7" y="11.6" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">B</text><text x="267.9" y="10.9" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">C</text><text x="38.1" y="-74.8" text-anchor="middle" font-size="14" font-weight="bold" fill="#2E7D32">M</text><text x="191.9" y="-75.4" text-anchor="middle" font-size="14" font-weight="bold" fill="#2E7D32">N</text><text x="115.1" y="-82.6" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#2E7D32">7</text></svg>
+  <figcaption>הסימונים מראים ש-<span class="fi">\(M\)</span> ו-<span class="fi">\(N\)</span> הן באמת האמצעים — קו אחד לכל חצי בשוק אחת, שניים בשנייה.</figcaption>
+  </figure>
+  <div class="q-row">
+    <label for="q-mid">היקף <span class="fi">\(ABC\)</span> (ס״מ):</label>
+    <input class="q-input" id="q-mid" type="text" inputmode="decimal" data-answer="36" data-tol="0.01">
+    <button class="q-check">בדיקה</button>
+    <span class="q-feedback"></span>
+  </div>
+  <details class="sol"><summary>לראות את הפתרון</summary>
+    <div class="sol-body">
+      <p><span class="fi">\(MN\)</span> הוא קטע אמצעים, ולכן
+      <span class="fi">\(\triangle AMN\sim\triangle ABC\)</span> עם
+      <span class="fi">\(k=\tfrac12\)</span>. ההיקף גדל פי
+      <span class="fi">\(k\)</span> (לא פי <span class="fi">\(k^2\)</span> — זה שטח):</p>
+      $$P_{\triangle ABC}=18\cdot 2=\mathbf{36}\ \text{ס״מ}$$
+      <p class="aside">הנתון <span class="fi">\(MN=7\)</span> נועד להסיח —
+      הוא רק אומר לנו ש-<span class="fi">\(BC=14\)</span>, ולא נחוץ לשאלה שנשאלה.
+      במבחן זה קורה הרבה: <strong>לא כל נתון בהכרח משמש</strong>.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex9"> סיימתי את התרגיל הזה</label>
+</article>
+
+<div class="box intuition" style="margin-top:30px">
+  <div class="box-title">התקציר שכדאי להעתיק למחברת לפני מבחן</div>
+  דומים = אותה צורה, גודל אחר · הזוויות שוות, הצלעות ביחס
+  <span class="fi">\(k\)</span>.
+  <br>שלושה משפטים: <strong>ז.ז</strong> (הכי שימושי) · <strong>צ.צ.צ</strong> · <strong>צ.ז.צ</strong>.
+  <br>שתי תבניות: <strong>קו מקביל בתוך משולש</strong> · <strong>שעון חול</strong>.
+  שתיהן נותנות ז.ז.
+  <br>סדר האותיות קובע מי מתאים למי — ובודקים אותו זווית מול זווית.
+  <br>היקף פי <span class="fi">\(k\)</span> · שטח פי <span class="fi">\(k^{2}\)</span> ·
+  ומשטח חזרה לצלע — שורש.
+</div>
+
+<div class="watch">
+  <h3>רוצה לראות מישהו מלמד את זה בקול?</h3>
+  <p>
+    ב-<a href="https://school.walla.co.il/" target="_blank" rel="noopener">Walla! School</a>
+    יש שיעורי מתמטיקה חינמיים לצפייה, וגם דמיון משולשים ביניהם — מורה שבונה
+    את הפתרון על הלוח בדיוק כמו ה"בונים ביחד" שבעמוד הזה. שווה כשמתחשק לשמוע
+    הסבר במקום לקרוא אותו.
+  </p>
+  <p class="aside">
+    ובכל מקרה, כל מה שצריך לדעת לעבודת הקיץ נמצא כאן בעמוד — הסרטונים הם תוספת,
+    לא תחליף.
+  </p>
+  <p class="aside">
+    משפטי הגבהים, התיכונים וחוצי-הזווית שבעמוד הזה לקוחים מאוסף המשפטים של
+    <a href="https://isrageo.blogspot.com/2013/09/blog-post.html" target="_blank" rel="noopener">הבלוג הגאומטרי isrageo</a> —
+    שם הם מופיעים כרשימת משפטים; כאן הם מצוירים ומוכחים.
+  </p>
+</div>
+
+<div class="pagenav">
+  <a href="03-quadrilaterals-areas.html"><span class="dir">התחנה הקודמת בגאומטריה</span>מרובעים ונוסחאות שטח</a>
+  <a class="next" href="08-pythagoras.html"><span class="dir">התחנה הבאה</span>משפט פיתגורס ←</a>
+</div>
+
+<footer class="fin">חלק מהעולם של שירה · <a href="index.html">חזרה למפת הגאומטריה</a> ·
+<a href="../booklet.html">מפת החוברת</a></footer>
+</main>
+</div>
+</body>
+</html>

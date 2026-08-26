@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>שם העמוד — סטטיסטיקה — המתמטיקה של שירה</title>
+<!-- שלד עמוד לעולם של שירה. להעתיק אל statistics/NN-name.html ולתקן את
+     הנתיבים היחסיים (../) אם העומק שונה. כל הרכיבים מודגמים למטה. -->
+<link rel="stylesheet" href="../vendor/katex.min.css">
+<link rel="stylesheet" href="../css/shira.css">
+<script defer src="../vendor/katex.min.js"></script>
+<script defer src="../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../js/shira.js"></script>
+</head>
+<body data-page="stat:00-skeleton">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">סטטיסטיקה — המפה</a>
+    <span class="crumbs">תחנה <b>2</b> מתוך 7 · <b>שם העמוד</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">סטטיסטיקה · תחנה 2</div>
+  <h1>שם העמוד</h1>
+  <p class="lead">משפט או שניים על מה יש כאן, בגובה העיניים.</p>
+  <p class="youknow"><b>בסוף העמוד תדעי:</b> לחשב X · להסביר Y · לזהות Z.</p>
+</header>
+
+<!-- ===== קופסת הגדרה ===== -->
+<div class="box def">
+  <div class="box-title">הגדרה</div>
+  שורה אחת = מחשבה אחת.
+</div>
+
+<!-- ===== נוסחה עם צבעים + מקרא ===== -->
+<div class="fbox">
+  <div class="fbox-title">הנוסחה</div>
+  $$\underbrace{\textcolor{#1D6FA5}{175}}_{\text{הקבוצה}}\;/\;\underbrace{\textcolor{#8A6D1B}{500}}_{\text{הסך הכל}} = 35\%$$
+  <span class="f-legend">
+    <span><i class="sw" style="background:#DDEDF8"></i> כחול — הקבוצה שמדברים עליה</span>
+    <span><i class="sw" style="background:#FBF0C9"></i> צהוב — הסך הכל</span>
+  </span>
+</div>
+
+<!-- ===== פירוק שאלה בצבעים ===== -->
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">ביחד</span><h4>תרגיל 1</h4></div>
+  <p class="q-text">
+    <span class="mk mk-total">בסקר השתתפו 500 נשאלים</span>.
+    <span class="mk mk-group">175 מהם בחרו במפלגת הים</span>.
+    <span class="mk mk-find">מהי השכיחות היחסית?</span>
+  </p>
+  <details class="alt">
+    <summary>עוד דרכים לשאול בדיוק את זה</summary>
+    <div class="alt-body"><ul><li>ניסוח חלופי…</li></ul></div>
+  </details>
+  <details class="sol">
+    <summary>הצגי פתרון</summary>
+    <div class="sol-body">הפתרון המלא, צעד-צעד.</div>
+  </details>
+  <div class="q-row">
+    <span>בדיקה מהירה:</span>
+    <input class="q-input" data-answer="35" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex1"> סיימתי את התרגיל הזה</label>
+</article>
+
+<!-- ===== המחשת נקודות (חציון) ===== -->
+<div class="dotrow">
+  <span class="dot d1"></span><span class="dot d2 ring"><span class="pos">20</span></span><span class="dot d2"></span>
+</div>
+<p class="viz-cap">כיתוב מתחת להמחשה.</p>
+
+<!-- ===== וידאו =====
+     שימו לב: iframe של יוטיוב לא עובד מ-file:// (שגיאה 153) — לכן התבנית היא
+     תמונת-תצוגה מקומית (פריים מ-assets/stats) + לינק החוצה. -->
+<div class="watch">
+  <h3>רוצה לראות את זה מוסבר בקול?</h3>
+  <a class="video-link" href="https://www.youtube.com/watch?v=VIDEOID&t=127">
+    <img src="../assets/stats/VIDEOID/01_t0030.jpg" alt="שם הסרטון — שקף מהסרטון" loading="lazy">
+    <span class="vt"><b>שם הסרטון</b><span>משפט על מה יש בו · 3:04</span></span>
+    <span class="play">▶</span>
+  </a>
+</div>
+
+<!-- ===== התקדמות + ניווט ===== -->
+<div class="progresswrap no-print">
+  <span class="progressbar"><i></i></span><span class="progress-label"></span>
+  <button class="all-sols" style="font-family:inherit;font-size:12px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:4px 10px;cursor:pointer">לפתוח את כל הפתרונות</button>
+</div>
+
+<nav class="pagenav">
+  <a href="01-basics.html"><span class="dir">→ הקודם</span>שם העמוד הקודם</a>
+  <a class="next" href="03-median-mode.html"><span class="dir">הבא ←</span>שם העמוד הבא</a>
+</nav>
+
+<footer class="fin">חלק מהעולם של שירה · <a href="../index.html">חזרה למרכז</a></footer>
+</main>
+</div>
+</body>
+</html>

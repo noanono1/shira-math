@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<!-- מסך הבית של האייפד/הטלפון -->
+<link rel="apple-touch-icon" href="../assets/icons/icon-180.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>גאומטריה — המפה — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../css/shira.css">
+<style>
+:root{--accent:var(--alg)}
+/* רשימת תחנות — כמו במפת הסטטיסטיקה */
+.station{display:flex; gap:14px; align-items:flex-start; text-decoration:none;
+  background:var(--card); border:1px solid var(--line); border-radius:var(--r-lg);
+  padding:14px 16px; margin:10px 0; color:var(--ink);
+  box-shadow:0 10px 28px -26px var(--shadow); transition:.15s}
+.station:hover{border-color:var(--alg)}
+.station .n{flex:0 0 auto; width:34px; height:34px; border-radius:50%;
+  background:var(--alg); color:#fff; font-weight:800; font-size:15px;
+  display:flex; align-items:center; justify-content:center; margin-top:2px}
+.station.anchor .n{background:#7A4E8C}
+.station .t{min-width:0; flex:1}
+.station .t b{display:block; font-size:16.5px}
+.station .t span{font-size:13px; color:var(--soft); line-height:1.5}
+.station .st{flex:0 0 auto; font-size:11.5px; color:var(--soft); text-align:left;
+  margin-top:4px; min-width:74px}
+.station .st .okk{color:var(--alg); font-weight:700}
+.station .t .tm{display:block; margin-top:6px; font-size:11.5px; color:var(--soft)}
+.station .t .tm b{display:inline; font-size:inherit; color:var(--ink); font-weight:700}
+.groupt{margin:26px 0 4px; font-size:13px; font-weight:800; color:var(--soft);
+  letter-spacing:.06em}
+/* "שכחתי איך עושים…" — הגישה המהירה */
+.qt{display:grid; grid-template-columns:repeat(auto-fill,minmax(215px,1fr)); gap:8px; margin:12px 0 4px}
+.qt a{display:block; text-decoration:none; background:var(--card); color:var(--ink);
+  border:1px solid var(--line); border-radius:10px; padding:9px 12px; font-size:13px;
+  transition:.15s}
+.qt a:hover{border-color:var(--alg)}
+.qt a b{display:block; font-size:13.5px}
+.qt a span{color:var(--soft); font-size:11.5px}
+</style>
+<script defer src="../js/shira.js"></script>
+</head>
+<body data-page="geo:index">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../index.html">⌂ המרכז של שירה</a>
+    <span class="crumbs"><b>גאומטריה</b> · המפה</span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">גאומטריה · המפה</div>
+  <h1>שמונה תחנות, מסלול אחד</h1>
+  <p class="lead">
+    מקטעים וזוויות, דרך חפיפת משולשים, ועד נוסחאות שטח, ואחר כך המפגש עם
+    האלגברה: שטח שמחשבים מתוך גרף. תחנות 5–6 הן כתיבת הוכחות — ספריית דגמים
+    ובנק תרגול. ותחנות 7–8 הן שני החלקים האחרונים של עבודת הקיץ:
+    <strong>דמיון משולשים</strong> ו<strong>משפט פיתגורס</strong>.
+    תחנה אחרי תחנה, ובכל דף תמיד רשום איפה את.
+  </p>
+</header>
+
+<div class="groupt">שכחתי איך עושים…</div>
+<div class="qt">
+  <a href="01-angles.html#sec-vertical"><b>זווית חסרה</b><span>קודקודיות, צמודות, סכום במשולש</span></a>
+  <a href="01-angles.html#sec-zfc"><b>‏Z / F / C במקבילים</b><span>מתחלפות, מתאימות, חד-צדדיות</span></a>
+  <a href="01-angles.html#sec-segments"><b>מחברים קטעים</b><span>שלם = חלק + חלק</span></a>
+  <a href="02-triangles-congruence.html#sec-proof"><b>כותבים הוכחת חפיפה</b><span>טענה ונימוק, ארבעת המשפטים</span></a>
+  <a href="05-proof-models.html#finder"><b>יש לי תרגיל הוכחה — מאיפה מתחילים</b><span>מוצאים את הדגם המתאים</span></a>
+  <a href="08-pythagoras.html#sec-directions"><b>פיתגורס</b><span>מחפשת יתר? מחברים. ניצב? מחסרים</span></a>
+  <a href="07-similarity.html#sec-theorems"><b>מתי משולשים דומים</b><span>ז.ז · צ.צ.צ · צ.ז.צ</span></a>
+  <a href="07-similarity.html#sec-order"><b>סדר האותיות בדמיון</b><span>מי מתאים למי, ואיך קוראים ממנו יחס</span></a>
+  <a href="07-similarity.html#sec-area"><b>יחס שטחים</b><span>צלעות פי k ← שטח פי k²</span></a>
+  <a href="03-quadrilaterals-areas.html#sec-formulas"><b>נוסחת שטח</b><span>הטבלה עם כל הצורות</span></a>
+  <a href="04-graphs-and-shapes.html#sec-method"><b>שטח מתוך גרף</b><span>קודקודים ← אורכים ← נוסחה</span></a>
+</div>
+
+<div class="groupt">המסלול · תחנות 1–4</div>
+
+<a class="station" href="01-angles.html">
+  <span class="n">1</span>
+  <span class="t"><b>📐 קטעים, זוויות וישרים מקבילים</b>
+  <span>קודקודיות וצמודות, סכום זוויות במשולש, ומפת ה-Z/F/C המלאה.</span><span class="tm"><b>≈ 30 דק׳</b> · 8 תרגילים</span></span>
+  <span class="st" data-st="geo:01-angles"></span>
+</a>
+<a class="station anchor" href="02-triangles-congruence.html">
+  <span class="n">2</span>
+  <span class="t"><b>🔺 משולשים, חפיפה ופיתגורס</b>
+  <span>ארבעת משפטי החפיפה, איך כותבים הוכחה — ותרגילי החפיפה האמיתיים מעבודת הקיץ שלך.</span><span class="tm"><b>≈ 30 דק׳</b> · 7 תרגילים</span></span>
+  <span class="st" data-st="geo:02-triangles-congruence"></span>
+</a>
+<a class="station" href="03-quadrilaterals-areas.html">
+  <span class="n">3</span>
+  <span class="t"><b>⬜ מרובעים, נוסחאות שטח ושטחים מורכבים</b>
+  <span>משפחת המרובעים, טבלת הנוסחאות המלאה, ואיך מפרקים צורה מסובכת לחלקים פשוטים.</span><span class="tm"><b>≈ 20 דק׳</b> · 5 תרגילים</span></span>
+  <span class="st" data-st="geo:03-quadrilaterals-areas"></span>
+</a>
+<a class="station anchor" href="04-graphs-and-shapes.html">
+  <span class="n">4</span>
+  <span class="t"><b>🗺️ גאומטריה במערכת צירים — המפגש עם האלגברה</b>
+  <span>מהישר על הגרף ועד שטח המשולש והטרפז שהוא יוצר עם הצירים.</span><span class="tm"><b>≈ 30 דק׳</b> · 5 תרגילים</span></span>
+  <span class="st" data-st="geo:04-graphs-and-shapes"></span>
+</a>
+
+<div class="groupt">הוכחות · תחנות 5–6</div>
+
+<a class="station anchor" href="05-proof-models.html">
+  <span class="n">5</span>
+  <span class="t"><b>📚 ספריית הדגמים · איך כותבים הוכחה</b>
+  <span>עשרים ושלושה דגמים — הוכחות שלמות בטבלת טענה ונימוק. מביאה תרגיל משלך, מוצאת את הדגם שדומה לו, ומעתיקה את המבנה.</span><span class="tm">‏23 דגמים · <b>≈ 3 דק׳ לדגם</b> · אפשר לעשות בחלקים</span></span>
+  <span class="st" data-st="geo:05-proof-models"></span>
+</a>
+<a class="station" href="06-proof-practice.html">
+  <span class="n">6</span>
+  <span class="t"><b>✍️ בנק תרגילי ההוכחה</b>
+  <span>‏48 תרגילים בשלבים עולים — מהשלמת נימוקים בטבלה בנויה ועד שאלות בצורת מבחן, ותרגילי זיהוי "איזה משפט מתאים כאן".</span><span class="tm">‏48 תרגילים · <b>≈ 4 דק׳ לתרגיל</b> · אפשר לעשות בחלקים</span></span>
+  <span class="st" data-st="geo:06-proof-practice"></span>
+</a>
+
+<div class="groupt">דמיון ופיתגורס · תחנות 7–8</div>
+
+<a class="station anchor" href="07-similarity.html">
+  <span class="n">7</span>
+  <span class="t"><b>🔍 דמיון משולשים</b>
+  <span>אותה צורה, גודל אחר: שלושת משפטי הדמיון, שתי התבניות שחוזרות בכל תרגיל, יחס היקפים ושטחים — ושלושת תרגילי חלק ז׳ מעבודת הקיץ, פתורים עד הסוף.</span><span class="tm"><b>≈ 35 דק׳</b> · 11 תרגילים · <b>חדש</b></span></span>
+  <span class="st" data-st="geo:07-similarity"></span>
+</a>
+<a class="station anchor" href="08-pythagoras.html">
+  <span class="n">8</span>
+  <span class="t"><b>📏 משפט פיתגורס</b>
+  <span>מתי מחברים ומתי מחסרים, השלשות שכדאי לזהות מיד, פיתגורס בתוך היקף ושטח — ושלושת תרגילי חלק ח׳ מעבודת הקיץ, פתורים עד הסוף.</span><span class="tm"><b>≈ 30 דק׳</b> · 10 תרגילים · <b>חדש</b></span></span>
+  <span class="st" data-st="geo:08-pythagoras"></span>
+</a>
+
+<div class="groupt">נספח · תרגילי החוברת עצמם</div>
+
+<a class="station anchor" href="09-booklet-proofs.html">
+  <span class="n" style="background:#B7791F">ח׳</span>
+  <span class="t"><b>📖 שבעת התרגילים שנשארו — חפיפה ושווה-שוקיים</b>
+  <span>תרגילים 4 ו-5 של חלק ה׳ וכל חמשת התרגילים של חלק ו׳, כל אחד עם טבלת טענה ונימוק מלאה. עם זה, כל תרגילי הגאומטריה בחוברת פתורים באתר.</span><span class="tm">‏7 תרגילים · <b>≈ 40 דק׳</b> · <b>חדש</b></span></span>
+  <span class="st" data-st="geo:09-booklet-proofs"></span>
+</a>
+
+<div class="groupt">ולסיום</div>
+
+<a class="station" href="../algebra/08-quiz.html" style="border-style:dashed">
+  <span class="n" style="background:var(--ink)">✓</span>
+  <span class="t"><b>📝 בוחן הבית המשותף</b>
+  <span>הבוחן יושב במסלול האלגברה ומכסה גם גאומטריה — תרגיל הזוויות (תרגיל 6) הוא שלך.</span><span class="tm"><b>≈ 30 דק׳</b> · 6 תרגילים</span></span>
+  <span class="st" data-st="alg:08-quiz"></span>
+</a>
+
+<div class="box intuition" style="margin-top:26px">
+  <div class="box-title">נתקעת בשאלה מעבודת הקיץ?</div>
+  חלק ה׳ (חפיפת משולשים) — תחנה 2 · חלק ו׳ (שווה-שוקיים) — תחנה 2 ·
+  <strong>חלק ז׳ (משולשים דומים) — תחנה 7</strong> ·
+  <strong>חלק ח׳ (משפט פיתגורס) — תחנה 8</strong>.
+  <br>שאלות שטחים — תחנה 3 · זוויות חסרות — תחנה 1 · שטח מתוך גרף (חלק א׳) — תחנה 4.
+  <br>ואם השאלה היא "איך בכלל כותבים את ההוכחה" — תחנה 5, ולתרגול נוסף תחנה 6.
+  <br>ואת כל החוברת, חלק אחרי חלק ותרגיל אחרי תרגיל, אפשר לראות ב<a href="../booklet.html">מפת החוברת</a>.
+</div>
+
+<footer class="fin">חלק מהעולם של שירה · <a href="../index.html">חזרה למרכז</a></footer>
+</main>
+</div>
+
+<script>
+/* "איפה עצרת" — כמו במפת הסטטיסטיקה; לקו הסיום נספרות רק תחנות הגאומטריה */
+document.addEventListener('DOMContentLoaded', function () {
+  var completed = 0;
+  document.querySelectorAll('.st[data-st]').forEach(function (el) {
+    try {
+      var d = JSON.parse(localStorage.getItem('shira:' + el.dataset.st) || 'null');
+      if (!d || !d.total) { el.textContent = ''; return; }
+      var n = Object.keys(d.done || {}).length;
+      if (n === 0) { el.textContent = ''; return; }
+      if (n >= d.total) {
+        el.innerHTML = '<span class="okk">הושלמה ✓</span>';
+        if (el.dataset.st.indexOf('geo:') === 0) completed++;
+      } else { el.innerHTML = '<span class="okk">' + n + '</span> מתוך ' + d.total + ' סומנו'; }
+    } catch (e) { el.textContent = ''; }
+  });
+  if (completed >= 8) {
+    var fin = document.createElement('div');
+    fin.className = 'box def';
+    fin.style.marginTop = '20px';
+    fin.innerHTML = '<div class="box-title">סיימת את מסלול הגאומטריה 🎉</div>' +
+      'כל שמונה התחנות מסומנות כהושלמו. רוצה את חותמת הגמר? הבוחן המשותף מחכה למעלה.';
+    document.querySelector('main').insertBefore(fin, document.querySelector('footer.fin'));
+  }
+});
+</script>
+</body>
+</html>

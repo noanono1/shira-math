@@ -1,0 +1,2285 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<!-- מסך הבית של האייפד/הטלפון -->
+<link rel="apple-touch-icon" href="../assets/icons/icon-180.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>בנק התרגילים — אלגברה ופונקציות — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../vendor/katex.min.css">
+<link rel="stylesheet" href="../css/shira.css">
+<style>
+:root{--accent:var(--alg)}
+/* המאתר — רשת עוגנים קומפקטית לראש העמוד */
+.finder{display:grid; grid-template-columns:repeat(auto-fill,minmax(215px,1fr)); gap:8px; margin:14px 0 4px}
+.finder a{display:block; text-decoration:none; background:var(--card); color:var(--ink);
+  border:1px solid var(--line); border-radius:10px; padding:9px 12px; transition:.15s}
+.finder a:hover{border-color:var(--alg)}
+.finder a b{display:block; font-size:13.5px}
+.finder a span{color:var(--soft); font-size:11.5px; line-height:1.5}
+.finder a .cnt{float:left; font-size:11px; font-weight:800; color:var(--alg);
+  background:#EEF4F7; border-radius:20px; padding:1px 8px; margin-inline-start:6px}
+/* שלט קבוצה — כמה תרגילים ומה מכסים */
+.grouplead{font-size:13.5px; color:var(--soft); margin:8px 0 16px}
+/* תגית מספר התרגיל בכותרת הכרטיס */
+article.ex .ex-head .lvl{background:var(--alg); letter-spacing:.06em; font-size:11px}
+/* שורת "נסמן" — הגדרה אחת בשורה */
+.setup{margin:8px 0 10px; line-height:2.1}
+.setup .fi{margin-inline-end:2px}
+/* מיני-איור בתוך פתרון: בלי מסגרת כפולה */
+figure.mini{margin:14px auto; padding:10px 8px 8px; max-width:520px}
+figure.mini figcaption{font-size:12.5px; margin-top:6px}
+</style>
+<script defer src="../vendor/katex.min.js"></script>
+<script defer src="../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../js/shira.js"></script>
+<style>
+/* מחוון פתיחה — כמה זמן, כמה תרגילים, ואיפה מתחילים לתרגל (מוסתר בהדפסה) */
+.pagemeta{display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px;
+  margin:12px 0 0; font-size:13px; color:var(--soft)}
+.pagemeta .pm-time{background:var(--faint); border-radius:999px; padding:3px 10px}
+.pagemeta .pm-time b{color:var(--ink); font-weight:700}
+.pagemeta .pm-jump{color:var(--accent); font-weight:700; text-decoration:none}
+.pagemeta .pm-jump:hover{text-decoration:underline}
+.pagemeta .pm-note{flex:1 1 100%; margin:0}
+#ex-first,#bank-map{scroll-margin-top:78px}
+</style>
+</head>
+<body data-page="alg:09-exercise-bank">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">אלגברה ופונקציות — המפה</a>
+    <span class="crumbs">בנק התרגילים · <b>46 תרגילים פתורים</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">אלגברה ופונקציות · בנק התרגילים</div>
+  <h1>בנק התרגילים — כל טיפוס, עם פתרון מלא</h1>
+  <p class="lead">
+    ‏46 תרגילים בשמונה קבוצות, לפי הטיפוסים שחוזרים בעבודת הקיץ, בדפי החזרה למבחן ובכיתה.
+    כל תרגיל כאן פתור עד הסוף: שורה אחר שורה, עם הפעולה שעשינו בסוף כל שורה, עם בדיקה —
+    ועם שרטוט בכל מקום שבו הפתרון נשען על שרטוט.
+  </p>
+  <p class="youknow"><b>בסוף העמוד תדעי:</b> לזהות לאיזו קבוצה שייך תרגיל שאת רואה בפעם הראשונה ·
+  לפתור אותו במחברת ולבדוק את התשובה לבד ·
+  להשוות את הפתרון שלך לפתרון מלא, שורה מול שורה.
+  <br><b>איך משתמשים:</b> מצאי במאתר את הקבוצה של התרגיל שנתקעת בו,
+  פתרי במחברת, הקלידי את התשובה לבדיקה — ורק אחר כך פתחי את הפתרון והשווי שורה מול שורה.
+  <br>מחפשת הסבר על הנושא עצמו ולא תרגיל? <a href="index.html">המפה</a> מובילה לתחנה שמלמדת אותו.</p>
+  <p class="pagemeta no-print">
+    <span class="pm-time">‏46 תרגילים ב-8 קבוצות · <b>≈ 3 דק׳ לתרגיל</b></span>
+    <a class="pm-jump" href="#finder">לקפוץ ישר למאתר הסוגים ↓</a>
+    <span class="pm-note">אין צורך לעשות הכל ברצף — כל קבוצה עומדת בפני עצמה.</span>
+  </p>
+</header>
+
+<div class="box def">
+  <div class="box-title">מה יש בכל פתרון כאן</div>
+  שורות מיושרות זו מתחת לזו, כשבסוף כל שורה כתובה באדום הפעולה שעשינו על שני האגפים.
+  <br>אחריהן בדיקה בהצבה — כי תשובה שלא נבדקה היא עדיין ניחוש.
+  <br>ובשאלות שיש להן צורה — ישר, ציר מספרים, אחוזים — יש גם שרטוט.
+</div>
+
+<h2 id="finder"><span class="num">◎</span>המאתר — לאיזו קבוצה שייך התרגיל שלך?</h2>
+<div class="finder">
+  <a href="#g-lang"><b>שפת האלגברה<span class="cnt">5</span></b><span>כינוס איברים · פתיחת סוגריים · הצבה בביטוי</span></a>
+  <a href="#g-eq"><b>משוואות<span class="cnt">7</span></b><span>סוגריים · שברים · נעלם בשני האגפים · בדיקת פתרון</span></a>
+  <a href="#g-word"><b>בעיות מילוליות<span class="cnt">6</span></b><span>גיל · מספרים · קניות · תנועה · יחס</span></a>
+  <a href="#g-ineq"><b>אי-שוויונות ותחום<span class="cnt">6</span></b><span>פתרון וסימון על ציר · היפוך הסימן · תחום הצבה</span></a>
+  <a href="#g-coord"><b>מערכת צירים ופונקציה<span class="cnt">4</span></b><span>שיעורי נקודות · נקודה על הישר · טבלת ערכים</span></a>
+  <a href="#g-line"><b>הישר <span class="en">y=mx+b</span><span class="cnt">7</span></b><span>שיפוע · משוואת ישר · חיתוכים · מקבילים · חיוביות</span></a>
+  <a href="#g-sys"><b>מערכות משוואות<span class="cnt">5</span></b><span>שיטת ההצבה · בעיה מילולית · נקודת חיתוך</span></a>
+  <a href="#g-pct"><b>אחוזים<span class="cnt">6</span></b><span>אחוז מתוך סך · מציאת הסך · שינוי כפול · אחוז השינוי</span></a>
+</div>
+<p class="aside">התרגילים כאן מוסיפים טיפוסים חדשים על אלה שכבר פתרת בתחנות 1–7 ובבוחן הבית —
+אין כאן חזרה על אותם תרגילים.</p>
+
+<!-- ==================================================================== -->
+<!-- ============================ א · שפת האלגברה ======================= -->
+<!-- ==================================================================== -->
+<h2 id="g-lang"><span class="num">א</span>שפת האלגברה — לכנס, לפתוח סוגריים, להציב</h2>
+<p class="grouplead">חמישה תרגילים על הפעולות שקודמות לכל משוואה: לקצר ביטוי, לפתוח סוגריים
+(גם כשלפניהם מינוס), ולהציב מספר — כולל מספר שלילי.</p>
+
+<article class="ex" id="ex-a1">
+  <div class="ex-head"><span class="lvl">א1</span><h4>כינוס איברים דומים עם שני משתנים</h4></div>
+  <p class="q-text">
+    לפנייך הביטוי <span class="fi">\(8a-3b+5-2a+7b-9\)</span>.
+    <br>א. כנסי איברים דומים וכתבי אותו בצורה הקצרה ביותר.
+    <br>ב. הציבי בביטוי המקוצר <span class="fi">\(a=2\)</span> ו-<span class="fi">\(b=1\)</span>.
+  </p>
+  <div class="q-row"><span>א. המקדם של <span class="fi">\(a\)</span>:</span>
+    <input class="q-input" data-answer="6" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>א. המקדם של <span class="fi">\(b\)</span>:</span>
+    <input class="q-input" data-answer="4" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ב. ערך הביטוי:</span>
+    <input class="q-input" data-answer="12" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>מכנסים לפי המשתנה: כל איברי <span class="fi">\(a\)</span> יחד,
+      כל איברי <span class="fi">\(b\)</span> יחד, והמספרים לחוד.
+      <br>כל איבר נוסע עם הסימן שלפניו.</p>
+      $$\begin{aligned}
+      &amp;\underbrace{8a-2a}_{6a}\;\underbrace{-3b+7b}_{4b}\;\underbrace{+5-9}_{-4}\\[6pt]
+      &amp;= 6a+4b-4
+      \end{aligned}$$
+      <p>ועכשיו ההצבה — כל אות מוחלפת בערך שלה, והמספר החופשי נשאר כמו שהוא:</p>
+      $$6\cdot\textcolor{#2563EB}{2}+4\cdot\textcolor{#7C3AED}{1}-4
+        \;=\;12+4-4\;=\;\mathbf{12}$$
+      <p><b>בדיקה</b> — מציבים באותם מספרים בביטוי <em>המקורי</em>, לפני הקיצור:
+      <br><span class="fi">\(8\cdot 2-3\cdot 1+5-2\cdot 2+7\cdot 1-9=16-3+5-4+7-9=12\)</span> ✓
+      <br>שני הביטויים נתנו 12 — הקיצור נאמן למקור.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="a1"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="ex-a2">
+  <div class="ex-head"><span class="lvl">א2</span><h4>פתיחת סוגריים — מינוס לפני הסוגריים</h4></div>
+  <p class="q-text">
+    פתחי סוגריים וכנסי איברים דומים: <span class="fi">\(5(2x-3)-4(x-2)\)</span>.
+  </p>
+  <div class="q-row"><span>המקדם של <span class="fi">\(x\)</span>:</span>
+    <input class="q-input" data-answer="6" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>המספר החופשי:</span>
+    <input class="q-input" data-answer="-7" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>הסוגריים השניים באים אחרי <span class="fi">\(-4\)</span>.
+      <br>המספר שכופל אותם הוא <span class="fi">\(-4\)</span> — עם המינוס, לא <span class="fi">\(4\)</span> —
+      ולכן כל אחד משני האיברים בפנים מוכפל ב-<span class="fi">\(-4\)</span>.</p>
+      $$\begin{aligned}
+      &amp;\;\;5(2\textcolor{#2563EB}{x}-3)\;\underbrace{-4}_{\text{הכופל}}(\textcolor{#2563EB}{x}-2)\\[4pt]
+      &amp;=\;10\textcolor{#2563EB}{x}-15\;\underbrace{-4\textcolor{#2563EB}{x}}_{-4\,\cdot\,x}\;\underbrace{+8}_{-4\,\cdot\,(-2)}\\[4pt]
+      &amp;=\;6\textcolor{#2563EB}{x}-7
+      \end{aligned}$$
+      <p>שני האיברים שיצאו מהסוגריים השניים החליפו סימן:
+      <span class="fi">\(x\)</span> נעשה <span class="fi">\(-4x\)</span>,
+      ו-<span class="fi">\(-2\)</span> נעשה <span class="fi">\(+8\)</span> — כי מינוס כפול מינוס נותן פלוס.</p>
+      <p><b>בדיקה</b> בהצבת <span class="fi">\(x=3\)</span> בשני הביטויים:
+      <br>המקורי: <span class="fi">\(5(6-3)-4(3-2)=15-4=11\)</span>
+      <br>המקוצר: <span class="fi">\(6\cdot 3-7=11\)</span> ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="a2"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="ex-a3">
+  <div class="ex-head"><span class="lvl">א3</span><h4>מינוס לפני סוגריים, בלי מספר לידו</h4></div>
+  <p class="q-text">
+    פשטי את הביטוי: <span class="fi">\(7y-(3y-8)+2\)</span>.
+  </p>
+  <div class="q-row"><span>המקדם של <span class="fi">\(y\)</span>:</span>
+    <input class="q-input" data-answer="4" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>המספר החופשי:</span>
+    <input class="q-input" data-answer="10" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>לפני הסוגריים יש מינוס בלי מספר לידו.
+      <br>מינוס בודד כזה פירושו כפל ב-<span class="fi">\(-1\)</span>, ולכן כדאי לרשום אותו כך במפורש:</p>
+      $$\begin{aligned}
+      7\textcolor{#7C3AED}{y}-(3\textcolor{#7C3AED}{y}-8)+2
+        &amp;= 7\textcolor{#7C3AED}{y}+(-1)(3\textcolor{#7C3AED}{y}-8)+2\\[4pt]
+        &amp;= 7\textcolor{#7C3AED}{y}-3\textcolor{#7C3AED}{y}+8+2\\[4pt]
+        &amp;= 4\textcolor{#7C3AED}{y}+10
+      \end{aligned}$$
+      <p>שני האיברים שהיו בסוגריים יצאו עם הסימן ההפוך:
+      <span class="fi">\(3y\)</span> יצא כ-<span class="fi">\(-3y\)</span>,
+      ו-<span class="fi">\(-8\)</span> יצא כ-<span class="fi">\(+8\)</span>.</p>
+      <p><b>בדיקה</b> בהצבת <span class="fi">\(y=-2\)</span>:
+      <br>המקורי: <span class="fi">\(7(-2)-\big(3(-2)-8\big)+2=-14-(-14)+2=2\)</span>
+      <br>המקוצר: <span class="fi">\(4(-2)+10=-8+10=2\)</span> ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="a3"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="ex-a4">
+  <div class="ex-head"><span class="lvl">א4</span><h4>הצבה — מספר שלילי בריבוע, ושני משתנים</h4></div>
+  <p class="q-text">
+    הציבי <span class="fi">\(x=-2\)</span> ו-<span class="fi">\(y=5\)</span> בביטוי
+    <span class="fi">\(3x^{2}-2xy\)</span>. מה ערכו?
+  </p>
+  <div class="q-row"><span>ערך הביטוי:</span>
+    <input class="q-input" data-answer="32" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>שלב ראשון, לפני כל חישוב: כותבים כל מספר שלילי בתוך סוגריים.
+      <br>הסוגריים הם שאומרים שגם המינוס נכנס להעלאה בחזקה ולכפל.</p>
+      $$\begin{aligned}
+      3\textcolor{#2563EB}{x}^{2}-2\textcolor{#2563EB}{x}\textcolor{#7C3AED}{y}
+        &amp;= 3\cdot\textcolor{#2563EB}{(-2)}^{2}-2\cdot\textcolor{#2563EB}{(-2)}\cdot\textcolor{#7C3AED}{5}\\[4pt]
+        &amp;= 3\cdot\underbrace{4}_{(-2)^2}\;-\;\underbrace{(-20)}_{2\,\cdot\,(-2)\,\cdot\,5}\\[4pt]
+        &amp;= 12+20\;=\;\mathbf{32}
+      \end{aligned}$$
+      <p><span class="fi">\((-2)^{2}\)</span> שווה <span class="fi">\(4\)</span>:
+      מינוס כפול מינוס נותן פלוס.
+      <span class="aside">‏<span class="fi">\(-2^{2}\)</span>, בלי סוגריים, הוא ביטוי אחר לגמרי — שם החזקה חלה רק על ה-2.</span></p>
+      <p>והאיבר השני: <span class="fi">\(2\cdot(-2)\cdot 5=-20\)</span>, ולפניו סימן חיסור —
+      אז מחסרים <span class="fi">\((-20)\)</span>, כלומר מוסיפים 20.</p>
+      <p><b>בדיקה</b> בפירוק לשני חלקים בנפרד:
+      <span class="fi">\(3x^{2}=12\)</span> וגם <span class="fi">\(2xy=-20\)</span>,
+      ולכן <span class="fi">\(12-(-20)=32\)</span> ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="a4"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="ex-a5">
+  <div class="ex-head"><span class="lvl">א5</span><h4>קודם לפשט, ורק אחר כך להציב</h4></div>
+  <p class="q-text">
+    נתון הביטוי <span class="fi">\(2(3m-4)-3(m-5)\)</span>.
+    <br>א. פשטי אותו.
+    <br>ב. הציבי בו <span class="fi">\(m=-3\)</span>.
+  </p>
+  <div class="q-row"><span>א. המקדם של <span class="fi">\(m\)</span>:</span>
+    <input class="q-input" data-answer="3" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>א. המספר החופשי:</span>
+    <input class="q-input" data-answer="7" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ב. ערך הביטוי:</span>
+    <input class="q-input" data-answer="-2" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>מפשטים קודם — ככה ההצבה נעשית בביטוי קצר, עם פחות מקומות ליפול בהם.</p>
+      $$\begin{aligned}
+      2(3\textcolor{#EA580C}{m}-4)-3(\textcolor{#EA580C}{m}-5)
+        &amp;= 6\textcolor{#EA580C}{m}-8-3\textcolor{#EA580C}{m}+15\\[4pt]
+        &amp;= 3\textcolor{#EA580C}{m}+7
+      \end{aligned}$$
+      <p>‏<span class="fi">\(-3\cdot(-5)=+15\)</span> — זה המקום שדורש תשומת לב בשורה הזו.</p>
+      <p>עכשיו מציבים <span class="fi">\(m=-3\)</span> בביטוי המפושט:</p>
+      $$3\cdot\textcolor{#EA580C}{(-3)}+7=-9+7=\mathbf{-2}$$
+      <p><b>בדיקה</b> בהצבה ישירה בביטוי המקורי:
+      <br><span class="fi">\(2\big(3(-3)-4\big)-3\big((-3)-5\big)=2(-13)-3(-8)=-26+24=-2\)</span> ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="a5"> סיימתי את התרגיל הזה</label>
+</article>
+
+
+<!-- ==================================================================== -->
+<!-- ============================== ב · משוואות ========================= -->
+<!-- ==================================================================== -->
+<h2 id="g-eq"><span class="num">ב</span>משוואות — מהפשוטה ועד השברים</h2>
+<p class="grouplead">שבעה תרגילים בסדר עולה: משוואה בשני צעדים, סוגריים משני האגפים,
+מינוס לפני סוגריים, שתי משוואות עם שברים, משוואת יחס שפותרים בכפל מוצלב — ובסוף בדיקת פתרון.</p>
+
+<article class="ex" id="ex-b1">
+  <div class="ex-head"><span class="lvl">ב1</span><h4>משוואה בשני צעדים, ותשובה שלילית</h4></div>
+  <p class="q-text">פתרי את המשוואה: <span class="fi">\(9-2x=21\)</span>.</p>
+  <div class="q-row"><span>‏<span class="fi">\(x=\)</span></span>
+    <input class="q-input" data-answer="-6" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>מפנים לאגף אחד את האיבר עם הנעלם, ולשני את המספרים.</p>
+      $$\begin{aligned}
+      9-2\textcolor{#2563EB}{x} &amp;= 21 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{-9}}\\[3pt]
+      -2\textcolor{#2563EB}{x} &amp;= 12 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{:}\,({-2})}\\[3pt]
+      \textcolor{#2563EB}{x} &amp;= \mathbf{-6}
+      \end{aligned}$$
+      <p>בשורה האחרונה חילקנו במספר שלילי, ולכן <span class="fi">\(12:(-2)=-6\)</span>.</p>
+      <p><b>בדיקה</b> בהצבה במשוואה המקורית:
+      <br><span class="fi">\(9-2\cdot(-6)=9+12=21\)</span> ✓
+      <br>האגף השמאלי יצא 21, בדיוק כמו הימני.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="b1"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="ex-b2">
+  <div class="ex-head"><span class="lvl">ב2</span><h4>סוגריים בשני האגפים</h4></div>
+  <p class="q-text">פתרי את המשוואה: <span class="fi">\(4(x-3)=2(x+1)\)</span>.</p>
+  <div class="q-row"><span>‏<span class="fi">\(x=\)</span></span>
+    <input class="q-input" data-answer="7" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>קודם פותחים את הסוגריים בשני האגפים, ורק אז מתחילים להעביר.</p>
+      $$\begin{aligned}
+      4(\textcolor{#2563EB}{x}-3) &amp;= 2(\textcolor{#2563EB}{x}+1)\\[3pt]
+      4\textcolor{#2563EB}{x}-12 &amp;= 2\textcolor{#2563EB}{x}+2 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{-2x}}\\[3pt]
+      2\textcolor{#2563EB}{x}-12 &amp;= 2 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{+12}}\\[3pt]
+      2\textcolor{#2563EB}{x} &amp;= 14 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{:}\,2}\\[3pt]
+      \textcolor{#2563EB}{x} &amp;= \mathbf{7}
+      \end{aligned}$$
+      <p><b>בדיקה</b> — מציבים 7 בכל אגף בנפרד ומשווים את שתי התוצאות:
+      <br>אגף שמאל: <span class="fi">\(4(7-3)=4\cdot 4=16\)</span>
+      <br>אגף ימין: <span class="fi">\(2(7+1)=2\cdot 8=16\)</span> ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="b2"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="ex-b3">
+  <div class="ex-head"><span class="lvl">ב3</span><h4>מינוס לפני סוגריים בתוך משוואה</h4></div>
+  <p class="q-text">פתרי את המשוואה: <span class="fi">\(5x-2(x-4)=20\)</span>.</p>
+  <div class="q-row"><span>‏<span class="fi">\(x=\)</span></span>
+    <input class="q-input" data-answer="4" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>הכופל של הסוגריים הוא <span class="fi">\(-2\)</span>, ולכן
+      <span class="fi">\(-2\cdot(-4)=+8\)</span>.</p>
+      $$\begin{aligned}
+      5\textcolor{#2563EB}{x}-2(\textcolor{#2563EB}{x}-4) &amp;= 20\\[3pt]
+      5\textcolor{#2563EB}{x}-2\textcolor{#2563EB}{x}+8 &amp;= 20\\[3pt]
+      3\textcolor{#2563EB}{x}+8 &amp;= 20 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{-8}}\\[3pt]
+      3\textcolor{#2563EB}{x} &amp;= 12 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{:}\,3}\\[3pt]
+      \textcolor{#2563EB}{x} &amp;= \mathbf{4}
+      \end{aligned}$$
+      <p><b>בדיקה</b>: <span class="fi">\(5\cdot 4-2(4-4)=20-2\cdot 0=20\)</span> ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="b3"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="ex-b4">
+  <div class="ex-head"><span class="lvl">ב4</span><h4>משוואה עם שברים — מכנה משותף</h4></div>
+  <p class="q-text">פתרי את המשוואה:</p>
+  $$\frac{x+2}{4}-\frac{x-3}{6}=1$$
+  <div class="q-row"><span>‏<span class="fi">\(x=\)</span></span>
+    <input class="q-input" data-answer="0" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>המכנים הם 4 ו-6, והמכנה המשותף הקטן ביותר שלהם הוא 12.
+      <br>כופלים את <b>כל</b> המשוואה ב-12 — כולל את ה-1 שבאגף ימין — והשברים נעלמים.</p>
+      $$\begin{aligned}
+      \frac{\textcolor{#2563EB}{x}+2}{4}-\frac{\textcolor{#2563EB}{x}-3}{6} &amp;= 1
+        &amp;&amp;\qquad\textcolor{#C0392B}{/\;{\cdot}\,12}\\[5pt]
+      3(\textcolor{#2563EB}{x}+2)-2(\textcolor{#2563EB}{x}-3) &amp;= 12\\[3pt]
+      3\textcolor{#2563EB}{x}+6-2\textcolor{#2563EB}{x}+6 &amp;= 12\\[3pt]
+      \textcolor{#2563EB}{x}+12 &amp;= 12 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{-12}}\\[3pt]
+      \textcolor{#2563EB}{x} &amp;= \mathbf{0}
+      \end{aligned}$$
+      <p>‏<span class="fi">\(12:4=3\)</span> ולכן השבר הראשון קיבל כופל 3,
+      ו-<span class="fi">\(12:6=2\)</span> ולכן השני קיבל כופל 2.
+      <span class="aside">אפס הוא פתרון לכל דבר — מספר שמציבים ובודקים בדיוק כמו כל מספר אחר.</span></p>
+      <p><b>בדיקה</b> בהצבת <span class="fi">\(x=0\)</span> במשוואה המקורית:
+      <br><span class="fi">\(\frac{0+2}{4}-\frac{0-3}{6}=\frac{2}{4}-\frac{-3}{6}=\frac{1}{2}+\frac{1}{2}=1\)</span> ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="b4"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="ex-b5">
+  <div class="ex-head"><span class="lvl">ב5</span><h4>שברים בשלושה מכנים שונים</h4></div>
+  <p class="q-text">פתרי את המשוואה:</p>
+  $$\frac{2x-1}{5}-\frac{x-3}{2}=\frac{1}{10}$$
+  <div class="q-row"><span>‏<span class="fi">\(x=\)</span></span>
+    <input class="q-input" data-answer="12" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>המכנים 5, 2 ו-10 מתחלקים כולם ב-10, ולכן המכנה המשותף הוא 10.</p>
+      $$\begin{aligned}
+      \frac{2\textcolor{#2563EB}{x}-1}{5}-\frac{\textcolor{#2563EB}{x}-3}{2} &amp;= \frac{1}{10}
+        &amp;&amp;\qquad\textcolor{#C0392B}{/\;{\cdot}\,10}\\[5pt]
+      2(2\textcolor{#2563EB}{x}-1)-5(\textcolor{#2563EB}{x}-3) &amp;= 1\\[3pt]
+      4\textcolor{#2563EB}{x}-2-5\textcolor{#2563EB}{x}+15 &amp;= 1\\[3pt]
+      -\textcolor{#2563EB}{x}+13 &amp;= 1 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{-13}}\\[3pt]
+      -\textcolor{#2563EB}{x} &amp;= -12 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{\cdot}\,({-1})}\\[3pt]
+      \textcolor{#2563EB}{x} &amp;= \mathbf{12}
+      \end{aligned}$$
+      <p>הכופלים הגיעו מחלוקת המכנה המשותף בכל מכנה:
+      <span class="fi">\(10:5=2\)</span>, <span class="fi">\(10:2=5\)</span>,
+      <span class="fi">\(10:10=1\)</span>.</p>
+      <p><b>בדיקה</b> בהצבת <span class="fi">\(x=12\)</span>:
+      <br><span class="fi">\(\frac{2\cdot 12-1}{5}-\frac{12-3}{2}=\frac{23}{5}-\frac{9}{2}
+      =\frac{46}{10}-\frac{45}{10}=\frac{1}{10}\)</span> ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="b5"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="ex-b6">
+  <div class="ex-head"><span class="lvl">ב6</span><h4>שבר אחד מול שבר אחד — כפל מוצלב</h4></div>
+  <p class="q-text">פתרי את המשוואה:</p>
+  $$\frac{x+8}{4}=\frac{3x+4}{7}$$
+  <div class="q-row"><span>‏<span class="fi">\(x=\)</span></span>
+    <input class="q-input" data-answer="8" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>כשיש שבר אחד בכל אגף, כפל ב-28 (המכנה המשותף) שקול לכפל מוצלב:
+      המונה של אגף אחד כפול המכנה של האגף השני.</p>
+      $$\begin{aligned}
+      \frac{\textcolor{#2563EB}{x}+8}{4} &amp;= \frac{3\textcolor{#2563EB}{x}+4}{7}
+        &amp;&amp;\qquad\textcolor{#C0392B}{/\;{\cdot}\,28}\\[5pt]
+      7(\textcolor{#2563EB}{x}+8) &amp;= 4(3\textcolor{#2563EB}{x}+4)\\[3pt]
+      7\textcolor{#2563EB}{x}+56 &amp;= 12\textcolor{#2563EB}{x}+16 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{-7x}}\\[3pt]
+      56 &amp;= 5\textcolor{#2563EB}{x}+16 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{-16}}\\[3pt]
+      40 &amp;= 5\textcolor{#2563EB}{x} &amp;&amp;\qquad\textcolor{#C0392B}{/\;{:}\,5}\\[3pt]
+      \textcolor{#2563EB}{x} &amp;= \mathbf{8}
+      \end{aligned}$$
+      <p>העברנו את <span class="fi">\(7x\)</span> ימינה כדי שהמקדם של
+      <span class="fi">\(x\)</span> יישאר חיובי — כך אין צורך בחלוקה במספר שלילי בסוף.</p>
+      <p><b>בדיקה</b>: <span class="fi">\(\frac{8+8}{4}=\frac{16}{4}=4\)</span>
+      וגם <span class="fi">\(\frac{3\cdot 8+4}{7}=\frac{28}{7}=4\)</span> ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="b6"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="ex-b7">
+  <div class="ex-head"><span class="lvl">ב7</span><h4>בדיקת פתרון — איזה מבין שני המספרים פותר?</h4></div>
+  <p class="q-text">
+    נתונה המשוואה <span class="fi">\(5(x-1)=3x+7\)</span>.
+    <br>שני מספרים מוצעים כפתרון: <span class="fi">\(x=5\)</span> ו-<span class="fi">\(x=6\)</span>.
+    <br>בדקי בהצבה איזה מהם פותר את המשוואה — ואז פתרי אותה גם אלגברית.
+  </p>
+  <div class="q-row"><span>הפתרון הוא <span class="fi">\(x=\)</span></span>
+    <input class="q-input" data-answer="6" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>בדיקת פתרון היא תמיד אותו תהליך: מציבים בכל אגף בנפרד, ומשווים את שתי התוצאות.</p>
+      <table class="dtable sol-table">
+        <tr><th>הצבה</th><th>‏<span class="fi">\(5(x-1)\)</span></th><th>‏<span class="fi">\(3x+7\)</span></th><th></th></tr>
+        <tr><td>‏<span class="fi">\(x=5\)</span></td><td>‏<span class="fi">\(5\cdot 4=20\)</span></td>
+            <td>‏<span class="fi">\(15+7=22\)</span></td><td>‏20 מול 22 — האגפים שונים</td></tr>
+        <tr><td>‏<span class="fi">\(x=6\)</span></td><td class="hl-find">‏<span class="fi">\(5\cdot 5=25\)</span></td>
+            <td class="hl-find">‏<span class="fi">\(18+7=25\)</span></td><td>‏25 מול 25 — שווים ✓</td></tr>
+      </table>
+      <p>‏<span class="fi">\(x=6\)</span> הוא הפתרון.</p>
+      <p>ואותה תשובה בדיוק מתקבלת גם מפתרון רגיל של המשוואה:</p>
+      $$\begin{aligned}
+      5(\textcolor{#2563EB}{x}-1) &amp;= 3\textcolor{#2563EB}{x}+7\\[3pt]
+      5\textcolor{#2563EB}{x}-5 &amp;= 3\textcolor{#2563EB}{x}+7 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{-3x}}\\[3pt]
+      2\textcolor{#2563EB}{x}-5 &amp;= 7 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{+5}}\\[3pt]
+      2\textcolor{#2563EB}{x} &amp;= 12 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{:}\,2}\\[3pt]
+      \textcolor{#2563EB}{x} &amp;= \mathbf{6}
+      \end{aligned}$$
+      <p>למשוואה מהסוג הזה יש פתרון אחד ויחיד, ולכן די היה בכך ש-<span class="fi">\(x=6\)</span>
+      התאים כדי לדעת שהוא התשובה.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="b7"> סיימתי את התרגיל הזה</label>
+</article>
+
+<!-- ==================================================================== -->
+<!-- ========================= ג · בעיות מילוליות ======================= -->
+<!-- ==================================================================== -->
+<h2 id="g-word"><span class="num">ג</span>בעיות מילוליות — מהסיפור אל המשוואה</h2>
+<p class="grouplead">שש בעיות מהטיפוסים שחוזרים בדפי בית הספר: שתי בעיות גיל, מספרים עוקבים,
+קנייה של שני סוגים, תנועה של שני כלי רכב זה לקראת זה, ובעיית יחס עם עזיבה.
+בכל אחת שלב ה-<b>נסמן</b> פרוס לשורות — הגדרה אחת בכל שורה.</p>
+
+<div class="box intuition">
+  <div class="box-title">ארבעת הצעדים, בכל בעיה מילולית</div>
+  ‏1. נסמן — מחליטים מי הנעלם, ומבטאים כל שאר הגדלים דרכו. הגדרה אחת בכל שורה.
+  <br>‏2. בונים משוואה — מתרגמים את המשפט שאומר "בסך הכל" או "שווה" לשוויון.
+  <br>‏3. פותרים.
+  <br>‏4. חוזרים לשאלה — מה בדיוק ביקשו? ובודקים מול הסיפור, לא רק מול המשוואה.
+</div>
+
+<article class="ex" id="ex-c1">
+  <div class="ex-head"><span class="lvl">ג1</span><h4>בעיית גיל — "מבוגרת פי"</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">היום אמא מבוגרת מבתה פי 3.</span>
+    <span class="mk mk-change">בעוד 8 שנים היא תהיה מבוגרת ממנה פי 2.</span>
+    <span class="mk mk-find">בת כמה הבת היום?</span>
+  </p>
+  <div class="q-row"><span>גיל הבת היום:</span>
+    <input class="q-input" data-answer="8" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>גיל האם היום:</span>
+    <input class="q-input" data-answer="24" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p><b>נסמן</b> — הנעלם הוא הגיל שאותו מבקשים, כלומר גיל הבת:</p>
+      <div class="setup">
+        <span class="fi">\(\textcolor{#2563EB}{x}\)</span> — גיל הבת היום
+        <br><span class="fi">\(3\textcolor{#2563EB}{x}\)</span> — גיל האם היום
+        <br><span class="fi">\(\textcolor{#2563EB}{x}+8\)</span> — גיל הבת בעוד 8 שנים
+        <br><span class="fi">\(3\textcolor{#2563EB}{x}+8\)</span> — גיל האם בעוד 8 שנים
+      </div>
+      <p>בעוד 8 שנים <b>שתיהן</b> מתבגרות באותן 8 שנים — לכן כל אחד מהגילים מקבל
+      <span class="fi">\(+8\)</span>, כל אחד בנפרד.</p>
+      <p><b>המשוואה</b> מגיעה מהמשפט "תהיה מבוגרת ממנה פי 2":
+      גיל האם אז שווה לפעמיים גיל הבת אז.</p>
+      $$\begin{aligned}
+      3\textcolor{#2563EB}{x}+8 &amp;= 2(\textcolor{#2563EB}{x}+8)\\[3pt]
+      3\textcolor{#2563EB}{x}+8 &amp;= 2\textcolor{#2563EB}{x}+16 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{-2x}}\\[3pt]
+      \textcolor{#2563EB}{x}+8 &amp;= 16 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{-8}}\\[3pt]
+      \textcolor{#2563EB}{x} &amp;= \mathbf{8}
+      \end{aligned}$$
+      <p><b>חזרה לשאלה</b>: הבת בת <b>8</b>, והאם בת <span class="fi">\(3\cdot 8=\)</span> <b>24</b>.</p>
+      <p><b>בדיקה מול הסיפור</b> — בשני המשפטים שהשאלה נתנה:
+      <br>היום: <span class="fi">\(24=3\cdot 8\)</span> — פי 3 ✓
+      <br>בעוד 8 שנים: הבת בת 16, האם בת 32, ואכן <span class="fi">\(32=2\cdot 16\)</span> — פי 2 ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="c1"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="ex-c2">
+  <div class="ex-head"><span class="lvl">ג2</span><h4>בעיית גיל — הפרש קבוע וסכום בעבר</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">יוסי מבוגר מאחיו ב-5 שנים.</span>
+    <span class="mk mk-change">לפני 3 שנים סכום גילאיהם היה 25.</span>
+    <span class="mk mk-find">בני כמה הם היום?</span>
+  </p>
+  <div class="q-row"><span>גיל האח:</span>
+    <input class="q-input" data-answer="13" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>גיל יוסי:</span>
+    <input class="q-input" data-answer="18" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p><b>נסמן</b> — נוח לסמן את הצעיר, כי אז גיל השני נכתב בחיבור:</p>
+      <div class="setup">
+        <span class="fi">\(\textcolor{#2563EB}{x}\)</span> — גיל האח היום
+        <br><span class="fi">\(\textcolor{#2563EB}{x}+5\)</span> — גיל יוסי היום
+        <br><span class="fi">\(\textcolor{#2563EB}{x}-3\)</span> — גיל האח לפני 3 שנים
+        <br><span class="fi">\(\textcolor{#2563EB}{x}+5-3=\textcolor{#2563EB}{x}+2\)</span> — גיל יוסי לפני 3 שנים
+      </div>
+      <p>"לפני" פירושו להחסיר 3 מכל אחד מהגילים.</p>
+      <p><b>המשוואה</b> — סכום שני הגילים <em>לפני 3 שנים</em> היה 25:</p>
+      $$\begin{aligned}
+      (\textcolor{#2563EB}{x}-3)+(\textcolor{#2563EB}{x}+2) &amp;= 25\\[3pt]
+      2\textcolor{#2563EB}{x}-1 &amp;= 25 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{+1}}\\[3pt]
+      2\textcolor{#2563EB}{x} &amp;= 26 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{:}\,2}\\[3pt]
+      \textcolor{#2563EB}{x} &amp;= \mathbf{13}
+      \end{aligned}$$
+      <p><b>חזרה לשאלה</b>: האח בן <b>13</b>, ויוסי בן <span class="fi">\(13+5=\)</span> <b>18</b>.</p>
+      <p><b>בדיקה מול הסיפור</b>:
+      <br>ההפרש היום: <span class="fi">\(18-13=5\)</span> ✓
+      <br>לפני 3 שנים הם היו בני 10 ו-15, וסכומם <span class="fi">\(10+15=25\)</span> ✓</p>
+      <p class="aside">שימי לב שההפרש 5 נשמר גם בעבר — הפרש גילים לא משתנה עם השנים,
+      וזו בדיקה מהירה שאפשר לעשות בכל בעיית גיל.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="c2"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="ex-c3">
+  <div class="ex-head"><span class="lvl">ג3</span><h4>שלושה מספרים עוקבים</h4></div>
+  <p class="q-text">
+    <span class="mk mk-total">סכומם של שלושה מספרים שלמים עוקבים הוא 84.</span>
+    <span class="mk mk-find">מצאי את שלושת המספרים.</span>
+  </p>
+  <div class="q-row"><span>המספר הקטן:</span>
+    <input class="q-input" data-answer="27" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>המספר הגדול:</span>
+    <input class="q-input" data-answer="29" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>"עוקבים" פירושו שכל אחד גדול מקודמו ב-1, כמו 12, 13, 14.</p>
+      <p><b>נסמן</b> לפי הקטן שבהם:</p>
+      <div class="setup">
+        <span class="fi">\(\textcolor{#2563EB}{x}\)</span> — המספר הקטן
+        <br><span class="fi">\(\textcolor{#2563EB}{x}+1\)</span> — המספר האמצעי
+        <br><span class="fi">\(\textcolor{#2563EB}{x}+2\)</span> — המספר הגדול
+      </div>
+      $$\begin{aligned}
+      \textcolor{#2563EB}{x}+(\textcolor{#2563EB}{x}+1)+(\textcolor{#2563EB}{x}+2) &amp;= 84\\[3pt]
+      3\textcolor{#2563EB}{x}+3 &amp;= 84 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{-3}}\\[3pt]
+      3\textcolor{#2563EB}{x} &amp;= 81 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{:}\,3}\\[3pt]
+      \textcolor{#2563EB}{x} &amp;= \mathbf{27}
+      \end{aligned}$$
+      <p><b>חזרה לשאלה</b>: שלושת המספרים הם <b>27, 28, 29</b>.</p>
+      <p><b>בדיקה</b>: <span class="fi">\(27+28+29=84\)</span> ✓</p>
+      <p class="aside">‏84 מתחלק ב-3 ונותן 28 — האמצעי. בשלושה מספרים עוקבים האמצעי הוא תמיד
+      הסכום חלקי 3, וזו דרך מהירה לבדוק את התשובה.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="c3"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="ex-c4">
+  <div class="ex-head"><span class="lvl">ג4</span><h4>קנייה של שני סוגים — כמות כוללת ידועה</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">מחברת עולה 8&nbsp;₪ ועט עולה 5&nbsp;₪.</span>
+    <span class="mk mk-total">שירה קנתה 12 פריטים בסך הכל</span>
+    <span class="mk mk-given2">ושילמה 78&nbsp;₪.</span>
+    <span class="mk mk-find">כמה מחברות וכמה עטים קנתה?</span>
+  </p>
+  <div class="q-row"><span>מחברות:</span>
+    <input class="q-input" data-answer="6" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>עטים:</span>
+    <input class="q-input" data-answer="6" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>הכמות הכוללת ידועה — 12 פריטים. לכן אפשר לסמן נעלם אחד בלבד:
+      אם ידוע כמה מחברות, כל השאר עטים.</p>
+      <div class="setup">
+        <span class="fi">\(\textcolor{#2563EB}{x}\)</span> — מספר המחברות
+        <br><span class="fi">\(12-\textcolor{#2563EB}{x}\)</span> — מספר העטים
+        <br><span class="fi">\(8\textcolor{#2563EB}{x}\)</span> — התשלום על המחברות, בשקלים
+        <br><span class="fi">\(5(12-\textcolor{#2563EB}{x})\)</span> — התשלום על העטים, בשקלים
+      </div>
+      <p><b>המשוואה</b> — שני התשלומים יחד הם 78&nbsp;₪:</p>
+      $$\begin{aligned}
+      8\textcolor{#2563EB}{x}+5(12-\textcolor{#2563EB}{x}) &amp;= 78\\[3pt]
+      8\textcolor{#2563EB}{x}+60-5\textcolor{#2563EB}{x} &amp;= 78\\[3pt]
+      3\textcolor{#2563EB}{x}+60 &amp;= 78 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{-60}}\\[3pt]
+      3\textcolor{#2563EB}{x} &amp;= 18 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{:}\,3}\\[3pt]
+      \textcolor{#2563EB}{x} &amp;= \mathbf{6}
+      \end{aligned}$$
+      <p><b>חזרה לשאלה</b>: <b>6 מחברות</b>, ולכן <span class="fi">\(12-6=\)</span> <b>6 עטים</b>.</p>
+      <table class="dtable sol-table">
+        <tr><th>פריט</th><th>כמות</th><th>מחיר ליחידה</th><th>תשלום</th></tr>
+        <tr><td>מחברת</td><td>6</td><td>‏8&nbsp;₪</td><td class="hl-group">‏48&nbsp;₪</td></tr>
+        <tr><td>עט</td><td>6</td><td>‏5&nbsp;₪</td><td class="hl-group">‏30&nbsp;₪</td></tr>
+        <tr><td>סה"כ</td><td>12</td><td>—</td><td class="hl-total">‏78&nbsp;₪</td></tr>
+      </table>
+      <p><b>בדיקה</b>: הכמות 12 ✓, והתשלום <span class="fi">\(48+30=78\)</span> ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="c4"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="ex-c5">
+  <div class="ex-head"><span class="lvl">ג5</span><h4>תנועה — שני רכבים זה לקראת זה</h4></div>
+  <p class="q-text">
+    <span class="mk mk-total">המרחק בין העיר <span class="en">A</span> לעיר <span class="en">B</span> הוא 300&nbsp;ק"מ.</span>
+    <span class="mk mk-given">מ-<span class="en">A</span> יצאה משאית במהירות 60&nbsp;קמ"ש,</span>
+    <span class="mk mk-given2">ובאותה שעה יצאה מ-<span class="en">B</span> לקראתה מכונית במהירות 90&nbsp;קמ"ש.</span>
+    <span class="mk mk-find">אחרי כמה שעות ייפגשו, ובאיזה מרחק מ-<span class="en">A</span>?</span>
+  </p>
+  <div class="q-row"><span>ייפגשו אחרי (שעות):</span>
+    <input class="q-input" data-answer="2" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>מרחק מ-<span class="en">A</span> (ק"מ):</span>
+    <input class="q-input" data-answer="120" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>בבעיות תנועה עובדים עם הקשר <b>מרחק = מהירות × זמן</b>.
+      <br>שני הרכבים יצאו באותה שעה, ולכן עד המפגש כל אחד מהם נסע <em>אותו</em> משך זמן.</p>
+      <div class="setup">
+        <span class="fi">\(\textcolor{#2563EB}{t}\)</span> — מספר השעות עד המפגש
+        <br><span class="fi">\(60\textcolor{#2563EB}{t}\)</span> — המרחק שעברה המשאית, בק"מ
+        <br><span class="fi">\(90\textcolor{#2563EB}{t}\)</span> — המרחק שעברה המכונית, בק"מ
+      </div>
+      <p><b>המשוואה</b> — ברגע המפגש שני המרחקים יחד מכסים את כל 300 הק"מ שביניהם:</p>
+      $$\begin{aligned}
+      60\textcolor{#2563EB}{t}+90\textcolor{#2563EB}{t} &amp;= 300\\[3pt]
+      150\textcolor{#2563EB}{t} &amp;= 300 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{:}\,150}\\[3pt]
+      \textcolor{#2563EB}{t} &amp;= \mathbf{2}
+      \end{aligned}$$
+      <p><b>חזרה לשאלה</b>: הם נפגשים אחרי <b>שעתיים</b>,
+      במרחק <span class="fi">\(60\cdot 2=\)</span> <b>‏120&nbsp;ק"מ</b> מ-<span class="en">A</span>.</p>
+      <figure class="mini">
+        <svg viewBox="0 0 500 96" style="width:100%;max-width:500px;height:auto" role="img" aria-label="road from A to B, meeting point after 120 km">
+  <line x1="34" y1="44" x2="466" y2="44" stroke="#5A6875" stroke-width="3"/>
+  <line x1="34" y1="32" x2="34" y2="56" stroke="#5A6875" stroke-width="2.4"/>
+  <text x="34" y="24" text-anchor="middle" font-family="Arial" font-size="13" font-weight="800" fill="#1C2733">A</text>
+  <line x1="466" y1="32" x2="466" y2="56" stroke="#5A6875" stroke-width="2.4"/>
+  <text x="466" y="24" text-anchor="middle" font-family="Arial" font-size="13" font-weight="800" fill="#1C2733">B</text>
+  <line x1="206.8" y1="30" x2="206.8" y2="58" stroke="#EA580C" stroke-width="2" stroke-dasharray="5 4"/>
+  <circle cx="206.8" cy="44" r="6.5" fill="#EA580C" stroke="#fff" stroke-width="2"/>
+  <text x="206.8" y="22" text-anchor="middle" font-family="Arial" font-size="12" font-weight="800" fill="#EA580C" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3.5">t = 2</text>
+  <line x1="38" y1="70" x2="192.8" y2="70" stroke="#2563EB" stroke-width="2.6"/>
+  <polygon points="204.8,70 190.8,64 190.8,76" fill="#2563EB"/>
+  <text x="120.4" y="86" text-anchor="middle" font-family="Arial" font-size="11.5" font-weight="700" fill="#2563EB">120 km</text>
+  <line x1="462" y1="70" x2="220.8" y2="70" stroke="#7C3AED" stroke-width="2.6"/>
+  <polygon points="208.8,70 222.8,64 222.8,76" fill="#7C3AED"/>
+  <text x="336.4" y="86" text-anchor="middle" font-family="Arial" font-size="11.5" font-weight="700" fill="#7C3AED">180 km</text>
+  <text x="250" y="12" text-anchor="middle" font-family="Arial" font-size="11.5" font-weight="700" fill="#5A6875">300 km</text>
+</svg>
+        <figcaption>‏300 הק"מ מתחלקים בין שני הרכבים: המשאית עשתה 120&nbsp;ק"מ בשעתיים,
+        המכונית עשתה 180&nbsp;ק"מ באותן שעתיים, ושם — בנקודה הכתומה — הם נפגשו.</figcaption>
+      </figure>
+      <p><b>בדיקה</b>: <span class="fi">\(120+180=300\)</span> ✓
+      <br>וגם המרחק של כל אחד מתאים למהירות שלו:
+      <span class="fi">\(120:2=60\)</span> קמ"ש ו-<span class="fi">\(180:2=90\)</span> קמ"ש ✓</p>
+      <p class="aside">המכונית מהירה יותר, ולכן עברה את החלק הגדול מהדרך — והמפגש קרוב יותר ל-<span class="en">A</span>.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="c5"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="ex-c6">
+  <div class="ex-head"><span class="lvl">ג6</span><h4>יחס בין שתי קבוצות, ואנשים שעוזבים</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">באולם מספר הגברים גדול פי 3 ממספר הנשים.</span>
+    <span class="mk mk-change">‏10 גברים ו-2 נשים עזבו את האולם,</span>
+    <span class="mk mk-given2">ואז נשארו באולם גברים ונשים במספרים שווים.</span>
+    <span class="mk mk-find">כמה גברים וכמה נשים היו באולם בהתחלה?</span>
+  </p>
+  <div class="q-row"><span>נשים בהתחלה:</span>
+    <input class="q-input" data-answer="4" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>גברים בהתחלה:</span>
+    <input class="q-input" data-answer="12" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p><b>נסמן</b> לפי הקבוצה הקטנה — הנשים — כדי שהיחס "פי 3" ייכתב בכפל ולא בשבר:</p>
+      <div class="setup">
+        <span class="fi">\(\textcolor{#2563EB}{x}\)</span> — מספר הנשים בהתחלה
+        <br><span class="fi">\(3\textcolor{#2563EB}{x}\)</span> — מספר הגברים בהתחלה
+        <br><span class="fi">\(\textcolor{#2563EB}{x}-2\)</span> — מספר הנשים שנשארו
+        <br><span class="fi">\(3\textcolor{#2563EB}{x}-10\)</span> — מספר הגברים שנשארו
+      </div>
+      <p><b>המשוואה</b> מגיעה מהמשפט האחרון — אחרי העזיבה שני המספרים שווים:</p>
+      $$\begin{aligned}
+      3\textcolor{#2563EB}{x}-10 &amp;= \textcolor{#2563EB}{x}-2 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{-x}}\\[3pt]
+      2\textcolor{#2563EB}{x}-10 &amp;= -2 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{+10}}\\[3pt]
+      2\textcolor{#2563EB}{x} &amp;= 8 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{:}\,2}\\[3pt]
+      \textcolor{#2563EB}{x} &amp;= \mathbf{4}
+      \end{aligned}$$
+      <p><b>חזרה לשאלה</b>: בהתחלה היו <b>4 נשים</b> ו-<span class="fi">\(3\cdot 4=\)</span> <b>12 גברים</b>.</p>
+      <table class="dtable sol-table">
+        <tr><th></th><th>בהתחלה</th><th>עזבו</th><th>נשארו</th></tr>
+        <tr><td>נשים</td><td>4</td><td>2</td><td class="hl-find">2</td></tr>
+        <tr><td>גברים</td><td>12</td><td>10</td><td class="hl-find">2</td></tr>
+      </table>
+      <p><b>בדיקה מול הסיפור</b>:
+      <br>בהתחלה <span class="fi">\(12=3\cdot 4\)</span> — פי 3 ✓
+      <br>אחרי העזיבה נשארו 2 ו-2 — מספרים שווים ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="c6"> סיימתי את התרגיל הזה</label>
+</article>
+
+
+<!-- ==================================================================== -->
+<!-- ====================== ד · אי-שוויונות ותחום ======================= -->
+<!-- ==================================================================== -->
+<h2 id="g-ineq"><span class="num">ד</span>אי-שוויונות ותחום הצבה</h2>
+<p class="grouplead">שישה תרגילים. אי-שוויון נפתר בדיוק כמו משוואה, עם כלל אחד נוסף:
+בכפל או בחילוק במספר שלילי — סימן האי-שוויון מתהפך.
+כל תשובה כאן מסומנת גם על ציר המספרים.</p>
+
+<div class="box warn">
+  <div class="box-title">איך קוראים את הסימון על הציר</div>
+  עיגול <b>מלא</b> — הערך עצמו נכלל בפתרון (<span class="fi">\(\le\)</span> או <span class="fi">\(\ge\)</span>).
+  <br>עיגול <b>ריק</b> — הערך עצמו אינו נכלל (<span class="fi">\(\lt\)</span> או <span class="fi">\(\gt\)</span>).
+  <br>החץ מראה לאיזה כיוון נמשכים הפתרונות, עד אינסוף.
+</div>
+
+<article class="ex" id="ex-d1">
+  <div class="ex-head"><span class="lvl">ד1</span><h4>אי-שוויון בשני צעדים</h4></div>
+  <p class="q-text">
+    פתרי את האי-שוויון <span class="fi">\(3x-7\lt 8\)</span> וסמני את הפתרון על ציר המספרים.
+  </p>
+  <div class="q-row">
+    <span>הפתרון הוא</span>
+    <span style="direction:ltr;unicode-bidi:isolate;display:inline-flex;align-items:center;gap:8px"><span class="fi">\(x\lt\)</span><input class="q-input" data-answer="5" data-tol="0.001" inputmode="decimal" placeholder="?"></span>
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>שתי הפעולות כאן הן חיבור וחילוק במספר חיובי, ולכן הסימן נשאר כמו שהוא.</p>
+      $$\begin{aligned}
+      3\textcolor{#2563EB}{x}-7 &amp;\lt 8 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{+7}}\\[3pt]
+      3\textcolor{#2563EB}{x} &amp;\lt 15 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{:}\,3}\\[3pt]
+      \textcolor{#2563EB}{x} &amp;\lt \mathbf{5}
+      \end{aligned}$$
+      <figure class="mini">
+        <svg viewBox="0 0 460 66" style="width:100%;max-width:460px;height:auto" role="img" aria-label="number line">
+  <line x1="14" y1="36" x2="446" y2="36" stroke="#5A6875" stroke-width="2"/>
+  <g stroke="#5A6875" stroke-width="1.6"><line x1="26" y1="31" x2="26" y2="41"/><line x1="71.33" y1="31" x2="71.33" y2="41"/><line x1="116.67" y1="31" x2="116.67" y2="41"/><line x1="162" y1="31" x2="162" y2="41"/><line x1="207.33" y1="31" x2="207.33" y2="41"/><line x1="252.67" y1="31" x2="252.67" y2="41"/><line x1="298" y1="31" x2="298" y2="41"/><line x1="343.33" y1="31" x2="343.33" y2="41"/><line x1="388.67" y1="31" x2="388.67" y2="41"/><line x1="434" y1="31" x2="434" y2="41"/></g>
+  <g font-family="Arial" font-size="11" fill="#5A6875"><text x="26" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">0</text><text x="71.33" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">1</text><text x="116.67" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">2</text><text x="162" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">3</text><text x="207.33" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">4</text><text x="252.67" y="57" text-anchor="middle" font-size="12.5" font-weight="800" fill="#1C2733">5</text><text x="298" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">6</text><text x="343.33" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">7</text><text x="388.67" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">8</text><text x="434" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">9</text></g>
+  <line x1="22" y1="36" x2="252.67" y2="36" stroke="#2563EB" stroke-width="5.5"/>
+  <polygon points="6,36 24,29 24,43" fill="#2563EB"/>
+  <circle cx="252.67" cy="36" r="7" fill="#FFFFFF" stroke="#2563EB" stroke-width="3.2"/>
+  <text x="252.67" y="21" text-anchor="middle" font-family="Arial" font-size="13" font-weight="800" fill="#2563EB" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3.5">x < 5</text>
+</svg>
+        <figcaption>כל המספרים הקטנים מ-5 פותרים.
+        העיגול ב-5 <b>ריק</b>, כי הסימן הוא <span class="fi">\(\lt\)</span> ולא <span class="fi">\(\le\)</span>.</figcaption>
+      </figure>
+      <p><b>בדיקה בשתי הצבות</b> — אחת מתוך התחום ואחת מחוצה לו:
+      <br><span class="fi">\(x=4\)</span>: ‏<span class="fi">\(3\cdot 4-7=5\)</span>, וגם
+      <span class="fi">\(5\lt 8\)</span> ✓ — 4 אכן פותר
+      <br><span class="fi">\(x=6\)</span>: ‏<span class="fi">\(3\cdot 6-7=11\)</span>, ו-<span class="fi">\(11\)</span>
+      גדול מ-8 — 6 אינו פותר, כפי שהתשובה אומרת ✓</p>
+      <p class="aside">גבול התחום, <span class="fi">\(x=5\)</span>, נותן בדיוק
+      <span class="fi">\(3\cdot 5-7=8\)</span> — שווה ל-8, ולכן אינו נכלל.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="d1"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="ex-d2">
+  <div class="ex-head"><span class="lvl">ד2</span><h4>חילוק במספר שלילי — הסימן מתהפך</h4></div>
+  <p class="q-text">
+    פתרי את האי-שוויון <span class="fi">\(-4x+3\ge 19\)</span> וסמני את הפתרון על ציר המספרים.
+  </p>
+  <div class="q-row">
+    <span>הפתרון הוא</span>
+    <span style="direction:ltr;unicode-bidi:isolate;display:inline-flex;align-items:center;gap:8px"><span class="fi">\(x\le\)</span><input class="q-input" data-answer="-4" data-tol="0.001" inputmode="decimal" placeholder="?"></span>
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      $$\begin{aligned}
+      -4\textcolor{#2563EB}{x}+3 &amp;\ge 19 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{-3}}\\[3pt]
+      -4\textcolor{#2563EB}{x} &amp;\ge 16 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{:}\,({-4})\;\;\text{— הסימן מתהפך}}\\[3pt]
+      \textcolor{#2563EB}{x} &amp;\le \mathbf{-4}
+      \end{aligned}$$
+      <p>בשורה האחרונה חילקנו ב-<span class="fi">\(-4\)</span>, ולכן
+      <span class="fi">\(\ge\)</span> נעשה <span class="fi">\(\le\)</span>.
+      <br>הסיבה: כפל בשלילי מסדר את המספרים על הציר בסדר הפוך —
+      ‏<span class="fi">\(2\lt 5\)</span>, אבל <span class="fi">\(-2\gt -5\)</span>.</p>
+      <figure class="mini">
+        <svg viewBox="0 0 460 66" style="width:100%;max-width:460px;height:auto" role="img" aria-label="number line">
+  <line x1="14" y1="36" x2="446" y2="36" stroke="#5A6875" stroke-width="2"/>
+  <g stroke="#5A6875" stroke-width="1.6"><line x1="26" y1="31" x2="26" y2="41"/><line x1="71.33" y1="31" x2="71.33" y2="41"/><line x1="116.67" y1="31" x2="116.67" y2="41"/><line x1="162" y1="31" x2="162" y2="41"/><line x1="207.33" y1="31" x2="207.33" y2="41"/><line x1="252.67" y1="31" x2="252.67" y2="41"/><line x1="298" y1="31" x2="298" y2="41"/><line x1="343.33" y1="31" x2="343.33" y2="41"/><line x1="388.67" y1="31" x2="388.67" y2="41"/><line x1="434" y1="31" x2="434" y2="41"/></g>
+  <g font-family="Arial" font-size="11" fill="#5A6875"><text x="26" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">−9</text><text x="71.33" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">−8</text><text x="116.67" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">−7</text><text x="162" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">−6</text><text x="207.33" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">−5</text><text x="252.67" y="57" text-anchor="middle" font-size="12.5" font-weight="800" fill="#1C2733">−4</text><text x="298" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">−3</text><text x="343.33" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">−2</text><text x="388.67" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">−1</text><text x="434" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">0</text></g>
+  <line x1="22" y1="36" x2="252.67" y2="36" stroke="#2563EB" stroke-width="5.5"/>
+  <polygon points="6,36 24,29 24,43" fill="#2563EB"/>
+  <circle cx="252.67" cy="36" r="7" fill="#2563EB" stroke="#FFFFFF" stroke-width="2.4"/>
+  <text x="252.67" y="21" text-anchor="middle" font-family="Arial" font-size="13" font-weight="800" fill="#2563EB" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3.5">x ≤ −4</text>
+</svg>
+        <figcaption>כל המספרים מ-<span class="fi">\(-4\)</span> ומטה פותרים.
+        העיגול <b>מלא</b>, כי הסימן <span class="fi">\(\le\)</span> כולל גם את
+        <span class="fi">\(-4\)</span> עצמו.</figcaption>
+      </figure>
+      <p><b>בדיקה בשתי הצבות</b>:
+      <br><span class="fi">\(x=-5\)</span>: ‏<span class="fi">\(-4(-5)+3=23\)</span>, וגם
+      <span class="fi">\(23\ge 19\)</span> ✓
+      <br><span class="fi">\(x=-3\)</span>: ‏<span class="fi">\(-4(-3)+3=15\)</span>, ו-15 קטן מ-19 —
+      ‏<span class="fi">\(-3\)</span> אינו פותר ✓
+      <br>ובגבול <span class="fi">\(x=-4\)</span>: ‏<span class="fi">\(-4(-4)+3=19\)</span> — שווה בדיוק,
+      ולכן נכלל ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="d2"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="ex-d3">
+  <div class="ex-head"><span class="lvl">ד3</span><h4>אי-שוויון עם סוגריים ומינוס</h4></div>
+  <p class="q-text">
+    פתרי את האי-שוויון <span class="fi">\(5(x-2)-(2x+1)\gt 7\)</span>.
+  </p>
+  <div class="q-row">
+    <span>הפתרון הוא</span>
+    <span style="direction:ltr;unicode-bidi:isolate;display:inline-flex;align-items:center;gap:8px"><span class="fi">\(x\gt\)</span><input class="q-input" data-answer="6" data-tol="0.001" inputmode="decimal" placeholder="?"></span>
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>קודם פותחים את שתי הסוגריים. לפני הסוגריים השניים יש מינוס בודד,
+      ולכן שני האיברים שבפנים יוצאים עם הסימן ההפוך.</p>
+      $$\begin{aligned}
+      5(\textcolor{#2563EB}{x}-2)-(2\textcolor{#2563EB}{x}+1) &amp;\gt 7\\[3pt]
+      5\textcolor{#2563EB}{x}-10-2\textcolor{#2563EB}{x}-1 &amp;\gt 7\\[3pt]
+      3\textcolor{#2563EB}{x}-11 &amp;\gt 7 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{+11}}\\[3pt]
+      3\textcolor{#2563EB}{x} &amp;\gt 18 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{:}\,3}\\[3pt]
+      \textcolor{#2563EB}{x} &amp;\gt \mathbf{6}
+      \end{aligned}$$
+      <figure class="mini">
+        <svg viewBox="0 0 460 66" style="width:100%;max-width:460px;height:auto" role="img" aria-label="number line">
+  <line x1="14" y1="36" x2="446" y2="36" stroke="#5A6875" stroke-width="2"/>
+  <g stroke="#5A6875" stroke-width="1.6"><line x1="26" y1="31" x2="26" y2="41"/><line x1="71.33" y1="31" x2="71.33" y2="41"/><line x1="116.67" y1="31" x2="116.67" y2="41"/><line x1="162" y1="31" x2="162" y2="41"/><line x1="207.33" y1="31" x2="207.33" y2="41"/><line x1="252.67" y1="31" x2="252.67" y2="41"/><line x1="298" y1="31" x2="298" y2="41"/><line x1="343.33" y1="31" x2="343.33" y2="41"/><line x1="388.67" y1="31" x2="388.67" y2="41"/><line x1="434" y1="31" x2="434" y2="41"/></g>
+  <g font-family="Arial" font-size="11" fill="#5A6875"><text x="26" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">1</text><text x="71.33" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">2</text><text x="116.67" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">3</text><text x="162" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">4</text><text x="207.33" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">5</text><text x="252.67" y="57" text-anchor="middle" font-size="12.5" font-weight="800" fill="#1C2733">6</text><text x="298" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">7</text><text x="343.33" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">8</text><text x="388.67" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">9</text><text x="434" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">10</text></g>
+  <line x1="252.67" y1="36" x2="438" y2="36" stroke="#2563EB" stroke-width="5.5"/>
+  <polygon points="454,36 436,29 436,43" fill="#2563EB"/>
+  <circle cx="252.67" cy="36" r="7" fill="#FFFFFF" stroke="#2563EB" stroke-width="3.2"/>
+  <text x="252.67" y="21" text-anchor="middle" font-family="Arial" font-size="13" font-weight="800" fill="#2563EB" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3.5">x > 6</text>
+</svg>
+        <figcaption>הפתרונות הם כל המספרים הגדולים מ-6, והחץ ממשיך ימינה עד אינסוף.</figcaption>
+      </figure>
+      <p><b>בדיקה בשתי הצבות</b>:
+      <br><span class="fi">\(x=7\)</span>: ‏<span class="fi">\(5\cdot 5-15=25-15=10\)</span>,
+      וגם <span class="fi">\(10\gt 7\)</span> ✓
+      <br><span class="fi">\(x=5\)</span>: ‏<span class="fi">\(5\cdot 3-11=15-11=4\)</span>,
+      ו-4 קטן מ-7 — 5 אינו פותר ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="d3"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="ex-d4">
+  <div class="ex-head"><span class="lvl">ד4</span><h4>אי-שוויון עם שברים</h4></div>
+  <p class="q-text">פתרי את האי-שוויון:</p>
+  $$\frac{2x-1}{3}\le\frac{x+2}{2}$$
+  <div class="q-row">
+    <span>הפתרון הוא</span>
+    <span style="direction:ltr;unicode-bidi:isolate;display:inline-flex;align-items:center;gap:8px"><span class="fi">\(x\le\)</span><input class="q-input" data-answer="8" data-tol="0.001" inputmode="decimal" placeholder="?"></span>
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>המכנה המשותף של 3 ו-2 הוא 6.
+      <br>‏6 הוא מספר חיובי, ולכן הכפל בו <b>אינו</b> משנה את כיוון הסימן.</p>
+      $$\begin{aligned}
+      \frac{2\textcolor{#2563EB}{x}-1}{3} &amp;\le \frac{\textcolor{#2563EB}{x}+2}{2}
+        &amp;&amp;\qquad\textcolor{#C0392B}{/\;{\cdot}\,6}\\[5pt]
+      2(2\textcolor{#2563EB}{x}-1) &amp;\le 3(\textcolor{#2563EB}{x}+2)\\[3pt]
+      4\textcolor{#2563EB}{x}-2 &amp;\le 3\textcolor{#2563EB}{x}+6 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{-3x}}\\[3pt]
+      \textcolor{#2563EB}{x}-2 &amp;\le 6 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{+2}}\\[3pt]
+      \textcolor{#2563EB}{x} &amp;\le \mathbf{8}
+      \end{aligned}$$
+      <figure class="mini">
+        <svg viewBox="0 0 460 66" style="width:100%;max-width:460px;height:auto" role="img" aria-label="number line">
+  <line x1="14" y1="36" x2="446" y2="36" stroke="#5A6875" stroke-width="2"/>
+  <g stroke="#5A6875" stroke-width="1.6"><line x1="26" y1="31" x2="26" y2="41"/><line x1="71.33" y1="31" x2="71.33" y2="41"/><line x1="116.67" y1="31" x2="116.67" y2="41"/><line x1="162" y1="31" x2="162" y2="41"/><line x1="207.33" y1="31" x2="207.33" y2="41"/><line x1="252.67" y1="31" x2="252.67" y2="41"/><line x1="298" y1="31" x2="298" y2="41"/><line x1="343.33" y1="31" x2="343.33" y2="41"/><line x1="388.67" y1="31" x2="388.67" y2="41"/><line x1="434" y1="31" x2="434" y2="41"/></g>
+  <g font-family="Arial" font-size="11" fill="#5A6875"><text x="26" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">3</text><text x="71.33" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">4</text><text x="116.67" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">5</text><text x="162" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">6</text><text x="207.33" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">7</text><text x="252.67" y="57" text-anchor="middle" font-size="12.5" font-weight="800" fill="#1C2733">8</text><text x="298" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">9</text><text x="343.33" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">10</text><text x="388.67" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">11</text><text x="434" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">12</text></g>
+  <line x1="22" y1="36" x2="252.67" y2="36" stroke="#2563EB" stroke-width="5.5"/>
+  <polygon points="6,36 24,29 24,43" fill="#2563EB"/>
+  <circle cx="252.67" cy="36" r="7" fill="#2563EB" stroke="#FFFFFF" stroke-width="2.4"/>
+  <text x="252.67" y="21" text-anchor="middle" font-family="Arial" font-size="13" font-weight="800" fill="#2563EB" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3.5">x ≤ 8</text>
+</svg>
+        <figcaption>‏8 עצמו נכלל — העיגול מלא — וכל מה שמשמאלו פותר גם הוא.</figcaption>
+      </figure>
+      <p><b>בדיקה בשתי הצבות</b>:
+      <br><span class="fi">\(x=7\)</span>: ‏<span class="fi">\(\frac{13}{3}\approx 4.33\)</span> מול
+      <span class="fi">\(\frac{9}{2}=4.5\)</span> — השמאלי קטן יותר ✓
+      <br><span class="fi">\(x=9\)</span>: ‏<span class="fi">\(\frac{17}{3}\approx 5.67\)</span> מול
+      <span class="fi">\(\frac{11}{2}=5.5\)</span> — השמאלי גדול יותר, ולכן 9 אינו פותר ✓
+      <br>ובגבול <span class="fi">\(x=8\)</span>: ‏<span class="fi">\(\frac{15}{3}=5\)</span> ו-<span class="fi">\(\frac{10}{2}=5\)</span> —
+      שווים בדיוק, ולכן 8 נכלל ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="d4"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="ex-d5">
+  <div class="ex-head"><span class="lvl">ד5</span><h4>שבר עם מינוס בתוכו — ההיפוך מגיע בשורה האחרונה</h4></div>
+  <p class="q-text">פתרי את האי-שוויון:</p>
+  $$\frac{4-3x}{2}\gt 5$$
+  <div class="q-row">
+    <span>הפתרון הוא</span>
+    <span style="direction:ltr;unicode-bidi:isolate;display:inline-flex;align-items:center;gap:8px"><span class="fi">\(x\lt\)</span><input class="q-input" data-answer="-2" data-tol="0.001" inputmode="decimal" placeholder="?"></span>
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>שתי פעולות כאן, וכדאי להבחין ביניהן: הכפל ב-2 חיובי (הסימן נשמר),
+      והחילוק ב-<span class="fi">\(-3\)</span> שלילי (הסימן מתהפך).</p>
+      $$\begin{aligned}
+      \frac{4-3\textcolor{#2563EB}{x}}{2} &amp;\gt 5 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{\cdot}\,2}\\[5pt]
+      4-3\textcolor{#2563EB}{x} &amp;\gt 10 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{-4}}\\[3pt]
+      -3\textcolor{#2563EB}{x} &amp;\gt 6 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{:}\,({-3})\;\;\text{— הסימן מתהפך}}\\[3pt]
+      \textcolor{#2563EB}{x} &amp;\lt \mathbf{-2}
+      \end{aligned}$$
+      <figure class="mini">
+        <svg viewBox="0 0 460 66" style="width:100%;max-width:460px;height:auto" role="img" aria-label="number line">
+  <line x1="14" y1="36" x2="446" y2="36" stroke="#5A6875" stroke-width="2"/>
+  <g stroke="#5A6875" stroke-width="1.6"><line x1="26" y1="31" x2="26" y2="41"/><line x1="71.33" y1="31" x2="71.33" y2="41"/><line x1="116.67" y1="31" x2="116.67" y2="41"/><line x1="162" y1="31" x2="162" y2="41"/><line x1="207.33" y1="31" x2="207.33" y2="41"/><line x1="252.67" y1="31" x2="252.67" y2="41"/><line x1="298" y1="31" x2="298" y2="41"/><line x1="343.33" y1="31" x2="343.33" y2="41"/><line x1="388.67" y1="31" x2="388.67" y2="41"/><line x1="434" y1="31" x2="434" y2="41"/></g>
+  <g font-family="Arial" font-size="11" fill="#5A6875"><text x="26" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">−7</text><text x="71.33" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">−6</text><text x="116.67" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">−5</text><text x="162" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">−4</text><text x="207.33" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">−3</text><text x="252.67" y="57" text-anchor="middle" font-size="12.5" font-weight="800" fill="#1C2733">−2</text><text x="298" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">−1</text><text x="343.33" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">0</text><text x="388.67" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">1</text><text x="434" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">2</text></g>
+  <line x1="22" y1="36" x2="252.67" y2="36" stroke="#2563EB" stroke-width="5.5"/>
+  <polygon points="6,36 24,29 24,43" fill="#2563EB"/>
+  <circle cx="252.67" cy="36" r="7" fill="#FFFFFF" stroke="#2563EB" stroke-width="3.2"/>
+  <text x="252.67" y="21" text-anchor="middle" font-family="Arial" font-size="13" font-weight="800" fill="#2563EB" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3.5">x < −2</text>
+</svg>
+        <figcaption>הפתרונות הם כל המספרים הקטנים מ-<span class="fi">\(-2\)</span>:
+        ‏<span class="fi">\(-3\)</span>, <span class="fi">\(-4\)</span>, וכן הלאה שמאלה.</figcaption>
+      </figure>
+      <p><b>בדיקה בשתי הצבות</b>:
+      <br><span class="fi">\(x=-4\)</span>: ‏<span class="fi">\(\frac{4+12}{2}=8\)</span>,
+      וגם <span class="fi">\(8\gt 5\)</span> ✓
+      <br><span class="fi">\(x=0\)</span>: ‏<span class="fi">\(\frac{4}{2}=2\)</span>,
+      ו-2 קטן מ-5 — 0 אינו פותר ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="d5"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="ex-d6">
+  <div class="ex-head"><span class="lvl">ד6</span><h4>תחום הצבה של ביטוי עם נעלם במכנה</h4></div>
+  <p class="q-text">
+    רשמי את תחום ההצבה של הביטוי <span class="fi">\(\dfrac{7}{2x-10}\)</span>.
+  </p>
+  <div class="q-row">
+    <span>הערך האסור הוא <span class="fi">\(x=\)</span></span>
+    <input class="q-input" data-answer="5" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>מכנה של שבר לעולם אינו יכול להיות 0.
+      <br>לכן מחפשים את ההצבה שמאפסת את המכנה — והיא הערך היחיד שאסור.</p>
+      $$\begin{aligned}
+      2\textcolor{#2563EB}{x}-10 &amp;= 0 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{+10}}\\[3pt]
+      2\textcolor{#2563EB}{x} &amp;= 10 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{:}\,2}\\[3pt]
+      \textcolor{#2563EB}{x} &amp;= 5
+      \end{aligned}$$
+      <p>תחום ההצבה: <span class="fi">\(\textcolor{#2563EB}{x}\ne 5\)</span> —
+      כל מספר אחר מותר.</p>
+      <figure class="mini">
+        <svg viewBox="0 0 460 66" style="width:100%;max-width:460px;height:auto" role="img" aria-label="number line">
+  <line x1="14" y1="36" x2="446" y2="36" stroke="#5A6875" stroke-width="2"/>
+  <g stroke="#5A6875" stroke-width="1.6"><line x1="26" y1="31" x2="26" y2="41"/><line x1="77" y1="31" x2="77" y2="41"/><line x1="128" y1="31" x2="128" y2="41"/><line x1="179" y1="31" x2="179" y2="41"/><line x1="230" y1="31" x2="230" y2="41"/><line x1="281" y1="31" x2="281" y2="41"/><line x1="332" y1="31" x2="332" y2="41"/><line x1="383" y1="31" x2="383" y2="41"/><line x1="434" y1="31" x2="434" y2="41"/></g>
+  <g font-family="Arial" font-size="11" fill="#5A6875"><text x="26" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">1</text><text x="77" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">2</text><text x="128" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">3</text><text x="179" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">4</text><text x="230" y="57" text-anchor="middle" font-size="12.5" font-weight="800" fill="#1C2733">5</text><text x="281" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">6</text><text x="332" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">7</text><text x="383" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">8</text><text x="434" y="57" text-anchor="middle" font-size="11" font-weight="400" fill="#5A6875">9</text></g>
+  <line x1="22" y1="36" x2="438" y2="36" stroke="#2563EB" stroke-width="5.5"/>
+  <polygon points="6,36 24,29 24,43" fill="#2563EB"/>
+  <polygon points="454,36 436,29 436,43" fill="#2563EB"/>
+  <circle cx="230" cy="36" r="7" fill="#FFFFFF" stroke="#2563EB" stroke-width="3.2"/>
+  <text x="230" y="21" text-anchor="middle" font-family="Arial" font-size="13" font-weight="800" fill="#2563EB" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3.5">x ≠ 5</text>
+</svg>
+        <figcaption>הציר כולו מותר, לשני הכיוונים, מלבד חור אחד — עיגול <b>ריק</b> ב-5.</figcaption>
+      </figure>
+      <p><b>בדיקה</b>:
+      <br>הצבת <span class="fi">\(x=5\)</span> נותנת מכנה
+      <span class="fi">\(2\cdot 5-10=0\)</span> — הביטוי אינו קיים שם ✓
+      <br>הצבת <span class="fi">\(x=6\)</span> נותנת <span class="fi">\(\frac{7}{2}\)</span>,
+      ‏<span class="fi">\(x=0\)</span> נותנת <span class="fi">\(\frac{7}{-10}\)</span> — שניהם מספרים תקינים ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="d6"> סיימתי את התרגיל הזה</label>
+</article>
+
+<!-- ==================================================================== -->
+<!-- ==================== ה · מערכת צירים ופונקציה ====================== -->
+<!-- ==================================================================== -->
+<h2 id="g-coord"><span class="num">ה</span>מערכת צירים ופונקציה</h2>
+<p class="grouplead">ארבעה תרגילים: לקרוא שיעורי נקודות מסרטוט, לבדוק אם נקודה נמצאת על הישר,
+להשלים טבלת ערכים ולשרטט לפיה — ולמצוא את כלל הפונקציה מתוך טבלה.</p>
+
+<article class="ex" id="ex-e1">
+  <div class="ex-head"><span class="lvl">ה1</span><h4>שיעורי נקודות מסרטוט</h4></div>
+  <p class="q-text">
+    בסרטוט מופיע הישר <span class="fi">\(y=2x-4\)</span> ושלוש נקודות עליו:
+    <br><span class="en">A</span> — החיתוך עם ציר <span class="fi">\(x\)</span> ·
+    <span class="en">B</span> — החיתוך עם ציר <span class="fi">\(y\)</span> ·
+    <span class="en">C</span> — הנקודה שעליו ששיעור ה-<span class="fi">\(x\)</span> שלה הוא 3.
+    <br>מצאי את שיעורי שלוש הנקודות. פתרי בחישוב, ואז ודאי מול הסרטוט.
+  </p>
+  <figure>
+    <svg viewBox="0 0 368 528" style="width:100%;max-width:368px;height:auto" role="img" aria-label="graph of y=2x minus 4 with points A, B and C marked">
+  <path stroke="#E4E8EE" stroke-width="1" fill="none" d="M24 24V504 M64 24V504 M104 24V504 M144 24V504 M184 24V504 M224 24V504 M264 24V504 M304 24V504 M344 24V504 M24 504H344 M24 464H344 M24 424H344 M24 384H344 M24 344H344 M24 304H344 M24 264H344 M24 224H344 M24 184H344 M24 144H344 M24 104H344 M24 64H344 M24 24H344"/>
+  <line x1="20" y1="264" x2="342" y2="264" stroke="#5A6875" stroke-width="1.6"/>
+  <polygon points="354,264 340,257.5 340,270.5" fill="#5A6875"/>
+  <line x1="104" y1="508" x2="104" y2="26" stroke="#5A6875" stroke-width="1.6"/>
+  <polygon points="104,14 97.5,28 110.5,28" fill="#5A6875"/>
+  <g font-family="Arial" font-size="11" fill="#5A6875"><text x="98" y="279" text-anchor="end">0</text><text x="24" y="280" text-anchor="middle">−2</text><text x="64" y="280" text-anchor="middle">−1</text><text x="144" y="280" text-anchor="middle">1</text><text x="184" y="280" text-anchor="middle">2</text><text x="224" y="280" text-anchor="middle">3</text><text x="264" y="280" text-anchor="middle">4</text><text x="304" y="280" text-anchor="middle">5</text><text x="344" y="280" text-anchor="middle">6</text><text x="97" y="508" text-anchor="end">−6</text><text x="97" y="468" text-anchor="end">−5</text><text x="97" y="428" text-anchor="end">−4</text><text x="97" y="388" text-anchor="end">−3</text><text x="97" y="348" text-anchor="end">−2</text><text x="97" y="308" text-anchor="end">−1</text><text x="97" y="228" text-anchor="end">1</text><text x="97" y="188" text-anchor="end">2</text><text x="97" y="148" text-anchor="end">3</text><text x="97" y="108" text-anchor="end">4</text><text x="97" y="68" text-anchor="end">5</text><text x="97" y="28" text-anchor="end">6</text></g>
+  <line x1="64" y1="504" x2="304" y2="24" stroke="#7C3AED" stroke-width="3" stroke-linecap="round"/>
+  <text x="272" y="76" text-anchor="end" font-family="Arial" font-size="13" font-weight="700" fill="#7C3AED" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3.5">y=2x−4</text>
+  <circle cx="184" cy="264" r="6" fill="#EA580C" stroke="#fff" stroke-width="2"/>
+  <text x="194" y="252" text-anchor="start" font-family="Arial" font-size="12.5" font-weight="700" fill="#EA580C" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3.5">A(2, 0)</text>
+  <circle cx="104" cy="424" r="6" fill="#059669" stroke="#fff" stroke-width="2"/>
+  <text x="116" y="440" text-anchor="start" font-family="Arial" font-size="12.5" font-weight="700" fill="#059669" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3.5">B(0, −4)</text>
+  <circle cx="224" cy="184" r="6" fill="#2563EB" stroke="#fff" stroke-width="2"/>
+  <text x="236" y="190" text-anchor="start" font-family="Arial" font-size="12.5" font-weight="700" fill="#2563EB" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3.5">C(3, 2)</text>
+</svg>
+    <figcaption>הישר <span class="fi">\(y=2x-4\)</span> ושלוש הנקודות שעליו.
+    אורך צלע של משבצת הוא יחידה אחת.</figcaption>
+  </figure>
+  <div class="q-row"><span>שיעור ה-<span class="fi">\(x\)</span> של <span class="en">A</span>:</span>
+    <input class="q-input" data-answer="2" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>שיעור ה-<span class="fi">\(y\)</span> של <span class="en">B</span>:</span>
+    <input class="q-input" data-answer="-4" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>שיעור ה-<span class="fi">\(y\)</span> של <span class="en">C</span>:</span>
+    <input class="q-input" data-answer="2" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>לכל נקודה יש שיעור אחד שכבר ידוע מהתיאור, ואת השני מחשבים בהצבה.</p>
+      <p><b><span class="en">A</span> — על ציר <span class="fi">\(x\)</span></b>.
+      כל נקודה על ציר <span class="fi">\(x\)</span> נמצאת בגובה 0, ולכן מציבים
+      <span class="fi">\(y=0\)</span>:</p>
+      $$\begin{aligned}
+      2\textcolor{#2563EB}{x}-4 &amp;= 0 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{+4}}\\[3pt]
+      2\textcolor{#2563EB}{x} &amp;= 4 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{:}\,2}\\[3pt]
+      \textcolor{#2563EB}{x} &amp;= 2
+      \end{aligned}$$
+      <p>ולכן <span class="fi">\(A(2,\,0)\)</span>.</p>
+      <p><b><span class="en">B</span> — על ציר <span class="fi">\(y\)</span></b>.
+      כל נקודה על ציר <span class="fi">\(y\)</span> נמצאת ב-<span class="fi">\(x=0\)</span>:</p>
+      $$\textcolor{#7C3AED}{y}=2\cdot\textcolor{#2563EB}{0}-4=-4$$
+      <p>ולכן <span class="fi">\(B(0,\,-4)\)</span> — וזה בדיוק המספר החופשי
+      <span class="fi">\(\textcolor{#059669}{b}\)</span> של הישר.</p>
+      <p><b><span class="en">C</span> — הצבה של <span class="fi">\(x=3\)</span></b>:</p>
+      $$\textcolor{#7C3AED}{y}=2\cdot\textcolor{#2563EB}{3}-4=6-4=2$$
+      <p>ולכן <span class="fi">\(C(3,\,2)\)</span>.</p>
+      <p><b>בדיקה מול הסרטוט</b>: <span class="en">A</span> יושבת על הציר האופקי במשבצת השנייה
+      מימין לראשית, <span class="en">B</span> ארבע משבצות מתחת לראשית על הציר האנכי,
+      ו-<span class="en">C</span> שלוש ימינה ושתיים למעלה ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="e1"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="ex-e2">
+  <div class="ex-head"><span class="lvl">ה2</span><h4>האם הנקודה נמצאת על הישר?</h4></div>
+  <p class="q-text">
+    נתון הישר <span class="fi">\(y=-\tfrac{1}{2}x+4\)</span>.
+    <br>בדקי בהצבה אילו מהנקודות נמצאות עליו:
+    <span class="fi">\(P(4,\,2)\)</span> ו-<span class="fi">\(Q(-2,\,6)\)</span>.
+  </p>
+  <div class="q-row"><span>עבור <span class="fi">\(x=4\)</span> מתקבל <span class="fi">\(y=\)</span></span>
+    <input class="q-input" data-answer="2" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>עבור <span class="fi">\(x=-2\)</span> מתקבל <span class="fi">\(y=\)</span></span>
+    <input class="q-input" data-answer="5" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>בדיקה אם נקודה נמצאת על ישר היא תמיד אותה פעולה:
+      מציבים את שיעור ה-<span class="fi">\(x\)</span> של הנקודה במשוואה,
+      ומשווים את התוצאה לשיעור ה-<span class="fi">\(y\)</span> שלה.</p>
+      <p><b>הנקודה <span class="fi">\(P(4,\,2)\)</span></b>:</p>
+      $$\textcolor{#7C3AED}{y}=-\tfrac{1}{2}\cdot\textcolor{#2563EB}{4}+4=-2+4=2$$
+      <p>המשוואה נתנה 2, ושיעור ה-<span class="fi">\(y\)</span> של הנקודה הוא 2 — שווים.
+      ‏<span class="fi">\(P\)</span> נמצאת על הישר ✓</p>
+      <p><b>הנקודה <span class="fi">\(Q(-2,\,6)\)</span></b>:</p>
+      $$\textcolor{#7C3AED}{y}=-\tfrac{1}{2}\cdot\textcolor{#2563EB}{(-2)}+4=1+4=5$$
+      <p>המשוואה נתנה 5, ושיעור ה-<span class="fi">\(y\)</span> של הנקודה הוא 6.
+      <br>שני מספרים שונים, ולכן <span class="fi">\(Q\)</span> אינה על הישר.
+      <br>הנקודה של הישר עבור <span class="fi">\(x=-2\)</span> היא
+      <span class="fi">\((-2,\,5)\)</span>, ו-<span class="fi">\(Q\)</span> יושבת יחידה אחת מעליה.</p>
+      <figure class="mini">
+        <svg viewBox="0 0 528 368" style="width:100%;max-width:528px;height:auto" role="img" aria-label="graph of y = minus half x plus 4; P is on the line, Q is one unit above it">
+  <path stroke="#E4E8EE" stroke-width="1" fill="none" d="M24 24V344 M64 24V344 M104 24V344 M144 24V344 M184 24V344 M224 24V344 M264 24V344 M304 24V344 M344 24V344 M384 24V344 M424 24V344 M464 24V344 M504 24V344 M24 344H504 M24 304H504 M24 264H504 M24 224H504 M24 184H504 M24 144H504 M24 104H504 M24 64H504 M24 24H504"/>
+  <line x1="20" y1="304" x2="502" y2="304" stroke="#5A6875" stroke-width="1.6"/>
+  <polygon points="514,304 500,297.5 500,310.5" fill="#5A6875"/>
+  <line x1="184" y1="348" x2="184" y2="26" stroke="#5A6875" stroke-width="1.6"/>
+  <polygon points="184,14 177.5,28 190.5,28" fill="#5A6875"/>
+  <g font-family="Arial" font-size="11" fill="#5A6875"><text x="178" y="319" text-anchor="end">0</text><text x="24" y="320" text-anchor="middle">−4</text><text x="64" y="320" text-anchor="middle">−3</text><text x="104" y="320" text-anchor="middle">−2</text><text x="144" y="320" text-anchor="middle">−1</text><text x="224" y="320" text-anchor="middle">1</text><text x="264" y="320" text-anchor="middle">2</text><text x="304" y="320" text-anchor="middle">3</text><text x="344" y="320" text-anchor="middle">4</text><text x="384" y="320" text-anchor="middle">5</text><text x="424" y="320" text-anchor="middle">6</text><text x="464" y="320" text-anchor="middle">7</text><text x="504" y="320" text-anchor="middle">8</text><text x="177" y="348" text-anchor="end">−1</text><text x="177" y="268" text-anchor="end">1</text><text x="177" y="228" text-anchor="end">2</text><text x="177" y="188" text-anchor="end">3</text><text x="177" y="148" text-anchor="end">4</text><text x="177" y="108" text-anchor="end">5</text><text x="177" y="68" text-anchor="end">6</text><text x="177" y="28" text-anchor="end">7</text></g>
+  <line x1="44" y1="74" x2="484" y2="294" stroke="#7C3AED" stroke-width="3" stroke-linecap="round"/>
+  <text x="448" y="265" text-anchor="end" font-family="Arial" font-size="13" font-weight="700" fill="#7C3AED" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3.5">y=−½x+4</text>
+  <circle cx="344" cy="224" r="6" fill="#059669" stroke="#fff" stroke-width="2"/>
+  <text x="355" y="241" text-anchor="start" font-family="Arial" font-size="12.5" font-weight="700" fill="#059669" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3.5">P(4, 2)</text>
+  <circle cx="104" cy="64" r="6" fill="#C0392B" stroke="#fff" stroke-width="2"/>
+  <text x="115" y="55" text-anchor="start" font-family="Arial" font-size="12.5" font-weight="700" fill="#C0392B" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3.5">Q(−2, 6)</text>
+  <circle cx="104" cy="104" r="5" fill="#7C3AED" stroke="#fff" stroke-width="2"/>
+  <line x1="104" y1="64" x2="104" y2="104" stroke="#C0392B" stroke-width="2.2" stroke-dasharray="6 5"/>
+  <text x="104" y="124" text-anchor="middle" font-family="Arial" font-size="11.5" font-weight="700" fill="#7C3AED" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3.5">(−2, 5)</text>
+</svg>
+        <figcaption>‏<span class="fi">\(P\)</span> יושבת בדיוק על הישר.
+        ‏<span class="fi">\(Q\)</span> נמצאת יחידה אחת מעל הנקודה
+        <span class="fi">\((-2,\,5)\)</span> שהישר עובר בה.</figcaption>
+      </figure>
+      <p class="aside">חצי כפול <span class="fi">\((-2)\)</span> נותן
+      <span class="fi">\(-1\)</span>, ולפניו סימן מינוס — ולכן האיבר הזה תרם
+      <span class="fi">\(+1\)</span>.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="e2"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="ex-e3">
+  <div class="ex-head"><span class="lvl">ה3</span><h4>השלמת טבלת ערכים</h4></div>
+  <p class="q-text">
+    נתונה הפונקציה <span class="fi">\(y=-2x+3\)</span>.
+    <br>השלימי את טבלת הערכים עבור <span class="fi">\(x=-2,-1,0,1,2,3\)</span>,
+    וסמני את הנקודות במערכת צירים.
+  </p>
+  <table class="dtable">
+    <tr><th>‏<span class="fi">\(x\)</span></th><td>‏<span class="fi">\(-2\)</span></td><td>‏<span class="fi">\(-1\)</span></td><td>0</td><td>1</td><td>2</td><td>3</td></tr>
+    <tr><th>‏<span class="fi">\(y\)</span></th><td class="x-cell">?</td><td class="x-cell">?</td><td class="x-cell">?</td><td class="x-cell">?</td><td class="x-cell">?</td><td class="x-cell">?</td></tr>
+  </table>
+  <div class="q-row"><span>עבור <span class="fi">\(x=-2\)</span>: ‏<span class="fi">\(y=\)</span></span>
+    <input class="q-input" data-answer="7" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>עבור <span class="fi">\(x=3\)</span>: ‏<span class="fi">\(y=\)</span></span>
+    <input class="q-input" data-answer="-3" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>כל תא בטבלה הוא הצבה אחת. מציבים כל <span class="fi">\(x\)</span> בנפרד,
+      ושומרים על הסוגריים סביב מספרים שליליים.</p>
+      $$\begin{aligned}
+      \textcolor{#2563EB}{x}=-2:\quad &amp;\textcolor{#7C3AED}{y}=-2\cdot(-2)+3=4+3=7\\[2pt]
+      \textcolor{#2563EB}{x}=-1:\quad &amp;\textcolor{#7C3AED}{y}=-2\cdot(-1)+3=2+3=5\\[2pt]
+      \textcolor{#2563EB}{x}=0:\quad  &amp;\textcolor{#7C3AED}{y}=0+3=3\\[2pt]
+      \textcolor{#2563EB}{x}=1:\quad  &amp;\textcolor{#7C3AED}{y}=-2+3=1\\[2pt]
+      \textcolor{#2563EB}{x}=2:\quad  &amp;\textcolor{#7C3AED}{y}=-4+3=-1\\[2pt]
+      \textcolor{#2563EB}{x}=3:\quad  &amp;\textcolor{#7C3AED}{y}=-6+3=-3
+      \end{aligned}$$
+      <table class="dtable sol-table">
+        <tr><th>‏<span class="fi">\(x\)</span></th><td>‏<span class="fi">\(-2\)</span></td><td>‏<span class="fi">\(-1\)</span></td><td>0</td><td>1</td><td>2</td><td>3</td></tr>
+        <tr><th>‏<span class="fi">\(y\)</span></th><td class="hl-find">7</td><td class="hl-find">5</td><td class="hl-find">3</td><td class="hl-find">1</td><td class="hl-find">‏<span class="fi">\(-1\)</span></td><td class="hl-find">‏<span class="fi">\(-3\)</span></td></tr>
+      </table>
+      <p>בשורת ה-<span class="fi">\(y\)</span> כל מספר קטן מקודמו ב-2 בדיוק:
+      ‏7, 5, 3, 1, <span class="fi">\(-1\)</span>, <span class="fi">\(-3\)</span>.
+      <br>זהו השיפוע <span class="fi">\(\textcolor{#EA580C}{m}=-2\)</span> — צעד אחד ימינה מוריד 2.</p>
+      <figure class="mini">
+        <svg viewBox="0 0 328 528" style="width:100%;max-width:328px;height:auto" role="img" aria-label="the six table points lying on the line y = minus 2x plus 3">
+  <path stroke="#E4E8EE" stroke-width="1" fill="none" d="M24 24V504 M64 24V504 M104 24V504 M144 24V504 M184 24V504 M224 24V504 M264 24V504 M304 24V504 M24 504H304 M24 464H304 M24 424H304 M24 384H304 M24 344H304 M24 304H304 M24 264H304 M24 224H304 M24 184H304 M24 144H304 M24 104H304 M24 64H304 M24 24H304"/>
+  <line x1="20" y1="344" x2="302" y2="344" stroke="#5A6875" stroke-width="1.6"/>
+  <polygon points="314,344 300,337.5 300,350.5" fill="#5A6875"/>
+  <line x1="144" y1="508" x2="144" y2="26" stroke="#5A6875" stroke-width="1.6"/>
+  <polygon points="144,14 137.5,28 150.5,28" fill="#5A6875"/>
+  <g font-family="Arial" font-size="11" fill="#5A6875"><text x="138" y="359" text-anchor="end">0</text><text x="24" y="360" text-anchor="middle">−3</text><text x="64" y="360" text-anchor="middle">−2</text><text x="104" y="360" text-anchor="middle">−1</text><text x="184" y="360" text-anchor="middle">1</text><text x="224" y="360" text-anchor="middle">2</text><text x="264" y="360" text-anchor="middle">3</text><text x="304" y="360" text-anchor="middle">4</text><text x="137" y="508" text-anchor="end">−4</text><text x="137" y="468" text-anchor="end">−3</text><text x="137" y="428" text-anchor="end">−2</text><text x="137" y="388" text-anchor="end">−1</text><text x="137" y="308" text-anchor="end">1</text><text x="137" y="268" text-anchor="end">2</text><text x="137" y="228" text-anchor="end">3</text><text x="137" y="188" text-anchor="end">4</text><text x="137" y="148" text-anchor="end">5</text><text x="137" y="108" text-anchor="end">6</text><text x="137" y="68" text-anchor="end">7</text><text x="137" y="28" text-anchor="end">8</text></g>
+  <line x1="48" y1="32" x2="280" y2="496" stroke="#7C3AED" stroke-width="3" stroke-linecap="round"/>
+  <text x="248" y="420" text-anchor="end" font-family="Arial" font-size="13" font-weight="700" fill="#7C3AED" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3.5">y=−2x+3</text>
+  <circle cx="64" cy="64" r="5.2" fill="#2563EB" stroke="#fff" stroke-width="2"/>
+  <circle cx="104" cy="144" r="5.2" fill="#2563EB" stroke="#fff" stroke-width="2"/>
+  <circle cx="144" cy="224" r="5.2" fill="#2563EB" stroke="#fff" stroke-width="2"/>
+  <circle cx="184" cy="304" r="5.2" fill="#2563EB" stroke="#fff" stroke-width="2"/>
+  <circle cx="224" cy="384" r="5.2" fill="#2563EB" stroke="#fff" stroke-width="2"/>
+  <circle cx="264" cy="464" r="5.2" fill="#2563EB" stroke="#fff" stroke-width="2"/>
+  <text x="74" y="58" text-anchor="start" font-family="Arial" font-size="11" font-weight="700" fill="#2563EB" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3.5">(−2, 7)</text>
+  <text x="272" y="478" text-anchor="start" font-family="Arial" font-size="11" font-weight="700" fill="#2563EB" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3.5">(3, −3)</text>
+</svg>
+        <figcaption>שש הנקודות מהטבלה. כולן יושבות על ישר אחד — כך נראית פונקציה קווית.</figcaption>
+      </figure>
+      <p><b>בדיקה</b>: ההצבה <span class="fi">\(x=0\)</span> נתנה 3,
+      וזהו המספר החופשי במשוואה ✓
+      <br>וההפרש הקבוע בין ערכי <span class="fi">\(y\)</span> הוא
+      <span class="fi">\(-2\)</span>, בדיוק המקדם של <span class="fi">\(x\)</span> ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="e3"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="ex-e4">
+  <div class="ex-head"><span class="lvl">ה4</span><h4>מטבלה אל כלל הפונקציה</h4></div>
+  <p class="q-text">
+    הטבלה מתארת פונקציה קווית.
+    <br>א. מצאי את הכלל שלה בצורה <span class="fi">\(y=mx+b\)</span>.
+    <br>ב. חשבי את ערך הפונקציה עבור <span class="fi">\(x=10\)</span>.
+  </p>
+  <table class="dtable">
+    <tr><th>‏<span class="fi">\(x\)</span></th><td>0</td><td>1</td><td>2</td><td>3</td></tr>
+    <tr><th>‏<span class="fi">\(y\)</span></th><td>‏<span class="fi">\(-5\)</span></td><td>‏<span class="fi">\(-2\)</span></td><td>1</td><td>4</td></tr>
+  </table>
+  <div class="q-row"><span>א. ‏<span class="fi">\(m=\)</span></span>
+    <input class="q-input" data-answer="3" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>א. ‏<span class="fi">\(b=\)</span></span>
+    <input class="q-input" data-answer="-5" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ב. ‏<span class="fi">\(y\)</span> עבור <span class="fi">\(x=10\)</span>:</span>
+    <input class="q-input" data-answer="25" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>שני המספרים שמחפשים קרויים בשמם בטבלה עצמה.</p>
+      <p><b>המספר החופשי <span class="fi">\(\textcolor{#059669}{b}\)</span></b> הוא ערך הפונקציה
+      ב-<span class="fi">\(x=0\)</span>, והוא כתוב בטבלה:
+      <span class="fi">\(\textcolor{#059669}{b}=-5\)</span>.</p>
+      <p><b>השיפוע <span class="fi">\(\textcolor{#EA580C}{m}\)</span></b> הוא כמה
+      <span class="fi">\(y\)</span> משתנה על כל צעד אחד של <span class="fi">\(x\)</span>.
+      <br>בטבלה ה-<span class="fi">\(x\)</span> עולה ב-1 בכל פעם, אז מספיק לחסר שני ערכים סמוכים:</p>
+      $$\textcolor{#EA580C}{m}=\frac{\textcolor{#7C3AED}{-2}-(\textcolor{#7C3AED}{-5})}{\textcolor{#2563EB}{1}-\textcolor{#2563EB}{0}}
+        =\frac{3}{1}=3$$
+      <p>ואותו הפרש חוזר לאורך כל השורה:
+      ‏<span class="fi">\(-5\to-2\to1\to4\)</span> — כל פעם עלייה של 3.</p>
+      <p>ולכן כלל הפונקציה הוא:</p>
+      $$\textcolor{#7C3AED}{y}=3\textcolor{#2563EB}{x}-5$$
+      <p><b>ב.</b> הצבת <span class="fi">\(x=10\)</span>:</p>
+      $$\textcolor{#7C3AED}{y}=3\cdot\textcolor{#2563EB}{10}-5=30-5=\mathbf{25}$$
+      <p><b>בדיקה</b> — מציבים את כל ארבע השורות של הטבלה בכלל שמצאנו:
+      <br><span class="fi">\(3\cdot 0-5=-5\)</span> ✓ ·
+      <span class="fi">\(3\cdot 1-5=-2\)</span> ✓ ·
+      <span class="fi">\(3\cdot 2-5=1\)</span> ✓ ·
+      <span class="fi">\(3\cdot 3-5=4\)</span> ✓
+      <br>כל ארבע ההצבות תואמות את הטבלה.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="e4"> סיימתי את התרגיל הזה</label>
+</article>
+
+
+<!-- ==================================================================== -->
+<!-- ========================== ו · הישר y=mx+b ========================= -->
+<!-- ==================================================================== -->
+<h2 id="g-line"><span class="num">ו</span>הישר <span class="fi">\(y=mx+b\)</span></h2>
+<p class="grouplead">שבעה תרגילים — בדיוק הטיפוסים שחוזרים בחלק א׳ של עבודת הקיץ ובדף החזרה למבחן:
+שיפוע משתי נקודות, משוואת ישר משיפוע ונקודה, משוואת ישר משתי נקודות, חיתוכים עם הצירים
+והשטח שנוצר, ישר מקביל, תחומי חיוביות ושליליות, ונקודת חיתוך של שני ישרים.</p>
+
+<div class="fbox">
+  <div class="fbox-title">שני המספרים שמגדירים כל ישר</div>
+  $$\textcolor{#7C3AED}{y}=\textcolor{#EA580C}{m}\textcolor{#2563EB}{x}+\textcolor{#059669}{b}
+  \qquad\qquad
+  \textcolor{#EA580C}{m}=\frac{\textcolor{#7C3AED}{y_2}-\textcolor{#7C3AED}{y_1}}{\textcolor{#2563EB}{x_2}-\textcolor{#2563EB}{x_1}}$$
+  <span class="f-legend">
+    <span><i class="sw" style="background:#EA580C"></i> <bdi>‏<span class="fi">\(m\)</span> — השיפוע: כמה <span class="fi">\(y\)</span> משתנה על כל צעד אחד ימינה</bdi></span>
+    <span><i class="sw" style="background:#059669"></i> <bdi>‏<span class="fi">\(b\)</span> — הגובה שבו הישר חוצה את ציר <span class="fi">\(y\)</span></bdi></span>
+  </span>
+</div>
+
+<article class="ex" id="ex-f1">
+  <div class="ex-head"><span class="lvl">ו1</span><h4>שיפוע משתי נקודות</h4></div>
+  <p class="q-text">
+    ישר עובר דרך הנקודות <span class="fi">\(A(-3,\,5)\)</span> ו-<span class="fi">\(B(5,\,1)\)</span>.
+    <br>מהו השיפוע שלו?
+  </p>
+  <div class="q-row"><span>‏<span class="fi">\(m=\)</span></span>
+    <input class="q-input" data-answer="-0.5" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>מסמנים נקודה אחת כ-<span class="fi">\(1\)</span> ואחת כ-<span class="fi">\(2\)</span>,
+      ומקפידים שאותה נקודה תשמש ראשונה גם במונה וגם במכנה.</p>
+      $$\begin{aligned}
+      &amp;\textcolor{#2563EB}{x_1}=-3,\;\textcolor{#7C3AED}{y_1}=5
+      \qquad \textcolor{#2563EB}{x_2}=5,\;\textcolor{#7C3AED}{y_2}=1\\[8pt]
+      \textcolor{#EA580C}{m}&amp;=\frac{\textcolor{#7C3AED}{y_2}-\textcolor{#7C3AED}{y_1}}{\textcolor{#2563EB}{x_2}-\textcolor{#2563EB}{x_1}}
+      =\frac{\textcolor{#7C3AED}{1}-\textcolor{#7C3AED}{5}}{\textcolor{#2563EB}{5}-\textcolor{#2563EB}{(-3)}}
+      =\frac{-4}{8}=\mathbf{-\tfrac{1}{2}}
+      \end{aligned}$$
+      <p>המכנה יצא <span class="fi">\(5-(-3)=8\)</span>: חיסור מספר שלילי הוא חיבור.</p>
+      <p><b>בדיקה</b> — מחליפים בין שתי הנקודות ומחשבים שוב.
+      התוצאה חייבת לצאת זהה:</p>
+      $$\frac{\textcolor{#7C3AED}{5}-\textcolor{#7C3AED}{1}}{\textcolor{#2563EB}{(-3)}-\textcolor{#2563EB}{5}}
+      =\frac{4}{-8}=-\tfrac{1}{2}\;✓$$
+      <p>‏<span class="fi">\(m\)</span> שלילי — הישר יורד: מ-<span class="fi">\(A\)</span>
+      ל-<span class="fi">\(B\)</span> התקדמנו 8 יחידות ימינה וירדנו 4, כלומר חצי יחידה לכל צעד.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="f1"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="ex-f2">
+  <div class="ex-head"><span class="lvl">ו2</span><h4>משוואת ישר משיפוע ונקודה</h4></div>
+  <p class="q-text">
+    לישר שיפוע <span class="fi">\(m=\tfrac{1}{2}\)</span>, והוא עובר דרך הנקודה
+    <span class="fi">\((-2,\,1)\)</span>.
+    <br>א. מצאי את משוואת הישר.
+    <br>ב. באיזה גובה הוא חוצה את ציר <span class="fi">\(y\)</span>?
+  </p>
+  <div class="q-row"><span>‏<span class="fi">\(b=\)</span></span>
+    <input class="q-input" data-answer="2" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>השיפוע כבר ידוע, אז כותבים את המשוואה עם <span class="fi">\(\textcolor{#059669}{b}\)</span>
+      אחד לא ידוע, ומציבים בה את הנקודה.</p>
+      $$\textcolor{#7C3AED}{y}=\tfrac{1}{2}\textcolor{#2563EB}{x}+\textcolor{#059669}{b}$$
+      <p>הנקודה <span class="fi">\((-2,\,1)\)</span> נמצאת על הישר, ולכן שיעוריה מקיימים
+      את המשוואה: מציבים <span class="fi">\(x=-2\)</span> ו-<span class="fi">\(y=1\)</span>.</p>
+      $$\begin{aligned}
+      \textcolor{#7C3AED}{1} &amp;= \tfrac{1}{2}\cdot\textcolor{#2563EB}{(-2)}+\textcolor{#059669}{b}\\[3pt]
+      1 &amp;= -1+\textcolor{#059669}{b} &amp;&amp;\qquad\textcolor{#C0392B}{/\;{+1}}\\[3pt]
+      \textcolor{#059669}{b} &amp;= \mathbf{2}
+      \end{aligned}$$
+      <p>משוואת הישר: <span class="fi">\(y=\tfrac{1}{2}x+2\)</span>,
+      והוא חוצה את ציר <span class="fi">\(y\)</span> בגובה 2.</p>
+      <figure class="mini">
+        <svg viewBox="0 0 608 368" style="width:100%;max-width:600px;height:auto" role="img" aria-label="line y = half x plus 2 drawn by stairs of 2 right and 1 up from the point minus 2, 1">
+  <path stroke="#E4E8EE" stroke-width="1" fill="none" d="M24 24V344 M64 24V344 M104 24V344 M144 24V344 M184 24V344 M224 24V344 M264 24V344 M304 24V344 M344 24V344 M384 24V344 M424 24V344 M464 24V344 M504 24V344 M544 24V344 M584 24V344 M24 344H584 M24 304H584 M24 264H584 M24 224H584 M24 184H584 M24 144H584 M24 104H584 M24 64H584 M24 24H584"/>
+  <line x1="20" y1="264" x2="582" y2="264" stroke="#5A6875" stroke-width="1.6"/>
+  <polygon points="594,264 580,257.5 580,270.5" fill="#5A6875"/>
+  <line x1="264" y1="348" x2="264" y2="26" stroke="#5A6875" stroke-width="1.6"/>
+  <polygon points="264,14 257.5,28 270.5,28" fill="#5A6875"/>
+  <g font-family="Arial" font-size="11" fill="#5A6875"><text x="258" y="279" text-anchor="end">0</text><text x="24" y="280" text-anchor="middle">−6</text><text x="64" y="280" text-anchor="middle">−5</text><text x="104" y="280" text-anchor="middle">−4</text><text x="144" y="280" text-anchor="middle">−3</text><text x="184" y="280" text-anchor="middle">−2</text><text x="224" y="280" text-anchor="middle">−1</text><text x="304" y="280" text-anchor="middle">1</text><text x="344" y="280" text-anchor="middle">2</text><text x="384" y="280" text-anchor="middle">3</text><text x="424" y="280" text-anchor="middle">4</text><text x="464" y="280" text-anchor="middle">5</text><text x="504" y="280" text-anchor="middle">6</text><text x="544" y="280" text-anchor="middle">7</text><text x="584" y="280" text-anchor="middle">8</text><text x="257" y="348" text-anchor="end">−2</text><text x="257" y="308" text-anchor="end">−1</text><text x="257" y="228" text-anchor="end">1</text><text x="257" y="188" text-anchor="end">2</text><text x="257" y="148" text-anchor="end">3</text><text x="257" y="108" text-anchor="end">4</text><text x="257" y="68" text-anchor="end">5</text><text x="257" y="28" text-anchor="end">6</text></g>
+  <line x1="40" y1="296" x2="568" y2="32" stroke="#7C3AED" stroke-width="3" stroke-linecap="round"/>
+  <text x="528" y="41" text-anchor="end" font-family="Arial" font-size="13" font-weight="700" fill="#7C3AED" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3.5">y=½x+2</text>
+  <line x1="184" y1="224" x2="253" y2="224" stroke="#EA580C" stroke-width="2.4" stroke-dasharray="6 5"/>
+  <polygon points="264,224 253,229.5 253,218.5" fill="#EA580C"/>
+  <text x="224" y="216" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="700" fill="#EA580C" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3.5">+2</text>
+  <line x1="264" y1="224" x2="264" y2="195" stroke="#EA580C" stroke-width="2.4" stroke-dasharray="6 5"/>
+  <polygon points="264,184 269.5,195 258.5,195" fill="#EA580C"/>
+  <text x="277" y="208" text-anchor="start" font-family="Arial" font-size="12.5" font-weight="700" fill="#EA580C" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3.5">+1</text>
+  <line x1="264" y1="184" x2="333" y2="184" stroke="#EA580C" stroke-width="2.4" stroke-dasharray="6 5"/>
+  <polygon points="344,184 333,189.5 333,178.5" fill="#EA580C"/>
+  <text x="304" y="176" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="700" fill="#EA580C" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3.5">+2</text>
+  <line x1="344" y1="184" x2="344" y2="155" stroke="#EA580C" stroke-width="2.4" stroke-dasharray="6 5"/>
+  <polygon points="344,144 349.5,155 338.5,155" fill="#EA580C"/>
+  <text x="357" y="168" text-anchor="start" font-family="Arial" font-size="12.5" font-weight="700" fill="#EA580C" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3.5">+1</text>
+  <circle cx="184" cy="224" r="6" fill="#059669" stroke="#fff" stroke-width="2"/>
+  <text x="174" y="213" text-anchor="end" font-family="Arial" font-size="12.5" font-weight="700" fill="#059669" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3.5">(−2, 1)</text>
+  <circle cx="264" cy="184" r="6" fill="#2563EB" stroke="#fff" stroke-width="2"/>
+  <text x="254" y="174" text-anchor="end" font-family="Arial" font-size="12.5" font-weight="700" fill="#2563EB" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3.5">(0, 2)</text>
+  <circle cx="344" cy="144" r="6" fill="#2563EB" stroke="#fff" stroke-width="2"/>
+  <text x="350" y="128" text-anchor="start" font-family="Arial" font-size="12.5" font-weight="700" fill="#2563EB" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3.5">(2, 3)</text>
+</svg>
+        <figcaption>מהנקודה <span class="fi">\((-2,\,1)\)</span> הולכים בשיטת המדרגות:
+        שני צעדים ימינה, צעד אחד למעלה — וכך מגיעים ל-<span class="fi">\((0,\,2)\)</span>
+        ואחר כך ל-<span class="fi">\((2,\,3)\)</span>.</figcaption>
+      </figure>
+      <p>שיפוע <span class="fi">\(\tfrac{1}{2}\)</span> פירושו חצי יחידה למעלה על כל צעד ימינה,
+      ולכן נוח לצעוד שתי יחידות בכל פעם — כך העלייה יוצאת יחידה שלמה.</p>
+      <p><b>בדיקה</b>: הצבת <span class="fi">\(x=-2\)</span> במשוואה שמצאנו נותנת
+      <span class="fi">\(\tfrac{1}{2}(-2)+2=-1+2=1\)</span> ✓ — בדיוק שיעור ה-<span class="fi">\(y\)</span>
+      של הנקודה הנתונה.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="f2"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="ex-f3">
+  <div class="ex-head"><span class="lvl">ו3</span><h4>משוואת ישר משתי נקודות — בשתי הדרכים</h4></div>
+  <p class="q-text">
+    מצאי את משוואת הישר העובר דרך הנקודות
+    <span class="fi">\(A(-3,\,8)\)</span> ו-<span class="fi">\(B(2,\,-2)\)</span>.
+  </p>
+  <div class="q-row"><span>‏<span class="fi">\(m=\)</span></span>
+    <input class="q-input" data-answer="-2" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>‏<span class="fi">\(b=\)</span></span>
+    <input class="q-input" data-answer="2" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p><b>הדרך הראשונה — קודם שיפוע, אחר כך הצבה.</b></p>
+      $$\textcolor{#EA580C}{m}=\frac{\textcolor{#7C3AED}{-2}-\textcolor{#7C3AED}{8}}{\textcolor{#2563EB}{2}-\textcolor{#2563EB}{(-3)}}
+        =\frac{-10}{5}=-2$$
+      <p>עכשיו יש שיפוע ונקודה, וזה בדיוק המצב של תרגיל ו2.
+      מציבים את <span class="fi">\(B(2,\,-2)\)</span> — נקודה עם מספרים קטנים נוחה יותר:</p>
+      $$\begin{aligned}
+      \textcolor{#7C3AED}{y} &amp;= -2\textcolor{#2563EB}{x}+\textcolor{#059669}{b}\\[3pt]
+      \textcolor{#7C3AED}{-2} &amp;= -2\cdot\textcolor{#2563EB}{2}+\textcolor{#059669}{b}\\[3pt]
+      -2 &amp;= -4+\textcolor{#059669}{b} &amp;&amp;\qquad\textcolor{#C0392B}{/\;{+4}}\\[3pt]
+      \textcolor{#059669}{b} &amp;= 2
+      \end{aligned}$$
+      <p>משוואת הישר: <span class="fi">\(y=-2x+2\)</span>.</p>
+      <details class="alt">
+        <summary>הדרך השנייה — שתי משוואות עם שני נעלמים</summary>
+        <div class="alt-body">
+          <p>כל אחת מהנקודות נותנת משוואה אחת ב-<span class="fi">\(m\)</span> וב-<span class="fi">\(b\)</span>:</p>
+          $$\begin{cases}
+          \;\;8=\textcolor{#EA580C}{m}\cdot(-3)+\textcolor{#059669}{b}\\[3pt]
+          -2=\textcolor{#EA580C}{m}\cdot 2+\textcolor{#059669}{b}
+          \end{cases}$$
+          <p>מבודדים <span class="fi">\(b\)</span> מהמשוואה השנייה ומציבים בראשונה:</p>
+          $$\begin{aligned}
+          \textcolor{#059669}{b} &amp;= -2-2\textcolor{#EA580C}{m}\\[3pt]
+          8 &amp;= -3\textcolor{#EA580C}{m}+(-2-2\textcolor{#EA580C}{m})\\[3pt]
+          8 &amp;= -5\textcolor{#EA580C}{m}-2 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{+2}}\\[3pt]
+          10 &amp;= -5\textcolor{#EA580C}{m} &amp;&amp;\qquad\textcolor{#C0392B}{/\;{:}\,({-5})}\\[3pt]
+          \textcolor{#EA580C}{m} &amp;= -2
+          \end{aligned}$$
+          <p>ובחזרה: <span class="fi">\(b=-2-2(-2)=-2+4=2\)</span> —
+          אותה משוואה בדיוק, <span class="fi">\(y=-2x+2\)</span>.</p>
+        </div>
+      </details>
+      <figure class="mini">
+        <svg viewBox="0 0 368 528" style="width:100%;max-width:368px;height:auto" role="img" aria-label="the line through A minus 3, 8 and B 2, minus 2 with the step arrows plus 5 and minus 10">
+  <path stroke="#E4E8EE" stroke-width="1" fill="none" d="M24 24V504 M64 24V504 M104 24V504 M144 24V504 M184 24V504 M224 24V504 M264 24V504 M304 24V504 M344 24V504 M24 504H344 M24 464H344 M24 424H344 M24 384H344 M24 344H344 M24 304H344 M24 264H344 M24 224H344 M24 184H344 M24 144H344 M24 104H344 M24 64H344 M24 24H344"/>
+  <line x1="20" y1="384" x2="342" y2="384" stroke="#5A6875" stroke-width="1.6"/>
+  <polygon points="354,384 340,377.5 340,390.5" fill="#5A6875"/>
+  <line x1="184" y1="508" x2="184" y2="26" stroke="#5A6875" stroke-width="1.6"/>
+  <polygon points="184,14 177.5,28 190.5,28" fill="#5A6875"/>
+  <g font-family="Arial" font-size="11" fill="#5A6875"><text x="178" y="399" text-anchor="end">0</text><text x="24" y="400" text-anchor="middle">−4</text><text x="64" y="400" text-anchor="middle">−3</text><text x="104" y="400" text-anchor="middle">−2</text><text x="144" y="400" text-anchor="middle">−1</text><text x="224" y="400" text-anchor="middle">1</text><text x="264" y="400" text-anchor="middle">2</text><text x="304" y="400" text-anchor="middle">3</text><text x="344" y="400" text-anchor="middle">4</text><text x="177" y="508" text-anchor="end">−3</text><text x="177" y="468" text-anchor="end">−2</text><text x="177" y="428" text-anchor="end">−1</text><text x="177" y="348" text-anchor="end">1</text><text x="177" y="308" text-anchor="end">2</text><text x="177" y="268" text-anchor="end">3</text><text x="177" y="228" text-anchor="end">4</text><text x="177" y="188" text-anchor="end">5</text><text x="177" y="148" text-anchor="end">6</text><text x="177" y="108" text-anchor="end">7</text><text x="177" y="68" text-anchor="end">8</text><text x="177" y="28" text-anchor="end">9</text></g>
+  <line x1="48" y1="32" x2="320" y2="576" stroke="#7C3AED" stroke-width="3" stroke-linecap="round"/>
+  <text x="344" y="486" text-anchor="end" font-family="Arial" font-size="13" font-weight="700" fill="#7C3AED" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3.5">y=−2x+2</text>
+  <line x1="64" y1="64" x2="253" y2="64" stroke="#EA580C" stroke-width="2.4" stroke-dasharray="6 5"/>
+  <polygon points="264,64 253,69.5 253,58.5" fill="#EA580C"/>
+  <text x="164" y="56" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="700" fill="#EA580C" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3.5">+5</text>
+  <line x1="264" y1="64" x2="264" y2="453" stroke="#EA580C" stroke-width="2.4" stroke-dasharray="6 5"/>
+  <polygon points="264,464 258.5,453 269.5,453" fill="#EA580C"/>
+  <text x="277" y="264" text-anchor="start" font-family="Arial" font-size="12.5" font-weight="700" fill="#EA580C" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3.5">−10</text>
+  <circle cx="64" cy="64" r="6" fill="#059669" stroke="#fff" stroke-width="2"/>
+  <text x="75" y="55" text-anchor="start" font-family="Arial" font-size="12.5" font-weight="700" fill="#059669" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3.5">A(−3, 8)</text>
+  <circle cx="264" cy="464" r="6" fill="#059669" stroke="#fff" stroke-width="2"/>
+  <text x="253" y="480" text-anchor="end" font-family="Arial" font-size="12.5" font-weight="700" fill="#059669" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3.5">B(2, −2)</text>
+  <circle cx="184" cy="304" r="6" fill="#2563EB" stroke="#fff" stroke-width="2"/>
+  <text x="173" y="295" text-anchor="end" font-family="Arial" font-size="12.5" font-weight="700" fill="#2563EB" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3.5">(0, 2)</text>
+</svg>
+        <figcaption>מ-<span class="fi">\(A\)</span> ל-<span class="fi">\(B\)</span>:
+        חמש יחידות ימינה, עשר יחידות למטה. עשר חלקי חמש נותן 2 יחידות ירידה לכל צעד,
+        ומכאן <span class="fi">\(m=-2\)</span>.</figcaption>
+      </figure>
+      <p><b>בדיקה</b> — מציבים בשתי הנקודות, לא רק באחת:
+      <br><span class="fi">\(A\)</span>: ‏<span class="fi">\(-2\cdot(-3)+2=6+2=8\)</span> ✓
+      <br><span class="fi">\(B\)</span>: ‏<span class="fi">\(-2\cdot 2+2=-4+2=-2\)</span> ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="f3"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="ex-f4">
+  <div class="ex-head"><span class="lvl">ו4</span><h4>חיתוכים עם הצירים והמשולש שנוצר</h4></div>
+  <p class="q-text">
+    נתון הישר <span class="fi">\(y=\tfrac{3}{4}x-3\)</span>.
+    <br>א. מצאי את נקודת החיתוך עם ציר <span class="fi">\(y\)</span>.
+    <br>ב. מצאי את נקודת החיתוך עם ציר <span class="fi">\(x\)</span>.
+    <br>ג. חשבי את שטח המשולש שהישר יוצר עם שני הצירים.
+  </p>
+  <div class="q-row"><span>א. ‏<span class="fi">\(y\)</span> בנקודת החיתוך עם ציר <span class="fi">\(y\)</span>:</span>
+    <input class="q-input" data-answer="-3" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ב. ‏<span class="fi">\(x\)</span> בנקודת החיתוך עם ציר <span class="fi">\(x\)</span>:</span>
+    <input class="q-input" data-answer="4" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ג. שטח המשולש:</span>
+    <input class="q-input" data-answer="6" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>הכלל לשתי הנקודות אחד: כדי למצוא חיתוך עם ציר אחד, מציבים 0 בציר השני.</p>
+      <p><b>א. חיתוך עם ציר <span class="fi">\(y\)</span></b> — מציבים
+      <span class="fi">\(x=0\)</span>:</p>
+      $$\textcolor{#7C3AED}{y}=\tfrac{3}{4}\cdot\textcolor{#2563EB}{0}-3=-3
+      \qquad\Longrightarrow\qquad (0,\,-3)$$
+      <p><b>ב. חיתוך עם ציר <span class="fi">\(x\)</span></b> — מציבים
+      <span class="fi">\(y=0\)</span> ופותרים משוואה:</p>
+      $$\begin{aligned}
+      \tfrac{3}{4}\textcolor{#2563EB}{x}-3 &amp;= 0 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{+3}}\\[3pt]
+      \tfrac{3}{4}\textcolor{#2563EB}{x} &amp;= 3 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{\cdot}\,4}\\[3pt]
+      3\textcolor{#2563EB}{x} &amp;= 12 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{:}\,3}\\[3pt]
+      \textcolor{#2563EB}{x} &amp;= 4
+      \end{aligned}$$
+      <p>ולכן החיתוך עם ציר <span class="fi">\(x\)</span> הוא <span class="fi">\((4,\,0)\)</span>.</p>
+      <p><b>ג. השטח.</b> שלושת קודקודי המשולש הם הראשית <span class="fi">\((0,\,0)\)</span>
+      ושתי נקודות החיתוך שמצאנו.
+      <br>הזווית בראשית היא זווית ישרה, כי שני הצירים מאונכים —
+      ולכן שני הניצבים שוכבים על הצירים, ואורכיהם הם המרחקים מהראשית:</p>
+      <p>הניצב שעל ציר <span class="fi">\(x\)</span> — אורכו 4.
+      <br>הניצב שעל ציר <span class="fi">\(y\)</span> — אורכו 3, המרחק מ-0 עד
+      <span class="fi">\(-3\)</span>.
+      <br>אורך הוא תמיד מספר חיובי, ולכן המרחק לנקודה
+      <span class="fi">\((0,\,-3)\)</span> הוא 3.</p>
+      $$S=\frac{4\cdot 3}{2}=\mathbf{6}$$
+      <p>שטח המשולש הוא <b>6 יחידות ריבועיות</b>.</p>
+      <figure class="mini">
+        <svg viewBox="0 0 408 328" style="width:100%;max-width:408px;height:auto" role="img" aria-label="line y = three quarters x minus 3, its two intercepts and the triangle it forms with the axes">
+  <path stroke="#E4E8EE" stroke-width="1" fill="none" d="M24 24V304 M64 24V304 M104 24V304 M144 24V304 M184 24V304 M224 24V304 M264 24V304 M304 24V304 M344 24V304 M384 24V304 M24 304H384 M24 264H384 M24 224H384 M24 184H384 M24 144H384 M24 104H384 M24 64H384 M24 24H384"/>
+  <line x1="20" y1="144" x2="382" y2="144" stroke="#5A6875" stroke-width="1.6"/>
+  <polygon points="394,144 380,137.5 380,150.5" fill="#5A6875"/>
+  <line x1="104" y1="308" x2="104" y2="26" stroke="#5A6875" stroke-width="1.6"/>
+  <polygon points="104,14 97.5,28 110.5,28" fill="#5A6875"/>
+  <g font-family="Arial" font-size="11" fill="#5A6875"><text x="98" y="159" text-anchor="end">0</text><text x="24" y="160" text-anchor="middle">−2</text><text x="64" y="160" text-anchor="middle">−1</text><text x="144" y="160" text-anchor="middle">1</text><text x="184" y="160" text-anchor="middle">2</text><text x="224" y="160" text-anchor="middle">3</text><text x="264" y="160" text-anchor="middle">4</text><text x="304" y="160" text-anchor="middle">5</text><text x="344" y="160" text-anchor="middle">6</text><text x="384" y="160" text-anchor="middle">7</text><text x="97" y="308" text-anchor="end">−4</text><text x="97" y="268" text-anchor="end">−3</text><text x="97" y="228" text-anchor="end">−2</text><text x="97" y="188" text-anchor="end">−1</text><text x="97" y="108" text-anchor="end">1</text><text x="97" y="68" text-anchor="end">2</text><text x="97" y="28" text-anchor="end">3</text></g>
+  <polygon points="104,144 264,144 104,264" fill="#EA580C" opacity=".18"/>
+  <line x1="56" y1="300" x2="368" y2="66" stroke="#7C3AED" stroke-width="3" stroke-linecap="round"/>
+  <text x="352" y="67" text-anchor="end" font-family="Arial" font-size="13" font-weight="700" fill="#7C3AED" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3.5">y=¾x−3</text>
+  <circle cx="104" cy="264" r="6" fill="#059669" stroke="#fff" stroke-width="2"/>
+  <text x="115" y="253" text-anchor="start" font-family="Arial" font-size="12.5" font-weight="700" fill="#059669" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3.5">(0, −3)</text>
+  <circle cx="264" cy="144" r="6" fill="#EA580C" stroke="#fff" stroke-width="2"/>
+  <text x="272" y="133" text-anchor="start" font-family="Arial" font-size="12.5" font-weight="700" fill="#EA580C" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3.5">(4, 0)</text>
+  <text x="184" y="204" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#C0392B" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3.5">S=6</text>
+</svg>
+        <figcaption>המשולש הכתום: קודקוד בראשית, קודקוד ב-<span class="fi">\((4,\,0)\)</span>
+        וקודקוד ב-<span class="fi">\((0,\,-3)\)</span>. הניצבים באורכים 4 ו-3.</figcaption>
+      </figure>
+      <p><b>בדיקה</b> — שתי הנקודות חייבות לקיים את משוואת הישר:
+      <br>‏<span class="fi">\(\tfrac{3}{4}\cdot 0-3=-3\)</span> ✓
+      <br>‏<span class="fi">\(\tfrac{3}{4}\cdot 4-3=3-3=0\)</span> ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="f4"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="ex-f5">
+  <div class="ex-head"><span class="lvl">ו5</span><h4>ישר מקביל העובר דרך נקודה</h4></div>
+  <p class="q-text">
+    מצאי את משוואת הישר המקביל לישר <span class="fi">\(y=-2x+7\)</span>
+    והעובר דרך הנקודה <span class="fi">\((3,\,-1)\)</span>.
+  </p>
+  <div class="q-row"><span>‏<span class="fi">\(m=\)</span></span>
+    <input class="q-input" data-answer="-2" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>‏<span class="fi">\(b=\)</span></span>
+    <input class="q-input" data-answer="5" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>שני ישרים מקבילים אם ורק אם השיפועים שלהם שווים.
+      <br>לכן השיפוע המבוקש מועתק כמו שהוא מהישר הנתון:
+      <span class="fi">\(\textcolor{#EA580C}{m}=-2\)</span>.</p>
+      <p>נשאר למצוא את <span class="fi">\(\textcolor{#059669}{b}\)</span>, בעזרת הנקודה:</p>
+      $$\begin{aligned}
+      \textcolor{#7C3AED}{y} &amp;= -2\textcolor{#2563EB}{x}+\textcolor{#059669}{b}\\[3pt]
+      \textcolor{#7C3AED}{-1} &amp;= -2\cdot\textcolor{#2563EB}{3}+\textcolor{#059669}{b}\\[3pt]
+      -1 &amp;= -6+\textcolor{#059669}{b} &amp;&amp;\qquad\textcolor{#C0392B}{/\;{+6}}\\[3pt]
+      \textcolor{#059669}{b} &amp;= \mathbf{5}
+      \end{aligned}$$
+      <p>משוואת הישר המבוקש: <span class="fi">\(y=-2x+5\)</span>.</p>
+      <p><b>בדיקה</b> בשני הדברים שהשאלה דרשה:
+      <br>מקבילות — שני השיפועים <span class="fi">\(-2\)</span>, שווים ✓
+      <br>מעבר בנקודה — <span class="fi">\(-2\cdot 3+5=-6+5=-1\)</span> ✓</p>
+      <p class="aside">שני הישרים אינם אותו ישר: המספרים החופשיים שלהם, 7 ו-5, שונים —
+      ולכן הם שני ישרים שונים שלעולם אינם נפגשים.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="f5"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="ex-f6">
+  <div class="ex-head"><span class="lvl">ו6</span><h4>תחום חיוביות ותחום שליליות</h4></div>
+  <p class="q-text">
+    נתונה הפונקציה <span class="fi">\(y=\tfrac{1}{2}x-2\)</span>.
+    <br>א. מצאי את נקודת האפס שלה.
+    <br>ב. מהו תחום החיוביות ומהו תחום השליליות?
+  </p>
+  <div class="q-row"><span>א. נקודת האפס: ‏<span class="fi">\(x=\)</span></span>
+    <input class="q-input" data-answer="4" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row">
+    <span>ב. חיובית עבור</span>
+    <span style="direction:ltr;unicode-bidi:isolate;display:inline-flex;align-items:center;gap:8px"><span class="fi">\(x\gt\)</span><input class="q-input" data-answer="4" data-tol="0.001" inputmode="decimal" placeholder="?"></span>
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p><b>א. נקודת האפס</b> היא ההצבה שבה הפונקציה מקבלת ערך 0 — שם הישר חוצה
+      את ציר <span class="fi">\(x\)</span>.</p>
+      $$\begin{aligned}
+      \tfrac{1}{2}\textcolor{#2563EB}{x}-2 &amp;= 0 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{+2}}\\[3pt]
+      \tfrac{1}{2}\textcolor{#2563EB}{x} &amp;= 2 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{\cdot}\,2}\\[3pt]
+      \textcolor{#2563EB}{x} &amp;= \mathbf{4}
+      \end{aligned}$$
+      <p><b>ב.</b> נקודת האפס מחלקת את ציר <span class="fi">\(x\)</span> לשני חלקים,
+      ובכל חלק לישר יש סימן אחד קבוע.
+      <br>השיפוע כאן חיובי, ולכן הישר עולה: משמאל לנקודה 4 הוא מתחת לציר,
+      ומימין לה הוא מעליו.</p>
+      <p>תחום החיוביות: <span class="fi">\(\textcolor{#2563EB}{x}\gt 4\)</span>
+      <br>תחום השליליות: <span class="fi">\(\textcolor{#2563EB}{x}\lt 4\)</span></p>
+      <figure class="mini">
+        <svg viewBox="0 0 608 368" style="width:100%;max-width:600px;height:auto" role="img" aria-label="line y = half x minus 2 with the x axis split at x = 4 into a negative part and a positive part">
+  <path stroke="#E4E8EE" stroke-width="1" fill="none" d="M24 24V344 M64 24V344 M104 24V344 M144 24V344 M184 24V344 M224 24V344 M264 24V344 M304 24V344 M344 24V344 M384 24V344 M424 24V344 M464 24V344 M504 24V344 M544 24V344 M584 24V344 M24 344H584 M24 304H584 M24 264H584 M24 224H584 M24 184H584 M24 144H584 M24 104H584 M24 64H584 M24 24H584"/>
+  <line x1="20" y1="144" x2="582" y2="144" stroke="#5A6875" stroke-width="1.6"/>
+  <polygon points="594,144 580,137.5 580,150.5" fill="#5A6875"/>
+  <line x1="184" y1="348" x2="184" y2="26" stroke="#5A6875" stroke-width="1.6"/>
+  <polygon points="184,14 177.5,28 190.5,28" fill="#5A6875"/>
+  <g font-family="Arial" font-size="11" fill="#5A6875"><text x="178" y="159" text-anchor="end">0</text><text x="24" y="160" text-anchor="middle">−4</text><text x="64" y="160" text-anchor="middle">−3</text><text x="104" y="160" text-anchor="middle">−2</text><text x="144" y="160" text-anchor="middle">−1</text><text x="224" y="160" text-anchor="middle">1</text><text x="264" y="160" text-anchor="middle">2</text><text x="304" y="160" text-anchor="middle">3</text><text x="344" y="160" text-anchor="middle">4</text><text x="384" y="160" text-anchor="middle">5</text><text x="424" y="160" text-anchor="middle">6</text><text x="464" y="160" text-anchor="middle">7</text><text x="504" y="160" text-anchor="middle">8</text><text x="544" y="160" text-anchor="middle">9</text><text x="584" y="160" text-anchor="middle">10</text><text x="177" y="348" text-anchor="end">−5</text><text x="177" y="308" text-anchor="end">−4</text><text x="177" y="268" text-anchor="end">−3</text><text x="177" y="228" text-anchor="end">−2</text><text x="177" y="188" text-anchor="end">−1</text><text x="177" y="108" text-anchor="end">1</text><text x="177" y="68" text-anchor="end">2</text><text x="177" y="28" text-anchor="end">3</text></g>
+  <line x1="40" y1="296" x2="568" y2="32" stroke="#7C3AED" stroke-width="3" stroke-linecap="round"/>
+  <text x="528" y="41" text-anchor="end" font-family="Arial" font-size="13" font-weight="700" fill="#7C3AED" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3.5">y=½x−2</text>
+  <line x1="344" y1="144" x2="576" y2="144" stroke="#059669" stroke-width="6.5" stroke-linecap="butt" opacity=".95"/>
+  <line x1="32" y1="144" x2="344" y2="144" stroke="#C0392B" stroke-width="6.5" stroke-linecap="butt" opacity=".95"/>
+  <circle cx="344" cy="144" r="6" fill="#1C2733" stroke="#fff" stroke-width="2"/>
+  <text x="338" y="131" text-anchor="end" font-family="Arial" font-size="12.5" font-weight="700" fill="#1C2733" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3.5">(4, 0)</text>
+  <text x="464" y="180" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="700" fill="#059669" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3.5">y > 0</text>
+  <text x="192" y="180" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="700" fill="#C0392B" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3.5">y < 0</text>
+</svg>
+        <figcaption>מימין ל-<span class="fi">\((4,\,0)\)</span> הישר נמצא מעל ציר
+        <span class="fi">\(x\)</span> — שם <span class="fi">\(y\gt 0\)</span>.
+        משמאל לה הוא מתחת לציר — שם <span class="fi">\(y\lt 0\)</span>.</figcaption>
+      </figure>
+      <p><b>בדיקה בשתי הצבות</b>, אחת מכל צד של הנקודה 4:
+      <br><span class="fi">\(x=6\)</span>: ‏<span class="fi">\(\tfrac{1}{2}\cdot 6-2=1\)</span> — חיובי ✓
+      <br><span class="fi">\(x=2\)</span>: ‏<span class="fi">\(\tfrac{1}{2}\cdot 2-2=-1\)</span> — שלילי ✓
+      <br>ובנקודה עצמה, <span class="fi">\(x=4\)</span>, מתקבל 0 — לא חיובי ולא שלילי,
+      ולכן היא אינה שייכת לאף אחד משני התחומים.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="f6"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="ex-f7">
+  <div class="ex-head"><span class="lvl">ו7</span><h4>נקודת חיתוך של שני ישרים</h4></div>
+  <p class="q-text">
+    נתונים שני הישרים <span class="fi">\(y=2x-3\)</span> ו-<span class="fi">\(y=-x+6\)</span>.
+    <br>מצאי את שיעורי נקודת החיתוך שלהם.
+  </p>
+  <div class="q-row"><span>‏<span class="fi">\(x=\)</span></span>
+    <input class="q-input" data-answer="3" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>‏<span class="fi">\(y=\)</span></span>
+    <input class="q-input" data-answer="3" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>נקודת החיתוך היא הנקודה היחידה שנמצאת על שני הישרים,
+      ולכן שם ערכי ה-<span class="fi">\(y\)</span> שלהם שווים.
+      <br>משווים בין שני הביטויים ופותרים:</p>
+      $$\begin{aligned}
+      2\textcolor{#2563EB}{x}-3 &amp;= -\textcolor{#2563EB}{x}+6 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{+x}}\\[3pt]
+      3\textcolor{#2563EB}{x}-3 &amp;= 6 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{+3}}\\[3pt]
+      3\textcolor{#2563EB}{x} &amp;= 9 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{:}\,3}\\[3pt]
+      \textcolor{#2563EB}{x} &amp;= \mathbf{3}
+      \end{aligned}$$
+      <p>מצאנו רק את שיעור ה-<span class="fi">\(x\)</span>.
+      את שיעור ה-<span class="fi">\(y\)</span> מקבלים בהצבה חזרה — בכל אחד משני הישרים:</p>
+      $$\textcolor{#7C3AED}{y}=2\cdot\textcolor{#2563EB}{3}-3=\mathbf{3}$$
+      <p>נקודת החיתוך: <span class="fi">\((3,\,3)\)</span>.</p>
+      <figure class="mini">
+        <svg viewBox="0 0 408 528" style="width:100%;max-width:408px;height:auto" role="img" aria-label="the lines y = 2x minus 3 and y = minus x plus 6 crossing at the point 3, 3">
+  <path stroke="#E4E8EE" stroke-width="1" fill="none" d="M24 24V504 M64 24V504 M104 24V504 M144 24V504 M184 24V504 M224 24V504 M264 24V504 M304 24V504 M344 24V504 M384 24V504 M24 504H384 M24 464H384 M24 424H384 M24 384H384 M24 344H384 M24 304H384 M24 264H384 M24 224H384 M24 184H384 M24 144H384 M24 104H384 M24 64H384 M24 24H384"/>
+  <line x1="20" y1="304" x2="382" y2="304" stroke="#5A6875" stroke-width="1.6"/>
+  <polygon points="394,304 380,297.5 380,310.5" fill="#5A6875"/>
+  <line x1="104" y1="508" x2="104" y2="26" stroke="#5A6875" stroke-width="1.6"/>
+  <polygon points="104,14 97.5,28 110.5,28" fill="#5A6875"/>
+  <g font-family="Arial" font-size="11" fill="#5A6875"><text x="98" y="319" text-anchor="end">0</text><text x="24" y="320" text-anchor="middle">−2</text><text x="64" y="320" text-anchor="middle">−1</text><text x="144" y="320" text-anchor="middle">1</text><text x="184" y="320" text-anchor="middle">2</text><text x="224" y="320" text-anchor="middle">3</text><text x="264" y="320" text-anchor="middle">4</text><text x="304" y="320" text-anchor="middle">5</text><text x="344" y="320" text-anchor="middle">6</text><text x="384" y="320" text-anchor="middle">7</text><text x="97" y="508" text-anchor="end">−5</text><text x="97" y="468" text-anchor="end">−4</text><text x="97" y="428" text-anchor="end">−3</text><text x="97" y="388" text-anchor="end">−2</text><text x="97" y="348" text-anchor="end">−1</text><text x="97" y="268" text-anchor="end">1</text><text x="97" y="228" text-anchor="end">2</text><text x="97" y="188" text-anchor="end">3</text><text x="97" y="148" text-anchor="end">4</text><text x="97" y="108" text-anchor="end">5</text><text x="97" y="68" text-anchor="end">6</text><text x="97" y="28" text-anchor="end">7</text></g>
+  <line x1="64" y1="504" x2="304" y2="24" stroke="#7C3AED" stroke-width="3" stroke-linecap="round"/>
+  <text x="292" y="37" text-anchor="end" font-family="Arial" font-size="13" font-weight="700" fill="#7C3AED" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3.5">y=2x−3</text>
+  <line x1="68" y1="28" x2="376" y2="336" stroke="#059669" stroke-width="3" stroke-linecap="round"/>
+  <text x="118" y="66" text-anchor="start" font-family="Arial" font-size="13" font-weight="700" fill="#059669" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3.5">y=−x+6</text>
+  <line x1="224" y1="304" x2="224" y2="184" stroke="#EA580C" stroke-width="2.2" stroke-dasharray="6 5"/>
+  <line x1="104" y1="184" x2="224" y2="184" stroke="#EA580C" stroke-width="2.2" stroke-dasharray="6 5"/>
+  <circle cx="224" cy="184" r="7" fill="#EA580C" stroke="#fff" stroke-width="2"/>
+  <text x="235" y="174" text-anchor="start" font-family="Arial" font-size="12.5" font-weight="700" fill="#EA580C" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3.5">(3, 3)</text>
+</svg>
+        <figcaption>שני הישרים נחתכים בנקודה אחת — <span class="fi">\((3,\,3)\)</span>.
+        שיפועיהם שונים (2 ו-<span class="fi">\(-1\)</span>), ולכן חיתוך אחד ויחיד.</figcaption>
+      </figure>
+      <p><b>בדיקה</b> — הנקודה חייבת לקיים את <b>שתי</b> המשוואות:
+      <br>‏<span class="fi">\(2\cdot 3-3=3\)</span> ✓
+      <br>‏<span class="fi">\(-3+6=3\)</span> ✓
+      <br>שתי ההצבות נתנו 3, ולכן <span class="fi">\((3,\,3)\)</span> באמת על שני הישרים.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="f7"> סיימתי את התרגיל הזה</label>
+</article>
+
+
+<!-- ==================================================================== -->
+<!-- ======================== ז · מערכות משוואות ======================== -->
+<!-- ==================================================================== -->
+<h2 id="g-sys"><span class="num">ז</span>מערכות משוואות — שיטת ההצבה</h2>
+<p class="grouplead">חמישה תרגילים בשיטה שהעבודה דורשת במפורש: מבודדים נעלם אחד,
+מציבים אותו במשוואה השנייה, פותרים, חוזרים ומוצאים את הנעלם השני — ובודקים בשתי המשוואות.
+שניים מהם מגיעים מסיפור.</p>
+
+<div class="box def">
+  <div class="box-title">ארבעת הצעדים של שיטת ההצבה</div>
+  ‏1. <b>מבודדים</b> — בוחרים את הנעלם הקל לבידוד ומשאירים אותו לבד באגף אחד.
+  <br>‏2. <b>מציבים</b> — את הביטוי שקיבלנו מכניסים במקומו במשוואה <em>השנייה</em>.
+  <br>‏3. <b>פותרים</b> — נשארה משוואה עם נעלם אחד.
+  <br>‏4. <b>חוזרים</b> — מציבים את מה שמצאנו בביטוי המבודד ומקבלים את הנעלם השני.
+</div>
+
+<article class="ex" id="ex-g1">
+  <div class="ex-head"><span class="lvl">ז1</span><h4>נעלם שכבר מבודד</h4></div>
+  <p class="q-text">פתרי בשיטת ההצבה:</p>
+  $$\begin{cases}y=3x-4\\[3pt] 2x+y=11\end{cases}$$
+  <div class="q-row"><span>‏<span class="fi">\(x=\)</span></span>
+    <input class="q-input" data-answer="3" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>‏<span class="fi">\(y=\)</span></span>
+    <input class="q-input" data-answer="5" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>במשוואה הראשונה <span class="fi">\(\textcolor{#7C3AED}{y}\)</span> כבר לבד,
+      אז שלב הבידוד כבר נעשה בשבילנו. מציבים אותו במשוואה השנייה במקום
+      <span class="fi">\(\textcolor{#7C3AED}{y}\)</span>:</p>
+      $$\begin{aligned}
+      2\textcolor{#2563EB}{x}+\underbrace{(3\textcolor{#2563EB}{x}-4)}_{\textcolor{#7C3AED}{y}} &amp;= 11\\[3pt]
+      2\textcolor{#2563EB}{x}+3\textcolor{#2563EB}{x}-4 &amp;= 11\\[3pt]
+      5\textcolor{#2563EB}{x}-4 &amp;= 11 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{+4}}\\[3pt]
+      5\textcolor{#2563EB}{x} &amp;= 15 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{:}\,5}\\[3pt]
+      \textcolor{#2563EB}{x} &amp;= \mathbf{3}
+      \end{aligned}$$
+      <p>וחוזרים לביטוי המבודד כדי למצוא את <span class="fi">\(y\)</span>:</p>
+      $$\textcolor{#7C3AED}{y}=3\cdot\textcolor{#2563EB}{3}-4=9-4=\mathbf{5}$$
+      <p>הפתרון: <span class="fi">\(x=3\)</span> ו-<span class="fi">\(y=5\)</span>,
+      כלומר הזוג <span class="fi">\((3,\,5)\)</span>.</p>
+      <p><b>בדיקה בשתי המשוואות</b> — פתרון של מערכת חייב לקיים את שתיהן:
+      <br>‏<span class="fi">\(5=3\cdot 3-4\)</span> ✓
+      <br>‏<span class="fi">\(2\cdot 3+5=6+5=11\)</span> ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="g1"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="ex-g2">
+  <div class="ex-head"><span class="lvl">ז2</span><h4>קודם מבודדים, ורק אז מציבים</h4></div>
+  <p class="q-text">פתרי בשיטת ההצבה:</p>
+  $$\begin{cases}x+2y=7\\[3pt] 3x-y=7\end{cases}$$
+  <div class="q-row"><span>‏<span class="fi">\(x=\)</span></span>
+    <input class="q-input" data-answer="3" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>‏<span class="fi">\(y=\)</span></span>
+    <input class="q-input" data-answer="2" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p><b>איזה נעלם לבודד?</b> ה-<span class="fi">\(\textcolor{#2563EB}{x}\)</span>
+      במשוואה הראשונה עומד עם מקדם 1 — בידוד שלו לא ידרוש חלוקה בכלל.
+      זו הבחירה הנוחה.</p>
+      $$\begin{aligned}
+      \textcolor{#2563EB}{x}+2\textcolor{#7C3AED}{y} &amp;= 7 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{-2y}}\\[3pt]
+      \textcolor{#2563EB}{x} &amp;= 7-2\textcolor{#7C3AED}{y}
+      \end{aligned}$$
+      <p>ומציבים את הביטוי הזה במשוואה <b>השנייה</b>, בכל מקום שבו מופיע
+      <span class="fi">\(x\)</span>:</p>
+      $$\begin{aligned}
+      3\underbrace{(7-2\textcolor{#7C3AED}{y})}_{\textcolor{#2563EB}{x}}-\textcolor{#7C3AED}{y} &amp;= 7\\[3pt]
+      21-6\textcolor{#7C3AED}{y}-\textcolor{#7C3AED}{y} &amp;= 7\\[3pt]
+      21-7\textcolor{#7C3AED}{y} &amp;= 7 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{-21}}\\[3pt]
+      -7\textcolor{#7C3AED}{y} &amp;= -14 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{:}\,({-7})}\\[3pt]
+      \textcolor{#7C3AED}{y} &amp;= \mathbf{2}
+      \end{aligned}$$
+      <p>וחוזרים לביטוי המבודד:</p>
+      $$\textcolor{#2563EB}{x}=7-2\cdot\textcolor{#7C3AED}{2}=7-4=\mathbf{3}$$
+      <p><b>בדיקה בשתי המשוואות</b>:
+      <br>‏<span class="fi">\(3+2\cdot 2=3+4=7\)</span> ✓
+      <br>‏<span class="fi">\(3\cdot 3-2=9-2=7\)</span> ✓</p>
+      <p class="aside">אפשר היה לבודד גם את <span class="fi">\(y\)</span> מהמשוואה השנייה —
+      גם שם המקדם שלו הוא 1. הפתרון היה יוצא זהה.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="g2"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="ex-g3">
+  <div class="ex-head"><span class="lvl">ז3</span><h4>שתי המשוואות בצורה כללית</h4></div>
+  <p class="q-text">פתרי בשיטת ההצבה:</p>
+  $$\begin{cases}5x-2y=4\\[3pt] x+3y=11\end{cases}$$
+  <div class="q-row"><span>‏<span class="fi">\(x=\)</span></span>
+    <input class="q-input" data-answer="2" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>‏<span class="fi">\(y=\)</span></span>
+    <input class="q-input" data-answer="3" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>אף נעלם אינו מבודד, ולכן מתחילים בבחירה.
+      <br>המקדמים הם 5, 2, 1, 3 — והמקדם 1 של <span class="fi">\(x\)</span>
+      במשוואה השנייה הוא הקל ביותר.</p>
+      $$\begin{aligned}
+      \textcolor{#2563EB}{x}+3\textcolor{#7C3AED}{y} &amp;= 11 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{-3y}}\\[3pt]
+      \textcolor{#2563EB}{x} &amp;= 11-3\textcolor{#7C3AED}{y}
+      \end{aligned}$$
+      <p>מציבים במשוואה הראשונה:</p>
+      $$\begin{aligned}
+      5\underbrace{(11-3\textcolor{#7C3AED}{y})}_{\textcolor{#2563EB}{x}}-2\textcolor{#7C3AED}{y} &amp;= 4\\[3pt]
+      55-15\textcolor{#7C3AED}{y}-2\textcolor{#7C3AED}{y} &amp;= 4\\[3pt]
+      55-17\textcolor{#7C3AED}{y} &amp;= 4 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{-55}}\\[3pt]
+      -17\textcolor{#7C3AED}{y} &amp;= -51 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{:}\,({-17})}\\[3pt]
+      \textcolor{#7C3AED}{y} &amp;= \mathbf{3}
+      \end{aligned}$$
+      $$\textcolor{#2563EB}{x}=11-3\cdot\textcolor{#7C3AED}{3}=11-9=\mathbf{2}$$
+      <p>הפתרון: <span class="fi">\((2,\,3)\)</span>.</p>
+      <p><b>בדיקה בשתי המשוואות</b>:
+      <br>‏<span class="fi">\(5\cdot 2-2\cdot 3=10-6=4\)</span> ✓
+      <br>‏<span class="fi">\(2+3\cdot 3=2+9=11\)</span> ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="g3"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="ex-g4">
+  <div class="ex-head"><span class="lvl">ז4</span><h4>בעיה מילולית שמובילה למערכת — מחירים</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">מחיר ק"ג שקדים גדול ב-2&nbsp;₪ ממחיר ק"ג אגוזים.</span>
+    <span class="mk mk-given2">סוחר קנה 4&nbsp;ק"ג שקדים ו-6&nbsp;ק"ג אגוזים ושילם 88&nbsp;₪.</span>
+    <span class="mk mk-find">מהו מחיר ק"ג מכל סוג?</span>
+  </p>
+  <div class="q-row"><span>ק"ג שקדים (₪):</span>
+    <input class="q-input" data-answer="10" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ק"ג אגוזים (₪):</span>
+    <input class="q-input" data-answer="8" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p><b>נסמן</b> — שני מחירים לא ידועים, ולכן שני נעלמים:</p>
+      <div class="setup">
+        <span class="fi">\(\textcolor{#2563EB}{x}\)</span> — מחיר ק"ג שקדים, בשקלים
+        <br><span class="fi">\(\textcolor{#7C3AED}{y}\)</span> — מחיר ק"ג אגוזים, בשקלים
+      </div>
+      <p><b>המערכת</b> — משפט אחד בשאלה נותן משוואה אחת:</p>
+      $$\begin{cases}
+      \textcolor{#2563EB}{x}=\textcolor{#7C3AED}{y}+2 &amp;\quad\text{(השקדים יקרים ב-2)}\\[4pt]
+      4\textcolor{#2563EB}{x}+6\textcolor{#7C3AED}{y}=88 &amp;\quad\text{(סך התשלום)}
+      \end{cases}$$
+      <p>המשוואה הראשונה כבר מבודדת, אז מציבים אותה בשנייה:</p>
+      $$\begin{aligned}
+      4\underbrace{(\textcolor{#7C3AED}{y}+2)}_{\textcolor{#2563EB}{x}}+6\textcolor{#7C3AED}{y} &amp;= 88\\[3pt]
+      4\textcolor{#7C3AED}{y}+8+6\textcolor{#7C3AED}{y} &amp;= 88\\[3pt]
+      10\textcolor{#7C3AED}{y}+8 &amp;= 88 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{-8}}\\[3pt]
+      10\textcolor{#7C3AED}{y} &amp;= 80 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{:}\,10}\\[3pt]
+      \textcolor{#7C3AED}{y} &amp;= \mathbf{8}
+      \end{aligned}$$
+      $$\textcolor{#2563EB}{x}=\textcolor{#7C3AED}{8}+2=\mathbf{10}$$
+      <p><b>חזרה לשאלה</b>: ק"ג שקדים עולה <b>‏10&nbsp;₪</b>, וק"ג אגוזים <b>‏8&nbsp;₪</b>.</p>
+      <table class="dtable sol-table">
+        <tr><th>סוג</th><th>כמות</th><th>מחיר לק"ג</th><th>תשלום</th></tr>
+        <tr><td>שקדים</td><td>‏4&nbsp;ק"ג</td><td>‏10&nbsp;₪</td><td class="hl-group">‏40&nbsp;₪</td></tr>
+        <tr><td>אגוזים</td><td>‏6&nbsp;ק"ג</td><td>‏8&nbsp;₪</td><td class="hl-group">‏48&nbsp;₪</td></tr>
+        <tr><td>סה"כ</td><td>—</td><td>—</td><td class="hl-total">‏88&nbsp;₪</td></tr>
+      </table>
+      <p><b>בדיקה מול הסיפור</b>:
+      <br>ההפרש בין המחירים: <span class="fi">\(10-8=2\)</span> ✓
+      <br>התשלום: <span class="fi">\(40+48=88\)</span> ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="g4"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="ex-g5">
+  <div class="ex-head"><span class="lvl">ז5</span><h4>בעיה מילולית שמובילה למערכת — ניקוד עם חיסור</h4></div>
+  <p class="q-text">
+    <span class="mk mk-total">קלע ירה 20 יריות למטרה.</span>
+    <span class="mk mk-given">על כל פגיעה קיבל 5 נקודות,</span>
+    <span class="mk mk-given2">ועל כל החטאה הורידו לו 3 נקודות.</span>
+    <span class="mk mk-change">בסך הכל צבר 60 נקודות.</span>
+    <span class="mk mk-find">בכמה יריות פגע במטרה?</span>
+  </p>
+  <div class="q-row"><span>פגיעות:</span>
+    <input class="q-input" data-answer="15" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>החטאות:</span>
+    <input class="q-input" data-answer="5" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p><b>נסמן</b>:</p>
+      <div class="setup">
+        <span class="fi">\(\textcolor{#2563EB}{x}\)</span> — מספר הפגיעות
+        <br><span class="fi">\(\textcolor{#7C3AED}{y}\)</span> — מספר ההחטאות
+      </div>
+      <p><b>המערכת</b> — פעמיים "בסך הכל", אחת על מספר היריות ואחת על הנקודות:</p>
+      $$\begin{cases}
+      \textcolor{#2563EB}{x}+\textcolor{#7C3AED}{y}=20 &amp;\quad\text{(כל היריות)}\\[4pt]
+      5\textcolor{#2563EB}{x}-3\textcolor{#7C3AED}{y}=60 &amp;\quad\text{(מאזן הנקודות)}
+      \end{cases}$$
+      <p>ההחטאות מורידות נקודות, ולכן האיבר שלהן נכנס למשוואה עם סימן חיסור.</p>
+      <p>מבודדים <span class="fi">\(y\)</span> מהמשוואה הראשונה ומציבים בשנייה:</p>
+      $$\begin{aligned}
+      \textcolor{#7C3AED}{y} &amp;= 20-\textcolor{#2563EB}{x}\\[6pt]
+      5\textcolor{#2563EB}{x}-3\underbrace{(20-\textcolor{#2563EB}{x})}_{\textcolor{#7C3AED}{y}} &amp;= 60\\[3pt]
+      5\textcolor{#2563EB}{x}-60+3\textcolor{#2563EB}{x} &amp;= 60\\[3pt]
+      8\textcolor{#2563EB}{x}-60 &amp;= 60 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{+60}}\\[3pt]
+      8\textcolor{#2563EB}{x} &amp;= 120 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{:}\,8}\\[3pt]
+      \textcolor{#2563EB}{x} &amp;= \mathbf{15}
+      \end{aligned}$$
+      <p>‏<span class="fi">\(-3\cdot(-x)=+3x\)</span> — זו השורה שדורשת זהירות כאן.</p>
+      $$\textcolor{#7C3AED}{y}=20-\textcolor{#2563EB}{15}=\mathbf{5}$$
+      <p><b>חזרה לשאלה</b>: הקלע פגע ב-<b>15</b> יריות, והחטיא ב-<b>5</b>.</p>
+      <p><b>בדיקה מול הסיפור</b>:
+      <br>מספר היריות: <span class="fi">\(15+5=20\)</span> ✓
+      <br>הנקודות: <span class="fi">\(5\cdot 15-3\cdot 5=75-15=60\)</span> ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="g5"> סיימתי את התרגיל הזה</label>
+</article>
+
+<!-- ==================================================================== -->
+<!-- ============================== ח · אחוזים ========================== -->
+<!-- ==================================================================== -->
+<h2 id="g-pct"><span class="num">ח</span>אחוזים</h2>
+<p class="grouplead">שישה תרגילים: אחוז מתוך סך, מציאת הסך כשמכירים חלק ממנו,
+הורדה באחוזים, הדרך חזרה מהמחיר שאחרי אל המקורי, שני שינויים ברצף, ואחוז השינוי.</p>
+
+<div class="fbox">
+  <div class="fbox-title">מקדם הכפל — כלי אחד לכל השאלות האלה</div>
+  $$\text{הורדה של }25\%\;\Rightarrow\;{\times}\,0.75
+  \qquad\qquad
+  \text{העלאה של }20\%\;\Rightarrow\;{\times}\,1.2$$
+  <span class="f-legend">
+    <span><bdi>מהמחיר הישן אל החדש — כופלים במקדם. מהחדש אל הישן — מחלקים בו.</bdi></span>
+  </span>
+</div>
+
+<article class="ex" id="ex-h1">
+  <div class="ex-head"><span class="lvl">ח1</span><h4>אחוז מתוך סך ידוע</h4></div>
+  <p class="q-text">
+    <span class="mk mk-total">בבית ספר לומדים 480 תלמידים.</span>
+    <span class="mk mk-group">‏35% מהם לומדים אנגלית מוגברת.</span>
+    <span class="mk mk-find">כמה תלמידים לומדים אנגלית מוגברת?</span>
+  </p>
+  <div class="q-row"><span>מספר התלמידים:</span>
+    <input class="q-input" data-answer="168" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>אחוז הוא חלק מתוך מאה, ולכן <span class="fi">\(35\%=\frac{35}{100}=0.35\)</span>.
+      <br>"‏35% מתוך 480" פירושו כפל: <span class="fi">\(0.35\)</span> כפול הסך.</p>
+      $$0.35\cdot 480=\mathbf{168}$$
+      <p>אפשר גם בשני צעדים, בלי מחשבון:
+      <br>‏1% מ-480 הוא <span class="fi">\(480:100=4.8\)</span>
+      <br>ולכן 35% הם <span class="fi">\(4.8\cdot 35=168\)</span></p>
+      <figure class="mini">
+        <svg viewBox="0 0 470 76" style="width:100%;max-width:470px;height:auto" role="img" aria-label="percent bar">
+  <rect x="14" y="22" width="154.7" height="30" fill="#2563EB" opacity=".9" rx="3"/>
+  <text x="91.35" y="41.5" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="800" fill="#FFFFFF">35%</text>
+  <text x="91.35" y="69" text-anchor="middle" font-family="Arial" font-size="11.5" font-weight="700" fill="#2563EB">168</text>
+  <rect x="168.7" y="22" width="287.3" height="30" fill="#9AA5B1" opacity=".9" rx="3"/>
+  <text x="312.35" y="41.5" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="800" fill="#FFFFFF">65%</text>
+  <text x="312.35" y="69" text-anchor="middle" font-family="Arial" font-size="11.5" font-weight="700" fill="#9AA5B1">312</text>
+  <rect x="14" y="22" width="442" height="30" fill="none" stroke="#5A6875" stroke-width="1.4" rx="3"/>
+  <text x="235" y="14" text-anchor="middle" font-family="Arial" font-size="11.5" font-weight="700" fill="#5A6875">100%  =  480</text>
+</svg>
+        <figcaption>מתוך 480 התלמידים, 168 לומדים אנגלית מוגברת
+        והשאר — 312 תלמידים — הם 65% הנותרים.</figcaption>
+      </figure>
+      <p><b>בדיקה</b>: שני החלקים יחד חייבים להשלים את הסך.
+      <br>‏<span class="fi">\(0.65\cdot 480=312\)</span>, וגם
+      <span class="fi">\(168+312=480\)</span> ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="h1"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="ex-h2">
+  <div class="ex-head"><span class="lvl">ח2</span><h4>מציאת הסך מתוך חלק ואחוז</h4></div>
+  <p class="q-text">
+    <span class="mk mk-group">‏45 תלמידים בבית ספר נרשמו למקהלה,</span>
+    <span class="mk mk-given">והם 15% מכלל התלמידים.</span>
+    <span class="mk mk-find">כמה תלמידים לומדים בבית הספר?</span>
+  </p>
+  <div class="q-row"><span>סך התלמידים:</span>
+    <input class="q-input" data-answer="300" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>הפעם הסך הוא הנעלם, והחלק ידוע.</p>
+      <div class="setup">
+        <span class="fi">\(\textcolor{#2563EB}{x}\)</span> — מספר התלמידים בבית הספר
+      </div>
+      <p>‏15% מהסך שווים 45, וזו בדיוק המשוואה:</p>
+      $$\begin{aligned}
+      0.15\cdot\textcolor{#2563EB}{x} &amp;= 45 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{:}\,0.15}\\[3pt]
+      \textcolor{#2563EB}{x} &amp;= \frac{45}{0.15}=\mathbf{300}
+      \end{aligned}$$
+      <p>ובדרך שנייה, בלי חלוקה בשבר עשרוני:
+      <br>אם 15% הם 45, אז 1% הוא <span class="fi">\(45:15=3\)</span>
+      <br>ו-100% הם <span class="fi">\(3\cdot 100=300\)</span></p>
+      <figure class="mini">
+        <svg viewBox="0 0 470 76" style="width:100%;max-width:470px;height:auto" role="img" aria-label="percent bar">
+  <rect x="14" y="22" width="66.3" height="30" fill="#059669" opacity=".9" rx="3"/>
+  <text x="47.15" y="41.5" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="800" fill="#FFFFFF">15%</text>
+  <text x="47.15" y="69" text-anchor="middle" font-family="Arial" font-size="11.5" font-weight="700" fill="#059669">45</text>
+  <rect x="80.3" y="22" width="375.7" height="30" fill="#9AA5B1" opacity=".9" rx="3"/>
+  <text x="268.15" y="41.5" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="800" fill="#FFFFFF">85%</text>
+  <text x="268.15" y="69" text-anchor="middle" font-family="Arial" font-size="11.5" font-weight="700" fill="#9AA5B1">255</text>
+  <rect x="14" y="22" width="442" height="30" fill="none" stroke="#5A6875" stroke-width="1.4" rx="3"/>
+  <text x="235" y="14" text-anchor="middle" font-family="Arial" font-size="11.5" font-weight="700" fill="#5A6875">100%  =  ?</text>
+</svg>
+        <figcaption>‏45 התלמידים הם רק 15% מהרצועה. הרצועה כולה — 100% — היא 300 תלמידים.</figcaption>
+      </figure>
+      <p><b>בדיקה</b>: <span class="fi">\(0.15\cdot 300=45\)</span> ✓ —
+      חוזרים מהתשובה אל הנתון.</p>
+      <p class="aside">התשובה גדולה מ-45, וזה הגיוני: 45 הם רק חלק קטן מהסך.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="h2"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="ex-h3">
+  <div class="ex-head"><span class="lvl">ח3</span><h4>הורדה באחוזים</h4></div>
+  <p class="q-text">
+    <span class="mk mk-total">מעיל עולה 240&nbsp;₪.</span>
+    <span class="mk mk-change">בסוף העונה ניתנה עליו הנחה של 35%.</span>
+    <span class="mk mk-find">מה מחירו אחרי ההנחה?</span>
+  </p>
+  <div class="q-row"><span>המחיר אחרי ההנחה (₪):</span>
+    <input class="q-input" data-answer="156" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>הנחה של 35% משאירה 65% מהמחיר, ולכן מקדם הכפל הוא
+      <span class="fi">\(1-0.35=0.65\)</span>.</p>
+      $$240\cdot 0.65=\mathbf{156}$$
+      <p>ובדרך השנייה — קודם מחשבים כמה ההנחה שווה בשקלים, ואז מחסרים:
+      <br>ההנחה: <span class="fi">\(240\cdot 0.35=84\)</span> ₪
+      <br>המחיר החדש: <span class="fi">\(240-84=156\)</span> ₪
+      <br>שתי הדרכים נותנות את אותו מספר, כי הן מתארות את אותו מעבר.</p>
+      <figure class="mini">
+        <svg viewBox="0 0 470 76" style="width:100%;max-width:470px;height:auto" role="img" aria-label="percent bar">
+  <rect x="14" y="22" width="287.3" height="30" fill="#059669" opacity=".9" rx="3"/>
+  <text x="157.65" y="41.5" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="800" fill="#FFFFFF">65%</text>
+  <text x="157.65" y="69" text-anchor="middle" font-family="Arial" font-size="11.5" font-weight="700" fill="#059669">156</text>
+  <rect x="301.3" y="22" width="154.7" height="30" fill="#C0392B" opacity=".9" rx="3"/>
+  <text x="378.65" y="41.5" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="800" fill="#FFFFFF">35%</text>
+  <text x="378.65" y="69" text-anchor="middle" font-family="Arial" font-size="11.5" font-weight="700" fill="#C0392B">−84</text>
+  <rect x="14" y="22" width="442" height="30" fill="none" stroke="#5A6875" stroke-width="1.4" rx="3"/>
+  <text x="235" y="14" text-anchor="middle" font-family="Arial" font-size="11.5" font-weight="700" fill="#5A6875">100%  =  240</text>
+</svg>
+        <figcaption>מתוך 240&nbsp;₪ נשארו 65% — 156&nbsp;₪, והנתח האדום הוא 84&nbsp;₪ שירדו במחיר.</figcaption>
+      </figure>
+      <p><b>בדיקה</b>: <span class="fi">\(156+84=240\)</span> ✓ —
+      המחיר החדש וההנחה יחד מרכיבים את המחיר המקורי.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="h3"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="ex-h4">
+  <div class="ex-head"><span class="lvl">ח4</span><h4>מהמחיר שאחרי ההנחה אל המחיר המקורי</h4></div>
+  <p class="q-text">
+    <span class="mk mk-change">אחרי הנחה של 20%</span>
+    <span class="mk mk-given">שילמה נועה על נעליים 152&nbsp;₪.</span>
+    <span class="mk mk-find">מה היה המחיר לפני ההנחה?</span>
+  </p>
+  <div class="q-row"><span>המחיר המקורי (₪):</span>
+    <input class="q-input" data-answer="190" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>‏152&nbsp;₪ הם המחיר <em>שאחרי</em>, והמחיר המקורי הוא הנעלם.</p>
+      <div class="setup">
+        <span class="fi">\(\textcolor{#2563EB}{x}\)</span> — המחיר לפני ההנחה, בשקלים
+      </div>
+      <p>הנחה של 20% היא כפל ב-<span class="fi">\(0.8\)</span>, והתוצאה היא 152:</p>
+      $$\begin{aligned}
+      0.8\cdot\textcolor{#2563EB}{x} &amp;= 152 &amp;&amp;\qquad\textcolor{#C0392B}{/\;{:}\,0.8}\\[3pt]
+      \textcolor{#2563EB}{x} &amp;= \frac{152}{0.8}=\mathbf{190}
+      \end{aligned}$$
+      <p>מהמחיר הישן אל החדש כופלים במקדם, ולכן מהחדש אל הישן מחלקים בו —
+      חילוק הוא הפעולה ההופכית לכפל.</p>
+      <figure class="mini">
+        <svg viewBox="0 0 470 76" style="width:100%;max-width:470px;height:auto" role="img" aria-label="percent bar">
+  <rect x="14" y="22" width="353.6" height="30" fill="#059669" opacity=".9" rx="3"/>
+  <text x="190.8" y="41.5" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="800" fill="#FFFFFF">80%</text>
+  <text x="190.8" y="69" text-anchor="middle" font-family="Arial" font-size="11.5" font-weight="700" fill="#059669">152</text>
+  <rect x="367.6" y="22" width="88.4" height="30" fill="#C0392B" opacity=".9" rx="3"/>
+  <text x="411.8" y="41.5" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="800" fill="#FFFFFF">20%</text>
+  <text x="411.8" y="69" text-anchor="middle" font-family="Arial" font-size="11.5" font-weight="700" fill="#C0392B">−38</text>
+  <rect x="14" y="22" width="442" height="30" fill="none" stroke="#5A6875" stroke-width="1.4" rx="3"/>
+  <text x="235" y="14" text-anchor="middle" font-family="Arial" font-size="11.5" font-weight="700" fill="#5A6875">100%  =  ?</text>
+</svg>
+        <figcaption>‏152&nbsp;₪ הם 80% מהמחיר המקורי. הרצועה כולה — 190&nbsp;₪ —
+        וההנחה עצמה 38&nbsp;₪.</figcaption>
+      </figure>
+      <p><b>בדיקה</b> — יוצאים מהתשובה וחוזרים לנתון:
+      <br>ההנחה: <span class="fi">\(190\cdot 0.2=38\)</span> ₪
+      <br>המחיר אחריה: <span class="fi">\(190-38=152\)</span> ✓</p>
+      <p class="aside">התשובה גדולה מ-152, כפי שמצופה ממחיר שהיה לפני הנחה.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="h4"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="ex-h5">
+  <div class="ex-head"><span class="lvl">ח5</span><h4>שני שינויים ברצף</h4></div>
+  <p class="q-text">
+    <span class="mk mk-total">מחיר מוצר היה 500&nbsp;₪.</span>
+    <span class="mk mk-change">הוא התייקר ב-20%, ואחר כך הוזל ב-20%.</span>
+    <span class="mk mk-find">א. מה מחירו בסוף? ב. בכמה אחוזים השתנה המחיר בסך הכל?</span>
+  </p>
+  <div class="q-row"><span>א. המחיר בסוף (₪):</span>
+    <input class="q-input" data-answer="480" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ב. אחוז השינוי הכולל:</span>
+    <input class="q-input" data-answer="-4" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p>לכל שינוי מקדם משלו, ומפעילים אותם לפי הסדר.</p>
+      $$\begin{aligned}
+      \text{אחרי ההתייקרות}&amp;:\quad 500\cdot 1.2=600\\[4pt]
+      \text{אחרי ההוזלה}&amp;:\quad 600\cdot 0.8=\mathbf{480}
+      \end{aligned}$$
+      <p>שימי לב מה כל אחוז נלקח ממנו:
+      <br>ההתייקרות חושבה מ-500 והוסיפה 100&nbsp;₪.
+      <br>ההוזלה חושבה מ-600 והורידה 120&nbsp;₪.
+      <br>שני האחוזים שווים, אבל הסכומים שהם מייצגים שונים —
+      ולכן המחיר הסופי אינו 500.</p>
+      <p><b>ב. אחוז השינוי הכולל.</b> אפשר לכפול את שני המקדמים ולקבל מקדם אחד:</p>
+      $$1.2\cdot 0.8=0.96\qquad\Longrightarrow\qquad 500\cdot 0.96=480$$
+      <p>מקדם <span class="fi">\(0.96\)</span> פירושו שנשארו 96% מהמחיר המקורי,
+      כלומר ירידה של 4%.</p>
+      <p>ואותה תשובה גם מחישוב ישיר של אחוז השינוי:</p>
+      $$\frac{480-500}{500}\cdot 100=\frac{-20}{500}\cdot 100=-4\%$$
+      <p><b>בדיקה</b>: <span class="fi">\(500\cdot 0.04=20\)</span> ₪,
+      וההפרש בין 500 ל-480 הוא אכן 20&nbsp;₪ ✓</p>
+      <p class="aside">מקדם 0.96 שייך למוצר הזה בכל מחיר: גם 700&nbsp;₪ ירדו ל-672&nbsp;₪,
+      שהם 4% פחות.</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="h5"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="ex-h6">
+  <div class="ex-head"><span class="lvl">ח6</span><h4>אחוז השינוי — ובעיית הבריכה</h4></div>
+  <p class="q-text">
+    א. <span class="mk mk-given">מחיר של מוצר עלה מ-80&nbsp;₪ ל-92&nbsp;₪.</span>
+    <span class="mk mk-find">בכמה אחוזים התייקר?</span>
+    <br>ב. <span class="mk mk-total">בבריכה היו 400&nbsp;ליטר מים.</span>
+    <span class="mk mk-change">הוסיפו לה 120&nbsp;ליטר, ואז הוציאו 25% מהכמות שהצטברה.</span>
+    <span class="mk mk-find">כמה ליטר נשארו, ובכמה אחוזים הכמות קטנה מהכמות ההתחלתית?</span>
+  </p>
+  <div class="q-row"><span>א. אחוז ההתייקרות:</span>
+    <input class="q-input" data-answer="15" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ב. ליטרים שנשארו:</span>
+    <input class="q-input" data-answer="390" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ב. אחוז השינוי מהכמות ההתחלתית:</span>
+    <input class="q-input" data-answer="-2.5" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <details class="sol">
+    <summary>הצגי פתרון מלא</summary>
+    <div class="sol-body">
+      <p><b>א.</b> אחוז השינוי מודד את גודל השינוי ביחס למצב <em>ההתחלתי</em>.
+      <br>המכנה תמיד הערך הישן — 80.</p>
+      $$\frac{92-80}{80}\cdot 100=\frac{12}{80}\cdot 100=0.15\cdot 100=\mathbf{15\%}$$
+      <figure class="mini">
+        <svg viewBox="0 0 470 76" style="width:100%;max-width:470px;height:auto" role="img" aria-label="percent bar">
+  <rect x="14" y="22" width="384.36" height="30" fill="#2563EB" opacity=".9" rx="3"/>
+  <text x="206.18" y="41.5" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="800" fill="#FFFFFF">100%</text>
+  <text x="206.18" y="69" text-anchor="middle" font-family="Arial" font-size="11.5" font-weight="700" fill="#2563EB">80</text>
+  <rect x="398.36" y="22" width="57.64" height="30" fill="#059669" opacity=".9" rx="3"/>
+  <text x="427.18" y="41.5" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="800" fill="#FFFFFF">+15%</text>
+  <text x="427.18" y="69" text-anchor="middle" font-family="Arial" font-size="11.5" font-weight="700" fill="#059669">+12</text>
+  <rect x="14" y="22" width="442" height="30" fill="none" stroke="#5A6875" stroke-width="1.4" rx="3"/>
+  <text x="235" y="14" text-anchor="middle" font-family="Arial" font-size="11.5" font-weight="700" fill="#5A6875">80  →  92</text>
+</svg>
+        <figcaption>‏12&nbsp;₪ נוספו על 80&nbsp;₪ — תוספת שהיא 15% מהמחיר הישן.</figcaption>
+      </figure>
+      <p><b>בדיקה</b>: <span class="fi">\(80\cdot 1.15=92\)</span> ✓</p>
+      <p><b>ב.</b> שני שלבים, לפי הסדר שבסיפור.</p>
+      $$\begin{aligned}
+      \text{אחרי ההוספה}&amp;:\quad 400+120=520\\[4pt]
+      \text{אחרי ההוצאה}&amp;:\quad 520\cdot 0.75=\mathbf{390}
+      \end{aligned}$$
+      <p>הוציאו 25%, ולכן נשארו 75% — ומכאן מקדם <span class="fi">\(0.75\)</span>.
+      <br>ה-25% נלקחו מ-520 (הכמות שהצטברה), ולא מ-400.</p>
+      <p>ועכשיו אחוז השינוי, שוב מול הכמות ההתחלתית 400:</p>
+      $$\frac{390-400}{400}\cdot 100=\frac{-10}{400}\cdot 100=\mathbf{-2.5\%}$$
+      <p>המונה שלילי, ולכן הכמות הסופית <b>קטנה</b> מההתחלתית — ב-2.5%.</p>
+      <p><b>בדיקה</b>: <span class="fi">\(400\cdot 0.975=390\)</span> ✓
+      <br>וגם: הוצאנו <span class="fi">\(520\cdot 0.25=130\)</span> ליטר,
+      ואכן <span class="fi">\(520-130=390\)</span> ✓</p>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="h6"> סיימתי את התרגיל הזה</label>
+</article>
+
+<h2 id="done"><span class="num">✓</span>סיימת סבב?</h2>
+<p>
+  התרגילים כאן לא הולכים לשום מקום — אפשר לחזור אליהם לפני כל מבחן.
+  <br>אם קבוצה שלמה יצאה חלקה, הסימן שהנושא יושב.
+  <br>אם נתקעת שוב ושוב באותה קבוצה, <a href="index.html">המפה</a> מובילה לתחנה שמלמדת אותה מההתחלה.
+</p>
+
+<div class="progresswrap no-print">
+  <span class="progressbar"><i></i></span><span class="progress-label"></span>
+  <button class="all-sols" style="font-family:inherit;font-size:12px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:4px 10px;cursor:pointer">לפתוח את כל הפתרונות</button>
+</div>
+
+<nav class="pagenav">
+  <a href="08-quiz.html"><span class="dir">→ לפני כן</span>בוחן הבית</a>
+  <a class="next" href="index.html"><span class="dir">חזרה ←</span>אלגברה ופונקציות — המפה</a>
+</nav>
+
+<footer class="fin">חלק מהעולם של שירה · <a href="index.html">המפה</a> · <a href="../index.html">המרכז</a></footer>
+</main>
+</div>
+</body>
+</html>
