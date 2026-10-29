@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<link rel="apple-touch-icon" href="../../assets/icons/icon-180.png">
+<link rel="manifest" href="../../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>מחסן התרגילים — פונקציות ט׳ — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../../vendor/katex.min.css">
+<link rel="stylesheet" href="../../css/shira.css">
+<style>
+:root{--accent:#B7791F}
+.wrap{max-width:880px}
+.finder{display:grid; grid-template-columns:repeat(auto-fill,minmax(215px,1fr)); gap:8px; margin:14px 0 4px}
+.finder a{display:block; text-decoration:none; background:var(--card); color:var(--ink);
+  border:1px solid var(--line); border-radius:10px; padding:9px 12px; transition:.15s}
+.finder a:hover{border-color:var(--accent)}
+.finder a b{display:block; font-size:13.5px}
+.finder a span{color:var(--soft); font-size:11.5px; line-height:1.5}
+.finder a .cnt{float:left; font-size:11px; font-weight:800; color:var(--accent);
+  background:#FBF0C9; border-radius:20px; padding:1px 8px; margin-inline-start:6px}
+.grouplead{font-size:13.5px; color:var(--soft); margin:8px 0 16px}
+article.ex .ex-head .lvl{background:var(--accent); letter-spacing:.06em; font-size:11px}
+</style>
+<script defer src="../../vendor/katex.min.js"></script>
+<script defer src="../../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../../js/shira.js"></script>
+</head>
+<body data-page="g9fun:04-exercise-bank">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">פונקציות ט׳ — המפה</a>
+    <span class="crumbs">פונקציות ט׳ · <b>מחסן התרגילים</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">פונקציות · כיתה ט׳ · תרגול</div>
+  <h1>מחסן התרגילים</h1>
+  <p class="lead">
+    ארבעה-עשר תרגילים לפי סוג, כל אחד עם פתרון מלא. מוצאים את הסוג שנתקעת
+    בו, ורואים אותו נפתר.
+  </p>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>14 תרגילים</b> · ≈ 3 דק׳ לתרגיל</span>
+  </p>
+</header>
+
+<h2 id="finder">🔎 מאתר הסוגים</h2>
+<div class="finder">
+  <a href="#g-vertex"><b>קדקוד וציר סימטריה<span class="cnt">4</span></b><span>משלוש צורות הכתיבה</span></a>
+  <a href="#g-zeros"><b>נקודות חיתוך עם הצירים<span class="cnt">4</span></b><span>עם <span class="fi">\(x\)</span> ועם <span class="fi">\(y\)</span></span></a>
+  <a href="#g-sign"><b>תחומי סימן, עלייה וירידה<span class="cnt">3</span></b><span>מתי חיובית, מתי עולה</span></a>
+  <a href="#g-meet"><b>פרבולה מול ישר<span class="cnt">3</span></b><span>נקודות מפגש ומי מעל מי</span></a>
+</div>
+
+<!-- ============ א · קדקוד ============ -->
+<h2 id="g-vertex"><span class="num">א</span>קדקוד וציר סימטריה</h2>
+<p class="grouplead">התחנה: <a href="01-parabola.html#sec-forms">שלוש צורות הכתיבה</a>.</p>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">א1</span><h4>מצורת הקדקוד</h4></div>
+  <p class="q-text">מהו הקדקוד של <span class="fi">\(y=(x-2)^{2}+7\)</span>?</p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">קוראים ישר: <span class="fi">\((2,7)\)</span>.</div>
+  </details>
+  <div class="q-row"><span>שיעור <span class="fi">\(x\)</span>:</span>
+    <input class="q-input" data-answer="2" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="a1"> סיימתי</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">א2</span><h4>סימן פלוס בסוגריים</h4></div>
+  <p class="q-text">מהו הקדקוד של <span class="fi">\(y=(x+5)^{2}-3\)</span>?</p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      <span class="fi">\((x+5)=(x-(-5))\)</span>, ולכן הקדקוד
+      <span class="fi">\((-5,-3)\)</span>.
+    </div>
+  </details>
+  <div class="q-row"><span>שיעור <span class="fi">\(x\)</span>:</span>
+    <input class="q-input" data-answer="-5" inputmode="text" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="a2"> סיימתי</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">א3</span><h4>מהצורה הכללית</h4></div>
+  <p class="q-text">מהו הקדקוד של <span class="fi">\(y=x^{2}-8x+15\)</span>?</p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$x=-\frac{b}{2a}=\frac{8}{2}=4$$
+      $$y=16-32+15=-1$$
+      הקדקוד <span class="fi">\((4,-1)\)</span>.
+    </div>
+  </details>
+  <div class="q-row"><span>שיעור <span class="fi">\(x\)</span>:</span>
+    <input class="q-input" data-answer="4" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>שיעור <span class="fi">\(y\)</span>:</span>
+    <input class="q-input" data-answer="-1" inputmode="text" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="a3"> סיימתי</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">א4</span><h4>מצורת המכפלה</h4></div>
+  <p class="q-text">מהו ציר הסימטריה של <span class="fi">\(y=(x-1)(x-7)\)</span>?</p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      האפסים הם 1 ו-7, וציר הסימטריה באמצע:
+      $$x=\frac{1+7}{2}=4$$
+    </div>
+  </details>
+  <div class="q-row"><span class="fi">\(x=\)</span>
+    <input class="q-input" data-answer="4" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="a4"> סיימתי</label>
+</article>
+
+<!-- ============ ב · חיתוכים ============ -->
+<h2 id="g-zeros"><span class="num">ב</span>נקודות חיתוך עם הצירים</h2>
+<p class="grouplead">עם ציר <span class="fi">\(y\)</span> — מציבים <span class="fi">\(x=0\)</span>. עם ציר <span class="fi">\(x\)</span> — משווים לאפס ומפרקים.</p>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">ב1</span><h4>חיתוך עם ציר <span class="fi">\(y\)</span></h4></div>
+  <p class="q-text">מהי נקודת החיתוך עם ציר <span class="fi">\(y\)</span> של
+    <span class="fi">\(y=2x^{2}+3x-10\)</span>?</p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">מציבים <span class="fi">\(x=0\)</span>:
+    <span class="fi">\(y=-10\)</span>, כלומר <span class="fi">\((0,-10)\)</span> —
+    האיבר החופשי.</div>
+  </details>
+  <div class="q-row"><span class="fi">\(y=\)</span>
+    <input class="q-input" data-answer="-10" inputmode="text" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="b1"> סיימתי</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">ב2</span><h4>אפסים בפירוק</h4></div>
+  <p class="q-text">מצאי את נקודות האפס של <span class="fi">\(y=x^{2}-5x+6\)</span></p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">$$(x-2)(x-3)=0\;\Longrightarrow\;x_{1}=2,\ x_{2}=3$$</div>
+  </details>
+  <div class="q-row"><span>הקטנה:</span>
+    <input class="q-input" data-answer="2" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>והגדולה:</span>
+    <input class="q-input" data-answer="3" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="b2"> סיימתי</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">ב3</span><h4>אפסים בגורם משותף</h4></div>
+  <p class="q-text">מצאי את נקודות האפס של <span class="fi">\(y=x^{2}-6x\)</span></p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">$$x(x-6)=0\;\Longrightarrow\;x_{1}=0,\ x_{2}=6$$
+    כשאין איבר חופשי, אחת מנקודות האפס היא תמיד הראשית.</div>
+  </details>
+  <div class="q-row"><span>האפס שאינו 0:</span>
+    <input class="q-input" data-answer="6" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="b3"> סיימתי</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">ב4</span><h4>מצורת הקדקוד</h4></div>
+  <p class="q-text">מצאי את נקודות האפס של <span class="fi">\(y=(x-2)^{2}-9\)</span></p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$(x-2)^{2}=9\;\Longrightarrow\;x-2=\pm3$$
+      $$x_{1}=5\qquad x_{2}=-1$$
+      בדיקה: האמצע ביניהם הוא 2 — בדיוק ציר הסימטריה ✓
+    </div>
+  </details>
+  <div class="q-row"><span>הגדולה:</span>
+    <input class="q-input" data-answer="5" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>והקטנה:</span>
+    <input class="q-input" data-answer="-1" inputmode="text" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="b4"> סיימתי</label>
+</article>
+
+<!-- ============ ג · סימן ============ -->
+<h2 id="g-sign"><span class="num">ג</span>תחומי סימן, עלייה וירידה</h2>
+<p class="grouplead">התחנה: <a href="01-parabola.html#sec-sign">מתי הפונקציה חיובית</a>. תמיד קודם למצוא אפסים וקדקוד.</p>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">ג1</span><h4>תחום שליליות</h4></div>
+  <p class="q-text">באיזה תחום <span class="fi">\(y=x^{2}-5x+6\)</span> שלילית?</p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      האפסים 2 ו-3, והפרבולה פתוחה למעלה ⟵ שלילית ביניהם:
+      $$2&lt;x&lt;3$$
+    </div>
+  </details>
+  <div class="q-row"><span>הגבול השמאלי:</span>
+    <input class="q-input" data-answer="2" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="c1"> סיימתי</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">ג2</span><h4>תחום עלייה</h4></div>
+  <p class="q-text">באיזה תחום <span class="fi">\(y=x^{2}-8x+15\)</span> עולה?</p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      הקדקוד ב-<span class="fi">\(x=4\)</span>, והפרבולה פתוחה למעלה ⟵
+      יורדת עד הקדקוד ועולה אחריו:
+      $$x&gt;4$$
+    </div>
+  </details>
+  <div class="q-row"><span>מאיזה <span class="fi">\(x\)</span>:</span>
+    <input class="q-input" data-answer="4" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="c2"> סיימתי</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">ג3</span><h4>פרבולה הפוכה</h4></div>
+  <p class="q-text">באיזה תחום <span class="fi">\(y=-(x-1)(x-5)\)</span> חיובית?</p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      האפסים 1 ו-5, אבל המקדם <strong>שלילי</strong> ⟵ הפרבולה פתוחה למטה,
+      וכל הסימנים מתהפכים. היא חיובית <em>בין</em> האפסים:
+      $$1&lt;x&lt;5$$
+      בדיקה ב-<span class="fi">\(x=3\)</span>:
+      <span class="fi">\(-(2)(-2)=4&gt;0\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row"><span>הגבול השמאלי:</span>
+    <input class="q-input" data-answer="1" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>והימני:</span>
+    <input class="q-input" data-answer="5" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="c3"> סיימתי</label>
+</article>
+
+<!-- ============ ד · מפגש ============ -->
+<h2 id="g-meet"><span class="num">ד</span>פרבולה מול ישר</h2>
+<p class="grouplead">התחנה: <a href="02-parabola-and-line.html">פרבולה וישר</a>. משווים, מסדרים מול אפס, פותרים.</p>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">ד1</span><h4>מפגש עם ישר אופקי</h4></div>
+  <p class="q-text">מצאי את נקודות המפגש של <span class="fi">\(y=x^{2}-1\)</span>
+    עם <span class="fi">\(y=8\)</span></p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$x^{2}-1=8\;\Longrightarrow\;x^{2}=9\;\Longrightarrow\;x=\pm3$$
+      הנקודות <span class="fi">\((3,8)\)</span> ו-<span class="fi">\((-3,8)\)</span>.
+    </div>
+  </details>
+  <div class="q-row"><span>שיעור <span class="fi">\(x\)</span> החיובי:</span>
+    <input class="q-input" data-answer="3" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="d1"> סיימתי</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">ד2</span><h4>מפגש עם ישר משופע</h4></div>
+  <p class="q-text">מצאי את נקודות המפגש של <span class="fi">\(f(x)=x^{2}+x\)</span>
+    ו-<span class="fi">\(g(x)=3x+3\)</span></p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$x^{2}+x=3x+3\;\Longrightarrow\;x^{2}-2x-3=0$$
+      $$(x-3)(x+1)=0\;\Longrightarrow\;x_{1}=3,\ x_{2}=-1$$
+      מציבים בישר: <span class="fi">\(g(3)=12\)</span> ו-<span class="fi">\(g(-1)=0\)</span>.
+      <br>הנקודות: <span class="fi">\((3,12)\)</span> ו-<span class="fi">\((-1,0)\)</span>.
+      <br>בדיקה: <span class="fi">\(f(3)=9+3=12\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row"><span>שיעור <span class="fi">\(x\)</span> החיובי:</span>
+    <input class="q-input" data-answer="3" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>שיעור ה-<span class="fi">\(y\)</span> שלו:</span>
+    <input class="q-input" data-answer="12" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="d2"> סיימתי</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">ד3</span><h4>מי מעל מי</h4></div>
+  <p class="q-text">עבור הפונקציות מ-ד2 — באיזה תחום
+    <span class="fi">\(g(x)&gt;f(x)\)</span>?</p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      מעבירים לאגף אחד:
+      $$g(x)-f(x)=3x+3-x^{2}-x=-x^{2}+2x+3$$
+      זו פרבולה פתוחה <strong>למטה</strong> שאפסיה <span class="fi">\(-1\)</span>
+      ו-<span class="fi">\(3\)</span>, ולכן היא חיובית <em>בין</em> האפסים:
+      $$-1&lt;x&lt;3$$
+      בדיקה ב-<span class="fi">\(x=0\)</span>:
+      <span class="fi">\(g(0)=3\)</span> ו-<span class="fi">\(f(0)=0\)</span> —
+      הישר מעל ✓
+    </div>
+  </details>
+  <div class="q-row"><span>הגבול השמאלי:</span>
+    <input class="q-input" data-answer="-1" inputmode="text" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>והימני:</span>
+    <input class="q-input" data-answer="3" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="d3"> סיימתי</label>
+</article>
+
+<div class="progresswrap no-print">
+  <span class="progressbar"><i></i></span><span class="progress-label"></span>
+  <button class="all-sols" style="font-family:inherit;font-size:12px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:4px 10px;cursor:pointer">לפתוח את כל הפתרונות</button>
+</div>
+
+<nav class="pagenav">
+  <a href="03-quiz.html"><span class="dir">→ הקודם</span>בוחן הבית</a>
+  <a class="next" href="index.html"><span class="dir">המפה ←</span>פונקציות ט׳</a>
+</nav>
+
+<footer class="fin">חלק מהעולם של שירה ·
+<a href="../../index.html">חזרה למרכז</a> ·
+<a href="index.html">מפת הפונקציות</a></footer>
+</main>
+</div>
+</body>
+</html>

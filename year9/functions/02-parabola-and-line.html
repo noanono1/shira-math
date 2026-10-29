@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<link rel="apple-touch-icon" href="../../assets/icons/icon-180.png">
+<link rel="manifest" href="../../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>פרבולה וישר — פונקציות ט׳ — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../../vendor/katex.min.css">
+<link rel="stylesheet" href="../../css/shira.css">
+<style>
+:root{--accent:#B7791F}
+table.compare td:first-child{font-weight:700; white-space:nowrap}
+</style>
+<script defer src="../../vendor/katex.min.js"></script>
+<script defer src="../../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../../js/shira.js"></script>
+</head>
+<body data-page="g9fun:02-parabola-and-line">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">פונקציות ט׳ — המפה</a>
+    <span class="crumbs">תחנה <b>3</b> מתוך 4 · <b>פרבולה וישר</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">פונקציות · כיתה ט׳ · תחנה 3</div>
+  <h1>פרבולה וישר — נקודות מפגש ומי מעל מי</h1>
+  <p class="lead">
+    בשאלה טיפוסית במפמ״ר נתונות שתי פונקציות — פרבולה וישר — ומבקשים את
+    נקודות המפגש שלהן, ואז באיזה תחום אחת מעל השנייה. הכלי הוא בדיוק זה
+    שלמדת <a href="../../year8/algebra/05-line-equation.html">בשני ישרים</a>:
+    <strong>משווים ופותרים</strong>. רק שהפעם המשוואה שיוצאת היא ריבועית.
+  </p>
+  <p class="youknow"><b>בסוף העמוד תדעי:</b> למצוא נקודות חיתוך בין פרבולה
+  לישר · לקבוע באיזה תחום <span class="fi">\(f(x)&gt;g(x)\)</span> ·
+  לקרוא תשובה מהגרף כשהוא נתון · ולדעת מתי אין נקודות מפגש בכלל.</p>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>≈ 35 דק׳</b> · 7 תרגילים</span>
+    <a class="pm-jump" href="#sec-practice">לקפוץ ישר לתרגילים ↓</a>
+  </p>
+</header>
+
+<!-- ============ 1. נקודות מפגש ============ -->
+<h2 id="sec-meet"><span class="num">1</span>נקודות מפגש — משווים ופותרים</h2>
+
+<p>
+  נקודת מפגש היא נקודה שנמצאת על <strong>שני</strong> הגרפים, כלומר
+  <span class="fi">\(x\)</span> שבו שתי הפונקציות נותנות את אותו
+  <span class="fi">\(y\)</span>. ולכן:
+</p>
+
+<div class="fbox">
+  <div class="fbox-title">כל השיטה בשורה אחת</div>
+  $$f(x)=g(x)$$
+  <span class="f-legend">
+    <span>מעבירים הכול לאגף אחד, ומקבלים משוואה ריבועית — ואותה כבר את יודעת לפתור</span>
+  </span>
+</div>
+
+<p>
+  ההבדל היחיד מהמקרה של שני ישרים: שם התקבלה משוואה פשוטה עם פתרון אחד,
+  וכאן מתקבלת משוואה ריבועית — <strong>ולכן ייתכנו שתי נקודות מפגש</strong>.
+</p>
+
+<figure style="max-width:420px;margin:16px auto 6px">
+  <svg viewBox="0 0 330 210" style="width:100%;height:auto" role="img"
+       aria-label="פרבולה וישר הנחתכים בשתי נקודות, המסומנות בירוק">
+    <line x1="18" y1="150" x2="316" y2="150" stroke="#5A6875" stroke-width="1.4"/>
+    <line x1="120" y1="14" x2="120" y2="196" stroke="#5A6875" stroke-width="1.4"/>
+    <path d="M55,30 Q150,290 245,30" fill="none" stroke="#B7791F" stroke-width="2.6"/>
+    <line x1="40" y1="185" x2="300" y2="45" stroke="#2E6F8E" stroke-width="2.4"/>
+    <circle cx="85" cy="158" r="4.6" fill="#2E7D32"/>
+    <circle cx="228" cy="81" r="4.6" fill="#2E7D32"/>
+    <text x="266" y="42" font-family="Arial" font-size="12" font-weight="700" fill="#2E6F8E">g(x)</text>
+    <text x="252" y="34" font-family="Arial" font-size="12" font-weight="700" fill="#B7791F">f(x)</text>
+    <text x="165" y="204" text-anchor="middle" font-family="Arial" font-size="11.5" fill="#5A6875">שתי נקודות מפגש — ולכן משוואה ריבועית</text>
+  </svg>
+  <figcaption>
+    ישר יכול לחתוך פרבולה בשתי נקודות, בנקודה אחת (אם הוא משיק לה),
+    או בכלל לא. מספר הפתרונות של המשוואה הוא בדיוק מספר נקודות המפגש.
+  </figcaption>
+</figure>
+
+<div class="nb" data-nb>
+  <div class="nb-head"><b>בונים ביחד במחברת</b><span class="nb-count"></span></div>
+  <ol class="nb-steps">
+    <li class="nb-step"><b>התרגיל</b>
+      <p>נתונות <span class="fi">\(f(x)=x^{2}-2x-3\)</span> ו-<span class="fi">\(g(x)=x-3\)</span>.
+      מצאי את נקודות המפגש שלהן.</p>
+    </li>
+    <li class="nb-step"><b>משווים</b>
+      <p>$$x^{2}-2x-3=x-3$$</p>
+    </li>
+    <li class="nb-step"><b>מעבירים הכול לאגף אחד</b>
+      <p>$$x^{2}-2x-3-x+3=0\;\Longrightarrow\;x^{2}-3x=0$$
+      שימי לב שה-<span class="fi">\(-3\)</span> וה-<span class="fi">\(+3\)</span>
+      התקזזו.</p>
+    </li>
+    <li class="nb-step"><b>פותרים — בלי לחלק ב-<span class="fi">\(x\)</span></b>
+      <p>$$x(x-3)=0\;\Longrightarrow\;x_{1}=0,\ x_{2}=3$$</p>
+    </li>
+    <li class="nb-step"><b>ומוצאים את שיעורי ה-<span class="fi">\(y\)</span></b>
+      <p>מציבים בפונקציה ה<strong>פשוטה</strong> יותר — הישר:
+      $$g(0)=0-3=-3\qquad\qquad g(3)=3-3=0$$
+      נקודות המפגש: <span class="fi">\((0,-3)\)</span> ו-<span class="fi">\((3,0)\)</span>.</p>
+    </li>
+    <li class="nb-step"><b>בדיקה — בפונקציה השנייה</b>
+      <p>$$f(0)=-3\;\checkmark\qquad\qquad f(3)=9-6-3=0\;\checkmark$$
+      שתי הנקודות באמת יושבות על שני הגרפים. הצבה בפונקציה שלא השתמשת בה
+      היא הבדיקה הטובה ביותר כאן.</p>
+    </li>
+  </ol>
+</div>
+
+<div class="box warn">
+  <div class="box-title">אל תשכחי את שיעור ה-<span class="fi">\(y\)</span></div>
+  השאלה מבקשת <strong>נקודות</strong>, ונקודה היא זוג. מי שעוצרת אחרי
+  <span class="fi">\(x_{1}=0,\ x_{2}=3\)</span> ענתה חצי תשובה, ומקבלת
+  חלק מהנקודות בלבד.
+</div>
+
+<!-- ============ 2. מי מעל מי ============ -->
+<h2 id="sec-above"><span class="num">2</span>מי מעל מי — <span class="fi">\(f(x)&gt;g(x)\)</span></h2>
+
+<p>
+  זו שאלת ההמשך הקבועה. אחרי שמצאת את נקודות המפגש, כל מה שנשאר הוא לקבוע
+  באיזה צד של מי כל גרף נמצא. <strong>נקודות המפגש הן הגבולות</strong> —
+  רק בהן הסדר יכול להתהפך.
+</p>
+
+<div class="box def">
+  <div class="box-title">שלושת הצעדים</div>
+  <ol class="steps">
+    <li>למצוא את נקודות המפגש — הן מחלקות את הציר לתחומים;</li>
+    <li>לבחור מספר <strong>בתוך</strong> כל תחום, ולהציב בשתי הפונקציות;</li>
+    <li>לכתוב את התחום שבו הפונקציה המבוקשת גדולה יותר.</li>
+  </ol>
+  הצבה של מספר אחד לכל תחום מספיקה לחלוטין — בתוך תחום הסדר לא משתנה.
+</div>
+
+<div class="nb" data-nb>
+  <div class="nb-head"><b>בונים ביחד במחברת</b><span class="nb-count"></span></div>
+  <ol class="nb-steps">
+    <li class="nb-step"><b>השאלה</b>
+      <p>עבור אותן <span class="fi">\(f(x)=x^{2}-2x-3\)</span> ו-<span class="fi">\(g(x)=x-3\)</span>
+      — באיזה תחום <span class="fi">\(f(x)&gt;g(x)\)</span>?</p>
+    </li>
+    <li class="nb-step"><b>הגבולות כבר ידועים</b>
+      <p>נקודות המפגש הן ב-<span class="fi">\(x=0\)</span> וב-<span class="fi">\(x=3\)</span>,
+      ולכן יש שלושה תחומים לבדוק:
+      $$x&lt;0\qquad 0&lt;x&lt;3\qquad x&gt;3$$</p>
+    </li>
+    <li class="nb-step"><b>בודקים מספר אחד מכל תחום</b>
+      <p>ניקח <span class="fi">\(x=-1\)</span>, <span class="fi">\(x=1\)</span>
+      ו-<span class="fi">\(x=4\)</span>:</p>
+      <table class="dtable compare">
+        <tr><th><span class="fi">\(x\)</span></th>
+            <th><span class="fi">\(f(x)\)</span></th>
+            <th><span class="fi">\(g(x)\)</span></th><th>מי גדול</th></tr>
+        <tr><td>−1</td><td>0</td><td>−4</td><td><span class="fi">\(f\)</span></td></tr>
+        <tr><td>1</td><td>−4</td><td>−2</td><td><span class="fi">\(g\)</span></td></tr>
+        <tr><td>4</td><td>5</td><td>1</td><td><span class="fi">\(f\)</span></td></tr>
+      </table>
+    </li>
+    <li class="nb-step"><b>התשובה</b>
+      <p>$$f(x)&gt;g(x)\;:\qquad x&lt;0\ \ \text{or}\ \ x&gt;3$$
+      הפרבולה מעל הישר <strong>מחוץ</strong> לנקודות המפגש, ומתחתיו ביניהן.
+      זה הדפוס הרגיל כשהפרבולה פתוחה למעלה.</p>
+    </li>
+    <li class="nb-step"><b>דרך נוספת — בלי טבלה</b>
+      <p>אפשר גם להעביר הכול לאגף אחד ולשאול מתי הביטוי חיובי:
+      $$f(x)-g(x)=x^{2}-3x=x(x-3)&gt;0$$
+      זו פרבולה פתוחה למעלה שאפסיה 0 ו-3, ולכן היא חיובית מחוץ להם —
+      אותה תשובה בדיוק, בשורה אחת.</p>
+    </li>
+  </ol>
+</div>
+
+<!-- ============ 3. כשאין מפגש ============ -->
+<h2 id="sec-none"><span class="num">3</span>וכשאין נקודות מפגש בכלל</h2>
+
+<p>
+  לא כל ישר פוגש כל פרבולה. אם אחרי ההשוואה מתקבלת משוואה ריבועית עם
+  <span class="fi">\(\Delta&lt;0\)</span> — אין פתרון, ולכן אין נקודות מפגש.
+  זו תשובה מלאה ולגיטימית.
+</p>
+
+<div class="box intuition">
+  <div class="box-title">שלושת המקרים, ומה הם אומרים בציור</div>
+  <table class="dtable compare">
+    <tr><th>הדיסקרימיננטה</th><th>מספר נקודות מפגש</th><th>מה רואים</th></tr>
+    <tr><td><span class="fi">\(\Delta&gt;0\)</span></td><td>שתיים</td>
+        <td>הישר חוצה את הפרבולה</td></tr>
+    <tr><td><span class="fi">\(\Delta=0\)</span></td><td>אחת</td>
+        <td>הישר <strong>משיק</strong> לפרבולה — נוגע ולא חוצה</td></tr>
+    <tr><td><span class="fi">\(\Delta&lt;0\)</span></td><td>אף אחת</td>
+        <td>הישר עובר לגמרי מעל או מתחת</td></tr>
+  </table>
+  זו בדיוק אותה טבלה
+  <a href="../algebra/05-quadratic-equation.html#sec-disc">מהמשוואה הריבועית</a> —
+  כי זו אותה משוואה.
+</div>
+
+<!-- ============ 4. תרגול ============ -->
+<h2 id="sec-practice"><span class="num">4</span>תרגול — משלב לשלב</h2>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 1 — מפגש עם ישר אופקי</h4></div>
+  <p class="q-text"><span class="mk mk-find">מצאי את נקודות המפגש של</span>
+    <span class="fi">\(f(x)=x^{2}\)</span>
+    <span class="mk mk-find">עם הישר</span>
+    <span class="fi">\(y=9\)</span></p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$x^{2}=9\;\Longrightarrow\;x=\pm 3$$
+      הנקודות <span class="fi">\((3,9)\)</span> ו-<span class="fi">\((-3,9)\)</span>.
+      <br>שיעור ה-<span class="fi">\(y\)</span> הוא 9 בשתיהן — כי זה בדיוק
+      מה שישר אופקי אומר.
+    </div>
+  </details>
+  <div class="q-row"><span>שיעור <span class="fi">\(x\)</span> החיובי:</span>
+    <input class="q-input" data-answer="3" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex1"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 2 — מפגש עם ישר משופע</h4></div>
+  <p class="q-text"><span class="mk mk-find">מצאי את נקודות המפגש של</span>
+    <span class="fi">\(f(x)=x^{2}-4\)</span> <span class="mk mk-find">ו-</span>
+    <span class="fi">\(g(x)=3x\)</span></p>
+  <details class="step"><summary>שלב ראשון — משווים ומסדרים</summary>
+    <div class="step-body"><span class="fi">\(x^{2}-4=3x\)</span>, ומעבירים:
+    <span class="fi">\(x^{2}-3x-4=0\)</span>.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      מכפלה <span class="fi">\(-4\)</span>, סכום <span class="fi">\(-3\)</span>:
+      <span class="fi">\(-4\)</span> ו-<span class="fi">\(1\)</span>.
+      $$(x-4)(x+1)=0\;\Longrightarrow\;x_{1}=4,\ x_{2}=-1$$
+      מציבים בישר: <span class="fi">\(g(4)=12\)</span> ו-<span class="fi">\(g(-1)=-3\)</span>.
+      <br>הנקודות: <span class="fi">\((4,12)\)</span> ו-<span class="fi">\((-1,-3)\)</span>.
+      <br>בדיקה בפרבולה: <span class="fi">\(f(4)=16-4=12\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row"><span>שיעור <span class="fi">\(x\)</span> החיובי:</span>
+    <input class="q-input" data-answer="4" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ושיעור ה-<span class="fi">\(y\)</span> שלו:</span>
+    <input class="q-input" data-answer="12" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex2"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 3 — מי מעל מי</h4></div>
+  <p class="q-text"><span class="mk mk-find">עבור הפונקציות מתרגיל 2 — באיזה תחום</span>
+    <span class="fi">\(f(x)&gt;g(x)\)</span>?</p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      נקודות המפגש: <span class="fi">\(-1\)</span> ו-<span class="fi">\(4\)</span>.
+      <br>מעבירים לאגף אחד:
+      $$f(x)-g(x)=x^{2}-3x-4=(x-4)(x+1)$$
+      זו פרבולה פתוחה למעלה שאפסיה <span class="fi">\(-1\)</span> ו-<span class="fi">\(4\)</span>,
+      ולכן היא חיובית <strong>מחוץ</strong> להם:
+      $$x&lt;-1\ \ \text{or}\ \ x&gt;4$$
+      בדיקה מהירה ב-<span class="fi">\(x=0\)</span> (בתוך התחום האמצעי):
+      <span class="fi">\(f(0)=-4\)</span> ו-<span class="fi">\(g(0)=0\)</span> —
+      הישר מעל, כמצופה ✓
+    </div>
+  </details>
+  <div class="q-row"><span>הגבול השמאלי:</span>
+    <input class="q-input" data-answer="-1" inputmode="text" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>והימני:</span>
+    <input class="q-input" data-answer="4" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex3"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 4 — ישר משיק</h4></div>
+  <p class="q-text"><span class="mk mk-find">כמה נקודות מפגש יש ל-</span>
+    <span class="fi">\(f(x)=x^{2}\)</span>
+    <span class="mk mk-find">ו-</span><span class="fi">\(g(x)=2x-1\)</span>?</p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$x^{2}=2x-1\;\Longrightarrow\;x^{2}-2x+1=0$$
+      $$\Delta=4-4=0$$
+      דיסקרימיננטה אפס ⟵ <strong>נקודת מפגש אחת</strong>. הישר
+      <strong>משיק</strong> לפרבולה.
+      <br>הנקודה: <span class="fi">\((x-1)^{2}=0\)</span> נותן
+      <span class="fi">\(x=1\)</span>, ו-<span class="fi">\(y=1\)</span> —
+      כלומר <span class="fi">\((1,1)\)</span>.
+    </div>
+  </details>
+  <div class="q-row"><span>מספר נקודות המפגש:</span>
+    <input class="q-input" data-answer="1" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex4"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 5 — כשאין מפגש</h4></div>
+  <p class="q-text"><span class="mk mk-find">האם</span>
+    <span class="fi">\(f(x)=x^{2}+2\)</span>
+    <span class="mk mk-find">והישר</span> <span class="fi">\(y=-1\)</span>
+    <span class="mk mk-find">נפגשים?</span> נמקי.</p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$x^{2}+2=-1\;\Longrightarrow\;x^{2}=-3$$
+      אין מספר שריבועו שלילי, ולכן <strong>אין נקודות מפגש</strong>.
+      <br>הסבר גרפי: הקדקוד של הפרבולה הוא <span class="fi">\((0,2)\)</span>,
+      והיא פתוחה למעלה — כלומר כולה מעל <span class="fi">\(y=2\)</span>.
+      הישר <span class="fi">\(y=-1\)</span> עובר הרבה מתחתיה.
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex5"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 6 — בסגנון המפמ״ר</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">נתונות
+    <span class="fi">\(f(x)=-2(x-4)(x+2)\)</span> ו-<span class="fi">\(g(x)=x-4\)</span></span>.
+    <span class="mk mk-find">מצאי את נקודות החיתוך בין שתי הפונקציות.</span>
+    <br><span style="font-size:13px;color:var(--soft)">בסגנון שאלה א׳ במפמ״ר
+    ט׳ רמה א׳, טור א׳.</span>
+  </p>
+  <details class="step"><summary>שלב ראשון — לפתוח את הסוגריים של <span class="fi">\(f\)</span></summary>
+    <div class="step-body">
+      <span class="fi">\(-2(x-4)(x+2)=-2(x^{2}-2x-8)=-2x^{2}+4x+16\)</span>.
+    </div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      משווים:
+      $$-2x^{2}+4x+16=x-4$$
+      מעבירים הכול לאגף אחד:
+      $$-2x^{2}+3x+20=0$$
+      נוח יותר לכפול ב-<span class="fi">\(-1\)</span> כדי שהמקדם המוביל
+      יהיה חיובי:
+      $$2x^{2}-3x-20=0$$
+      בנוסחה, עם <span class="fi">\(a=2,\ b=-3,\ c=-20\)</span>:
+      $$\Delta=9+160=169\qquad \sqrt{169}=13$$
+      $$x_{1,2}=\frac{3\pm13}{4}\;\Longrightarrow\;x_{1}=4,\ x_{2}=-\tfrac52$$
+      מציבים בישר:
+      $$g(4)=0\qquad\qquad g(-2.5)=-6.5$$
+      <strong>הנקודות:</strong> <span class="fi">\((4,0)\)</span> ו-<span class="fi">\((-2.5,\,-6.5)\)</span>.
+      <br>בדיקה ב-<span class="fi">\(f\)</span>:
+      <span class="fi">\(f(4)=-2\cdot0\cdot6=0\)</span> ✓
+      <br><br><strong>שימי לב:</strong> <span class="fi">\((4,0)\)</span>
+      היא גם נקודת אפס של הפרבולה וגם נקודת אפס של הישר — ולכן שניהם
+      עוברים שם. זה לא צירוף מקרים: הישר <span class="fi">\(x-4\)</span>
+      מתאפס באותו מקום שאחד הגורמים של <span class="fi">\(f\)</span> מתאפס.
+    </div>
+  </details>
+  <div class="q-row"><span>שיעור <span class="fi">\(x\)</span> השלם:</span>
+    <input class="q-input" data-answer="4" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span class="fi">\(\Delta=\)</span>
+    <input class="q-input" data-answer="169" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex6"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 7 — לקרוא מהגרף</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">בסרטוט מופיעים גרף של פרבולה וגרף של ישר,
+    הנחתכים בנקודות שבהן <span class="fi">\(x=-1\)</span> ו-<span class="fi">\(x=3\)</span></span>.
+    <span class="mk mk-given">הפרבולה פתוחה למעלה</span>.
+    <span class="mk mk-find">באיזה תחום הישר נמצא מעל הפרבולה?</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      אין כאן מה לחשב — התשובה נקראת מהצורה.
+      <br>פרבולה פתוחה למעלה "צוללת" מתחת לישר <strong>בין</strong> נקודות
+      המפגש, וחוזרת מעליו מחוצה להן. לכן הישר מעל הפרבולה בדיוק בתחום
+      שביניהן:
+      $$-1&lt;x&lt;3$$
+      <strong>למה זה תמיד כך:</strong> ההפרש
+      <span class="fi">\(f(x)-g(x)\)</span> הוא בעצמו פרבולה פתוחה למעלה
+      שאפסיה הם נקודות המפגש — ופרבולה כזאת שלילית בין אפסיה.
+      שאלות "קריאה מגרף" נפתרות מהצורה, ולא מחישוב.
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex7"> סיימתי את התרגיל הזה</label>
+</article>
+
+<div class="box def" style="margin-top:26px">
+  <div class="box-title">מה לקחת מכאן</div>
+  <strong>משווים ופותרים</strong> — זה הכול. המשוואה שיוצאת היא ריבועית,
+  ולכן מספר נקודות המפגש הוא מספר הפתרונות שלה. ואחרי שיש גבולות,
+  שאלת "מי מעל מי" נפתרת בהצבת מספר אחד בכל תחום.
+</div>
+
+<div class="progresswrap no-print">
+  <span class="progressbar"><i></i></span><span class="progress-label"></span>
+  <button class="all-sols" style="font-family:inherit;font-size:12px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:4px 10px;cursor:pointer">לפתוח את כל הפתרונות</button>
+</div>
+
+<nav class="pagenav">
+  <a href="01b-shifts-and-properties.html"><span class="dir">→ הקודם</span>הזזות ותכונות הפונקציה</a>
+  <a class="next" href="02b-quadratic-inequalities.html"><span class="dir">הבא ←</span>אי-שוויונות ריבועיים</a>
+</nav>
+
+<footer class="fin">חלק מהעולם של שירה ·
+<a href="../../index.html">חזרה למרכז</a> ·
+<a href="index.html">מפת הפונקציות</a></footer>
+</main>
+</div>
+</body>
+</html>

@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<link rel="apple-touch-icon" href="../../assets/icons/icon-180.png">
+<link rel="manifest" href="../../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>מבחן 1 — יום ד׳ 4.11 — כיתה ט׳ — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../../vendor/katex.min.css">
+<link rel="stylesheet" href="../../css/shira.css">
+<style>
+:root{--accent:#B4553C}
+.wrap{max-width:880px}
+
+/* הספירה לאחור */
+.cd{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin:10px 0 4px}
+.cd b{font-size:30px; font-weight:800; color:var(--accent); line-height:1.2}
+.cd span{font-size:14px; color:var(--soft)}
+.cd.past b{color:#2E7D32}
+.today-link{display:inline-block; margin-top:10px; text-decoration:none; font-weight:800;
+  font-size:14.5px; color:#fff; background:var(--accent); border-radius:10px; padding:8px 14px}
+.today-link:hover{filter:brightness(1.07)}
+
+/* שבעת הימים */
+.days{display:flex; flex-direction:column; gap:10px; margin:14px 0}
+.day{background:var(--card); border:1px solid var(--line); border-radius:var(--r-md);
+  padding:11px 15px 9px; scroll-margin-top:76px}
+.day-h{display:flex; align-items:baseline; gap:8px 12px; flex-wrap:wrap}
+.day-h .dname{font-size:12.5px; font-weight:800; color:var(--soft); background:var(--faint);
+  border-radius:99px; padding:1px 10px; white-space:nowrap}
+.day-h b{font-size:15.5px}
+.day-h .dmin{font-size:12.5px; color:var(--soft); white-space:nowrap}
+.day-h .badge{font-size:12px; font-weight:800; color:#fff; background:var(--accent);
+  border-radius:99px; padding:1px 10px; white-space:nowrap}
+.day ol.todo{margin:6px 0 4px; padding-inline-start:20px; font-size:14.5px; line-height:1.7}
+.day ol.todo li{margin:3px 0}
+.day ol.todo .t{font-size:12px; font-weight:800; color:var(--soft); white-space:nowrap}
+.day .incls{font-size:13px; color:var(--soft); margin:4px 0 2px}
+.day.today{border:2px solid var(--accent); box-shadow:0 10px 26px -18px var(--shadow)}
+.day.done:not(.today){opacity:.62}
+.day.done .day-h b{text-decoration:line-through; text-decoration-color:#B9B1A3}
+
+/* הדף של המורה */
+.sheet{background:#FFFFFF; border:1px solid var(--line); border-radius:var(--r-md);
+  padding:12px 16px; margin:12px 0; font-size:14.5px; line-height:1.8}
+.sheet .st{font-weight:800; text-decoration:underline; text-align:center; margin-bottom:4px}
+.sheet u{text-underline-offset:3px}
+.sheet .bye{font-weight:800; font-style:italic; margin-top:6px}
+table.topics td{vertical-align:top; text-align:right; font-size:14px}
+table.topics td.tname{min-width:170px}
+table.topics td.tname .fx{display:inline-block; border:1.5px solid #1C2733; border-radius:7px;
+  padding:0 8px; margin:3px 0}
+table.topics td .src{display:block; font-size:12px; color:var(--soft); margin-top:3px}
+table.topics td.ok{text-align:center; vertical-align:middle}
+table.topics td.ok .mark{margin:0; justify-content:center}
+table.topics tr.grp td{background:var(--faint); font-weight:800; font-size:13px}
+table.topics a{font-weight:700}
+@media (max-width:640px){
+  table.dtable.topics, table.dtable.topics tbody, table.dtable.topics tr, table.dtable.topics td{display:block; width:auto}
+  table.dtable.topics tr:first-child{display:none}
+  table.dtable.topics tr{background:var(--card); border:1px solid var(--line); border-radius:var(--r-md);
+    margin:8px 0; padding:7px 12px}
+  table.dtable.topics tr.grp{background:var(--faint)}
+  table.dtable.topics td{border:none; padding:2px 0; background:transparent}
+  table.dtable.topics td[data-l]::before{content:attr(data-l) " "; font-weight:800; font-size:12px; color:var(--soft)}
+  table.dtable.topics td.ok{text-align:right}
+  table.dtable.topics td.ok .mark{justify-content:flex-start}
+  table.dtable.topics td.ok .mark::after{content:"אני מוכנה בזה"; font-size:13px; color:var(--soft)}
+}
+
+/* המבחן לדוגמה */
+.pts{font-size:12px; font-weight:800; color:var(--accent); border:1.5px solid var(--accent);
+  border-radius:99px; padding:0 9px; white-space:nowrap; margin-inline-start:auto}
+article.ex .ex-head{flex-wrap:wrap}
+.q-text .sub{display:block; margin:5px 0}
+.sol-body .sub-h{display:block; font-weight:800; margin:14px 0 2px}
+.sol-body .sub-h:first-child{margin-top:0}
+.back{font-size:13px; color:var(--soft); border-top:1px dashed var(--faint);
+  margin-top:12px; padding-top:8px}
+.back a{font-weight:700}
+.concl{display:inline-block; border:2px solid #1C2733; border-radius:7px;
+  padding:2px 12px; font-weight:800; margin:4px 0}
+table.dtable tr.tr-sep td{background:var(--faint);font-weight:800;font-size:12.5px;letter-spacing:.05em;padding:4px 10px}
+table.dtable tr.tr-qed td{background:var(--card);text-align:left;color:var(--accent);font-weight:800;font-size:13.5px;letter-spacing:.05em;padding:4px 14px}
+table.dtable tr.tr-ans td{background:#DFF0DC;color:#2E7D32;font-weight:800;font-size:13.5px;text-align:right;padding:6px 14px}
+table.proof td:last-child{text-align:right}
+table.pts-sum td{font-size:14px}
+.marks-legend{display:flex; flex-wrap:wrap; gap:6px 18px; font-size:14px; margin-top:6px}
+
+/* ביום המבחן */
+ol.tips{counter-reset:tp; list-style:none; padding:0; margin:12px 0; display:flex;
+  flex-direction:column; gap:8px}
+ol.tips li{counter-increment:tp; display:flex; gap:12px; align-items:flex-start;
+  background:var(--card); border:1px solid var(--line); border-radius:var(--r-md);
+  padding:10px 14px; font-size:14.5px; line-height:1.65}
+ol.tips li::before{content:counter(tp); flex:0 0 auto; width:25px; height:25px; border-radius:50%;
+  background:var(--accent); color:#fff; font-weight:800; font-size:12.5px;
+  display:flex; align-items:center; justify-content:center; margin-top:1px}
+ol.tips li b{display:block}
+.sumdl{margin:14px 0 0;padding:12px 14px;border:1.5px solid var(--accent);border-radius:12px;background:#FBFAF7;font-size:14px;line-height:1.6}
+.sumdl-l{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.sumdl-l a{padding:5px 12px;border-radius:8px;border:1px solid var(--line);background:#fff;font-weight:700;text-decoration:none;font-size:13.5px}
+.sumdl-l a:first-child{background:var(--accent);color:#fff;border-color:var(--accent)}
+@media print{ .today-link{display:none} .day{break-inside:avoid} }
+</style>
+<script defer src="../../vendor/katex.min.js"></script>
+<script defer src="../../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../../js/shira.js"></script>
+</head>
+<body data-page="g9exam:exam1">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">מבחנים — ט׳</a>
+    <span class="crumbs">כיתה ט׳ · <b>מבחן 1</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">כיתה ט׳ · הקבצה א1 · נובמבר 2026</div>
+  <h1>מבחן 1 — יום ד׳ 4.11</h1>
+  <div class="cd" id="cd"><b id="cd-n">יום ד׳ 4.11</b><span id="cd-t">שעות 1+2</span></div>
+  <p class="lead">
+    שעות 1+2. שני חלקים: <strong>חלק א׳ — אלגברה</strong> (פונקציה קווית מעבודת הקיץ,
+    ונוסחאות הכפל המקוצר והשימושים בהן) ו<strong>חלק ב׳ — גיאומטריה</strong> (הדלתון).
+  </p>
+  <p class="youknow"><b>איך משתמשים בדף:</b> פותחים אותו כל יום, ועושים את מה שכתוב בכרטיס
+  המודגש — הוא מתחלף לבד לפי התאריך. ביום ב׳ וביום ג׳ פותרים את המבחן לדוגמה שבסוף הדף.</p>
+  <div class="sumdl no-print">
+    <b>📄 דף הסיכום למבחן</b> — 5 עמודים: הנוסחאות, חמשת השימושים, פונקציה קווית, הדלתון ואיך מוכיחים אותו. מדפיסים ופותרים לצידו.
+    <span class="sumdl-l"><a href="exam1-summary.pdf" download>הורדה (PDF בצבע)</a><a href="exam1-summary-ink.pdf" download>גרסה לחיסכון בדיו</a><a href="exam1-summary.html">לצפייה באתר</a></span>
+  </div>
+  <a class="today-link no-print" id="today-link" href="#day-1">למשימה של היום ↓</a>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>7 ימים</b> · 55–65 דק׳ ביום · מבחן לדוגמה 90 דק׳</span>
+  </p>
+</header>
+
+<h2 id="sec-today"><span class="num">1</span>מה עושים היום</h2>
+<p style="font-size:13.5px;color:var(--soft)">שבעה ימים, יום אחד בכל כרטיס. הכרטיס של היום מודגש.</p>
+<div class="days">
+<article class="day" id="day-1" data-date="2026-10-28">
+  <div class="day-h"><span class="dname">יום ד׳ 28.10</span><b>הפונקציה הקווית מעבודת הקיץ</b><span class="dmin">≈ 55 דק׳</span></div>
+  <ol class="todo">
+    <li><span class="t">10 דק׳</span> — חזרה: <a href="../../year8/algebra/04-linear-function.html#sec-intercepts">נקודות חיתוך עם הצירים</a> ו<a href="../../year8/algebra/05-line-equation.html#sec-intersect">נקודת החיתוך של שני ישרים</a>.</li><li><span class="t">35 דק׳</span> — מעבודת הקיץ, לבד במחברת ואז מול הפתרון: <a href="../../year8/algebra/11-booklet-functions.html#a6">תרגיל 6</a>, <a href="../../year8/algebra/11-booklet-functions.html#a8">תרגיל 8</a>, <a href="../../year8/algebra/11-booklet-functions.html#a4">תרגיל 4</a> (משוואת ישר משתי נקודות).</li><li><span class="t">10 דק׳</span> — <a href="../../year8/algebra/05-line-equation.html#sec-compare">מי מעל מי</a> — מתי \(f(x)\gt g(x)\).</li>
+  </ol>
+  
+  <label class="mark"><input type="checkbox" data-k="day1"> סיימתי את היום הזה</label>
+</article>
+<article class="day" id="day-2" data-date="2026-10-29">
+  <div class="day-h"><span class="dname">יום ה׳ 29.10</span><b>פישוט, השלמה ומשוואות</b><span class="dmin">≈ 60 דק׳</span></div>
+  <ol class="todo">
+    <li><span class="t">5 דק׳</span> — <a href="../algebra/02-short-multiplication.html#sec-three">שלוש הנוסחאות</a> — לכתוב אותן בעל פה בראש הדף.</li><li><span class="t">15 דק׳</span> — <a href="../algebra/02b-formula-uses.html#sec-simplify">פישוט</a> (הצעד \(-1\cdot(\;)\)) ו<a href="../algebra/02b-formula-uses.html#sec-blanks">השלמה ומשוואות</a> (פתרון אחד, אין פתרון, אינסוף פתרונות).</li><li><span class="t">40 דק׳</span> — תרגילים <a href="../algebra/02b-formula-uses.html#t4">4</a>, <a href="../algebra/02b-formula-uses.html#t6">6</a>, <a href="../algebra/02b-formula-uses.html#t10">10</a>, <a href="../algebra/02b-formula-uses.html#t12">12</a>, <a href="../algebra/02b-formula-uses.html#t13">13</a>.</li>
+  </ol>
+  
+  <label class="mark"><input type="checkbox" data-k="day2"> סיימתי את היום הזה</label>
+</article>
+<article class="day" id="day-3" data-date="2026-10-30">
+  <div class="day-h"><span class="dname">יום ו׳ 30.10</span><b>חישוב על סמך נתונים, והוכחת התחלקות</b><span class="dmin">≈ 55 דק׳</span></div>
+  <ol class="todo">
+    <li><span class="t">15 דק׳</span> — <a href="../algebra/02b-formula-uses.html#sec-given">חישוב ביטויים על סמך נתונים</a> ו<a href="../algebra/02b-formula-uses.html#sec-divide">הוכחת התחלקות</a> — כולל משפט המסקנה.</li><li><span class="t">40 דק׳</span> — תרגילים <a href="../algebra/02b-formula-uses.html#t18">18</a>, <a href="../algebra/02b-formula-uses.html#t19">19</a>, <a href="../algebra/02b-formula-uses.html#t20">20</a>, <a href="../algebra/02b-formula-uses.html#t25">25</a>, <a href="../algebra/02b-formula-uses.html#t26">26</a>.</li>
+  </ol>
+  
+  <label class="mark"><input type="checkbox" data-k="day3"> סיימתי את היום הזה</label>
+</article>
+<article class="day" id="day-4" data-date="2026-10-31">
+  <div class="day-h"><span class="dname">שבת 31.10</span><b>בעיות מילוליות, ועוד עבודת קיץ</b><span class="dmin">≈ 55 דק׳</span></div>
+  <ol class="todo">
+    <li><span class="t">5 דק׳</span> — <a href="../algebra/02b-formula-uses.html#sec-words">בעיות מילוליות</a>: נעלם ← ביטוי לכל כמות ← משוואה.</li><li><span class="t">25 דק׳</span> — תרגילים <a href="../algebra/02b-formula-uses.html#t30">30</a>, <a href="../algebra/02b-formula-uses.html#t31">31</a>.</li><li><span class="t">25 דק׳</span> — מעבודת הקיץ: <a href="../../year8/algebra/11-booklet-functions.html#a7">תרגיל 7</a> (שלושה ישרים) ו<a href="../../year8/algebra/11-booklet-functions.html#a9">תרגיל 9</a> (שתי המשאיות).</li>
+  </ol>
+  
+  <label class="mark"><input type="checkbox" data-k="day4"> סיימתי את היום הזה</label>
+</article>
+<article class="day" id="day-5" data-date="2026-11-01">
+  <div class="day-h"><span class="dname">יום א׳ 1.11</span><b>הדלתון: תכונות ותנאים</b><span class="dmin">≈ 60 דק׳</span></div>
+  <ol class="todo">
+    <li><span class="t">20 דק׳</span> — <a href="../geometry/01b-kite.html#sec-what">מה זה דלתון</a>, <a href="../geometry/01b-kite.html#sec-props">התכונות</a> ו<a href="../geometry/01b-kite.html#sec-conditions">תנאים הכרחיים ומספיקים</a>.</li><li><span class="t">15 דק׳</span> — <a href="../geometry/01b-kite.html#m1">דגם 1</a> ו<a href="../geometry/01b-kite.html#m2">דגם 2</a> — לכתוב את הטבלה בלי להציץ, ואז להשוות.</li><li><span class="t">25 דק׳</span> — תרגילים <a href="../geometry/01b-kite.html#t2">2</a>, <a href="../geometry/01b-kite.html#t12">12</a>, <a href="../geometry/01b-kite.html#t14">14</a>.</li>
+  </ol>
+  <p class="incls">בכיתה: שיעור חזרה עם דף חזרה. כל סעיף בדף שלא ברור — לסמן ולשאול עליו.</p>
+  <label class="mark"><input type="checkbox" data-k="day5"> סיימתי את היום הזה</label>
+</article>
+<article class="day" id="day-6" data-date="2026-11-02">
+  <div class="day-h"><span class="dname">יום ב׳ 2.11</span><b>שטח הדלתון, ומבחן לדוגמה — חלק ב׳</b><span class="dmin">≈ 60 דק׳</span></div>
+  <ol class="todo">
+    <li><span class="t">10 דק׳</span> — <a href="../geometry/01b-kite.html#sec-area">שטח הדלתון</a>.</li><li><span class="t">15 דק׳</span> — תרגילים <a href="../geometry/01b-kite.html#t6">6</a> ו-<a href="../geometry/01b-kite.html#t9">9</a>.</li><li><span class="t">35 דק׳</span> — <a href="#part-b">מבחן לדוגמה, חלק ב׳</a> (שאלות 6–7) עם שעון, ואז בדיקה מול הפתרונות.</li>
+  </ol>
+  <p class="incls">בכיתה: שיעור החזרה השני.</p>
+  <label class="mark"><input type="checkbox" data-k="day6"> סיימתי את היום הזה</label>
+</article>
+<article class="day" id="day-7" data-date="2026-11-03">
+  <div class="day-h"><span class="dname">יום ג׳ 3.11</span><b>מבחן לדוגמה — חלק א׳</b><span class="dmin">≈ 65 דק׳</span></div>
+  <ol class="todo">
+    <li><span class="t">55 דק׳</span> — <a href="#part-a">מבחן לדוגמה, חלק א׳</a> (שאלות 1–5) עם שעון, במחברת.</li><li><span class="t">10 דק׳</span> — בדיקה מול הפתרונות. לכל טעות — הקישור שבסוף הפתרון מוביל לסעיף שמלמד אותה.</li><li><span class="t">2 דק׳</span> — <a href="#sec-day">חמשת הכללים ליום המבחן</a>.</li>
+  </ol>
+  
+  <label class="mark"><input type="checkbox" data-k="day7"> סיימתי את היום הזה</label>
+</article>
+</div>
+
+<h2 id="sec-topics"><span class="num">2</span>הנושאים — בדיוק כמו בדף של המורה</h2>
+
+<div class="sheet">
+  <div class="st">נושאים למבחן מספר 1 במתמטיקה – ט (א1) – נובמבר 2026</div>
+  א. <u>תאריך המבחן</u> – יום ד׳ ה-4/11, שעות 1+2.
+  <br>ב. <u>מבנה המבחן</u> – במבחן שני חלקים: חלק א׳ – אלגברה, חלק ב׳ – גיאומטריה.
+  <br>ג. <u>חזרה למבחן</u> – בימים א׳ + ב׳ ה-1-2/11 נקיים שיעורי חזרה, בעזרת דפי חזרה.
+  ניתן להיעזר בדפי עבודה לתלמידים המופיעים באתרים של: אתי עוזרי, גבי יקואל.
+  <br>ד. <u>הנושאים והעמודים בספר</u> — בטבלה:
+</div>
+
+<div class="tbl-scroll">
+<table class="dtable topics">
+  <tr><th>הנושא (מהדף של המורה)</th><th>ללמוד</th><th>לתרגל</th><th>אני מוכנה בזה</th></tr>
+  <tr class="grp"><td colspan="4">אלגברה — בספר עמ׳ 66–82, 374–376, 379–381 (רמה א) · דף עבודה של תרגילים מסכמים · דפי חזרה למבחן</td></tr>
+  <tr><td class="tname">1. <b>עבודת קיץ</b> – פונקציה קווית.<span class="src">שאלה אחת במבחן מתוך עבודת הקיץ.</span></td><td data-l="ללמוד:"><a href="../../year8/algebra/04-linear-function.html#sec-intercepts">חיתוך עם הצירים</a> · <a href="../../year8/algebra/05-line-equation.html#sec-intersect">חיתוך שני ישרים</a> · <a href="../../year8/algebra/05-line-equation.html#sec-find-eq">משוואת ישר</a> · <a href="../../year8/booklet.html">מפת עבודת הקיץ</a></td><td data-l="לתרגל:">כל 10 התרגילים מעבודת הקיץ פתורים: <a href="../../year8/algebra/11-booklet-functions.html#a1">1</a>–<a href="../../year8/algebra/11-booklet-functions.html#a10">10</a> · <a href="#q1">שאלה 1</a> במבחן לדוגמה<br><b>עוד בתרגול לפי סוג:</b> <a href="../algebra/08-exercise-bank.html#g-line-eq">משוואת ישר (6)</a> · <a href="../algebra/08-exercise-bank.html#g-line-axes">חיתוך עם הצירים (4)</a> · <a href="../algebra/08-exercise-bank.html#g-line-intersect">חיתוך ישרים (3)</a> · <a href="../algebra/08-exercise-bank.html#g-line-graph">מגרף (4)</a></td><td class="ok"><label class="mark"><input type="checkbox" data-k="t-linear" aria-label="אני מוכנה בזה"></label></td></tr>
+  <tr><td class="tname">2. <b>נוסחאות הכפל המקוצר והשימושים בהן:</b><br><span class="fx">\((a+b)(a-b)=a^{2}-b^{2}\)</span><br><span class="fx">\((a\pm b)^{2}=a^{2}\pm2ab+b^{2}\)</span></td><td data-l="ללמוד:"><a href="../algebra/02-short-multiplication.html#sec-three">שלוש הנוסחאות</a></td><td data-l="לתרגל:"><a href="../algebra/02-short-multiplication.html#sec-practice">תרגול הנוסחאות</a><br><b>עוד בתרגול לפי סוג:</b> <a href="../algebra/08-exercise-bank.html#g-open-formulas">פתיחת הנוסחאות (16)</a></td><td class="ok"><label class="mark"><input type="checkbox" data-k="t-formulas" aria-label="אני מוכנה בזה"></label></td></tr>
+  <tr><td class="tname">* פישוט ביטויים בעזרת הנוסחאות.</td><td data-l="ללמוד:"><a href="../algebra/02b-formula-uses.html#sec-simplify">פישוט</a></td><td data-l="לתרגל:"><a href="../algebra/02b-formula-uses.html#t1">תרגילים 1–7</a> · <a href="#q2">שאלה 2א</a><br><b>עוד בתרגול לפי סוג:</b> <a href="../algebra/08-exercise-bank.html#g-open-mixed">פישוט מעורב (17)</a></td><td class="ok"><label class="mark"><input type="checkbox" data-k="t-simplify" aria-label="אני מוכנה בזה"></label></td></tr>
+  <tr><td class="tname">* השלמת המקומות הריקים, בהתאם לנוסחה או לקבלת טענה נכונה, פתרון משוואות.</td><td data-l="ללמוד:"><a href="../algebra/02b-formula-uses.html#sec-blanks">השלמה ומשוואות</a></td><td data-l="לתרגל:"><a href="../algebra/02b-formula-uses.html#t8">תרגילים 8–15</a> · <a href="#q2">שאלה 2ב–ד</a><br><b>עוד בתרגול לפי סוג:</b> <a href="../algebra/08-exercise-bank.html#g-open-blanks">מקומות ריקים (13)</a> · <a href="../algebra/08-exercise-bank.html#g-open-eq">משוואות (18)</a></td><td class="ok"><label class="mark"><input type="checkbox" data-k="t-blanks" aria-label="אני מוכנה בזה"></label></td></tr>
+  <tr><td class="tname">* חישוב ביטויים על סמך נתונים (הוכחות).</td><td data-l="ללמוד:"><a href="../algebra/02b-formula-uses.html#sec-given">חישוב על סמך נתונים</a></td><td data-l="לתרגל:"><a href="../algebra/02b-formula-uses.html#t16">תרגילים 16–24</a> · <a href="#q3">שאלה 3</a><br><b>עוד בתרגול לפי סוג:</b> <a href="../algebra/08-exercise-bank.html#g-open-given">חישוב מנתונים (12)</a> · <a href="../algebra/08-exercise-bank.html#g-open-mental">חשבון חכם (12)</a></td><td class="ok"><label class="mark"><input type="checkbox" data-k="t-given" aria-label="אני מוכנה בזה"></label></td></tr>
+  <tr><td class="tname">* הוכחת התחלקות, ללא שארית, פתרון בעיות מילוליות.</td><td data-l="ללמוד:"><a href="../algebra/02b-formula-uses.html#sec-divide">הוכחת התחלקות</a> · <a href="../algebra/02b-formula-uses.html#sec-words">בעיות מילוליות</a></td><td data-l="לתרגל:"><a href="../algebra/02b-formula-uses.html#t25">תרגילים 25–28 ו-29–33</a> · <a href="#q4">שאלות 4</a> ו-<a href="#q5">5</a><br><b>עוד בתרגול לפי סוג:</b> <a href="../algebra/08-exercise-bank.html#g-open-divide">התחלקות (13)</a> · <a href="../algebra/08-exercise-bank.html#g-open-words">מילוליות (11)</a></td><td class="ok"><label class="mark"><input type="checkbox" data-k="t-divide" aria-label="אני מוכנה בזה"></label></td></tr>
+  <tr class="grp"><td colspan="4">גיאומטריה — ספר חלק ב׳ עמ׳ 543–552 · דפי עבודה ותרגילים שעשינו בכיתה · דפי חזרה למבחן</td></tr>
+  <tr><td class="tname"><b>הדלתון</b> – תכונות הדלתון,</td><td data-l="ללמוד:"><a href="../geometry/01b-kite.html#sec-what">מה זה דלתון</a> · <a href="../geometry/01b-kite.html#sec-props">התכונות</a></td><td data-l="לתרגל:"><a href="../geometry/01b-kite.html#t1">תרגילים 1–5</a></td><td class="ok"><label class="mark"><input type="checkbox" data-k="t-kite-props" aria-label="אני מוכנה בזה"></label></td></tr>
+  <tr><td class="tname">תנאים הכרחיים ומספיקים.</td><td data-l="ללמוד:"><a href="../geometry/01b-kite.html#sec-conditions">הכרחי ומספיק</a></td><td data-l="לתרגל:"><a href="../geometry/01b-kite.html#sub-cond">תרגילים 12–14</a> · <a href="#q6">שאלה 6ב</a></td><td class="ok"><label class="mark"><input type="checkbox" data-k="t-kite-cond" aria-label="אני מוכנה בזה"></label></td></tr>
+  <tr><td class="tname">הוכחות וחישובים – שטח דלתון.</td><td data-l="ללמוד:"><a href="../geometry/01b-kite.html#sec-models">ארבעה דגמי הוכחה</a> · <a href="../geometry/01b-kite.html#sec-area">שטח הדלתון</a></td><td data-l="לתרגל:"><a href="../geometry/01b-kite.html#sub-proofs">תרגילים 15–19</a> · <a href="../geometry/01b-kite.html#t6">6</a>, <a href="../geometry/01b-kite.html#t9">9–11</a> · <a href="#q6">שאלות 6</a> ו-<a href="#q7">7</a></td><td class="ok"><label class="mark"><input type="checkbox" data-k="t-kite-proofs" aria-label="אני מוכנה בזה"></label></td></tr>
+</table>
+</div>
+<p class="aside">הרבה מהתרגילים בעמוד השימושים בנוסחאות לקוחים מדפי העבודה של גבי יקואל (משבצת) — אחד משני האתרים שהמורה ציינה.</p>
+<div class="sheet" style="text-align:center"><span class="bye">ביחד נעלה ונצליח!!!!!</span></div>
+
+<div class="progresswrap no-print">
+  <span class="progressbar"><i></i></span><span class="progress-label"></span>
+</div>
+
+<h2 id="sec-exam"><span class="num">3</span>מבחן לדוגמה</h2>
+
+<div class="box def">
+  <div class="box-title">כמו המבחן האמיתי</div>
+  שני חלקים, 100 נקודות, 90 דקות — בערך 55 דקות לחלק א׳ ו-35 דקות לחלק ב׳.
+  <br>כותבים במחברת, עם שעון, ופותחים את הפתרונות רק בסוף.
+  <br>כל השאלות חדשות: הן לא מופיעות בתרגילים שבאתר.
+</div>
+
+<div class="tbl-scroll"><table class="dtable pts-sum">
+  <tr><th>שאלה</th><th>חלק</th><th>מה בודקים</th><th>נקודות</th></tr>
+  <tr><td><a href="#q1">1</a></td><td>א׳</td><td style="text-align:right">פונקציה קווית, בסגנון עבודת הקיץ</td><td>14</td></tr>
+  <tr><td><a href="#q2">2</a></td><td>א׳</td><td style="text-align:right">פישוט, משוואות, השלמת מקום ריק</td><td>12</td></tr>
+  <tr><td><a href="#q3">3</a></td><td>א׳</td><td style="text-align:right">חישוב ביטויים על סמך נתונים</td><td>10</td></tr>
+  <tr><td><a href="#q4">4</a></td><td>א׳</td><td style="text-align:right">הוכחת התחלקות ללא שארית</td><td>12</td></tr>
+  <tr><td><a href="#q5">5</a></td><td>א׳</td><td style="text-align:right">בעיה מילולית</td><td>12</td></tr>
+  <tr><td><a href="#q6">6</a></td><td>ב׳</td><td style="text-align:right">הוכחת דלתון, הכרחי ומספיק, זוויות</td><td>20</td></tr>
+  <tr><td><a href="#q7">7</a></td><td>ב׳</td><td style="text-align:right">חישובים ושטח בדלתון</td><td>20</td></tr>
+  <tr><td colspan="3" style="text-align:right"><b>הסך הכל</b></td><td><b>100</b></td></tr>
+</table></div>
+
+<div class="box example">
+  <div class="box-title">הסימנים של הלוח בפתרונות</div>
+  כמו בכיתה: קו אחד מתחת לאיברים הריבועיים, שני קווים מתחת לאיברים עם האות בלבד.
+  <div class="marks-legend">
+    <span><span class="fi">\(\textcolor{#7C3AED}{\underline{x^{2}}}\)</span> איבר ריבועי</span>
+    <span><span class="fi">\(\textcolor{#EA580C}{\underline{\underline{x}}}\)</span> איבר עם האות</span>
+    <span><span class="fi">\(\textcolor{#059669}{7}\)</span> מספר בלי אות</span>
+    <span><span class="fi">\(\textcolor{#C0392B}{-1\cdot}\)</span> פעולה שאנחנו מוסיפות</span>
+  </div>
+</div>
+
+<h3 id="part-a">חלק א׳ — אלגברה <span class="aside">(60 נקודות, ≈ 55 דק׳)</span></h3>
+
+<article class="ex" id="q1">
+  <div class="ex-head"><span class="lvl l2">חלק א׳</span><h4>שאלה 1</h4><span class="pts">14 נק׳</span></div>
+  <div class="q-text">
+    נתונות הפונקציות \(f(x)=x-3\) ו-\(g(x)=-\tfrac12x+6\).
+    בשרטוט — הגרפים של שתי הפונקציות, I ו-II, והנקודות \(A, B, C, D, E\).
+    <span class="sub">א. התאימי לכל פונקציה את הגרף שלה. נמקי. <span class="aside">(2 נק׳)</span></span>
+    <span class="sub">ב. מצאי את שיעורי הנקודות \(A, B, C, D, E\). <span class="aside">(4 נק׳)</span></span>
+    <span class="sub">ג. חשבי את שטח המשולש \(ABD\). <span class="aside">(3 נק׳)</span></span>
+    <span class="sub">ד. עבור אילו ערכי \(x\) מתקיים \(f(x)\gt g(x)\)? <span class="aside">(2 נק׳)</span></span>
+    <span class="sub">ה. מצאי את משוואת הישר העובר דרך הנקודות \(A\) ו-\(E\). <span class="aside">(3 נק׳)</span></span>
+  </div>
+  <figure style="max-width:420px;margin:14px auto"><svg viewBox="0 0 384 329" style="width:100%;max-width:420px;height:auto" role="img" aria-label="שני הישרים של השאלה: I יורד, II עולה; הנקודות A עד E"><line x1="16.0" y1="192.0" x2="368.0" y2="192.0" stroke="#5A6875" stroke-width="1.8"/><line x1="71.0" y1="313.0" x2="71.0" y2="16.0" stroke="#5A6875" stroke-width="1.8"/><text x="364.0" y="185.0" text-anchor="middle" font-size="13" font-style="italic" fill="#5A6875">x</text><text x="59.0" y="26.0" text-anchor="middle" font-size="13" font-style="italic" fill="#5A6875">y</text><line x1="38.0" y1="291.0" x2="302.0" y2="27.0" stroke="#2E6F8E" stroke-width="2.8"/><line x1="18.2" y1="33.6" x2="354.8" y2="201.9" stroke="#C2408C" stroke-width="2.8"/><text x="306.0" y="41.0" text-anchor="start" font-size="14" font-weight="bold" fill="#2E6F8E">II</text><text x="269.0" y="150.0" text-anchor="middle" font-size="14" font-weight="bold" fill="#C2408C">I</text><circle cx="71.0" cy="60.0" r="4" fill="#334155"/><text x="59.0" y="56.0" text-anchor="end" font-size="13" font-weight="bold" fill="#334155">A</text><circle cx="203.0" cy="126.0" r="4" fill="#6D28D9"/><text x="203.0" y="114.0" text-anchor="middle" font-size="13" font-weight="bold" fill="#6D28D9">B</text><circle cx="335.0" cy="192.0" r="4" fill="#334155"/><text x="331.0" y="210.0" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">C</text><circle cx="71.0" cy="258.0" r="4" fill="#334155"/><text x="58.0" y="264.0" text-anchor="end" font-size="13" font-weight="bold" fill="#334155">D</text><circle cx="137.0" cy="192.0" r="4" fill="#334155"/><text x="146.0" y="209.0" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">E</text><text x="62.0" y="207.0" text-anchor="middle" font-size="11" fill="#5A6875">O</text></svg></figure>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <span class="sub-h">א. התאמה</span>
+    $$f(x)=\underbrace{1}_{m\gt0}\cdot x-3\qquad g(x)=\underbrace{-\tfrac12}_{m\lt0}x+6$$
+    לגרף של \(f\) שיפוע חיובי, ולכן הוא הישר העולה: <span class="concl">II הוא \(f\)</span>
+    <br>לגרף של \(g\) שיפוע שלילי, ולכן הוא הישר היורד: <span class="concl">I הוא \(g\)</span>
+
+    <span class="sub-h">ב. חמש הנקודות</span>
+    \(A\) ו-\(D\) על ציר \(y\) — מציבים \(x=0\):
+    $$g(0)=-\tfrac12\cdot0+6=6\qquad\Longrightarrow\qquad A(0,\,6)$$
+    $$f(0)=0-3=-3\qquad\Longrightarrow\qquad D(0,\,-3)$$
+    \(E\) ו-\(C\) על ציר \(x\) — מציבים \(y=0\):
+    $$x-3=0\qquad\textcolor{#C0392B}{/\;+3}$$
+    $$x=3\qquad\Longrightarrow\qquad E(3,\,0)$$
+    $$-\tfrac12x+6=0\qquad\textcolor{#C0392B}{/\;-6}$$
+    $$-\tfrac12x=-6\qquad\textcolor{#C0392B}{/\;\cdot(-2)}$$
+    $$x=12\qquad\Longrightarrow\qquad C(12,\,0)$$
+    \(B\) — נקודת החיתוך — משווים \(f(x)=g(x)\):
+    $$x-3=-\tfrac12x+6\qquad\textcolor{#C0392B}{/\;+\tfrac12x\;\;+3}$$
+    $$1.5x=9\qquad\textcolor{#C0392B}{/\;:1.5}$$
+    $$x=6$$
+    מציבים בפונקציה \(f\):
+    $$y=6-3=3\qquad\Longrightarrow\qquad B(6,\,3)$$
+    בדיקה ב-\(g\): \(-\tfrac12\cdot6+6=3\) ✓
+    <figure style="max-width:420px;margin:14px auto"><svg viewBox="0 0 384 329" style="width:100%;max-width:420px;height:auto" role="img" aria-label="הישרים f ו-g עם שיעורי הנקודות, המשולש ABD צבוע, והחלק של f שמעל g מודגש"><polygon points="71.0,60.0 203.0,126.0 71.0,258.0" fill="#FBF0C9" stroke="none" stroke-width="0" stroke-linejoin="round"/><line x1="16.0" y1="192.0" x2="368.0" y2="192.0" stroke="#5A6875" stroke-width="1.8"/><line x1="71.0" y1="313.0" x2="71.0" y2="16.0" stroke="#5A6875" stroke-width="1.8"/><text x="364.0" y="185.0" text-anchor="middle" font-size="13" font-style="italic" fill="#5A6875">x</text><text x="59.0" y="26.0" text-anchor="middle" font-size="13" font-style="italic" fill="#5A6875">y</text><line x1="27.0" y1="192.0" x2="27.0" y2="196.0" stroke="#5A6875" stroke-width="1"/><line x1="49.0" y1="192.0" x2="49.0" y2="196.0" stroke="#5A6875" stroke-width="1"/><line x1="93.0" y1="192.0" x2="93.0" y2="196.0" stroke="#5A6875" stroke-width="1"/><line x1="115.0" y1="192.0" x2="115.0" y2="196.0" stroke="#5A6875" stroke-width="1"/><line x1="137.0" y1="192.0" x2="137.0" y2="196.0" stroke="#5A6875" stroke-width="1"/><line x1="159.0" y1="192.0" x2="159.0" y2="196.0" stroke="#5A6875" stroke-width="1"/><line x1="181.0" y1="192.0" x2="181.0" y2="196.0" stroke="#5A6875" stroke-width="1"/><line x1="203.0" y1="192.0" x2="203.0" y2="196.0" stroke="#5A6875" stroke-width="1"/><line x1="225.0" y1="192.0" x2="225.0" y2="196.0" stroke="#5A6875" stroke-width="1"/><line x1="247.0" y1="192.0" x2="247.0" y2="196.0" stroke="#5A6875" stroke-width="1"/><line x1="269.0" y1="192.0" x2="269.0" y2="196.0" stroke="#5A6875" stroke-width="1"/><line x1="291.0" y1="192.0" x2="291.0" y2="196.0" stroke="#5A6875" stroke-width="1"/><line x1="313.0" y1="192.0" x2="313.0" y2="196.0" stroke="#5A6875" stroke-width="1"/><line x1="335.0" y1="192.0" x2="335.0" y2="196.0" stroke="#5A6875" stroke-width="1"/><line x1="357.0" y1="192.0" x2="357.0" y2="196.0" stroke="#5A6875" stroke-width="1"/><line x1="71.0" y1="302.0" x2="67.0" y2="302.0" stroke="#5A6875" stroke-width="1"/><line x1="71.0" y1="280.0" x2="67.0" y2="280.0" stroke="#5A6875" stroke-width="1"/><line x1="71.0" y1="258.0" x2="67.0" y2="258.0" stroke="#5A6875" stroke-width="1"/><line x1="71.0" y1="236.0" x2="67.0" y2="236.0" stroke="#5A6875" stroke-width="1"/><line x1="71.0" y1="214.0" x2="67.0" y2="214.0" stroke="#5A6875" stroke-width="1"/><line x1="71.0" y1="170.0" x2="67.0" y2="170.0" stroke="#5A6875" stroke-width="1"/><line x1="71.0" y1="148.0" x2="67.0" y2="148.0" stroke="#5A6875" stroke-width="1"/><line x1="71.0" y1="126.0" x2="67.0" y2="126.0" stroke="#5A6875" stroke-width="1"/><line x1="71.0" y1="104.0" x2="67.0" y2="104.0" stroke="#5A6875" stroke-width="1"/><line x1="71.0" y1="82.0" x2="67.0" y2="82.0" stroke="#5A6875" stroke-width="1"/><line x1="71.0" y1="60.0" x2="67.0" y2="60.0" stroke="#5A6875" stroke-width="1"/><line x1="71.0" y1="38.0" x2="67.0" y2="38.0" stroke="#5A6875" stroke-width="1"/><line x1="38.0" y1="291.0" x2="302.0" y2="27.0" stroke="#2E6F8E" stroke-width="2.8"/><line x1="18.2" y1="33.6" x2="354.8" y2="201.9" stroke="#C2408C" stroke-width="2.8"/><line x1="203.0" y1="126.0" x2="302.0" y2="27.0" stroke="#2E7D32" stroke-width="6"/><text x="306.0" y="41.0" text-anchor="start" font-size="14" font-weight="bold" font-style="italic" fill="#2E6F8E">f</text><text x="269.0" y="150.0" text-anchor="middle" font-size="14" font-weight="bold" font-style="italic" fill="#C2408C">g</text><circle cx="71.0" cy="60.0" r="4" fill="#334155"/><text x="59.0" y="56.0" text-anchor="end" font-size="13" font-weight="bold" fill="#334155">A(0, 6)</text><circle cx="203.0" cy="126.0" r="4" fill="#6D28D9"/><text x="215.0" y="131.0" text-anchor="start" font-size="13" font-weight="bold" fill="#6D28D9">B(6, 3)</text><circle cx="335.0" cy="192.0" r="4" fill="#334155"/><text x="331.0" y="210.0" text-anchor="end" font-size="13" font-weight="bold" fill="#334155">C(12, 0)</text><circle cx="71.0" cy="258.0" r="4" fill="#334155"/><text x="58.0" y="264.0" text-anchor="end" font-size="13" font-weight="bold" fill="#334155">D(0, −3)</text><circle cx="137.0" cy="192.0" r="4" fill="#334155"/><text x="148.0" y="209.0" text-anchor="start" font-size="13" font-weight="bold" fill="#334155">E(3, 0)</text><text x="62.0" y="207.0" text-anchor="middle" font-size="11" fill="#5A6875">O</text></svg></figure>
+
+    <span class="sub-h">ג. שטח המשולש \(ABD\)</span>
+    \(A\) ו-\(D\) על ציר \(y\), ולכן \(AD\) הוא הבסיס:
+    $$AD=6-(-3)=9$$
+    הגובה לבסיס הוא המרחק של \(B\) מציר \(y\) — שיעור ה-\(x\) שלה:
+    $$h=6$$
+    $$S_{ABD}=\frac{AD\cdot h}{2}=\frac{9\cdot6}{2}=\boxed{27}$$
+
+    <span class="sub-h">ד. מתי \(f(x)\gt g(x)\)</span>
+    $$x-3\gt-\tfrac12x+6\qquad\textcolor{#C0392B}{/\;+\tfrac12x\;\;+3}$$
+    $$1.5x\gt9\qquad\textcolor{#C0392B}{/\;:1.5}$$
+    $$\boxed{x\gt6}$$
+    בשרטוט: מימין ל-\(B\) הישר העולה \(f\) נמצא מעל הישר היורד \(g\).
+    <br>בדיקה ב-\(x=8\): \(f(8)=5\), \(g(8)=2\), ו-\(5\gt2\) ✓
+
+    <span class="sub-h">ה. הישר דרך \(A(0,6)\) ו-\(E(3,0)\)</span>
+    $$m=\frac{y_2-y_1}{x_2-x_1}=\frac{0-6}{3-0}=-2$$
+    \(A\) על ציר \(y\), ולכן \(b=6\):
+    $$\boxed{y=-2x+6}$$
+    בדיקה ב-\(E\): \(-2\cdot3+6=0\) ✓
+    <p class="back">טעית כאן? <a href="../../year8/algebra/04-linear-function.html#sec-intercepts">חיתוך עם הצירים</a> ·
+    <a href="../../year8/algebra/05-line-equation.html#sec-intersect">חיתוך שני ישרים</a> · <a href="../../year8/algebra/05-line-equation.html#sec-compare">מי מעל מי</a> ·
+    <a href="../../year8/algebra/05-line-equation.html#sec-find-eq">משוואת ישר</a> · ובעבודת הקיץ: <a href="../../year8/algebra/11-booklet-functions.html#a6">תרגיל 6</a></p>
+  </div></details>
+  <div class="q-row"><span>ב. שיעור ה-x של B:</span><input class="q-input" data-answer="6" inputmode="decimal" placeholder="?"><button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ג. שטח ABD:</span><input class="q-input" data-answer="27" inputmode="decimal" placeholder="?"><button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ה. השיפוע של הישר AE:</span><input class="q-input" data-answer="-2" inputmode="decimal" placeholder="?"><button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+</article>
+
+<article class="ex" id="q2">
+  <div class="ex-head"><span class="lvl l2">חלק א׳</span><h4>שאלה 2</h4><span class="pts">12 נק׳</span></div>
+  <div class="q-text">
+    נתון הביטוי \((2x-3)^{2}-(2x+1)(2x-1)\).
+    <span class="sub">א. פשטי את הביטוי. <span class="aside">(3 נק׳)</span></span>
+    <span class="sub">ב. פתרי את המשוואה \((2x-3)^{2}-(2x+1)(2x-1)=2-4x\). <span class="aside">(3 נק׳)</span></span>
+    <span class="sub">ג. פתרי את המשוואה \((2x-3)^{2}-(2x+1)(2x-1)=10(1-x)-2x\). כמה פתרונות יש לה? נמקי. <span class="aside">(3 נק׳)</span></span>
+    <span class="sub">ד. השלימי מספר במקום הריק, כך שלמשוואה \((2x-3)^{2}-(2x+1)(2x-1)=-12x+\square\) לא יהיה פתרון.
+    האם יש רק מספר אחד שמתאים? נמקי. <span class="aside">(3 נק׳)</span></span>
+  </div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <span class="sub-h">א. פישוט</span>
+    $$\underbrace{(2x-3)^{2}}_{(a-b)^{2}}\;-\;\underbrace{(2x+1)(2x-1)}_{(a+b)(a-b)}$$
+    $$=4x^{2}-12x+9\;\textcolor{#C0392B}{-1\cdot}(4x^{2}-1)$$
+    $$=\textcolor{#7C3AED}{\underline{4x^{2}}}\textcolor{#EA580C}{\underline{\underline{-12x}}}\textcolor{#059669}{+9}\textcolor{#7C3AED}{\underline{-4x^{2}}}\textcolor{#059669}{+1}$$
+    $$=\boxed{-12x+10}$$
+    בדיקה ב-\(x=1\): \((-1)^{2}-3\cdot1=-2\) וגם \(-12+10=-2\) ✓
+
+    <span class="sub-h">ב. המשוואה הראשונה</span>
+    אגף שמאל הוא הביטוי מסעיף א׳:
+    $$-12x+10=2-4x\qquad\textcolor{#C0392B}{/\;+4x\;\;-10}$$
+    $$-8x=-8\qquad\textcolor{#C0392B}{/\;:(-8)}$$
+    $$x=1$$
+    <span class="concl">פתרון אחד: \(x=1\)</span>
+    <br>בדיקה: \((2-3)^{2}-3\cdot1=1-3=-2\) וגם \(2-4\cdot1=-2\) ✓
+
+    <span class="sub-h">ג. המשוואה השנייה</span>
+    פותחים את אגף ימין:
+    $$10(1-x)-2x=10-10x-2x=10-12x$$
+    $$-12x+10=10-12x\qquad\textcolor{#C0392B}{/\;+12x\;\;-10}$$
+    $$0=0$$
+    השוויון נכון, ואין בו \(x\) — כל מספר מקיים את המשוואה.
+    <br><span class="concl">אינסוף פתרונות — כל \(x\)</span>
+    <br>בדיקה ב-\(x=0\): \(9-1\cdot(-1)=10\) וגם \(10\cdot1-0=10\) ✓
+
+    <span class="sub-h">ד. השלמה</span>
+    $$-12x+10=-12x+\square\qquad\textcolor{#C0392B}{/\;+12x}$$
+    $$10=\square$$
+    כשבמקום הריק 10 — מתקבל \(10=10\), אינסוף פתרונות.
+    <br>כשבמקום הריק מספר אחר, למשל 0 — מתקבל \(10=0\), שוויון שקרי: אין פתרון.
+    <br><span class="concl">למשל \(\square=0\). מתאים כל מספר שונה מ-10 — אינסוף מספרים.</span>
+    <p class="back">טעית כאן? <a href="../algebra/02b-formula-uses.html#sec-simplify">פישוט</a> · <a href="../algebra/02b-formula-uses.html#sec-blanks">השלמה ומשוואות — שלוש התוצאות</a></p>
+  </div></details>
+  <div class="q-row"><span>ב. x =</span><input class="q-input" data-answer="1" inputmode="decimal" placeholder="?"><button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+</article>
+
+<article class="ex" id="q3">
+  <div class="ex-head"><span class="lvl l2">חלק א׳</span><h4>שאלה 3</h4><span class="pts">10 נק׳</span></div>
+  <div class="q-text">
+    נתון: \(a-b=5\), \(ab=14\).
+    <span class="sub">א. חשבי את \(a^{2}+b^{2}\). <span class="aside">(4 נק׳)</span></span>
+    <span class="sub">ב. חשבי את \((a+b)^{2}\). <span class="aside">(3 נק׳)</span></span>
+    <span class="sub">ג. הוכיחי: \(a^{3}b+ab^{3}=742\). <span class="aside">(3 נק׳)</span></span>
+  </div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <span class="sub-h">א. \(a^{2}+b^{2}\)</span>
+    הנוסחה שיש בה \(a-b\) ו-\(ab\):
+    $$(a-b)^{2}=a^{2}+b^{2}-2ab$$
+    מציבים את הנתונים:
+    $$\underbrace{5^{2}}_{(a-b)^{2}}=a^{2}+b^{2}-\underbrace{2\cdot14}_{2ab}$$
+    $$25=a^{2}+b^{2}-28\qquad\textcolor{#C0392B}{/\;+28}$$
+    $$\boxed{a^{2}+b^{2}=53}$$
+
+    <span class="sub-h">ב. \((a+b)^{2}\)</span>
+    $$(a+b)^{2}=\underbrace{a^{2}+b^{2}}_{53}+\underbrace{2ab}_{2\cdot14}$$
+    $$=53+28=\boxed{81}$$
+
+    <span class="sub-h">ג. ההוכחה</span>
+    מוציאים גורם משותף \(ab\):
+    $$a^{3}b+ab^{3}=ab\,(a^{2}+b^{2})$$
+    מציבים את \(ab=14\) ואת התוצאה של סעיף א׳:
+    $$=\underbrace{14}_{ab}\cdot\underbrace{53}_{a^{2}+b^{2}}=742$$
+    מש"ל
+    <br>בדיקה במספרים שמקיימים את הנתונים, \(a=7,\;b=2\):
+    \(7^{3}\cdot2+7\cdot2^{3}=686+56=742\) ✓
+    <p class="back">טעית כאן? <a href="../algebra/02b-formula-uses.html#sec-given">חישוב ביטויים על סמך נתונים</a></p>
+  </div></details>
+  <div class="q-row"><span>א. a²+b² =</span><input class="q-input" data-answer="53" inputmode="decimal" placeholder="?"><button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ב. (a+b)² =</span><input class="q-input" data-answer="81" inputmode="decimal" placeholder="?"><button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+</article>
+
+<article class="ex" id="q4">
+  <div class="ex-head"><span class="lvl l2">חלק א׳</span><h4>שאלה 4</h4><span class="pts">12 נק׳</span></div>
+  <div class="q-text">
+    \(n\) הוא מספר שלם.
+    <span class="sub">א. הוכיחי שהביטוי \((2n+3)^{2}-(2n-1)^{2}\) מתחלק ב-8 ללא שארית. <span class="aside">(6 נק׳)</span></span>
+    <span class="sub">ב. הוכיחי שסכום הריבועים של שלושה מספרים שלמים עוקבים, פחות 2, מתחלק ב-3 ללא שארית. <span class="aside">(6 נק׳)</span></span>
+  </div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <span class="sub-h">א. מתחלק ב-8</span>
+    פותחים את שני הריבועים; את השני — בסוגריים, עם \(-1\cdot\):
+    $$4n^{2}+12n+9\;\textcolor{#C0392B}{-1\cdot}(4n^{2}-4n+1)$$
+    $$=\textcolor{#7C3AED}{\underline{4n^{2}}}\textcolor{#EA580C}{\underline{\underline{+12n}}}\textcolor{#059669}{+9}\textcolor{#7C3AED}{\underline{-4n^{2}}}\textcolor{#EA580C}{\underline{\underline{+4n}}}\textcolor{#059669}{-1}$$
+    $$=16n+8$$
+    מוציאים גורם משותף 8:
+    $$\underline{8}\cdot2n+\underline{8}=\boxed{8\cdot(2n+1)}$$
+    \(n\) שלם, ולכן גם \(2n+1\) שלם.
+    <br>הביטוי שווה ל-8 כפול מספר שלם, ולכן הוא מתחלק ב-8 ללא שארית. מש"ל
+    <br>בדיקה ב-\(n=1\): \(5^{2}-1^{2}=24=8\cdot3\) ✓
+
+    <span class="sub-h">ב. מתחלק ב-3</span>
+    שלושה מספרים עוקבים: \(n-1,\;\;n,\;\;n+1\).
+    $$(n-1)^{2}+n^{2}+(n+1)^{2}-2$$
+    $$=\textcolor{#7C3AED}{\underline{n^{2}}}\textcolor{#EA580C}{\underline{\underline{-2n}}}\textcolor{#059669}{+1}\textcolor{#7C3AED}{\underline{+n^{2}}}\textcolor{#7C3AED}{\underline{+n^{2}}}\textcolor{#EA580C}{\underline{\underline{+2n}}}\textcolor{#059669}{+1}\textcolor{#059669}{-2}$$
+    $$=\underbrace{3n^{2}}_{n^{2}+n^{2}+n^{2}}\;\underbrace{-2n+2n}_{0}\;\underbrace{+1+1-2}_{0}=\boxed{3\cdot n^{2}}$$
+    \(n\) שלם, ולכן גם \(n^{2}\) שלם.
+    <br>הביטוי שווה ל-3 כפול מספר שלם, ולכן הוא מתחלק ב-3 ללא שארית. מש"ל
+    <br>בדיקה ב-4, 5, 6: \(16+25+36-2=75=3\cdot25\) ✓
+    <p class="back">טעית כאן? <a href="../algebra/02b-formula-uses.html#sec-divide">הוכחת התחלקות — ומספרים עוקבים</a></p>
+  </div></details>
+</article>
+
+<article class="ex" id="q5">
+  <div class="ex-head"><span class="lvl l2">חלק א׳</span><h4>שאלה 5</h4><span class="pts">12 נק׳</span></div>
+  <div class="q-text">
+    נתון ריבוע שאורך צלעו \(x\) ס״מ \((x\gt5)\).
+    מגדילים שתי צלעות נגדיות של הריבוע ב-5 ס״מ, ומקטינים את שתי הצלעות האחרות ב-5 ס״מ — ומתקבל מלבן.
+    <span class="sub">א. רשמי ביטוי לשטח המלבן, והוכיחי ששטח המלבן קטן ב-25 סמ״ר משטח הריבוע, לכל ערך של \(x\). <span class="aside">(4 נק׳)</span></span>
+    <span class="sub">ב. בונים ריבוע חדש, שאורך צלעו גדול ב-3 ס״מ מאורך צלע הריבוע המקורי.
+    שטח הריבוע החדש גדול ב-82 סמ״ר משטח המלבן. מצאי את \(x\). <span class="aside">(6 נק׳)</span></span>
+    <span class="sub">ג. חשבי את שטח המלבן. <span class="aside">(2 נק׳)</span></span>
+  </div>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <span class="sub-h">א. שטח המלבן</span>
+    צלעות המלבן: \(x+5\) ו-\(x-5\).
+    $$S_{\text{מלבן}}=(x+5)(x-5)=\boxed{x^{2}-25}$$
+    ההפרש בין שטח הריבוע לשטח המלבן:
+    $$x^{2}\;\textcolor{#C0392B}{-1\cdot}(x^{2}-25)$$
+    $$=\textcolor{#7C3AED}{\underline{x^{2}}}\textcolor{#7C3AED}{\underline{-x^{2}}}\textcolor{#059669}{+25}=25$$
+    ההפרש הוא 25 לכל \(x\): שטח המלבן קטן ב-25 סמ״ר משטח הריבוע. מש"ל
+
+    <span class="sub-h">ב. המשוואה</span>
+    צלע הריבוע החדש: \(x+3\).
+    $$\underbrace{(x+3)^{2}}_{\text{הריבוע החדש}}-\underbrace{(x+5)(x-5)}_{\text{המלבן}}=82$$
+    $$x^{2}+6x+9\;\textcolor{#C0392B}{-1\cdot}(x^{2}-25)=82$$
+    $$\textcolor{#7C3AED}{\underline{x^{2}}}\textcolor{#EA580C}{\underline{\underline{+6x}}}\textcolor{#059669}{+9}\textcolor{#7C3AED}{\underline{-x^{2}}}\textcolor{#059669}{+25}=82$$
+    $$6x+34=82\qquad\textcolor{#C0392B}{/\;-34}$$
+    $$6x=48\qquad\textcolor{#C0392B}{/\;:6}$$
+    $$x=8$$
+    <span class="concl">\(x=8\) ס״מ</span> — ו-\(8\gt5\), כנדרש.
+
+    <span class="sub-h">ג. שטח המלבן</span>
+    $$S_{\text{מלבן}}=(8+5)(8-5)=13\cdot3=\boxed{39}$$
+    שטח המלבן: 39 סמ״ר.
+    <br>בדיקה: הריבוע החדש \(11^{2}=121\), ו-\(121-39=82\) ✓
+    <br>ובדיקה של סעיף א׳: \(8^{2}-39=64-39=25\) ✓
+    <figure style="max-width:520px;margin:14px auto"><svg viewBox="-10 0 536 212" style="width:100%;max-width:520px;height:auto" role="img" aria-label="שלושת המרובעים בקנה מידה, כש-x=8: ריבוע 8 על 8, מלבן 13 על 3, וריבוע ב׳ 11 על 11"><rect x="20.0" y="85.0" width="88.0" height="88.0" fill="#E8EBEE" stroke="#334155" stroke-width="2"/><text x="64.0" y="190.0" text-anchor="middle" font-size="24" font-weight="bold" fill="#5A6875">x</text><text x="112.0" y="134.0" text-anchor="start" font-size="24" font-weight="bold" fill="#5A6875">x</text><text x="64.0" y="77.0" text-anchor="middle" font-size="24" font-weight="bold" fill="#334155">הריבוע</text><rect x="156.0" y="140.0" width="143.0" height="33.0" fill="#DDEDF8" stroke="#334155" stroke-width="2"/><text x="227.5" y="190.0" text-anchor="middle" font-size="24" font-weight="bold" fill="#5A6875">x+5</text><text x="303.0" y="161.5" text-anchor="start" font-size="24" font-weight="bold" fill="#5A6875">x−5</text><text x="227.5" y="132.0" text-anchor="middle" font-size="24" font-weight="bold" fill="#334155">המלבן</text><rect x="347.0" y="52.0" width="121.0" height="121.0" fill="#DCEEE9" stroke="#334155" stroke-width="2"/><text x="407.5" y="190.0" text-anchor="middle" font-size="24" font-weight="bold" fill="#5A6875">x+3</text><text x="472.0" y="117.5" text-anchor="start" font-size="24" font-weight="bold" fill="#5A6875">x+3</text><text x="407.5" y="44.0" text-anchor="middle" font-size="24" font-weight="bold" fill="#334155">הריבוע החדש</text></svg><figcaption>שלושת המרובעים כש-x=8, בקנה מידה: 8 על 8, 13 על 3, 11 על 11.</figcaption></figure>
+    <p class="back">טעית כאן? <a href="../algebra/02b-formula-uses.html#sec-words">בעיות מילוליות</a></p>
+  </div></details>
+  <div class="q-row"><span>ב. x =</span><input class="q-input" data-answer="8" inputmode="decimal" placeholder="?"><button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ג. שטח המלבן (סמ״ר):</span><input class="q-input" data-answer="39" inputmode="decimal" placeholder="?"><button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+</article>
+
+<h3 id="part-b">חלק ב׳ — גיאומטריה <span class="aside">(40 נקודות, ≈ 35 דק׳)</span></h3>
+
+<article class="ex" id="q6">
+  <div class="ex-head"><span class="lvl l2">חלק ב׳</span><h4>שאלה 6</h4><span class="pts">20 נק׳</span></div>
+  <div class="q-text">
+    נתון משולש שווה שוקיים \(ABC\) \((AB=AC)\). \(AD\) הוא התיכון לבסיס \(BC\).
+    הנקודה \(E\) נמצאת על המשך \(AD\), כך ש-\(D\) בין \(A\) ל-\(E\).
+    <span class="sub">א. הוכיחי: המרובע \(ABEC\) הוא דלתון. <span class="aside">(10 נק׳)</span></span>
+    <span class="sub">ב. דנה כתבה בהוכחה שלה רק: „האלכסונים \(AE\) ו-\(BC\) מאונכים זה לזה, ולכן \(ABEC\) דלתון.”
+    האם הנימוק של דנה מספיק? נמקי, וכתבי מה צריך להוסיף לו. <span class="aside">(4 נק׳)</span></span>
+    <span class="sub">ג. נתון גם: \(\angle BAC=50^\circ\), \(\angle BEC=100^\circ\). חשבי את \(\angle ABE\). <span class="aside">(6 נק׳)</span></span>
+  </div>
+  <figure style="max-width:300px;margin:14px auto"><svg viewBox="0 0 288 402" style="width:100%;max-width:330px;height:auto" role="img" aria-label="משולש שווה שוקיים ABC, התיכון AD והמשכו עד E"><polygon points="144.0,34.0 34.0,269.9 144.0,362.2 254.0,269.9" fill="#FBFAF7" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/><line x1="144.0" y1="34.0" x2="144.0" y2="362.2" stroke="#334155" stroke-width="2"/><line x1="34.0" y1="269.9" x2="254.0" y2="269.9" stroke="#334155" stroke-width="2"/><text x="144.0" y="23.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">A</text><text x="19.0" y="274.9" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">B</text><text x="269.0" y="274.9" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">C</text><text x="156.0" y="287.9" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">D</text><text x="144.0" y="383.2" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">E</text></svg></figure>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <span class="sub-h">א. ההוכחה</span>
+    <strong>מסרטטים מחדש בגדול</strong> ומסמנים את כל הנתונים:
+    <figure style="max-width:330px;margin:14px auto"><svg viewBox="0 0 288 402" style="width:100%;max-width:330px;height:auto" role="img" aria-label="המרובע ABEC: AB=AC, BD=DC, AD מאונך ל-BC, ומה שצריך להוכיח EB=EC מקווקו"><polygon points="144.0,34.0 34.0,269.9 144.0,362.2 254.0,269.9" fill="#FBFAF7" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/><line x1="144.0" y1="34.0" x2="144.0" y2="362.2" stroke="#334155" stroke-width="2"/><line x1="34.0" y1="269.9" x2="254.0" y2="269.9" stroke="#334155" stroke-width="2"/><path d="M144.0,258.9 L155.0,258.9 L155.0,269.9" fill="none" stroke="#334155" stroke-width="2"/><line x1="111.0" y1="104.8" x2="67.0" y2="199.1" stroke="#2563EB" stroke-width="5"/><line x1="94.4" y1="154.5" x2="83.6" y2="149.4" stroke="#2563EB" stroke-width="2.5"/><line x1="177.0" y1="104.8" x2="221.0" y2="199.1" stroke="#2563EB" stroke-width="5"/><line x1="204.4" y1="149.4" x2="193.6" y2="154.5" stroke="#2563EB" stroke-width="2.5"/><line x1="67.0" y1="269.9" x2="111.0" y2="269.9" stroke="#EA580C" stroke-width="5"/><line x1="85.5" y1="263.9" x2="85.5" y2="275.9" stroke="#EA580C" stroke-width="2.5"/><line x1="92.5" y1="263.9" x2="92.5" y2="275.9" stroke="#EA580C" stroke-width="2.5"/><line x1="177.0" y1="269.9" x2="221.0" y2="269.9" stroke="#EA580C" stroke-width="5"/><line x1="195.5" y1="263.9" x2="195.5" y2="275.9" stroke="#EA580C" stroke-width="2.5"/><line x1="202.5" y1="263.9" x2="202.5" y2="275.9" stroke="#EA580C" stroke-width="2.5"/><line x1="67.0" y1="297.6" x2="111.0" y2="334.5" stroke="#059669" stroke-width="4" stroke-dasharray="7 5"/><line x1="87.5" y1="307.0" x2="79.8" y2="316.1" stroke="#059669" stroke-width="2.5"/><line x1="92.9" y1="311.4" x2="85.1" y2="320.6" stroke="#059669" stroke-width="2.5"/><line x1="98.2" y1="315.9" x2="90.5" y2="325.1" stroke="#059669" stroke-width="2.5"/><line x1="221.0" y1="297.6" x2="177.0" y2="334.5" stroke="#059669" stroke-width="4" stroke-dasharray="7 5"/><line x1="208.2" y1="316.1" x2="200.5" y2="307.0" stroke="#059669" stroke-width="2.5"/><line x1="202.9" y1="320.6" x2="195.1" y2="311.4" stroke="#059669" stroke-width="2.5"/><line x1="197.5" y1="325.1" x2="189.8" y2="315.9" stroke="#059669" stroke-width="2.5"/><text x="144.0" y="23.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">A</text><text x="19.0" y="274.9" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">B</text><text x="269.0" y="274.9" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">C</text><text x="156.0" y="287.9" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">D</text><text x="144.0" y="383.2" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">E</text></svg><figcaption>נתון: \(AB=AC\), \(BD=DC\). מה שצריך להוכיח — \(EB=EC\) — מקווקו.</figcaption></figure>
+    <div class="tbl-scroll"><table class="dtable proof">
+      <tr><th></th><th>טענה</th><th>נימוק</th></tr>
+      <tr class="tr-sep"><td colspan="3">סעיף א׳</td></tr>
+      <tr><td>1</td><td class="hl-c2">\(AB=AC\)</td><td>נתון</td></tr>
+      <tr><td>2</td><td style="background:#FBE3D0">\(BD=DC\)</td><td>נתון: \(AD\) תיכון לבסיס \(BC\)</td></tr>
+      <tr><td>3</td><td>\(AD\perp BC\)</td><td>במשולש שווה שוקיים התיכון לבסיס הוא גם הגובה לבסיס (לפי 1, 2)</td></tr>
+      <tr><td>4</td><td>\(\angle BDE=\angle CDE=90^\circ\)</td><td>\(E\) על המשך \(AD\), ולכן \(DE\perp BC\) (לפי 3)</td></tr>
+      <tr><td>5</td><td>\(DE=DE\)</td><td>צלע משותפת</td></tr>
+      <tr><td>6</td><td>\(\triangle BDE\cong\triangle CDE\)</td><td>משפט חפיפה צ.ז.צ (לפי 2, 4, 5)</td></tr>
+      <tr><td>7</td><td class="hl-c3">\(EB=EC\)</td><td>צלעות מתאימות במשולשים חופפים שוות (לפי 6)</td></tr>
+      <tr><td>8</td><td>\(ABEC\) דלתון</td><td>מרובע המורכב משני משולשים שווי שוקיים בעלי בסיס משותף הוא דלתון
+        (\(\triangle ABC\) ו-\(\triangle EBC\) על הבסיס \(BC\); לפי 1, 7)</td></tr>
+      <tr class="tr-qed"><td colspan="3"><b>מש"ל א׳</b></td></tr>
+    </table></div>
+
+    <span class="sub-h">ב. הנימוק של דנה</span>
+    <strong>הנימוק לא מספיק.</strong> אלכסונים מאונכים הם תנאי <strong>הכרחי</strong> לדלתון — יש אותם בכל דלתון —
+    אבל הם אינם תנאי <strong>מספיק</strong>: יש מרובע שאלכסוניו מאונכים והוא אינו דלתון.
+    <figure style="max-width:220px;margin:14px auto"><svg viewBox="0 0 238 234" style="width:100%;max-width:220px;height:auto" role="img" aria-label="מרובע שאלכסוניו מאונכים, ואף אחד מהם לא חוצה את השני"><polygon points="85.0,34.0 204.0,102.0 85.0,204.0 34.0,102.0" fill="#FBFAF7" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/><line x1="85.0" y1="34.0" x2="85.0" y2="204.0" stroke="#334155" stroke-width="2"/><line x1="34.0" y1="102.0" x2="204.0" y2="102.0" stroke="#334155" stroke-width="2"/><path d="M85.0,91.0 L96.0,91.0 L96.0,102.0" fill="none" stroke="#334155" stroke-width="2"/></svg><figcaption>דוגמה נגדית: האלכסונים מאונכים, ואף אחד מהם לא חוצה את השני.</figcaption></figure>
+    מה שצריך להוסיף: גם ש-\(AE\) <strong>חוצה</strong> את \(BC\) \((BD=DC)\).
+    אלכסון שמאונך לאלכסון השני וגם חוצה אותו — זה תנאי מספיק, ומוכיחים אותו בחפיפה, כמו בשורות 2–8.
+
+    <span class="sub-h">ג. הזווית \(\angle ABE\)</span>
+    <figure style="max-width:330px;margin:14px auto"><svg viewBox="0 0 288 402" style="width:100%;max-width:330px;height:auto" role="img" aria-label="המרובע ABEC עם זווית A של 50 מעלות, זווית E של 100 מעלות, וזווית B מחולקת ל-65 ו-40"><polygon points="144.0,34.0 34.0,269.9 144.0,362.2 254.0,269.9" fill="#FBFAF7" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/><line x1="144.0" y1="34.0" x2="144.0" y2="362.2" stroke="#334155" stroke-width="2"/><line x1="34.0" y1="269.9" x2="254.0" y2="269.9" stroke="#334155" stroke-width="2"/><line x1="67.0" y1="297.6" x2="111.0" y2="334.5" stroke="#059669" stroke-width="5"/><line x1="87.5" y1="307.0" x2="79.8" y2="316.1" stroke="#059669" stroke-width="2.5"/><line x1="92.9" y1="311.4" x2="85.1" y2="320.6" stroke="#059669" stroke-width="2.5"/><line x1="98.2" y1="315.9" x2="90.5" y2="325.1" stroke="#059669" stroke-width="2.5"/><line x1="221.0" y1="297.6" x2="177.0" y2="334.5" stroke="#059669" stroke-width="5"/><line x1="208.2" y1="316.1" x2="200.5" y2="307.0" stroke="#059669" stroke-width="2.5"/><line x1="202.9" y1="320.6" x2="195.1" y2="311.4" stroke="#059669" stroke-width="2.5"/><line x1="197.5" y1="325.1" x2="189.8" y2="315.9" stroke="#059669" stroke-width="2.5"/><line x1="111.0" y1="104.8" x2="67.0" y2="199.1" stroke="#2563EB" stroke-width="5"/><line x1="94.4" y1="154.5" x2="83.6" y2="149.4" stroke="#2563EB" stroke-width="2.5"/><line x1="177.0" y1="104.8" x2="221.0" y2="199.1" stroke="#2563EB" stroke-width="5"/><line x1="204.4" y1="149.4" x2="193.6" y2="154.5" stroke="#2563EB" stroke-width="2.5"/><path d="M129.6,64.8 A34,34 0 0 0 158.4,64.8" fill="none" stroke="#C2408C" stroke-width="3.5"/><text x="144.0" y="91.0" text-anchor="middle" font-size="13" font-weight="bold" fill="#C2408C">50°</text><path d="M124.1,345.5 A26,26 0 0 1 163.9,345.5" fill="none" stroke="#9D174D" stroke-width="3.5"/><text x="144.0" y="323.2" text-anchor="middle" font-size="13" font-weight="bold" fill="#9D174D">100°</text><path d="M47.6,243.2 A30,30 0 0 1 64.0,268.8" fill="none" stroke="#B7791F" stroke-width="3.5"/><text x="76.2" y="248.0" text-anchor="middle" font-size="13" font-weight="bold" fill="#B7791F">65°</text><path d="M64.0,270.9 A30,30 0 0 1 57.6,288.4" fill="none" stroke="#0E7490" stroke-width="3.5"/><text x="81.0" y="292.0" text-anchor="middle" font-size="13" font-weight="bold" fill="#0E7490">40°</text><text x="144.0" y="23.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">A</text><text x="19.0" y="274.9" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">B</text><text x="269.0" y="274.9" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">C</text><text x="156.0" y="287.9" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">D</text><text x="144.0" y="383.2" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">E</text></svg></figure>
+    <div class="tbl-scroll"><table class="dtable proof">
+      <tr><th></th><th>טענה</th><th>נימוק</th></tr>
+      <tr class="tr-sep"><td colspan="3">סעיף ג׳</td></tr>
+      <tr><td>1</td><td>\(\angle BAC=50^\circ,\;\;\angle BEC=100^\circ\)</td><td>נתון</td></tr>
+      <tr><td>2</td><td class="hl-c2">\(AB=AC\)</td><td>נתון</td></tr>
+      <tr><td>3</td><td>\(\angle ABC=\dfrac{180^\circ-50^\circ}{2}=65^\circ\)</td><td>במשולש שווה שוקיים זוויות הבסיס שוות, וסכום הזוויות במשולש \(180^\circ\) (לפי 1, 2)</td></tr>
+      <tr><td>4</td><td class="hl-c3">\(EB=EC\)</td><td>הוכחנו בסעיף א׳</td></tr>
+      <tr><td>5</td><td>\(\angle EBC=\dfrac{180^\circ-100^\circ}{2}=40^\circ\)</td><td>במשולש שווה שוקיים \(EBC\) זוויות הבסיס שוות, וסכום הזוויות במשולש \(180^\circ\) (לפי 1, 4)</td></tr>
+      <tr><td>6</td><td>\(\angle ABE=\angle ABC+\angle CBE=65^\circ+40^\circ=105^\circ\)</td><td>חיבור זוויות (לפי 3, 5)</td></tr>
+      <tr class="tr-ans"><td colspan="3">תשובה: \(\angle ABE=105^\circ\)</td></tr>
+    </table></div>
+    בדיקה — סכום הזוויות במרובע \(ABEC\): \(50^\circ+105^\circ+100^\circ+105^\circ=360^\circ\) ✓
+    <p class="usedth" style="font-size:12.5px;color:var(--soft)"><b style="color:var(--ink)">המשפטים שהשתמשנו בהם:</b> תיכון לבסיס הוא גם גובה ·
+    משפט חפיפה צ.ז.צ · הגדרת הדלתון · זוויות הבסיס במשולש שווה שוקיים · סכום הזוויות במשולש</p>
+    <p class="back">טעית כאן? <a href="../geometry/01b-kite.html#sec-what">ההגדרה</a> · <a href="../geometry/01b-kite.html#sec-conditions">הכרחי ומספיק</a> ·
+    <a href="../geometry/01b-kite.html#m1">דגם 1</a> · <a href="../geometry/01b-kite.html#m2">דגם 2</a></p>
+  </div></details>
+  <div class="q-row"><span>ג. ∠ABE (במעלות):</span><input class="q-input" data-answer="105" inputmode="decimal" placeholder="?"><button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+</article>
+
+<article class="ex" id="q7">
+  <div class="ex-head"><span class="lvl l2">חלק ב׳</span><h4>שאלה 7</h4><span class="pts">20 נק׳</span></div>
+  <div class="q-text">
+    \(ABCD\) הוא דלתון \((AB=AD,\;CB=CD)\). האלכסונים נחתכים בנקודה \(M\).
+    נתון: \(AB=10\) ס״מ, \(BD=12\) ס״מ, ושטח הדלתון 75 סמ״ר.
+    <span class="sub">א. חשבי את אורך האלכסון \(AC\). <span class="aside">(4 נק׳)</span></span>
+    <span class="sub">ב. חשבי את \(AM\) ואת \(MC\). נמקי. <span class="aside">(6 נק׳)</span></span>
+    <span class="sub">ג. חשבי את היקף הדלתון. <span class="aside">(5 נק׳)</span></span>
+    <span class="sub">ד. מאריכים את האלכסון \(AC\) מעבר לנקודה \(C\) עד לנקודה \(E\), כך ששטח המרובע \(ABED\) גדול פי 2 משטח הדלתון \(ABCD\).
+    (1) הוכיחי ש-\(ABED\) הוא דלתון. (2) חשבי את \(CE\). <span class="aside">(5 נק׳)</span></span>
+  </div>
+  <figure style="max-width:330px;margin:14px auto"><svg viewBox="0 0 332 343" style="width:100%;max-width:360px;height:auto" role="img" aria-label="דלתון ABCD, האלכסונים נחתכים ב-M, AB=10 ו-BD=12"><polygon points="166.0,34.0 34.0,210.0 166.0,309.0 298.0,210.0" fill="#FBFAF7" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/><line x1="166.0" y1="34.0" x2="166.0" y2="309.0" stroke="#334155" stroke-width="2"/><line x1="34.0" y1="210.0" x2="298.0" y2="210.0" stroke="#334155" stroke-width="2"/><text x="88.0" y="120.0" text-anchor="middle" font-size="14" font-weight="bold" fill="#5A6875">10</text><text x="96.0" y="229.0" text-anchor="middle" font-size="13" font-weight="bold" fill="#7C3AED">BD = 12</text><text x="166.0" y="23.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">A</text><text x="20.0" y="215.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">B</text><text x="166.0" y="331.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">C</text><text x="312.0" y="215.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">D</text><text x="179.0" y="229.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">M</text></svg></figure>
+  <details class="sol"><summary>הצגי פתרון מלא</summary><div class="sol-body">
+    <strong>מסרטטים מחדש בגדול</strong>, ומוסיפים כל מידה ברגע שמוצאים אותה:
+    <figure style="max-width:360px;margin:14px auto"><svg viewBox="0 0 332 343" style="width:100%;max-width:360px;height:auto" role="img" aria-label="הדלתון עם כל המידות: AM=8, MC=4.5, BM=MD=6, AB=10, BC=7.5"><polygon points="166.0,34.0 34.0,210.0 166.0,309.0 298.0,210.0" fill="#FBFAF7" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/><line x1="166.0" y1="34.0" x2="166.0" y2="309.0" stroke="#334155" stroke-width="2"/><line x1="34.0" y1="210.0" x2="298.0" y2="210.0" stroke="#334155" stroke-width="2"/><path d="M166.0,199.0 L177.0,199.0 L177.0,210.0" fill="none" stroke="#334155" stroke-width="2"/><line x1="126.4" y1="86.8" x2="73.6" y2="157.2" stroke="#2563EB" stroke-width="5"/><line x1="104.8" y1="125.6" x2="95.2" y2="118.4" stroke="#2563EB" stroke-width="2.5"/><line x1="205.6" y1="86.8" x2="258.4" y2="157.2" stroke="#2563EB" stroke-width="5"/><line x1="236.8" y1="118.4" x2="227.2" y2="125.6" stroke="#2563EB" stroke-width="2.5"/><line x1="73.6" y1="239.7" x2="126.4" y2="279.3" stroke="#059669" stroke-width="5"/><line x1="100.8" y1="252.6" x2="93.6" y2="262.2" stroke="#059669" stroke-width="2.5"/><line x1="106.4" y1="256.8" x2="99.2" y2="266.4" stroke="#059669" stroke-width="2.5"/><line x1="258.4" y1="239.7" x2="205.6" y2="279.3" stroke="#059669" stroke-width="5"/><line x1="238.4" y1="262.2" x2="231.2" y2="252.6" stroke="#059669" stroke-width="2.5"/><line x1="232.8" y1="266.4" x2="225.6" y2="256.8" stroke="#059669" stroke-width="2.5"/><text x="86.0" y="118.0" text-anchor="middle" font-size="14" font-weight="bold" fill="#5A6875">10</text><text x="82.0" y="275.5" text-anchor="middle" font-size="14" font-weight="bold" fill="#2E7D32">7.5</text><text x="100.0" y="203.0" text-anchor="middle" font-size="14" font-weight="bold" fill="#5A6875">6</text><text x="232.0" y="203.0" text-anchor="middle" font-size="14" font-weight="bold" fill="#5A6875">6</text><text x="179.0" y="152.0" text-anchor="middle" font-size="14" font-weight="bold" fill="#5A6875">8</text><text x="185.0" y="264.5" text-anchor="middle" font-size="14" font-weight="bold" fill="#5A6875">4.5</text><text x="166.0" y="23.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">A</text><text x="20.0" y="215.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">B</text><text x="166.0" y="331.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">C</text><text x="312.0" y="215.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">D</text><text x="153.0" y="229.0" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">M</text></svg></figure>
+    <div class="tbl-scroll"><table class="dtable proof">
+      <tr><th></th><th>טענה</th><th>נימוק</th></tr>
+      <tr class="tr-sep"><td colspan="3">סעיף א׳</td></tr>
+      <tr><td>1</td><td>\(AB=10,\;\;BD=12,\;\;S_{ABCD}=75\)</td><td>נתון</td></tr>
+      <tr><td>2</td><td>\(S_{ABCD}=\dfrac{AC\cdot BD}{2}\)</td><td>שטח דלתון שווה למחצית המכפלה של אלכסוניו</td></tr>
+      <tr><td>3</td><td>\(75=\dfrac{AC\cdot12}{2}\)<br>\(75=6\cdot AC\)<br>\(AC=12.5\)</td><td>לפי 1, 2</td></tr>
+      <tr class="tr-ans"><td colspan="3">תשובה: \(AC=12.5\) ס״מ</td></tr>
+      <tr class="tr-sep"><td colspan="3">סעיף ב׳</td></tr>
+      <tr><td>4</td><td>\(BM=MD=\dfrac{12}{2}=6\)</td><td>בדלתון האלכסון הראשי חוצה את האלכסון המשני (לפי 1)</td></tr>
+      <tr><td>5</td><td>\(AC\perp BD\)</td><td>בדלתון האלכסון הראשי מאונך לאלכסון המשני</td></tr>
+      <tr><td>6</td><td>\(AM^{2}+BM^{2}=AB^{2}\)</td><td>משפט פיתגורס ב-\(\triangle ABM\), ישר זווית ב-\(M\) (לפי 5)</td></tr>
+      <tr><td>7</td><td>\(AM^{2}+6^{2}=10^{2}\)<br>\(AM^{2}=100-36=64\)<br>\(AM=8\)</td><td>לפי 1, 4, 6</td></tr>
+      <tr><td>8</td><td>\(MC=AC-AM=12.5-8=4.5\)</td><td>חיסור קטעים (לפי 3, 7)</td></tr>
+      <tr class="tr-ans"><td colspan="3">תשובה: \(AM=8\) ס״מ, \(MC=4.5\) ס״מ</td></tr>
+      <tr class="tr-sep"><td colspan="3">סעיף ג׳</td></tr>
+      <tr><td>9</td><td>\(BC^{2}=BM^{2}+MC^{2}\)</td><td>משפט פיתגורס ב-\(\triangle CBM\), ישר זווית ב-\(M\) (לפי 5)</td></tr>
+      <tr><td>10</td><td>\(BC^{2}=6^{2}+4.5^{2}=36+20.25=56.25\)<br>\(BC=7.5\)</td><td>לפי 4, 8, 9</td></tr>
+      <tr><td>11</td><td class="hl-c2">\(AD=AB=10\)</td><td>נתון: \(AB=AD\)</td></tr>
+      <tr><td>12</td><td class="hl-c3">\(CD=CB=7.5\)</td><td>נתון: \(CB=CD\) (לפי 10)</td></tr>
+      <tr><td>13</td><td>\(P=10+10+7.5+7.5=35\)</td><td>היקף = סכום הצלעות (לפי 11, 12)</td></tr>
+      <tr class="tr-ans"><td colspan="3">תשובה: היקף הדלתון 35 ס״מ</td></tr>
+      <tr class="tr-sep"><td colspan="3">סעיף ד׳ (1)</td></tr>
+      <tr><td>14</td><td>\(\angle EMB=\angle EMD=90^\circ\)</td><td>\(E\) על המשך \(AC\), ולכן \(EM\perp BD\) (לפי 5)</td></tr>
+      <tr><td>15</td><td>\(EM=EM\)</td><td>צלע משותפת</td></tr>
+      <tr><td>16</td><td>\(\triangle EBM\cong\triangle EDM\)</td><td>משפט חפיפה צ.ז.צ (לפי 4, 14, 15)</td></tr>
+      <tr><td>17</td><td>\(EB=ED\)</td><td>צלעות מתאימות במשולשים חופפים שוות (לפי 16)</td></tr>
+      <tr><td>18</td><td>\(ABED\) דלתון</td><td>מרובע המורכב משני משולשים שווי שוקיים בעלי בסיס משותף הוא דלתון
+        (\(\triangle ABD\) ו-\(\triangle EBD\) על הבסיס \(BD\); לפי 11, 17)</td></tr>
+      <tr class="tr-qed"><td colspan="3"><b>מש"ל ד׳(1)</b></td></tr>
+      <tr class="tr-sep"><td colspan="3">סעיף ד׳ (2)</td></tr>
+      <tr><td>19</td><td>\(S_{ABED}=2\cdot75=150\)</td><td>נתון: השטח גדול פי 2</td></tr>
+      <tr><td>20</td><td>\(150=\dfrac{AE\cdot12}{2}\)<br>\(150=6\cdot AE\)<br>\(AE=25\)</td><td>שטח דלתון שווה למחצית המכפלה של אלכסוניו (לפי 18, 19)</td></tr>
+      <tr><td>21</td><td>\(CE=AE-AC=25-12.5=12.5\)</td><td>חיסור קטעים (לפי 3, 20)</td></tr>
+      <tr class="tr-ans"><td colspan="3">תשובה: \(CE=12.5\) ס״מ</td></tr>
+    </table></div>
+    <figure style="max-width:250px;margin:14px auto"><svg viewBox="0 0 284 360" style="width:100%;max-width:290px;height:auto" role="img" aria-label="הדלתון ABCD בתוך הדלתון הגדול ABED; AC=12.5 ו-CE=12.5"><polygon points="142.0,30.0 70.0,126.0 142.0,330.0 214.0,126.0" fill="#EAF1FB" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/><polygon points="142.0,30.0 70.0,126.0 142.0,180.0 214.0,126.0" fill="#FBFAF7" stroke="#334155" stroke-width="1.6" stroke-linejoin="round"/><line x1="142.0" y1="30.0" x2="142.0" y2="330.0" stroke="#334155" stroke-width="2"/><line x1="70.0" y1="126.0" x2="214.0" y2="126.0" stroke="#334155" stroke-width="2"/><path d="M142.0,117.0 L151.0,117.0 L151.0,126.0" fill="none" stroke="#334155" stroke-width="2"/><text x="206.0" y="99.0" text-anchor="start" font-size="13" font-weight="bold" fill="#5A6875">AC = 12.5</text><text x="180.0" y="267.0" text-anchor="start" font-size="13" font-weight="bold" fill="#2E7D32">CE = 12.5</text><text x="142.0" y="21.0" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">A</text><text x="57.0" y="131.0" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">B</text><text x="154.0" y="196.0" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">C</text><text x="227.0" y="131.0" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">D</text><text x="142.0" y="349.0" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">E</text><text x="130.0" y="120.0" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">M</text></svg><figcaption>הדלתון \(ABCD\) בתוך הדלתון \(ABED\): אותו אלכסון משני, והאלכסון הראשי כפול.</figcaption></figure>
+    בדיקה: \(\dfrac{25\cdot12}{2}=150=2\cdot75\) ✓
+    <p class="back">טעית כאן? <a href="../geometry/01b-kite.html#sec-props">התכונות</a> · <a href="../geometry/01b-kite.html#sec-area">שטח הדלתון</a> ·
+    <a href="../geometry/01b-kite.html#sub-calc">תרגילי חישוב</a></p>
+  </div></details>
+  <div class="q-row"><span>א. AC (ס״מ):</span><input class="q-input" data-answer="12.5" inputmode="decimal" placeholder="?"><button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ב. MC (ס״מ):</span><input class="q-input" data-answer="4.5" inputmode="decimal" placeholder="?"><button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ג. ההיקף (ס״מ):</span><input class="q-input" data-answer="35" inputmode="decimal" placeholder="?"><button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ד. CE (ס״מ):</span><input class="q-input" data-answer="12.5" inputmode="decimal" placeholder="?"><button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+</article>
+
+
+<h2 id="sec-day"><span class="num">4</span>ביום המבחן</h2>
+<ol class="tips">
+  <li><div><b>בודקים בהצבה.</b>בפישוט — מציבים \(x=1\) בביטוי המקורי ובתשובה: אותו מספר בשניהם = הפישוט נכון.<br>במשוואה — מציבים את הפתרון שמצאת בשני אגפי המשוואה המקורית.</div></li>
+  <li><div><b>מחסרים ריבוע — קודם סוגריים.</b>\(-(x-3)^{2}=-1\cdot(x^{2}-6x+9)\), ורק בשורה הבאה פותחים ומחליפים סימנים.</div></li>
+  <li><div><b>בהתחלקות — משפט המסקנה המלא.</b>„הביטוי שווה ל-8 כפול מספר שלם, ולכן מתחלק ב-8 ללא שארית.” ובסוף מש"ל.</div></li>
+  <li><div><b>בגיאומטריה — מסמנים על השרטוט לפני הטבלה.</b>כל נתון מסומן בשרטוט. בדלתון כותבים מי קדקודי הראש ומי האלכסון הראשי.</div></li>
+  <li><div><b>שעון: כ-55 דק׳ לחלק א׳, כ-35 דק׳ לחלק ב׳.</b>נתקעת בסעיף — עוברים לבא, וחוזרים אליו בסוף.</div></li>
+</ol>
+
+<nav class="pagenav">
+  <a href="index.html"><span class="dir">→ חזרה</span>מבחנים — ט׳</a>
+  <a class="next" href="#sec-today"><span class="dir">למעלה ↑</span>מה עושים היום</a>
+</nav>
+
+<footer class="fin">חלק מהעולם של שירה ·
+<a href="../../index.html">חזרה למרכז</a></footer>
+</main>
+</div>
+<script>
+/* היום בתוכנית + הספירה לאחור. רק תאריך מקומי, בלי שום שרת. */
+(function () {
+  var DAYS = ['2026-10-28','2026-10-29','2026-10-30','2026-10-31','2026-11-01','2026-11-02','2026-11-03'];
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  var now = new Date();
+  var key = now.getFullYear() + '-' + pad(now.getMonth() + 1) + '-' + pad(now.getDate());
+  var t0 = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  var diff = Math.round((new Date(2026, 10, 4) - t0) / 86400000);
+
+  var n = document.getElementById('cd-n'), t = document.getElementById('cd-t'), cd = document.getElementById('cd');
+  if (diff > 2) { n.textContent = 'עוד ' + diff + ' ימים'; t.textContent = 'עד המבחן ביום ד׳ 4.11'; }
+  else if (diff === 2) { n.textContent = 'עוד יומיים'; t.textContent = 'עד המבחן ביום ד׳ 4.11'; }
+  else if (diff === 1) { n.textContent = 'המבחן מחר'; t.textContent = 'יום ד׳ 4.11, שעות 1+2'; }
+  else if (diff === 0) { n.textContent = 'המבחן היום'; t.textContent = 'שעות 1+2 · בהצלחה!'; }
+  else { n.textContent = 'המבחן מאחורייך'; t.textContent = 'הדף נשאר כאן, עם המבחן לדוגמה והקישורים.'; cd.classList.add('past'); }
+
+  var idx = key < DAYS[0] ? 0 : (key > DAYS[DAYS.length - 1] ? DAYS.length - 1 : DAYS.indexOf(key));
+  var card = document.getElementById('day-' + (idx + 1));
+  var link = document.getElementById('today-link');
+  if (card) {
+    card.classList.add('today');
+    var badge = document.createElement('span');
+    badge.className = 'badge';
+    badge.textContent = key < DAYS[0] ? 'מתחילים כאן' : (key > DAYS[DAYS.length - 1] ? 'היום האחרון בתוכנית' : 'היום');
+    card.querySelector('.day-h').appendChild(badge);
+    var title = card.querySelector('.day-h b').textContent;
+    link.href = '#day-' + (idx + 1);
+    link.textContent = (key < DAYS[0] ? 'המשימה הראשונה (יום ד׳ 28.10): ' : 'המשימה של היום: ') + title + ' ↓';
+  }
+  if (diff === 0 && link) { link.href = '#sec-day'; link.textContent = 'ביום המבחן — חמישה כללים ↓'; }
+  if (diff < 0 && link) link.style.display = 'none';
+
+  /* כרטיס שסומן "סיימתי" — מתעמעם. shira.js מסמן את התיבות בטעינה, ולכן בודקים אחרי load */
+  function paintDone() {
+    document.querySelectorAll('.day').forEach(function (d) {
+      var b = d.querySelector('input[data-k]');
+      d.classList.toggle('done', !!(b && b.checked));
+    });
+  }
+  document.querySelectorAll('.day input[data-k]').forEach(function (b) { b.addEventListener('change', paintDone); });
+  window.addEventListener('load', paintDone);
+})();
+</script>
+</body>
+</html>

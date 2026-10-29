@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<link rel="apple-touch-icon" href="../assets/icons/icon-180.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>כיתה ח׳ — היסודות — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../vendor/katex.min.css">
+<link rel="stylesheet" href="../css/shira.css">
+<style>
+/* ============================================================
+   הבית של כיתה ח׳ — "היסודות".
+   זה לא ארכיון ולא חומר שפג תוקפו: זה הבסיס שכל נושא בט׳ עומד
+   עליו, וזה המקום שאליו נוסעים כשמשהו בט׳ לא מתיישב. לכן הדף
+   בנוי סביב שאלה אחת — "על מה נשענת מה שאני לומדת עכשיו?" —
+   ולא סביב "מה למדתי פעם".
+   שפת העיצוב זהה לבית של ט׳; מה שמשתנה הוא הטון והמבטא.
+   ============================================================ */
+:root{--accent:#5A6875; --stat:#2E7D6B; --alg:#2E6F8E; --geo:#7A4E8C; --summer:#B7791F}
+.wrap{max-width:860px}
+header.hero .eyebrow{color:var(--soft)}
+
+.doors{display:flex; flex-direction:column; gap:14px; margin-top:4px}
+.card{background:var(--card); border:1px solid var(--line); border-radius:14px;
+  overflow:hidden; box-shadow:0 12px 30px -26px var(--shadow); transition:.18s}
+.card:hover{box-shadow:0 16px 34px -22px var(--shadow); border-color:#DCD5C8}
+.card .strip{height:5px}
+.card .body{padding:15px 20px}
+.card .kick{font-size:10.5px; letter-spacing:.15em; text-transform:uppercase;
+  font-weight:800; margin-bottom:2px}
+.card h2{margin:0 0 5px; font-size:20px; font-weight:800; letter-spacing:-.01em;
+  border:0; padding:0}
+.card p{margin:0 0 8px; font-size:14px; color:var(--soft); line-height:1.55; max-width:64ch}
+.chips{display:flex; flex-wrap:wrap; gap:6px; margin:0 0 11px}
+.chips span{font-size:11.5px; font-weight:700; color:var(--soft); background:#FBFAF7;
+  border:1px solid var(--line); border-radius:6px; padding:2px 8px; white-space:nowrap}
+.acts{display:flex; gap:8px; flex-wrap:wrap; align-items:center}
+.go{display:inline-flex; align-items:center; gap:7px; text-decoration:none;
+  font-size:14px; font-weight:700; color:#fff; background:var(--ink);
+  border-radius:9px; padding:9px 16px; transition:.15s}
+.go:hover{filter:brightness(1.08)}
+.go .ar{font-size:11px}
+.alt{display:inline-flex; align-items:center; gap:6px; text-decoration:none; font-size:12.5px;
+  font-weight:600; color:var(--soft); border:1px solid var(--line); background:#FBFAF7;
+  border-radius:8px; padding:7px 12px; transition:.15s}
+.alt:hover{color:var(--ink); border-color:#D8D1C4}
+.mod-extra:empty{display:none}
+.c-stat .strip{background:var(--stat)} .c-stat .kick{color:var(--stat)} .c-stat .go{background:var(--stat)}
+.c-alg .strip{background:var(--alg)} .c-alg .kick{color:var(--alg)} .c-alg .go{background:var(--alg)}
+.c-geo .strip{background:var(--geo)} .c-geo .kick{color:var(--geo)} .c-geo .go{background:var(--geo)}
+.c-summer .strip{background:var(--summer)} .c-summer .kick{color:var(--summer)} .c-summer .go{background:var(--summer)}
+
+.sec{margin:34px 0 12px; display:flex; align-items:baseline; gap:12px}
+.sec h3{margin:0; font-size:15px; font-weight:800; white-space:nowrap; color:var(--soft)}
+.sec .bar{flex:1; height:1px; background:var(--line)}
+
+/* "על מה זה נושא בט׳ נשען" — הגשר בין השנים, וזו הסיבה שהדף קיים */
+.bridge{background:var(--card); border:1px solid var(--line); border-radius:12px;
+  padding:6px 18px}
+.bridge a{display:flex; align-items:baseline; gap:8px; text-decoration:none;
+  font-size:13.5px; padding:9px 2px; border-bottom:1px dashed var(--faint); color:var(--ink)}
+.bridge a:last-child{border-bottom:none}
+.bridge a:hover{color:var(--alg)}
+.bridge .d{font-size:11.5px; color:var(--soft); margin-inline-start:auto; text-align:left}
+
+@media (max-width:640px){
+  .wrap{padding:18px 14px 54px}
+  .card .body{padding:13px 15px 14px}
+  .card h2{font-size:17.5px}
+  .card p{font-size:13.5px}
+  .go{font-size:13.5px; padding:9px 14px}
+}
+</style>
+<script defer src="../vendor/katex.min.js"></script>
+<script defer src="../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../js/shira.js"></script>
+</head>
+<body data-page="year8:index">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../index.html">⌂ המרכז של שירה</a>
+    <span class="crumbs"><b>כיתה ח׳</b> · היסודות</span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">היסודות</div>
+  <h1>כיתה ח׳ — הבסיס שהכול עומד עליו</h1>
+  <p class="lead">
+    זה לא חומר שנגמר. כמעט כל נושא בכיתה ט׳ נשען על משהו מכאן —
+    פירוק לגורמים הוא חוק הפילוג הפוך, פרבולה מדברת באותן מילים של
+    הפונקציה הקווית, וכל הוכחת דמיון נכתבת בדיוק כמו הוכחת חפיפה.
+    כשמשהו בט׳ לא מתיישב, רוב הסיכויים שהתשובה כאן.
+  </p>
+  <nav class="years" aria-label="בחירת שנה">
+    <a href="../index.html">כיתה ט׳ <small>השנה</small></a>
+    <a href="index.html" aria-current="page">כיתה ח׳ <small>היסודות</small></a>
+  </nav>
+</header>
+
+<div class="doors">
+
+  <article class="card c-stat">
+    <div class="strip"></div>
+    <div class="body">
+      <div class="kick">ללמוד צעד-צעד</div>
+      <h2>📊 סטטיסטיקה</h2>
+      <p>ממוצע, חציון, שכיח ושכיחות יחסית — מההתחלה, בקצב שלך.</p>
+      <div class="chips"><span>7 תחנות</span><span>84 תרגילים פתורים</span><span>25 סרטונים</span><span>בוחן בית</span></div>
+      <div class="acts">
+        <a class="go" href="statistics/index.html">להיכנס לסטטיסטיקה <span class="ar">←</span></a>
+        <span class="mod-extra" data-mod="stat"></span>
+      </div>
+    </div>
+  </article>
+
+  <article class="card c-alg">
+    <div class="strip"></div>
+    <div class="body">
+      <div class="kick">ללמוד צעד-צעד</div>
+      <h2>📈 אלגברה ופונקציות</h2>
+      <p>משוואות ומערכות, פונקציה קווית ומשוואת ישר, ובעיות אחוזים.</p>
+      <div class="chips"><span>7 תחנות + 2 נספחים</span><span>108 תרגילים פתורים</span><span>13 קיצורי "שכחתי איך עושים"</span><span>בוחן בית</span></div>
+      <div class="acts">
+        <a class="go" href="algebra/index.html">להיכנס לאלגברה ופונקציות <span class="ar">←</span></a>
+        <span class="mod-extra" data-mod="alg"></span>
+      </div>
+    </div>
+  </article>
+
+  <article class="card c-geo">
+    <div class="strip"></div>
+    <div class="body">
+      <div class="kick">ללמוד צעד-צעד</div>
+      <h2>📐 גאומטריה</h2>
+      <p>זוויות ומקבילים, חפיפה, שטחים, דמיון משולשים ופיתגורס — ואיך כותבים הוכחה.</p>
+      <div class="chips"><span>8 תחנות + נספח</span><span>121 תרגילים פתורים</span><span>23 דגמי הוכחה</span></div>
+      <div class="acts">
+        <a class="go" href="geometry/index.html">להיכנס לגאומטריה <span class="ar">←</span></a>
+        <span class="mod-extra" data-mod="geo"></span>
+      </div>
+    </div>
+  </article>
+
+  <article class="card c-summer">
+    <div class="strip"></div>
+    <div class="body">
+      <div class="kick">החוברת</div>
+      <h2>📘 עבודת הקיץ — ח׳ עולה לט׳</h2>
+      <p>החוברת הרשמית של הקבצה א1, שמונה חלקים — <strong>42 מתוך 43 התרגילים פתורים כאן שלב-אחרי-שלב</strong>.</p>
+      <div class="chips"><span>43 תרגילים</span><span>8 חלקים</span><span>PDF</span></div>
+      <div class="acts">
+        <a class="go" href="booklet.html">מפת החוברת — תרגיל אחרי תרגיל <span class="ar">←</span></a>
+        <a class="alt" href="../assets/pdf/summer-work-a1.pdf" target="_blank" rel="noopener">לפתוח את ה-<span class="en">PDF</span> ←</a>
+      </div>
+    </div>
+  </article>
+
+</div>
+
+<div class="sec"><h3>הגשר לכיתה ט׳ — על מה כל נושא נשען</h3><div class="bar"></div></div>
+<div class="bridge">
+  <a href="algebra/01-algebra-language.html#sec-distribute">חוק הפילוג ופתיחת סוגריים <span class="d">← פירוק לגורמים · כפל מקוצר</span></a>
+  <a href="algebra/02-equations.html">פתרון משוואות ותחום הצבה <span class="d">← משוואה ריבועית · שברים אלגבריים</span></a>
+  <a href="algebra/04-linear-function.html">קריאת גרף של ישר, תחומי סימן <span class="d">← הפרבולה</span></a>
+  <a href="algebra/05-line-equation.html">שיפוע ומשוואת ישר <span class="d">← גאומטריה אנליטית</span></a>
+  <a href="geometry/02-triangles-congruence.html">הוכחת חפיפה בטענה ונימוק <span class="d">← הוכחות דמיון ומרובעים</span></a>
+  <a href="geometry/03-quadrilaterals-areas.html">נוסחאות השטח <span class="d">← גופים ונפחים</span></a>
+  <a href="geometry/07-similarity.html">דמיון משולשים <span class="d">← דמיון ומשפט תאלס</span></a>
+  <a href="geometry/08-pythagoras.html">משפט פיתגורס <span class="d">← גאומטריה אנליטית · שורשים</span></a>
+  <a href="statistics/04-relative-frequency.html">שכיחות יחסית ואחוזים <span class="d">← הסתברות</span></a>
+</div>
+
+<footer class="fin">חלק מהעולם של שירה ·
+<a href="../index.html">למרכז (כיתה ט׳)</a> ·
+<a href="../library.html">לספרייה</a></footer>
+</main>
+</div>
+
+<script>
+/* "המשכי מאיפה שעצרת" — אותו קוד כמו בבית של ט׳, על מודולי ח׳.
+   המפתחות לא השתנו בפיצול השנים, ולכן התקדמות שנצברה לפניו נשמרת. */
+document.addEventListener('DOMContentLoaded', function () {
+  var MODS = [
+{ mod: 'stat', dir: 'statistics/', stations: ['01-basics', '02-mean', '03-median-mode',
+        '04-relative-frequency', '05-elections', '06-table-with-hole', '07-music-year', '08-self-quiz',
+        '09-exercise-bank'],
+      names: ['נתונים ושכיחות', 'ממוצע', 'חציון ושכיח', 'שכיחות יחסית',
+        'ליל המנדטים', 'הטבלה עם החור', 'השנה שלך במוזיקה', 'בוחן הבית',
+        'מחסן התרגילים'] },
+    { mod: 'alg', dir: 'algebra/', stations: ['01-algebra-language', '02-equations',
+        '03-coordinates-function', '04-linear-function', '05-line-equation', '06-systems',
+        '07-percent', '08-quiz', '09-exercise-bank'],
+      names: ['השפה האלגברית', 'משוואות', 'מערכת צירים ופונקציה', 'פונקציה קווית',
+        'משוואת ישר', 'מערכת משוואות', 'בעיות אחוזים', 'בוחן הבית',
+        'מחסן התרגילים'] },
+    { mod: 'geo', dir: 'geometry/', stations: ['01-angles', '02-triangles-congruence',
+        '03-quadrilaterals-areas', '04-graphs-and-shapes', '05-proof-models', '06-proof-practice'],
+      names: ['זוויות', 'משולשים וחפיפה', 'מרובעים ושטחים', 'גרפים וצורות',
+        'ספריית הדגמים', 'תרגול הוכחות'] },
+  ];
+  MODS.forEach(function (M) {
+    var holder = document.querySelector('.mod-extra[data-mod=' + M.mod + ']');
+    if (!holder) return;
+    var completed = 0, lastTouched = -1;
+    M.stations.forEach(function (s, i) {
+      try {
+        var d = JSON.parse(localStorage.getItem('shira:' + M.mod + ':' + s) || 'null');
+        if (!d || !d.done) return;
+        var n = Object.keys(d.done).length;
+        if (n > 0) lastTouched = i;
+        if (d.total && n >= d.total) completed++;
+      } catch (e) { /* empty */ }
+    });
+    if (lastTouched < 0) { return; }
+    var a = document.createElement('a');
+    a.className = 'alt';
+    a.href = M.dir + M.stations[lastTouched] + '.html';
+    a.textContent = 'המשכי: ' + M.names[lastTouched] + ' ←';
+    holder.replaceWith(a);
+    var line = document.createElement('span');
+    line.style.cssText = 'flex-basis:100%;font-size:11.5px;color:var(--soft);margin-top:2px';
+    line.textContent = 'הושלמו ' + completed + ' מתוך ' + M.stations.length + ' תחנות';
+    a.after(line);
+  });
+});
+</script>
+</body>
+</html>

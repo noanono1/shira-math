@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<link rel="apple-touch-icon" href="../../assets/icons/icon-180.png">
+<link rel="manifest" href="../../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>חוקי חזקות ושורשים — אלגברה ט׳ — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../../vendor/katex.min.css">
+<link rel="stylesheet" href="../../css/shira.css">
+<style>
+:root{--accent:#2E6F8E}
+/* טבלת החוקים — הנוסחה גדולה, ההסבר קטן לצידה */
+table.laws td:first-child{white-space:nowrap}
+table.laws .why{font-size:13px; color:var(--soft); line-height:1.5}
+/* טבלת הדפוס היורד — העמודה שמראה "מחלקים ב-2 בכל שורה" */
+table.ladder td,table.ladder th{text-align:center}
+table.ladder .arrow{color:var(--soft); font-size:12.5px; white-space:nowrap}
+table.ladder tr.zero td{background:#DFF0DC}
+table.ladder tr.neg td{background:#EAE0FA}
+</style>
+<script defer src="../../vendor/katex.min.js"></script>
+<script defer src="../../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../../js/shira.js"></script>
+</head>
+<body data-page="g9alg:01-powers">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">אלגברה ט׳ — המפה</a>
+    <span class="crumbs">תחנה <b>1</b> מתוך 8 · <b>חוקי חזקות</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">אלגברה · כיתה ט׳ · תחנה 1</div>
+  <h1>חוקי חזקות ושורשים</h1>
+  <p class="lead">
+    זו התחנה הראשונה של השנה, והיא כמעט כולה קיצורי דרך. כל חוק כאן חוסך
+    כתיבה ארוכה שאת כבר יודעת לעשות ביד — ובעיקר, שלושת החוקים הראשונים הם
+    הכלים שכל <a href="index.html">פירוק לגורמים</a> יישען עליהם בהמשך השנה.
+  </p>
+  <p class="youknow"><b>בסוף העמוד תדעי:</b> לכפול ולחלק חזקות של אותו בסיס ·
+  להעלות חזקה בחזקה · להסביר למה <span class="fi">\(a^{0}=1\)</span> ולא לזכור
+  את זה בעל-פה · לעבוד עם מעריך שלילי · לפשט שורשים כמו
+  <span class="fi">\(\sqrt{72}\)</span> · ולא ליפול בשתי המלכודות שכולם נופלים בהן.</p>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>≈ 30 דק׳</b> · 9 תרגילים</span>
+    <a class="pm-jump" href="#sec-practice">לקפוץ ישר לתרגילים ↓</a>
+  </p>
+</header>
+
+<!-- ============ 1. מה זו חזקה ============ -->
+<h2 id="sec-what"><span class="num">1</span>תזכורת קצרה — מה חזקה בכלל אומרת</h2>
+
+<p>
+  חזקה היא קיצור לכפל חוזר, בדיוק כמו שכפל הוא קיצור לחיבור חוזר.
+  הכתיב <span class="fi">\(a^{n}\)</span> אומר: כפלי את <span class="fi">\(a\)</span>
+  בעצמו <span class="fi">\(n\)</span> פעמים.
+</p>
+
+<div class="box def">
+  <div class="box-title">שני השמות</div>
+  ב-<span class="fi">\(2^{5}\)</span> המספר <span class="fi">\(2\)</span> נקרא
+  <strong>בסיס</strong> — מה כופלים; והמספר <span class="fi">\(5\)</span> נקרא
+  <strong>מעריך</strong> — כמה פעמים.
+  $$2^{5}=2\cdot 2\cdot 2\cdot 2\cdot 2=32$$
+</div>
+
+<figure style="max-width:420px;margin:16px auto 6px">
+  <svg viewBox="0 0 400 96" style="width:100%;height:auto" role="img"
+       aria-label="שני בחזקת חמש: חמישה עיגולים של המספר שתיים מוכפלים זה בזה ונותנים שלושים ושתיים">
+    <text x="200" y="20" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">חמישה גורמים, כולם 2</text>
+    <g>
+      <circle cx="60" cy="52" r="17" fill="#DDEDF8" stroke="#2E6F8E" stroke-width="1.6"/>
+      <circle cx="122" cy="52" r="17" fill="#DDEDF8" stroke="#2E6F8E" stroke-width="1.6"/>
+      <circle cx="184" cy="52" r="17" fill="#DDEDF8" stroke="#2E6F8E" stroke-width="1.6"/>
+      <circle cx="246" cy="52" r="17" fill="#DDEDF8" stroke="#2E6F8E" stroke-width="1.6"/>
+      <circle cx="308" cy="52" r="17" fill="#DDEDF8" stroke="#2E6F8E" stroke-width="1.6"/>
+      <text x="60" y="58" text-anchor="middle" font-family="Arial" font-size="16" font-weight="800" fill="#2E6F8E">2</text>
+      <text x="122" y="58" text-anchor="middle" font-family="Arial" font-size="16" font-weight="800" fill="#2E6F8E">2</text>
+      <text x="184" y="58" text-anchor="middle" font-family="Arial" font-size="16" font-weight="800" fill="#2E6F8E">2</text>
+      <text x="246" y="58" text-anchor="middle" font-family="Arial" font-size="16" font-weight="800" fill="#2E6F8E">2</text>
+      <text x="308" y="58" text-anchor="middle" font-family="Arial" font-size="16" font-weight="800" fill="#2E6F8E">2</text>
+      <text x="91" y="58" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">·</text>
+      <text x="153" y="58" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">·</text>
+      <text x="215" y="58" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">·</text>
+      <text x="277" y="58" text-anchor="middle" font-family="Arial" font-size="13" fill="#5A6875">·</text>
+    </g>
+    <text x="345" y="58" text-anchor="middle" font-family="Arial" font-size="15" fill="#5A6875">=</text>
+    <text x="378" y="59" text-anchor="middle" font-family="Arial" font-size="17" font-weight="800" fill="#1C2733">32</text>
+    <text x="200" y="88" text-anchor="middle" font-family="Arial" font-size="12.5" fill="#5A6875">המעריך סופר עיגולים — וזה כל הסוד של החוקים הבאים</text>
+  </svg>
+  <figcaption>המעריך הוא מונה. כל חוק בעמוד הזה הוא בסך הכול ספירה של עיגולים.</figcaption>
+</figure>
+
+<div class="box warn">
+  <div class="box-title">המלכודת הראשונה — והיא הנפוצה ביותר</div>
+  <span class="fi">\(3x+5x\)</span> ו-<span class="fi">\(x^{3}\cdot x^{5}\)</span>
+  נראים דומים ואינם קרובים בכלל.
+  <br>ב<strong>חיבור</strong> מכנסים איברים דומים: <span class="fi">\(3x+5x=8x\)</span> —
+  שלושה תפוחים ועוד חמישה תפוחים.
+  <br>ב<strong>כפל</strong> סופרים גורמים: <span class="fi">\(x^{3}\cdot x^{5}=x^{8}\)</span> —
+  שלושה עיגולים ועוד חמישה עיגולים.
+  <br>המעריכים נפגשים <em>רק</em> בכפל ובחילוק. בחיבור ובחיסור הם לא זזים בכלל:
+  <span class="fi">\(x^{3}+x^{5}\)</span> נשאר בדיוק ככה, ואי אפשר לקצר אותו.
+</div>
+
+<!-- ============ 2. שלושת החוקים ============ -->
+<h2 id="sec-rules"><span class="num">2</span>שלושת החוקים — וכולם מאותה ספירה</h2>
+
+<p>
+  אין כאן שום דבר לזכור בעל-פה. אם כותבים את החזקה במלואה, כל חוק פשוט
+  <em>קורה</em>. נראה את זה על החוק הראשון:
+</p>
+
+<div class="fbox">
+  <div class="fbox-title">למה מחברים מעריכים בכפל</div>
+  $$\underbrace{x\cdot x\cdot x}_{x^{3}}\;\cdot\;\underbrace{x\cdot x}_{x^{2}}
+    \;=\;\underbrace{x\cdot x\cdot x\cdot x\cdot x}_{x^{5}}$$
+  <span class="f-legend">
+    <span>שלושה גורמים ועוד שני גורמים — יחד חמישה. ולכן <span class="fi">\(3+2=5\)</span>.</span>
+  </span>
+</div>
+
+<p>אותו טיעון בדיוק נותן את שלושת החוקים:</p>
+
+<table class="dtable laws">
+  <tr><th>החוק</th><th>למה זה עובד</th></tr>
+  <tr>
+    <td><span class="fi">\(a^{m}\cdot a^{n}=a^{m+n}\)</span></td>
+    <td class="why">מוסיפים גורמים לערימה אחת — אז סופרים אותם יחד.</td>
+  </tr>
+  <tr>
+    <td><span class="fi">\(\dfrac{a^{m}}{a^{n}}=a^{m-n}\)</span></td>
+    <td class="why">כל גורם למטה מצמצם גורם למעלה — אז מורידים מהספירה.</td>
+  </tr>
+  <tr>
+    <td><span class="fi">\((a^{m})^{n}=a^{m\cdot n}\)</span></td>
+    <td class="why"><span class="fi">\(n\)</span> ערימות, ובכל אחת <span class="fi">\(m\)</span> גורמים.</td>
+  </tr>
+  <tr>
+    <td><span class="fi">\((a\cdot b)^{n}=a^{n}\cdot b^{n}\)</span></td>
+    <td class="why">החזקה מתחלקת על כל מה שמוכפל בפנים.</td>
+  </tr>
+  <tr>
+    <td><span class="fi">\(\left(\dfrac{a}{b}\right)^{n}=\dfrac{a^{n}}{b^{n}}\)</span></td>
+    <td class="why">אותו דבר, גם על מונה וגם על מכנה.</td>
+  </tr>
+</table>
+
+<div class="box warn">
+  <div class="box-title">שימי לב לשני התנאים</div>
+  שני החוקים הראשונים דורשים <strong>אותו בסיס</strong>. אין שום חוק שמקצר
+  <span class="fi">\(2^{3}\cdot 5^{4}\)</span> — הבסיסים שונים, ופשוט מחשבים.
+  <br>ושני האחרונים עובדים רק על <strong>כפל וחילוק</strong> בתוך הסוגריים.
+  <span class="fi">\((a+b)^{2}\)</span> הוא <em>לא</em>
+  <span class="fi">\(a^{2}+b^{2}\)</span> — ובדיוק לזה מוקדשת
+  <a href="index.html">התחנה הבאה</a>.
+</div>
+
+<div class="nb" data-nb>
+  <div class="nb-head"><b>בונים ביחד במחברת</b><span class="nb-count"></span></div>
+  <ol class="nb-steps">
+    <li class="nb-step"><b>התרגיל</b>
+      <p>לפשט: <span class="fi">\(\dfrac{12a^{7}b^{3}}{6a^{4}b^{3}}\)</span></p>
+    </li>
+    <li class="nb-step"><b>מפרידים לשלושה חשבונות נפרדים</b>
+      <p>מספרים עם מספרים, <span class="fi">\(a\)</span> עם
+      <span class="fi">\(a\)</span>, <span class="fi">\(b\)</span> עם
+      <span class="fi">\(b\)</span>. אף אחד מהם לא מדבר עם השני:</p>
+      $$\frac{12}{6}\;\cdot\;\frac{a^{7}}{a^{4}}\;\cdot\;\frac{b^{3}}{b^{3}}$$
+    </li>
+    <li class="nb-step"><b>המספרים — חילוק רגיל</b>
+      <p><span class="fi">\(12:6=2\)</span>. שימי לב שכאן <strong>מחלקים</strong>
+      את המקדמים, ולא מחסרים אותם — החוק של המעריכים לא נוגע במספר שמלפנים.</p>
+    </li>
+    <li class="nb-step"><b>האותיות — מחסרים מעריכים</b>
+      <p><span class="fi">\(a^{7-4}=a^{3}\)</span>, וגם
+      <span class="fi">\(b^{3-3}=b^{0}\)</span>.</p>
+    </li>
+    <li class="nb-step"><b>מה זה <span class="fi">\(b^{0}\)</span>?</b>
+      <p>זה בדיוק מה שסעיף 3 מסביר — והתשובה היא
+      <span class="fi">\(1\)</span>. הגיוני: <span class="fi">\(b^{3}\)</span>
+      חלקי <span class="fi">\(b^{3}\)</span> הוא מספר חלקי עצמו.</p>
+    </li>
+    <li class="nb-step"><b>התשובה</b>
+      <p>$$\frac{12a^{7}b^{3}}{6a^{4}b^{3}}=2a^{3}$$
+      ובדיקה מהירה עם מספרים: ל-<span class="fi">\(a=2,\;b=5\)</span> המקור נותן
+      <span class="fi">\(\frac{12\cdot128\cdot125}{6\cdot16\cdot125}=16\)</span>,
+      והתשובה נותנת <span class="fi">\(2\cdot 8=16\)</span> ✓</p>
+    </li>
+  </ol>
+</div>
+
+<!-- ============ 3. מעריך אפס ושלילי ============ -->
+<h2 id="sec-zero"><span class="num">3</span><span class="fi">\(a^{0}\)</span> ומעריך שלילי — לא לזכור, להבין</h2>
+
+<p>
+  "כל דבר בחזקת אפס שווה אחד" נשמע כמו כלל שרירותי שצריך לזכור. הוא לא.
+  הוא פשוט מה שקורה כשממשיכים דפוס קיים שורה אחת למטה.
+</p>
+
+<p>נרד בסולם החזקות של 2, ונשים לב מה קורה בכל צעד:</p>
+
+<table class="dtable ladder">
+  <tr><th>החזקה</th><th>הערך</th><th>מה קרה מהשורה הקודמת</th></tr>
+  <tr><td><span class="fi">\(2^{4}\)</span></td><td>16</td><td class="arrow">—</td></tr>
+  <tr><td><span class="fi">\(2^{3}\)</span></td><td>8</td><td class="arrow">חילקנו ב-2</td></tr>
+  <tr><td><span class="fi">\(2^{2}\)</span></td><td>4</td><td class="arrow">חילקנו ב-2</td></tr>
+  <tr><td><span class="fi">\(2^{1}\)</span></td><td>2</td><td class="arrow">חילקנו ב-2</td></tr>
+  <tr class="zero"><td><span class="fi">\(2^{0}\)</span></td><td><b>1</b></td><td class="arrow">חילקנו ב-2 — וקיבלנו 1</td></tr>
+  <tr class="neg"><td><span class="fi">\(2^{-1}\)</span></td><td><span class="fi">\(\tfrac{1}{2}\)</span></td><td class="arrow">ממשיכים לחלק ב-2</td></tr>
+  <tr class="neg"><td><span class="fi">\(2^{-2}\)</span></td><td><span class="fi">\(\tfrac{1}{4}\)</span></td><td class="arrow">ממשיכים לחלק ב-2</td></tr>
+</table>
+
+<p>
+  הירידה במעריך היא תמיד חלוקה בבסיס. כשממשיכים אותה מ-<span class="fi">\(2^{1}=2\)</span>
+  צעד אחד למטה מקבלים <span class="fi">\(2:2=1\)</span> — ולכן
+  <span class="fi">\(2^{0}=1\)</span>. ואם ממשיכים עוד, נכנסים לשברים.
+</p>
+
+<div class="box def">
+  <div class="box-title">שתי ההגדרות שנולדו מהדפוס</div>
+  $$a^{0}=1\qquad\qquad a^{-n}=\frac{1}{a^{n}}$$
+  מעריך שלילי אינו מספר שלילי — הוא הוראה <strong>להפוך לשבר</strong>.
+  למשל <span class="fi">\(3^{-2}=\frac{1}{9}\)</span>, שהוא מספר חיובי קטן.
+</div>
+
+<div class="box intuition">
+  <div class="box-title">אותו דבר, בשורה אחת</div>
+  אפשר להגיע ל-<span class="fi">\(a^{0}\)</span> גם ישר מחוק החילוק:
+  $$\frac{a^{5}}{a^{5}}=a^{5-5}=a^{0}
+    \qquad\text{—}\qquad
+    \frac{a^{5}}{a^{5}}=1$$
+  אותו ביטוי, שני חישובים, ולכן <span class="fi">\(a^{0}=1\)</span>.
+  <br>יוצא דופן יחיד: <span class="fi">\(a\)</span> עצמו לא יכול להיות אפס,
+  כי אז חילקנו באפס.
+</div>
+
+<div class="box warn">
+  <div class="box-title">המלכודת השנייה — איפה יושב המינוס</div>
+  <span class="fi">\((-2)^{4}\)</span> ו-<span class="fi">\(-2^{4}\)</span>
+  הם שני דברים שונים.
+  <br>ב-<span class="fi">\((-2)^{4}\)</span> הסוגריים אומרים שהבסיס הוא
+  <span class="fi">\(-2\)</span>, וכופלים אותו בעצמו ארבע פעמים:
+  ארבעה מינוסים מתבטלים בזוגות, והתוצאה <span class="fi">\(+16\)</span>.
+  <br>ב-<span class="fi">\(-2^{4}\)</span> אין סוגריים, ולכן החזקה חלה רק על
+  <span class="fi">\(2\)</span>, והמינוס נשאר מבחוץ:
+  <span class="fi">\(-16\)</span>.
+  <br><strong>הכלל שנובע מזה:</strong> מעריך זוגי על בסיס שלילי נותן תוצאה
+  חיובית; מעריך אי-זוגי משאיר את המינוס.
+</div>
+
+<!-- ============ 4. שורשים ============ -->
+<h2 id="sec-roots"><span class="num">4</span>שורשים — הפעולה ההפוכה</h2>
+
+<p>
+  <span class="fi">\(\sqrt{a}\)</span> שואל: איזה מספר <strong>אי-שלילי</strong>,
+  כשמעלים אותו בריבוע, נותן <span class="fi">\(a\)</span>. זו בדיוק הפעולה
+  ההפוכה לריבוע, ולכן שני החוקים הבאים אינם חדשים — הם חוקי החזקות במראה.
+</p>
+
+<div class="fbox">
+  <div class="fbox-title">שני החוקים היחידים שצריך</div>
+  $$\sqrt{a\cdot b}=\sqrt{a}\cdot\sqrt{b}
+    \qquad\qquad
+    \sqrt{\frac{a}{b}}=\frac{\sqrt{a}}{\sqrt{b}}$$
+  <span class="f-legend">
+    <span>שורש מתפרק על <strong>כפל וחילוק</strong> — ולעולם לא על חיבור</span>
+  </span>
+</div>
+
+<div class="box warn">
+  <div class="box-title">אין חוק לחיבור</div>
+  <span class="fi">\(\sqrt{9+16}\)</span> אינו
+  <span class="fi">\(\sqrt{9}+\sqrt{16}\)</span> — ומספר אחד מראה את זה:
+  $$\sqrt{9+16}=\sqrt{25}=5
+    \qquad\text{vs.}\qquad
+    \sqrt{9}+\sqrt{16}=3+4=7$$
+  חמש ושבע. לא אותו דבר, ולכן אין חוק כזה.
+</div>
+
+<p>
+  הדבר השימושי ביותר שעושים עם החוק הראשון הוא <strong>לפשט שורש</strong>:
+  לחלץ מתוכו את מה שיש לו שורש שלם. מחפשים גורם שהוא ריבוע מושלם
+  (<span class="fi">\(4,9,16,25,36\ldots\)</span>) — וכדאי הגדול ביותר:
+</p>
+
+<div class="nb" data-nb>
+  <div class="nb-head"><b>בונים ביחד במחברת</b><span class="nb-count"></span></div>
+  <ol class="nb-steps">
+    <li class="nb-step"><b>התרגיל</b>
+      <p>לפשט את <span class="fi">\(\sqrt{72}\)</span>.</p>
+    </li>
+    <li class="nb-step"><b>מחפשים ריבוע מושלם שמחלק את 72</b>
+      <p>מועמדים: <span class="fi">\(4\)</span> מחלק, <span class="fi">\(9\)</span>
+      מחלק, ו-<span class="fi">\(36\)</span> גם מחלק. לוקחים את
+      <strong>הגדול ביותר</strong>, כדי לסיים בצעד אחד:
+      <span class="fi">\(72=36\cdot 2\)</span>.</p>
+    </li>
+    <li class="nb-step"><b>מפרקים לפי החוק</b>
+      <p>$$\sqrt{72}=\sqrt{36\cdot 2}=\sqrt{36}\cdot\sqrt{2}=6\sqrt{2}$$</p>
+    </li>
+    <li class="nb-step"><b>ומה אם בוחרים גורם קטן יותר?</b>
+      <p>גם זה עובד, רק לוקח עוד צעד:
+      <span class="fi">\(\sqrt{72}=\sqrt{4\cdot18}=2\sqrt{18}\)</span>,
+      ואז <span class="fi">\(\sqrt{18}=3\sqrt2\)</span>, ובסך הכול
+      <span class="fi">\(2\cdot3\sqrt2=6\sqrt2\)</span> — אותה תשובה.
+      אף פעם לא טעות; רק ארוך יותר.</p>
+    </li>
+    <li class="nb-step"><b>בדיקה במחשבון</b>
+      <p><span class="fi">\(\sqrt{72}\approx 8.485\)</span> וגם
+      <span class="fi">\(6\sqrt2\approx 6\cdot1.414=8.485\)</span> ✓</p>
+    </li>
+  </ol>
+</div>
+
+<div class="box intuition">
+  <div class="box-title">ואיפה תפגשי את זה שוב</div>
+  שורשים לא נשארים בתחנה הזאת. הם יחזרו בכל תרגיל
+  <strong>פיתגורס</strong> שהתשובה בו אינה שלמה, ובכל
+  <strong>משוואה ריבועית</strong> שנפתרת בנוסחת השורשים. שם התשובה
+  <span class="fi">\(6\sqrt2\)</span> נחשבת מדויקת יותר מ-8.485.
+</div>
+
+<!-- ============ 5. תרגול ============ -->
+<h2 id="sec-practice"><span class="num">5</span>תרגול — משלב לשלב</h2>
+
+<p style="font-size:13.5px;color:var(--soft)">
+  שלושת הראשונים ביחד, עם שלבים שנפתחים. אחר כך לבד, ובסוף שניים בסגנון
+  שאלות המבחן.
+</p>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 1 — שלושה חוקים בשורה אחת</h4></div>
+  <p class="q-text">
+    <span class="mk mk-find">פשטי:</span>
+    <span class="fi">\(\dfrac{x^{9}\cdot x^{3}}{x^{5}}\)</span>
+  </p>
+  <details class="step"><summary>שלב ראשון — קודם המונה</summary>
+    <div class="step-body">במונה יש כפל של אותו בסיס, אז מחברים מעריכים:
+    <span class="fi">\(x^{9}\cdot x^{3}=x^{12}\)</span>.</div>
+  </details>
+  <details class="step"><summary>שלב שני — ואז החילוק</summary>
+    <div class="step-body">$$\frac{x^{12}}{x^{5}}=x^{12-5}=x^{7}$$</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$\frac{x^{9}\cdot x^{3}}{x^{5}}=\frac{x^{12}}{x^{5}}=x^{7}$$
+      אפשר גם בסדר אחר — <span class="fi">\(9+3-5=7\)</span> בבת אחת.
+      כשכל הבסיסים זהים, המעריכים פשוט מתחשבנים ביניהם.
+    </div>
+  </details>
+  <div class="q-row">
+    <span>המעריך בתשובה:</span>
+    <input class="q-input" data-answer="7" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex1"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 2 — מקדמים ואותיות ביחד</h4></div>
+  <p class="q-text">
+    <span class="mk mk-find">פשטי:</span>
+    <span class="fi">\(\dfrac{20a^{6}}{5a^{2}}\)</span>
+  </p>
+  <details class="step"><summary>שלב ראשון — להפריד</summary>
+    <div class="step-body">מספרים לחוד, אותיות לחוד:
+    <span class="fi">\(\frac{20}{5}\cdot\frac{a^{6}}{a^{2}}\)</span>.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$\frac{20a^{6}}{5a^{2}}=\frac{20}{5}\cdot a^{6-2}=4a^{4}$$
+      <strong>שימי לב:</strong> המקדמים <span class="fi">\(20\)</span> ו-<span class="fi">\(5\)</span>
+      <em>מתחלקים</em>, והמעריכים <em>נחסרים</em>. שתי פעולות שונות באותו תרגיל,
+      וזו הטעות שהכי קל לעשות כאן.
+    </div>
+  </details>
+  <div class="q-row">
+    <span>המקדם בתשובה:</span>
+    <input class="q-input" data-answer="4" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex2"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 3 — חזקה על סוגריים</h4></div>
+  <p class="q-text">
+    <span class="mk mk-find">פשטי:</span>
+    <span class="fi">\(\left(2x^{3}\right)^{4}\)</span>
+  </p>
+  <details class="step"><summary>שלב ראשון — החזקה חלה על הכול</summary>
+    <div class="step-body">בתוך הסוגריים יש <strong>כפל</strong> של
+    <span class="fi">\(2\)</span> ב-<span class="fi">\(x^{3}\)</span>,
+    ולכן החזקה מתחלקת על שניהם:
+    <span class="fi">\(2^{4}\cdot\left(x^{3}\right)^{4}\)</span>.
+    <br>קל לשכוח את ה-2 ולכתוב <span class="fi">\(2x^{12}\)</span> — וזו טעות.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$\left(2x^{3}\right)^{4}=2^{4}\cdot x^{3\cdot4}=16x^{12}$$
+      בדיקה ל-<span class="fi">\(x=1\)</span>: המקור
+      <span class="fi">\((2\cdot1)^{4}=16\)</span>, והתשובה
+      <span class="fi">\(16\cdot1=16\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row">
+    <span>המקדם:</span>
+    <input class="q-input" data-answer="16" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <span>המעריך:</span>
+    <input class="q-input" data-answer="12" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex3"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 4 — מעריך אפס</h4></div>
+  <p class="q-text">
+    <span class="mk mk-find">חשבי:</span>
+    <span class="fi">\(5^{0}+3^{0}\cdot 7\)</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      כל אחד מהם בחזקת אפס הוא <span class="fi">\(1\)</span>, וקודם כפל ואז חיבור:
+      $$5^{0}+3^{0}\cdot7=1+1\cdot7=1+7=8$$
+      <strong>לא</strong> <span class="fi">\((1+1)\cdot7=14\)</span> — סדר
+      פעולות רגיל, החזקות לא משנות אותו.
+    </div>
+  </details>
+  <div class="q-row">
+    <span>התשובה:</span>
+    <input class="q-input" data-answer="8" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex4"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 5 — איפה יושב המינוס</h4></div>
+  <p class="q-text">
+    <span class="mk mk-find">חשבי כל אחד בנפרד:</span>
+    <span class="fi">\((-3)^{2}\)</span> · <span class="fi">\(-3^{2}\)</span> ·
+    <span class="fi">\((-3)^{3}\)</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      <span class="fi">\((-3)^{2}=(-3)\cdot(-3)=9\)</span> — שני מינוסים מתבטלים.
+      <br><span class="fi">\(-3^{2}=-(3\cdot3)=-9\)</span> — אין סוגריים, החזקה
+      חלה רק על ה-3.
+      <br><span class="fi">\((-3)^{3}=(-3)(-3)(-3)=-27\)</span> — שלושה מינוסים,
+      אחד נשאר.
+      <br><br>הכלל: <strong>מעריך זוגי מנקה את המינוס, מעריך אי-זוגי משאיר אותו</strong> —
+      אבל רק כשהמינוס בתוך הסוגריים.
+    </div>
+  </details>
+  <div class="q-row">
+    <span class="fi">\((-3)^{2}\)</span>
+    <input class="q-input" data-answer="9" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <span class="fi">\(-3^{2}\)</span>
+    <input class="q-input" data-answer="-9" inputmode="text" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex5"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 6 — מעריך שלילי</h4></div>
+  <p class="q-text">
+    <span class="mk mk-find">כתבי בלי מעריך שלילי, וחשבי:</span>
+    <span class="fi">\(2^{-3}\)</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$2^{-3}=\frac{1}{2^{3}}=\frac{1}{8}=0.125$$
+      התוצאה <strong>חיובית</strong> וקטנה מ-1. מעריך שלילי הופך לשבר;
+      הוא לא הופך את הסימן.
+    </div>
+  </details>
+  <div class="q-row">
+    <span>כמספר עשרוני:</span>
+    <input class="q-input" data-answer="0.125" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex6"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 7 — לפשט שורש</h4></div>
+  <p class="q-text">
+    <span class="mk mk-find">פשטי:</span>
+    <span class="fi">\(\sqrt{50}\)</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      הריבוע המושלם הגדול ביותר שמחלק את 50 הוא <span class="fi">\(25\)</span>:
+      $$\sqrt{50}=\sqrt{25\cdot2}=\sqrt{25}\cdot\sqrt{2}=5\sqrt{2}$$
+      בדיקה: <span class="fi">\(5\cdot1.414=7.07\)</span>, וגם
+      <span class="fi">\(\sqrt{50}\approx7.07\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row">
+    <span>המספר שמחוץ לשורש:</span>
+    <input class="q-input" data-answer="5" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <span>ומה נשאר בפנים:</span>
+    <input class="q-input" data-answer="2" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex7"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 8 — למצוא את המעריך</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">נתון</span>
+    <span class="fi">\(3^{2m}=6561\)</span>.
+    <span class="mk mk-find">מצאי את <span class="fi">\(m\)</span>.</span>
+    <br><span style="font-size:13px;color:var(--soft)">רמז: אם שני הצדדים יהיו
+    חזקות של אותו בסיס, אפשר פשוט להשוות מעריכים.</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      קודם כותבים את 6561 כחזקה של 3. עולים בסולם עד שמגיעים:
+      $$3^{4}=81\qquad 3^{5}=243\qquad 3^{6}=729\qquad 3^{7}=2187\qquad
+        \boxed{3^{8}=6561}$$
+      עכשיו לשני הצדדים אותו בסיס:
+      $$3^{2m}=3^{8}\;\Longrightarrow\;2m=8\;\Longrightarrow\;m=4$$
+      <strong>הרעיון הכללי:</strong> כשהבסיסים שווים, המעריכים חייבים להיות שווים.
+      זה הופך משוואת חזקות למשוואה רגילה — וזה בדיוק מה שיישאל במבחן.
+    </div>
+  </details>
+  <div class="q-row">
+    <span class="fi">\(m=\)</span>
+    <input class="q-input" data-answer="4" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex8"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 9 — מתי הכול מתאפס למעריך</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">נתון</span>
+    <span class="fi">\(5^{(m^{2}+4m-21)}=1\)</span>.
+    <span class="mk mk-find">מצאי את כל הערכים האפשריים של
+    <span class="fi">\(m\)</span>.</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      אגף ימין הוא <span class="fi">\(1\)</span>, והדרך היחידה שחזקה של 5 תיתן 1
+      היא <strong>מעריך אפס</strong>. לכן:
+      $$m^{2}+4m-21=0$$
+      זו משוואה ריבועית — הנושא של
+      <a href="index.html">תחנה 5</a> — ופותרים אותה בפירוק לטרינום:
+      מחפשים שני מספרים שמכפלתם <span class="fi">\(-21\)</span> וסכומם
+      <span class="fi">\(4\)</span>. אלה <span class="fi">\(7\)</span> ו-<span class="fi">\(-3\)</span>:
+      $$(m+7)(m-3)=0\;\Longrightarrow\;m=-7\ \ \text{או}\ \ m=3$$
+      <strong>שתי תשובות, ושתיהן נכונות.</strong> מציבים כל אחת בחזרה במעריך
+      ובודקים שהוא באמת מתאפס:
+      $$m=3:\quad 9+12-21=0\;\checkmark$$
+      $$m=-7:\quad 49-28-21=0\;\checkmark$$
+      התרגיל הזה מראה למה הסדר בשנה הוא כזה: חזקות פותחות דלת,
+      ופירוק לגורמים הוא מה שעובר דרכה.
+    </div>
+  </details>
+  <div class="q-row">
+    <span>הפתרון החיובי:</span>
+    <input class="q-input" data-answer="3" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <span>והשלילי:</span>
+    <input class="q-input" data-answer="-7" inputmode="text" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex9"> סיימתי את התרגיל הזה</label>
+</article>
+
+<div class="box def" style="margin-top:26px">
+  <div class="box-title">מה לקחת מכאן לתחנה הבאה</div>
+  שני הדברים שיחזרו מיד: <strong>חוק הכפל</strong>
+  (<span class="fi">\(x\cdot x=x^{2}\)</span>) — כי בלעדיו אי אפשר לפתוח
+  <span class="fi">\((a+b)^{2}\)</span>; ו<strong>חוק החילוק</strong> — כי הוא
+  מה שמצמצם שברים אלגבריים. שאר החוקים יופיעו פה ושם, אבל אלה שניים שאת
+  משתמשת בהם כל יום.
+</div>
+
+
+<div class="watch">
+  <h3>רוצה לראות את זה מוסבר בקול?</h3>
+  <p>הסרטונים הם תגבור, לא חובה — ומי שהעמוד הספיק לה יכולה לדלג.</p>
+  <a class="video-link" href="https://www.youtube.com/watch?v=eTo3ed97f1Y" target="_blank" rel="noopener">
+    <img src="../../assets/g9-vids/eTo3ed97f1Y.jpg" alt="חוקי חזקות — תמונה מהסרטון" loading="lazy">
+    <span class="vt"><b>שימוש בכל חוקי החזקות-כיתה ט</b><span>עובר על כל חוקי החזקות בתרגיל אחד מורכב · 5:29 · Ovad Lev Ari</span></span>
+    <span class="play">▶</span>
+  </a>
+</div>
+
+<div class="progresswrap no-print">
+  <span class="progressbar"><i></i></span><span class="progress-label"></span>
+  <button class="all-sols" style="font-family:inherit;font-size:12px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:4px 10px;cursor:pointer">לפתוח את כל הפתרונות</button>
+</div>
+
+<nav class="pagenav">
+  <a class="next" href="02-short-multiplication.html"><span class="dir">הבא ←</span>נוסחאות הכפל המקוצר</a>
+</nav>
+
+<footer class="fin">חלק מהעולם של שירה ·
+<a href="../../index.html">חזרה למרכז</a> ·
+<a href="index.html">מפת האלגברה</a></footer>
+</main>
+</div>
+</body>
+</html>

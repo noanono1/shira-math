@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<link rel="apple-touch-icon" href="../../assets/icons/icon-180.png">
+<link rel="manifest" href="../../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>מחסן התרגילים — הסתברות ואוריינות ט׳ — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../../vendor/katex.min.css">
+<link rel="stylesheet" href="../../css/shira.css">
+<style>
+:root{--accent:#2E7D6B}
+.wrap{max-width:880px}
+.finder{display:grid; grid-template-columns:repeat(auto-fill,minmax(215px,1fr)); gap:8px; margin:14px 0 4px}
+.finder a{display:block; text-decoration:none; background:var(--card); color:var(--ink);
+  border:1px solid var(--line); border-radius:10px; padding:9px 12px; transition:.15s}
+.finder a:hover{border-color:var(--accent)}
+.finder a b{display:block; font-size:13.5px}
+.finder a span{color:var(--soft); font-size:11.5px; line-height:1.5}
+.finder a .cnt{float:left; font-size:11px; font-weight:800; color:var(--accent);
+  background:#E6F2EF; border-radius:20px; padding:1px 8px; margin-inline-start:6px}
+.grouplead{font-size:13.5px; color:var(--soft); margin:8px 0 16px}
+article.ex .ex-head .lvl{background:var(--accent); letter-spacing:.06em; font-size:11px}
+</style>
+<script defer src="../../vendor/katex.min.js"></script>
+<script defer src="../../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../../js/shira.js"></script>
+</head>
+<body data-page="g9prob:04-exercise-bank">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">הסתברות ט׳ — המפה</a>
+    <span class="crumbs">הסתברות ואוריינות · <b>מחסן התרגילים</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">הסתברות ואוריינות · כיתה ט׳ · תרגול</div>
+  <h1>מחסן התרגילים</h1>
+  <p class="lead">
+    שנים-עשר תרגילים לפי סוג, כל אחד עם פתרון מלא.
+  </p>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>12 תרגילים</b> · ≈ 3 דק׳ לתרגיל</span>
+  </p>
+</header>
+
+<h2 id="finder">🔎 מאתר הסוגים</h2>
+<div class="finder">
+  <a href="#g-one"><b>ניסוי אחד<span class="cnt">4</span></b><span>קובייה, שקית, קלפים — והמשלים</span></a>
+  <a href="#g-two"><b>שני שלבים<span class="cnt">4</span></b><span>עם החזרה ובלי, ועץ הסתברויות</span></a>
+  <a href="#g-lit"><b>אוריינות<span class="cnt">4</span></b><span>תעריפים, מבצעים וקריאת נתונים</span></a>
+</div>
+
+<!-- ============ א ============ -->
+<h2 id="g-one"><span class="num">א</span>ניסוי אחד</h2>
+<p class="grouplead">התחנה: <a href="01-probability.html#sec-basic">הנוסחה הבסיסית</a>.</p>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">א1</span><h4>קובייה</h4></div>
+  <p class="q-text">מה ההסתברות לקבל מספר גדול מ-4 בהטלת קובייה?</p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      הרצויים: <span class="fi">\(\{5,6\}\)</span> — שניים.
+      $$P=\frac{2}{6}=\frac13\approx0.333$$
+      שימי לב ש"גדול מ-4" אינו כולל את 4 עצמו.
+    </div>
+  </details>
+  <div class="q-row"><span>כמספר עשרוני:</span>
+    <input class="q-input" data-answer="0.333" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="a1"> סיימתי</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">א2</span><h4>שקית</h4></div>
+  <p class="q-text">בשקית 8 גולות ירוקות ו-12 צהובות. מה ההסתברות לשלוף ירוקה?</p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">$$P=\frac{8}{20}=0.4$$</div>
+  </details>
+  <div class="q-row"><span>כמספר עשרוני:</span>
+    <input class="q-input" data-answer="0.4" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="a2"> סיימתי</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">א3</span><h4>משלים</h4></div>
+  <p class="q-text">ההסתברות שיירד גשם היא 0.35. מה ההסתברות שלא יירד?</p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">$$1-0.35=0.65$$</div>
+  </details>
+  <div class="q-row"><span>ההסתברות:</span>
+    <input class="q-input" data-answer="0.65" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="a3"> סיימתי</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">א4</span><h4>למצוא כמה יש</h4></div>
+  <p class="q-text">בשקית 15 גולות אדומות, וההסתברות לשלוף אדומה היא 0.3.
+    כמה גולות בסך הכול?</p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$\frac{15}{n}=0.3\;\Longrightarrow\;n=\frac{15}{0.3}=50$$
+      בדיקה: <span class="fi">\(\frac{15}{50}=0.3\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row"><span>סך הגולות:</span>
+    <input class="q-input" data-answer="50" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="a4"> סיימתי</label>
+</article>
+
+<!-- ============ ב ============ -->
+<h2 id="g-two"><span class="num">ב</span>שני שלבים</h2>
+<p class="grouplead">התחנה: <a href="01-probability.html#sec-tree">עץ הסתברויות</a>. קודם לבדוק — עם החזרה או בלי.</p>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">ב1</span><h4>שתי מטבעות</h4></div>
+  <p class="q-text">מטילים מטבע פעמיים. מה ההסתברות לקבל "עץ" פעמיים?</p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">$$\frac12\cdot\frac12=\frac14=0.25$$</div>
+  </details>
+  <div class="q-row"><span>כמספר עשרוני:</span>
+    <input class="q-input" data-answer="0.25" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="b1"> סיימתי</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">ב2</span><h4>עם החזרה</h4></div>
+  <p class="q-text">בשקית 2 לבנות ו-8 שחורות. שולפים שתיים <strong>עם</strong>
+    החזרה. מה ההסתברות ששתיהן לבנות?</p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">$$\frac{2}{10}\cdot\frac{2}{10}=\frac{4}{100}=0.04$$</div>
+  </details>
+  <div class="q-row"><span>כמספר עשרוני:</span>
+    <input class="q-input" data-answer="0.04" data-tol="0.005" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="b2"> סיימתי</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">ב3</span><h4>בלי החזרה</h4></div>
+  <p class="q-text">אותה שקית, <strong>בלי</strong> החזרה. מה ההסתברות
+    ששתיהן לבנות?</p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$\frac{2}{10}\cdot\frac{1}{9}=\frac{2}{90}=\frac{1}{45}\approx0.022$$
+      פחות מ-0.04 ✓ — אחרי ששלפנו לבנה נשארה רק אחת.
+    </div>
+  </details>
+  <div class="q-row"><span>כמספר עשרוני:</span>
+    <input class="q-input" data-answer="0.022" data-tol="0.003" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="b3"> סיימתי</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">ב4</span><h4>לפחות אחד</h4></div>
+  <p class="q-text">מטילים מטבע 3 פעמים. מה ההסתברות לקבל לפחות "עץ" אחד?</p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      דרך המשלים — "אף עץ" פירושו שלוש פעמים "פלי":
+      $$P(\text{none})=\left(\frac12\right)^{3}=\frac18$$
+      $$P=1-\frac18=\frac78=0.875$$
+    </div>
+  </details>
+  <div class="q-row"><span>כמספר עשרוני:</span>
+    <input class="q-input" data-answer="0.875" data-tol="0.005" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="b4"> סיימתי</label>
+</article>
+
+<!-- ============ ג ============ -->
+<h2 id="g-lit"><span class="num">ג</span>אוריינות</h2>
+<p class="grouplead">התחנה: <a href="02-literacy.html">אוריינות מתמטית</a>. לקרוא מה שואלים לפני הנתונים.</p>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">ג1</span><h4>תעריף מדורג</h4></div>
+  <p class="q-text">מונית: 12 ₪ דמי נסיעה קבועים, ועוד 3 ₪ לכל ק״מ.
+    כמה תעלה נסיעה של 8 ק״מ?</p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">$$12+8\cdot3=12+24=36$$</div>
+  </details>
+  <div class="q-row"><span>המחיר (₪):</span>
+    <input class="q-input" data-answer="36" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="c1"> סיימתי</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">ג2</span><h4>מבצע</h4></div>
+  <p class="q-text">ספר עולה 60 ₪, ובמבצע "50% על השני".
+    כמה יעלו שני ספרים?</p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$60+60\cdot0.5=60+30=90$$
+      זו הנחה כוללת של <span class="fi">\(\frac{30}{120}=25\%\)</span>.
+    </div>
+  </details>
+  <div class="q-row"><span>המחיר (₪):</span>
+    <input class="q-input" data-answer="90" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="c2"> סיימתי</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">ג3</span><h4>שתי התייקרויות</h4></div>
+  <p class="q-text">מחיר עלה ב-10% ואז בעוד 10%. בכמה אחוזים עלה בסך הכול?</p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$1.1\cdot1.1=1.21$$
+      עלייה של <strong>21%</strong>, ולא 20% — כי ההעלאה השנייה נלקחת
+      מהמחיר שכבר עלה.
+    </div>
+  </details>
+  <div class="q-row"><span>אחוז העלייה:</span>
+    <input class="q-input" data-answer="21" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="c3"> סיימתי</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">ג4</span><h4>שני מסלולים</h4></div>
+  <p class="q-text">
+    מסלול א׳: 100 ₪ קבוע ועוד 5 ₪ ליחידה.
+    מסלול ב׳: 10 ₪ ליחידה, בלי קבוע.
+    <br>מכמה יחידות מסלול א׳ משתלם יותר?
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$100+5x=10x\;\Longrightarrow\;100=5x\;\Longrightarrow\;x=20$$
+      ב-20 יחידות המחירים שווים (200 ₪ כל אחד).
+      <br><strong>מעל</strong> 20 יחידות — מסלול א׳ זול יותר.
+      <br>בדיקה ב-30: א׳ <span class="fi">\(100+150=250\)</span>,
+      ב׳ <span class="fi">\(300\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row"><span>נקודת ההשוואה:</span>
+    <input class="q-input" data-answer="20" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="c4"> סיימתי</label>
+</article>
+
+<div class="progresswrap no-print">
+  <span class="progressbar"><i></i></span><span class="progress-label"></span>
+  <button class="all-sols" style="font-family:inherit;font-size:12px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:4px 10px;cursor:pointer">לפתוח את כל הפתרונות</button>
+</div>
+
+<nav class="pagenav">
+  <a href="03-quiz.html"><span class="dir">→ הקודם</span>בוחן הבית</a>
+  <a class="next" href="index.html"><span class="dir">המפה ←</span>הסתברות ואוריינות</a>
+</nav>
+
+<footer class="fin">חלק מהעולם של שירה ·
+<a href="../../index.html">חזרה למרכז</a> ·
+<a href="index.html">מפת ההסתברות</a></footer>
+</main>
+</div>
+</body>
+</html>

@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<link rel="apple-touch-icon" href="../../assets/icons/icon-180.png">
+<link rel="manifest" href="../../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>המשוואה הריבועית — אלגברה ט׳ — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../../vendor/katex.min.css">
+<link rel="stylesheet" href="../../css/shira.css">
+<style>
+:root{--accent:#2E6F8E}
+/* שלושת המקרים של הדיסקרימיננטה — כרטיס עם ציור לכל אחד */
+.cases{display:flex; flex-wrap:wrap; gap:11px; margin:14px 0}
+.cases>div{flex:1 1 200px; min-width:0; border:1px solid var(--line);
+  border-radius:var(--r-md); background:var(--card); padding:11px 13px 13px; text-align:center}
+.cases .cttl{font-size:13px; font-weight:800; margin-bottom:2px}
+.cases .csub{font-size:12px; color:var(--soft); line-height:1.5}
+.cases svg{display:block; margin:6px auto 4px}
+.cases .pos .cttl{color:#2E7D32} .cases .zero .cttl{color:#8A6D1B} .cases .neg .cttl{color:#B4553C}
+</style>
+<script defer src="../../vendor/katex.min.js"></script>
+<script defer src="../../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../../js/shira.js"></script>
+</head>
+<body data-page="g9alg:05-quadratic-equation">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">אלגברה ט׳ — המפה</a>
+    <span class="crumbs">תחנה <b>6</b> מתוך 8 · <b>משוואה ריבועית</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">אלגברה · כיתה ט׳ · תחנה 6</div>
+  <h1>המשוואה הריבועית</h1>
+  <p class="lead">
+    משוואה שיש בה <span class="fi">\(x^{2}\)</span>. שלא כמו המשוואות שאת
+    פותרת מכיתה ח׳, לרוב יש לה <strong>שני פתרונות</strong> — ולפעמים אחד,
+    ולפעמים אף אחד. הכול נשען על טריק אחד קטן, ועל נוסחה אחת שעובדת כשהטריק
+    לא מספיק.
+  </p>
+  <p class="youknow"><b>בסוף העמוד תדעי:</b> לסדר משוואה לצורה הסטנדרטית ·
+  לפתור בפירוק לגורמים · להשתמש בנוסחת השורשים · לדעת מראש כמה פתרונות יש
+  לפי הדיסקרימיננטה · ולבדוק אילו פתרונות באמת מתאימים לשאלה.</p>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>≈ 40 דק׳</b> · 10 תרגילים</span>
+    <a class="pm-jump" href="#sec-practice">לקפוץ ישר לתרגילים ↓</a>
+  </p>
+</header>
+
+<!-- ============ 1. הטריק ============ -->
+<h2 id="sec-zero"><span class="num">1</span>הטריק שהכול נשען עליו</h2>
+
+<p>
+  יש עובדה אחת פשוטה על מספרים, ומכאן נובעת כל השיטה:
+</p>
+
+<div class="box def">
+  <div class="box-title">מכפלה ששווה אפס</div>
+  אם מכפלה של שני מספרים היא אפס — <strong>לפחות אחד מהם חייב להיות אפס</strong>.
+  $$A\cdot B=0\;\Longrightarrow\;A=0\ \ \text{or}\ \ B=0$$
+  אין דרך אחרת. שני מספרים שאינם אפס נותנים מכפלה שאינה אפס, תמיד.
+</div>
+
+<p>
+  שימי לב כמה זה מיוחד: אין שום כלל דומה למכפלה ששווה
+  <span class="fi">\(12\)</span>. שם יש אינסוף אפשרויות. רק האפס מתנהג ככה —
+  <strong>ולכן תמיד מעבירים הכול לאגף אחד ומשווים לאפס</strong>.
+</p>
+
+<div class="fbox">
+  <div class="fbox-title">מכאן — שתי משוואות פשוטות במקום אחת קשה</div>
+  $$(x-6)(x+5)=0$$
+  $$x-6=0\;\Longrightarrow\;x_{1}=6
+    \qquad\qquad
+    x+5=0\;\Longrightarrow\;x_{2}=-5$$
+  <span class="f-legend">
+    <span>כל גורם נותן פתרון אחד — ולכן בדרך כלל יש <strong>שניים</strong></span>
+  </span>
+</div>
+
+<div class="box warn">
+  <div class="box-title">המלכודת: לחלק ב-<span class="fi">\(x\)</span></div>
+  במשוואה <span class="fi">\(x^{2}=5x\)</span> מתפתה לחלק את שני האגפים
+  ב-<span class="fi">\(x\)</span> ולקבל <span class="fi">\(x=5\)</span>.
+  <br>אבל חילוק ב-<span class="fi">\(x\)</span> מניח בשקט
+  ש-<span class="fi">\(x\neq0\)</span> — ובכך <strong>מוחק פתרון</strong>.
+  הדרך הנכונה היא להעביר לאגף אחד ולפרק:
+  $$x^{2}-5x=0\;\Longrightarrow\;x(x-5)=0\;\Longrightarrow\;x_{1}=0,\ x_{2}=5$$
+  שני פתרונות, ו-<span class="fi">\(x=0\)</span> באמת מקיים את המשוואה
+  המקורית: <span class="fi">\(0=0\)</span> ✓
+  <br><strong>לעולם לא מחלקים משוואה בנעלם.</strong>
+</div>
+
+<!-- ============ 2. השיטה ============ -->
+<h2 id="sec-method"><span class="num">2</span>השיטה — שלושה צעדים</h2>
+
+<ol class="steps">
+  <li><strong>לסדר</strong> — להעביר הכול לאגף אחד, כך שיישאר
+      <span class="fi">\(0\)</span> באגף השני, בצורה
+      <span class="fi">\(ax^{2}+bx+c=0\)</span>.</li>
+  <li><strong>לפרק</strong> — לפי שלוש הדרכים מ<a href="03-factoring.html">תחנה 3</a>.</li>
+  <li><strong>לאפס כל גורם</strong> בנפרד, ולקבל את הפתרונות.</li>
+</ol>
+
+<div class="nb" data-nb>
+  <div class="nb-head"><b>בונים ביחד במחברת</b><span class="nb-count"></span></div>
+  <ol class="nb-steps">
+    <li class="nb-step"><b>התרגיל</b>
+      <p>לפתור: <span class="fi">\(x^{2}+3x=10\)</span></p>
+    </li>
+    <li class="nb-step"><b>שלב 1 — לסדר מול אפס</b>
+      <p>מעבירים את ה-10 שמאלה:
+      $$x^{2}+3x-10=0$$
+      <strong>לא לדלג על זה.</strong> כל עוד באגף ימין יושב 10 ולא 0,
+      הטריק של המכפלה לא חל.</p>
+    </li>
+    <li class="nb-step"><b>שלב 2 — לפרק</b>
+      <p>טרינום: מכפלה <span class="fi">\(-10\)</span>, סכום
+      <span class="fi">\(3\)</span>. המספרים הם <span class="fi">\(5\)</span>
+      ו-<span class="fi">\(-2\)</span>:
+      $$(x+5)(x-2)=0$$</p>
+    </li>
+    <li class="nb-step"><b>שלב 3 — לאפס כל גורם</b>
+      <p>$$x+5=0\;\Rightarrow\;x_{1}=-5
+        \qquad x-2=0\;\Rightarrow\;x_{2}=2$$</p>
+    </li>
+    <li class="nb-step"><b>בדיקה — במשוואה המקורית</b>
+      <p>ל-<span class="fi">\(x=2\)</span>:
+      <span class="fi">\(4+6=10\)</span> ✓
+      <br>ל-<span class="fi">\(x=-5\)</span>:
+      <span class="fi">\(25-15=10\)</span> ✓
+      <br>שתיהן נכונות.</p>
+    </li>
+  </ol>
+</div>
+
+<!-- ============ 3. הנוסחה ============ -->
+<h2 id="sec-formula"><span class="num">3</span>נוסחת השורשים — כשהפירוק לא מסתדר</h2>
+
+<p>
+  לא כל טרינום מתפרק יפה. כשאין שני מספרים שלמים שמתאימים, יש נוסחה שעובדת
+  <strong>תמיד</strong> — היא לא מתעניינת אם המספרים נאים.
+</p>
+
+<div class="fbox">
+  <div class="fbox-title">נוסחת השורשים</div>
+  $$x_{1,2}=\frac{-b\pm\sqrt{b^{2}-4ac}}{2a}
+    \qquad\text{for}\qquad ax^{2}+bx+c=0$$
+  <span class="f-legend">
+    <span><span class="fi">\(a\)</span> — מקדם <span class="fi">\(x^{2}\)</span> ·
+      <span class="fi">\(b\)</span> — מקדם <span class="fi">\(x\)</span> ·
+      <span class="fi">\(c\)</span> — האיבר החופשי</span>
+    <span>הסימן <span class="fi">\(\pm\)</span> הוא מה שנותן שני פתרונות בבת אחת</span>
+  </span>
+</div>
+
+<div class="box warn">
+  <div class="box-title">שלוש נקודות שבהן טועים בנוסחה</div>
+  <ol class="steps">
+    <li>קוראים את המקדמים <strong>רק אחרי</strong> שהמשוואה מסודרת מול אפס.</li>
+    <li>המקדמים כוללים את הסימן. ב-<span class="fi">\(x^{2}-5x+6=0\)</span>
+        המקדם <span class="fi">\(b\)</span> הוא <span class="fi">\(-5\)</span>,
+        ולא <span class="fi">\(5\)</span>.</li>
+    <li>הקו העליון הוא <span class="fi">\(-b\)</span>. אם
+        <span class="fi">\(b=-5\)</span>, אז
+        <span class="fi">\(-b=+5\)</span> — שני מינוסים שהופכים לפלוס.</li>
+  </ol>
+</div>
+
+<!-- ============ 4. הדיסקרימיננטה ============ -->
+<h2 id="sec-disc"><span class="num">4</span>כמה פתרונות יש — ואיך יודעים מראש</h2>
+
+<p>
+  הביטוי שמתחת לשורש, <span class="fi">\(b^{2}-4ac\)</span>, נקרא
+  <strong>דיסקרימיננטה</strong> ומסומן <span class="fi">\(\Delta\)</span>.
+  הוא לבדו קובע כמה פתרונות יהיו — עוד לפני שמסיימים לחשב.
+</p>
+
+<div class="cases">
+  <div class="pos">
+    <div class="cttl">שני פתרונות</div>
+    <svg viewBox="0 0 120 74" width="120" height="74" role="img" aria-label="פרבולה שחותכת את ציר איקס בשתי נקודות">
+      <line x1="8" y1="52" x2="112" y2="52" stroke="#94A3B8" stroke-width="1.3"/>
+      <path d="M25,12 Q60,104 95,12" fill="none" stroke="#2E6F8E" stroke-width="2.4"/>
+      <circle cx="42" cy="52" r="3.6" fill="#2E7D32"/><circle cx="78" cy="52" r="3.6" fill="#2E7D32"/>
+    </svg>
+    <div class="csub"><span class="fi">\(\Delta&gt;0\)</span><br>השורש של מספר חיובי,
+      וה-<span class="fi">\(\pm\)</span> מפצל לשניים</div>
+  </div>
+  <div class="zero">
+    <div class="cttl">פתרון אחד</div>
+    <svg viewBox="0 0 120 74" width="120" height="74" role="img" aria-label="פרבולה שמשיקה לציר איקס בנקודה אחת">
+      <line x1="8" y1="52" x2="112" y2="52" stroke="#94A3B8" stroke-width="1.3"/>
+      <path d="M28,12 Q60,92 92,12" fill="none" stroke="#2E6F8E" stroke-width="2.4"/>
+      <circle cx="60" cy="52" r="3.6" fill="#8A6D1B"/>
+    </svg>
+    <div class="csub"><span class="fi">\(\Delta=0\)</span><br>השורש הוא אפס,
+      ולכן <span class="fi">\(+0\)</span> ו-<span class="fi">\(-0\)</span> זה אותו דבר</div>
+  </div>
+  <div class="neg">
+    <div class="cttl">אין פתרון</div>
+    <svg viewBox="0 0 120 74" width="120" height="74" role="img" aria-label="פרבולה שכולה מעל ציר איקס ואינה חותכת אותו">
+      <line x1="8" y1="52" x2="112" y2="52" stroke="#94A3B8" stroke-width="1.3"/>
+      <path d="M30,10 Q60,66 90,10" fill="none" stroke="#2E6F8E" stroke-width="2.4"/>
+    </svg>
+    <div class="csub"><span class="fi">\(\Delta&lt;0\)</span><br>אין שורש למספר שלילי,
+      ולכן אין מה לחשב</div>
+  </div>
+</div>
+
+<div class="box intuition">
+  <div class="box-title">והציורים אינם קישוט</div>
+  שלושת הציורים הם גרפים של <a href="../functions/index.html">הפרבולה</a>,
+  שהיא הנושא של המודול הבא. פתרונות המשוואה
+  <span class="fi">\(ax^{2}+bx+c=0\)</span> הם <strong>בדיוק</strong>
+  נקודות החיתוך של הפרבולה עם ציר <span class="fi">\(x\)</span>.
+  <br>לכן "אין פתרון" אינו כישלון — הוא אומר שהעקומה כולה מעל הציר
+  (או כולה מתחתיו) ופשוט לא נוגעת בו.
+</div>
+
+<div class="nb" data-nb>
+  <div class="nb-head"><b>בונים ביחד במחברת</b><span class="nb-count"></span></div>
+  <ol class="nb-steps">
+    <li class="nb-step"><b>התרגיל</b>
+      <p>לפתור בנוסחה: <span class="fi">\(2x^{2}-7x+3=0\)</span></p>
+    </li>
+    <li class="nb-step"><b>קוראים את שלושת המקדמים — עם הסימנים</b>
+      <p>$$a=2\qquad b=-7\qquad c=3$$</p>
+    </li>
+    <li class="nb-step"><b>קודם הדיסקרימיננטה לבדה</b>
+      <p>$$\Delta=b^{2}-4ac=(-7)^{2}-4\cdot2\cdot3=49-24=25$$
+      חיובית, ויש לה שורש שלם — סימן טוב. יהיו שני פתרונות נאים.</p>
+    </li>
+    <li class="nb-step"><b>מציבים בנוסחה</b>
+      <p>$$x_{1,2}=\frac{-(-7)\pm\sqrt{25}}{2\cdot 2}=\frac{7\pm5}{4}$$
+      שימי לב ל-<span class="fi">\(-(-7)=+7\)</span>.</p>
+    </li>
+    <li class="nb-step"><b>מפצלים לשני חישובים</b>
+      <p>$$x_{1}=\frac{7+5}{4}=3
+        \qquad\qquad
+        x_{2}=\frac{7-5}{4}=\frac{1}{2}$$</p>
+    </li>
+    <li class="nb-step"><b>בדיקה</b>
+      <p>ל-<span class="fi">\(x=3\)</span>:
+      <span class="fi">\(18-21+3=0\)</span> ✓
+      <br>ל-<span class="fi">\(x=0.5\)</span>:
+      <span class="fi">\(0.5-3.5+3=0\)</span> ✓</p>
+    </li>
+  </ol>
+</div>
+
+<!-- ============ 5. תרגול ============ -->
+<h2 id="sec-practice"><span class="num">5</span>תרגול — משלב לשלב</h2>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 1 — כבר מפורק</h4></div>
+  <p class="q-text"><span class="mk mk-find">פתרי:</span>
+    <span class="fi">\((x-4)(x+7)=0\)</span></p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$x-4=0\;\Rightarrow\;x_{1}=4
+        \qquad x+7=0\;\Rightarrow\;x_{2}=-7$$
+      שימי לב שהסימן <strong>מתהפך</strong>: הסוגריים
+      <span class="fi">\((x+7)\)</span> נותנים פתרון
+      <span class="fi">\(-7\)</span>.
+    </div>
+  </details>
+  <div class="q-row">
+    <span>הפתרון החיובי:</span>
+    <input class="q-input" data-answer="4" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <span>והשלילי:</span>
+    <input class="q-input" data-answer="-7" inputmode="text" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex1"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 2 — לפרק ואז לאפס</h4></div>
+  <p class="q-text"><span class="mk mk-find">פתרי:</span>
+    <span class="fi">\(x^{2}-9x+20=0\)</span></p>
+  <details class="step"><summary>שלב ראשון — טרינום</summary>
+    <div class="step-body">מכפלה 20, סכום <span class="fi">\(-9\)</span>:
+    שניהם שליליים — <span class="fi">\(-4\)</span> ו-<span class="fi">\(-5\)</span>.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$(x-4)(x-5)=0\;\Longrightarrow\;x_{1}=4,\ x_{2}=5$$
+      בדיקה ל-<span class="fi">\(x=4\)</span>:
+      <span class="fi">\(16-36+20=0\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row">
+    <span>הפתרון הקטן:</span>
+    <input class="q-input" data-answer="4" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <span>והגדול:</span>
+    <input class="q-input" data-answer="5" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex2"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 3 — אין איבר חופשי</h4></div>
+  <p class="q-text"><span class="mk mk-find">פתרי:</span>
+    <span class="fi">\(x^{2}=7x\)</span></p>
+  <details class="step"><summary>שלב ראשון — לא לחלק!</summary>
+    <div class="step-body">מעבירים הכול לאגף אחד:
+    <span class="fi">\(x^{2}-7x=0\)</span>, ומוציאים גורם משותף.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$x^{2}-7x=0\;\Longrightarrow\;x(x-7)=0$$
+      $$x_{1}=0\qquad x_{2}=7$$
+      מי שחילקה ב-<span class="fi">\(x\)</span> קיבלה רק את
+      <span class="fi">\(7\)</span> ואיבדה חצי מהתשובה.
+    </div>
+  </details>
+  <div class="q-row">
+    <span>הפתרון הראשון:</span>
+    <input class="q-input" data-answer="0" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <span>והשני:</span>
+    <input class="q-input" data-answer="7" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex3"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 4 — הפרש ריבועים</h4></div>
+  <p class="q-text"><span class="mk mk-find">פתרי:</span>
+    <span class="fi">\(x^{2}-36=0\)</span></p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$x^{2}-36=(x-6)(x+6)=0\;\Longrightarrow\;x_{1,2}=\pm 6$$
+      אפשר גם ישירות: <span class="fi">\(x^{2}=36\)</span>, ולכן
+      <span class="fi">\(x=\pm6\)</span> — <strong>שני</strong> שורשים,
+      חיובי ושלילי. זו טעות נפוצה לכתוב רק 6.
+    </div>
+  </details>
+  <div class="q-row">
+    <span>הפתרון החיובי:</span>
+    <input class="q-input" data-answer="6" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex4"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 5 — קודם לסדר</h4></div>
+  <p class="q-text"><span class="mk mk-find">פתרי:</span>
+    <span class="fi">\(x^{2}+4x=21\)</span></p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$x^{2}+4x-21=0$$
+      מכפלה <span class="fi">\(-21\)</span>, סכום <span class="fi">\(4\)</span>:
+      <span class="fi">\(7\)</span> ו-<span class="fi">\(-3\)</span>.
+      $$(x+7)(x-3)=0\;\Longrightarrow\;x_{1}=-7,\ x_{2}=3$$
+    </div>
+  </details>
+  <div class="q-row">
+    <span>הפתרון החיובי:</span>
+    <input class="q-input" data-answer="3" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <span>והשלילי:</span>
+    <input class="q-input" data-answer="-7" inputmode="text" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex5"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 6 — בנוסחה</h4></div>
+  <p class="q-text"><span class="mk mk-find">פתרי בעזרת הנוסחה:</span>
+    <span class="fi">\(x^{2}-6x+8=0\)</span></p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$a=1,\quad b=-6,\quad c=8$$
+      $$\Delta=(-6)^{2}-4\cdot1\cdot8=36-32=4$$
+      $$x_{1,2}=\frac{6\pm\sqrt{4}}{2}=\frac{6\pm2}{2}$$
+      $$x_{1}=4\qquad x_{2}=2$$
+      (אפשר היה גם לפרק לטרינום ולקבל אותו דבר — הנוסחה פשוט תמיד עובדת.)
+    </div>
+  </details>
+  <div class="q-row">
+    <span class="fi">\(\Delta=\)</span>
+    <input class="q-input" data-answer="4" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <span>הפתרון הגדול:</span>
+    <input class="q-input" data-answer="4" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex6"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 7 — כמה פתרונות, בלי לפתור</h4></div>
+  <p class="q-text">
+    <span class="mk mk-find">כמה פתרונות יש ל-</span>
+    <span class="fi">\(x^{2}+2x+5=0\)</span>?
+    <span class="mk mk-find">נמקי בלי לפתור.</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$\Delta=2^{2}-4\cdot1\cdot5=4-20=-16$$
+      הדיסקרימיננטה שלילית, ואין שורש למספר שלילי — ולכן
+      <strong>אין פתרון</strong>.
+      <br>מבחינת הגרף: הפרבולה הזאת יושבת כולה מעל ציר
+      <span class="fi">\(x\)</span> ואינה נוגעת בו.
+    </div>
+  </details>
+  <div class="q-row">
+    <span class="fi">\(\Delta=\)</span>
+    <input class="q-input" data-answer="-16" inputmode="text" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <span>מספר הפתרונות:</span>
+    <input class="q-input" data-answer="0" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex7"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 8 — פתרון כפול</h4></div>
+  <p class="q-text"><span class="mk mk-find">פתרי:</span>
+    <span class="fi">\(x^{2}-8x+16=0\)</span></p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      זהו ריבוע שלם:
+      $$(x-4)^{2}=0\;\Longrightarrow\;x=4$$
+      ובנוסחה מקבלים את אותו דבר:
+      <span class="fi">\(\Delta=64-64=0\)</span>, ולכן
+      <span class="fi">\(x=\frac{8\pm0}{2}=4\)</span>.
+      <br><strong>פתרון אחד בלבד</strong> — שני הגורמים זהים, ולכן שניהם
+      מובילים לאותו מספר. הפרבולה משיקה לציר.
+    </div>
+  </details>
+  <div class="q-row">
+    <span class="fi">\(x=\)</span>
+    <input class="q-input" data-answer="4" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex8"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 9 — עם מקדם לפני <span class="fi">\(x^{2}\)</span></h4></div>
+  <p class="q-text"><span class="mk mk-find">פתרי:</span>
+    <span class="fi">\(3x^{2}-12x=0\)</span></p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      גורם משותף <span class="fi">\(3x\)</span>:
+      $$3x(x-4)=0\;\Longrightarrow\;x_{1}=0,\ x_{2}=4$$
+      המקדם <span class="fi">\(3\)</span> אינו נותן פתרון — הוא מספר קבוע
+      שלעולם אינו אפס. רק גורמים שיש בהם <span class="fi">\(x\)</span>
+      תורמים פתרון.
+    </div>
+  </details>
+  <div class="q-row">
+    <span>הפתרון שאינו אפס:</span>
+    <input class="q-input" data-answer="4" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex9"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 10 — בסגנון המפמ״ר: מתי פתרון נפסל</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">בסיס של משולש ארוך ב-5 ס״מ מגובהו</span>,
+    <span class="mk mk-given">ושטח המשולש 42 סמ״ר</span>.
+    <span class="mk mk-find">מהו הגובה?</span>
+  </p>
+  <details class="step"><summary>שלב ראשון — לסמן ולבנות משוואה</summary>
+    <div class="step-body">נסמן את הגובה <span class="fi">\(x\)</span>,
+    ואז הבסיס הוא <span class="fi">\(x+5\)</span>. נוסחת שטח המשולש:
+    <span class="fi">\(\frac{(x+5)\cdot x}{2}=42\)</span>.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$\frac{x(x+5)}{2}=42\;\Longrightarrow\;x(x+5)=84$$
+      $$x^{2}+5x-84=0$$
+      מכפלה <span class="fi">\(-84\)</span> וסכום <span class="fi">\(5\)</span>:
+      המספרים <span class="fi">\(12\)</span> ו-<span class="fi">\(-7\)</span>.
+      $$(x+12)(x-7)=0\;\Longrightarrow\;x_{1}=-12,\ x_{2}=7$$
+      <strong>וכאן החלק שנותן את הנקודות:</strong> גובה של משולש אינו יכול
+      להיות <span class="fi">\(-12\)</span> ס״מ. הפתרון הזה נפסל לא בגלל
+      חשבון — הוא נכון מתמטית — אלא בגלל <em>הסיפור</em>.
+      <br>התשובה: הגובה <strong>7 ס״מ</strong> (והבסיס 12 ס״מ).
+      <br>בדיקה: <span class="fi">\(\frac{12\cdot7}{2}=42\)</span> ✓
+      <br><br>בכל שאלה מילולית שמגיעה למשוואה ריבועית — לבדוק אם שני
+      הפתרונות באמת הגיוניים. אורך, גובה, מחיר ומספר אנשים אינם שליליים.
+    </div>
+  </details>
+  <div class="q-row">
+    <span>הגובה (ס״מ):</span>
+    <input class="q-input" data-answer="7" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <span>והבסיס:</span>
+    <input class="q-input" data-answer="12" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex10"> סיימתי את התרגיל הזה</label>
+</article>
+
+<div class="box def" style="margin-top:26px">
+  <div class="box-title">מה לקחת מכאן</div>
+  <strong>קודם מסדרים מול אפס</strong> — בלי זה שום דבר לא עובד.
+  אחר כך מנסים לפרק, ואם לא מסתדר, הנוסחה תמיד שם.
+  ובשאלה מילולית — לבדוק שגם הסיפור מסכים עם התשובה, לא רק החשבון.
+</div>
+
+
+<div class="watch">
+  <h3>רוצה לראות את זה מוסבר בקול?</h3>
+  <p>הסרטונים הם תגבור, לא חובה — ומי שהעמוד הספיק לה יכולה לדלג.</p>
+  <a class="video-link" href="https://www.youtube.com/watch?v=1Xvb2WxmrzI" target="_blank" rel="noopener">
+    <img src="../../assets/g9-vids/1Xvb2WxmrzI.jpg" alt="משוואה ריבועית — נוסחת השורשים — תמונה מהסרטון" loading="lazy">
+    <span class="vt"><b>בואו ללמוד משוואות ריבועיות - נוסחת השורשים</b><span>נוסחת השורשים — מתי משתמשים בה ואיך מציבים · 8:00 · פתרון פשוט</span></span>
+    <span class="play">▶</span>
+  </a>
+</div>
+
+<div class="progresswrap no-print">
+  <span class="progressbar"><i></i></span><span class="progress-label"></span>
+  <button class="all-sols" style="font-family:inherit;font-size:12px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:4px 10px;cursor:pointer">לפתוח את כל הפתרונות</button>
+</div>
+
+<nav class="pagenav">
+  <a href="04-algebraic-fractions.html"><span class="dir">→ הקודם</span>שברים אלגבריים</a>
+  <a class="next" href="05b-equations-plus.html"><span class="dir">הבא ←</span>משוואות עם שברים ומערכות ממעלה שנייה</a>
+</nav>
+
+<footer class="fin">חלק מהעולם של שירה ·
+<a href="../../index.html">חזרה למרכז</a> ·
+<a href="index.html">מפת האלגברה</a></footer>
+</main>
+</div>
+</body>
+</html>

@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<link rel="apple-touch-icon" href="../../assets/icons/icon-180.png">
+<link rel="manifest" href="../../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>פירוק לגורמים — אלגברה ט׳ — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../../vendor/katex.min.css">
+<link rel="stylesheet" href="../../css/shira.css">
+<style>
+:root{--accent:#2E6F8E}
+/* שלושת הכיוונים — כרטיס לכל דרך, בסדר שבו בודקים אותן */
+.ways{display:flex; flex-direction:column; gap:10px; margin:14px 0}
+.way{display:flex; gap:12px; align-items:flex-start; border:1px solid var(--line);
+  border-radius:var(--r-md); background:var(--card); padding:12px 15px}
+.way .wn{flex:0 0 auto; width:27px; height:27px; border-radius:8px; color:#fff;
+  font-weight:800; font-size:14px; display:flex; align-items:center; justify-content:center}
+.way.w1 .wn{background:#2E7D32} .way.w2 .wn{background:#1D6FA5} .way.w3 .wn{background:#8A6D1B}
+.way .wb{min-width:0}
+.way .wb b{display:block; font-size:15.5px; margin-bottom:2px}
+.way .wb .when{font-size:13px; color:var(--soft); line-height:1.55}
+.way .katex-display{margin:.45em 0}
+/* עץ ההחלטה — טבלת "כמה איברים ⟵ מה עושים" */
+table.decide td:first-child{white-space:nowrap; font-weight:700}
+</style>
+<script defer src="../../vendor/katex.min.js"></script>
+<script defer src="../../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../../js/shira.js"></script>
+</head>
+<body data-page="g9alg:03-factoring">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">אלגברה ט׳ — המפה</a>
+    <span class="crumbs">תחנה <b>4</b> מתוך 8 · <b>פירוק לגורמים</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">אלגברה · כיתה ט׳ · תחנה 4</div>
+  <h1>פירוק לגורמים</h1>
+  <p class="lead">
+    זו התחנה המרכזית של השנה. פירוק לגורמים הוא הכיוון ההפוך של פתיחת
+    סוגריים: לוקחים ביטוי ארוך שמחובר, וכותבים אותו בחזרה כ<strong>מכפלה</strong>.
+    שלוש דרכים, ובודקים אותן תמיד באותו סדר.
+  </p>
+  <p class="youknow"><b>בסוף העמוד תדעי:</b> להוציא גורם משותף, כולל כשהוא
+  אות · לזהות מתי הביטוי הוא נוסחת כפל מקוצר · לפרק טרינום בשיטת "מכפלה
+  וסכום" · ובעיקר — <strong>להחליט לבד</strong> באיזו דרך ללכת, לפי כמה
+  איברים יש בביטוי.</p>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>≈ 40 דק׳</b> · 11 תרגילים</span>
+    <a class="pm-jump" href="#sec-practice">לקפוץ ישר לתרגילים ↓</a>
+  </p>
+</header>
+
+<!-- ============ 1. למה ============ -->
+<h2 id="sec-why"><span class="num">1</span>למה זה הנושא הכי חשוב השנה</h2>
+
+<p>
+  התשובה הקצרה: כי אי אפשר בלעדיו. שלושת הנושאים הגדולים שנשארו בשנה נשענים
+  עליו ישירות, ואף אחד מהם לא נפתר בלי לפרק קודם.
+</p>
+
+<table class="dtable">
+  <tr><th>הנושא</th><th>מה פירוק לגורמים עושה שם</th></tr>
+  <tr><td>משוואה ריבועית</td>
+      <td>מכפלה ששווה אפס מתפרקת לשתי משוואות פשוטות — וזו כל השיטה.</td></tr>
+  <tr><td>שברים אלגבריים</td>
+      <td>אי אפשר לצמצם סכום. רק אחרי שהמונה והמכנה הפכו למכפלות אפשר לצמצם.</td></tr>
+  <tr><td>הפרבולה</td>
+      <td>נקודות החיתוך עם ציר <span class="fi">\(x\)</span> נקראות ישר מהגורמים.</td></tr>
+</table>
+
+<div class="box intuition">
+  <div class="box-title">אותו רעיון, במספרים רגילים</div>
+  לפרק את <span class="fi">\(12\)</span> לגורמים זה לכתוב
+  <span class="fi">\(12=3\cdot 4\)</span> — במקום סכום, מכפלה. את עושה את זה
+  מאז כיתה ד׳, כשמצאת מכנה משותף.
+  <br>ההבדל היחיד עכשיו: מפרקים ביטוי עם <span class="fi">\(x\)</span> במקום
+  מספר. הרעיון זהה לגמרי.
+</div>
+
+<!-- ============ 2. הסדר ============ -->
+<h2 id="sec-order"><span class="num">2</span>שלוש הדרכים — ותמיד באותו סדר</h2>
+
+<p>
+  הדבר היחיד שצריך לזכור מהעמוד הזה הוא <strong>הסדר</strong>. תמיד בודקים
+  אותן אחת-אחת, מלמעלה למטה, ועוצרים בראשונה שמתאימה.
+</p>
+
+<div class="ways">
+  <div class="way w1">
+    <span class="wn">1</span>
+    <span class="wb">
+      <b>הוצאת גורם משותף</b>
+      <span class="when">בודקים <strong>תמיד</strong> ראשון, ולא משנה כמה
+      איברים יש. אם יש משהו שמשותף לכולם — מוציאים אותו החוצה.</span>
+      $$6x^{2}+9x=3x(2x+3)$$
+    </span>
+  </div>
+  <div class="way w2">
+    <span class="wn">2</span>
+    <span class="wb">
+      <b>נוסחאות הכפל המקוצר</b>
+      <span class="when">כשנשארו <strong>שני</strong> איברים עם מינוס
+      (הפרש ריבועים), או <strong>שלושה</strong> שהקצוות שלהם ריבועים.</span>
+      $$x^{2}-49=(x-7)(x+7)$$
+    </span>
+  </div>
+  <div class="way w3">
+    <span class="wn">3</span>
+    <span class="wb">
+      <b>טרינום</b>
+      <span class="when">שלושה איברים שאינם ריבוע שלם. מחפשים שני מספרים
+      לפי מכפלה וסכום.</span>
+      $$x^{2}+5x+6=(x+2)(x+3)$$
+    </span>
+  </div>
+</div>
+
+<div class="box warn">
+  <div class="box-title">למה הסדר חשוב באמת</div>
+  ניקח את <span class="fi">\(2x^{2}-18\)</span>. מי שקופצת ישר לנוסחאות
+  מסתבכת — <span class="fi">\(2x^{2}\)</span> אינו ריבוע נאה.
+  <br>אבל מי שבדקה קודם גורם משותף רואה מיד שאפשר להוציא
+  <span class="fi">\(2\)</span>:
+  $$2x^{2}-18=2(x^{2}-9)=2(x-3)(x+3)$$
+  ואחרי ההוצאה, מה שנשאר בסוגריים הוא הפרש ריבועים פשוט.
+  <strong>הוצאת גורם משותף כמעט תמיד מקלה על מה שבא אחריה.</strong>
+</div>
+
+<div class="box def">
+  <div class="box-title">עץ ההחלטה — לפי מספר האיברים</div>
+  <table class="dtable decide">
+    <tr><th>אחרי הוצאת גורם משותף נשארו…</th><th>הדרך</th></tr>
+    <tr><td>שני איברים, עם מינוס</td><td>הפרש ריבועים</td></tr>
+    <tr><td>שני איברים, עם פלוס</td><td>אין פירוק — עוצרים</td></tr>
+    <tr><td>שלושה איברים, הקצוות ריבועים והאמצעי מתאים</td><td>ריבוע של סוגריים</td></tr>
+    <tr><td>שלושה איברים, אחרת</td><td>טרינום</td></tr>
+  </table>
+</div>
+
+<!-- ============ 3. גורם משותף ============ -->
+<h2 id="sec-common"><span class="num">3</span>דרך 1 — הוצאת גורם משותף</h2>
+
+<p>
+  זהו חוק הפילוג לאחור. במקום לפתוח
+  <span class="fi">\(3x(2x+3)\)</span> ולקבל
+  <span class="fi">\(6x^{2}+9x\)</span>, הולכים מהסוף להתחלה.
+  שואלים שתי שאלות נפרדות:
+</p>
+
+<div class="fbox">
+  <div class="fbox-title">שתי שאלות, ותשובה אחת</div>
+  $$\underbrace{6x^{2}+9x}_{\text{?}}
+    \;=\;\underbrace{3}_{\text{gcd}(6,9)}\cdot
+       \underbrace{x}_{\min(x^{2},x)}\cdot(2x+3)$$
+  <span class="f-legend">
+    <span>מה המספר הגדול ביותר שמחלק את <strong>כל</strong> המקדמים</span>
+    <span>ומה החזקה <strong>הנמוכה ביותר</strong> של האות שמופיעה בכולם</span>
+  </span>
+</div>
+
+<div class="nb" data-nb>
+  <div class="nb-head"><b>בונים ביחד במחברת</b><span class="nb-count"></span></div>
+  <ol class="nb-steps">
+    <li class="nb-step"><b>התרגיל</b>
+      <p>לפרק: <span class="fi">\(12a^{3}b-18a^{2}b^{2}\)</span></p>
+    </li>
+    <li class="nb-step"><b>המקדמים</b>
+      <p><span class="fi">\(12\)</span> ו-<span class="fi">\(18\)</span>.
+      המחלק המשותף הגדול ביותר שלהם הוא <span class="fi">\(6\)</span>.</p>
+    </li>
+    <li class="nb-step"><b>האות <span class="fi">\(a\)</span></b>
+      <p>מופיעה כ-<span class="fi">\(a^{3}\)</span> וכ-<span class="fi">\(a^{2}\)</span>.
+      לוקחים את <strong>החזקה הנמוכה</strong>:
+      <span class="fi">\(a^{2}\)</span>. הגיוני — אי אפשר להוציא שלושה
+      עותקים ממקום שיש בו רק שניים.</p>
+    </li>
+    <li class="nb-step"><b>האות <span class="fi">\(b\)</span></b>
+      <p>מופיעה כ-<span class="fi">\(b\)</span> וכ-<span class="fi">\(b^{2}\)</span>.
+      הנמוכה היא <span class="fi">\(b\)</span>.</p>
+    </li>
+    <li class="nb-step"><b>הגורם המשותף המלא</b>
+      <p><span class="fi">\(6a^{2}b\)</span>. עכשיו מחלקים כל איבר בו:
+      $$\frac{12a^{3}b}{6a^{2}b}=2a
+        \qquad\qquad
+        \frac{18a^{2}b^{2}}{6a^{2}b}=3b$$</p>
+    </li>
+    <li class="nb-step"><b>כותבים ובודקים</b>
+      <p>$$12a^{3}b-18a^{2}b^{2}=6a^{2}b(2a-3b)$$
+      בדיקה — פותחים בחזרה:
+      <span class="fi">\(6a^{2}b\cdot 2a=12a^{3}b\)</span> ✓ ו-<span class="fi">\(6a^{2}b\cdot 3b=18a^{2}b^{2}\)</span> ✓</p>
+    </li>
+  </ol>
+</div>
+
+<div class="box warn">
+  <div class="box-title">כשהאיבר עצמו יוצא כולו</div>
+  ב-<span class="fi">\(5x^{2}+5x\)</span> הגורם המשותף הוא
+  <span class="fi">\(5x\)</span>, והאיבר השני מתחלק בו לגמרי. מה נשאר ממנו?
+  <span class="fi">\(1\)</span> — ולא כלום:
+  $$5x^{2}+5x=5x(x+1)$$
+  אם כותבים <span class="fi">\(5x(x)\)</span> ומאבדים את ה-1, הפירוק שגוי.
+  הבדיקה בפתיחה חוזרת תופסת את זה מיד.
+</div>
+
+<!-- ============ 4. טרינום ============ -->
+<h2 id="sec-trinomial"><span class="num">4</span>דרך 3 — טרינום</h2>
+
+<p>
+  טרינום הוא ביטוי מהצורה <span class="fi">\(x^{2}+bx+c\)</span>. כדי לפרק
+  אותו מחפשים שני מספרים, ויש להם בדיוק שתי דרישות — ותמיד באותו סדר:
+</p>
+
+<div class="fbox">
+  <div class="fbox-title">מכפלה וסכום</div>
+  $$x^{2}+\underbrace{5}_{\text{סכום}}x+\underbrace{6}_{\text{מכפלה}}
+    \;=\;(x+2)(x+3)$$
+  <span class="f-legend">
+    <span>שני המספרים ש<strong>מכפלתם</strong> היא האיבר החופשי (6)</span>
+    <span>ו<strong>סכומם</strong> הוא מקדם <span class="fi">\(x\)</span> (5)</span>
+  </span>
+</div>
+
+<p>
+  ולמה זה עובד? כי כשפותחים <span class="fi">\((x+p)(x+q)\)</span> מקבלים
+  <span class="fi">\(x^{2}+(p+q)x+pq\)</span> — הסכום נוחת על
+  <span class="fi">\(x\)</span> והמכפלה על האיבר החופשי. אנחנו פשוט הולכות
+  אחורה.
+</p>
+
+<div class="box def">
+  <div class="box-title">מאיפה מתחילים לחפש — תמיד מהמכפלה</div>
+  למכפלה יש מעט אפשרויות, ולסכום יש אינסוף. לכן מונים את זוגות המחלקים של
+  האיבר החופשי, ורק אז בודקים איזה זוג נותן את הסכום הנכון.
+  <br><br>
+  <strong>ומה הסימנים אומרים לך מראש:</strong>
+  <table class="dtable decide" style="margin-top:8px">
+    <tr><th>האיבר החופשי</th><th>מקדם <span class="fi">\(x\)</span></th><th>שני המספרים</th></tr>
+    <tr><td>חיובי</td><td>חיובי</td><td>שניהם חיוביים</td></tr>
+    <tr><td>חיובי</td><td>שלילי</td><td>שניהם שליליים</td></tr>
+    <tr><td>שלילי</td><td>כלשהו</td><td>אחד חיובי ואחד שלילי</td></tr>
+  </table>
+  הטבלה הזאת חוסכת חצי מהניסיונות.
+</div>
+
+<div class="nb" data-nb>
+  <div class="nb-head"><b>בונים ביחד במחברת</b><span class="nb-count"></span></div>
+  <ol class="nb-steps">
+    <li class="nb-step"><b>התרגיל</b>
+      <p>לפרק: <span class="fi">\(y^{2}-5y+6\)</span>
+      <br><span style="font-size:13px;color:var(--soft)">מדף העבודה השבועי
+      מס׳ 2 של משרד החינוך לכיתה ט׳.</span></p>
+    </li>
+    <li class="nb-step"><b>קוראים את הסימנים</b>
+      <p>האיבר החופשי <span class="fi">\(+6\)</span> חיובי, ומקדם
+      <span class="fi">\(y\)</span> הוא <span class="fi">\(-5\)</span> שלילי.
+      לפי הטבלה: <strong>שני המספרים שליליים</strong>.</p>
+    </li>
+    <li class="nb-step"><b>מונים את זוגות המחלקים של 6</b>
+      <p>$$6=1\cdot 6\qquad 6=2\cdot 3$$
+      עם המינוסים: <span class="fi">\((-1,-6)\)</span> או
+      <span class="fi">\((-2,-3)\)</span>. רק שתי אפשרויות.</p>
+    </li>
+    <li class="nb-step"><b>בודקים את הסכום</b>
+      <p>$$-1+(-6)=-7\qquad\qquad -2+(-3)=-5\;\checkmark$$
+      הזוג השני הוא הנכון.</p>
+    </li>
+    <li class="nb-step"><b>כותבים ובודקים</b>
+      <p>$$y^{2}-5y+6=(y-2)(y-3)$$
+      פותחים בחזרה:
+      <span class="fi">\(y^{2}-3y-2y+6=y^{2}-5y+6\)</span> ✓</p>
+    </li>
+  </ol>
+</div>
+
+<div class="box intuition">
+  <div class="box-title">כשיש מקדם לפני <span class="fi">\(x^{2}\)</span></div>
+  בטרינום כמו <span class="fi">\(2y^{2}-72\)</span> או
+  <span class="fi">\(3x^{2}+15x+18\)</span> — קודם בודקים גורם משותף,
+  ולרוב הוא פותר את הבעיה:
+  $$3x^{2}+15x+18=3(x^{2}+5x+6)=3(x+2)(x+3)$$
+  אחרי ההוצאה נשאר טרינום פשוט עם <span class="fi">\(x^{2}\)</span> נקי,
+  ואיתו את כבר יודעת לעבוד. זו עוד הוכחה לכך שדרך 1 באה ראשונה.
+</div>
+
+<!-- ============ 5. תרגול ============ -->
+<h2 id="sec-practice"><span class="num">5</span>תרגול — משלב לשלב</h2>
+
+<p style="font-size:13.5px;color:var(--soft)">
+  שימי לב: מתרגיל 7 והלאה <strong>לא כתוב באיזו דרך ללכת</strong> — וזה
+  בדיוק מה שיקרה במבחן. ההחלטה היא חלק מהתרגיל.
+</p>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 1 — גורם משותף מספרי</h4></div>
+  <p class="q-text"><span class="mk mk-find">פרקי:</span>
+    <span class="fi">\(8x+20\)</span></p>
+  <details class="step"><summary>שלב ראשון — מה מחלק את שניהם</summary>
+    <div class="step-body"><span class="fi">\(8\)</span> ו-<span class="fi">\(20\)</span>
+    מתחלקים ב-<span class="fi">\(4\)</span>. אין אות משותפת —
+    <span class="fi">\(20\)</span> הוא מספר בלבד.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">$$8x+20=4(2x+5)$$
+    בדיקה: <span class="fi">\(4\cdot2x=8x\)</span> ✓ ו-<span class="fi">\(4\cdot5=20\)</span> ✓</div>
+  </details>
+  <div class="q-row">
+    <span>הגורם שיצא:</span>
+    <input class="q-input" data-answer="4" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex1"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 2 — גורם משותף עם אות</h4></div>
+  <p class="q-text"><span class="mk mk-find">פרקי:</span>
+    <span class="fi">\(x^{3}-8x^{2}\)</span>
+    <span style="font-size:13px;color:var(--soft)">(מדף עבודה ט׳ מס׳ 6)</span></p>
+  <details class="step"><summary>שלב ראשון — החזקה הנמוכה</summary>
+    <div class="step-body"><span class="fi">\(x\)</span> מופיעה כ-<span class="fi">\(x^{3}\)</span>
+    וכ-<span class="fi">\(x^{2}\)</span>; מוציאים את הנמוכה,
+    <span class="fi">\(x^{2}\)</span>.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">$$x^{3}-8x^{2}=x^{2}(x-8)$$
+    בדיקה: <span class="fi">\(x^{2}\cdot x=x^{3}\)</span> ✓ ו-<span class="fi">\(x^{2}\cdot 8=8x^{2}\)</span> ✓</div>
+  </details>
+  <div class="q-row">
+    <span>מעריך <span class="fi">\(x\)</span> בגורם שיצא:</span>
+    <input class="q-input" data-answer="2" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex2"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 3 — טרינום פשוט</h4></div>
+  <p class="q-text"><span class="mk mk-find">פרקי:</span>
+    <span class="fi">\(x^{2}+7x+12\)</span></p>
+  <details class="step"><summary>שלב ראשון — הסימנים</summary>
+    <div class="step-body">שניהם חיוביים, ולכן שני המספרים חיוביים.</div>
+  </details>
+  <details class="step"><summary>שלב שני — זוגות המחלקים של 12</summary>
+    <div class="step-body"><span class="fi">\(1\cdot12\)</span> ·
+    <span class="fi">\(2\cdot6\)</span> · <span class="fi">\(3\cdot4\)</span>.
+    הסכומים: 13, 8, 7. השלישי הוא שלנו.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">$$x^{2}+7x+12=(x+3)(x+4)$$</div>
+  </details>
+  <div class="q-row">
+    <span>המספר הקטן:</span>
+    <input class="q-input" data-answer="3" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <span>והגדול:</span>
+    <input class="q-input" data-answer="4" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex3"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 4 — טרינום עם סימן מעורב</h4></div>
+  <p class="q-text"><span class="mk mk-find">פרקי:</span>
+    <span class="fi">\(x^{2}+2x-15\)</span></p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      האיבר החופשי שלילי ⟵ מספר אחד חיובי ואחד שלילי.
+      זוגות המחלקים של 15: <span class="fi">\(1\cdot15\)</span> ו-<span class="fi">\(3\cdot5\)</span>.
+      צריך שההפרש ביניהם יהיה 2, והגדול יהיה החיובי:
+      $$x^{2}+2x-15=(x+5)(x-3)$$
+      בדיקה: <span class="fi">\(-3x+5x=+2x\)</span> ✓ ו-<span class="fi">\(5\cdot(-3)=-15\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row">
+    <span>המספר החיובי:</span>
+    <input class="q-input" data-answer="5" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <span>והשלילי:</span>
+    <input class="q-input" data-answer="-3" inputmode="text" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex4"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 5 — הפרש ריבועים</h4></div>
+  <p class="q-text"><span class="mk mk-find">פרקי:</span>
+    <span class="fi">\(25x^{2}-4\)</span></p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$\sqrt{25x^{2}}=5x\qquad\sqrt{4}=2$$
+      $$25x^{2}-4=(5x-2)(5x+2)$$
+    </div>
+  </details>
+  <div class="q-row">
+    <span>מקדם <span class="fi">\(x\)</span>:</span>
+    <input class="q-input" data-answer="5" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <span>המספר:</span>
+    <input class="q-input" data-answer="2" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex5"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 6 — שני שלבים: גורם משותף ואז נוסחה</h4></div>
+  <p class="q-text"><span class="mk mk-find">פרקי עד הסוף:</span>
+    <span class="fi">\(2y^{2}-72\)</span>
+    <span style="font-size:13px;color:var(--soft)">(מדף עבודה ט׳ מס׳ 2)</span></p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      דרך 1 קודם — גורם משותף <span class="fi">\(2\)</span>:
+      $$2y^{2}-72=2(y^{2}-36)$$
+      ומה שנשאר בסוגריים הוא הפרש ריבועים:
+      $$=2(y-6)(y+6)$$
+      <strong>"עד הסוף" פירושו עד שאי אפשר יותר.</strong> לעצור ב-<span class="fi">\(2(y^{2}-36)\)</span>
+      זו תשובה חלקית, ובמבחן היא מקבלת חלק מהנקודות בלבד.
+    </div>
+  </details>
+  <div class="q-row">
+    <span>הגורם המספרי:</span>
+    <input class="q-input" data-answer="2" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <span>המספר בסוגריים:</span>
+    <input class="q-input" data-answer="6" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex6"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 7 — את מחליטה</h4></div>
+  <p class="q-text"><span class="mk mk-find">פרקי:</span>
+    <span class="fi">\(3x^{2}-27\)</span></p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      גורם משותף <span class="fi">\(3\)</span>, ואז הפרש ריבועים:
+      $$3x^{2}-27=3(x^{2}-9)=3(x-3)(x+3)$$
+    </div>
+  </details>
+  <div class="q-row">
+    <span>הגורם המספרי:</span>
+    <input class="q-input" data-answer="3" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <span>המספר בסוגריים:</span>
+    <input class="q-input" data-answer="3" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex7"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 8 — את מחליטה</h4></div>
+  <p class="q-text"><span class="mk mk-find">פרקי:</span>
+    <span class="fi">\(x^{2}-10x+25\)</span></p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      אין גורם משותף. שלושה איברים, והקצוות ריבועים:
+      <span class="fi">\(x\)</span> ו-<span class="fi">\(5\)</span>.
+      בודקים את האמצעי: <span class="fi">\(2\cdot x\cdot5=10x\)</span> ✓
+      $$x^{2}-10x+25=(x-5)^{2}$$
+      אפשר היה גם דרך טרינום — מכפלה 25 וסכום <span class="fi">\(-10\)</span>
+      נותנים <span class="fi">\(-5\)</span> ו-<span class="fi">\(-5\)</span>,
+      כלומר <span class="fi">\((x-5)(x-5)\)</span>. אותה תשובה בדיוק.
+    </div>
+  </details>
+  <div class="q-row">
+    <span>המספר בסוגריים (עם הסימן):</span>
+    <input class="q-input" data-answer="-5" inputmode="text" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex8"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 9 — את מחליטה</h4></div>
+  <p class="q-text"><span class="mk mk-find">פרקי:</span>
+    <span class="fi">\(4x^{2}+8x\)</span></p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      שני איברים עם פלוס — אין נוסחה. אבל יש גורם משותף:
+      המקדמים מתחלקים ב-<span class="fi">\(4\)</span>, ולשניהם יש
+      <span class="fi">\(x\)</span>.
+      $$4x^{2}+8x=4x(x+2)$$
+    </div>
+  </details>
+  <div class="q-row">
+    <span>המקדם שיצא:</span>
+    <input class="q-input" data-answer="4" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <span>המספר בסוגריים:</span>
+    <input class="q-input" data-answer="2" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex9"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 10 — את מחליטה</h4></div>
+  <p class="q-text"><span class="mk mk-find">פרקי עד הסוף:</span>
+    <span class="fi">\(2x^{3}+10x^{2}+12x\)</span></p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      גורם משותף: <span class="fi">\(2\)</span> מכל המקדמים, ו-<span class="fi">\(x\)</span>
+      מכל האיברים.
+      $$2x^{3}+10x^{2}+12x=2x(x^{2}+5x+6)$$
+      ומה שנשאר הוא הטרינום מסעיף 4:
+      $$=2x(x+2)(x+3)$$
+      <strong>שלושה גורמים</strong> — וזה בסדר גמור. ממשיכים לפרק כל עוד אפשר.
+    </div>
+  </details>
+  <div class="q-row">
+    <span>כמה גורמים בתשובה הסופית:</span>
+    <input class="q-input" data-answer="3" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex10"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 11 — מתי עוצרים</h4></div>
+  <p class="q-text">
+    <span class="mk mk-find">האם אפשר לפרק את
+    <span class="fi">\(x^{2}+16\)</span>?</span> נמקי.
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      <strong>לא.</strong> נעבור על שלוש הדרכים:
+      <ol class="steps">
+        <li>גורם משותף — אין. <span class="fi">\(x^{2}\)</span> ו-<span class="fi">\(16\)</span>
+            לא חולקים כלום.</li>
+        <li>נוסחאות — שני איברים, אבל עם <strong>פלוס</strong>. הפרש ריבועים
+            דורש מינוס, ולסכום ריבועים אין נוסחה.</li>
+        <li>טרינום — צריך שלושה איברים; כאן יש שניים.</li>
+      </ol>
+      אף דרך לא מתאימה, ולכן הביטוי כבר בצורתו הסופית.
+      <br><br><strong>ולמה זה חשוב:</strong> במבחן, "אי אפשר לפרק" היא תשובה
+      לגיטימית ומלאה — כשמנמקים אותה. מה שלא מקבל נקודות זה להמציא פירוק
+      שלא קיים.
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex11"> סיימתי את התרגיל הזה</label>
+</article>
+
+<div class="box def" style="margin-top:26px">
+  <div class="box-title">מה לקחת מכאן</div>
+  לא את שלוש הדרכים — את <strong>הסדר</strong>. גורם משותף תמיד ראשון,
+  ואז לספור איברים: שניים ⟵ נוסחה, שלושה ⟵ ריבוע שלם או טרינום.
+  ולסיים תמיד בפתיחה חוזרת, שהיא הבדיקה הזולה ביותר שיש.
+</div>
+
+
+<div class="watch">
+  <h3>רוצה לראות את זה מוסבר בקול?</h3>
+  <p>הסרטונים הם תגבור, לא חובה — ומי שהעמוד הספיק לה יכולה לדלג.</p>
+  <a class="video-link" href="https://www.youtube.com/watch?v=JK6CC2AbC6k" target="_blank" rel="noopener">
+    <img src="../../assets/g9-vids/JK6CC2AbC6k.jpg" alt="פירוק לגורמים — טרינום — תמונה מהסרטון" loading="lazy">
+    <span class="vt"><b>הבינו פירוק לגורמים בעזרת טרינום ב-6 דקות!</b><span>טרינום מההתחלה: מכפלה וסכום, שלב אחרי שלב · 6:36 · פתרון פשוט</span></span>
+    <span class="play">▶</span>
+  </a>
+</div>
+
+<div class="progresswrap no-print">
+  <span class="progressbar"><i></i></span><span class="progress-label"></span>
+  <button class="all-sols" style="font-family:inherit;font-size:12px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:4px 10px;cursor:pointer">לפתוח את כל הפתרונות</button>
+</div>
+
+<nav class="pagenav">
+  <a href="02b-formula-uses.html"><span class="dir">→ הקודם</span>השימושים בנוסחאות</a>
+  <a class="next" href="04-algebraic-fractions.html"><span class="dir">הבא ←</span>שברים אלגבריים</a>
+</nav>
+
+<footer class="fin">חלק מהעולם של שירה ·
+<a href="../../index.html">חזרה למרכז</a> ·
+<a href="index.html">מפת האלגברה</a></footer>
+</main>
+</div>
+</body>
+</html>

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<link rel="apple-touch-icon" href="../../assets/icons/icon-180.png">
+<link rel="manifest" href="../../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>אוריינות מתמטית — ט׳ — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../../vendor/katex.min.css">
+<link rel="stylesheet" href="../../css/shira.css">
+<style>
+:root{--accent:#2E7D6B}
+/* ארבעת סוגי השאלות */
+.kinds{display:flex; flex-direction:column; gap:10px; margin:16px 0}
+.kind{display:flex; gap:12px; align-items:flex-start; border:1px solid var(--line);
+  border-radius:var(--r-md); background:var(--card); padding:12px 15px}
+.kind .kn{flex:0 0 auto; font-size:20px; line-height:1.2}
+.kind .kb{min-width:0}
+.kind .kb b{display:block; font-size:15px; margin-bottom:2px}
+.kind .kb p{margin:0; font-size:13px; color:var(--soft); line-height:1.6}
+table.tariff td,table.tariff th{text-align:center}
+table.tariff td:first-child,table.tariff th:first-child{text-align:right}
+</style>
+<script defer src="../../vendor/katex.min.js"></script>
+<script defer src="../../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../../js/shira.js"></script>
+</head>
+<body data-page="g9prob:02-literacy">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">הסתברות ט׳ — המפה</a>
+    <span class="crumbs">תחנה <b>2</b> מתוך 2 · <b>אוריינות</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">הסתברות ואוריינות · כיתה ט׳ · תחנה 2</div>
+  <h1>אוריינות מתמטית</h1>
+  <p class="lead">
+    שאלות שנראות כמו סיפור מהחיים ולא כמו מתמטיקה: תעריפים, מבצעים,
+    לוחות זמנים וגרפים מהעיתון. המתמטיקה בהן פשוטה — לרוב חיבור, כפל
+    ואחוזים. <strong>כל הקושי הוא בקריאה</strong>: להבין מה נתון, מה שואלים,
+    ומה בכלל צריך לחשב.
+  </p>
+  <p class="youknow"><b>בסוף העמוד תדעי:</b> לקרוא טבלת תעריפים ולבחור
+  ביניהם · להשוות שני מסלולי מחיר · לקרוא גרף ולענות ממנו · לזהות מה
+  <em>לא</em> צריך לחשב · ולנמק תשובה שאין לה מספר יחיד.</p>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>≈ 35 דק׳</b> · 6 שאלות</span>
+    <a class="pm-jump" href="#sec-practice">לקפוץ ישר לתרגילים ↓</a>
+  </p>
+</header>
+
+<div class="box warn">
+  <div class="box-title">למה הפרק הזה שווה את הזמן</div>
+  במבחן המפמ״ר, הסתברות ואוריינות יחד שוות בין <strong>15 ל-25 נקודות</strong> —
+  עד רבע מהציון. הן גם הפרק שהכי קל לוותר עליו בטעות, כי השאלות נראות
+  "לא מתמטיות" ורבים מדלגים עליהן. זו טעות: הן בדרך כלל הקלות ביותר
+  בשאלון.
+</div>
+
+<!-- ============ 1. השיטה ============ -->
+<h2 id="sec-method"><span class="num">1</span>איך ניגשים — ארבעה צעדים</h2>
+
+<div class="box def">
+  <div class="box-title">קוראים פעמיים, מחשבים פעם אחת</div>
+  <ol class="steps">
+    <li><strong>לקרוא את השאלה בסוף קודם.</strong> מה בדיוק מבקשים? מספר?
+        החלטה? נימוק? זה קובע איזה חלק מהנתונים בכלל רלוונטי.</li>
+    <li><strong>לסמן את הנתונים</strong> ולשים לב ליחידות — שקלים, דקות,
+        אחוזים, ק״מ.</li>
+    <li><strong>לבדוק מה מיותר.</strong> בשאלות אוריינות כמעט תמיד יש
+        נתונים שלא צריך. זה בכוונה.</li>
+    <li><strong>לענות במילים</strong>, לא רק במספר — ובמיוחד כשהשאלה
+        מבקשת להחליט או להמליץ.</li>
+  </ol>
+</div>
+
+<div class="kinds">
+  <div class="kind">
+    <span class="kn">📋</span>
+    <span class="kb"><b>טבלת תעריפים</b>
+      <p>מסלולי מחיר עם תשלום קבוע ותשלום משתנה. השאלה: איזה משתלם, ומתי
+      זה מתהפך.</p></span>
+  </div>
+  <div class="kind">
+    <span class="kn">🏷️</span>
+    <span class="kb"><b>מבצעים והנחות</b>
+      <p>"קנה 3 קבל 1", "50% על השני". השאלה: כמה באמת משלמים, ואיזה מבצע
+      עדיף.</p></span>
+  </div>
+  <div class="kind">
+    <span class="kn">📈</span>
+    <span class="kb"><b>קריאת גרף או טבלה</b>
+      <p>נתונים מהעיתון או מסקר. השאלה: לקרוא ערך, להשוות, או לזהות מגמה.</p></span>
+  </div>
+  <div class="kind">
+    <span class="kn">⏱️</span>
+    <span class="kb"><b>לוחות זמנים ותכנון</b>
+      <p>אוטובוסים, משמרות, מתכונים. השאלה: האם מספיקים, וכמה צריך.</p></span>
+  </div>
+</div>
+
+<!-- ============ 2. תעריפים ============ -->
+<h2 id="sec-tariff"><span class="num">2</span>שני מסלולים — ואיפה הם נפגשים</h2>
+
+<p>
+  זו השאלה הנפוצה ביותר בפרק, והיא בעצם
+  <a href="../../year8/algebra/05-line-equation.html">שני ישרים שנחתכים</a> —
+  רק בלבוש של חשבון חשמל או מנוי לחדר כושר.
+</p>
+
+<div class="nb" data-nb>
+  <div class="nb-head"><b>בונים ביחד במחברת</b><span class="nb-count"></span></div>
+  <ol class="nb-steps">
+    <li class="nb-step"><b>השאלה</b>
+      <p>חברת סלולר מציעה שני מסלולים:
+      <br><strong>א׳</strong> — 30 ₪ קבוע לחודש, ועוד 0.5 ₪ לכל דקת שיחה.
+      <br><strong>ב׳</strong> — 50 ₪ קבוע, ועוד 0.2 ₪ לדקה.
+      <br>איזה מסלול משתלם יותר?</p>
+    </li>
+    <li class="nb-step"><b>קודם — לשים לב שאין תשובה אחת</b>
+      <p>"איזה משתלם" תלוי בכמה מדברים. לכן התשובה תהיה
+      <strong>תנאי</strong>, לא מספר. זה בדיוק מה שהשאלה בודקת.</p>
+    </li>
+    <li class="nb-step"><b>כותבים ביטוי לכל מסלול</b>
+      <p>נסמן ב-<span class="fi">\(x\)</span> את מספר הדקות בחודש:
+      $$A=30+0.5x\qquad\qquad B=50+0.2x$$</p>
+    </li>
+    <li class="nb-step"><b>מוצאים את נקודת ההשוואה</b>
+      <p>משווים ופותרים:
+      $$30+0.5x=50+0.2x$$
+      $$0.3x=20\;\Longrightarrow\;x=66.67$$
+      כלומר בערך <strong>67 דקות</strong> — שם שני המסלולים עולים אותו דבר.</p>
+    </li>
+    <li class="nb-step"><b>בודקים מספר מכל צד</b>
+      <table class="dtable tariff">
+        <tr><th>דקות</th><th>מסלול א׳</th><th>מסלול ב׳</th><th>הזול</th></tr>
+        <tr><td>20</td><td>40 ₪</td><td>54 ₪</td><td>א׳</td></tr>
+        <tr><td>100</td><td>80 ₪</td><td>70 ₪</td><td>ב׳</td></tr>
+      </table>
+    </li>
+    <li class="nb-step"><b>התשובה — במילים</b>
+      <p>למי שמדברת <strong>פחות</strong> מ-67 דקות בחודש, מסלול א׳ זול
+      יותר. למי שמדברת <strong>יותר</strong>, מסלול ב׳.
+      <br><strong>וההיגיון מאחורי זה:</strong> ב׳ גובה יותר בהתחלה אבל פחות
+      לדקה, ולכן הוא משתלם רק כשיש מספיק דקות כדי "להחזיר" את ההפרש
+      הקבוע של 20 ₪.</p>
+    </li>
+  </ol>
+</div>
+
+<!-- ============ 3. מבצעים ============ -->
+<h2 id="sec-deals"><span class="num">3</span>מבצעים — לחשב את המחיר האמיתי</h2>
+
+<p>
+  הכלי היחיד כאן הוא <strong>מחיר ליחידה</strong>. כל מבצע, מסובך ככל
+  שיהיה, מתורגם למספר אחד: כמה עולה פריט אחד בסוף.
+</p>
+
+<div class="box def">
+  <div class="box-title">מבצעים נפוצים ומה הם באמת שווים</div>
+  <table class="dtable tariff">
+    <tr><th>המבצע</th><th>משלמים על</th><th>ההנחה האמיתית</th></tr>
+    <tr><td>קנה 3 קבל 1 חינם</td><td>3 מתוך 4</td><td>25%</td></tr>
+    <tr><td>קנה 2 קבל 1 חינם</td><td>2 מתוך 3</td><td>33.3%</td></tr>
+    <tr><td>50% על השני</td><td>1.5 מתוך 2</td><td>25%</td></tr>
+    <tr><td>1+1</td><td>1 מתוך 2</td><td>50%</td></tr>
+  </table>
+  שימי לב ש"קנה 3 קבל 1" ו"50% על השני" נותנים בדיוק אותה הנחה — למרות
+  שהראשון נשמע נדיב הרבה יותר. זה בדיוק סוג ההשוואה שהשאלות בודקות.
+</div>
+
+<div class="box intuition">
+  <div class="box-title">שני שינויים ברצף — המלכודת הוותיקה</div>
+  הנחה של 20% ואז עוד 20% <strong>אינה</strong> הנחה של 40%.
+  <br>אחרי הראשונה נשארים 80%, ואז לוקחים 80% מזה:
+  $$0.8\cdot 0.8=0.64$$
+  כלומר משלמים 64% — הנחה של <strong>36%</strong>, לא 40%.
+  <br>זה בדיוק אותו
+  <a href="../../year8/algebra/07-percent.html#sec-successive">מקדם הכפל</a>
+  שלמדת בכיתה ח׳.
+</div>
+
+<!-- ============ 4. תרגול ============ -->
+<h2 id="sec-practice"><span class="num">4</span>תרגול</h2>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>שאלה 1 — חניון</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">בחניון משלמים 12 ₪ לשעה הראשונה, ו-8 ₪ לכל
+    שעה נוספת</span>.
+    <span class="mk mk-find">כמה יעלה חניה של 5 שעות?</span>
+  </p>
+  <details class="step"><summary>שלב ראשון — כמה שעות "נוספות"</summary>
+    <div class="step-body">מתוך 5 שעות, אחת היא הראשונה ו-4 נוספות.
+    זה החלק שהכי קל לטעות בו — לא 5 נוספות.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$12+4\cdot 8=12+32=44$$
+      ‏44 ₪.
+      <br>מי שחישבה <span class="fi">\(5\cdot8=40\)</span> או
+      <span class="fi">\(12+5\cdot8=52\)</span> קראה לא נכון את התעריף.
+    </div>
+  </details>
+  <div class="q-row"><span>המחיר (₪):</span>
+    <input class="q-input" data-answer="44" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex1"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>שאלה 2 — איזה מבצע עדיף</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">חולצה עולה 80 ₪</span>.
+    <span class="mk mk-given">חנות א׳: "קנה 2 קבל 1 חינם"</span>.
+    <span class="mk mk-given">חנות ב׳: 30% הנחה על כל פריט</span>.
+    <span class="mk mk-find">איפה משתלם יותר לקנות 3 חולצות?</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      <strong>חנות א׳:</strong> משלמים על 2 בלבד:
+      $$2\cdot 80=160$$
+      <strong>חנות ב׳:</strong> 30% הנחה ⟵ מקדם 0.7 על כל פריט:
+      $$3\cdot 80\cdot 0.7=240\cdot0.7=168$$
+      <strong>חנות א׳ זולה יותר</strong> ב-8 ₪.
+      <br><br>שימי לב שההנחה בחנות א׳ היא בעצם
+      <span class="fi">\(\frac{80}{240}=33.3\%\)</span> — יותר מ-30%,
+      וזו הסיבה שהיא מנצחת. אבל זה נכון <em>רק</em> לקנייה של 3;
+      בקנייה של 2 חולצות דווקא חנות ב׳ עדיפה.
+    </div>
+  </details>
+  <div class="q-row"><span>מחיר בחנות א׳ (₪):</span>
+    <input class="q-input" data-answer="160" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ובחנות ב׳:</span>
+    <input class="q-input" data-answer="168" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex2"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>שאלה 3 — שני מסלולים</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">חדר כושר א׳: 200 ₪ הרשמה ועוד 40 ₪ לחודש</span>.
+    <span class="mk mk-given">חדר כושר ב׳: בלי הרשמה, 60 ₪ לחודש</span>.
+    <span class="mk mk-find">אחרי כמה חודשים המחיר משתווה?</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      נסמן ב-<span class="fi">\(x\)</span> את מספר החודשים:
+      $$200+40x=60x$$
+      $$200=20x\;\Longrightarrow\;x=10$$
+      אחרי <strong>10 חודשים</strong> שני המחירים שווים — 600 ₪ כל אחד.
+      <br>עד אז ב׳ זול יותר, ואחרי כן א׳.
+      <br>בדיקה: א׳ <span class="fi">\(200+400=600\)</span>,
+      ב׳ <span class="fi">\(60\cdot10=600\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row"><span>מספר החודשים:</span>
+    <input class="q-input" data-answer="10" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex3"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>שאלה 4 — שתי הנחות ברצף</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">מעיל עולה 500 ₪</span>.
+    <span class="mk mk-given">בחג ירד מחירו ב-20%, ואחרי החג ירד בעוד 10%</span>.
+    <span class="mk mk-find">מה מחירו הסופי, ובכמה אחוזים ירד בסך הכול?</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      מקדם ראשון <span class="fi">\(0.8\)</span>, שני
+      <span class="fi">\(0.9\)</span>:
+      $$500\cdot 0.8\cdot 0.9=500\cdot 0.72=360$$
+      המחיר הסופי <strong>360 ₪</strong>.
+      <br>המקדם הכולל <span class="fi">\(0.72\)</span> ⟵ משלמים 72%,
+      כלומר ירידה של <strong>28%</strong>.
+      <br><br><strong>ולא 30%.</strong> ההנחה השנייה נלקחת מהמחיר שכבר ירד,
+      ולכן היא "שווה" פחות בשקלים.
+    </div>
+  </details>
+  <div class="q-row"><span>המחיר הסופי (₪):</span>
+    <input class="q-input" data-answer="360" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>אחוז הירידה:</span>
+    <input class="q-input" data-answer="28" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex4"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>שאלה 5 — מתכון</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">מתכון לעוגה ל-8 אנשים דורש 300 גרם קמח,
+    4 ביצים ו-200 מ״ל חלב</span>.
+    <span class="mk mk-find">כמה מכל מרכיב צריך לעוגה ל-12 אנשים?</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      היחס: <span class="fi">\(\frac{12}{8}=1.5\)</span> — צריך פי אחד וחצי
+      מהכול.
+      $$300\cdot1.5=450\ \text{g}\qquad 4\cdot1.5=6\qquad 200\cdot1.5=300\ \text{ml}$$
+      ‏450 גרם קמח, 6 ביצים ו-300 מ״ל חלב.
+      <br><strong>מה שהופך את השאלה לטובה:</strong> הביצים יצאו מספר שלם,
+      וזה לא מובן מאליו. אילו היינו מכינים ל-10 אנשים, היה יוצא
+      <span class="fi">\(4\cdot1.25=5\)</span> — עדיין שלם; אבל ל-9 אנשים
+      היה יוצא 4.5 ביצים, וזו תשובה שצריך להתייחס אליה במילים.
+    </div>
+  </details>
+  <div class="q-row"><span>קמח (גרם):</span>
+    <input class="q-input" data-answer="450" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ביצים:</span>
+    <input class="q-input" data-answer="6" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex5"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>שאלה 6 — נתון מיותר</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">אוטובוס יוצא כל 15 דקות מהשעה 6:00</span>.
+    <span class="mk mk-given">הנסיעה אורכת 40 דקות</span>.
+    <span class="mk mk-given">במחיר של 6 ₪ לנסיעה</span>.
+    <span class="mk mk-find">דנה צריכה להגיע ליעד עד 8:00. מה האוטובוס
+    האחרון שהיא יכולה לתפוס?</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      עובדים <strong>אחורה</strong> מהיעד:
+      $$8{:}00-40\ \text{min}=7{:}20$$
+      צריך אוטובוס שיוצא ב-7:20 או לפני כן.
+      <br>האוטובוסים יוצאים ב-6:00, 6:15, 6:30… כלומר בכל רבע שעה עגול.
+      <span class="fi">\(7{:}15\)</span> ו-<span class="fi">\(7{:}30\)</span>
+      הם המועמדים, ו-7:30 כבר מאחר.
+      <br><strong>התשובה: האוטובוס של 7:15.</strong> הוא יגיע ב-7:55 —
+      חמש דקות לפני הזמן.
+      <br><br><strong>והמחיר?</strong> ‏6 ₪ הוא נתון מיותר לחלוטין. השאלה
+      לא שאלה עליו, והוא נמצא שם רק כדי לבדוק אם את קוראת מה מבקשים.
+      בשאלות אוריינות זה כמעט תמיד המצב.
+    </div>
+  </details>
+  <div class="q-row"><span>השעה (למשל 715):</span>
+    <input class="q-input" data-answer="715" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex6"> סיימתי את התרגיל הזה</label>
+</article>
+
+<div class="box def" style="margin-top:26px">
+  <div class="box-title">מה לקחת מכאן</div>
+  המתמטיקה כאן קלה — ההצלחה תלויה בקריאה. <strong>לקרוא את השאלה
+  לפני הנתונים</strong>, לשים לב ליחידות, לזכור שיש נתונים מיותרים,
+  ולענות במילים כשהתשובה היא החלטה ולא מספר.
+</div>
+
+<div class="progresswrap no-print">
+  <span class="progressbar"><i></i></span><span class="progress-label"></span>
+  <button class="all-sols" style="font-family:inherit;font-size:12px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:4px 10px;cursor:pointer">לפתוח את כל הפתרונות</button>
+</div>
+
+<nav class="pagenav">
+  <a href="01-probability.html"><span class="dir">→ הקודם</span>הסתברות</a>
+  <a class="next" href="index.html"><span class="dir">המפה ←</span>הסתברות ואוריינות</a>
+</nav>
+
+<footer class="fin">חלק מהעולם של שירה ·
+<a href="../../index.html">חזרה למרכז</a> ·
+<a href="index.html">מפת ההסתברות</a></footer>
+</main>
+</div>
+</body>
+</html>

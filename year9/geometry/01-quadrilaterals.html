@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<link rel="apple-touch-icon" href="../../assets/icons/icon-180.png">
+<link rel="manifest" href="../../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>משפחת המרובעים — גאומטריה ט׳ — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../../vendor/katex.min.css">
+<link rel="stylesheet" href="../../css/shira.css">
+<style>
+:root{--accent:#7A4E8C}
+/* כרטיס צורה: ציור, הגדרה, תכונות, ואיך מוכיחים */
+.shapes{display:flex; flex-direction:column; gap:12px; margin:16px 0}
+.shape{border:1px solid var(--line); border-radius:var(--r-md); background:var(--card);
+  overflow:hidden}
+.shape>.sh{display:flex; align-items:baseline; gap:10px; padding:10px 16px 9px;
+  background:#FAF7FC; border-bottom:1px solid #EDE4F2; flex-wrap:wrap}
+.shape>.sh b{font-size:16.5px; font-weight:800}
+.shape>.sh .def{font-size:13px; color:var(--soft)}
+.shape>.sb{display:flex; flex-wrap:wrap; gap:14px; padding:13px 16px 15px; align-items:flex-start}
+/* הציור נדחף לקצה הרחוק (שמאל ב-RTL) כדי שהטקסט יתחיל בקצה הקריאה
+   והחלל בין השניים ייווצר במרכז ולא כשוליים יתומים */
+.shape .art{flex:0 0 auto; width:140px; order:2; margin-inline-start:auto}
+.shape .txt{flex:1 1 260px; min-width:0}
+.shape .txt h5{margin:0 0 3px; font-size:12px; font-weight:800; letter-spacing:.05em;
+  text-transform:uppercase; color:var(--accent)}
+.shape .txt ul{margin:0 0 10px; padding-inline-start:18px; font-size:13.5px; line-height:1.65}
+.shape .txt ul:last-child{margin-bottom:0}
+.shape .txt ul.how{color:var(--soft)}
+.shape .txt ul.how li b{color:var(--ink)}
+/* עץ המשפחה */
+.family{border:1px solid var(--line); border-radius:var(--r-md); background:#FBFAF7;
+  padding:12px 16px 14px; margin:16px 0}
+</style>
+<script defer src="../../vendor/katex.min.js"></script>
+<script defer src="../../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../../js/shira.js"></script>
+</head>
+<body data-page="g9geo:01-quadrilaterals">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">גאומטריה ט׳ — המפה</a>
+    <span class="crumbs">תחנה <b>1</b> מתוך 6 · <b>מרובעים</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">גאומטריה · כיתה ט׳ · תחנה 1</div>
+  <h1>משפחת המרובעים</h1>
+  <p class="lead">
+    חמש צורות, וכל אחת מוגדרת על ידי מה שמייחד אותה. הקושי כאן אינו לזכור
+    תכונות — הוא <strong>לדעת לאיזה כיוון הולכים</strong>: מהצורה אל התכונה,
+    או מהתכונה אל הצורה. שני הכיוונים נראים דומים ומשמשים לדברים שונים לגמרי.
+  </p>
+  <p class="youknow"><b>בסוף העמוד תדעי:</b> את התכונות של מקבילית, מלבן,
+  מעוין, ריבוע וטרפז · את המשפטים ההפוכים — איך <em>מוכיחים</em> שמרובע
+  הוא מסוג מסוים · ולכתוב הוכחה שלמה בטענה ונימוק על מרובע.</p>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>≈ 45 דק׳</b> · 8 תרגילים</span>
+    <a class="pm-jump" href="#sec-practice">לקפוץ ישר לתרגילים ↓</a>
+  </p>
+</header>
+
+<!-- ============ 1. שני הכיוונים ============ -->
+<h2 id="sec-directions"><span class="num">1</span>שני הכיוונים — וזה כל הנושא</h2>
+
+<p>
+  לכל צורה יש שתי רשימות, והבלבול ביניהן הוא הטעות הנפוצה ביותר בפרק הזה:
+</p>
+
+<div class="box def">
+  <div class="box-title">התכונות ⟵ מהצורה החוצה</div>
+  <strong>"נתון שזו מקבילית"</strong> ⟵ ולכן הצלעות הנגדיות שוות.
+  <br>משתמשים בזה כשהצורה <em>נתונה</em> וצריך להסיק ממנה משהו.
+</div>
+
+<div class="box warn">
+  <div class="box-title">המשפטים ההפוכים ⟵ אל הצורה פנימה</div>
+  <strong>"נתון שהצלעות הנגדיות שוות"</strong> ⟵ ולכן זו מקבילית.
+  <br>משתמשים בזה כשצריך <em>להוכיח</em> שמרובע הוא מסוג מסוים.
+  <br>שימי לב: זה לא אותו משפט. אלה שני משפטים נפרדים, וכל אחד מהם צריך
+  להיכתב בנימוק בניסוח שלו.
+</div>
+
+<p>
+  כלל אצבע פשוט: <strong>קראי מה כתוב ב"צריך להוכיח"</strong>. אם צ״ל הוא
+  "המרובע הוא מקבילית" — את צריכה משפט הפוך. אם צ״ל הוא משהו על צלעות או
+  זוויות והמקבילית <em>נתונה</em> — את צריכה תכונה.
+</p>
+
+<!-- ============ 2. הצורות ============ -->
+<h2 id="sec-shapes"><span class="num">2</span>חמש הצורות</h2>
+
+<p style="font-size:13.5px;color:var(--soft)">
+  הניסוחים כאן לקוחים מ<a href="../../library.html">דף המושפים הרשמי לכיתה ט׳</a>
+  שבספרייה — אותם מילים שהמורה מצפה לראות בנימוק.
+</p>
+
+<div class="shapes">
+
+  <!-- מקבילית -->
+  <div class="shape">
+    <div class="sh"><b>מקבילית</b>
+      <span class="def">מרובע שכל שתי צלעות נגדיות שלו מקבילות</span></div>
+    <div class="sb">
+      <div class="art">
+        <svg viewBox="0 0 130 90" style="width:100%;height:auto" role="img"
+             aria-label="מקבילית עם שני אלכסונים שנחתכים באמצע">
+          <polygon points="30,72 100,72 110,20 40,20" fill="#F3ECF7" stroke="#7A4E8C" stroke-width="2"/>
+          <line x1="30" y1="72" x2="110" y2="20" stroke="#94A3B8" stroke-width="1.2" stroke-dasharray="4 3"/>
+          <line x1="100" y1="72" x2="40" y2="20" stroke="#94A3B8" stroke-width="1.2" stroke-dasharray="4 3"/>
+          <circle cx="70" cy="46" r="3" fill="#B4553C"/>
+        </svg>
+      </div>
+      <div class="txt">
+        <h5>תכונות</h5>
+        <ul>
+          <li>כל שתי צלעות נגדיות מקבילות ו<strong>שוות</strong></li>
+          <li>כל שתי זוויות נגדיות שוות</li>
+          <li>סכום כל שתי זוויות סמוכות הוא <span class="fi">\(180^\circ\)</span></li>
+          <li>האלכסונים <strong>חוצים זה את זה</strong></li>
+        </ul>
+        <h5>איך מוכיחים שמרובע הוא מקבילית</h5>
+        <ul class="how">
+          <li><b>שתי צלעות נגדיות</b> מקבילות — שתי הזוגות</li>
+          <li><b>שתי צלעות נגדיות</b> שוות — שתי הזוגות</li>
+          <li><b>שתי זוויות נגדיות</b> שוות — שתי הזוגות</li>
+          <li><b>האלכסונים</b> חוצים זה את זה</li>
+          <li><b>זוג אחד</b> של צלעות נגדיות שוות <em>ומקבילות</em></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- מלבן -->
+  <div class="shape">
+    <div class="sh"><b>מלבן</b>
+      <span class="def">מרובע בעל שלוש זוויות ישרות</span></div>
+    <div class="sb">
+      <div class="art">
+        <svg viewBox="0 0 130 90" style="width:100%;height:auto" role="img"
+             aria-label="מלבן עם שני אלכסונים שווים">
+          <rect x="25" y="20" width="82" height="52" fill="#F3ECF7" stroke="#7A4E8C" stroke-width="2"/>
+          <line x1="25" y1="20" x2="107" y2="72" stroke="#94A3B8" stroke-width="1.2" stroke-dasharray="4 3"/>
+          <line x1="107" y1="20" x2="25" y2="72" stroke="#94A3B8" stroke-width="1.2" stroke-dasharray="4 3"/>
+          <path d="M25,32 L37,32 L37,20" fill="none" stroke="#B4553C" stroke-width="1.6"/>
+        </svg>
+      </div>
+      <div class="txt">
+        <h5>תכונות</h5>
+        <ul>
+          <li>כל מה שיש למקבילית — <strong>מלבן הוא מקבילית</strong></li>
+          <li>כל הזוויות ישרות</li>
+          <li>האלכסונים <strong>שווים זה לזה</strong> (וגם חוצים)</li>
+        </ul>
+        <h5>איך מוכיחים מלבן</h5>
+        <ul class="how">
+          <li><b>מרובע</b> בעל שלוש זוויות ישרות</li>
+          <li><b>מקבילית</b> בעלת זווית ישרה</li>
+          <li><b>מקבילית</b> שאלכסוניה שווים</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- מעוין -->
+  <div class="shape">
+    <div class="sh"><b>מעוין</b>
+      <span class="def">מרובע שכל צלעותיו שוות</span></div>
+    <div class="sb">
+      <div class="art">
+        <svg viewBox="0 0 130 90" style="width:100%;height:auto" role="img"
+             aria-label="מעוין עם אלכסונים מאונכים">
+          <polygon points="65,14 112,46 65,78 18,46" fill="#F3ECF7" stroke="#7A4E8C" stroke-width="2"/>
+          <line x1="65" y1="14" x2="65" y2="78" stroke="#94A3B8" stroke-width="1.2" stroke-dasharray="4 3"/>
+          <line x1="18" y1="46" x2="112" y2="46" stroke="#94A3B8" stroke-width="1.2" stroke-dasharray="4 3"/>
+          <path d="M65,55 L74,55 L74,46" fill="none" stroke="#B4553C" stroke-width="1.6"/>
+        </svg>
+      </div>
+      <div class="txt">
+        <h5>תכונות</h5>
+        <ul>
+          <li>כל מה שיש למקבילית</li>
+          <li>כל הצלעות שוות</li>
+          <li>האלכסונים <strong>מאונכים</strong> זה לזה</li>
+          <li>האלכסונים <strong>חוצים את הזוויות</strong></li>
+        </ul>
+        <h5>איך מוכיחים מעוין</h5>
+        <ul class="how">
+          <li><b>מרובע</b> שכל צלעותיו שוות</li>
+          <li><b>מקבילית</b> בעלת שתי צלעות סמוכות שוות</li>
+          <li><b>מקבילית</b> שאלכסוניה מאונכים</li>
+          <li><b>מקבילית</b> שאחד מאלכסוניה חוצה זווית</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ריבוע -->
+  <div class="shape">
+    <div class="sh"><b>ריבוע</b>
+      <span class="def">מרובע שכל צלעותיו שוות וכל זוויותיו שוות</span></div>
+    <div class="sb">
+      <div class="art">
+        <svg viewBox="0 0 130 90" style="width:100%;height:auto" role="img"
+             aria-label="ריבוע עם אלכסונים שווים ומאונכים">
+          <rect x="38" y="16" width="58" height="58" fill="#F3ECF7" stroke="#7A4E8C" stroke-width="2"/>
+          <line x1="38" y1="16" x2="96" y2="74" stroke="#94A3B8" stroke-width="1.2" stroke-dasharray="4 3"/>
+          <line x1="96" y1="16" x2="38" y2="74" stroke="#94A3B8" stroke-width="1.2" stroke-dasharray="4 3"/>
+          <path d="M67,54 L76,54 L76,45" fill="none" stroke="#B4553C" stroke-width="1.6"/>
+        </svg>
+      </div>
+      <div class="txt">
+        <h5>תכונות</h5>
+        <ul>
+          <li>הכול. ריבוע הוא <strong>גם מלבן וגם מעוין</strong>, ולכן יש לו
+              כל התכונות של שניהם</li>
+          <li>האלכסונים שווים, מאונכים, חוצים זה את זה וחוצים את הזוויות</li>
+        </ul>
+        <h5>איך מוכיחים ריבוע</h5>
+        <ul class="how">
+          <li><b>מלבן</b> בעל שתי צלעות סמוכות שוות</li>
+          <li><b>מלבן</b> שאלכסוניו מאונכים</li>
+          <li><b>מעוין</b> בעל זווית ישרה</li>
+          <li><b>מעוין</b> שאלכסוניו שווים</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- טרפז -->
+  <div class="shape">
+    <div class="sh"><b>טרפז</b>
+      <span class="def">מרובע שיש בו בדיוק זוג אחד של צלעות מקבילות</span></div>
+    <div class="sb">
+      <div class="art">
+        <svg viewBox="0 0 130 90" style="width:100%;height:auto" role="img"
+             aria-label="טרפז שווה שוקיים עם בסיסים מקבילים">
+          <polygon points="20,72 110,72 90,20 40,20" fill="#F3ECF7" stroke="#7A4E8C" stroke-width="2"/>
+          <line x1="24" y1="66" x2="106" y2="66" stroke="#2E7D32" stroke-width="0" />
+          <text x="65" y="84" text-anchor="middle" font-family="Arial" font-size="10" fill="#5A6875">בסיס גדול</text>
+          <text x="65" y="15" text-anchor="middle" font-family="Arial" font-size="10" fill="#5A6875">בסיס קטן</text>
+        </svg>
+      </div>
+      <div class="txt">
+        <h5>תכונות</h5>
+        <ul>
+          <li>שתי הצלעות המקבילות נקראות <strong>בסיסים</strong>, והשתיים
+              האחרות <strong>שוקיים</strong></li>
+          <li>ב<strong>טרפז שווה-שוקיים</strong>: השוקיים שוות, זוויות הבסיס
+              שוות, והאלכסונים שווים</li>
+        </ul>
+        <h5>שימי לב</h5>
+        <ul class="how">
+          <li>טרפז <b>אינו</b> מקבילית — יש בו רק זוג אחד של מקבילות,
+              ולכן אין לו את תכונות המקבילית</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="family">
+  <div style="font-size:13px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);margin-bottom:6px">
+    עץ המשפחה — מי יורש ממי</div>
+  <p style="margin:0;font-size:13.5px;line-height:1.7">
+    <strong>מקבילית</strong> היא הבסיס. <strong>מלבן</strong> הוא מקבילית
+    שהוסיפו לה זווית ישרה; <strong>מעוין</strong> הוא מקבילית שהוסיפו לה
+    צלעות שוות; ו<strong>ריבוע</strong> הוא שניהם יחד.
+    <br>ולכן: כל תכונה של מקבילית נכונה אוטומטית גם למלבן, למעוין ולריבוע.
+    זה חוסך שינון של ארבע רשימות נפרדות.
+    <br><strong>טרפז יושב מחוץ למשפחה</strong> — הוא לא מקבילית, ואין לו
+    את תכונותיה.
+  </p>
+</div>
+
+<!-- ============ 3. הוכחה ============ -->
+<h2 id="sec-proof"><span class="num">3</span>הוכחה על מרובע — אותו שלד בדיוק</h2>
+
+<p>
+  אין כאן פורמט חדש. זהו אותו שלד שלמדת
+  <a href="../../year8/geometry/05-proof-models.html">בספריית הדגמים</a>:
+  <strong>נתון ← צ״ל ← טבלת טענה ונימוק ← מש״ל</strong>. מה שהשתנה הוא רק
+  אוצר הנימוקים שעומד לרשותך.
+</p>
+
+<div class="nb" data-nb>
+  <div class="nb-head"><b>בונים ביחד במחברת</b><span class="nb-count"></span></div>
+  <ol class="nb-steps">
+    <li class="nb-step"><b>התרגיל</b>
+      <p>במרובע <span class="fi">\(ABCD\)</span> נתון
+      <span class="fi">\(AB\parallel DC\)</span> וגם
+      <span class="fi">\(AB=DC\)</span>.
+      <br>הוכיחי ש-<span class="fi">\(ABCD\)</span> הוא מקבילית.</p>
+    </li>
+    <li class="nb-step"><b>לאיזה כיוון הולכים?</b>
+      <p>צ״ל הוא "המרובע הוא מקבילית" ⟵ צריך <strong>משפט הפוך</strong>,
+      ולא תכונה. מסתכלים ברשימת "איך מוכיחים מקבילית".</p>
+    </li>
+    <li class="nb-step"><b>מחפשים את המשפט שמתאים לנתון</b>
+      <p>הנתון הוא זוג אחד של צלעות נגדיות שהן גם שוות וגם מקבילות.
+      ברשימה יש בדיוק את זה:
+      <br><em>"מרובע ששתיים מצלעותיו הנגדיות שוות ומקבילות הוא מקבילית"</em>.</p>
+    </li>
+    <li class="nb-step"><b>כותבים את הטבלה</b>
+      <table class="dtable">
+        <tr><th></th><th>טענה</th><th>נימוק</th></tr>
+        <tr><td>1</td><td><span class="fi">\(AB\parallel DC\)</span></td>
+            <td style="text-align:right">נתון</td></tr>
+        <tr><td>2</td><td><span class="fi">\(AB=DC\)</span></td>
+            <td style="text-align:right">נתון</td></tr>
+        <tr><td>3</td><td><span class="fi">\(ABCD\)</span> מקבילית</td>
+            <td style="text-align:right">מרובע ששתיים מצלעותיו הנגדיות שוות ומקבילות</td></tr>
+      </table>
+    </li>
+    <li class="nb-step"><b>שלוש שורות, וזה הכול</b>
+      <p>מש״ל.
+      <br><strong>הנקודה החשובה:</strong> ההוכחה קצרה כי המשפט ההפוך עשה את
+      כל העבודה. מי שלא הכירה אותו הייתה מנסה לחפוף משולשים ומאריכה בחמש
+      שורות מיותרות — ומקבלת אותה תשובה בהרבה יותר מאמץ.</p>
+    </li>
+  </ol>
+</div>
+
+<div class="box intuition">
+  <div class="box-title">כשאין משפט הפוך שמתאים — חופפים משולשים</div>
+  לא תמיד הנתון יושב בדיוק על אחד המשפטים. אז חוזרים לכלי הוותיק: מעבירים
+  אלכסון, מקבלים שני משולשים, ומוכיחים שהם
+  <a href="../../year8/geometry/02-triangles-congruence.html">חופפים</a>.
+  מהחפיפה נובע שוויון צלעות או זוויות — ומשם ממשיכים למשפט ההפוך.
+  <br>האלכסון הוא כמעט תמיד הקו העזר הנכון בשאלות על מרובעים.
+</div>
+
+<!-- ============ 4. תרגול ============ -->
+<h2 id="sec-practice"><span class="num">4</span>תרגול — משלב לשלב</h2>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 1 — זווית במקבילית</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">במקבילית <span class="fi">\(ABCD\)</span>
+    הזווית <span class="fi">\(\angle A=70^\circ\)</span></span>.
+    <span class="mk mk-find">מצאי את שאר הזוויות.</span>
+  </p>
+  <details class="step"><summary>שלב ראשון — איזו רשימה</summary>
+    <div class="step-body">המקבילית <em>נתונה</em> ⟵ משתמשים ב<strong>תכונות</strong>.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      זוויות נגדיות שוות: <span class="fi">\(\angle C=\angle A=70^\circ\)</span>.
+      <br>זוויות סמוכות משלימות ל-<span class="fi">\(180^\circ\)</span>:
+      $$\angle B=180^\circ-70^\circ=110^\circ$$
+      ו-<span class="fi">\(\angle D=\angle B=110^\circ\)</span>.
+      <br>בדיקה: <span class="fi">\(70+110+70+110=360\)</span> ✓ — סכום
+      הזוויות במרובע.
+    </div>
+  </details>
+  <div class="q-row"><span class="fi">\(\angle B=\)</span>
+    <input class="q-input" data-answer="110" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex1"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 2 — אלכסונים במלבן</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">במלבן <span class="fi">\(ABCD\)</span> האלכסונים
+    נחתכים בנקודה <span class="fi">\(M\)</span>, ואורך האלכסון
+    <span class="fi">\(AC=12\)</span> ס״מ</span>.
+    <span class="mk mk-find">מהו אורך <span class="fi">\(BM\)</span>?</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      שתי תכונות של מלבן עובדות כאן יחד:
+      <br>1. האלכסונים <strong>שווים</strong> ⟵ <span class="fi">\(BD=AC=12\)</span>.
+      <br>2. האלכסונים <strong>חוצים זה את זה</strong> ⟵
+      <span class="fi">\(M\)</span> הוא אמצע כל אחד מהם.
+      $$BM=\frac{BD}{2}=\frac{12}{2}=6$$
+      <strong>מסקנה שכדאי לזכור:</strong> במלבן, כל ארבעת הקטעים מהמרכז
+      לקדקודים שווים — כולם חצי אלכסון.
+    </div>
+  </details>
+  <div class="q-row"><span class="fi">\(BM=\)</span>
+    <input class="q-input" data-answer="6" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex2"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 3 — לזהות את הצורה</h4></div>
+  <p class="q-text">
+    <span class="mk mk-find">מרובע שאלכסוניו חוצים זה את זה ומאונכים זה לזה —
+    איזו צורה הוא?</span> נמקי.
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      שני נתונים, ומפעילים אותם בזה אחר זה:
+      <ol class="steps">
+        <li>האלכסונים חוצים זה את זה ⟵ <em>"מרובע שאלכסוניו חוצים זה את זה
+            הוא מקבילית"</em> ⟵ זו <strong>מקבילית</strong>.</li>
+        <li>ועכשיו יש מקבילית שאלכסוניה מאונכים ⟵ <em>"מקבילית שאלכסוניה
+            מאונכים היא מעוין"</em> ⟵ זה <strong>מעוין</strong>.</li>
+      </ol>
+      <strong>שימי לב לשיטה:</strong> הוכחות על מרובעים נבנות בשלבים —
+      קודם מוכיחים מקבילית, ואז משדרגים אותה. כמעט כל משפט הפוך של מלבן,
+      מעוין וריבוע פותח במילה "מקבילית".
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex3"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 4 — מעוין</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">במעוין <span class="fi">\(ABCD\)</span> הזווית
+    <span class="fi">\(\angle A=100^\circ\)</span></span>.
+    <span class="mk mk-find">מהי הזווית שהאלכסון <span class="fi">\(AC\)</span>
+    יוצר עם הצלע <span class="fi">\(AB\)</span>?</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      במעוין <strong>האלכסונים חוצים את הזוויות</strong>, ולכן
+      <span class="fi">\(AC\)</span> חוצה את <span class="fi">\(\angle A\)</span>:
+      $$\frac{100^\circ}{2}=50^\circ$$
+      זו תכונה ייחודית למעוין ולריבוע. במקבילית רגילה ובמלבן האלכסון
+      <em>אינו</em> חוצה את הזווית — וזו טעות נפוצה.
+    </div>
+  </details>
+  <div class="q-row"><span>הזווית (מעלות):</span>
+    <input class="q-input" data-answer="50" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex4"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 5 — טרפז שווה-שוקיים</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">בטרפז שווה-שוקיים <span class="fi">\(ABCD\)</span>
+    (<span class="fi">\(AB\parallel DC\)</span>) הזווית
+    <span class="fi">\(\angle A=65^\circ\)</span></span>.
+    <span class="mk mk-find">מצאי את <span class="fi">\(\angle D\)</span>.</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      <span class="fi">\(AD\)</span> היא שוק החותכת שני ישרים מקבילים, ולכן
+      <span class="fi">\(\angle A\)</span> ו-<span class="fi">\(\angle D\)</span>
+      הן <strong>זוויות חד-צדדיות</strong> — וסכומן
+      <span class="fi">\(180^\circ\)</span>:
+      $$\angle D=180^\circ-65^\circ=115^\circ$$
+      <strong>שימי לב:</strong> הנימוק כאן הוא Z/F/C
+      <a href="../../year8/geometry/01-angles.html">מכיתה ח׳</a>, ולא תכונה
+      של טרפז. הטרפז רק סיפק את המקבילות.
+    </div>
+  </details>
+  <div class="q-row"><span class="fi">\(\angle D=\)</span>
+    <input class="q-input" data-answer="115" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex5"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 6 — הוכחה: מקבילית</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">במרובע <span class="fi">\(ABCD\)</span>
+    האלכסונים נחתכים בנקודה <span class="fi">\(M\)</span>, ונתון
+    <span class="fi">\(AM=MC\)</span> וגם <span class="fi">\(BM=MD\)</span></span>.
+    <span class="mk mk-find">הוכיחי ש-<span class="fi">\(ABCD\)</span> מקבילית.</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      <table class="dtable">
+        <tr><th></th><th>טענה</th><th>נימוק</th></tr>
+        <tr><td>1</td><td><span class="fi">\(AM=MC\)</span></td>
+            <td style="text-align:right">נתון</td></tr>
+        <tr><td>2</td><td><span class="fi">\(BM=MD\)</span></td>
+            <td style="text-align:right">נתון</td></tr>
+        <tr><td>3</td><td>האלכסונים חוצים זה את זה</td>
+            <td style="text-align:right">מ-1 ומ-2: <span class="fi">\(M\)</span> אמצע שניהם</td></tr>
+        <tr><td>4</td><td><span class="fi">\(ABCD\)</span> מקבילית</td>
+            <td style="text-align:right">מרובע שאלכסוניו חוצים זה את זה</td></tr>
+      </table>
+      מש״ל.
+      <br><br><strong>שורה 3 היא המפתח.</strong> הנתונים נותנים שני שוויונות
+      נפרדים; השורה הזאת מתרגמת אותם למשפט אחד בשפה שהמשפט ההפוך מדבר בה.
+      בלעדיה השורה האחרונה תלויה באוויר.
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex6"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 7 — הוכחה בשני שלבים</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">במקבילית <span class="fi">\(ABCD\)</span> נתון
+    <span class="fi">\(AB=BC\)</span></span>.
+    <span class="mk mk-find">הוכיחי שהמרובע הוא מעוין, ושהאלכסונים שלו
+    מאונכים.</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      <table class="dtable">
+        <tr><th></th><th>טענה</th><th>נימוק</th></tr>
+        <tr><td>1</td><td><span class="fi">\(ABCD\)</span> מקבילית</td>
+            <td style="text-align:right">נתון</td></tr>
+        <tr><td>2</td><td><span class="fi">\(AB=BC\)</span></td>
+            <td style="text-align:right">נתון — שתי צלעות <em>סמוכות</em></td></tr>
+        <tr><td>3</td><td><span class="fi">\(ABCD\)</span> מעוין</td>
+            <td style="text-align:right">מקבילית בעלת שתי צלעות סמוכות שוות</td></tr>
+        <tr><td>4</td><td><span class="fi">\(AC\perp BD\)</span></td>
+            <td style="text-align:right">במעוין האלכסונים מאונכים</td></tr>
+      </table>
+      מש״ל.
+      <br><br><strong>שימי לב לשינוי הכיוון באמצע ההוכחה:</strong> שורה 3
+      משתמשת ב<em>משפט הפוך</em> (מגיעים אל הצורה), ושורה 4 משתמשת
+      ב<em>תכונה</em> (יוצאים ממנה). זו התבנית הנפוצה ביותר בהוכחות על
+      מרובעים — קודם מזהים מה הצורה, ואז קוראים ממנה מה שצריך.
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex7"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 8 — האם בהכרח?</h4></div>
+  <p class="q-text">
+    <span class="mk mk-find">מרובע שאלכסוניו שווים — האם הוא בהכרח מלבן?</span>
+    נמקי.
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      <strong>לא.</strong> המשפט ההפוך אומר <em>"<strong>מקבילית</strong>
+      שאלכסוניה שווים היא מלבן"</em> — והמילה "מקבילית" היא תנאי, לא קישוט.
+      <br>דוגמה נגדית: ב<strong>טרפז שווה-שוקיים</strong> האלכסונים שווים,
+      והוא בוודאי אינו מלבן.
+      <br><br><strong>מה השאלה בודקת:</strong> משפט הפוך עובד רק כשכל
+      התנאים שלו מתקיימים. להשמיט תנאי ולהסיק בכל זאת — זו הטעות שהכי הרבה
+      נקודות נופלות עליה בפרק הזה. במבחן, שאלת "האם בהכרח" כמעט תמיד מסתירה
+      תנאי חסר.
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex8"> סיימתי את התרגיל הזה</label>
+</article>
+
+<div class="box def" style="margin-top:26px">
+  <div class="box-title">מה לקחת מכאן</div>
+  לפני כל שורה בהוכחה, שאלי: <strong>אני נכנסת לצורה או יוצאת ממנה?</strong>
+  צ״ל "זו מקבילית" ⟵ משפט הפוך. מקבילית נתונה ⟵ תכונה. וכשמוכיחים מלבן,
+  מעוין או ריבוע — כמעט תמיד מוכיחים קודם מקבילית, ורק אז משדרגים.
+</div>
+
+
+<div class="watch">
+  <h3>רוצה לראות את זה מוסבר בקול?</h3>
+  <p>הסרטונים הם תגבור, לא חובה — ומי שהעמוד הספיק לה יכולה לדלג.</p>
+  <a class="video-link" href="https://www.youtube.com/watch?v=o6QZ5MYO_O8" target="_blank" rel="noopener">
+    <img src="../../assets/g9-vids/o6QZ5MYO_O8.jpg" alt="מקבילית — הוכחות — תמונה מהסרטון" loading="lazy">
+    <span class="vt"><b>בואו ללמוד מקבילית ב-8 דקות!</b><span>מקבילית: התכונות והמשפטים ההפוכים · 8:21 · פתרון פשוט</span></span>
+    <span class="play">▶</span>
+  </a>
+</div>
+
+<div class="progresswrap no-print">
+  <span class="progressbar"><i></i></span><span class="progress-label"></span>
+  <button class="all-sols" style="font-family:inherit;font-size:12px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:4px 10px;cursor:pointer">לפתוח את כל הפתרונות</button>
+</div>
+
+<nav class="pagenav">
+  <a class="next" href="01b-kite.html"><span class="dir">הבא ←</span>הדלתון</a>
+</nav>
+
+<footer class="fin">חלק מהעולם של שירה ·
+<a href="../../index.html">חזרה למרכז</a> ·
+<a href="index.html">מפת הגאומטריה</a></footer>
+</main>
+</div>
+</body>
+</html>

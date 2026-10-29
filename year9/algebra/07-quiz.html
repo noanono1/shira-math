@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<link rel="apple-touch-icon" href="../../assets/icons/icon-180.png">
+<link rel="manifest" href="../../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>בוחן הבית — אלגברה ט׳ — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../../vendor/katex.min.css">
+<link rel="stylesheet" href="../../css/shira.css">
+<style>
+:root{--accent:#2E6F8E}
+/* בוחן: אין שלבים, אין צבעים, ואין פתרון ליד השאלה */
+.qz{border:1px solid var(--line); border-radius:var(--r-md); background:var(--card);
+  padding:13px 17px 15px; margin:13px 0}
+.qz .qh{font-size:15.5px; font-weight:800; margin-bottom:6px}
+.qz .qh span{font-size:11.5px; font-weight:700; color:var(--soft);
+  background:var(--faint); border-radius:99px; padding:2px 9px; margin-inline-end:8px}
+.qz p{margin:0 0 8px; line-height:1.8}
+.qz ol{margin:6px 0 0; padding-inline-start:20px}
+.qz ol li{margin-bottom:3px}
+/* כל הפתרונות יחד, בתחתית — ורק אחרי שניסית הכול */
+.answers{border:1px solid var(--line); border-radius:var(--r-md);
+  background:#FBFAF7; margin-top:26px}
+.answers>summary{cursor:pointer; padding:13px 17px; font-weight:800; font-size:15.5px}
+.answers .abody{padding:0 17px 16px; border-top:1px solid var(--line)}
+.answers h4{margin:16px 0 4px; font-size:15px}
+</style>
+<script defer src="../../vendor/katex.min.js"></script>
+<script defer src="../../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../../js/shira.js"></script>
+</head>
+<body data-page="g9alg:07-quiz">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">אלגברה ט׳ — המפה</a>
+    <span class="crumbs">אלגברה ט׳ · <b>בוחן הבית</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">אלגברה · כיתה ט׳ · הגמר</div>
+  <h1>בוחן הבית</h1>
+  <p class="lead">
+    שבע שאלות שלא ראית בשום מקום באתר — מספרים חדשים, בלי צבעים, בלי רמזים
+    ובלי שלבים. בדיוק כמו בכיתה. מחברת ליד, פותרים הכול, ורק בסוף בודקים.
+  </p>
+  <p class="youknow"><b>מה נבדק כאן:</b> חוקי חזקות · נוסחאות הכפל המקוצר ·
+  פירוק לגורמים בשלוש הדרכים · תחום הצבה וצמצום · פתרון משוואה ריבועית ·
+  ובעיה מילולית שמגיעה למשוואה ריבועית.</p>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>≈ 45 דק׳</b> · 7 שאלות</span>
+    <a class="pm-jump" href="#answers">לפתרונות ↓</a>
+  </p>
+</header>
+
+<div class="box warn">
+  <div class="box-title">איך עובדים</div>
+  כל שאלה פותרים במחברת <strong>עד הסוף</strong>, עם דרך פתרון כתובה —
+  לא רק תשובה. הפתרונות המלאים מחכים בקופסה אחת בתחתית העמוד, ורק אחרי
+  שניסית את כולן. אם נתקעת בשאלה, סמני אותה והמשיכי הלאה.
+</div>
+
+<div class="qz">
+  <div class="qh"><span>1</span>חוקי חזקות</div>
+  <p>פשטי כל ביטוי:</p>
+  <ol>
+    <li><span class="fi">\(\dfrac{x^{8}\cdot x^{2}}{x^{6}}\)</span></li>
+    <li><span class="fi">\(\left(3a^{2}\right)^{3}\)</span></li>
+    <li><span class="fi">\(4^{0}+2^{-2}\)</span></li>
+    <li><span class="fi">\(\sqrt{98}\)</span> — לפשט</li>
+  </ol>
+</div>
+
+<div class="qz">
+  <div class="qh"><span>2</span>כפל מקוצר</div>
+  <p>פתחי סוגריים ופשטי:</p>
+  <ol>
+    <li><span class="fi">\((x-6)^{2}\)</span></li>
+    <li><span class="fi">\((3x+2)(3x-2)\)</span></li>
+    <li><span class="fi">\((x+5)^{2}-(x+3)(x-3)\)</span></li>
+  </ol>
+</div>
+
+<div class="qz">
+  <div class="qh"><span>3</span>פירוק לגורמים</div>
+  <p>פרקי <strong>עד הסוף</strong>:</p>
+  <ol>
+    <li><span class="fi">\(7x^{2}-28\)</span></li>
+    <li><span class="fi">\(x^{2}-11x+24\)</span></li>
+    <li><span class="fi">\(x^{2}+3x-54\)</span></li>
+    <li><span class="fi">\(5x^{3}-20x^{2}+20x\)</span></li>
+  </ol>
+</div>
+
+<div class="qz">
+  <div class="qh"><span>4</span>שבר אלגברי</div>
+  <p>נתון הביטוי <span class="fi">\(\dfrac{x^{2}-49}{x^{2}+14x+49}\)</span>.</p>
+  <ol>
+    <li>רשמי את תחום ההצבה.</li>
+    <li>צמצמי את הביטוי.</li>
+  </ol>
+</div>
+
+<div class="qz">
+  <div class="qh"><span>5</span>משוואות ריבועיות</div>
+  <p>פתרי:</p>
+  <ol>
+    <li><span class="fi">\(x^{2}-13x+42=0\)</span></li>
+    <li><span class="fi">\(x^{2}=9x\)</span></li>
+    <li><span class="fi">\(2x^{2}-5x-3=0\)</span> — בעזרת הנוסחה</li>
+  </ol>
+</div>
+
+<div class="qz">
+  <div class="qh"><span>6</span>כמה פתרונות — בלי לפתור</div>
+  <p>
+    לכל אחת מהמשוואות הבאות, קבעי כמה פתרונות יש לה <strong>בלי לפתור
+    אותה</strong>, ונמקי:
+  </p>
+  <ol>
+    <li><span class="fi">\(x^{2}+6x+9=0\)</span></li>
+    <li><span class="fi">\(x^{2}+x+4=0\)</span></li>
+  </ol>
+</div>
+
+<div class="qz">
+  <div class="qh"><span>7</span>בעיה מילולית</div>
+  <p>
+    אורכו של מלבן גדול ב-4 ס״מ מרוחבו, ושטחו 96 סמ״ר.
+    <br>מצאי את מידות המלבן ואת היקפו. הציגי את שלושת שלבי הפתרון.
+  </p>
+</div>
+
+<details class="answers" id="answers">
+  <summary>הפתרונות — רק אחרי שניסית את כולן ↓</summary>
+  <div class="abody">
+
+    <h4>שאלה 1</h4>
+    <p>
+      1. <span class="fi">\(\frac{x^{10}}{x^{6}}=x^{4}\)</span>
+      &nbsp;·&nbsp; 2. <span class="fi">\(3^{3}\cdot a^{6}=27a^{6}\)</span>
+      &nbsp;·&nbsp; 3. <span class="fi">\(1+\frac14=1.25\)</span>
+      &nbsp;·&nbsp; 4. <span class="fi">\(\sqrt{49\cdot2}=7\sqrt2\)</span>
+    </p>
+
+    <h4>שאלה 2</h4>
+    $$(x-6)^{2}=x^{2}-12x+36$$
+    $$(3x+2)(3x-2)=9x^{2}-4$$
+    <p>ובשלישית — פותחים כל חלק ואז מחסרים:</p>
+    $$(x^{2}+10x+25)-(x^{2}-9)=10x+34$$
+
+    <h4>שאלה 3</h4>
+    $$7x^{2}-28=7(x^{2}-4)=7(x-2)(x+2)$$
+    $$x^{2}-11x+24=(x-3)(x-8)$$
+    $$x^{2}+3x-54=(x+9)(x-6)$$
+    $$5x^{3}-20x^{2}+20x=5x(x^{2}-4x+4)=5x(x-2)^{2}$$
+
+    <h4>שאלה 4</h4>
+    <p>
+      המכנה הוא ריבוע שלם: <span class="fi">\(x^{2}+14x+49=(x+7)^{2}\)</span>,
+      והוא מתאפס כאשר <span class="fi">\(x=-7\)</span>.
+      <br><strong>תחום הצבה:</strong> <span class="fi">\(x\neq-7\)</span>.
+    </p>
+    $$\frac{(x-7)(x+7)}{(x+7)^{2}}=\frac{x-7}{x+7}\qquad x\neq-7$$
+
+    <h4>שאלה 5</h4>
+    <p>1. מכפלה 42, סכום <span class="fi">\(-13\)</span> ⟵ שניהם שליליים:</p>
+    $$(x-6)(x-7)=0\;\Longrightarrow\;x_{1}=6,\ x_{2}=7$$
+    <p>2. מעבירים לאגף אחד — לא מחלקים ב-<span class="fi">\(x\)</span>:</p>
+    $$x^{2}-9x=0\;\Longrightarrow\;x(x-9)=0\;\Longrightarrow\;x_{1}=0,\ x_{2}=9$$
+    <p>3. בנוסחה, עם <span class="fi">\(a=2,\ b=-5,\ c=-3\)</span>:</p>
+    $$\Delta=25+24=49$$
+    $$x_{1,2}=\frac{5\pm7}{4}\;\Longrightarrow\;x_{1}=3,\ x_{2}=-\tfrac12$$
+
+    <h4>שאלה 6</h4>
+    <p>
+      1. <span class="fi">\(\Delta=36-36=0\)</span> ⟵ <strong>פתרון אחד</strong>
+      (זהו <span class="fi">\((x+3)^{2}=0\)</span>, והפרבולה משיקה לציר).
+      <br>2. <span class="fi">\(\Delta=1-16=-15&lt;0\)</span> ⟵
+      <strong>אין פתרון</strong>, כי אין שורש למספר שלילי.
+    </p>
+
+    <h4>שאלה 7</h4>
+    <p><strong>הגדרת נעלם:</strong> נסמן ב-<span class="fi">\(x\)</span> את
+    רוחב המלבן בס״מ; האורך הוא <span class="fi">\(x+4\)</span>.</p>
+    <p><strong>המשוואה:</strong></p>
+    $$x(x+4)=96\;\Longrightarrow\;x^{2}+4x-96=0$$
+    <p><strong>הפתרון:</strong> מכפלה <span class="fi">\(-96\)</span> וסכום
+    <span class="fi">\(4\)</span> ⟵ <span class="fi">\(12\)</span> ו-<span class="fi">\(-8\)</span>:</p>
+    $$(x+12)(x-8)=0\;\Longrightarrow\;x_{1}=-12,\ x_{2}=8$$
+    <p>
+      רוחב שלילי אינו קיים, ולכן הרוחב 8 ס״מ והאורך 12 ס״מ.
+      <br>ההיקף: <span class="fi">\(2(8+12)=40\)</span> ס״מ.
+      <br>בדיקה: <span class="fi">\(8\cdot12=96\)</span> ✓
+    </p>
+
+    <div class="box def" style="margin-top:18px">
+      <div class="box-title">איך לקרוא את התוצאה שלך</div>
+      טעות בשאלה 3 או 5 שווה חזרה ל<a href="03-factoring.html">תחנת הפירוק</a> —
+      היא הבסיס של שתיהן. טעות בשאלה 4 היא כמעט תמיד תחום הצבה שנשכח, לא
+      צמצום. וטעות בשאלה 7 היא בדרך כלל בשלב הראשון, לא בחשבון.
+    </div>
+  </div>
+</details>
+
+<nav class="pagenav">
+  <a href="06-word-problems.html"><span class="dir">→ הקודם</span>בעיות מילוליות</a>
+  <a class="next" href="index.html"><span class="dir">המפה ←</span>אלגברה ט׳</a>
+</nav>
+
+<footer class="fin">חלק מהעולם של שירה ·
+<a href="../../index.html">חזרה למרכז</a> ·
+<a href="index.html">מפת האלגברה</a></footer>
+</main>
+</div>
+</body>
+</html>

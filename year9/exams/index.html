@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<link rel="apple-touch-icon" href="../../assets/icons/icon-180.png">
+<link rel="manifest" href="../../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>מפמ״ר וסימולציות — כיתה ט׳ — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../../vendor/katex.min.css">
+<link rel="stylesheet" href="../../css/shira.css">
+<style>
+:root{--accent:#B4553C}
+.wrap{max-width:880px}
+
+/* מבנה המבחן — נושא, משקל, ואיפה הוא נלמד */
+table.blueprint td:first-child{font-weight:700; white-space:nowrap}
+table.blueprint .w{font-weight:800; color:var(--accent); white-space:nowrap}
+/* פס המשקל — כמה מהמבחן כל נושא תופס, בעין אחת */
+.wbar{display:flex; height:26px; border-radius:8px; overflow:hidden; margin:14px 0 6px;
+  border:1px solid var(--line)}
+.wbar span{display:flex; align-items:center; justify-content:center;
+  font-size:11px; font-weight:800; color:#fff; white-space:nowrap; overflow:hidden}
+.wlegend{display:flex; flex-wrap:wrap; gap:12px; font-size:12px; color:var(--soft); margin-bottom:4px}
+.wlegend i{display:inline-block; width:10px; height:10px; border-radius:3px;
+  margin-inline-end:5px; vertical-align:middle}
+
+/* שאלה אמיתית מתוך שאלון */
+.qcard{border:1px solid var(--line); border-radius:var(--r-md); background:var(--card);
+  padding:13px 16px 15px; margin:12px 0}
+.qcard .qsrc{font-size:11.5px; font-weight:800; color:var(--soft);
+  background:var(--faint); border-radius:99px; padding:2px 10px; display:inline-block;
+  margin-bottom:6px}
+.qcard .qbody{line-height:1.85}
+.qcard .qbody ol{margin:6px 0 0; padding-inline-start:20px}
+.qcard .where{margin-top:10px; padding-top:9px; border-top:1px dashed var(--faint);
+  font-size:13px; color:var(--soft)}
+.qcard .where b{color:var(--ink)}
+.qcard .where a{font-weight:700}
+
+.papers{display:flex; flex-direction:column; gap:11px; margin-top:4px}
+.paper{background:var(--card); border:1px solid var(--line); border-radius:12px;
+  padding:13px 16px; box-shadow:0 10px 26px -26px var(--shadow)}
+.paper .ph{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap}
+.paper .ph b{font-size:15.5px; font-weight:800}
+.paper .ph .yr{font-size:11.5px; font-weight:800; color:var(--soft);
+  background:var(--faint); border-radius:99px; padding:2px 10px}
+.paper p{margin:5px 0 0; font-size:13.5px; color:var(--soft); line-height:1.55}
+.paper .acts{margin-top:9px; display:flex; gap:7px; flex-wrap:wrap}
+.paper .acts a{text-decoration:none; font-size:12.5px; font-weight:700; color:var(--soft);
+  border:1px solid var(--line); background:#FBFAF7; border-radius:8px; padding:6px 11px}
+.paper .acts a:hover{color:var(--ink); border-color:#D8D1C4}
+/* לוח הזמנים לקראת המבחן */
+.plan{counter-reset:pl; display:flex; flex-direction:column; gap:9px; margin:14px 0}
+.plan .p{display:flex; gap:12px; align-items:flex-start; background:var(--card);
+  border:1px solid var(--line); border-radius:var(--r-md); padding:11px 15px}
+.plan .p .pn{flex:0 0 auto; width:25px; height:25px; border-radius:50%;
+  background:var(--accent); color:#fff; font-weight:800; font-size:12.5px;
+  display:flex; align-items:center; justify-content:center}
+.plan .p div{min-width:0; font-size:13.5px; line-height:1.6}
+.plan .p div b{display:block; font-size:14.5px}
+</style>
+<script defer src="../../vendor/katex.min.js"></script>
+<script defer src="../../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../../js/shira.js"></script>
+</head>
+<body data-page="g9exam:index">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../../index.html">⌂ המרכז של שירה</a>
+    <span class="crumbs">כיתה ט׳ · <b>מבחנים</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">המבחן של סוף השנה</div>
+  <h1>מפמ״ר וסימולציות</h1>
+  <p class="lead">
+    בסוף כיתה ט׳ יש מבחן ארצי — <strong>מפמ״ר</strong> — של משרד החינוך.
+    תשעים דקות, מחשבון מותר, ובכל שאלה צריך להציג דרך פתרון. הדף הזה מראה
+    בדיוק ממה הוא מורכב, ולוקח שאלות אמיתיות מתוכו אל התחנה שמלמדת אותן.
+  </p>
+  <p class="youknow"><b>למה זה מדויק:</b> משרד החינוך מפרסם את
+  <strong>מבנה המבחן המומלץ</strong> — כמה אחוזים לכל נושא — והמספרים כאן
+  מועתקים ממנו, לא נאמדו. השאלות שמופיעות בהמשך הן שאלות אמיתיות משאלוני
+  2012–2016 ומהסימולציות של ההקבצות.</p>
+</header>
+
+<div class="box def">
+  <div class="box-title">המבחנים בכיתה השנה</div>
+  הדף הזה הוא על המפמ״ר של סוף השנה. למבחנים של הכיתה יש דף משלהם — עם הנושאים
+  בדיוק כמו בדף של המורה, תוכנית יום-יום ומבחן לדוגמה:
+  <ul>
+    <li><a href="exam1.html"><b>מבחן 1 · יום ד׳ 4.11</b></a> — נוסחאות הכפל המקוצר והשימושים בהן · הדלתון · שאלה מעבודת הקיץ · <a href="exam1-summary.pdf" download>דף הסיכום (PDF)</a></li>
+  </ul>
+</div>
+
+
+<!-- ============ 1. מבנה ============ -->
+<h2 id="sec-blueprint"><span class="num">1</span>ממה המבחן מורכב</h2>
+
+<div class="wbar" role="img" aria-label="פס המראה את משקל הנושאים במבחן: פונקציות רבע, גאומטריה שליש, טכניקה אלגברית שישית, ושאלה מילולית, הסתברות ואוריינות עשירית כל אחד">
+  <span style="flex:0 0 33%;background:#7A4E8C">גאומטריה 30–35%</span>
+  <span style="flex:0 0 27%;background:#B7791F">פונקציות 20–30%</span>
+  <span style="flex:0 0 17%;background:#2E6F8E">טכניקה 10–20%</span>
+  <span style="flex:0 0 10%;background:#8A6D1B">מילולית</span>
+  <span style="flex:0 0 13%;background:#2E7D6B">הסתברות · אוריינות</span>
+</div>
+
+<table class="dtable blueprint">
+  <tr><th>הנושא</th><th>משקל</th><th>כמה שאלות</th><th>איפה זה נלמד</th></tr>
+  <tr>
+    <td>גאומטריה</td><td class="w">30–35%</td><td>2–3</td>
+    <td>משולשים, מרובעים וקטע אמצעים —
+        <a href="../geometry/index.html">מודול הגאומטריה</a></td>
+  </tr>
+  <tr>
+    <td>פונקציות</td><td class="w">20–30%</td><td>2–3</td>
+    <td>הפרבולה ומפגש עם ישר —
+        <a href="../functions/index.html">מודול הפונקציות</a></td>
+  </tr>
+  <tr>
+    <td>טכניקה אלגברית</td><td class="w">10–20%</td><td>1–2</td>
+    <td>חזקות, פירוק, שברים ומשוואות —
+        <a href="../algebra/index.html">מודול האלגברה</a></td>
+  </tr>
+  <tr>
+    <td>שאלה מילולית</td><td class="w">10%</td><td>1</td>
+    <td><a href="../algebra/06-word-problems.html">בעיות מילוליות</a></td>
+  </tr>
+  <tr>
+    <td>הסתברות</td><td class="w">5–10%</td><td>1–2</td>
+    <td><a href="../probability/01-probability.html">הסתברות</a></td>
+  </tr>
+  <tr>
+    <td>אוריינות</td><td class="w">0–10%</td><td>0–1</td>
+    <td><a href="../probability/02-literacy.html">אוריינות מתמטית</a></td>
+  </tr>
+</table>
+
+<div class="box def">
+  <div class="box-title">מה המספרים האלה אומרים בפועל</div>
+  <strong>גאומטריה ופונקציות יחד הן יותר מחצי מהמבחן.</strong> אם נשאר זמן
+  מוגבל לחזרה, שם הוא שווה הכי הרבה.
+  <br>ומצד שני — הסתברות ואוריינות הן עד 20% ביחד, והן בדרך כלל השאלות
+  הקצרות והקלות בשאלון. לוותר עליהן זה לוותר על נקודות זולות.
+</div>
+
+<!-- ============ 2. שאלות אמיתיות ============ -->
+<h2 id="sec-real"><span class="num">2</span>שאלות אמיתיות — ואיפה כל אחת נלמדת</h2>
+
+<p style="font-size:13.5px;color:var(--soft)">
+  שש שאלות מתוך שאלוני מפמ״ר אמיתיים, אחת מכל נושא. לכל אחת רשום איזו
+  תחנה מלמדת אותה — כך שאם היא נראית זרה, את יודעת בדיוק לאן לחזור.
+</p>
+
+<div class="qcard">
+  <span class="qsrc">פונקציות · מפמ״ר 2016</span>
+  <div class="qbody">
+    נתונות שתי הפונקציות הריבועיות
+    <span class="fi">\(f(x)=-x^{2}+6x-5\)</span> ו-<span class="fi">\(g(x)=x^{2}-1\)</span>.
+    <ol>
+      <li>סמנו ליד כל גרף אם הוא <span class="fi">\(f\)</span> או
+          <span class="fi">\(g\)</span>.</li>
+      <li>חשבו את נקודות החיתוך בין שתי הפונקציות.</li>
+      <li>הנקודות <span class="fi">\(C\)</span> ו-<span class="fi">\(D\)</span>
+          הן הקדקודים. מצאו את הפונקציה העוברת דרכן.</li>
+    </ol>
+    <div class="where">
+      <b>מה צריך לדעת:</b> כיוון הפתיחה לפי הסימן של
+      <span class="fi">\(a\)</span>
+      (<a href="../functions/01-parabola.html#sec-a">תחנה 1</a>) ·
+      נקודות מפגש בהשוואה
+      (<a href="../functions/02-parabola-and-line.html#sec-meet">תחנה 2</a>) ·
+      וקדקוד מהצורה הכללית
+      (<a href="../functions/01-parabola.html#sec-forms">תחנה 1</a>).
+    </div>
+  </div>
+</div>
+
+<div class="qcard">
+  <span class="qsrc">פונקציות · מפמ״ר 2016</span>
+  <div class="qbody">
+    נתונה <span class="fi">\(f(x)=(x-5)(x-3)\)</span>.
+    <ol>
+      <li>מהם שיעורי הקדקוד?</li>
+      <li>מהו התחום שבו הפונקציה עולה?</li>
+      <li>נתונה <span class="fi">\(g(x)=(x-5)(3-x)\)</span>.
+          מהו התחום שבו <em>היא</em> עולה?</li>
+    </ol>
+    <div class="where">
+      <b>מה צריך לדעת:</b> קדקוד מצורת המכפלה (האמצע בין האפסים), ותחומי
+      עלייה ביחס אליו —
+      <a href="../functions/01-parabola.html#sec-sign">תחנה 1, סעיף 4</a>.
+      <br><b>ומה הופך את סעיף ג׳ לקשה:</b> ב-<span class="fi">\(g\)</span>
+      הסוגריים השניים הפוכים, ולכן המקדם המוביל שלילי והפרבולה פתוחה למטה —
+      כל תחומי העלייה והירידה מתהפכים. אותם אפסים, תשובה הפוכה.
+    </div>
+  </div>
+</div>
+
+<div class="qcard">
+  <span class="qsrc">פונקציות · מפמ״ר 2012, נוסח א׳</span>
+  <div class="qbody">
+    נתונה <span class="fi">\(m(x)=(x-3)^{2}-4\)</span>.
+    <ol>
+      <li>באיזה תחום הפונקציה שלילית? הציגו דרך פתרון.</li>
+      <li>כתבו פונקציה ריבועית שהקדקוד שלה
+          <span class="fi">\((3,-4)\)</span> ואין לה חיתוך עם ציר
+          <span class="fi">\(x\)</span>.</li>
+    </ol>
+    <div class="where">
+      <b>שתי השאלות האלה פתורות במלואן</b> —
+      <a href="../functions/01-parabola.html#sec-practice">תחנה 1, תרגילים 7 ו-8</a>.
+    </div>
+  </div>
+</div>
+
+<div class="qcard">
+  <span class="qsrc">גאומטריה · מפמ״ר 2016</span>
+  <div class="qbody">
+    ענו נכון או לא נכון, ונמקו במשפט:
+    <br>קיים משולש שווה-שוקיים שזווית הראש שלו גדולה <strong>פי 6</strong>
+    מזווית הבסיס.
+    <div class="where">
+      <b>איך ניגשים:</b> נסמן את זווית הבסיס <span class="fi">\(x\)</span>;
+      בשווה-שוקיים שתי זוויות הבסיס שוות, וזווית הראש היא
+      <span class="fi">\(6x\)</span>. סכום הזוויות במשולש:
+      <span class="fi">\(x+x+6x=180\)</span>, כלומר
+      <span class="fi">\(x=22.5^\circ\)</span> — זווית חוקית, ולכן
+      <strong>נכון</strong>, והמשולש קיים.
+      <br><b>מה זה בודק:</b> שאלת "האם קיים" נפתרת בבניית משוואה, לא
+      בניחוש — <a href="../geometry/index.html">מודול הגאומטריה</a> ו<a href="../algebra/06-word-problems.html">בעיות מילוליות</a>.
+    </div>
+  </div>
+</div>
+
+<div class="qcard">
+  <span class="qsrc">הסתברות · מפמ״ר 2016</span>
+  <div class="qbody">
+    ההסתברות שתלמיד יקבל 90 במקצוע מסוים היא
+    <span class="fi">\(\tfrac13\)</span>. בשנה נערכו שלושה מבחנים.
+    <br>מה ההסתברות שיקבל 90 בשלושתם?
+    <div class="where">
+      <b>מה צריך לדעת:</b> "בשלושתם" הוא <strong>וגם</strong> ⟵ מכפילים:
+      <span class="fi">\(\left(\tfrac13\right)^{3}=\tfrac{1}{27}\)</span>.
+      <br>זו בדיוק התבנית של
+      <a href="../probability/01-probability.html#sec-and-or">תחנה 1, סעיף 2</a>,
+      מורחבת לשלושה שלבים במקום שניים.
+    </div>
+  </div>
+</div>
+
+<div class="qcard">
+  <span class="qsrc">אוריינות · מפמ״ר 2016</span>
+  <div class="qbody">
+    מאותו מקום על גדת נהר יצאו רפסודה וסירת מנוע ליעד שמרחקו 150 ק״מ,
+    בשעה 8:00, עם זרם שמהירותו 10 קמ״ש. בשעה 9:30 יצא אופנוע ים מאותו
+    מקום ולאותו יעד.
+    <div class="where">
+      <b>מה צריך לדעת:</b> טבלת <strong>מרחק · מהירות · זמן</strong>,
+      ושעות שמתורגמות להפרש זמן —
+      <a href="../algebra/06-word-problems.html#sec-table">בעיות מילוליות, סעיף 3</a>,
+      יחד עם קריאת מצב מהחיים
+      (<a href="../probability/02-literacy.html#sec-method">אוריינות, סעיף 1</a>).
+      <br><b>שימי לב לרפסודה:</b> אין לה מנוע, ולכן מהירותה היא בדיוק
+      מהירות הזרם — 10 קמ״ש. זה נתון שהשאלה נותנת בלי לומר אותו.
+    </div>
+  </div>
+</div>
+
+<!-- ============ 3. הסימולציות ============ -->
+<h2 id="sec-sims"><span class="num">3</span>הסימולציות של ההקבצה שלך</h2>
+
+<div class="papers">
+  <div class="paper">
+    <div class="ph"><b>סימולציה — הקבצה א1</b><span class="yr">המסלול שלך</span></div>
+    <p>
+      פונקציה קווית · חוקי חזקות · נוסחאות הכפל המקוצר · פירוק לגורמים
+      בהוצאת גורם משותף · משוואות · מערכת משוואות · גאומטריה: תרגיל חישוב
+      ותרגיל הוכחה.
+    </p>
+    <div class="acts">
+      <a href="../algebra/01-powers.html">חוקי חזקות ←</a>
+      <a href="../algebra/02-short-multiplication.html">כפל מקוצר ←</a>
+      <a href="../algebra/03-factoring.html">פירוק לגורמים ←</a>
+      <a href="../../year8/algebra/06-systems.html">מערכת משוואות ←</a>
+      <a href="../geometry/index.html">גאומטריה ←</a>
+    </div>
+  </div>
+  <div class="paper">
+    <div class="ph"><b>סימולציה — הקבצה א2</b><span class="yr">אותם נושאים</span></div>
+    <p>
+      חוקי חזקות · מערכת משוואות · פירוק לגורמים בעזרת נוסחאות הכפל המקוצר ·
+      משוואות עם מכנה משותף · גאומטריה: תרגיל הוכחה. מקור טוב לעוד תרגילים
+      מאותו סוג.
+    </p>
+    <div class="acts">
+      <a href="../algebra/04-algebraic-fractions.html">שברים ומכנה משותף ←</a>
+      <a href="../geometry/01-quadrilaterals.html#sec-proof">הוכחות ←</a>
+    </div>
+  </div>
+  <div class="paper">
+    <div class="ph"><b>מאגר המפמ״ר הארצי</b><span class="yr">2012–2017</span></div>
+    <p>
+      עשרה שאלונים שלמים, ואחד מהם כולל תשובות רשמיות. הדרך הכי טובה לבדוק
+      את עצמך באמת — אבל רק בשלב האחרון.
+    </p>
+    <div class="acts">
+      <a href="../../library.html">לספרייה, לפתוח את השאלונים ←</a>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 4. איך מתכוננים ============ -->
+<h2 id="sec-plan"><span class="num">4</span>איך מתכוננים — בסדר הזה</h2>
+
+<div class="plan">
+  <div class="p"><span class="pn">1</span>
+    <div><b>התחנות</b>
+      קודם להבין את הנושא. אין טעם לפתור מבחן על נושא שעוד לא יושב —
+      זה רק מלמד לטעות מהר יותר.</div></div>
+  <div class="p"><span class="pn">2</span>
+    <div><b>מחסני התרגילים</b>
+      תרגול לפי <em>סוג</em>, עם פתרון ליד. כאן בונים שטף.</div></div>
+  <div class="p"><span class="pn">3</span>
+    <div><b>בוחני הבית</b>
+      אותם נושאים, אבל בלי רמזים ובלי צבעים. זה המקום לגלות מה באמת יושב
+      ומה רק נראה מוכר.</div></div>
+  <div class="p"><span class="pn">4</span>
+    <div><b>שאלון שלם, עם שעון</b>
+      ורק עכשיו. תשעים דקות, מחשבון, מחברת — בדיוק כמו ביום האמיתי.
+      ואחר כך לבדוק מול הפתרונות הרשמיים.</div></div>
+</div>
+
+<div class="box warn">
+  <div class="box-title">שני דברים שנכונים בכל שאלון</div>
+  <strong>"הציגו דרך פתרון"</strong> כתוב בראש כל מבחן מפמ״ר, וזה אומר
+  שתשובה נכונה בלי דרך מקבלת חלק מהנקודות בלבד. ולהפך — דרך נכונה עם טעות
+  חשבון בסוף מקבלת את רוב הנקודות.
+  <br><strong>ואם נתקעת — ממשיכים.</strong> השאלות אינן מסודרות לפי קושי,
+  ושאלה קלה עשויה לחכות אחרי זו שנתקעת בה.
+</div>
+
+<footer class="fin">חלק מהעולם של שירה ·
+<a href="../../index.html">חזרה למרכז</a> ·
+<a href="../../library.html">לספרייה</a></footer>
+</main>
+</div>
+</body>
+</html>

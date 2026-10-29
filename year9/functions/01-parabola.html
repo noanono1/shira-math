@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<link rel="apple-touch-icon" href="../../assets/icons/icon-180.png">
+<link rel="manifest" href="../../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>הפרבולה — פונקציות ט׳ — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../../vendor/katex.min.css">
+<link rel="stylesheet" href="../../css/shira.css">
+<style>
+:root{--accent:#B7791F}
+/* שלוש צורות הכתיבה — כרטיס לכל אחת, וכל אחת מסגירה משהו אחר */
+.forms{display:flex; flex-direction:column; gap:10px; margin:14px 0}
+.form{display:flex; gap:12px; align-items:flex-start; border:1px solid var(--line);
+  border-radius:var(--r-md); background:var(--card); padding:12px 15px}
+.form .fn{flex:0 0 auto; width:27px; height:27px; border-radius:8px; color:#fff;
+  font-weight:800; font-size:14px; display:flex; align-items:center; justify-content:center;
+  background:var(--accent)}
+.form .fb{min-width:0}
+.form .fb b{display:block; font-size:15.5px; margin-bottom:2px}
+.form .fb .tells{font-size:13px; color:var(--soft); line-height:1.55}
+.form .katex-display{margin:.45em 0}
+/* טבלת ערכים לצד הגרף */
+.plotpair{display:flex; flex-wrap:wrap; gap:14px; align-items:flex-start; margin:16px 0}
+.plotpair>*{flex:1 1 250px; min-width:0}
+table.vals td,table.vals th{text-align:center; padding:5px 8px}
+</style>
+<script defer src="../../vendor/katex.min.js"></script>
+<script defer src="../../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../../js/shira.js"></script>
+</head>
+<body data-page="g9fun:01-parabola">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">פונקציות ט׳ — המפה</a>
+    <span class="crumbs">תחנה <b>1</b> מתוך 4 · <b>הפרבולה</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">פונקציות · כיתה ט׳ · תחנה 1</div>
+  <h1>הפרבולה — קדקוד, אפסים וציר סימטריה</h1>
+  <p class="lead">
+    עד היום כל גרף שראית היה <strong>ישר</strong>. הפונקציה
+    <span class="fi">\(y=x^{2}\)</span> נותנת עקומה בצורת חיוך — פרבולה.
+    השאלות עליה מנוסחות בדיוק באותן מילים שאת מכירה
+    <a href="../../year8/algebra/04-linear-function.html">מהפונקציה הקווית</a>:
+    נקודות חיתוך, תחומי חיוביות ושליליות, עלייה וירידה. רק הצורה השתנתה.
+  </p>
+  <p class="youknow"><b>בסוף העמוד תדעי:</b> לשרטט פרבולה מטבלת ערכים ·
+  לקרוא קדקוד ישר מצורת הכתיבה · למצוא נקודות חיתוך עם שני הצירים ·
+  להבין מה <span class="fi">\(a\)</span> קובע · ולזהות את ציר הסימטריה.</p>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>≈ 40 דק׳</b> · 9 תרגילים</span>
+    <a class="pm-jump" href="#sec-practice">לקפוץ ישר לתרגילים ↓</a>
+  </p>
+</header>
+
+<!-- ============ 1. מאיפה הצורה ============ -->
+<h2 id="sec-shape"><span class="num">1</span>מאיפה הצורה הזאת מגיעה</h2>
+
+<p>
+  אין כאן קסם. נבנה טבלת ערכים ל-<span class="fi">\(y=x^{2}\)</span>
+  ונסמן את הנקודות — הצורה תופיע מעצמה:
+</p>
+
+<div class="plotpair">
+  <div>
+    <table class="dtable vals">
+      <tr><th><span class="fi">\(x\)</span></th>
+          <td>−3</td><td>−2</td><td>−1</td><td>0</td><td>1</td><td>2</td><td>3</td></tr>
+      <tr><th><span class="fi">\(y=x^{2}\)</span></th>
+          <td>9</td><td>4</td><td>1</td><td><b>0</b></td><td>1</td><td>4</td><td>9</td></tr>
+    </table>
+    <p style="font-size:13.5px;color:var(--soft);margin-top:10px">
+      שימי לב לשורה השנייה: היא <strong>סימטרית</strong>. הערכים חוזרים על
+      עצמם משני צידי האפס, כי ריבוע מוחק את הסימן —
+      <span class="fi">\((-3)^{2}\)</span> ו-<span class="fi">\(3^{2}\)</span>
+      שניהם <span class="fi">\(9\)</span>.
+      <br>וזו בדיוק הסיבה שלפרבולה יש ציר סימטריה.
+    </p>
+  </div>
+  <figure style="margin:0">
+    <svg viewBox="0 0 240 210" style="width:100%;max-width:270px;height:auto" role="img"
+         aria-label="גרף הפונקציה y שווה x בריבוע, פרבולה שקדקודה בראשית">
+      <!-- grid -->
+      <g stroke="#EFEAE0" stroke-width="1">
+        <line x1="30" y1="30" x2="230" y2="30"/><line x1="30" y1="60" x2="230" y2="60"/>
+        <line x1="30" y1="90" x2="230" y2="90"/><line x1="30" y1="120" x2="230" y2="120"/>
+        <line x1="30" y1="150" x2="230" y2="150"/>
+        <line x1="60" y1="20" x2="60" y2="185"/><line x1="90" y1="20" x2="90" y2="185"/>
+        <line x1="150" y1="20" x2="150" y2="185"/><line x1="180" y1="20" x2="180" y2="185"/>
+        <line x1="210" y1="20" x2="210" y2="185"/>
+      </g>
+      <!-- axes -->
+      <line x1="20" y1="180" x2="234" y2="180" stroke="#5A6875" stroke-width="1.5"/>
+      <line x1="120" y1="18" x2="120" y2="192" stroke="#5A6875" stroke-width="1.5"/>
+      <!-- parabola y=x^2 : x px = 120+30x ; y px = 180-15y -->
+      <path d="M60,45 Q120,255 180,45" fill="none" stroke="#B7791F" stroke-width="2.6"/>
+      <!-- points -->
+      <circle cx="60" cy="45" r="3.4" fill="#B7791F"/><circle cx="90" cy="120" r="3.4" fill="#B7791F"/>
+      <circle cx="120" cy="180" r="4.2" fill="#2E7D32"/>
+      <circle cx="150" cy="120" r="3.4" fill="#B7791F"/><circle cx="180" cy="45" r="3.4" fill="#B7791F"/>
+      <text x="120" y="199" text-anchor="middle" font-family="Arial" font-size="11" font-weight="700" fill="#2E7D32">(0,0)</text>
+      <text x="236" y="176" font-family="Arial" font-size="12" font-style="italic" fill="#5A6875">x</text>
+      <text x="110" y="17" font-family="Arial" font-size="12" font-style="italic" fill="#5A6875">y</text>
+    </svg>
+    <figcaption>הנקודות מהטבלה, ובקו שמחבר אותן. הקדקוד (ירוק) יושב בראשית.</figcaption>
+  </figure>
+</div>
+
+<div class="box def">
+  <div class="box-title">שלושת השמות החדשים</div>
+  <ul class="steps">
+    <li><strong>קדקוד</strong> — הנקודה הנמוכה ביותר של הפרבולה (או הגבוהה
+        ביותר, אם היא הפוכה). ב-<span class="fi">\(y=x^{2}\)</span> הוא
+        <span class="fi">\((0,0)\)</span>.</li>
+    <li><strong>ציר סימטריה</strong> — הישר האנכי שעובר דרך הקדקוד. הפרבולה
+        נראית זהה משני צדדיו.</li>
+    <li><strong>נקודות אפס</strong> — היכן שהפרבולה חוצה את ציר
+        <span class="fi">\(x\)</span>. יכולות להיות שתיים, אחת, או אף אחת.</li>
+  </ul>
+</div>
+
+<!-- ============ 2. מה a קובע ============ -->
+<h2 id="sec-a"><span class="num">2</span>מה <span class="fi">\(a\)</span> קובע — ומה הוא לא</h2>
+
+<p>
+  המקדם שלפני <span class="fi">\(x^{2}\)</span> קובע שני דברים בלבד:
+  לאיזה כיוון הפרבולה פונה, וכמה היא צרה.
+</p>
+
+<figure style="max-width:430px;margin:16px auto 6px">
+  <svg viewBox="0 0 320 170" style="width:100%;height:auto" role="img"
+       aria-label="שלוש פרבולות: אחת פתוחה למעלה, אחת צרה יותר, ואחת פתוחה למטה">
+    <line x1="15" y1="88" x2="305" y2="88" stroke="#94A3B8" stroke-width="1.3"/>
+    <line x1="160" y1="12" x2="160" y2="162" stroke="#94A3B8" stroke-width="1.3"/>
+    <!-- a=1 -->
+    <path d="M100,20 Q160,224 220,20" fill="none" stroke="#B7791F" stroke-width="2.4"/>
+    <!-- a=3 narrow -->
+    <path d="M125,20 Q160,224 195,20" fill="none" stroke="#2E6F8E" stroke-width="2.4" stroke-dasharray="5 4"/>
+    <!-- a=-1 -->
+    <path d="M100,156 Q160,-48 220,156" fill="none" stroke="#B4553C" stroke-width="2.4"/>
+    <text x="232" y="26" font-family="Arial" font-size="12" font-weight="700" fill="#B7791F">a = 1</text>
+    <text x="200" y="16" font-family="Arial" font-size="12" font-weight="700" fill="#2E6F8E">a = 3</text>
+    <text x="232" y="154" font-family="Arial" font-size="12" font-weight="700" fill="#B4553C">a = −1</text>
+  </svg>
+  <figcaption>
+    <span class="fi">\(a&gt;0\)</span> — חיוך, פתוחה למעלה, ולקדקוד יש ערך
+    <strong>מינימלי</strong>. <span class="fi">\(a&lt;0\)</span> — עצוב, פתוחה
+    למטה, ולקדקוד ערך <strong>מקסימלי</strong>. וככל ש-<span class="fi">\(|a|\)</span>
+    גדול יותר, הפרבולה צרה יותר.
+  </figcaption>
+</figure>
+
+<div class="box warn">
+  <div class="box-title">מה <span class="fi">\(a\)</span> לא קובע</div>
+  הוא לא מזיז את הפרבולה ימינה או שמאלה. את זה עושים
+  <span class="fi">\(b\)</span> ו-<span class="fi">\(c\)</span>.
+  שאלה נפוצה במבחן נותנת גרף ומבקשת לבחור את הפונקציה המתאימה — והצעד
+  הראשון תמיד זהה: <strong>להסתכל לאיזה כיוון הפרבולה פונה</strong>,
+  וזה כבר פוסל חצי מהאפשרויות.
+</div>
+
+<!-- ============ 3. שלוש הצורות ============ -->
+<h2 id="sec-forms"><span class="num">3</span>שלוש צורות הכתיבה — וכל אחת מסגירה משהו אחר</h2>
+
+<p>
+  אותה פרבולה בדיוק יכולה להיכתב בשלוש דרכים. הן אינן פונקציות שונות —
+  הן זוויות מבט שונות, וכל אחת נותנת לך מידע אחר <em>בחינם</em>.
+</p>
+
+<div class="forms">
+  <div class="form">
+    <span class="fn">1</span>
+    <span class="fb">
+      <b>צורת הקדקוד</b>
+      $$y=(x-p)^{2}+k$$
+      <span class="tells">הקדקוד הוא <span class="fi">\((p,k)\)</span>, וקוראים
+      אותו ישר — בלי לצייר ובלי לחשב. שימי לב ל<strong>מינוס</strong>
+      שבנוסחה: ב-<span class="fi">\((x-3)^{2}\)</span> הקדקוד ב-<span class="fi">\(x=3\)</span>,
+      וב-<span class="fi">\((x+3)^{2}\)</span> הוא ב-<span class="fi">\(x=-3\)</span>.</span>
+    </span>
+  </div>
+  <div class="form">
+    <span class="fn">2</span>
+    <span class="fb">
+      <b>צורת המכפלה</b>
+      $$y=a(x-x_{1})(x-x_{2})$$
+      <span class="tells">נקודות האפס הן <span class="fi">\(x_{1}\)</span>
+      ו-<span class="fi">\(x_{2}\)</span>, ישר מהסוגריים. זו התוצאה של
+      <a href="../algebra/03-factoring.html">פירוק לגורמים</a> — ולכן פירוק
+      הוא הכלי המרכזי גם כאן.</span>
+    </span>
+  </div>
+  <div class="form">
+    <span class="fn">3</span>
+    <span class="fb">
+      <b>הצורה הכללית</b>
+      $$y=ax^{2}+bx+c$$
+      <span class="tells">האיבר החופשי <span class="fi">\(c\)</span> הוא
+      נקודת החיתוך עם ציר <span class="fi">\(y\)</span> — כי כשמציבים
+      <span class="fi">\(x=0\)</span> כל השאר נעלם.</span>
+    </span>
+  </div>
+</div>
+
+<div class="box intuition">
+  <div class="box-title">מה עושים כשהצורה לא נוחה</div>
+  אם נתונה הצורה הכללית ורוצים את הקדקוד, לא צריך לצייר. ציר הסימטריה
+  יושב תמיד באמצע שבין שתי נקודות האפס, ומכאן הנוסחה:
+  $$x_{\text{vertex}}=-\frac{b}{2a}$$
+  מוצאים את שיעור ה-<span class="fi">\(x\)</span> של הקדקוד, מציבים אותו
+  בפונקציה, ומקבלים את שיעור ה-<span class="fi">\(y\)</span>.
+</div>
+
+<div class="nb" data-nb>
+  <div class="nb-head"><b>בונים ביחד במחברת</b><span class="nb-count"></span></div>
+  <ol class="nb-steps">
+    <li class="nb-step"><b>התרגיל</b>
+      <p>נתונה <span class="fi">\(m(x)=(x-3)^{2}-4\)</span>.
+      מצאי את הקדקוד, את נקודות החיתוך עם הצירים, ואת ציר הסימטריה.
+      <br><span style="font-size:13px;color:var(--soft)">הפונקציה הזאת מופיעה
+      בשאלה 1 של מבחן המפמ״ר לכיתה ט׳, 2012.</span></p>
+    </li>
+    <li class="nb-step"><b>הקדקוד — קוראים אותו ישר</b>
+      <p>זו צורת הקדקוד, עם <span class="fi">\(p=3\)</span> ו-<span class="fi">\(k=-4\)</span>:
+      $$\text{vertex}=(3,\,-4)$$
+      אפס עבודה. זו כל הסיבה שהצורה הזאת קיימת.</p>
+    </li>
+    <li class="nb-step"><b>ציר הסימטריה</b>
+      <p>הישר האנכי דרך הקדקוד: <span class="fi">\(x=3\)</span>.</p>
+    </li>
+    <li class="nb-step"><b>חיתוך עם ציר <span class="fi">\(y\)</span> — מציבים אפס</b>
+      <p>$$m(0)=(0-3)^{2}-4=9-4=5$$
+      הנקודה <span class="fi">\((0,5)\)</span>.</p>
+    </li>
+    <li class="nb-step"><b>חיתוך עם ציר <span class="fi">\(x\)</span> — משווים לאפס</b>
+      <p>$$(x-3)^{2}-4=0\;\Longrightarrow\;(x-3)^{2}=4$$
+      שורש לשני הצדדים — <strong>ושני סימנים</strong>:
+      $$x-3=\pm 2\;\Longrightarrow\;x_{1}=5,\ x_{2}=1$$
+      הנקודות <span class="fi">\((1,0)\)</span> ו-<span class="fi">\((5,0)\)</span>.</p>
+    </li>
+    <li class="nb-step"><b>בדיקה שהכול מתיישב</b>
+      <p>האמצע בין <span class="fi">\(1\)</span> ל-<span class="fi">\(5\)</span>
+      הוא <span class="fi">\(3\)</span> — בדיוק ציר הסימטריה ✓
+      <br>הבדיקה הזאת תופסת כמעט כל טעות חשבון בשאלות מהסוג הזה.</p>
+    </li>
+  </ol>
+</div>
+
+<!-- ============ 4. תחומי סימן ============ -->
+<h2 id="sec-sign"><span class="num">4</span>מתי הפונקציה חיובית — קוראים מהציור</h2>
+
+<p>
+  "תחום חיוביות" פירושו: לאילו ערכי <span class="fi">\(x\)</span> הגרף נמצא
+  <strong>מעל</strong> ציר <span class="fi">\(x\)</span>. זו אותה שאלה בדיוק
+  שענית עליה בפונקציה הקווית — רק שכאן התשובה מגיעה בשני חלקים.
+</p>
+
+<figure style="max-width:420px;margin:16px auto 6px">
+  <svg viewBox="0 0 330 190" style="width:100%;height:auto" role="img"
+       aria-label="פרבולה החותכת את ציר איקס בנקודות 1 ו-5; מסומן בירוק היכן היא מעל הציר ובאדום היכן היא מתחתיו">
+    <line x1="18" y1="120" x2="316" y2="120" stroke="#5A6875" stroke-width="1.5"/>
+    <path d="M60,25 Q165,255 270,25" fill="none" stroke="#B7791F" stroke-width="2.6"/>
+    <circle cx="105" cy="120" r="4.4" fill="#2E7D32"/><circle cx="225" cy="120" r="4.4" fill="#2E7D32"/>
+    <text x="105" y="138" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700" fill="#2E7D32">1</text>
+    <text x="225" y="138" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700" fill="#2E7D32">5</text>
+    <!-- above / below bands -->
+    <line x1="30" y1="106" x2="103" y2="106" stroke="#2E7D32" stroke-width="3.4"/>
+    <line x1="227" y1="106" x2="300" y2="106" stroke="#2E7D32" stroke-width="3.4"/>
+    <line x1="107" y1="134" x2="223" y2="134" stroke="#B4553C" stroke-width="3.4"/>
+    <text x="66" y="100" text-anchor="middle" font-family="Arial" font-size="11" font-weight="700" fill="#2E7D32">מעל</text>
+    <text x="264" y="100" text-anchor="middle" font-family="Arial" font-size="11" font-weight="700" fill="#2E7D32">מעל</text>
+    <text x="165" y="150" text-anchor="middle" font-family="Arial" font-size="11" font-weight="700" fill="#B4553C">מתחת</text>
+    <text x="165" y="176" text-anchor="middle" font-family="Arial" font-size="11.5" fill="#5A6875">בין שתי נקודות האפס — הפונקציה שלילית</text>
+  </svg>
+  <figcaption>
+    הפרבולה של הדוגמה הקודמת. חיובית משני הצדדים החיצוניים, שלילית
+    <em>בין</em> נקודות האפס.
+  </figcaption>
+</figure>
+
+<div class="box def">
+  <div class="box-title">הכלל, לפרבולה פתוחה למעלה</div>
+  $$m(x)&lt;0\;:\quad 1&lt;x&lt;5$$
+  $$m(x)&gt;0\;:\quad x&lt;1\ \ \text{or}\ \ x&gt;5$$
+  שימי לב לצורת הכתיבה: התחום השלילי הוא <strong>אי-שוויון כפול</strong>
+  (בין שני מספרים), והחיובי הוא <strong>שני תחומים נפרדים</strong>.
+  <br>ואם הפרבולה פתוחה למטה — הכול מתהפך.
+</div>
+
+<div class="box intuition">
+  <div class="box-title">עלייה וירידה — ובזה הפרבולה שונה מהישר</div>
+  לישר יש כיוון אחד לכל אורכו. לפרבולה יש שני חלקים: היא <strong>יורדת</strong>
+  עד לקדקוד, ואז <strong>עולה</strong>. נקודת המפנה היא תמיד הקדקוד עצמו,
+  ולכן התשובה נכתבת ביחס אליו:
+  $$\text{decreasing}:\ x&lt;3\qquad\qquad\text{increasing}:\ x&gt;3$$
+</div>
+
+<!-- ============ 5. תרגול ============ -->
+<h2 id="sec-practice"><span class="num">5</span>תרגול — משלב לשלב</h2>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 1 — לקרוא קדקוד</h4></div>
+  <p class="q-text"><span class="mk mk-find">מהו הקדקוד של</span>
+    <span class="fi">\(y=(x-6)^{2}+2\)</span>?</p>
+  <details class="step"><summary>שלב ראשון — לזהות את הצורה</summary>
+    <div class="step-body">זו צורת הקדקוד <span class="fi">\((x-p)^{2}+k\)</span>,
+    ולכן קוראים ישר.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      <span class="fi">\(p=6\)</span> ו-<span class="fi">\(k=2\)</span>, ולכן
+      הקדקוד הוא <span class="fi">\((6,2)\)</span>.
+      <br>הפרבולה פתוחה למעלה (המקדם חיובי), ולכן <span class="fi">\(2\)</span>
+      הוא הערך <strong>המינימלי</strong> של הפונקציה.
+    </div>
+  </details>
+  <div class="q-row"><span>שיעור <span class="fi">\(x\)</span> של הקדקוד:</span>
+    <input class="q-input" data-answer="6" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ושיעור <span class="fi">\(y\)</span>:</span>
+    <input class="q-input" data-answer="2" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex1"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 2 — כשהסימן בסוגריים הוא פלוס</h4></div>
+  <p class="q-text"><span class="mk mk-find">מהו הקדקוד של</span>
+    <span class="fi">\(y=(x+4)^{2}-9\)</span>?</p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      הנוסחה היא <span class="fi">\((x-p)^{2}\)</span>, ולכן צריך לכתוב את
+      הסוגריים כחיסור:
+      $$(x+4)=(x-(-4))\;\Longrightarrow\;p=-4$$
+      הקדקוד הוא <span class="fi">\((-4,-9)\)</span>.
+      <br><strong>כלל מהיר:</strong> שיעור ה-<span class="fi">\(x\)</span>
+      של הקדקוד הוא תמיד <em>הפוך</em> לסימן שבסוגריים.
+    </div>
+  </details>
+  <div class="q-row"><span>שיעור <span class="fi">\(x\)</span>:</span>
+    <input class="q-input" data-answer="-4" inputmode="text" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex2"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 3 — נקודות אפס מהמכפלה</h4></div>
+  <p class="q-text"><span class="mk mk-find">מהן נקודות החיתוך עם ציר <span class="fi">\(x\)</span> של</span>
+    <span class="fi">\(f(x)=-2(x-4)(x+2)\)</span>?
+    <span class="mk mk-find">ולאיזה כיוון הפרבולה פתוחה?</span></p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      זו צורת המכפלה. מכפלה מתאפסת כשאחד הגורמים מתאפס:
+      $$x-4=0\;\Rightarrow\;x_{1}=4
+        \qquad x+2=0\;\Rightarrow\;x_{2}=-2$$
+      הנקודות <span class="fi">\((4,0)\)</span> ו-<span class="fi">\((-2,0)\)</span>.
+      <br>המקדם <span class="fi">\(a=-2\)</span> שלילי, ולכן הפרבולה פתוחה
+      <strong>למטה</strong>, ולקדקוד שלה יש ערך מקסימלי.
+      <br><br>וציר הסימטריה — באמצע בין נקודות האפס:
+      <span class="fi">\(\frac{4+(-2)}{2}=1\)</span>.
+    </div>
+  </details>
+  <div class="q-row"><span>נקודת האפס החיובית:</span>
+    <input class="q-input" data-answer="4" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ציר הסימטריה <span class="fi">\(x=\)</span></span>
+    <input class="q-input" data-answer="1" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex3"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 4 — חיתוך עם ציר <span class="fi">\(y\)</span></h4></div>
+  <p class="q-text"><span class="mk mk-find">מהי נקודת החיתוך עם ציר <span class="fi">\(y\)</span> של</span>
+    <span class="fi">\(y=x^{2}-6x+8\)</span>?</p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      מציבים <span class="fi">\(x=0\)</span>:
+      $$y=0-0+8=8$$
+      הנקודה <span class="fi">\((0,8)\)</span> — וזה בדיוק האיבר החופשי.
+      בצורה הכללית זה תמיד כך.
+    </div>
+  </details>
+  <div class="q-row"><span class="fi">\(y=\)</span>
+    <input class="q-input" data-answer="8" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex4"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 5 — נקודות אפס מהצורה הכללית</h4></div>
+  <p class="q-text"><span class="mk mk-find">מצאי את נקודות האפס של</span>
+    <span class="fi">\(y=x^{2}-6x+8\)</span></p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      משווים לאפס ומפרקים — מכפלה 8, סכום <span class="fi">\(-6\)</span>:
+      $$x^{2}-6x+8=0\;\Longrightarrow\;(x-2)(x-4)=0$$
+      $$x_{1}=2\qquad x_{2}=4$$
+      <strong>פירוק לגורמים הוא הכלי</strong>, בדיוק כמו במשוואה ריבועית —
+      כי זו בדיוק אותה משוואה.
+    </div>
+  </details>
+  <div class="q-row"><span>הקטנה:</span>
+    <input class="q-input" data-answer="2" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>והגדולה:</span>
+    <input class="q-input" data-answer="4" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex5"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 6 — קדקוד מהצורה הכללית</h4></div>
+  <p class="q-text"><span class="mk mk-find">מצאי את הקדקוד של</span>
+    <span class="fi">\(y=x^{2}-6x+8\)</span></p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      <strong>דרך א׳ — הנוסחה:</strong>
+      $$x=-\frac{b}{2a}=-\frac{-6}{2}=3$$
+      מציבים בפונקציה: <span class="fi">\(y=9-18+8=-1\)</span>.
+      הקדקוד <span class="fi">\((3,-1)\)</span>.
+      <br><br><strong>דרך נוספת — האמצע בין נקודות האפס:</strong>
+      מתרגיל 5 ידוע שהאפסים הם 2 ו-4, והאמצע ביניהם הוא
+      <span class="fi">\(\frac{2+4}{2}=3\)</span> — אותה תשובה, בלי נוסחה.
+      <br>שתי הדרכים נכונות; השנייה מהירה יותר כשכבר מצאת את האפסים.
+    </div>
+  </details>
+  <div class="q-row"><span>שיעור <span class="fi">\(x\)</span>:</span>
+    <input class="q-input" data-answer="3" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>שיעור <span class="fi">\(y\)</span>:</span>
+    <input class="q-input" data-answer="-1" inputmode="text" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex6"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 7 — תחומי סימן</h4></div>
+  <p class="q-text"><span class="mk mk-find">באיזה תחום הפונקציה
+    <span class="fi">\(m(x)=(x-3)^{2}-4\)</span> שלילית?</span> הציגי דרך פתרון.
+    <br><span style="font-size:13px;color:var(--soft)">שאלה ג׳ במפמ״ר ט׳ 2012,
+    נוסח א׳.</span></p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      קודם מוצאים את נקודות האפס — שם הפונקציה מחליפה סימן:
+      $$(x-3)^{2}-4=0\;\Longrightarrow\;(x-3)^{2}=4\;\Longrightarrow\;x-3=\pm2$$
+      $$x_{1}=1\qquad x_{2}=5$$
+      המקדם חיובי ⟵ הפרבולה פתוחה למעלה ⟵ היא <strong>שלילית בין</strong>
+      נקודות האפס:
+      $$1&lt;x&lt;5$$
+      <strong>הנימוק הוא חלק מהתשובה.</strong> "פתוחה למעלה, ולכן שלילית בין
+      האפסים" — זה מה שנותן את הנקודות, לא רק המספרים.
+    </div>
+  </details>
+  <div class="q-row"><span>הגבול השמאלי:</span>
+    <input class="q-input" data-answer="1" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>והימני:</span>
+    <input class="q-input" data-answer="5" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex7"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 8 — לכתוב פונקציה לפי תנאים</h4></div>
+  <p class="q-text">
+    <span class="mk mk-find">כתבי פונקציה ריבועית שהקדקוד שלה הוא
+    <span class="fi">\((3,-4)\)</span> ואין לה נקודות חיתוך עם ציר
+    <span class="fi">\(x\)</span>.</span>
+    <br><span style="font-size:13px;color:var(--soft)">שאלה ד׳ באותו מפמ״ר.</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      נתחיל מצורת הקדקוד, שנותנת את התנאי הראשון בחינם:
+      $$y=a(x-3)^{2}-4$$
+      עכשיו התנאי השני. הקדקוד יושב ב-<span class="fi">\(y=-4\)</span>, כלומר
+      <strong>מתחת</strong> לציר. אם הפרבולה תהיה פתוחה למעלה
+      (<span class="fi">\(a&gt;0\)</span>) היא בהכרח תעלה ותחצה את הציר.
+      <br>לכן היא חייבת להיות פתוחה <strong>למטה</strong>: הקדקוד הוא הנקודה
+      הגבוהה ביותר, וכל השאר מתחתיו — ואף פעם לא נוגעים בציר.
+      $$a&lt;0\;,\ \text{for example}\ a=-1\;:\qquad y=-(x-3)^{2}-4$$
+      <strong>בדיקה:</strong> הערך המקסימלי הוא <span class="fi">\(-4\)</span>,
+      שהוא שלילי, ולכן הפונקציה שלילית תמיד ולעולם אינה מתאפסת ✓
+      <br><br>יש אינסוף תשובות נכונות — כל <span class="fi">\(a\)</span> שלילי
+      עובד. בשאלה כזאת מספיק לתת אחת ולנמק.
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex8"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 9 — נכון או לא נכון</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">נתונה <span class="fi">\(m(x)=(x-3)^{2}-4\)</span></span>.
+    <span class="mk mk-find">קבעי לגבי כל טענה אם היא נכונה, ונמקי:</span>
+    <br>א. לישר <span class="fi">\(y=-7\)</span> יש שתי נקודות חיתוך עם הפונקציה.
+    <br>ב. לישר <span class="fi">\(y=0\)</span> יש שתי נקודות חיתוך עם הפונקציה.
+    <br>ג. לישר <span class="fi">\(x=3\)</span> יש נקודת חיתוך אחת עם הפונקציה.
+    <br><span style="font-size:13px;color:var(--soft)">סעיף ב׳ באותו מפמ״ר.</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      כל השאלה נפתרת מנקודה אחת: <strong>הקדקוד הוא
+      <span class="fi">\((3,-4)\)</span></strong>, והפרבולה פתוחה למעלה —
+      כלומר הערך הנמוך ביותר שהיא מקבלת הוא <span class="fi">\(-4\)</span>.
+      <br><br>
+      <strong>א. לא נכון.</strong> הישר <span class="fi">\(y=-7\)</span> עובר
+      מתחת לקדקוד, והפונקציה לעולם אינה יורדת לשם. אפס נקודות חיתוך.
+      <br>
+      <strong>ב. נכון.</strong> הישר <span class="fi">\(y=0\)</span> הוא ציר
+      <span class="fi">\(x\)</span> עצמו, והוא עובר מעל הקדקוד — ולכן חוצה
+      את הפרבולה פעמיים, ב-<span class="fi">\(x=1\)</span> וב-<span class="fi">\(x=5\)</span>.
+      <br>
+      <strong>ג. נכון.</strong> <span class="fi">\(x=3\)</span> הוא ישר
+      <em>אנכי</em>, ולא אופקי. פונקציה נותנת ערך <span class="fi">\(y\)</span>
+      אחד בדיוק לכל <span class="fi">\(x\)</span>, ולכן כל ישר אנכי חותך
+      אותה בנקודה אחת בלבד — כאן, בקדקוד עצמו.
+      <br><br><strong>מה שהשאלה בודקת:</strong> ישר אופקי
+      (<span class="fi">\(y=\ldots\)</span>) יכול לחתוך פרבולה 0, 1 או 2
+      פעמים — תלוי אם הוא מעל הקדקוד, עליו, או מתחתיו. ישר אנכי
+      (<span class="fi">\(x=\ldots\)</span>) חותך תמיד בדיוק פעם אחת.
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex9"> סיימתי את התרגיל הזה</label>
+</article>
+
+<div class="box def" style="margin-top:26px">
+  <div class="box-title">מה לקחת מכאן</div>
+  שתי נקודות שולטות בכל שאלה על פרבולה: <strong>הקדקוד</strong> וכיוון
+  הפתיחה. מהן נגזרות תחומי הסימן, העלייה והירידה, ומספר נקודות החיתוך עם
+  כל ישר אופקי. ואם הצורה שנתונה אינה נוחה — מפרקים לגורמים או משתמשים
+  ב-<span class="fi">\(x=-\frac{b}{2a}\)</span>.
+</div>
+
+
+<div class="watch">
+  <h3>רוצה לראות את זה מוסבר בקול?</h3>
+  <p>הסרטונים הם תגבור, לא חובה — ומי שהעמוד הספיק לה יכולה לדלג.</p>
+  <a class="video-link" href="https://www.youtube.com/watch?v=fs7kymwq4CQ" target="_blank" rel="noopener">
+    <img src="../../assets/g9-vids/fs7kymwq4CQ.jpg" alt="מציאת קדקוד פרבולה — תמונה מהסרטון" loading="lazy">
+    <span class="vt"><b>מציאת קודקוד פרבולה-כיתה ט</b><span>מציאת הקדקוד, בקצרה · 5:10 · Ovad Lev Ari</span></span>
+    <span class="play">▶</span>
+  </a>
+  <a class="video-link" href="https://www.youtube.com/watch?v=ghDKfPrSxcE" target="_blank" rel="noopener">
+    <img src="../../assets/g9-vids/ghDKfPrSxcE.jpg" alt="חקירת פרבולה — ייצוג קדקודי — תמונה מהסרטון" loading="lazy">
+    <span class="vt"><b>חקירת פרבולה מלאה ב-11 דקות (ייצוג קודקודי)</b><span>חקירת פרבולה מלאה מייצוג קדקודי — שיעור שלם · 11:34 · פתרון פשוט</span></span>
+    <span class="play">▶</span>
+  </a>
+</div>
+
+<div class="progresswrap no-print">
+  <span class="progressbar"><i></i></span><span class="progress-label"></span>
+  <button class="all-sols" style="font-family:inherit;font-size:12px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:4px 10px;cursor:pointer">לפתוח את כל הפתרונות</button>
+</div>
+
+<nav class="pagenav">
+  <a class="next" href="01b-shifts-and-properties.html"><span class="dir">הבא ←</span>הזזות ותכונות הפונקציה</a>
+</nav>
+
+<footer class="fin">חלק מהעולם של שירה ·
+<a href="../../index.html">חזרה למרכז</a> ·
+<a href="index.html">מפת הפונקציות</a></footer>
+</main>
+</div>
+</body>
+</html>

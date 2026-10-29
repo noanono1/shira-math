@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<link rel="apple-touch-icon" href="../../assets/icons/icon-180.png">
+<link rel="manifest" href="../../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>דמיון ומשפט תאלס — גאומטריה ט׳ — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../../vendor/katex.min.css">
+<link rel="stylesheet" href="../../css/shira.css">
+<style>
+:root{--accent:#7A4E8C}
+.figrow{display:flex; flex-wrap:wrap; gap:16px; align-items:flex-start; margin:16px 0}
+.figrow>figure{flex:1 1 250px; min-width:0; margin:0}
+</style>
+<script defer src="../../vendor/katex.min.js"></script>
+<script defer src="../../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../../js/shira.js"></script>
+</head>
+<body data-page="g9geo:02-similarity-thales">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">גאומטריה ט׳ — המפה</a>
+    <span class="crumbs">תחנה <b>4</b> מתוך 6 · <b>דמיון ותאלס</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">גאומטריה · כיתה ט׳ · תחנה 4</div>
+  <h1>דמיון ומשפט תאלס</h1>
+  <p class="lead">
+    את הבסיס כבר יש לך —
+    <a href="../../year8/geometry/07-similarity.html">תחנת הדמיון של כיתה ח׳</a>
+    מכסה את שלושת משפטי הדמיון ואת שתי התבניות הנפוצות. כאן ממשיכים מאותה
+    נקודה: <strong>משפט תאלס</strong> וההפוך לו, יחסים בין קטעים על מקבילים,
+    והמקרה המיוחד של הגובה ליתר.
+  </p>
+  <p class="youknow"><b>בסוף העמוד תדעי:</b> לנסח ולהשתמש במשפט תאלס ·
+  לזהות מתי המשפט ההפוך נדרש · להשתמש בקטע אמצעים במשולש ובטרפז ·
+  ולעבוד עם שלושת המשולשים הדומים שנוצרים מהגובה ליתר.</p>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>≈ 40 דק׳</b> · 7 תרגילים</span>
+    <a class="pm-jump" href="#sec-practice">לקפוץ ישר לתרגילים ↓</a>
+  </p>
+</header>
+
+<div class="box intuition">
+  <div class="box-title">רענון בשלוש שורות — מה כבר יש לך</div>
+  שני משולשים <strong>דומים</strong> אם זוויותיהם שוות בהתאמה; אז כל שתי
+  צלעות מתאימות נמצאות באותו יחס, שנקרא <strong>יחס הדמיון</strong>
+  <span class="fi">\(k\)</span>.
+  <br>שלושת משפטי הדמיון: <strong>ז.ז</strong> · <strong>צ.צ.צ</strong> ·
+  <strong>צ.ז.צ</strong> — ובמבחן משתמשים כמעט תמיד ב<strong>ז.ז</strong>.
+  <br>ההיקפים גדלים פי <span class="fi">\(k\)</span>, והשטחים פי
+  <span class="fi">\(k^{2}\)</span>.
+  <br>הכול מפורט <a href="../../year8/geometry/07-similarity.html">בתחנה של ח׳</a>.
+</div>
+
+<!-- ============ 1. תאלס ============ -->
+<h2 id="sec-thales"><span class="num">1</span>משפט תאלס</h2>
+
+<p>
+  משפט תאלס עוסק במצב אחד ספציפי: <strong>ישר מקביל לצלע במשולש</strong>
+  שחותך את שתי הצלעות האחרות. הוא אומר שהחיתוך מחלק אותן <em>באותו יחס</em>.
+</p>
+
+<div class="figrow">
+  <figure>
+    <svg viewBox="0 0 230 190" style="width:100%;height:auto" role="img"
+         aria-label="משולש ABC ובתוכו ישר DE מקביל לצלע BC, החותך את AB ואת AC">
+      <polygon points="115,20 30,165 200,165" fill="#F7F3FA" stroke="#7A4E8C" stroke-width="2"/>
+      <line x1="72" y1="93" x2="158" y2="93" stroke="#2E6F8E" stroke-width="2.4"/>
+      <circle cx="72" cy="93" r="3.4" fill="#2E6F8E"/><circle cx="158" cy="93" r="3.4" fill="#2E6F8E"/>
+      <text x="115" y="14" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">A</text>
+      <text x="22" y="178" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">B</text>
+      <text x="203" y="178" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">C</text>
+      <text x="58" y="90" font-family="Arial" font-size="13" font-weight="700" fill="#2E6F8E">D</text>
+      <text x="166" y="90" font-family="Arial" font-size="13" font-weight="700" fill="#2E6F8E">E</text>
+      <text x="115" y="108" text-anchor="middle" font-family="Arial" font-size="11" fill="#5A6875">DE ∥ BC</text>
+    </svg>
+    <figcaption>הישר <span class="fi">\(DE\)</span> מקביל ל-<span class="fi">\(BC\)</span>
+    וחותך את שתי הצלעות האחרות.</figcaption>
+  </figure>
+  <div>
+    <div class="fbox">
+      <div class="fbox-title">משפט תאלס</div>
+      $$\frac{AD}{DB}=\frac{AE}{EC}$$
+      <span class="f-legend">
+        <span>החלק העליון של צלע אחת אל התחתון שלה — כמו בצלע השנייה</span>
+      </span>
+    </div>
+    <p style="font-size:13.5px;color:var(--soft);margin-top:10px">
+      אפשר לכתוב את היחס גם ביחס לצלע השלמה, וזו לרוב הצורה הנוחה יותר:
+    </p>
+    $$\frac{AD}{AB}=\frac{AE}{AC}=\frac{DE}{BC}$$
+    <p style="font-size:13.5px;color:var(--soft)">
+      שימי לב שרק בצורה השנייה מופיע גם <span class="fi">\(DE\)</span> —
+      כי היא באה מהדמיון של שני המשולשים, לא מהמשפט עצמו.
+    </p>
+  </div>
+</div>
+
+<div class="box intuition">
+  <div class="box-title">למה זה עובד — וזה לא משפט חדש באמת</div>
+  מכיוון ש-<span class="fi">\(DE\parallel BC\)</span>, הזוויות
+  <span class="fi">\(\angle ADE\)</span> ו-<span class="fi">\(\angle ABC\)</span>
+  מתאימות ולכן שוות; והזווית <span class="fi">\(\angle A\)</span> משותפת.
+  לפי <strong>ז.ז</strong>:
+  $$\triangle ADE\sim\triangle ABC$$
+  ומדמיון נובע שהצלעות המתאימות ביחס קבוע. תאלס הוא בסך הכול
+  <a href="../../year8/geometry/07-similarity.html">תבנית "משולש בתוך משולש"</a>
+  שכבר למדת, כתובה כיחס.
+</div>
+
+<div class="box warn">
+  <div class="box-title">המשפט ההפוך — ומתי צריך אותו</div>
+  <em>"אם ישר חותך שתי צלעות במשולש ומחלק אותן באותו יחס, אז הוא מקביל
+  לצלע השלישית."</em>
+  <br>בזה משתמשים כשצ״ל הוא <strong>"הוכיחי ש-<span class="fi">\(DE\parallel BC\)</span>"</strong>.
+  בדיוק כמו במרובעים — צריך לדעת לאיזה כיוון הולכים.
+</div>
+
+<!-- ============ 2. קטע אמצעים ============ -->
+<h2 id="sec-mid"><span class="num">2</span>קטע אמצעים — המקרה הפרטי הכי שימושי</h2>
+
+<p>
+  אם <span class="fi">\(D\)</span> ו-<span class="fi">\(E\)</span> הם
+  <strong>אמצעי</strong> הצלעות, היחס הוא בדיוק <span class="fi">\(\tfrac12\)</span>
+  — ואז מקבלים שני דברים בבת אחת, בלי לחשב:
+</p>
+
+<div class="fbox">
+  <div class="fbox-title">קטע אמצעים במשולש</div>
+  $$DE\parallel BC\qquad\text{and}\qquad DE=\tfrac{1}{2}BC$$
+  <span class="f-legend">
+    <span>הקטע המחבר אמצעי שתי צלעות — מקביל לשלישית ושווה למחציתה</span>
+  </span>
+</div>
+
+<div class="figrow">
+  <figure>
+    <svg viewBox="0 0 230 175" style="width:100%;height:auto" role="img"
+         aria-label="משולש עם קטע אמצעים המחבר את אמצעי שתי הצלעות">
+      <polygon points="115,18 30,150 200,150" fill="#F7F3FA" stroke="#7A4E8C" stroke-width="2"/>
+      <line x1="72.5" y1="84" x2="157.5" y2="84" stroke="#2E7D32" stroke-width="2.6"/>
+      <circle cx="72.5" cy="84" r="3.4" fill="#2E7D32"/><circle cx="157.5" cy="84" r="3.4" fill="#2E7D32"/>
+      <!-- tick marks showing midpoints -->
+      <line x1="90" y1="47" x2="97" y2="53" stroke="#B4553C" stroke-width="1.8"/>
+      <line x1="50" y1="113" x2="57" y2="119" stroke="#B4553C" stroke-width="1.8"/>
+      <line x1="140" y1="47" x2="133" y2="53" stroke="#B4553C" stroke-width="1.8"/>
+      <line x1="180" y1="113" x2="173" y2="119" stroke="#B4553C" stroke-width="1.8"/>
+      <text x="115" y="99" text-anchor="middle" font-family="Arial" font-size="11" font-weight="700" fill="#2E7D32">חצי מהבסיס</text>
+    </svg>
+    <figcaption>הסימונים הכתומים מראים שהנקודות הן אמצעים —
+    ואז הקטע הירוק הוא בדיוק חצי מהבסיס.</figcaption>
+  </figure>
+  <div>
+    <p style="font-size:14px;line-height:1.7">
+      <strong>ובטרפז</strong> יש גרסה מקבילה: הקטע המחבר את אמצעי השוקיים
+      מקביל לבסיסים ושווה ל<em>ממוצע</em> שלהם:
+    </p>
+    $$m=\frac{a+b}{2}$$
+    <p style="font-size:13.5px;color:var(--soft)">
+      הגיוני: אם שני הבסיסים היו שווים — כלומר מקבילית — הקטע היה שווה לשניהם.
+      וכשאחד הבסיסים מתכווץ לאפס, הטרפז הופך למשולש והממוצע הופך לחצי,
+      בדיוק כמו קטע אמצעים במשולש.
+    </p>
+  </div>
+</div>
+
+<!-- ============ 3. הגובה ליתר ============ -->
+<h2 id="sec-altitude"><span class="num">3</span>הגובה ליתר — שלושה משולשים דומים</h2>
+
+<p>
+  במשולש ישר-זווית, הגובה מהזווית הישרה אל היתר יוצר מצב מיוחד: הוא מחלק
+  את המשולש לשני משולשים, ו<strong>שלושתם דומים זה לזה</strong>.
+</p>
+
+<figure style="max-width:400px;margin:16px auto 6px">
+  <svg viewBox="0 0 300 165" style="width:100%;height:auto" role="img"
+       aria-label="משולש ישר זווית ובו גובה ליתר המחלק אותו לשני משולשים">
+    <polygon points="30,135 270,135 96,25" fill="#F7F3FA" stroke="#7A4E8C" stroke-width="2"/>
+    <line x1="96" y1="25" x2="96" y2="135" stroke="#2E6F8E" stroke-width="2.2"/>
+    <path d="M96,123 L108,123 L108,135" fill="none" stroke="#B4553C" stroke-width="1.6"/>
+    <path d="M84,25 A14,14 0 0,0 96,39" fill="none" stroke="#B4553C" stroke-width="1.6"/>
+    <text x="24" y="149" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">B</text>
+    <text x="273" y="149" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">C</text>
+    <text x="90" y="19" font-family="Arial" font-size="13" font-weight="700" fill="#1C2733">A</text>
+    <text x="92" y="150" font-family="Arial" font-size="13" font-weight="700" fill="#2E6F8E">H</text>
+    <text x="150" y="80" font-family="Arial" font-size="11.5" fill="#5A6875">△ABH ∼ △CAH ∼ △CBA</text>
+  </svg>
+  <figcaption>
+    הגובה <span class="fi">\(AH\)</span> יוצר שלושה משולשים דומים.
+    כל אחד מהם מכיל זווית ישרה, וחולק עוד זווית עם המשולש המקורי — ולכן
+    <strong>ז.ז</strong>.
+  </figcaption>
+</figure>
+
+<div class="box def">
+  <div class="box-title">מה נובע מזה</div>
+  מהדמיון הזה מקבלים יחסים שימושיים, ובראשם:
+  $$AH^{2}=BH\cdot HC$$
+  הגובה בריבוע שווה למכפלת שני חלקי היתר.
+  <br><br>שווה גם לזכור את התכונה שאינה קשורה לדמיון:
+  <strong>במשולש ישר-זווית התיכון ליתר שווה למחצית היתר</strong> — כלומר
+  קדקוד הזווית הישרה נמצא תמיד במרחק שווה מכל קדקודי היתר.
+</div>
+
+<div class="nb" data-nb>
+  <div class="nb-head"><b>בונים ביחד במחברת</b><span class="nb-count"></span></div>
+  <ol class="nb-steps">
+    <li class="nb-step"><b>התרגיל</b>
+      <p>במשולש <span class="fi">\(ABC\)</span>, הישר
+      <span class="fi">\(DE\)</span> מקביל ל-<span class="fi">\(BC\)</span>.
+      נתון <span class="fi">\(AD=4\)</span>, <span class="fi">\(DB=6\)</span>
+      ו-<span class="fi">\(AE=5\)</span>.
+      <br>מצאי את <span class="fi">\(EC\)</span>.</p>
+    </li>
+    <li class="nb-step"><b>מזהים שזה תאלס</b>
+      <p>ישר מקביל לצלע, חותך את שתי האחרות ⟵ בדיוק המצב של המשפט.</p>
+    </li>
+    <li class="nb-step"><b>כותבים את היחס — ושומרים על הסדר</b>
+      <p>$$\frac{AD}{DB}=\frac{AE}{EC}$$
+      <strong>הסדר קריטי:</strong> בשני האגפים החלק ה"עליון" (הקרוב ל-<span class="fi">\(A\)</span>)
+      במונה. אם מהפכים באגף אחד בלבד — התשובה שגויה.</p>
+    </li>
+    <li class="nb-step"><b>מציבים</b>
+      <p>$$\frac{4}{6}=\frac{5}{EC}$$</p>
+    </li>
+    <li class="nb-step"><b>כפל בהצלבה</b>
+      <p>$$4\cdot EC=6\cdot 5=30\;\Longrightarrow\;EC=7.5$$</p>
+    </li>
+    <li class="nb-step"><b>בדיקה הגיונית</b>
+      <p><span class="fi">\(AD\)</span> קטן מ-<span class="fi">\(DB\)</span>,
+      ולכן גם <span class="fi">\(AE\)</span> אמור להיות קטן מ-<span class="fi">\(EC\)</span>.
+      ואכן <span class="fi">\(5&lt;7.5\)</span> ✓
+      <br>הבדיקה הזאת תופסת מיד יחס שנכתב הפוך.</p>
+    </li>
+  </ol>
+</div>
+
+<!-- ============ 4. תרגול ============ -->
+<h2 id="sec-practice"><span class="num">4</span>תרגול — משלב לשלב</h2>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 1 — תאלס ישיר</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">במשולש <span class="fi">\(ABC\)</span> נתון
+    <span class="fi">\(DE\parallel BC\)</span>, <span class="fi">\(AD=3\)</span>,
+    <span class="fi">\(DB=9\)</span> ו-<span class="fi">\(AE=4\)</span></span>.
+    <span class="mk mk-find">מצאי את <span class="fi">\(EC\)</span>.</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$\frac{3}{9}=\frac{4}{EC}\;\Longrightarrow\;3\cdot EC=36\;\Longrightarrow\;EC=12$$
+      בדיקה: היחס בשתי הצלעות הוא <span class="fi">\(\tfrac13\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row"><span class="fi">\(EC=\)</span>
+    <input class="q-input" data-answer="12" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex1"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 2 — היחס לצלע השלמה</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">אותו סרטוט, ונתון <span class="fi">\(BC=24\)</span></span>.
+    <span class="mk mk-find">מצאי את <span class="fi">\(DE\)</span>.</span>
+  </p>
+  <details class="step"><summary>שלב ראשון — איזה יחס נכון כאן</summary>
+    <div class="step-body">כדי לערב את <span class="fi">\(DE\)</span> צריך את
+    היחס <em>לצלעות השלמות</em>, שנובע מהדמיון:
+    <span class="fi">\(\frac{AD}{AB}=\frac{DE}{BC}\)</span>.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      הצלע השלמה: <span class="fi">\(AB=AD+DB=3+9=12\)</span>.
+      $$\frac{AD}{AB}=\frac{3}{12}=\frac14$$
+      $$\frac{DE}{24}=\frac14\;\Longrightarrow\;DE=6$$
+      <strong>המלכודת:</strong> להשתמש ב-<span class="fi">\(\frac{AD}{DB}=\frac{3}{9}\)</span>
+      ולקבל 8. יחס הדמיון נמדד תמיד מול הצלע <em>השלמה</em>, לא מול החלק
+      התחתון.
+    </div>
+  </details>
+  <div class="q-row"><span class="fi">\(DE=\)</span>
+    <input class="q-input" data-answer="6" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex2"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 3 — קטע אמצעים</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given"><span class="fi">\(D\)</span> ו-<span class="fi">\(E\)</span>
+    הם אמצעי הצלעות <span class="fi">\(AB\)</span> ו-<span class="fi">\(AC\)</span>,
+    ונתון <span class="fi">\(DE=7\)</span></span>.
+    <span class="mk mk-find">מהו <span class="fi">\(BC\)</span>?</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      קטע אמצעים שווה למחצית הצלע השלישית, ולכן הצלע כפולה ממנו:
+      $$BC=2\cdot DE=14$$
+    </div>
+  </details>
+  <div class="q-row"><span class="fi">\(BC=\)</span>
+    <input class="q-input" data-answer="14" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex3"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 4 — קטע אמצעים בטרפז</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">בטרפז הבסיסים הם 8 ס״מ ו-14 ס״מ</span>.
+    <span class="mk mk-find">מהו אורך הקטע המחבר את אמצעי השוקיים?</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$m=\frac{8+14}{2}=11$$
+      בדיקה הגיונית: 11 נמצא בין 8 ל-14 ✓ — הקטע חייב להיות ביניהם, ולכן
+      תשובה מחוץ לתחום הזה היא בהכרח שגויה.
+    </div>
+  </details>
+  <div class="q-row"><span>אורך הקטע:</span>
+    <input class="q-input" data-answer="11" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex4"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 5 — יחס שטחים</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">שני משולשים דומים, ויחס הדמיון ביניהם
+    <span class="fi">\(k=3\)</span></span>.
+    <span class="mk mk-given">שטח הקטן 5 סמ״ר</span>.
+    <span class="mk mk-find">מהו שטח הגדול?</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      השטחים גדלים פי <span class="fi">\(k^{2}\)</span>, לא פי
+      <span class="fi">\(k\)</span>:
+      $$S=5\cdot 3^{2}=5\cdot 9=45$$
+      <strong>למה בריבוע:</strong> שטח נמדד בשתי ממדים. אם כל אורך גדל פי 3,
+      גם הבסיס וגם הגובה גדלו פי 3 — ולכן השטח פי <span class="fi">\(3\cdot3\)</span>.
+      <br>התשובה 15 היא הטעות הנפוצה כאן.
+    </div>
+  </details>
+  <div class="q-row"><span>השטח (סמ״ר):</span>
+    <input class="q-input" data-answer="45" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex5"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 6 — הגובה ליתר</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">במשולש ישר-זווית הגובה ליתר מחלק אותו לשני
+    קטעים באורך 4 ס״מ ו-9 ס״מ</span>.
+    <span class="mk mk-find">מהו אורך הגובה?</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      מהדמיון של שלושת המשולשים נובע:
+      $$AH^{2}=BH\cdot HC=4\cdot 9=36$$
+      $$AH=\sqrt{36}=6$$
+      <strong>לקרוא בעיניים:</strong> הגובה הוא השורש של מכפלת שני החלקים.
+      וכשהמכפלה אינה ריבוע מושלם, התשובה תישאר עם שורש — וזה בסדר
+      (ראי <a href="../algebra/01-powers.html#sec-roots">לפשט שורשים</a>).
+    </div>
+  </details>
+  <div class="q-row"><span>הגובה (ס״מ):</span>
+    <input class="q-input" data-answer="6" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex6"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 7 — הוכחה: המשפט ההפוך</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">במשולש <span class="fi">\(ABC\)</span> נתון
+    <span class="fi">\(AD=2\)</span>, <span class="fi">\(DB=4\)</span>,
+    <span class="fi">\(AE=3\)</span>, <span class="fi">\(EC=6\)</span></span>.
+    <span class="mk mk-find">הוכיחי ש-<span class="fi">\(DE\parallel BC\)</span>.</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      צ״ל הוא מקבילות ⟵ צריך את <strong>המשפט ההפוך</strong> לתאלס.
+      <table class="dtable">
+        <tr><th></th><th>טענה</th><th>נימוק</th></tr>
+        <tr><td>1</td><td><span class="fi">\(\frac{AD}{DB}=\frac{2}{4}=\frac12\)</span></td>
+            <td style="text-align:right">נתון וחישוב</td></tr>
+        <tr><td>2</td><td><span class="fi">\(\frac{AE}{EC}=\frac{3}{6}=\frac12\)</span></td>
+            <td style="text-align:right">נתון וחישוב</td></tr>
+        <tr><td>3</td><td><span class="fi">\(\frac{AD}{DB}=\frac{AE}{EC}\)</span></td>
+            <td style="text-align:right">מ-1 ומ-2</td></tr>
+        <tr><td>4</td><td><span class="fi">\(DE\parallel BC\)</span></td>
+            <td style="text-align:right">המשפט ההפוך לתאלס</td></tr>
+      </table>
+      מש״ל.
+      <br><br><strong>שימי לב:</strong> שני היחסים אינם שווים במקרה — הם שווים
+      ל<em>אותו מספר</em>, וזה מה שהמשפט דורש. שורה 3 היא זו שמנסחת את
+      התנאי בשפה שהמשפט מדבר בה, ובלעדיה שורה 4 אינה מנומקת.
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex7"> סיימתי את התרגיל הזה</label>
+</article>
+
+<div class="box def" style="margin-top:26px">
+  <div class="box-title">מה לקחת מכאן</div>
+  תאלס הוא דמיון בתחפושת — ולכן אם שכחת את היחס, אפשר תמיד לחזור להוכיח
+  <strong>ז.ז</strong> ולקבל אותו. שמרי על <strong>סדר אחיד</strong> בשני
+  אגפי היחס, ובדקי את התשובה בהיגיון: הצלע הארוכה מתאימה לצלע הארוכה.
+</div>
+
+
+<div class="watch">
+  <h3>רוצה לראות את זה מוסבר בקול?</h3>
+  <p>הסרטונים הם תגבור, לא חובה — ומי שהעמוד הספיק לה יכולה לדלג.</p>
+  <a class="video-link" href="https://www.youtube.com/watch?v=Nm24cssFDY0" target="_blank" rel="noopener">
+    <img src="../../assets/g9-vids/Nm24cssFDY0.jpg" alt="משפט תאלס — תמונה מהסרטון" loading="lazy">
+    <span class="vt"><b>כל מה שצריך לדעת על משפט תאלס</b><span>משפט תאלס — מה הוא אומר ואיך מיישמים · 7:48 · Shlaf-ת'כלס עוזר לך במתמטיקה</span></span>
+    <span class="play">▶</span>
+  </a>
+</div>
+
+<div class="progresswrap no-print">
+  <span class="progressbar"><i></i></span><span class="progress-label"></span>
+  <button class="all-sols" style="font-family:inherit;font-size:12px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:4px 10px;cursor:pointer">לפתוח את כל הפתרונות</button>
+</div>
+
+<nav class="pagenav">
+  <a href="01c-triangle-theorems.html"><span class="dir">→ הקודם</span>משפטים במשולש</a>
+  <a class="next" href="03-analytic.html"><span class="dir">הבא ←</span>גאומטריה אנליטית</a>
+</nav>
+
+<footer class="fin">חלק מהעולם של שירה ·
+<a href="../../index.html">חזרה למרכז</a> ·
+<a href="index.html">מפת הגאומטריה</a></footer>
+</main>
+</div>
+</body>
+</html>

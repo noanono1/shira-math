@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<link rel="apple-touch-icon" href="../../assets/icons/icon-180.png">
+<link rel="manifest" href="../../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>גאומטריה — המפה — כיתה ט׳ — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../../vendor/katex.min.css">
+<link rel="stylesheet" href="../../css/shira.css">
+<style>
+:root{--accent:#7A4E8C}
+.wrap{max-width:880px}
+
+/* לוח "שכחתי איך עושים…" — אותו רכיב כמו במפות של ח׳ */
+.quick{display:grid; grid-template-columns:repeat(auto-fill,minmax(215px,1fr)); gap:8px; margin:14px 0 4px}
+.quick a{display:block; text-decoration:none; background:var(--card); color:var(--ink);
+  border:1px solid var(--line); border-radius:10px; padding:9px 12px; transition:.15s}
+.quick a:hover{border-color:var(--accent)}
+.quick a b{display:block; font-size:13.5px}
+.quick a span{color:var(--soft); font-size:11.5px; line-height:1.5}
+
+.grouplead{font-size:13.5px; color:var(--soft); margin:8px 0 14px}
+.stations{display:flex; flex-direction:column; gap:11px}
+.st{display:flex; gap:13px; align-items:flex-start; background:var(--card);
+  border:1px solid var(--line); border-radius:12px; padding:13px 16px;
+  text-decoration:none; color:var(--ink); transition:.15s;
+  box-shadow:0 10px 26px -26px var(--shadow)}
+a.st:hover{border-color:var(--accent); box-shadow:0 14px 30px -24px var(--shadow)}
+.st .n{flex:0 0 auto; width:30px; height:30px; border-radius:9px; background:var(--accent);
+  color:#fff; font-weight:800; font-size:14.5px;
+  display:flex; align-items:center; justify-content:center}
+.st .tx{min-width:0}
+.st .tx b{display:block; font-size:16px; font-weight:800; letter-spacing:-.01em}
+.st .tx p{margin:3px 0 0; font-size:13.5px; color:var(--soft); line-height:1.55}
+.st .tx .meta{margin-top:6px; font-size:11.5px; color:var(--soft); font-weight:700}
+/* תחנה שטרם נכתבה: אותה צורה בדיוק, בלי קישור — כדי שהמפה של השנה
+   תהיה שלמה ואמינה, ולא תבטיח דף שאינו קיים. */
+.st.soon{background:#FBFAF7; border-style:dashed; cursor:default}
+.st.soon .n{background:var(--line); color:var(--soft)}
+.st.soon .tx b{color:var(--soft)}
+.st .tag{margin-inline-start:auto; flex:0 0 auto; font-size:11px; font-weight:800;
+  color:var(--soft); background:var(--faint); border-radius:99px; padding:3px 10px;
+  align-self:center; white-space:nowrap}
+</style>
+<script defer src="../../vendor/katex.min.js"></script>
+<script defer src="../../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../../js/shira.js"></script>
+</head>
+<body data-page="g9geo:index">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../../index.html">⌂ המרכז של שירה</a>
+    <span class="crumbs">כיתה ט׳ · <b>גאומטריה</b> — המפה</span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">כיתה ט׳ · המפה</div>
+  <h1>גאומטריה — של המישור ושל הצירים</h1>
+  <p class="lead">
+    ארבע תחנות. שתי הראשונות ממשיכות ישירות את ההוכחות של כיתה ח׳ — אותו שלד של טענה ונימוק, משפחות חדשות של צורות. השתיים האחרונות פוגשות את האלגברה: גאומטריה על מערכת הצירים, ואז מהמישור אל המרחב.
+  </p>
+
+  <p class="youknow"><b>מה נשען על מה:</b> כתיבת הוכחה נלמדה ב<a href="../../year8/geometry/05-proof-models.html">ספריית הדגמים</a>, והנימוקים המותרים לציטוט הם אותם נימוקים. חדש כאן: משפחת המרובעים, משפט תאלס, ומרחק בין נקודות — שהוא פיתגורס בתחפושת.</p>
+
+</header>
+
+<h2>שכחתי איך עושים…</h2>
+<div class="quick">
+  <a href="01-quadrilaterals.html#sec-directions"><b>תכונה או משפט הפוך</b><span>קראי את הצ״ל — לאיזה כיוון</span></a>
+  <a href="01-quadrilaterals.html#sec-shapes"><b>תכונות המרובעים</b><span>חמש הצורות, בטבלה אחת</span></a>
+  <a href="01-quadrilaterals.html#sec-proof"><b>איך מוכיחים מקבילית</b><span>חמישה משפטים הפוכים</span></a>
+  <a href="01c-triangle-theorems.html#sec-iso"><b>להוכיח שווה-שוקיים</b><span>ארבעת המשפטים ההפוכים</span></a>
+  <a href="01c-triangle-theorems.html#sec-30"><b>משולש 30°-60°-90°</b><span>הניצב מול 30° — חצי מהיתר</span></a>
+  <a href="01b-kite.html#sec-props"><b>תכונות הדלתון</b><span>האלכסון הראשי עושה הכול</span></a>
+  <a href="01b-kite.html#sec-conditions"><b>הכרחי או מספיק?</b><span>מה מספיק כדי להוכיח דלתון</span></a>
+  <a href="01b-kite.html#sec-area"><b>שטח דלתון</b><span>מכפלת האלכסונים חלקי 2</span></a>
+  <a href="02-similarity-thales.html#sec-thales"><b>משפט תאלס</b><span>אותו יחס בשתי הצלעות</span></a>
+  <a href="02-similarity-thales.html#sec-mid"><b>קטע אמצעים</b><span>מקביל, וחצי מהצלע</span></a>
+  <a href="02-similarity-thales.html#sec-altitude"><b>הגובה ליתר</b><span>שלושה משולשים דומים</span></a>
+  <a href="03-analytic.html#sec-tools"><b>מרחק · אמצע · שיפוע</b><span>ארבע הנוסחאות</span></a>
+  <a href="03-analytic.html#sec-prove"><b>להוכיח מרובע בשיעורים</b><span>אמצעי אלכסונים או שיפועים</span></a>
+  <a href="03-analytic.html#sec-area"><b>שטח במערכת צירים</b><span>לחפש צלע אופקית או אנכית</span></a>
+  <a href="04-solids.html#sec-one"><b>נפח</b><span>שטח הבסיס כפול הגובה</span></a>
+  <a href="04-solids.html#sec-vs"><b>נפח או שטח פנים?</b><span>מה נכנס מול מה עוטף</span></a>
+</div>
+
+<h2>המסלול</h2>
+<p class="grouplead">כל תחנה נפתחת בפתרון שנבנה שלב-אחרי-שלב, וממשיכה לתרגול מדורג.</p>
+
+<div class="stations">
+
+  <a class="st" href="01-quadrilaterals.html">
+    <span class="n">1</span>
+    <span class="tx"><b>משפחת המרובעים</b>
+      <p>מקבילית, מלבן, מעוין, ריבוע וטרפז — התכונות, והמשפטים ההפוכים שמזהים כל אחת.</p>
+      <span class="meta">≈ 45 דק׳ · 8 תרגילים</span></span>
+  </a>
+
+  <a class="st" href="01b-kite.html">
+    <span class="n">2</span>
+    <span class="tx"><b>הדלתון</b>
+      <p>תכונות, תנאים הכרחיים ומספיקים, הוכחות ושטח הדלתון — החומר של מבחן 1.</p>
+      <span class="meta"></span></span>
+  </a>
+
+  <a class="st" href="01c-triangle-theorems.html">
+    <span class="n">3</span>
+    <span class="tx"><b>משפטים במשולש</b>
+      <p>המשפטים ההפוכים של שווה-שוקיים, מול הצלע הגדולה הזווית הגדולה, והמשולש 30°-60°-90°.</p>
+      <span class="meta">≈ 90 דק׳ · 18 תרגילים</span></span>
+  </a>
+
+  <a class="st" href="02-similarity-thales.html">
+    <span class="n">4</span>
+    <span class="tx"><b>דמיון ומשפט תאלס</b>
+      <p>ההמשך של דמיון משולשים: תאלס, קטע אמצעים, והגובה ליתר.</p>
+      <span class="meta">≈ 40 דק׳ · 7 תרגילים</span></span>
+  </a>
+
+  <a class="st" href="03-analytic.html">
+    <span class="n">5</span>
+    <span class="tx"><b>גאומטריה אנליטית</b>
+      <p>מרחק, אמצע קטע, שיפוע וניצבות — ולהוכיח צורה בחשבון במקום בנימוק.</p>
+      <span class="meta">≈ 40 דק׳ · 8 תרגילים</span></span>
+  </a>
+
+  <a class="st" href="04-solids.html">
+    <span class="n">6</span>
+    <span class="tx"><b>גופים ונפחים</b>
+      <p>תיבה, קובייה, מנסרה וגליל — כולן אותה נוסחה אחת.</p>
+      <span class="meta">≈ 35 דק׳ · 8 תרגילים</span></span>
+  </a>
+
+</div>
+
+<h2 id="bank">כשרוצים עוד תרגול</h2>
+<div class="stations">
+  <a class="st" href="06-exercise-bank.html">
+    <span class="n">∑</span>
+    <span class="tx"><b>🗂️ מחסן התרגילים</b>
+      <p>שישה-עשר תרגילים לפי סוג — מרובעים, תאלס, אנליטית ונפחים.</p>
+      <span class="meta">16 תרגילים · ≈ 3 דק׳ לתרגיל</span></span>
+  </a>
+  <a class="st" href="05-quiz.html">
+    <span class="n">✓</span>
+    <span class="tx"><b>בוחן הבית</b>
+      <p>שש שאלות בסגנון פרק הגאומטריה במפמ״ר — תרגיל חישוב ותרגיל הוכחה.</p>
+      <span class="meta">≈ 45 דק׳ · 6 שאלות</span></span>
+  </a>
+</div>
+
+<footer class="fin">חלק מהעולם של שירה ·
+<a href="../../index.html">חזרה למרכז</a> ·
+<a href="../../year8/index.html">כיתה ח׳ — היסודות</a></footer>
+</main>
+</div>
+</body>
+</html>

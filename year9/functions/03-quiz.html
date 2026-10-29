@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<link rel="apple-touch-icon" href="../../assets/icons/icon-180.png">
+<link rel="manifest" href="../../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>בוחן הבית — פונקציות ט׳ — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../../vendor/katex.min.css">
+<link rel="stylesheet" href="../../css/shira.css">
+<style>
+:root{--accent:#B7791F}
+.qz{border:1px solid var(--line); border-radius:var(--r-md); background:var(--card);
+  padding:13px 17px 15px; margin:13px 0}
+.qz .qh{font-size:15.5px; font-weight:800; margin-bottom:6px}
+.qz .qh span{font-size:11.5px; font-weight:700; color:var(--soft);
+  background:var(--faint); border-radius:99px; padding:2px 9px; margin-inline-end:8px}
+.qz p{margin:0 0 8px; line-height:1.8}
+.qz ol{margin:6px 0 0; padding-inline-start:20px}
+.qz ol li{margin-bottom:3px}
+.answers{border:1px solid var(--line); border-radius:var(--r-md);
+  background:#FBFAF7; margin-top:26px}
+.answers>summary{cursor:pointer; padding:13px 17px; font-weight:800; font-size:15.5px}
+.answers .abody{padding:0 17px 16px; border-top:1px solid var(--line)}
+.answers h4{margin:16px 0 4px; font-size:15px}
+</style>
+<script defer src="../../vendor/katex.min.js"></script>
+<script defer src="../../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../../js/shira.js"></script>
+</head>
+<body data-page="g9fun:03-quiz">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">פונקציות ט׳ — המפה</a>
+    <span class="crumbs">פונקציות ט׳ · <b>בוחן הבית</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">פונקציות · כיתה ט׳ · הגמר</div>
+  <h1>בוחן הבית</h1>
+  <p class="lead">
+    חמש שאלות בסגנון המפמ״ר, על פונקציות שלא ראית באתר. מחברת ליד,
+    פותרים הכול, ורק בסוף בודקים.
+  </p>
+  <p class="youknow"><b>מה נבדק כאן:</b> קדקוד וציר סימטריה · נקודות חיתוך
+  עם שני הצירים · תחומי סימן, עלייה וירידה · מפגש בין פרבולה לישר ·
+  וכתיבת פונקציה לפי תנאים.</p>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>≈ 40 דק׳</b> · 5 שאלות</span>
+    <a class="pm-jump" href="#answers">לפתרונות ↓</a>
+  </p>
+</header>
+
+<div class="box warn">
+  <div class="box-title">איך עובדים</div>
+  בכל שאלה יש להציג <strong>דרך פתרון</strong>, לא רק תשובה — בדיוק כמו
+  שכתוב בראש כל שאלון מפמ״ר. אם נתקעת, סמני והמשיכי.
+</div>
+
+<div class="qz">
+  <div class="qh"><span>1</span>קריאה מצורת הקדקוד</div>
+  <p>נתונה הפונקציה <span class="fi">\(f(x)=(x+2)^{2}-16\)</span>.</p>
+  <ol>
+    <li>מהו הקדקוד, ומהו ציר הסימטריה?</li>
+    <li>מהן נקודות החיתוך עם ציר <span class="fi">\(x\)</span>?</li>
+    <li>מהי נקודת החיתוך עם ציר <span class="fi">\(y\)</span>?</li>
+    <li>האם לקדקוד יש ערך מינימלי או מקסימלי? נמקי.</li>
+  </ol>
+</div>
+
+<div class="qz">
+  <div class="qh"><span>2</span>מהצורה הכללית</div>
+  <p>נתונה הפונקציה <span class="fi">\(g(x)=x^{2}-2x-8\)</span>.</p>
+  <ol>
+    <li>מצאי את נקודות האפס.</li>
+    <li>מצאי את הקדקוד.</li>
+    <li>באיזה תחום הפונקציה שלילית?</li>
+    <li>באיזה תחום היא יורדת?</li>
+  </ol>
+</div>
+
+<div class="qz">
+  <div class="qh"><span>3</span>פרבולה הפוכה</div>
+  <p>נתונה הפונקציה <span class="fi">\(h(x)=-(x-1)(x-7)\)</span>.</p>
+  <ol>
+    <li>מהן נקודות האפס?</li>
+    <li>מהו ציר הסימטריה, ומהו הקדקוד?</li>
+    <li>מהו הערך המקסימלי של הפונקציה?</li>
+  </ol>
+</div>
+
+<div class="qz">
+  <div class="qh"><span>4</span>פרבולה וישר</div>
+  <p>
+    נתונות <span class="fi">\(f(x)=x^{2}-3\)</span> ו-<span class="fi">\(g(x)=2x\)</span>.
+  </p>
+  <ol>
+    <li>מצאי את נקודות המפגש בין שתי הפונקציות.</li>
+    <li>באיזה תחום <span class="fi">\(f(x)&gt;g(x)\)</span>?</li>
+  </ol>
+</div>
+
+<div class="qz">
+  <div class="qh"><span>5</span>לכתוב פונקציה לפי תנאים</div>
+  <ol>
+    <li>כתבי פונקציה ריבועית שנקודות האפס שלה הן
+        <span class="fi">\(-3\)</span> ו-<span class="fi">\(5\)</span>.</li>
+    <li>כתבי פונקציה ריבועית שקדקודה <span class="fi">\((2,5)\)</span>
+        ואין לה נקודות חיתוך עם ציר <span class="fi">\(x\)</span>. נמקי.</li>
+  </ol>
+</div>
+
+<details class="answers" id="answers">
+  <summary>הפתרונות — רק אחרי שניסית את כולן ↓</summary>
+  <div class="abody">
+
+    <h4>שאלה 1</h4>
+    <p>
+      1. צורת הקדקוד: <span class="fi">\((x+2)=(x-(-2))\)</span>, ולכן הקדקוד
+      <span class="fi">\((-2,-16)\)</span> וציר הסימטריה
+      <span class="fi">\(x=-2\)</span>.
+    </p>
+    <p>2. משווים לאפס:</p>
+    $$(x+2)^{2}=16\;\Longrightarrow\;x+2=\pm4\;\Longrightarrow\;x_{1}=2,\ x_{2}=-6$$
+    <p>
+      בדיקה: האמצע בין <span class="fi">\(-6\)</span> ל-<span class="fi">\(2\)</span>
+      הוא <span class="fi">\(-2\)</span> ✓
+    </p>
+    <p>3. מציבים <span class="fi">\(x=0\)</span>:</p>
+    $$f(0)=4-16=-12\;\Longrightarrow\;(0,-12)$$
+    <p>
+      4. המקדם של <span class="fi">\((x+2)^{2}\)</span> חיובי, ולכן הפרבולה
+      פתוחה למעלה והקדקוד הוא נקודת <strong>מינימום</strong>. הערך המינימלי
+      הוא <span class="fi">\(-16\)</span>.
+    </p>
+
+    <h4>שאלה 2</h4>
+    <p>1. מפרקים: מכפלה <span class="fi">\(-8\)</span>, סכום <span class="fi">\(-2\)</span>:</p>
+    $$x^{2}-2x-8=(x-4)(x+2)=0\;\Longrightarrow\;x_{1}=4,\ x_{2}=-2$$
+    <p>2. הקדקוד — באמצע בין האפסים:</p>
+    $$x=\frac{4+(-2)}{2}=1\qquad y=1-2-8=-9$$
+    <p>הקדקוד <span class="fi">\((1,-9)\)</span>.</p>
+    <p>
+      3. פתוחה למעלה ⟵ שלילית <strong>בין</strong> האפסים:
+      <span class="fi">\(-2&lt;x&lt;4\)</span>.
+      <br>4. יורדת עד לקדקוד: <span class="fi">\(x&lt;1\)</span>.
+    </p>
+
+    <h4>שאלה 3</h4>
+    <p>
+      1. מכפלה ששווה אפס: <span class="fi">\(x_{1}=1\)</span> ו-<span class="fi">\(x_{2}=7\)</span>.
+      <br>2. ציר הסימטריה <span class="fi">\(x=\frac{1+7}{2}=4\)</span>, ולכן:
+    </p>
+    $$h(4)=-(4-1)(4-7)=-(3)(-3)=9$$
+    <p>הקדקוד <span class="fi">\((4,9)\)</span>.</p>
+    <p>
+      3. המקדם שלילי ⟵ הפרבולה פתוחה למטה ⟵ הקדקוד הוא נקודת
+      <strong>מקסימום</strong>, והערך המקסימלי הוא <span class="fi">\(9\)</span>.
+    </p>
+
+    <h4>שאלה 4</h4>
+    <p>1. משווים ומסדרים:</p>
+    $$x^{2}-3=2x\;\Longrightarrow\;x^{2}-2x-3=0$$
+    $$(x-3)(x+1)=0\;\Longrightarrow\;x_{1}=3,\ x_{2}=-1$$
+    <p>מציבים בישר: <span class="fi">\(g(3)=6\)</span> ו-<span class="fi">\(g(-1)=-2\)</span>.</p>
+    <p>הנקודות: <span class="fi">\((3,6)\)</span> ו-<span class="fi">\((-1,-2)\)</span>.</p>
+    <p>2. מעבירים לאגף אחד:</p>
+    $$f(x)-g(x)=x^{2}-2x-3=(x-3)(x+1)$$
+    <p>
+      פרבולה פתוחה למעלה שאפסיה <span class="fi">\(-1\)</span> ו-<span class="fi">\(3\)</span>,
+      ולכן חיובית מחוץ להם:
+    </p>
+    $$x&lt;-1\ \ \text{or}\ \ x&gt;3$$
+
+    <h4>שאלה 5</h4>
+    <p>
+      1. משתמשים בצורת המכפלה, שנותנת את האפסים בחינם:
+    </p>
+    $$y=(x+3)(x-5)$$
+    <p>
+      כל <span class="fi">\(a\neq0\)</span> עובד — גם
+      <span class="fi">\(y=2(x+3)(x-5)\)</span> נכון. יש אינסוף תשובות.
+    </p>
+    <p>
+      2. הקדקוד <span class="fi">\((2,5)\)</span> יושב <strong>מעל</strong>
+      ציר <span class="fi">\(x\)</span>. כדי שהפרבולה לא תחצה את הציר היא
+      חייבת להישאר מעליו — כלומר להיות פתוחה <strong>למעלה</strong>,
+      והקדקוד הוא הנקודה הנמוכה ביותר שלה:
+    </p>
+    $$y=(x-2)^{2}+5$$
+    <p>
+      נימוק: הערך המינימלי הוא <span class="fi">\(5&gt;0\)</span>, ולכן הפונקציה
+      חיובית תמיד ואינה מתאפסת לעולם.
+      <br><strong>שימי לב להבדל מהשאלה הדומה בתחנה 1:</strong> שם הקדקוד היה
+      <em>מתחת</em> לציר וצריך היה <span class="fi">\(a&lt;0\)</span>; כאן הוא
+      מעליו וצריך <span class="fi">\(a&gt;0\)</span>. הכיוון תמיד "בורח"
+      מהציר.
+    </p>
+
+    <div class="box def" style="margin-top:18px">
+      <div class="box-title">איך לקרוא את התוצאה שלך</div>
+      טעות בסעיפי הקדקוד היא כמעט תמיד סימן הפוך בסוגריים. טעות בתחומי סימן
+      היא כמעט תמיד שכחה לבדוק לאיזה כיוון הפרבולה פתוחה. ואם שאלה 4 לא
+      יצאה — הבעיה בדרך כלל ב<a href="../algebra/03-factoring.html">פירוק
+      לגורמים</a>, לא בפונקציות.
+    </div>
+  </div>
+</details>
+
+<nav class="pagenav">
+  <a href="02-parabola-and-line.html"><span class="dir">→ הקודם</span>פרבולה וישר</a>
+  <a class="next" href="04-exercise-bank.html"><span class="dir">הבא ←</span>מחסן התרגילים</a>
+</nav>
+
+<footer class="fin">חלק מהעולם של שירה ·
+<a href="../../index.html">חזרה למרכז</a> ·
+<a href="index.html">מפת הפונקציות</a></footer>
+</main>
+</div>
+</body>
+</html>

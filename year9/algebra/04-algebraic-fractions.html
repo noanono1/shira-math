@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<link rel="apple-touch-icon" href="../../assets/icons/icon-180.png">
+<link rel="manifest" href="../../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>שברים אלגבריים ותחום הצבה — אלגברה ט׳ — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../../vendor/katex.min.css">
+<link rel="stylesheet" href="../../css/shira.css">
+<style>
+:root{--accent:#2E6F8E}
+/* "מותר / אסור" — הטעות הכי יקרה בנושא הזה, זו מול זו */
+.vs{display:flex; flex-wrap:wrap; gap:12px; margin:14px 0}
+.vs>div{flex:1 1 250px; min-width:0; border-radius:var(--r-md); padding:11px 15px 13px}
+.vs .yes{background:#F7FCF7; border:1px solid #CFE6CF}
+.vs .no{background:#FDF6F5; border:1px solid #EAD2CE}
+.vs .ttl{font-size:12px; font-weight:800; letter-spacing:.06em;
+  text-transform:uppercase; margin-bottom:3px}
+.vs .yes .ttl{color:#2E7D32} .vs .no .ttl{color:#B4553C}
+.vs .katex-display{margin:.4em 0}
+.vs p{margin:6px 0 0; font-size:13px; color:var(--soft); line-height:1.5}
+</style>
+<script defer src="../../vendor/katex.min.js"></script>
+<script defer src="../../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../../js/shira.js"></script>
+</head>
+<body data-page="g9alg:04-algebraic-fractions">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">אלגברה ט׳ — המפה</a>
+    <span class="crumbs">תחנה <b>5</b> מתוך 8 · <b>שברים אלגבריים</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">אלגברה · כיתה ט׳ · תחנה 5</div>
+  <h1>שברים אלגבריים ותחום הצבה</h1>
+  <p class="lead">
+    שברים שיש <span class="fi">\(x\)</span> במונה או במכנה שלהם. כל מה שאת
+    יודעת על שברים רגילים נשאר נכון מילה במילה — צמצום, מכנה משותף, כפל
+    וחילוק. מה שנוסף הוא שני דברים: כדי לצמצם צריך
+    <strong>קודם לפרק</strong>, וצריך תמיד לרשום <strong>תחום הצבה</strong>.
+  </p>
+  <p class="youknow"><b>בסוף העמוד תדעי:</b> למצוא תחום הצבה ולהסביר למה הוא
+  קיים · לצמצם שבר אלגברי בלי ליפול בטעות הצמצום הנפוצה · לכפול ולחלק שברים
+  אלגבריים · ולחבר אותם עם מכנה משותף.</p>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>≈ 35 דק׳</b> · 9 תרגילים</span>
+    <a class="pm-jump" href="#sec-practice">לקפוץ ישר לתרגילים ↓</a>
+  </p>
+</header>
+
+<!-- ============ 1. תחום הצבה ============ -->
+<h2 id="sec-domain"><span class="num">1</span>תחום הצבה — ולמה הוא קודם לכל השאר</h2>
+
+<p>
+  חלוקה באפס אינה מוגדרת. זה לא חוק שהומצא כדי להקשות — פשוט אין מספר
+  שמתאים. אם <span class="fi">\(6:0\)</span> היה שווה למשהו, נניח
+  <span class="fi">\(k\)</span>, היה צריך להתקיים
+  <span class="fi">\(k\cdot 0=6\)</span> — וזה בלתי אפשרי, כי כל מספר כפול
+  אפס הוא אפס.
+</p>
+
+<p>
+  לכן, ברגע שיש <span class="fi">\(x\)</span> במכנה, צריך לשאול:
+  <strong>איזה ערך של <span class="fi">\(x\)</span> היה מאפס אותו?</strong>
+  הערך הזה נפסל.
+</p>
+
+<div class="box def">
+  <div class="box-title">איך מוצאים תחום הצבה — שני צעדים</div>
+  <ol class="steps">
+    <li>משווים את <strong>המכנה</strong> לאפס (ואם יש כמה מכנים — כל אחד בנפרד);</li>
+    <li>פותרים, ומוציאים את מה שקיבלנו מהתחום.</li>
+  </ol>
+  $$\frac{x+2}{x-5}\;:\qquad x-5\neq 0\;\Longrightarrow\;x\neq 5$$
+</div>
+
+<div class="box warn">
+  <div class="box-title">התחום נקבע לפי המכנה <em>המקורי</em></div>
+  זו הטעות שהכי הרבה נקודות נופלות עליה. אחרי צמצום המכנה משתנה — אבל
+  התחום כבר נקבע.
+  $$\frac{x^{2}-25}{x+5}=\frac{(x-5)\cancel{(x+5)}}{\cancel{(x+5)}}=x-5$$
+  התוצאה <span class="fi">\(x-5\)</span> נראית כאילו מותר להציב בה הכול,
+  אבל התנאי <span class="fi">\(x\neq-5\)</span> נשאר בתוקף — כי בביטוי
+  <em>שממנו התחלנו</em> המכנה היה מתאפס שם.
+  <br><strong>לכן רושמים את תחום ההצבה לפני שמצמצמים, לא אחרי.</strong>
+</div>
+
+<!-- ============ 2. צמצום ============ -->
+<h2 id="sec-reduce"><span class="num">2</span>צמצום — ורק אחרי פירוק</h2>
+
+<p>
+  צמצום מותר רק בין <strong>גורמים</strong> — כלומר בין דברים
+  שמוכפלים. אי אפשר לצמצם איבר מתוך סכום, וזו הטעות המרכזית בנושא:
+</p>
+
+<div class="vs">
+  <div class="yes">
+    <div class="ttl">✓ מותר — כאן זו מכפלה</div>
+    $$\frac{3\cdot\cancel{7}}{5\cdot\cancel{7}}=\frac{3}{5}$$
+    <p>ה-7 הוא גורם שלם למעלה ולמטה, ולכן הוא מתבטל.</p>
+  </div>
+  <div class="no">
+    <div class="ttl">✗ אסור — כאן זה סכום</div>
+    $$\frac{3+7}{5+7}\neq\frac{3}{5}$$
+    <p>נבדוק: <span class="fi">\(\frac{10}{12}\)</span> ולא
+    <span class="fi">\(\frac{3}{5}\)</span>. פשוט לא שווה.</p>
+  </div>
+</div>
+
+<p>
+  ומכאן כל השיטה: אם המונה או המכנה הם <em>סכום</em>, אי אפשר לגעת בהם.
+  קודם הופכים אותם ל<em>מכפלה</em> — כלומר
+  <a href="03-factoring.html">מפרקים לגורמים</a> — ורק אז מצמצמים.
+  זו הסיבה שתחנה 3 באה לפני זו.
+</p>
+
+<div class="nb" data-nb>
+  <div class="nb-head"><b>בונים ביחד במחברת</b><span class="nb-count"></span></div>
+  <ol class="nb-steps">
+    <li class="nb-step"><b>התרגיל</b>
+      <p>לצמצם, ולרשום תחום הצבה:
+      <span class="fi">\(\dfrac{x^{2}-x-2}{x^{2}-4}\)</span>
+      <br><span style="font-size:13px;color:var(--soft)">מדף העבודה השבועי
+      מס׳ 5 של משרד החינוך לכיתה ט׳.</span></p>
+    </li>
+    <li class="nb-step"><b>קודם תחום הצבה — מהמכנה המקורי</b>
+      <p>המכנה הוא <span class="fi">\(x^{2}-4\)</span>, ומפרקים אותו כדי
+      למצוא מתי הוא מתאפס:
+      $$x^{2}-4=(x-2)(x+2)=0\;\Longrightarrow\;x\neq 2,\;x\neq-2$$</p>
+    </li>
+    <li class="nb-step"><b>מפרקים את המונה — טרינום</b>
+      <p>מכפלה <span class="fi">\(-2\)</span> וסכום <span class="fi">\(-1\)</span>:
+      המספרים הם <span class="fi">\(-2\)</span> ו-<span class="fi">\(1\)</span>.
+      $$x^{2}-x-2=(x-2)(x+1)$$</p>
+    </li>
+    <li class="nb-step"><b>עכשיו שניהם מכפלות — אפשר לצמצם</b>
+      <p>$$\frac{(x-2)(x+1)}{(x-2)(x+2)}$$
+      הגורם <span class="fi">\((x-2)\)</span> מופיע למעלה ולמטה, ומתבטל.</p>
+    </li>
+    <li class="nb-step"><b>התשובה — עם התנאי</b>
+      <p>$$\frac{x^{2}-x-2}{x^{2}-4}=\frac{x+1}{x+2}\qquad x\neq\pm 2$$
+      שימי לב ש-<span class="fi">\(x\neq2\)</span> נשאר, למרות שבתוצאה
+      הסופית אין שום בעיה עם <span class="fi">\(x=2\)</span>. התחום מגיע
+      מהשאלה, לא מהתשובה.</p>
+    </li>
+  </ol>
+</div>
+
+<!-- ============ 3. פעולות ============ -->
+<h2 id="sec-ops"><span class="num">3</span>ארבע הפעולות — בדיוק כמו בשברים רגילים</h2>
+
+<p>
+  אין כאן שום כלל חדש. אלה אותם כללים שאת מכירה, רק שהמספרים הפכו לביטויים:
+</p>
+
+<table class="dtable">
+  <tr><th>הפעולה</th><th>הכלל</th><th>מה נוסף בשבר אלגברי</th></tr>
+  <tr>
+    <td>כפל</td>
+    <td><span class="fi">\(\dfrac{a}{b}\cdot\dfrac{c}{d}=\dfrac{ac}{bd}\)</span></td>
+    <td>מפרקים קודם, כדי לצמצם באלכסון</td>
+  </tr>
+  <tr>
+    <td>חילוק</td>
+    <td><span class="fi">\(\dfrac{a}{b}:\dfrac{c}{d}=\dfrac{a}{b}\cdot\dfrac{d}{c}\)</span></td>
+    <td>גם <span class="fi">\(c\)</span> נכנס לתחום ההצבה</td>
+  </tr>
+  <tr>
+    <td>חיבור וחיסור</td>
+    <td>מכנה משותף, ואז מחברים מונים</td>
+    <td>המכנה המשותף נבנה מהגורמים</td>
+  </tr>
+</table>
+
+<div class="box intuition">
+  <div class="box-title">בחילוק — שימי לב לתחום</div>
+  ב-<span class="fi">\(\dfrac{a}{b}:\dfrac{c}{d}\)</span> הביטוי
+  <span class="fi">\(c\)</span> עובר למכנה אחרי ההיפוך, ולכן גם
+  <span class="fi">\(c\neq0\)</span> — למרות שבשאלה המקורית הוא היה במונה.
+  זה הפרט שהכי קל לשכוח, ובמבחן הוא שווה נקודה.
+</div>
+
+<div class="nb" data-nb>
+  <div class="nb-head"><b>בונים ביחד במחברת</b><span class="nb-count"></span></div>
+  <ol class="nb-steps">
+    <li class="nb-step"><b>התרגיל</b>
+      <p>לחבר: <span class="fi">\(\dfrac{3}{x}+\dfrac{2}{x+1}\)</span></p>
+    </li>
+    <li class="nb-step"><b>תחום הצבה — שני מכנים, שני תנאים</b>
+      <p><span class="fi">\(x\neq 0\)</span> וגם <span class="fi">\(x\neq-1\)</span>.</p>
+    </li>
+    <li class="nb-step"><b>המכנה המשותף</b>
+      <p>לשני המכנים אין שום גורם משותף, ולכן המכנה המשותף הוא פשוט
+      המכפלה שלהם: <span class="fi">\(x(x+1)\)</span>.</p>
+    </li>
+    <li class="nb-step"><b>מרחיבים כל שבר</b>
+      <p>את השבר הראשון כופלים ב-<span class="fi">\((x+1)\)</span>,
+      ואת השני ב-<span class="fi">\(x\)</span>:
+      $$\frac{3(x+1)}{x(x+1)}+\frac{2x}{x(x+1)}$$</p>
+    </li>
+    <li class="nb-step"><b>מחברים מונים — והמכנה לא זז</b>
+      <p>$$\frac{3(x+1)+2x}{x(x+1)}=\frac{3x+3+2x}{x(x+1)}=\frac{5x+3}{x(x+1)}$$</p>
+    </li>
+    <li class="nb-step"><b>לבדוק אם אפשר לצמצם</b>
+      <p>המונה <span class="fi">\(5x+3\)</span> לא מתפרק, ולכן אין מה לצמצם.
+      זו התשובה:
+      $$\frac{3}{x}+\frac{2}{x+1}=\frac{5x+3}{x(x+1)}\qquad x\neq 0,\,-1$$
+      <strong>בדיקה מספרית</strong> ב-<span class="fi">\(x=1\)</span>:
+      המקור נותן <span class="fi">\(3+1=4\)</span>, והתשובה
+      <span class="fi">\(\frac{8}{2}=4\)</span> ✓</p>
+    </li>
+  </ol>
+</div>
+
+<!-- ============ 4. תרגול ============ -->
+<h2 id="sec-practice"><span class="num">4</span>תרגול — משלב לשלב</h2>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 1 — תחום הצבה בסיסי</h4></div>
+  <p class="q-text"><span class="mk mk-find">מהו תחום ההצבה של</span>
+    <span class="fi">\(\dfrac{7}{x-3}\)</span>?</p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$x-3\neq 0\;\Longrightarrow\;x\neq 3$$
+      כל מספר אחר מותר. רק ה-3 פסול, כי שם המכנה מתאפס.
+    </div>
+  </details>
+  <div class="q-row">
+    <span>הערך האסור:</span>
+    <input class="q-input" data-answer="3" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex1"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 2 — מכנה שצריך לפרק</h4></div>
+  <p class="q-text"><span class="mk mk-find">מהו תחום ההצבה של</span>
+    <span class="fi">\(\dfrac{4}{x^{2}-9}\)</span>?</p>
+  <details class="step"><summary>שלב ראשון — מפרקים כדי לראות מתי מתאפס</summary>
+    <div class="step-body">הפרש ריבועים:
+    <span class="fi">\(x^{2}-9=(x-3)(x+3)\)</span>.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      מכפלה מתאפסת כשאחד הגורמים מתאפס, ולכן <strong>שני</strong> ערכים פסולים:
+      $$x\neq 3\qquad\text{and}\qquad x\neq -3$$
+      מקובל לכתוב את זה בקיצור: <span class="fi">\(x\neq\pm3\)</span>.
+    </div>
+  </details>
+  <div class="q-row">
+    <span>החיובי:</span>
+    <input class="q-input" data-answer="3" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <span>והשלילי:</span>
+    <input class="q-input" data-answer="-3" inputmode="text" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex2"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 3 — צמצום ראשון</h4></div>
+  <p class="q-text"><span class="mk mk-find">צמצמי:</span>
+    <span class="fi">\(\dfrac{x^{2}-16}{x-4}\)</span></p>
+  <details class="step"><summary>שלב ראשון — תחום הצבה</summary>
+    <div class="step-body"><span class="fi">\(x-4\neq0\)</span>, כלומר
+    <span class="fi">\(x\neq4\)</span>.</div>
+  </details>
+  <details class="step"><summary>שלב שני — לפרק את המונה</summary>
+    <div class="step-body">הפרש ריבועים:
+    <span class="fi">\(x^{2}-16=(x-4)(x+4)\)</span>.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$\frac{(x-4)(x+4)}{(x-4)}=x+4\qquad x\neq 4$$
+    </div>
+  </details>
+  <div class="q-row">
+    <span>התשובה היא <span class="fi">\(x+\)</span></span>
+    <input class="q-input" data-answer="4" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex3"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 4 — לפרק גם למעלה וגם למטה</h4></div>
+  <p class="q-text"><span class="mk mk-find">צמצמי:</span>
+    <span class="fi">\(\dfrac{x^{2}+7x+10}{x^{2}-4}\)</span></p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      תחום: <span class="fi">\(x^{2}-4=(x-2)(x+2)\)</span>, ולכן
+      <span class="fi">\(x\neq\pm2\)</span>.
+      <br>מונה — טרינום, מכפלה 10 וסכום 7:
+      <span class="fi">\((x+2)(x+5)\)</span>.
+      $$\frac{(x+2)(x+5)}{(x-2)(x+2)}=\frac{x+5}{x-2}\qquad x\neq\pm2$$
+    </div>
+  </details>
+  <div class="q-row">
+    <span>המספר במונה:</span>
+    <input class="q-input" data-answer="5" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <span>ובמכנה (עם הסימן):</span>
+    <input class="q-input" data-answer="-2" inputmode="text" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex4"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 5 — גורם משותף קודם</h4></div>
+  <p class="q-text"><span class="mk mk-find">צמצמי:</span>
+    <span class="fi">\(\dfrac{3x+12}{x^{2}-16}\)</span></p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      מונה — גורם משותף: <span class="fi">\(3x+12=3(x+4)\)</span>.
+      <br>מכנה — הפרש ריבועים: <span class="fi">\((x-4)(x+4)\)</span>,
+      ולכן <span class="fi">\(x\neq\pm4\)</span>.
+      $$\frac{3(x+4)}{(x-4)(x+4)}=\frac{3}{x-4}\qquad x\neq\pm 4$$
+    </div>
+  </details>
+  <div class="q-row">
+    <span>המונה בתשובה:</span>
+    <input class="q-input" data-answer="3" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex5"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 6 — כפל שברים</h4></div>
+  <p class="q-text"><span class="mk mk-find">חשבי:</span>
+    <span class="fi">\(\dfrac{x+3}{x}\cdot\dfrac{x^{2}}{x^{2}-9}\)</span></p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      תחום: <span class="fi">\(x\neq0\)</span> ו-<span class="fi">\(x\neq\pm3\)</span>.
+      <br>מפרקים את מה שאפשר, ואז מצמצמים באלכסון:
+      $$\frac{(x+3)}{x}\cdot\frac{x\cdot x}{(x-3)(x+3)}
+        =\frac{x}{x-3}$$
+      ה-<span class="fi">\((x+3)\)</span> מצטמצם, ואחד מה-<span class="fi">\(x\)</span>
+      מצטמצם עם המכנה השמאלי.
+    </div>
+  </details>
+  <div class="q-row">
+    <span>המספר במכנה (עם הסימן):</span>
+    <input class="q-input" data-answer="-3" inputmode="text" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex6"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 7 — חיבור עם מכנה משותף</h4></div>
+  <p class="q-text"><span class="mk mk-find">חשבי:</span>
+    <span class="fi">\(\dfrac{1}{x}+\dfrac{1}{2x}\)</span></p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      תחום: <span class="fi">\(x\neq0\)</span>.
+      <br>המכנה המשותף הוא <span class="fi">\(2x\)</span> — לא
+      <span class="fi">\(2x^{2}\)</span>, כי <span class="fi">\(x\)</span>
+      כבר מחלק את <span class="fi">\(2x\)</span>.
+      $$\frac{2}{2x}+\frac{1}{2x}=\frac{3}{2x}\qquad x\neq0$$
+      בדיקה ב-<span class="fi">\(x=1\)</span>:
+      <span class="fi">\(1+0.5=1.5\)</span> וגם
+      <span class="fi">\(\frac{3}{2}=1.5\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row">
+    <span>המונה:</span>
+    <input class="q-input" data-answer="3" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <span>מקדם <span class="fi">\(x\)</span> במכנה:</span>
+    <input class="q-input" data-answer="2" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex7"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 8 — המלכודת של הצמצום</h4></div>
+  <p class="q-text">
+    <span class="mk mk-find">מישהו כתב</span>
+    <span class="fi">\(\dfrac{x+5}{5}=x\)</span>.
+    <span class="mk mk-find">מה שגוי כאן?</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      הוא צימצם את ה-5 של המונה עם ה-5 של המכנה — אבל במונה ה-5 הוא
+      <strong>מחובר</strong>, לא מוכפל. אין שם מכפלה, ולכן אין מה לצמצם.
+      <br>בדיקה עם מספר, שהיא הדרך הכי מהירה לתפוס טעות כזאת. ניקח
+      <span class="fi">\(x=5\)</span>:
+      $$\frac{5+5}{5}=\frac{10}{5}=2
+        \qquad\text{vs.}\qquad x=5$$
+      ‏2 ולא 5. הביטוי הזה פשוט לא ניתן לצמצום — הוא כבר בצורתו הפשוטה ביותר.
+      <br><br><strong>הכלל בשורה אחת:</strong> אם רואים פלוס או מינוס במונה
+      או במכנה, אסור לצמצם עד שמפרקים.
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex8"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 9 — משוואה עם <span class="fi">\(x\)</span> במכנה</h4></div>
+  <p class="q-text">
+    <span class="mk mk-find">פתרי:</span>
+    <span class="fi">\(\dfrac{12}{x}=4\)</span>,
+    <span class="mk mk-find">ורשמי תחום הצבה.</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      תחום: <span class="fi">\(x\neq 0\)</span>.
+      <br>כופלים את שני האגפים ב-<span class="fi">\(x\)</span>:
+      $$12=4x\;\Longrightarrow\;x=3$$
+      <strong>ובודקים מול התחום:</strong> <span class="fi">\(3\neq0\)</span> ✓
+      הפתרון תקף.
+      <br><br>הבדיקה הזאת אינה טקס. יש משוואות שבהן הפתרון שיוצא הוא בדיוק
+      הערך הפסול — ואז התשובה הנכונה היא <strong>"אין פתרון"</strong>.
+      אצל המורה זה שווה נקודות.
+    </div>
+  </details>
+  <div class="q-row">
+    <span class="fi">\(x=\)</span>
+    <input class="q-input" data-answer="3" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex9"> סיימתי את התרגיל הזה</label>
+</article>
+
+<div class="box def" style="margin-top:26px">
+  <div class="box-title">מה לקחת מכאן</div>
+  שלושה הרגלים, בסדר הזה: <strong>קודם תחום הצבה</strong> (מהמכנה המקורי),
+  <strong>ואז פירוק</strong> (כי בלי מכפלה אין צמצום),
+  <strong>ורק אז לצמצם</strong>. מי שעובדת בסדר הזה כמעט לא טועה בנושא הזה.
+</div>
+
+
+<div class="watch">
+  <h3>רוצה לראות את זה מוסבר בקול?</h3>
+  <p>הסרטונים הם תגבור, לא חובה — ומי שהעמוד הספיק לה יכולה לדלג.</p>
+  <a class="video-link" href="https://www.youtube.com/watch?v=daEdlJlnZtM" target="_blank" rel="noopener">
+    <img src="../../assets/g9-vids/daEdlJlnZtM.jpg" alt="צמצום שברים אלגבריים — תמונה מהסרטון" loading="lazy">
+    <span class="vt"><b>צמצום שברים אלגבריים כיתה ט</b><span>צמצום שברים אלגבריים, כולל תחום הצבה · 12:17 · אילון פרץ | מתמטיקה לבגרות ולחטיבה – Level Up </span></span>
+    <span class="play">▶</span>
+  </a>
+</div>
+
+<div class="progresswrap no-print">
+  <span class="progressbar"><i></i></span><span class="progress-label"></span>
+  <button class="all-sols" style="font-family:inherit;font-size:12px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:4px 10px;cursor:pointer">לפתוח את כל הפתרונות</button>
+</div>
+
+<nav class="pagenav">
+  <a href="03-factoring.html"><span class="dir">→ הקודם</span>פירוק לגורמים</a>
+  <a class="next" href="05-quadratic-equation.html"><span class="dir">הבא ←</span>המשוואה הריבועית</a>
+</nav>
+
+<footer class="fin">חלק מהעולם של שירה ·
+<a href="../../index.html">חזרה למרכז</a> ·
+<a href="index.html">מפת האלגברה</a></footer>
+</main>
+</div>
+</body>
+</html>

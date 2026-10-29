@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<link rel="apple-touch-icon" href="../../assets/icons/icon-180.png">
+<link rel="manifest" href="../../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>בעיות מילוליות מתקדמות — אלגברה ט׳ — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../../vendor/katex.min.css">
+<link rel="stylesheet" href="../../css/shira.css">
+<style>
+:root{--accent:#2E6F8E}
+/* שלוש המשפחות — כרטיס לכל אחת, עם הנוסחה שמזהה אותה */
+.fams{display:flex; flex-wrap:wrap; gap:11px; margin:14px 0}
+.fams>div{flex:1 1 235px; min-width:0; border:1px solid var(--line);
+  border-radius:var(--r-md); background:var(--card); padding:11px 14px 13px}
+.fams .ft{font-size:14.5px; font-weight:800; margin-bottom:3px}
+.fams .fs{font-size:12.8px; color:var(--soft); line-height:1.55}
+.fams .katex-display{margin:.4em 0}
+/* הטבלה שפותרת כמעט כל בעיית תנועה */
+table.motion td:first-child{font-weight:700; white-space:nowrap}
+</style>
+<script defer src="../../vendor/katex.min.js"></script>
+<script defer src="../../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../../js/shira.js"></script>
+</head>
+<body data-page="g9alg:06-word-problems">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">אלגברה ט׳ — המפה</a>
+    <span class="crumbs">תחנה <b>8</b> מתוך 8 · <b>בעיות מילוליות</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">אלגברה · כיתה ט׳ · תחנה 8</div>
+  <h1>בעיות מילוליות מתקדמות</h1>
+  <p class="lead">
+    אותן בעיות שאת פותרת מכיתה ח׳, אבל עם משוואות גדולות יותר — ולא מעט מהן
+    מגיעות בסוף למשוואה ריבועית. הקושי כאן כמעט אף פעם אינו בחשבון; הוא
+    בתרגום מעברית למשוואה. לכן העמוד הזה עוסק בעיקר בשלב הזה.
+  </p>
+  <p class="youknow"><b>בסוף העמוד תדעי:</b> לבחור נעלם נכון ולהגדיר אותו
+  במילים · לבנות טבלה לבעיית תנועה · לפתור בעיות הספק ("שני פועלים יחד") ·
+  לזהות מתי הבעיה נוחתת במשוואה ריבועית · ולבדוק שהתשובה הגיונית ולא רק נכונה.</p>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>≈ 40 דק׳</b> · 8 תרגילים</span>
+    <a class="pm-jump" href="#sec-practice">לקפוץ ישר לתרגילים ↓</a>
+  </p>
+</header>
+
+<!-- ============ 1. השיטה ============ -->
+<h2 id="sec-method"><span class="num">1</span>שלושת השלבים — וזה מה שהמורה רוצה לראות</h2>
+
+<p>
+  בסימולציית המבחן של ההקבצה שלך כתוב במפורש שיש להגיע לפתרון
+  <strong>בשלושה שלבים</strong>. זה לא סגנון — זו דרישה, וכל שלב שווה נקודות
+  בנפרד:
+</p>
+
+<div class="box def">
+  <div class="box-title">שלושת השלבים שכותבים במחברת</div>
+  <ol class="steps">
+    <li><strong>הגדרת נעלמים</strong> — משפט שלם בעברית: "נסמן ב-<span class="fi">\(x\)</span>
+        את מספר הכיסאות". לא רק <span class="fi">\(x=\)</span>.</li>
+    <li><strong>ניסוח המשוואה</strong> — לתרגם את הנתונים לשורה מתמטית אחת.</li>
+    <li><strong>פתרון, ותשובה במילים</strong> — כולל היחידות, וכולל בדיקה
+        שהתשובה מתאימה לסיפור.</li>
+  </ol>
+</div>
+
+<div class="box intuition">
+  <div class="box-title">איזה נעלם לבחור</div>
+  כשבשאלה יש שני גדלים שקשורים זה לזה — "הבסיס ארוך ב-5 מהגובה" —
+  <strong>מסמנים תמיד את הקטן</strong>, ואת השני מבטאים דרכו.
+  כך מקבלים <span class="fi">\(x\)</span> ו-<span class="fi">\(x+5\)</span>,
+  בלי מינוסים מיותרים.
+  <br>שווה גם לזכור: מסמנים את מה ש<strong>שואלים עליו</strong> כשאפשר —
+  ואז בסוף אין צורך בחישוב נוסף.
+</div>
+
+<!-- ============ 2. שלוש המשפחות ============ -->
+<h2 id="sec-families"><span class="num">2</span>שלוש המשפחות שחוזרות במבחן</h2>
+
+<div class="fams">
+  <div>
+    <div class="ft">🚗 תנועה</div>
+    <div class="fs">מרחק, מהירות וזמן. מזוהה במילים "יצא", "חזר", "מהירות".</div>
+    $$D=v\cdot t\qquad t=\frac{D}{v}$$
+  </div>
+  <div>
+    <div class="ft">🔧 הספק</div>
+    <div class="fs">"שני פועלים שעובדים יחד". מזוהה במילים "מסיים תוך…", "יחד".</div>
+    $$\text{part}=\frac{1}{t}$$
+  </div>
+  <div>
+    <div class="ft">💰 קנייה ומכירה</div>
+    <div class="fs">מחיר ליחידה × כמות. מזוהה במילים "קנה ב…", "רווח", "הנחה".</div>
+    $$\text{total}=p\cdot n$$
+  </div>
+</div>
+
+<!-- ============ 3. תנועה ============ -->
+<h2 id="sec-table"><span class="num">3</span>בעיות תנועה — הטבלה שפותרת כמעט כל אחת</h2>
+
+<p>
+  הכלי היחיד שצריך כאן הוא טבלה בת שלוש עמודות. ממלאים את מה שידוע,
+  מבטאים את השאר דרך <span class="fi">\(x\)</span>, ואז הנתון האחרון בשאלה —
+  זה שעדיין לא השתמשנו בו — הופך למשוואה.
+</p>
+
+<div class="nb" data-nb>
+  <div class="nb-head"><b>בונים ביחד במחברת</b><span class="nb-count"></span></div>
+  <ol class="nb-steps">
+    <li class="nb-step"><b>השאלה</b>
+      <p>מכונית נסעה 120 ק״מ מעיר א׳ לעיר ב׳. בדרך חזרה נסעה מהר יותר
+      ב-20 קמ״ש, והחזרה ארכה שעה פחות. מה הייתה המהירות בדרך הלוך?</p>
+    </li>
+    <li class="nb-step"><b>שלב 1 — הגדרת הנעלם</b>
+      <p>נסמן ב-<span class="fi">\(x\)</span> את המהירות בדרך הלוך, בקמ״ש.
+      אז המהירות בחזרה היא <span class="fi">\(x+20\)</span>.</p>
+    </li>
+    <li class="nb-step"><b>ממלאים את הטבלה</b>
+      <p>המרחק זהה בשני הכיוונים, והזמן מחושב לפי
+      <span class="fi">\(t=\frac{D}{v}\)</span>:</p>
+      <table class="dtable motion">
+        <tr><th></th><th>מרחק</th><th>מהירות</th><th>זמן</th></tr>
+        <tr><td>הלוך</td><td><span class="fi">\(120\)</span></td>
+            <td><span class="fi">\(x\)</span></td>
+            <td><span class="fi">\(\frac{120}{x}\)</span></td></tr>
+        <tr><td>חזור</td><td><span class="fi">\(120\)</span></td>
+            <td><span class="fi">\(x+20\)</span></td>
+            <td><span class="fi">\(\frac{120}{x+20}\)</span></td></tr>
+      </table>
+    </li>
+    <li class="nb-step"><b>שלב 2 — הנתון שלא ניצלנו הופך למשוואה</b>
+      <p>"החזרה ארכה שעה פחות" — כלומר זמן ההלוך גדול בשעה מזמן החזרה:
+      $$\frac{120}{x}-\frac{120}{x+20}=1$$
+      <span style="font-size:13px;color:var(--soft)">תחום הצבה:
+      <span class="fi">\(x\neq0\)</span> ו-<span class="fi">\(x\neq-20\)</span>
+      — ובכל מקרה מהירות חייבת להיות חיובית.</span></p>
+    </li>
+    <li class="nb-step"><b>שלב 3 — פותרים</b>
+      <p>כופלים הכול במכנה המשותף <span class="fi">\(x(x+20)\)</span>:
+      $$120(x+20)-120x=x(x+20)$$
+      $$120x+2400-120x=x^{2}+20x$$
+      $$2400=x^{2}+20x$$
+      $$x^{2}+20x-2400=0$$</p>
+    </li>
+    <li class="nb-step"><b>המשוואה הריבועית</b>
+      <p>מכפלה <span class="fi">\(-2400\)</span> וסכום <span class="fi">\(20\)</span>:
+      המספרים <span class="fi">\(60\)</span> ו-<span class="fi">\(-40\)</span>.
+      $$(x+60)(x-40)=0\;\Longrightarrow\;x_{1}=-60,\ x_{2}=40$$</p>
+    </li>
+    <li class="nb-step"><b>ובודקים מול הסיפור</b>
+      <p>מהירות שלילית אינה אפשרית, ולכן <span class="fi">\(x=40\)</span>.
+      <br><strong>תשובה:</strong> המהירות בדרך הלוך הייתה 40 קמ״ש.
+      <br>בדיקה: הלוך <span class="fi">\(\frac{120}{40}=3\)</span> שעות,
+      חזור <span class="fi">\(\frac{120}{60}=2\)</span> שעות — הפרש של שעה ✓</p>
+    </li>
+  </ol>
+</div>
+
+<!-- ============ 4. הספק ============ -->
+<h2 id="sec-work"><span class="num">4</span>בעיות הספק — הרעיון של "חלק מהעבודה"</h2>
+
+<p>
+  הבעיות האלה נראות קשות עד שמבינים משפט אחד: אם פועל מסיים עבודה שלמה
+  ב-6 שעות, אז <strong>בשעה אחת הוא עושה שישית ממנה</strong>.
+  זהו כל הרעיון.
+</p>
+
+<div class="fbox">
+  <div class="fbox-title">מזמן אל חלק — וחזרה</div>
+  $$\text{time}=6\ \Longrightarrow\ \text{per hour}=\frac{1}{6}$$
+  <span class="f-legend">
+    <span>וכששניים עובדים יחד — <strong>מחברים את החלקים</strong>, לא את הזמנים</span>
+  </span>
+</div>
+
+<div class="box warn">
+  <div class="box-title">למה אסור לחבר זמנים</div>
+  אם דנה מסיימת ב-6 שעות ורוני ב-3, מפתה לומר שיחד זה
+  <span class="fi">\(6+3=9\)</span> שעות — אבל זה חייב להיות
+  <em>פחות</em> מ-3, כי שניים עובדים במקביל.
+  <br>מה שמחברים הוא החלקים לשעה:
+  $$\frac{1}{6}+\frac{1}{3}=\frac{1}{6}+\frac{2}{6}=\frac{3}{6}=\frac{1}{2}$$
+  יחד הם עושים חצי עבודה בשעה, ולכן מסיימים ב-<strong>שעתיים</strong>.
+  פחות מ-3 ✓ הגיוני.
+</div>
+
+<!-- ============ 5. תרגול ============ -->
+<h2 id="sec-practice"><span class="num">5</span>תרגול — משלב לשלב</h2>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 1 — שני מספרים</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">מכפלת שני מספרים עוקבים היא 156</span>.
+    <span class="mk mk-find">מהם המספרים?</span>
+  </p>
+  <details class="step"><summary>שלב ראשון — הגדרת נעלם</summary>
+    <div class="step-body">נסמן ב-<span class="fi">\(x\)</span> את המספר הקטן.
+    "עוקבים" פירושו שהשני הוא <span class="fi">\(x+1\)</span>.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$x(x+1)=156$$
+      $$x^{2}+x-156=0$$
+      מכפלה <span class="fi">\(-156\)</span> וסכום <span class="fi">\(1\)</span>:
+      המספרים <span class="fi">\(13\)</span> ו-<span class="fi">\(-12\)</span>.
+      $$(x+13)(x-12)=0\;\Longrightarrow\;x_{1}=-13,\ x_{2}=12$$
+      <strong>שתי התשובות תקפות כאן!</strong> אם מדובר במספרים שלמים כלשהם,
+      אז 12 ו-13 מתאימים (<span class="fi">\(12\cdot13=156\)</span> ✓),
+      וגם <span class="fi">\(-13\)</span> ו-<span class="fi">\(-12\)</span>
+      מתאימים (<span class="fi">\((-13)(-12)=156\)</span> ✓).
+      <br>רק אם השאלה אומרת "מספרים טבעיים" נפסלת האפשרות השלילית.
+      <strong>לכן קוראים את השאלה עד הסוף</strong> — לא כל פתרון שלילי נפסל
+      אוטומטית.
+    </div>
+  </details>
+  <div class="q-row">
+    <span>המספר החיובי הקטן:</span>
+    <input class="q-input" data-answer="12" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex1"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 2 — מלבן</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">אורכו של מלבן גדול ב-3 ס״מ מרוחבו</span>,
+    <span class="mk mk-given">ושטחו 40 סמ״ר</span>.
+    <span class="mk mk-find">מהם מידותיו?</span>
+  </p>
+  <details class="step"><summary>שלב ראשון — לסמן את הקטן</summary>
+    <div class="step-body">הרוחב הוא הקטן, אז נסמן אותו
+    <span class="fi">\(x\)</span>; האורך הוא <span class="fi">\(x+3\)</span>.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$x(x+3)=40\;\Longrightarrow\;x^{2}+3x-40=0$$
+      מכפלה <span class="fi">\(-40\)</span> וסכום <span class="fi">\(3\)</span>:
+      <span class="fi">\(8\)</span> ו-<span class="fi">\(-5\)</span>.
+      $$(x+8)(x-5)=0\;\Longrightarrow\;x_{1}=-8,\ x_{2}=5$$
+      רוחב שלילי אינו קיים, ולכן <span class="fi">\(x=5\)</span>.
+      <br><strong>תשובה:</strong> הרוחב 5 ס״מ והאורך 8 ס״מ.
+      <br>בדיקה: <span class="fi">\(5\cdot8=40\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row">
+    <span>הרוחב:</span>
+    <input class="q-input" data-answer="5" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <span>האורך:</span>
+    <input class="q-input" data-answer="8" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex2"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 3 — הספק</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">ברז אחד ממלא בריכה ב-4 שעות</span>,
+    <span class="mk mk-given">וברז שני ממלא אותה ב-12 שעות</span>.
+    <span class="mk mk-find">תוך כמה זמן ימלאו אותה שניהם יחד?</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      חלק לשעה של כל ברז:
+      <span class="fi">\(\frac{1}{4}\)</span> ו-<span class="fi">\(\frac{1}{12}\)</span>.
+      $$\frac{1}{4}+\frac{1}{12}=\frac{3}{12}+\frac{1}{12}=\frac{4}{12}=\frac{1}{3}$$
+      יחד הם ממלאים שליש בריכה בשעה, ולכן הבריכה כולה תתמלא ב-<strong>3 שעות</strong>.
+      <br>בדיקה הגיונית: פחות מ-4 (הזמן של הברז המהיר לבדו) ✓
+    </div>
+  </details>
+  <div class="q-row">
+    <span>מספר השעות:</span>
+    <input class="q-input" data-answer="3" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex3"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 4 — הספק עם נעלם</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">דנה מסיימת עבודה ב-6 שעות</span>.
+    <span class="mk mk-given">יחד עם רוני הן מסיימות אותה ב-4 שעות</span>.
+    <span class="mk mk-find">תוך כמה זמן תסיים רוני לבדה?</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      נסמן ב-<span class="fi">\(x\)</span> את מספר השעות של רוני לבדה.
+      החלקים לשעה מתחברים לחלק המשותף:
+      $$\frac{1}{6}+\frac{1}{x}=\frac{1}{4}$$
+      מכנה משותף <span class="fi">\(12x\)</span>:
+      $$2x+12=3x\;\Longrightarrow\;x=12$$
+      <strong>תשובה:</strong> רוני תסיים לבדה ב-12 שעות.
+      <br>בדיקה: <span class="fi">\(\frac{1}{6}+\frac{1}{12}=\frac{3}{12}=\frac{1}{4}\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row">
+    <span>שעות של רוני:</span>
+    <input class="q-input" data-answer="12" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex4"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 5 — אחוזים ומשוואה</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">דמי מנוי שנתיים למכון "גוף בריא" יקרים ב-600 ₪
+    מדמי המנוי למכון "כל אחד יכול"</span>.
+    <span class="mk mk-given">"גוף בריא" העלה את המחיר ב-10%, ו"כל אחד יכול"
+    ב-12%</span>.
+    <span class="mk mk-given">ההעלאה בשקלים בשני המכונים הייתה שווה</span>.
+    <span class="mk mk-find">מה מחיר המנוי ב"גוף בריא"?</span>
+    <br><span style="font-size:13px;color:var(--soft)">מתוך מקבץ השאלות
+    המילוליות של משרד החינוך לכיתה ט׳.</span>
+  </p>
+  <details class="step"><summary>שלב ראשון — לסמן</summary>
+    <div class="step-body">נסמן ב-<span class="fi">\(x\)</span> את מחיר המנוי
+    ב"גוף בריא". אז "כל אחד יכול" עולה <span class="fi">\(x-600\)</span>.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      ההעלאה בשקלים היא אחוז מהמחיר:
+      $$0.10x=0.12(x-600)$$
+      $$0.10x=0.12x-72$$
+      $$72=0.02x\;\Longrightarrow\;x=3600$$
+      <strong>תשובה:</strong> מנוי ב"גוף בריא" עולה 3,600 ₪.
+      <br>בדיקה: "כל אחד יכול" עולה 3,000 ₪.
+      ההעלאות: <span class="fi">\(0.10\cdot3600=360\)</span> ו-<span class="fi">\(0.12\cdot3000=360\)</span> ✓
+      שוות.
+    </div>
+  </details>
+  <div class="q-row">
+    <span>המחיר (₪):</span>
+    <input class="q-input" data-answer="3600" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex5"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 6 — תנועה</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">אופנוען נסע 180 ק״מ</span>.
+    <span class="mk mk-given">אילו היה נוסע מהר יותר ב-15 קמ״ש, היה מגיע
+    שעה מוקדם יותר</span>.
+    <span class="mk mk-find">מה הייתה מהירותו בפועל?</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      נסמן ב-<span class="fi">\(x\)</span> את המהירות בפועל.
+      <table class="dtable motion">
+        <tr><th></th><th>מרחק</th><th>מהירות</th><th>זמן</th></tr>
+        <tr><td>בפועל</td><td>180</td><td><span class="fi">\(x\)</span></td>
+            <td><span class="fi">\(\frac{180}{x}\)</span></td></tr>
+        <tr><td>לו היה מהיר יותר</td><td>180</td><td><span class="fi">\(x+15\)</span></td>
+            <td><span class="fi">\(\frac{180}{x+15}\)</span></td></tr>
+      </table>
+      $$\frac{180}{x}-\frac{180}{x+15}=1$$
+      כופלים ב-<span class="fi">\(x(x+15)\)</span>:
+      $$180(x+15)-180x=x(x+15)$$
+      $$2700=x^{2}+15x\;\Longrightarrow\;x^{2}+15x-2700=0$$
+      מכפלה <span class="fi">\(-2700\)</span> וסכום <span class="fi">\(15\)</span>:
+      <span class="fi">\(60\)</span> ו-<span class="fi">\(-45\)</span>.
+      $$(x+60)(x-45)=0\;\Longrightarrow\;x=45$$
+      (הפתרון <span class="fi">\(-60\)</span> נפסל — מהירות אינה שלילית.)
+      <br><strong>תשובה:</strong> 45 קמ״ש.
+      <br>בדיקה: <span class="fi">\(\frac{180}{45}=4\)</span> שעות מול
+      <span class="fi">\(\frac{180}{60}=3\)</span> שעות — הפרש שעה ✓
+    </div>
+  </details>
+  <div class="q-row">
+    <span>המהירות (קמ״ש):</span>
+    <input class="q-input" data-answer="45" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex6"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 7 — קנייה ומכירה</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">חנות קנתה מספר חולצות ב-720 ₪ בסך הכול</span>.
+    <span class="mk mk-given">אילו כל חולצה הייתה זולה ב-2 ₪, היו מקבלים
+    5 חולצות נוספות באותו סכום</span>.
+    <span class="mk mk-find">כמה חולצות נקנו?</span>
+  </p>
+  <details class="step"><summary>שלב ראשון — לבטא מחיר דרך כמות</summary>
+    <div class="step-body">כשהסכום קבוע, המחיר ליחידה הוא הסכום חלקי הכמות.
+    זה המפתח לכל השאלות מהסוג הזה.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      נסמן ב-<span class="fi">\(x\)</span> את מספר החולצות שנקנו.
+      מחיר חולצה: <span class="fi">\(\frac{720}{x}\)</span>.
+      <br>בתרחיש השני: <span class="fi">\(x+5\)</span> חולצות באותם 720 ₪,
+      ומחירן <span class="fi">\(\frac{720}{x+5}\)</span> — זול ב-2 ₪:
+      $$\frac{720}{x}-\frac{720}{x+5}=2$$
+      כופלים ב-<span class="fi">\(x(x+5)\)</span>:
+      $$720(x+5)-720x=2x(x+5)$$
+      $$3600=2x^{2}+10x$$
+      מחלקים ב-2 — מותר, כי 2 הוא מספר קבוע ולא נעלם:
+      $$x^{2}+5x-1800=0$$
+      מכפלה <span class="fi">\(-1800\)</span> וסכום <span class="fi">\(5\)</span>:
+      <span class="fi">\(45\)</span> ו-<span class="fi">\(-40\)</span>.
+      $$(x+45)(x-40)=0\;\Longrightarrow\;x=40$$
+      (הפתרון <span class="fi">\(-45\)</span> נפסל — אי אפשר לקנות מספר
+      שלילי של חולצות.)
+      <br><strong>תשובה:</strong> נקנו 40 חולצות.
+      <br>בדיקה: <span class="fi">\(720:40=18\)</span> ₪ לחולצה. במחיר
+      <span class="fi">\(18-2=16\)</span> ₪ מקבלים
+      <span class="fi">\(720:16=45\)</span> חולצות — בדיוק 5 יותר ✓
+    </div>
+  </details>
+  <div class="q-row">
+    <span>מספר החולצות:</span>
+    <input class="q-input" data-answer="40" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <span>המחיר לחולצה (₪):</span>
+    <input class="q-input" data-answer="18" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex7"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 8 — בסגנון המפמ״ר</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">בכיתה יש 30 תלמידים</span>.
+    <span class="mk mk-given">מספר הבנות גדול פי 2 ממספר הבנים פחות 3</span>.
+    <span class="mk mk-find">כמה בנים יש בכיתה?</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      נסמן ב-<span class="fi">\(x\)</span> את מספר הבנים.
+      "פי 2 ממספר הבנים פחות 3" הוא <span class="fi">\(2x-3\)</span>,
+      וזה מספר הבנות.
+      $$x+(2x-3)=30$$
+      $$3x-3=30\;\Longrightarrow\;3x=33\;\Longrightarrow\;x=11$$
+      <strong>תשובה:</strong> 11 בנים (ו-19 בנות).
+      <br>בדיקה: <span class="fi">\(2\cdot11-3=19\)</span> ✓ וגם
+      <span class="fi">\(11+19=30\)</span> ✓
+      <br><br><strong>שימי לב לניסוח:</strong> "פי 2 ממספר הבנים פחות 3"
+      אינו <span class="fi">\(2(x-3)\)</span>. קריאה איטית של סדר המילים היא
+      חצי מהעבודה בשאלות האלה.
+    </div>
+  </details>
+  <div class="q-row">
+    <span>מספר הבנים:</span>
+    <input class="q-input" data-answer="11" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex8"> סיימתי את התרגיל הזה</label>
+</article>
+
+<div class="box def" style="margin-top:26px">
+  <div class="box-title">מה לקחת מכאן</div>
+  שלושת השלבים, כתובים במחברת — <strong>הגדרה, משוואה, פתרון ותשובה</strong>.
+  והנתון שנשאר בסוף, זה שעוד לא השתמשת בו, הוא כמעט תמיד המשוואה עצמה.
+</div>
+
+<div class="progresswrap no-print">
+  <span class="progressbar"><i></i></span><span class="progress-label"></span>
+  <button class="all-sols" style="font-family:inherit;font-size:12px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:4px 10px;cursor:pointer">לפתוח את כל הפתרונות</button>
+</div>
+
+<nav class="pagenav">
+  <a href="05b-equations-plus.html"><span class="dir">→ הקודם</span>משוואות עם שברים ומערכות ממעלה שנייה</a>
+  <a class="next" href="index.html"><span class="dir">המפה ←</span>אלגברה ט׳</a>
+</nav>
+
+<footer class="fin">חלק מהעולם של שירה ·
+<a href="../../index.html">חזרה למרכז</a> ·
+<a href="index.html">מפת האלגברה</a></footer>
+</main>
+</div>
+</body>
+</html>

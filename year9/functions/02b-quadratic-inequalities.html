@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<link rel="apple-touch-icon" href="../../assets/icons/icon-180.png">
+<link rel="manifest" href="../../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>אי-שוויונות ריבועיים — פונקציות ט׳ — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../../vendor/katex.min.css">
+<link rel="stylesheet" href="../../css/shira.css">
+<style>
+:root{--accent:#B7791F}
+/* סקיצה + ציר מספרים בתוך פתרון: ממורכזים, לא רחבים מהטקסט */
+.sk{display:flex; flex-wrap:wrap; justify-content:center; gap:4px 18px; margin:8px 0 4px; direction:ltr}
+.sk svg{max-width:100%; height:auto; display:block}
+/* כרטיסי מקרים / צורות כתיבה — נשברים לטור אחד בטלפון */
+.cards{display:flex; flex-wrap:wrap; gap:11px; margin:14px 0}
+.cards>div{flex:1 1 230px; min-width:0; border:1px solid var(--line);
+  border-radius:var(--r-md); background:var(--card); padding:10px 14px 12px}
+.cards .ct{font-size:14px; font-weight:800; margin-bottom:6px}
+/* שורת "אי-שוויון ← תשובה": המפתח מימין, התשובה משמאלו — כך נקרא מימין לשמאל */
+.rw{display:flex; gap:14px; align-items:baseline; flex-wrap:wrap; font-size:14px; line-height:1.9}
+.rw .k{flex:0 0 46px}
+.rw.big{font-size:15.5px; margin:4px 0}
+.rw.big .k{flex:0 0 150px}
+p.concl{display:table; margin:10px auto; border:1.5px solid #1C2733; border-radius:5px; padding:2px 12px}
+.cards .cw{font-size:15px; margin:2px 0 4px}
+.cards svg{display:block; margin:4px auto 8px; max-width:100%; height:auto}
+</style>
+<script defer src="../../vendor/katex.min.js"></script>
+<script defer src="../../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../../js/shira.js"></script>
+</head>
+<body data-page="g9fun:02b-quadratic-inequalities">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">פונקציות ט׳ — המפה</a>
+    <span class="crumbs">תחנה <b>4</b> מתוך 4 · <b>אי-שוויונות ריבועיים</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">פונקציות · כיתה ט׳ · תחנה 4</div>
+  <h1>אי-שוויונות ריבועיים — איפה הפרבולה מעל הציר</h1>
+  <p class="lead">
+    ב<a href="01-parabola.html#sec-sign">תחנת הפרבולה</a> קראת מהציור מתי הפונקציה
+    חיובית ומתי שלילית. אי-שוויון ריבועי הוא אותה שאלה בדיוק, כתובה באלגברה:
+    <span class="fi">\(x^{2}-3x-4\gt 0\)</span> שואל לאילו ערכי <span class="fi">\(x\)</span> הפרבולה
+    <span class="fi">\(y=x^{2}-3x-4\)</span> נמצאת <strong>מעל</strong> ציר <span class="fi">\(x\)</span>.
+  </p>
+  <p class="youknow"><b>בסוף העמוד תדעי:</b> לפתור אי-שוויון ריבועי בשלושה צעדים, בעזרת
+  סקיצה · לטפל בכל המקרים: שני אפסים, אפס אחד, בלי אפסים, <span class="fi">\(\ge\)</span> מול
+  <span class="fi">\(\gt\)</span>, מקדם <span class="fi">\(x^{2}\)</span> שלילי, אי-שוויון שצריך
+  קודם לסדר · ולכתוב את התשובה נכון, גם על ציר המספרים.</p>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>≈ 60 דק׳</b> · 16 תרגילים</span>
+    <a class="pm-jump" href="#sec-practice">לקפוץ ישר לתרגילים ↓</a>
+  </p>
+</header>
+
+<!-- ============ 1. הרעיון ============ -->
+<h2 id="sec-idea"><span class="num">1</span>הרעיון — אי-שוויון הוא שאלה על הגרף</h2>
+
+<p>
+  כל ביטוי <span class="fi">\(ax^{2}+bx+c\)</span> הוא הערך של הפרבולה
+  <span class="fi">\(y=ax^{2}+bx+c\)</span>. ולכן:
+</p>
+
+<div class="fbox">
+  <div class="fbox-title">כל אי-שוויון ריבועי הוא אחת משתי שאלות</div>
+  <div class="rw big"><span class="k"><span class="fi">\(ax^{2}+bx+c\gt 0\)</span></span>
+    <span class="v">הפרבולה <strong>מעל</strong> ציר <span class="fi">\(x\)</span></span></div>
+  <div class="rw big"><span class="k"><span class="fi">\(ax^{2}+bx+c\lt 0\)</span></span>
+    <span class="v">הפרבולה <strong>מתחת</strong> לציר <span class="fi">\(x\)</span></span></div>
+  <span class="f-legend">
+    <span>הגבולות בין "מעל" ל"מתחת" הם נקודות האפס — שם הפרבולה חותכת את הציר</span>
+  </span>
+</div>
+
+<figure style="max-width:420px;margin:16px auto 6px">
+<svg viewBox="0 0 360 218" style="width:100%;height:auto" role="img" aria-label="גרף הפרבולה y שווה x בריבוע פחות 3x פחות 4 בקנה מידה, חותכת את ציר x ב-מינוס 1 וב-4; מעל הציר מחוץ לאפסים ומתחתיו ביניהם">
+<g stroke="#EFEAE0" stroke-width="1"><line x1="18" y1="18" x2="18" y2="200"/><line x1="54" y1="18" x2="54" y2="200"/><line x1="90" y1="18" x2="90" y2="200"/><line x1="126" y1="18" x2="126" y2="200"/><line x1="162" y1="18" x2="162" y2="200"/><line x1="198" y1="18" x2="198" y2="200"/><line x1="234" y1="18" x2="234" y2="200"/><line x1="270" y1="18" x2="270" y2="200"/><line x1="306" y1="18" x2="306" y2="200"/><line x1="342" y1="18" x2="342" y2="200"/><line x1="18" y1="187" x2="342" y2="187"/><line x1="18" y1="161" x2="342" y2="161"/><line x1="18" y1="135" x2="342" y2="135"/><line x1="18" y1="109" x2="342" y2="109"/><line x1="18" y1="83" x2="342" y2="83"/><line x1="18" y1="57" x2="342" y2="57"/><line x1="18" y1="31" x2="342" y2="31"/></g>
+<line x1="18" y1="109" x2="342" y2="109" stroke="#5A6875" stroke-width="1.5"/>
+<polygon points="349,109 341,104.6 341,113.4" fill="#5A6875"/>
+<line x1="126" y1="200" x2="126" y2="18" stroke="#5A6875" stroke-width="1.5"/>
+<polygon points="126,11 121.5,19 130.5,19" fill="#5A6875"/>
+<text x="344" y="101" font-family="Arial" font-size="13" font-style="italic" fill="#5A6875">x</text>
+<text x="134" y="22" font-family="Arial" font-size="13" font-style="italic" fill="#5A6875">y</text>
+<line x1="18" y1="105" x2="18" y2="113" stroke="#5A6875" stroke-width="1.3"/>
+<text x="18" y="125" text-anchor="middle" font-family="Arial" font-size="11" fill="#5A6875">−3</text>
+<line x1="54" y1="105" x2="54" y2="113" stroke="#5A6875" stroke-width="1.3"/>
+<text x="54" y="125" text-anchor="middle" font-family="Arial" font-size="11" fill="#5A6875">−2</text>
+<line x1="90" y1="105" x2="90" y2="113" stroke="#5A6875" stroke-width="1.3"/>
+<text x="90" y="125" text-anchor="middle" font-family="Arial" font-size="11" fill="#5A6875">−1</text>
+<line x1="162" y1="105" x2="162" y2="113" stroke="#5A6875" stroke-width="1.3"/>
+<text x="162" y="125" text-anchor="middle" font-family="Arial" font-size="11" fill="#5A6875">1</text>
+<line x1="198" y1="105" x2="198" y2="113" stroke="#5A6875" stroke-width="1.3"/>
+<text x="198" y="125" text-anchor="middle" font-family="Arial" font-size="11" fill="#5A6875">2</text>
+<line x1="234" y1="105" x2="234" y2="113" stroke="#5A6875" stroke-width="1.3"/>
+<text x="234" y="125" text-anchor="middle" font-family="Arial" font-size="11" fill="#5A6875">3</text>
+<line x1="270" y1="105" x2="270" y2="113" stroke="#5A6875" stroke-width="1.3"/>
+<text x="270" y="125" text-anchor="middle" font-family="Arial" font-size="11" fill="#5A6875">4</text>
+<line x1="306" y1="105" x2="306" y2="113" stroke="#5A6875" stroke-width="1.3"/>
+<text x="306" y="125" text-anchor="middle" font-family="Arial" font-size="11" fill="#5A6875">5</text>
+<line x1="342" y1="105" x2="342" y2="113" stroke="#5A6875" stroke-width="1.3"/>
+<text x="342" y="125" text-anchor="middle" font-family="Arial" font-size="11" fill="#5A6875">6</text>
+<line x1="122" y1="187" x2="130" y2="187" stroke="#5A6875" stroke-width="1.3"/>
+<text x="119" y="191" text-anchor="end" font-family="Arial" font-size="11" fill="#5A6875">−6</text>
+<line x1="122" y1="161" x2="130" y2="161" stroke="#5A6875" stroke-width="1.3"/>
+<text x="119" y="165" text-anchor="end" font-family="Arial" font-size="11" fill="#5A6875">−4</text>
+<line x1="122" y1="135" x2="130" y2="135" stroke="#5A6875" stroke-width="1.3"/>
+<text x="119" y="139" text-anchor="end" font-family="Arial" font-size="11" fill="#5A6875">−2</text>
+<line x1="122" y1="83" x2="130" y2="83" stroke="#5A6875" stroke-width="1.3"/>
+<text x="119" y="87" text-anchor="end" font-family="Arial" font-size="11" fill="#5A6875">2</text>
+<line x1="122" y1="57" x2="130" y2="57" stroke="#5A6875" stroke-width="1.3"/>
+<text x="119" y="61" text-anchor="end" font-family="Arial" font-size="11" fill="#5A6875">4</text>
+<line x1="122" y1="31" x2="130" y2="31" stroke="#5A6875" stroke-width="1.3"/>
+<text x="119" y="35" text-anchor="end" font-family="Arial" font-size="11" fill="#5A6875">6</text>
+<line x1="18" y1="109" x2="90" y2="109" stroke="#2E7D32" stroke-width="5.5"/>
+<line x1="90" y1="109" x2="270" y2="109" stroke="#B4553C" stroke-width="5.5"/>
+<line x1="270" y1="109" x2="342" y2="109" stroke="#2E7D32" stroke-width="5.5"/>
+<path d="M49.3,19 L50.4,21.8 L51.5,24.6 L52.6,27.4 L53.7,30.2 L54.8,32.9 L55.9,35.7 L56.9,38.4 L58,41 L59.1,43.7 L60.2,46.3 L61.3,48.9 L62.4,51.5 L63.5,54.1 L64.6,56.6 L65.7,59.1 L66.7,61.6 L67.8,64 L68.9,66.5 L70,68.9 L71.1,71.3 L72.2,73.7 L73.3,76 L74.4,78.3 L75.5,80.6 L76.5,82.9 L77.6,85.1 L78.7,87.4 L79.8,89.6 L80.9,91.7 L82,93.9 L83.1,96 L84.2,98.1 L85.3,100.2 L86.3,102.3 L87.4,104.3 L88.5,106.3 L89.6,108.3 L90.7,110.3" fill="none" stroke="#2E7D32" stroke-width="2.6"/>
+<path d="M90.7,110.3 L91.8,112.2 L92.9,114.1 L94,116 L95.1,117.9 L96.1,119.7 L97.2,121.5 L98.3,123.3 L99.4,125.1 L100.5,126.9 L101.6,128.6 L102.7,130.3 L103.8,132 L104.9,133.6 L105.9,135.2 L107,136.8 L108.1,138.4 L109.2,140 L110.3,141.5 L111.4,143 L112.5,144.5 L113.6,146 L114.7,147.4 L115.7,148.8 L116.8,150.2 L117.9,151.6 L119,152.9 L120.1,154.3 L121.2,155.6 L122.3,156.8 L123.4,158.1 L124.5,159.3 L125.6,160.5 L126.6,161.7 L127.7,162.8 L128.8,164 L129.9,165.1 L131,166.2 L132.1,167.2 L133.2,168.3 L134.3,169.3 L135.4,170.3 L136.4,171.2 L137.5,172.2 L138.6,173.1 L139.7,174 L140.8,174.8 L141.9,175.7 L143,176.5 L144.1,177.3 L145.2,178.1 L146.2,178.8 L147.3,179.5 L148.4,180.2 L149.5,180.9 L150.6,181.6 L151.7,182.2 L152.8,182.8 L153.9,183.4 L155,184 L156,184.5 L157.1,185 L158.2,185.5 L159.3,186 L160.4,186.4 L161.5,186.8 L162.6,187.2 L163.7,187.6 L164.8,187.9 L165.8,188.2 L166.9,188.5 L168,188.8 L169.1,189.1 L170.2,189.3 L171.3,189.5 L172.4,189.7 L173.5,189.8 L174.6,190 L175.6,190.1 L176.7,190.1 L177.8,190.2 L178.9,190.2 L180,190.2 L181.1,190.2 L182.2,190.2 L183.3,190.1 L184.4,190.1 L185.4,190 L186.5,189.8 L187.6,189.7 L188.7,189.5 L189.8,189.3 L190.9,189.1 L192,188.8 L193.1,188.5 L194.2,188.2 L195.2,187.9 L196.3,187.6 L197.4,187.2 L198.5,186.8 L199.6,186.4 L200.7,186 L201.8,185.5 L202.9,185 L204,184.5 L205,184 L206.1,183.4 L207.2,182.8 L208.3,182.2 L209.4,181.6 L210.5,180.9 L211.6,180.2 L212.7,179.5 L213.8,178.8 L214.8,178.1 L215.9,177.3 L217,176.5 L218.1,175.7 L219.2,174.8 L220.3,174 L221.4,173.1 L222.5,172.2 L223.6,171.2 L224.6,170.3 L225.7,169.3 L226.8,168.3 L227.9,167.2 L229,166.2 L230.1,165.1 L231.2,164 L232.3,162.8 L233.4,161.7 L234.5,160.5 L235.5,159.3 L236.6,158.1 L237.7,156.8 L238.8,155.6 L239.9,154.3 L241,152.9 L242.1,151.6 L243.2,150.2 L244.3,148.8 L245.3,147.4 L246.4,146 L247.5,144.5 L248.6,143 L249.7,141.5 L250.8,140 L251.9,138.4 L253,136.8 L254.1,135.2 L255.1,133.6 L256.2,132 L257.3,130.3 L258.4,128.6 L259.5,126.9 L260.6,125.1 L261.7,123.3 L262.8,121.5 L263.9,119.7 L264.9,117.9 L266,116 L267.1,114.1 L268.2,112.2 L269.3,110.3 L270.4,108.3" fill="none" stroke="#B4553C" stroke-width="2.6"/>
+<path d="M270.4,108.3 L271.5,106.3 L272.6,104.3 L273.7,102.3 L274.7,100.2 L275.8,98.1 L276.9,96 L278,93.9 L279.1,91.7 L280.2,89.6 L281.3,87.4 L282.4,85.1 L283.5,82.9 L284.5,80.6 L285.6,78.3 L286.7,76 L287.8,73.7 L288.9,71.3 L290,68.9 L291.1,66.5 L292.2,64 L293.3,61.6 L294.3,59.1 L295.4,56.6 L296.5,54.1 L297.6,51.5 L298.7,48.9 L299.8,46.3 L300.9,43.7 L302,41 L303.1,38.4 L304.1,35.7 L305.2,32.9 L306.3,30.2 L307.4,27.4 L308.5,24.6 L309.6,21.8 L310.7,19" fill="none" stroke="#2E7D32" stroke-width="2.6"/>
+<text x="207" y="40.1" font-family="Arial" font-size="12.5" font-weight="700" fill="#1C2733" text-anchor="middle">y = x² − 3x − 4</text>
+<circle cx="90" cy="109" r="4.6" fill="#1C2733"/>
+<circle cx="270" cy="109" r="4.6" fill="#1C2733"/>
+<text x="46.8" y="75.2" text-anchor="end" font-family="Arial" font-size="12" font-weight="700" fill="#2E7D32">חיובית</text><text x="313.2" y="75.2" text-anchor="start" font-family="Arial" font-size="12" font-weight="700" fill="#2E7D32">חיובית</text><text x="180" y="140.2" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700" fill="#B4553C">שלילית</text></svg>
+  <figcaption>
+    הפרבולה <span class="fi">\(y=x^{2}-3x-4\)</span>, בקנה מידה. נקודות האפס הן
+    <span class="fi">\(-1\)</span> ו-<span class="fi">\(4\)</span>.
+    החלקים של הגרף <strong>מעל</strong> הציר, והקטעים שמתחתם על ציר <span class="fi">\(x\)</span>,
+    בירוק; החלק <strong>מתחת</strong> לציר, והקטע שמעליו, באדום.
+  </figcaption>
+</figure>
+
+<p>ומהציור קוראים את שתי התשובות:</p>
+
+<table class="dtable">
+  <tr><th>האי-שוויון</th><th>התשובה</th></tr>
+  <tr><td><span class="fi">\(x^{2}-3x-4\gt 0\)</span></td><td><span class="fi">\(x\lt -1\)</span> או <span class="fi">\(x\gt 4\)</span></td></tr>
+  <tr><td><span class="fi">\(x^{2}-3x-4\lt 0\)</span></td><td><span class="fi">\(-1\lt x\lt 4\)</span></td></tr>
+</table>
+
+<div class="box intuition">
+  <div class="box-title">ולכן לא צריך את כל הגרף</div>
+  כדי לקרוא את התשובה מספיקים שני דברים: <strong>איפה</strong> הפרבולה חותכת את הציר,
+  ו<strong>לאן</strong> היא פתוחה. ציור שיש בו רק אותם נקרא <strong>סקיצה</strong> — בלי
+  קנה מידה, בלי קדקוד, בלי טבלת ערכים. זו בדיוק השיטה שתוכנית הלימודים מבקשת.
+</div>
+
+<!-- ============ 2. השיטה ============ -->
+<h2 id="sec-method"><span class="num">2</span>השיטה — שלושה צעדים, וכל המקרים</h2>
+
+<div class="box def">
+  <div class="box-title">שלושת הצעדים</div>
+  <ol class="steps">
+    <li><strong>מסדרים מול אפס</strong>: הכול באגף אחד, בצורה
+      <span class="fi">\(ax^{2}+bx+c\gt 0\)</span> (או <span class="fi">\(\lt,\ \ge,\ \le\)</span>);</li>
+    <li><strong>מוצאים את נקודות האפס</strong>: פותרים את המשוואה
+      <span class="fi">\(ax^{2}+bx+c=0\)</span>;</li>
+    <li><strong>מסרטטים סקיצה וקוראים</strong>: האפסים על הציר, פרבולה פתוחה למעלה
+      (<span class="fi">\(a\gt 0\)</span>) או למטה (<span class="fi">\(a\lt 0\)</span>),
+      ומסמנים את התחום שבו היא בצד המבוקש.</li>
+  </ol>
+  בסקיצות בעמוד הזה, מה שעונה על השאלה — החלק של הפרבולה והקטע על הציר — בכחול.
+</div>
+
+<div class="nb" data-nb>
+  <div class="nb-head"><b>בונים ביחד במחברת</b><span class="nb-count"></span></div>
+  <ol class="nb-steps">
+    <li class="nb-step"><b>התרגיל</b>
+      <p>פתרי: <span class="fi">\(x^{2}-3x-40\lt 0\)</span>
+      <br><span class="aside">משבצת (גבי יקואל), דף עבודה "משוואות ומערכות משוואות ריבועיות", רמה א,
+      שאלה 23א.</span></p>
+    </li>
+    <li class="nb-step"><b>צעד 1 — מסדרים מול אפס</b>
+      <p>האי-שוויון כבר מסודר: באגף ימין <span class="fi">\(0\)</span>.</p>
+    </li>
+    <li class="nb-step"><b>צעד 2 — נקודות האפס</b>
+      <p>מכפלה <span class="fi">\(-40\)</span>, סכום <span class="fi">\(-3\)</span>:
+      המספרים הם <span class="fi">\(-8\)</span> ו-<span class="fi">\(5\)</span>.
+      $$x^{2}-3x-40=0$$
+      $$(x-8)(x+5)=0$$
+      $$x_{1}=-5\qquad\qquad x_{2}=8$$</p>
+    </li>
+    <li class="nb-step"><b>צעד 3 — סקיצה</b>
+      <p><span class="fi">\(a=1\gt 0\)</span>, ולכן הפרבולה פתוחה למעלה. מבקשים
+      <span class="fi">\(\lt 0\)</span> — היכן היא <strong>מתחת</strong> לציר:</p>
+      <div class="sk"><svg viewBox="0 0 300 122" width="300" height="122" role="img" aria-label="סקיצה: פרבולה פתוחה למעלה, אפסים מינוס 5 ו-8, מסומן הקטע שביניהם">
+<line x1="14" y1="62" x2="286" y2="62" stroke="#5A6875" stroke-width="1.5"/>
+<polygon points="292,62 284,57.6 284,66.4" fill="#5A6875"/>
+<text x="288" y="54" font-family="Arial" font-size="12" font-style="italic" fill="#5A6875">x</text>
+<path d="M58,8 L59.5,10.8 L61,13.5 L62.6,16.2 L64.1,18.8 L65.6,21.4 L67.2,24 L68.7,26.5 L70.2,28.9 L71.8,31.3 L73.3,33.7 L74.8,36 L76.4,38.2 L77.9,40.5 L79.4,42.6 L81,44.7 L82.5,46.8 L84,48.9 L85.6,50.8 L87.1,52.8 L88.6,54.7 L90.2,56.5 L91.7,58.3 L93.2,60.1 L94.8,61.8 L96.3,63.4" fill="none" stroke="#94A3B8" stroke-width="2.2"/>
+<path d="M96.3,63.4 L97.8,65 L99.4,66.6 L100.9,68.1 L102.4,69.6 L104,71 L105.5,72.4 L107.1,73.7 L108.6,75 L110.1,76.2 L111.7,77.4 L113.2,78.6 L114.7,79.7 L116.3,80.7 L117.8,81.7 L119.3,82.7 L120.9,83.6 L122.4,84.4 L123.9,85.3 L125.5,86 L127,86.8 L128.5,87.4 L130.1,88.1 L131.6,88.6 L133.1,89.2 L134.7,89.7 L136.2,90.1 L137.7,90.5 L139.3,90.9 L140.8,91.2 L142.3,91.4 L143.9,91.6 L145.4,91.8 L146.9,91.9 L148.5,92 L150,92 L151.5,92 L153.1,91.9 L154.6,91.8 L156.1,91.6 L157.7,91.4 L159.2,91.2 L160.7,90.9 L162.3,90.5 L163.8,90.1 L165.3,89.7 L166.9,89.2 L168.4,88.6 L169.9,88.1 L171.5,87.4 L173,86.8 L174.5,86 L176.1,85.3 L177.6,84.4 L179.1,83.6 L180.7,82.7 L182.2,81.7 L183.7,80.7 L185.3,79.7 L186.8,78.6 L188.3,77.4 L189.9,76.2 L191.4,75 L192.9,73.7 L194.5,72.4 L196,71 L197.6,69.6 L199.1,68.1 L200.6,66.6 L202.2,65 L203.7,63.4 L205.2,61.8" fill="none" stroke="#2563EB" stroke-width="3"/>
+<path d="M205.2,61.8 L206.8,60.1 L208.3,58.3 L209.8,56.5 L211.4,54.7 L212.9,52.8 L214.4,50.8 L216,48.9 L217.5,46.8 L219,44.8 L220.6,42.6 L222.1,40.5 L223.6,38.2 L225.2,36 L226.7,33.7 L228.2,31.3 L229.8,28.9 L231.3,26.5 L232.8,24 L234.4,21.4 L235.9,18.8 L237.4,16.2 L239,13.5 L240.5,10.8 L242,8" fill="none" stroke="#94A3B8" stroke-width="2.2"/>
+<line x1="95" y1="62" x2="205" y2="62" stroke="#2563EB" stroke-width="5.5" stroke-linecap="butt"/>
+<circle cx="95" cy="62" r="5.6" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<circle cx="205" cy="62" r="5.6" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<text x="95" y="83" text-anchor="middle" font-family="Arial" font-size="13.5" font-weight="700" fill="#1C2733">−5</text>
+<text x="205" y="83" text-anchor="middle" font-family="Arial" font-size="13.5" font-weight="700" fill="#1C2733">8</text>
+</svg></div>
+    </li>
+    <li class="nb-step"><b>התשובה</b>
+      <p>$$\boxed{-5\lt x\lt 8}$$
+      בדיקה במספר מתוך התחום, <span class="fi">\(x=0\)</span>:
+      <span class="fi">\(0-0-40=-40\lt 0\)</span> ✓</p>
+    </li>
+  </ol>
+</div>
+
+<p>
+  לפרבולה פתוחה למעלה עם שני אפסים יש תמיד אותה תמונה: <strong>מתחת</strong> לציר בין
+  האפסים, <strong>מעל</strong> הציר מחוץ להם. ואלה כל המקרים:
+</p>
+
+<div class="cards">
+  <div>
+    <div class="ct">שני אפסים · <span class="fi">\(\Delta\gt 0\)</span></div>
+    <svg viewBox="0 0 150 70" width="150" height="70" role="img" aria-label="סקיצה של פרבולה פתוחה למעלה">
+<line x1="8" y1="36" x2="142" y2="36" stroke="#5A6875" stroke-width="1.4"/>
+<path d="M29.3,6 L30.2,7.9 L31.1,9.8 L32,11.6 L32.9,13.4 L33.8,15.1 L34.8,16.8 L35.7,18.5 L36.6,20.1 L37.5,21.7 L38.4,23.3 L39.3,24.8 L40.2,26.3 L41.2,27.7 L42.1,29.1 L43,30.5 L43.9,31.8 L44.8,33.1 L45.7,34.3 L46.7,35.5 L47.6,36.7" fill="none" stroke="#2E7D32" stroke-width="2.4"/>
+<path d="M47.6,36.7 L48.5,37.9 L49.4,38.9 L50.3,40 L51.2,41 L52.1,42 L53.1,42.9 L54,43.8 L54.9,44.7 L55.8,45.5 L56.7,46.3 L57.6,47.1 L58.5,47.8 L59.5,48.5 L60.4,49.1 L61.3,49.7 L62.2,50.2 L63.1,50.8 L64,51.2 L64.9,51.7 L65.9,52.1 L66.8,52.4 L67.7,52.8 L68.6,53.1 L69.5,53.3 L70.4,53.5 L71.3,53.7 L72.3,53.8 L73.2,53.9 L74.1,54 L75,54 L75.9,54 L76.8,53.9 L77.7,53.8 L78.7,53.7 L79.6,53.5 L80.5,53.3 L81.4,53.1 L82.3,52.8 L83.2,52.4 L84.1,52.1 L85.1,51.7 L86,51.2 L86.9,50.8 L87.8,50.2 L88.7,49.7 L89.6,49.1 L90.5,48.5 L91.5,47.8 L92.4,47.1 L93.3,46.3 L94.2,45.5 L95.1,44.7 L96,43.8 L96.9,42.9 L97.9,42 L98.8,41 L99.7,40 L100.6,38.9 L101.5,37.9 L102.4,36.7 L103.3,35.5" fill="none" stroke="#B4553C" stroke-width="2.4"/>
+<path d="M103.3,35.5 L104.3,34.3 L105.2,33.1 L106.1,31.8 L107,30.5 L107.9,29.1 L108.8,27.7 L109.8,26.3 L110.7,24.8 L111.6,23.3 L112.5,21.7 L113.4,20.1 L114.3,18.5 L115.2,16.8 L116.2,15.1 L117.1,13.4 L118,11.6 L118.9,9.8 L119.8,7.9 L120.7,6" fill="none" stroke="#2E7D32" stroke-width="2.4"/>
+<circle cx="47" cy="36" r="3" fill="#1C2733"/>
+<text x="47" y="54" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700" font-style="italic" fill="#1C2733">x<tspan font-size="8.5" dy="3" font-style="normal">1</tspan></text>
+<circle cx="103" cy="36" r="3" fill="#1C2733"/>
+<text x="103" y="54" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700" font-style="italic" fill="#1C2733">x<tspan font-size="8.5" dy="3" font-style="normal">2</tspan></text>
+</svg>
+    <div class="rw"><span class="k"><span class="fi">\(\gt 0\)</span></span><span class="v"><span class="fi">\(x\lt x_{1}\)</span> או <span class="fi">\(x\gt x_{2}\)</span></span></div>
+    <div class="rw"><span class="k"><span class="fi">\(\ge 0\)</span></span><span class="v"><span class="fi">\(x\le x_{1}\)</span> או <span class="fi">\(x\ge x_{2}\)</span></span></div>
+    <div class="rw"><span class="k"><span class="fi">\(\lt 0\)</span></span><span class="v"><span class="fi">\(x_{1}\lt x\lt x_{2}\)</span></span></div>
+    <div class="rw"><span class="k"><span class="fi">\(\le 0\)</span></span><span class="v"><span class="fi">\(x_{1}\le x\le x_{2}\)</span></span></div>
+  </div>
+  <div>
+    <div class="ct">אפס אחד · <span class="fi">\(\Delta=0\)</span></div>
+    <svg viewBox="0 0 150 70" width="150" height="70" role="img" aria-label="סקיצה של פרבולה פתוחה למעלה">
+<line x1="8" y1="56" x2="142" y2="56" stroke="#5A6875" stroke-width="1.4"/>
+<path d="M27,12 L28,13.7 L28.9,15.4 L29.9,17.1 L30.8,18.8 L31.8,20.4 L32.8,21.9 L33.7,23.5 L34.7,25 L35.6,26.4 L36.6,27.8 L37.6,29.2 L38.5,30.6 L39.5,31.9 L40.4,33.2 L41.4,34.4 L42.4,35.7 L43.3,36.8 L44.3,38 L45.2,39.1 L46.2,40.2 L47.2,41.2 L48.1,42.2 L49.1,43.2 L50,44.1 L51,45 L52,45.9 L52.9,46.7 L53.9,47.5 L54.8,48.2 L55.8,49 L56.8,49.6 L57.7,50.3 L58.7,50.9 L59.6,51.5 L60.6,52 L61.6,52.6 L62.5,53 L63.5,53.5 L64.4,53.9 L65.4,54.2 L66.4,54.6 L67.3,54.9 L68.3,55.1 L69.2,55.4 L70.2,55.6 L71.2,55.7 L72.1,55.8 L73.1,55.9 L74,56 L75,56 L76,56 L76.9,55.9 L77.9,55.8 L78.8,55.7 L79.8,55.6 L80.8,55.4 L81.7,55.1 L82.7,54.9 L83.6,54.6 L84.6,54.2 L85.6,53.9 L86.5,53.5 L87.5,53 L88.4,52.6 L89.4,52 L90.4,51.5 L91.3,50.9 L92.3,50.3 L93.2,49.6 L94.2,49 L95.2,48.2 L96.1,47.5 L97.1,46.7 L98,45.9 L99,45 L100,44.1 L100.9,43.2 L101.9,42.2 L102.8,41.2 L103.8,40.2 L104.8,39.1 L105.7,38 L106.7,36.8 L107.6,35.7 L108.6,34.4 L109.6,33.2 L110.5,31.9 L111.5,30.6 L112.4,29.2 L113.4,27.8 L114.4,26.4 L115.3,25 L116.3,23.5 L117.2,21.9 L118.2,20.4 L119.2,18.8 L120.1,17.1 L121.1,15.4 L122,13.7 L123,12" fill="none" stroke="#2E7D32" stroke-width="2.4"/>
+<circle cx="75" cy="56" r="3" fill="#1C2733"/>
+<text x="75" y="74" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700" font-style="italic" fill="#1C2733">x<tspan font-size="8.5" dy="3" font-style="normal">1</tspan></text>
+</svg>
+    <div class="rw"><span class="k"><span class="fi">\(\gt 0\)</span></span><span class="v"><span class="fi">\(x\ne x_{1}\)</span></span></div>
+    <div class="rw"><span class="k"><span class="fi">\(\ge 0\)</span></span><span class="v">כל <span class="fi">\(x\)</span></span></div>
+    <div class="rw"><span class="k"><span class="fi">\(\lt 0\)</span></span><span class="v">אין פתרון</span></div>
+    <div class="rw"><span class="k"><span class="fi">\(\le 0\)</span></span><span class="v"><span class="fi">\(x=x_{1}\)</span></span></div>
+  </div>
+  <div>
+    <div class="ct">בלי אפסים · <span class="fi">\(\Delta\lt 0\)</span></div>
+    <svg viewBox="0 0 150 70" width="150" height="70" role="img" aria-label="סקיצה של פרבולה פתוחה למעלה">
+<line x1="8" y1="60" x2="142" y2="60" stroke="#5A6875" stroke-width="1.4"/>
+<path d="M27,14 L28,15.4 L28.9,16.8 L29.9,18.2 L30.8,19.5 L31.8,20.8 L32.8,22.1 L33.7,23.4 L34.7,24.6 L35.6,25.8 L36.6,27 L37.6,28.1 L38.5,29.2 L39.5,30.3 L40.4,31.3 L41.4,32.4 L42.4,33.4 L43.3,34.3 L44.3,35.3 L45.2,36.2 L46.2,37 L47.2,37.9 L48.1,38.7 L49.1,39.5 L50,40.3 L51,41 L52,41.7 L52.9,42.4 L53.9,43 L54.8,43.6 L55.8,44.2 L56.8,44.8 L57.7,45.3 L58.7,45.8 L59.6,46.3 L60.6,46.8 L61.6,47.2 L62.5,47.6 L63.5,47.9 L64.4,48.3 L65.4,48.6 L66.4,48.8 L67.3,49.1 L68.3,49.3 L69.2,49.5 L70.2,49.6 L71.2,49.8 L72.1,49.9 L73.1,49.9 L74,50 L75,50 L76,50 L76.9,49.9 L77.9,49.9 L78.8,49.8 L79.8,49.6 L80.8,49.5 L81.7,49.3 L82.7,49.1 L83.6,48.8 L84.6,48.6 L85.6,48.3 L86.5,47.9 L87.5,47.6 L88.4,47.2 L89.4,46.8 L90.4,46.3 L91.3,45.8 L92.3,45.3 L93.2,44.8 L94.2,44.2 L95.2,43.6 L96.1,43 L97.1,42.4 L98,41.7 L99,41 L100,40.3 L100.9,39.5 L101.9,38.7 L102.8,37.9 L103.8,37 L104.8,36.2 L105.7,35.3 L106.7,34.3 L107.6,33.4 L108.6,32.4 L109.6,31.3 L110.5,30.3 L111.5,29.2 L112.4,28.1 L113.4,27 L114.4,25.8 L115.3,24.6 L116.3,23.4 L117.2,22.1 L118.2,20.8 L119.2,19.5 L120.1,18.2 L121.1,16.8 L122,15.4 L123,14" fill="none" stroke="#2E7D32" stroke-width="2.4"/>
+</svg>
+    <div class="rw"><span class="k"><span class="fi">\(\gt 0\)</span></span><span class="v">כל <span class="fi">\(x\)</span></span></div>
+    <div class="rw"><span class="k"><span class="fi">\(\ge 0\)</span></span><span class="v">כל <span class="fi">\(x\)</span></span></div>
+    <div class="rw"><span class="k"><span class="fi">\(\lt 0\)</span></span><span class="v">אין פתרון</span></div>
+    <div class="rw"><span class="k"><span class="fi">\(\le 0\)</span></span><span class="v">אין פתרון</span></div>
+  </div>
+</div>
+<p class="aside">שלוש הסקיצות הן של פרבולה פתוחה למעלה (<span class="fi">\(a\gt 0\)</span>):
+החלק מעל הציר בירוק, החלק מתחתיו באדום.</p>
+
+<p>
+  ההבדל בין <span class="fi">\(\gt\)</span> ל-<span class="fi">\(\ge\)</span>: ב-<span class="fi">\(\ge\)</span>
+  גם נקודות האפס עצמן הן פתרון, כי בהן הביטוי שווה <span class="fi">\(0\)</span>.
+</p>
+
+<p><strong>כשהאפס אחד</strong> — למשל <span class="fi">\(x^{2}-6x+9=(x-3)^{2}\)</span> — הפרבולה
+נוגעת בציר ב-<span class="fi">\(x=3\)</span> ונשארת כולה מעליו:</p>
+
+<table class="dtable">
+  <tr><th>האי-שוויון</th><th>התשובה</th></tr>
+  <tr><td><span class="fi">\((x-3)^{2}\gt 0\)</span></td><td><span class="fi">\(x\ne 3\)</span></td></tr>
+  <tr><td><span class="fi">\((x-3)^{2}\ge 0\)</span></td><td>כל <span class="fi">\(x\)</span></td></tr>
+  <tr><td><span class="fi">\((x-3)^{2}\lt 0\)</span></td><td>אין פתרון</td></tr>
+  <tr><td><span class="fi">\((x-3)^{2}\le 0\)</span></td><td><span class="fi">\(x=3\)</span></td></tr>
+</table>
+
+<p><strong>כשאין אפסים</strong> — למשל <span class="fi">\(x^{2}+x+5\)</span>, עם
+<span class="fi">\(\Delta=1-20=-19\)</span> — הפרבולה כולה מעל הציר:
+<span class="fi">\(x^{2}+x+5\gt 0\)</span> לכל <span class="fi">\(x\)</span>, ול-<span class="fi">\(x^{2}+x+5\lt 0\)</span>
+אין פתרון.</p>
+
+<h3>כשמקדם <span class="fi">\(x^{2}\)</span> שלילי</h3>
+
+<p>
+  שתי דרכים, ושתיהן נותנות אותה תשובה: מסרטטים פרבולה פתוחה למטה, או כופלים את
+  האי-שוויון ב-<span class="fi">\(-1\)</span>. כפל במספר שלילי
+  <a href="../../year8/algebra/02-equations.html">הופך את סימן האי-שוויון</a>.
+</p>
+
+<div class="nb" data-nb>
+  <div class="nb-head"><b>בונים ביחד במחברת</b><span class="nb-count"></span></div>
+  <ol class="nb-steps">
+    <li class="nb-step"><b>התרגיל</b>
+      <p>פתרי: <span class="fi">\(-x^{2}+2x+8\ge 0\)</span></p>
+    </li>
+    <li class="nb-step"><b>נקודות האפס</b>
+      <p>$$-x^{2}+2x+8=0\qquad\textcolor{#C0392B}{/\;\cdot(-1)}$$
+      $$x^{2}-2x-8=0$$
+      $$(x-4)(x+2)=0$$
+      $$x_{1}=-2\qquad\qquad x_{2}=4$$</p>
+    </li>
+    <li class="nb-step"><b>דרך 1 — סקיצה של פרבולה פתוחה למטה</b>
+      <p><span class="fi">\(a=-1\lt 0\)</span>. מבקשים <span class="fi">\(\ge 0\)</span> — היכן
+      הפרבולה מעל הציר או עליו:</p>
+      <div class="sk"><svg viewBox="0 0 300 122" width="300" height="122" role="img" aria-label="סקיצה: פרבולה פתוחה למטה, אפסים מינוס 2 ו-4, מסומן הקטע שביניהם כולל הקצוות">
+<line x1="14" y1="58" x2="286" y2="58" stroke="#5A6875" stroke-width="1.5"/>
+<polygon points="292,58 284,53.6 284,62.4" fill="#5A6875"/>
+<text x="288" y="50" font-family="Arial" font-size="12" font-style="italic" fill="#5A6875">x</text>
+<path d="M56.9,114 L58.4,111.2 L60,108.4 L61.5,105.6 L63.1,102.9 L64.6,100.3 L66.2,97.7 L67.7,95.1 L69.3,92.6 L70.8,90.1 L72.4,87.7 L74,85.4 L75.5,83 L77.1,80.8 L78.6,78.5 L80.2,76.4 L81.7,74.2 L83.3,72.2 L84.8,70.1 L86.4,68.2 L87.9,66.2 L89.5,64.3 L91,62.5 L92.6,60.7 L94.1,59 L95.7,57.3" fill="none" stroke="#94A3B8" stroke-width="2.2"/>
+<path d="M95.7,57.3 L97.2,55.6 L98.8,54 L100.3,52.5 L101.9,51 L103.4,49.5 L105,48.1 L106.5,46.7 L108.1,45.4 L109.6,44.1 L111.2,42.9 L112.8,41.8 L114.3,40.6 L115.9,39.6 L117.4,38.5 L119,37.6 L120.5,36.6 L122.1,35.7 L123.6,34.9 L125.2,34.1 L126.7,33.4 L128.3,32.7 L129.8,32 L131.4,31.4 L132.9,30.9 L134.5,30.4 L136,29.9 L137.6,29.5 L139.1,29.2 L140.7,28.9 L142.2,28.6 L143.8,28.4 L145.3,28.2 L146.9,28.1 L148.4,28 L150,28 L151.6,28 L153.1,28.1 L154.7,28.2 L156.2,28.4 L157.8,28.6 L159.3,28.9 L160.9,29.2 L162.4,29.5 L164,29.9 L165.5,30.4 L167.1,30.9 L168.6,31.4 L170.2,32 L171.7,32.7 L173.3,33.4 L174.8,34.1 L176.4,34.9 L177.9,35.7 L179.5,36.6 L181,37.6 L182.6,38.5 L184.1,39.6 L185.7,40.6 L187.2,41.8 L188.8,42.9 L190.4,44.1 L191.9,45.4 L193.5,46.7 L195,48.1 L196.6,49.5 L198.1,51 L199.7,52.5 L201.2,54 L202.8,55.6 L204.3,57.3 L205.9,59" fill="none" stroke="#2563EB" stroke-width="3"/>
+<path d="M205.9,59 L207.4,60.7 L209,62.5 L210.5,64.3 L212.1,66.2 L213.6,68.2 L215.2,70.1 L216.7,72.2 L218.3,74.2 L219.8,76.4 L221.4,78.5 L222.9,80.8 L224.5,83 L226,85.4 L227.6,87.7 L229.2,90.1 L230.7,92.6 L232.3,95.1 L233.8,97.7 L235.4,100.3 L236.9,102.9 L238.5,105.6 L240,108.4 L241.6,111.2 L243.1,114" fill="none" stroke="#94A3B8" stroke-width="2.2"/>
+<line x1="95" y1="58" x2="205" y2="58" stroke="#2563EB" stroke-width="5.5" stroke-linecap="butt"/>
+<circle cx="95" cy="58" r="5.6" fill="#2563EB" stroke="#2563EB" stroke-width="2.6"/>
+<circle cx="205" cy="58" r="5.6" fill="#2563EB" stroke="#2563EB" stroke-width="2.6"/>
+<text x="95" y="79" text-anchor="middle" font-family="Arial" font-size="13.5" font-weight="700" fill="#1C2733">−2</text>
+<text x="205" y="79" text-anchor="middle" font-family="Arial" font-size="13.5" font-weight="700" fill="#1C2733">4</text>
+</svg></div>
+      $$\boxed{-2\le x\le 4}$$
+    </li>
+    <li class="nb-step"><b>דרך 2 — כופלים ב-<span class="fi">\(-1\)</span></b>
+      <p>$$-x^{2}+2x+8\ge 0\qquad\textcolor{#C0392B}{/\;\cdot(-1)}$$
+      $$x^{2}-2x-8\le 0$$
+      סימן האי-שוויון התהפך, והפרבולה פתוחה למעלה. מבקשים <span class="fi">\(\le 0\)</span> —
+      בין האפסים, כולל אותם:
+      $$-2\le x\le 4$$
+      אותה תשובה ✓</p>
+    </li>
+    <li class="nb-step"><b>בדיקה</b>
+      <p>במספר מתוך התחום, <span class="fi">\(x=0\)</span>: <span class="fi">\(8\ge 0\)</span> ✓
+      <br>בגבול, <span class="fi">\(x=4\)</span>: <span class="fi">\(-16+8+8=0\ge 0\)</span> ✓</p>
+    </li>
+  </ol>
+</div>
+
+<h3>כשצריך קודם לסדר</h3>
+
+<p>
+  אם יש סוגריים, או ביטויים בשני האגפים, צעד 1 הוא העבודה העיקרית: פותחים סוגריים
+  (<a href="../algebra/02-short-multiplication.html">נוסחאות הכפל המקוצר</a>), מעבירים הכול לאגף
+  אחד ומכנסים — ורק אז מוצאים אפסים.
+</p>
+
+<div class="nb" data-nb>
+  <div class="nb-head"><b>בונים ביחד במחברת</b><span class="nb-count"></span></div>
+  <ol class="nb-steps">
+    <li class="nb-step"><b>התרגיל</b>
+      <p>פתרי: <span class="fi">\((2x+1)^{2}-(x+5)(1-x)\gt 0\)</span>
+      <br><span class="aside">משבצת, רמה א, שאלה 22ב.</span></p>
+    </li>
+    <li class="nb-step"><b>צעד 1 — פותחים סוגריים</b>
+      <p>$$\underbrace{4x^{2}+4x+1}_{(2x+1)^{2}}\;\textcolor{#C0392B}{-1\cdot}\underbrace{(x-x^{2}+5-5x)}_{(x+5)(1-x)}\gt 0$$
+      $$4x^{2}+4x+1-x+x^{2}-5+5x\gt 0$$
+      $$5x^{2}+8x-4\gt 0$$</p>
+    </li>
+    <li class="nb-step"><b>צעד 2 — נקודות האפס</b>
+      <p>בנוסחה, עם <span class="fi">\(a=5,\ b=8,\ c=-4\)</span>:
+      $$\Delta=64+80=144\qquad\sqrt{144}=12$$
+      $$x_{1,2}=\frac{-8\pm12}{10}$$
+      $$x_{1}=-2\qquad\qquad x_{2}=0.4$$</p>
+    </li>
+    <li class="nb-step"><b>צעד 3 — סקיצה</b>
+      <p><span class="fi">\(a=5\gt 0\)</span>, פתוחה למעלה. מבקשים <span class="fi">\(\gt 0\)</span> — מחוץ
+      לאפסים:</p>
+      <div class="sk"><svg viewBox="0 0 300 122" width="300" height="122" role="img" aria-label="סקיצה: פרבולה פתוחה למעלה, אפסים מינוס 2 ו-0.4, מסומנים שני החלקים שמחוץ להם">
+<line x1="14" y1="62" x2="286" y2="62" stroke="#5A6875" stroke-width="1.5"/>
+<polygon points="292,62 284,57.6 284,66.4" fill="#5A6875"/>
+<text x="288" y="54" font-family="Arial" font-size="12" font-style="italic" fill="#5A6875">x</text>
+<path d="M58,8 L59.5,10.8 L61,13.5 L62.6,16.2 L64.1,18.8 L65.6,21.4 L67.2,24 L68.7,26.5 L70.2,28.9 L71.8,31.3 L73.3,33.7 L74.8,36 L76.4,38.2 L77.9,40.5 L79.4,42.6 L81,44.7 L82.5,46.8 L84,48.9 L85.6,50.8 L87.1,52.8 L88.6,54.7 L90.2,56.5 L91.7,58.3 L93.2,60.1 L94.8,61.8 L96.3,63.4" fill="none" stroke="#2563EB" stroke-width="3"/>
+<path d="M96.3,63.4 L97.8,65 L99.4,66.6 L100.9,68.1 L102.4,69.6 L104,71 L105.5,72.4 L107.1,73.7 L108.6,75 L110.1,76.2 L111.7,77.4 L113.2,78.6 L114.7,79.7 L116.3,80.7 L117.8,81.7 L119.3,82.7 L120.9,83.6 L122.4,84.4 L123.9,85.3 L125.5,86 L127,86.8 L128.5,87.4 L130.1,88.1 L131.6,88.6 L133.1,89.2 L134.7,89.7 L136.2,90.1 L137.7,90.5 L139.3,90.9 L140.8,91.2 L142.3,91.4 L143.9,91.6 L145.4,91.8 L146.9,91.9 L148.5,92 L150,92 L151.5,92 L153.1,91.9 L154.6,91.8 L156.1,91.6 L157.7,91.4 L159.2,91.2 L160.7,90.9 L162.3,90.5 L163.8,90.1 L165.3,89.7 L166.9,89.2 L168.4,88.6 L169.9,88.1 L171.5,87.4 L173,86.8 L174.5,86 L176.1,85.3 L177.6,84.4 L179.1,83.6 L180.7,82.7 L182.2,81.7 L183.7,80.7 L185.3,79.7 L186.8,78.6 L188.3,77.4 L189.9,76.2 L191.4,75 L192.9,73.7 L194.5,72.4 L196,71 L197.6,69.6 L199.1,68.1 L200.6,66.6 L202.2,65 L203.7,63.4 L205.2,61.8" fill="none" stroke="#94A3B8" stroke-width="2.2"/>
+<path d="M205.2,61.8 L206.8,60.1 L208.3,58.3 L209.8,56.5 L211.4,54.7 L212.9,52.8 L214.4,50.8 L216,48.9 L217.5,46.8 L219,44.8 L220.6,42.6 L222.1,40.5 L223.6,38.2 L225.2,36 L226.7,33.7 L228.2,31.3 L229.8,28.9 L231.3,26.5 L232.8,24 L234.4,21.4 L235.9,18.8 L237.4,16.2 L239,13.5 L240.5,10.8 L242,8" fill="none" stroke="#2563EB" stroke-width="3"/>
+<line x1="24" y1="62" x2="95" y2="62" stroke="#2563EB" stroke-width="5.5" stroke-linecap="butt"/>
+<polygon points="14,62 26,55.4 26,68.6" fill="#2563EB"/>
+<line x1="205" y1="62" x2="276" y2="62" stroke="#2563EB" stroke-width="5.5" stroke-linecap="butt"/>
+<polygon points="286,62 274,55.4 274,68.6" fill="#2563EB"/>
+<circle cx="95" cy="62" r="5.6" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<circle cx="205" cy="62" r="5.6" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<text x="95" y="83" text-anchor="middle" font-family="Arial" font-size="13.5" font-weight="700" fill="#1C2733">−2</text>
+<text x="205" y="83" text-anchor="middle" font-family="Arial" font-size="13.5" font-weight="700" fill="#1C2733">0.4</text>
+</svg></div>
+      <p class="concl"><span class="fi">\(x\lt -2\)</span> או <span class="fi">\(x\gt 0.4\)</span></p>
+    </li>
+    <li class="nb-step"><b>בדיקה</b>
+      <p>במספר מחוץ לאפסים, <span class="fi">\(x=1\)</span>, באי-שוויון המקורי:
+      <span class="fi">\(9-6\cdot0=9\gt 0\)</span> ✓
+      <br>ובמספר ביניהם, <span class="fi">\(x=0\)</span>:
+      <span class="fi">\(1-5=-4\)</span>, שלילי — ולכן <span class="fi">\(0\)</span> מחוץ לתשובה ✓</p>
+    </li>
+  </ol>
+</div>
+
+<p>
+  ואותו צעד 1 פותר גם <strong>פרבולה מול ישר</strong>: <span class="fi">\(f(x)\gt g(x)\)</span>
+  הופך ל-<span class="fi">\(f(x)-g(x)\gt 0\)</span>. ב<a href="02-parabola-and-line.html#sec-above">תחנה
+  הקודמת</a> מצאת את התשובה בטבלת ערכים; עם הסקיצה היא יוצאת בלי טבלה. תרגילים 13–15 למטה.
+</p>
+
+<!-- ============ 3. כתיבת התשובה ============ -->
+<h2 id="sec-write"><span class="num">3</span>איך כותבים את התשובה</h2>
+
+<p>
+  לתשובה יש שתי צורות, לפי מה שרואים בסקיצה — שני חלקים נפרדים, או קטע אחד:
+</p>
+
+<div class="cards">
+  <div>
+    <div class="ct">שני חלקים — מחוץ לאפסים</div>
+    <div class="cw"><span class="fi">\(x\lt -1\)</span> או <span class="fi">\(x\gt 4\)</span></div>
+    <svg viewBox="0 0 360 58" width="360" height="58" role="img" aria-label="ציר מספרים: x קטן ממינוס 1 או x גדול מ-4">
+<line x1="16" y1="26" x2="344" y2="26" stroke="#5A6875" stroke-width="1.6"/>
+<polygon points="350,26 342,21.6 342,30.4" fill="#5A6875"/>
+<polygon points="10,26 18,21.6 18,30.4" fill="#5A6875"/>
+<line x1="38" y1="21" x2="38" y2="31" stroke="#5A6875" stroke-width="1.4"/>
+<line x1="69.6" y1="21" x2="69.6" y2="31" stroke="#5A6875" stroke-width="1.4"/>
+<line x1="101.1" y1="21" x2="101.1" y2="31" stroke="#5A6875" stroke-width="1.4"/>
+<line x1="132.7" y1="21" x2="132.7" y2="31" stroke="#5A6875" stroke-width="1.4"/>
+<line x1="164.2" y1="21" x2="164.2" y2="31" stroke="#5A6875" stroke-width="1.4"/>
+<line x1="195.8" y1="21" x2="195.8" y2="31" stroke="#5A6875" stroke-width="1.4"/>
+<line x1="227.3" y1="21" x2="227.3" y2="31" stroke="#5A6875" stroke-width="1.4"/>
+<line x1="258.9" y1="21" x2="258.9" y2="31" stroke="#5A6875" stroke-width="1.4"/>
+<line x1="290.4" y1="21" x2="290.4" y2="31" stroke="#5A6875" stroke-width="1.4"/>
+<line x1="322" y1="21" x2="322" y2="31" stroke="#5A6875" stroke-width="1.4"/>
+<line x1="26" y1="26" x2="101.1" y2="26" stroke="#2563EB" stroke-width="5.5" stroke-linecap="butt"/>
+<polygon points="16,26 28,19.4 28,32.6" fill="#2563EB"/>
+<line x1="258.9" y1="26" x2="334" y2="26" stroke="#2563EB" stroke-width="5.5" stroke-linecap="butt"/>
+<polygon points="344,26 332,19.4 332,32.6" fill="#2563EB"/>
+<circle cx="101.1" cy="26" r="5.6" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<circle cx="258.9" cy="26" r="5.6" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<text x="38" y="49" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="400" fill="#5A6875">−3</text>
+<text x="69.6" y="49" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="400" fill="#5A6875">−2</text>
+<text x="101.1" y="49" text-anchor="middle" font-family="Arial" font-size="14" font-weight="800" fill="#1C2733">−1</text>
+<text x="132.7" y="49" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="400" fill="#5A6875">0</text>
+<text x="164.2" y="49" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="400" fill="#5A6875">1</text>
+<text x="195.8" y="49" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="400" fill="#5A6875">2</text>
+<text x="227.3" y="49" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="400" fill="#5A6875">3</text>
+<text x="258.9" y="49" text-anchor="middle" font-family="Arial" font-size="14" font-weight="800" fill="#1C2733">4</text>
+<text x="290.4" y="49" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="400" fill="#5A6875">5</text>
+<text x="322" y="49" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="400" fill="#5A6875">6</text>
+</svg>
+  </div>
+  <div>
+    <div class="ct">קטע אחד — בין האפסים</div>
+    <div class="cw"><span class="fi">\(-1\lt x\lt 4\)</span></div>
+    <svg viewBox="0 0 360 58" width="360" height="58" role="img" aria-label="ציר מספרים: x בין מינוס 1 ל-4">
+<line x1="16" y1="26" x2="344" y2="26" stroke="#5A6875" stroke-width="1.6"/>
+<polygon points="350,26 342,21.6 342,30.4" fill="#5A6875"/>
+<polygon points="10,26 18,21.6 18,30.4" fill="#5A6875"/>
+<line x1="38" y1="21" x2="38" y2="31" stroke="#5A6875" stroke-width="1.4"/>
+<line x1="69.6" y1="21" x2="69.6" y2="31" stroke="#5A6875" stroke-width="1.4"/>
+<line x1="101.1" y1="21" x2="101.1" y2="31" stroke="#5A6875" stroke-width="1.4"/>
+<line x1="132.7" y1="21" x2="132.7" y2="31" stroke="#5A6875" stroke-width="1.4"/>
+<line x1="164.2" y1="21" x2="164.2" y2="31" stroke="#5A6875" stroke-width="1.4"/>
+<line x1="195.8" y1="21" x2="195.8" y2="31" stroke="#5A6875" stroke-width="1.4"/>
+<line x1="227.3" y1="21" x2="227.3" y2="31" stroke="#5A6875" stroke-width="1.4"/>
+<line x1="258.9" y1="21" x2="258.9" y2="31" stroke="#5A6875" stroke-width="1.4"/>
+<line x1="290.4" y1="21" x2="290.4" y2="31" stroke="#5A6875" stroke-width="1.4"/>
+<line x1="322" y1="21" x2="322" y2="31" stroke="#5A6875" stroke-width="1.4"/>
+<line x1="101.1" y1="26" x2="258.9" y2="26" stroke="#2563EB" stroke-width="5.5" stroke-linecap="butt"/>
+<circle cx="101.1" cy="26" r="5.6" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<circle cx="258.9" cy="26" r="5.6" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<text x="38" y="49" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="400" fill="#5A6875">−3</text>
+<text x="69.6" y="49" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="400" fill="#5A6875">−2</text>
+<text x="101.1" y="49" text-anchor="middle" font-family="Arial" font-size="14" font-weight="800" fill="#1C2733">−1</text>
+<text x="132.7" y="49" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="400" fill="#5A6875">0</text>
+<text x="164.2" y="49" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="400" fill="#5A6875">1</text>
+<text x="195.8" y="49" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="400" fill="#5A6875">2</text>
+<text x="227.3" y="49" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="400" fill="#5A6875">3</text>
+<text x="258.9" y="49" text-anchor="middle" font-family="Arial" font-size="14" font-weight="800" fill="#1C2733">4</text>
+<text x="290.4" y="49" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="400" fill="#5A6875">5</text>
+<text x="322" y="49" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="400" fill="#5A6875">6</text>
+</svg>
+  </div>
+  <div>
+    <div class="ct">קטע אחד, כולל הקצוות</div>
+    <div class="cw"><span class="fi">\(-1\le x\le 4\)</span></div>
+    <svg viewBox="0 0 360 58" width="360" height="58" role="img" aria-label="ציר מספרים: x בין מינוס 1 ל-4 כולל הקצוות">
+<line x1="16" y1="26" x2="344" y2="26" stroke="#5A6875" stroke-width="1.6"/>
+<polygon points="350,26 342,21.6 342,30.4" fill="#5A6875"/>
+<polygon points="10,26 18,21.6 18,30.4" fill="#5A6875"/>
+<line x1="38" y1="21" x2="38" y2="31" stroke="#5A6875" stroke-width="1.4"/>
+<line x1="69.6" y1="21" x2="69.6" y2="31" stroke="#5A6875" stroke-width="1.4"/>
+<line x1="101.1" y1="21" x2="101.1" y2="31" stroke="#5A6875" stroke-width="1.4"/>
+<line x1="132.7" y1="21" x2="132.7" y2="31" stroke="#5A6875" stroke-width="1.4"/>
+<line x1="164.2" y1="21" x2="164.2" y2="31" stroke="#5A6875" stroke-width="1.4"/>
+<line x1="195.8" y1="21" x2="195.8" y2="31" stroke="#5A6875" stroke-width="1.4"/>
+<line x1="227.3" y1="21" x2="227.3" y2="31" stroke="#5A6875" stroke-width="1.4"/>
+<line x1="258.9" y1="21" x2="258.9" y2="31" stroke="#5A6875" stroke-width="1.4"/>
+<line x1="290.4" y1="21" x2="290.4" y2="31" stroke="#5A6875" stroke-width="1.4"/>
+<line x1="322" y1="21" x2="322" y2="31" stroke="#5A6875" stroke-width="1.4"/>
+<line x1="101.1" y1="26" x2="258.9" y2="26" stroke="#2563EB" stroke-width="5.5" stroke-linecap="butt"/>
+<circle cx="101.1" cy="26" r="5.6" fill="#2563EB" stroke="#2563EB" stroke-width="2.6"/>
+<circle cx="258.9" cy="26" r="5.6" fill="#2563EB" stroke="#2563EB" stroke-width="2.6"/>
+<text x="38" y="49" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="400" fill="#5A6875">−3</text>
+<text x="69.6" y="49" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="400" fill="#5A6875">−2</text>
+<text x="101.1" y="49" text-anchor="middle" font-family="Arial" font-size="14" font-weight="800" fill="#1C2733">−1</text>
+<text x="132.7" y="49" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="400" fill="#5A6875">0</text>
+<text x="164.2" y="49" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="400" fill="#5A6875">1</text>
+<text x="195.8" y="49" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="400" fill="#5A6875">2</text>
+<text x="227.3" y="49" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="400" fill="#5A6875">3</text>
+<text x="258.9" y="49" text-anchor="middle" font-family="Arial" font-size="14" font-weight="800" fill="#1C2733">4</text>
+<text x="290.4" y="49" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="400" fill="#5A6875">5</text>
+<text x="322" y="49" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="400" fill="#5A6875">6</text>
+</svg>
+  </div>
+  <div>
+    <div class="ct">הכול חוץ מנקודה אחת</div>
+    <div class="cw"><span class="fi">\(x\ne 3\)</span></div>
+    <svg viewBox="0 0 360 58" width="360" height="58" role="img" aria-label="ציר מספרים: כל x חוץ מ-3">
+<line x1="16" y1="26" x2="344" y2="26" stroke="#5A6875" stroke-width="1.6"/>
+<polygon points="350,26 342,21.6 342,30.4" fill="#5A6875"/>
+<polygon points="10,26 18,21.6 18,30.4" fill="#5A6875"/>
+<line x1="38" y1="21" x2="38" y2="31" stroke="#5A6875" stroke-width="1.4"/>
+<line x1="73.5" y1="21" x2="73.5" y2="31" stroke="#5A6875" stroke-width="1.4"/>
+<line x1="109" y1="21" x2="109" y2="31" stroke="#5A6875" stroke-width="1.4"/>
+<line x1="144.5" y1="21" x2="144.5" y2="31" stroke="#5A6875" stroke-width="1.4"/>
+<line x1="180" y1="21" x2="180" y2="31" stroke="#5A6875" stroke-width="1.4"/>
+<line x1="215.5" y1="21" x2="215.5" y2="31" stroke="#5A6875" stroke-width="1.4"/>
+<line x1="251" y1="21" x2="251" y2="31" stroke="#5A6875" stroke-width="1.4"/>
+<line x1="286.5" y1="21" x2="286.5" y2="31" stroke="#5A6875" stroke-width="1.4"/>
+<line x1="322" y1="21" x2="322" y2="31" stroke="#5A6875" stroke-width="1.4"/>
+<line x1="26" y1="26" x2="180" y2="26" stroke="#2563EB" stroke-width="5.5" stroke-linecap="butt"/>
+<polygon points="16,26 28,19.4 28,32.6" fill="#2563EB"/>
+<line x1="180" y1="26" x2="334" y2="26" stroke="#2563EB" stroke-width="5.5" stroke-linecap="butt"/>
+<polygon points="344,26 332,19.4 332,32.6" fill="#2563EB"/>
+<circle cx="180" cy="26" r="5.6" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<circle cx="180" cy="26" r="5.6" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<text x="38" y="49" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="400" fill="#5A6875">−1</text>
+<text x="73.5" y="49" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="400" fill="#5A6875">0</text>
+<text x="109" y="49" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="400" fill="#5A6875">1</text>
+<text x="144.5" y="49" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="400" fill="#5A6875">2</text>
+<text x="180" y="49" text-anchor="middle" font-family="Arial" font-size="14" font-weight="800" fill="#1C2733">3</text>
+<text x="215.5" y="49" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="400" fill="#5A6875">4</text>
+<text x="251" y="49" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="400" fill="#5A6875">5</text>
+<text x="286.5" y="49" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="400" fill="#5A6875">6</text>
+<text x="322" y="49" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="400" fill="#5A6875">7</text>
+</svg>
+  </div>
+</div>
+
+<div class="box def">
+  <div class="box-title">שלושה כללים לכתיבה</div>
+  <ol class="steps">
+    <li><strong>קטע אחד</strong> כותבים כאי-שוויון כפול, מהקטן לגדול:
+      <span class="fi">\(-1\lt x\lt 4\)</span> — "<span class="fi">\(x\)</span> בין
+      <span class="fi">\(-1\)</span> ל-<span class="fi">\(4\)</span>".</li>
+    <li><strong>שני חלקים</strong> כותבים כשני אי-שוויונות, עם המילה "או":
+      <span class="fi">\(x\lt -1\)</span> או <span class="fi">\(x\gt 4\)</span>. בתשובות של משבצת
+      הם מופיעים מופרדים בפסיק: <span class="fi">\(x\gt 4\ ,\ x\lt -1\)</span>.</li>
+    <li>על ציר המספרים: <strong>עיגול ריק</strong> ב-<span class="fi">\(\lt,\ \gt\)</span>,
+      <strong>עיגול מלא</strong> ב-<span class="fi">\(\le,\ \ge\)</span> — כמו
+      ב<a href="../../year8/algebra/02-equations.html">כיתה ח׳</a>.</li>
+  </ol>
+</div>
+
+<div class="box warn">
+  <div class="box-title">שימי לב</div>
+  אי-שוויון כפול מתאר רק קטע <strong>אחד</strong> בין שני מספרים. כשהסקיצה מראה שני חלקים
+  נפרדים, התשובה היא תמיד שני אי-שוויונות עם "או": <span class="fi">\(x\lt -1\)</span> או
+  <span class="fi">\(x\gt 4\)</span>.
+</div>
+
+<!-- ============ 4. תרגול ============ -->
+<h2 id="sec-practice"><span class="num">4</span>תרגול — משלב לשלב</h2>
+
+<p>
+  התרגילים מסודרים מהקל לקשה. ליד כל תרגיל כתוב מאיפה הוא. "משבצת" = דפי העבודה של
+  גבי יקואל, ההוצאה של ספר הלימוד שלך.
+</p>
+
+<h3>שני אפסים</h3>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 1 — גורם משותף</h4></div>
+  <p class="q-text"><span class="mk mk-find">פתרי את האי-שוויון:</span>
+    <span class="fi">\(x^{2}+9x\gt 0\)</span>
+    <br><span class="aside">משבצת, רמה ב, שאלה 21א.</span></p>
+  <details class="step"><summary>רמז — האפסים</summary>
+    <div class="step-body"><span class="fi">\(x(x+9)=0\)</span>.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      נקודות האפס:
+      $$x^{2}+9x=0$$
+      $$x(x+9)=0$$
+      $$x_{1}=-9\qquad\qquad x_{2}=0$$
+      <span class="fi">\(a=1\gt 0\)</span>, פתוחה למעלה. מבקשים <span class="fi">\(\gt 0\)</span>:
+      <div class="sk"><svg viewBox="0 0 300 122" width="300" height="122" role="img" aria-label="סקיצה לתרגיל 1">
+<line x1="14" y1="62" x2="286" y2="62" stroke="#5A6875" stroke-width="1.5"/>
+<polygon points="292,62 284,57.6 284,66.4" fill="#5A6875"/>
+<text x="288" y="54" font-family="Arial" font-size="12" font-style="italic" fill="#5A6875">x</text>
+<path d="M58,8 L59.5,10.8 L61,13.5 L62.6,16.2 L64.1,18.8 L65.6,21.4 L67.2,24 L68.7,26.5 L70.2,28.9 L71.8,31.3 L73.3,33.7 L74.8,36 L76.4,38.2 L77.9,40.5 L79.4,42.6 L81,44.7 L82.5,46.8 L84,48.9 L85.6,50.8 L87.1,52.8 L88.6,54.7 L90.2,56.5 L91.7,58.3 L93.2,60.1 L94.8,61.8 L96.3,63.4" fill="none" stroke="#2563EB" stroke-width="3"/>
+<path d="M96.3,63.4 L97.8,65 L99.4,66.6 L100.9,68.1 L102.4,69.6 L104,71 L105.5,72.4 L107.1,73.7 L108.6,75 L110.1,76.2 L111.7,77.4 L113.2,78.6 L114.7,79.7 L116.3,80.7 L117.8,81.7 L119.3,82.7 L120.9,83.6 L122.4,84.4 L123.9,85.3 L125.5,86 L127,86.8 L128.5,87.4 L130.1,88.1 L131.6,88.6 L133.1,89.2 L134.7,89.7 L136.2,90.1 L137.7,90.5 L139.3,90.9 L140.8,91.2 L142.3,91.4 L143.9,91.6 L145.4,91.8 L146.9,91.9 L148.5,92 L150,92 L151.5,92 L153.1,91.9 L154.6,91.8 L156.1,91.6 L157.7,91.4 L159.2,91.2 L160.7,90.9 L162.3,90.5 L163.8,90.1 L165.3,89.7 L166.9,89.2 L168.4,88.6 L169.9,88.1 L171.5,87.4 L173,86.8 L174.5,86 L176.1,85.3 L177.6,84.4 L179.1,83.6 L180.7,82.7 L182.2,81.7 L183.7,80.7 L185.3,79.7 L186.8,78.6 L188.3,77.4 L189.9,76.2 L191.4,75 L192.9,73.7 L194.5,72.4 L196,71 L197.6,69.6 L199.1,68.1 L200.6,66.6 L202.2,65 L203.7,63.4 L205.2,61.8" fill="none" stroke="#94A3B8" stroke-width="2.2"/>
+<path d="M205.2,61.8 L206.8,60.1 L208.3,58.3 L209.8,56.5 L211.4,54.7 L212.9,52.8 L214.4,50.8 L216,48.9 L217.5,46.8 L219,44.8 L220.6,42.6 L222.1,40.5 L223.6,38.2 L225.2,36 L226.7,33.7 L228.2,31.3 L229.8,28.9 L231.3,26.5 L232.8,24 L234.4,21.4 L235.9,18.8 L237.4,16.2 L239,13.5 L240.5,10.8 L242,8" fill="none" stroke="#2563EB" stroke-width="3"/>
+<line x1="24" y1="62" x2="95" y2="62" stroke="#2563EB" stroke-width="5.5" stroke-linecap="butt"/>
+<polygon points="14,62 26,55.4 26,68.6" fill="#2563EB"/>
+<line x1="205" y1="62" x2="276" y2="62" stroke="#2563EB" stroke-width="5.5" stroke-linecap="butt"/>
+<polygon points="286,62 274,55.4 274,68.6" fill="#2563EB"/>
+<circle cx="95" cy="62" r="5.6" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<circle cx="205" cy="62" r="5.6" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<text x="95" y="83" text-anchor="middle" font-family="Arial" font-size="13.5" font-weight="700" fill="#1C2733">−9</text>
+<text x="205" y="83" text-anchor="middle" font-family="Arial" font-size="13.5" font-weight="700" fill="#1C2733">0</text>
+</svg></div>
+      <p class="concl"><span class="fi">\(x\lt -9\)</span> או <span class="fi">\(x\gt 0\)</span></p>
+      בדיקה ב-<span class="fi">\(x=1\)</span>: <span class="fi">\(1+9=10\gt 0\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row"><span>הגבול השמאלי:</span>
+    <input class="q-input" data-answer="-9" inputmode="text" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>והימני:</span>
+    <input class="q-input" data-answer="0" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex1"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 2 — טרינום, קטע אחד</h4></div>
+  <p class="q-text"><span class="mk mk-find">פתרי את האי-שוויון:</span>
+    <span class="fi">\(x^{2}-9x+20\lt 0\)</span>
+    <br><span class="aside">משבצת, רמה ב, שאלה 21ד.</span></p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      נקודות האפס — מכפלה <span class="fi">\(20\)</span>, סכום <span class="fi">\(-9\)</span>:
+      $$(x-4)(x-5)=0$$
+      $$x_{1}=4\qquad\qquad x_{2}=5$$
+      <span class="fi">\(a=1\gt 0\)</span>, פתוחה למעלה. מבקשים <span class="fi">\(\lt 0\)</span>:
+      <div class="sk"><svg viewBox="0 0 300 122" width="300" height="122" role="img" aria-label="סקיצה לתרגיל 2">
+<line x1="14" y1="62" x2="286" y2="62" stroke="#5A6875" stroke-width="1.5"/>
+<polygon points="292,62 284,57.6 284,66.4" fill="#5A6875"/>
+<text x="288" y="54" font-family="Arial" font-size="12" font-style="italic" fill="#5A6875">x</text>
+<path d="M58,8 L59.5,10.8 L61,13.5 L62.6,16.2 L64.1,18.8 L65.6,21.4 L67.2,24 L68.7,26.5 L70.2,28.9 L71.8,31.3 L73.3,33.7 L74.8,36 L76.4,38.2 L77.9,40.5 L79.4,42.6 L81,44.7 L82.5,46.8 L84,48.9 L85.6,50.8 L87.1,52.8 L88.6,54.7 L90.2,56.5 L91.7,58.3 L93.2,60.1 L94.8,61.8 L96.3,63.4" fill="none" stroke="#94A3B8" stroke-width="2.2"/>
+<path d="M96.3,63.4 L97.8,65 L99.4,66.6 L100.9,68.1 L102.4,69.6 L104,71 L105.5,72.4 L107.1,73.7 L108.6,75 L110.1,76.2 L111.7,77.4 L113.2,78.6 L114.7,79.7 L116.3,80.7 L117.8,81.7 L119.3,82.7 L120.9,83.6 L122.4,84.4 L123.9,85.3 L125.5,86 L127,86.8 L128.5,87.4 L130.1,88.1 L131.6,88.6 L133.1,89.2 L134.7,89.7 L136.2,90.1 L137.7,90.5 L139.3,90.9 L140.8,91.2 L142.3,91.4 L143.9,91.6 L145.4,91.8 L146.9,91.9 L148.5,92 L150,92 L151.5,92 L153.1,91.9 L154.6,91.8 L156.1,91.6 L157.7,91.4 L159.2,91.2 L160.7,90.9 L162.3,90.5 L163.8,90.1 L165.3,89.7 L166.9,89.2 L168.4,88.6 L169.9,88.1 L171.5,87.4 L173,86.8 L174.5,86 L176.1,85.3 L177.6,84.4 L179.1,83.6 L180.7,82.7 L182.2,81.7 L183.7,80.7 L185.3,79.7 L186.8,78.6 L188.3,77.4 L189.9,76.2 L191.4,75 L192.9,73.7 L194.5,72.4 L196,71 L197.6,69.6 L199.1,68.1 L200.6,66.6 L202.2,65 L203.7,63.4 L205.2,61.8" fill="none" stroke="#2563EB" stroke-width="3"/>
+<path d="M205.2,61.8 L206.8,60.1 L208.3,58.3 L209.8,56.5 L211.4,54.7 L212.9,52.8 L214.4,50.8 L216,48.9 L217.5,46.8 L219,44.8 L220.6,42.6 L222.1,40.5 L223.6,38.2 L225.2,36 L226.7,33.7 L228.2,31.3 L229.8,28.9 L231.3,26.5 L232.8,24 L234.4,21.4 L235.9,18.8 L237.4,16.2 L239,13.5 L240.5,10.8 L242,8" fill="none" stroke="#94A3B8" stroke-width="2.2"/>
+<line x1="95" y1="62" x2="205" y2="62" stroke="#2563EB" stroke-width="5.5" stroke-linecap="butt"/>
+<circle cx="95" cy="62" r="5.6" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<circle cx="205" cy="62" r="5.6" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<text x="95" y="83" text-anchor="middle" font-family="Arial" font-size="13.5" font-weight="700" fill="#1C2733">4</text>
+<text x="205" y="83" text-anchor="middle" font-family="Arial" font-size="13.5" font-weight="700" fill="#1C2733">5</text>
+</svg></div>
+      $$\boxed{4\lt x\lt 5}$$
+      בדיקה ב-<span class="fi">\(x=4.5\)</span>: <span class="fi">\(20.25-40.5+20=-0.25\lt 0\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row"><span>הגבול השמאלי:</span>
+    <input class="q-input" data-answer="4" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>והימני:</span>
+    <input class="q-input" data-answer="5" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex2"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 3 — טרינום, שני חלקים</h4></div>
+  <p class="q-text"><span class="mk mk-find">פתרי את האי-שוויון:</span>
+    <span class="fi">\(x^{2}-3x-18\gt 0\)</span>
+    <br><span class="aside">משבצת, רמה ב, שאלה 21ה.</span></p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      נקודות האפס — מכפלה <span class="fi">\(-18\)</span>, סכום <span class="fi">\(-3\)</span>:
+      $$(x-6)(x+3)=0$$
+      $$x_{1}=-3\qquad\qquad x_{2}=6$$
+      <span class="fi">\(a=1\gt 0\)</span>, פתוחה למעלה. מבקשים <span class="fi">\(\gt 0\)</span>:
+      <div class="sk"><svg viewBox="0 0 300 122" width="300" height="122" role="img" aria-label="סקיצה לתרגיל 3">
+<line x1="14" y1="62" x2="286" y2="62" stroke="#5A6875" stroke-width="1.5"/>
+<polygon points="292,62 284,57.6 284,66.4" fill="#5A6875"/>
+<text x="288" y="54" font-family="Arial" font-size="12" font-style="italic" fill="#5A6875">x</text>
+<path d="M58,8 L59.5,10.8 L61,13.5 L62.6,16.2 L64.1,18.8 L65.6,21.4 L67.2,24 L68.7,26.5 L70.2,28.9 L71.8,31.3 L73.3,33.7 L74.8,36 L76.4,38.2 L77.9,40.5 L79.4,42.6 L81,44.7 L82.5,46.8 L84,48.9 L85.6,50.8 L87.1,52.8 L88.6,54.7 L90.2,56.5 L91.7,58.3 L93.2,60.1 L94.8,61.8 L96.3,63.4" fill="none" stroke="#2563EB" stroke-width="3"/>
+<path d="M96.3,63.4 L97.8,65 L99.4,66.6 L100.9,68.1 L102.4,69.6 L104,71 L105.5,72.4 L107.1,73.7 L108.6,75 L110.1,76.2 L111.7,77.4 L113.2,78.6 L114.7,79.7 L116.3,80.7 L117.8,81.7 L119.3,82.7 L120.9,83.6 L122.4,84.4 L123.9,85.3 L125.5,86 L127,86.8 L128.5,87.4 L130.1,88.1 L131.6,88.6 L133.1,89.2 L134.7,89.7 L136.2,90.1 L137.7,90.5 L139.3,90.9 L140.8,91.2 L142.3,91.4 L143.9,91.6 L145.4,91.8 L146.9,91.9 L148.5,92 L150,92 L151.5,92 L153.1,91.9 L154.6,91.8 L156.1,91.6 L157.7,91.4 L159.2,91.2 L160.7,90.9 L162.3,90.5 L163.8,90.1 L165.3,89.7 L166.9,89.2 L168.4,88.6 L169.9,88.1 L171.5,87.4 L173,86.8 L174.5,86 L176.1,85.3 L177.6,84.4 L179.1,83.6 L180.7,82.7 L182.2,81.7 L183.7,80.7 L185.3,79.7 L186.8,78.6 L188.3,77.4 L189.9,76.2 L191.4,75 L192.9,73.7 L194.5,72.4 L196,71 L197.6,69.6 L199.1,68.1 L200.6,66.6 L202.2,65 L203.7,63.4 L205.2,61.8" fill="none" stroke="#94A3B8" stroke-width="2.2"/>
+<path d="M205.2,61.8 L206.8,60.1 L208.3,58.3 L209.8,56.5 L211.4,54.7 L212.9,52.8 L214.4,50.8 L216,48.9 L217.5,46.8 L219,44.8 L220.6,42.6 L222.1,40.5 L223.6,38.2 L225.2,36 L226.7,33.7 L228.2,31.3 L229.8,28.9 L231.3,26.5 L232.8,24 L234.4,21.4 L235.9,18.8 L237.4,16.2 L239,13.5 L240.5,10.8 L242,8" fill="none" stroke="#2563EB" stroke-width="3"/>
+<line x1="24" y1="62" x2="95" y2="62" stroke="#2563EB" stroke-width="5.5" stroke-linecap="butt"/>
+<polygon points="14,62 26,55.4 26,68.6" fill="#2563EB"/>
+<line x1="205" y1="62" x2="276" y2="62" stroke="#2563EB" stroke-width="5.5" stroke-linecap="butt"/>
+<polygon points="286,62 274,55.4 274,68.6" fill="#2563EB"/>
+<circle cx="95" cy="62" r="5.6" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<circle cx="205" cy="62" r="5.6" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<text x="95" y="83" text-anchor="middle" font-family="Arial" font-size="13.5" font-weight="700" fill="#1C2733">−3</text>
+<text x="205" y="83" text-anchor="middle" font-family="Arial" font-size="13.5" font-weight="700" fill="#1C2733">6</text>
+</svg></div>
+      <p class="concl"><span class="fi">\(x\lt -3\)</span> או <span class="fi">\(x\gt 6\)</span></p>
+      בדיקה ב-<span class="fi">\(x=7\)</span>: <span class="fi">\(49-21-18=10\gt 0\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row"><span>הגבול השמאלי:</span>
+    <input class="q-input" data-answer="-3" inputmode="text" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>והימני:</span>
+    <input class="q-input" data-answer="6" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex3"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 4 — שלושת התחומים של פונקציה</h4></div>
+  <p class="q-text"><span class="mk mk-given">נתונה הפונקציה <span class="fi">\(y=x^{2}-12x+32\)</span></span>.
+    <span class="mk mk-find">מצאי את התחומים שבהם</span>
+    (i) <span class="fi">\(y\lt 0\)</span> &nbsp; (ii) <span class="fi">\(y=0\)</span> &nbsp;
+    (iii) <span class="fi">\(y\gt 0\)</span>
+    <br><span class="aside">משבצת, רמה ב, שאלה 23ב.</span></p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      נקודות האפס — מכפלה <span class="fi">\(32\)</span>, סכום <span class="fi">\(-12\)</span>:
+      $$(x-4)(x-8)=0$$
+      $$x_{1}=4\qquad\qquad x_{2}=8$$
+      <span class="fi">\(a=1\gt 0\)</span>, פתוחה למעלה.
+      <div class="sk"><svg viewBox="0 0 260 122" width="260" height="122" role="img" aria-label="סקיצה לתרגיל 4, y קטן מאפס">
+<line x1="14" y1="62" x2="246" y2="62" stroke="#5A6875" stroke-width="1.5"/>
+<polygon points="252,62 244,57.6 244,66.4" fill="#5A6875"/>
+<text x="248" y="54" font-family="Arial" font-size="12" font-style="italic" fill="#5A6875">x</text>
+<path d="M38,8 L39.5,10.8 L41,13.5 L42.6,16.2 L44.1,18.8 L45.6,21.4 L47.2,24 L48.7,26.5 L50.2,28.9 L51.8,31.3 L53.3,33.7 L54.8,36 L56.4,38.2 L57.9,40.5 L59.4,42.6 L61,44.7 L62.5,46.8 L64,48.9 L65.6,50.8 L67.1,52.8 L68.6,54.7 L70.2,56.5 L71.7,58.3 L73.2,60.1 L74.8,61.8 L76.3,63.4" fill="none" stroke="#94A3B8" stroke-width="2.2"/>
+<path d="M76.3,63.4 L77.8,65 L79.4,66.6 L80.9,68.1 L82.4,69.6 L84,71 L85.5,72.4 L87.1,73.7 L88.6,75 L90.1,76.2 L91.7,77.4 L93.2,78.6 L94.7,79.7 L96.3,80.7 L97.8,81.7 L99.3,82.7 L100.9,83.6 L102.4,84.4 L103.9,85.3 L105.5,86 L107,86.8 L108.5,87.4 L110.1,88.1 L111.6,88.6 L113.1,89.2 L114.7,89.7 L116.2,90.1 L117.7,90.5 L119.3,90.9 L120.8,91.2 L122.3,91.4 L123.9,91.6 L125.4,91.8 L126.9,91.9 L128.5,92 L130,92 L131.5,92 L133.1,91.9 L134.6,91.8 L136.1,91.6 L137.7,91.4 L139.2,91.2 L140.7,90.9 L142.3,90.5 L143.8,90.1 L145.3,89.7 L146.9,89.2 L148.4,88.6 L149.9,88.1 L151.5,87.4 L153,86.8 L154.5,86 L156.1,85.3 L157.6,84.4 L159.1,83.6 L160.7,82.7 L162.2,81.7 L163.7,80.7 L165.3,79.7 L166.8,78.6 L168.3,77.4 L169.9,76.2 L171.4,75 L172.9,73.7 L174.5,72.4 L176,71 L177.6,69.6 L179.1,68.1 L180.6,66.6 L182.2,65 L183.7,63.4 L185.2,61.8" fill="none" stroke="#2563EB" stroke-width="3"/>
+<path d="M185.2,61.8 L186.8,60.1 L188.3,58.3 L189.8,56.5 L191.4,54.7 L192.9,52.8 L194.4,50.8 L196,48.9 L197.5,46.8 L199,44.8 L200.6,42.6 L202.1,40.5 L203.6,38.2 L205.2,36 L206.7,33.7 L208.2,31.3 L209.8,28.9 L211.3,26.5 L212.8,24 L214.4,21.4 L215.9,18.8 L217.4,16.2 L219,13.5 L220.5,10.8 L222,8" fill="none" stroke="#94A3B8" stroke-width="2.2"/>
+<line x1="75" y1="62" x2="185" y2="62" stroke="#2563EB" stroke-width="5.5" stroke-linecap="butt"/>
+<circle cx="75" cy="62" r="5.6" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<circle cx="185" cy="62" r="5.6" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<text x="75" y="83" text-anchor="middle" font-family="Arial" font-size="13.5" font-weight="700" fill="#1C2733">4</text>
+<text x="185" y="83" text-anchor="middle" font-family="Arial" font-size="13.5" font-weight="700" fill="#1C2733">8</text>
+</svg> <svg viewBox="0 0 260 122" width="260" height="122" role="img" aria-label="סקיצה לתרגיל 4, y גדול מאפס">
+<line x1="14" y1="62" x2="246" y2="62" stroke="#5A6875" stroke-width="1.5"/>
+<polygon points="252,62 244,57.6 244,66.4" fill="#5A6875"/>
+<text x="248" y="54" font-family="Arial" font-size="12" font-style="italic" fill="#5A6875">x</text>
+<path d="M38,8 L39.5,10.8 L41,13.5 L42.6,16.2 L44.1,18.8 L45.6,21.4 L47.2,24 L48.7,26.5 L50.2,28.9 L51.8,31.3 L53.3,33.7 L54.8,36 L56.4,38.2 L57.9,40.5 L59.4,42.6 L61,44.7 L62.5,46.8 L64,48.9 L65.6,50.8 L67.1,52.8 L68.6,54.7 L70.2,56.5 L71.7,58.3 L73.2,60.1 L74.8,61.8 L76.3,63.4" fill="none" stroke="#2563EB" stroke-width="3"/>
+<path d="M76.3,63.4 L77.8,65 L79.4,66.6 L80.9,68.1 L82.4,69.6 L84,71 L85.5,72.4 L87.1,73.7 L88.6,75 L90.1,76.2 L91.7,77.4 L93.2,78.6 L94.7,79.7 L96.3,80.7 L97.8,81.7 L99.3,82.7 L100.9,83.6 L102.4,84.4 L103.9,85.3 L105.5,86 L107,86.8 L108.5,87.4 L110.1,88.1 L111.6,88.6 L113.1,89.2 L114.7,89.7 L116.2,90.1 L117.7,90.5 L119.3,90.9 L120.8,91.2 L122.3,91.4 L123.9,91.6 L125.4,91.8 L126.9,91.9 L128.5,92 L130,92 L131.5,92 L133.1,91.9 L134.6,91.8 L136.1,91.6 L137.7,91.4 L139.2,91.2 L140.7,90.9 L142.3,90.5 L143.8,90.1 L145.3,89.7 L146.9,89.2 L148.4,88.6 L149.9,88.1 L151.5,87.4 L153,86.8 L154.5,86 L156.1,85.3 L157.6,84.4 L159.1,83.6 L160.7,82.7 L162.2,81.7 L163.7,80.7 L165.3,79.7 L166.8,78.6 L168.3,77.4 L169.9,76.2 L171.4,75 L172.9,73.7 L174.5,72.4 L176,71 L177.6,69.6 L179.1,68.1 L180.6,66.6 L182.2,65 L183.7,63.4 L185.2,61.8" fill="none" stroke="#94A3B8" stroke-width="2.2"/>
+<path d="M185.2,61.8 L186.8,60.1 L188.3,58.3 L189.8,56.5 L191.4,54.7 L192.9,52.8 L194.4,50.8 L196,48.9 L197.5,46.8 L199,44.8 L200.6,42.6 L202.1,40.5 L203.6,38.2 L205.2,36 L206.7,33.7 L208.2,31.3 L209.8,28.9 L211.3,26.5 L212.8,24 L214.4,21.4 L215.9,18.8 L217.4,16.2 L219,13.5 L220.5,10.8 L222,8" fill="none" stroke="#2563EB" stroke-width="3"/>
+<line x1="24" y1="62" x2="75" y2="62" stroke="#2563EB" stroke-width="5.5" stroke-linecap="butt"/>
+<polygon points="14,62 26,55.4 26,68.6" fill="#2563EB"/>
+<line x1="185" y1="62" x2="236" y2="62" stroke="#2563EB" stroke-width="5.5" stroke-linecap="butt"/>
+<polygon points="246,62 234,55.4 234,68.6" fill="#2563EB"/>
+<circle cx="75" cy="62" r="5.6" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<circle cx="185" cy="62" r="5.6" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<text x="75" y="83" text-anchor="middle" font-family="Arial" font-size="13.5" font-weight="700" fill="#1C2733">4</text>
+<text x="185" y="83" text-anchor="middle" font-family="Arial" font-size="13.5" font-weight="700" fill="#1C2733">8</text>
+</svg></div>
+      <p>(i) <span class="fi">\(y\lt 0\)</span>: <span class="fi">\(4\lt x\lt 8\)</span></p>
+      <p>(ii) <span class="fi">\(y=0\)</span>: <span class="fi">\(x=4\)</span> , <span class="fi">\(x=8\)</span></p>
+      <p>(iii) <span class="fi">\(y\gt 0\)</span>: <span class="fi">\(x\lt 4\)</span> או <span class="fi">\(x\gt 8\)</span></p>
+      שלושת התחומים מכסים יחד את כל ציר <span class="fi">\(x\)</span>.
+    </div>
+  </details>
+  <div class="q-row"><span>האפס הקטן:</span>
+    <input class="q-input" data-answer="4" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>האפס הגדול:</span>
+    <input class="q-input" data-answer="8" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex4"> סיימתי את התרגיל הזה</label>
+</article>
+
+<h3>שוויון, מקדם שלילי וסידור</h3>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 5 — ריבוע קטן או שווה</h4></div>
+  <p class="q-text"><span class="mk mk-find">פתרי את האי-שוויון:</span>
+    <span class="fi">\(x^{2}\le 4\)</span>
+    <br><span class="aside">משבצת, רמה ב, שאלה 21ג.</span></p>
+  <details class="step"><summary>רמז — צעד 1</summary>
+    <div class="step-body"><span class="fi">\(x^{2}-4\le 0\)</span>, ו-<span class="fi">\(\le\)</span>
+    אומר שהאפסים עצמם בפנים.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      מסדרים מול אפס:
+      $$x^{2}\le 4\qquad\textcolor{#C0392B}{/\;-4}$$
+      $$x^{2}-4\le 0$$
+      נקודות האפס:
+      $$(x-2)(x+2)=0$$
+      $$x_{1}=-2\qquad\qquad x_{2}=2$$
+      <span class="fi">\(a=1\gt 0\)</span>, פתוחה למעלה. מבקשים <span class="fi">\(\le 0\)</span>:
+      <div class="sk"><svg viewBox="0 0 300 122" width="300" height="122" role="img" aria-label="סקיצה לתרגיל 5">
+<line x1="14" y1="62" x2="286" y2="62" stroke="#5A6875" stroke-width="1.5"/>
+<polygon points="292,62 284,57.6 284,66.4" fill="#5A6875"/>
+<text x="288" y="54" font-family="Arial" font-size="12" font-style="italic" fill="#5A6875">x</text>
+<path d="M58,8 L59.5,10.8 L61,13.5 L62.6,16.2 L64.1,18.8 L65.6,21.4 L67.2,24 L68.7,26.5 L70.2,28.9 L71.8,31.3 L73.3,33.7 L74.8,36 L76.4,38.2 L77.9,40.5 L79.4,42.6 L81,44.7 L82.5,46.8 L84,48.9 L85.6,50.8 L87.1,52.8 L88.6,54.7 L90.2,56.5 L91.7,58.3 L93.2,60.1 L94.8,61.8 L96.3,63.4" fill="none" stroke="#94A3B8" stroke-width="2.2"/>
+<path d="M96.3,63.4 L97.8,65 L99.4,66.6 L100.9,68.1 L102.4,69.6 L104,71 L105.5,72.4 L107.1,73.7 L108.6,75 L110.1,76.2 L111.7,77.4 L113.2,78.6 L114.7,79.7 L116.3,80.7 L117.8,81.7 L119.3,82.7 L120.9,83.6 L122.4,84.4 L123.9,85.3 L125.5,86 L127,86.8 L128.5,87.4 L130.1,88.1 L131.6,88.6 L133.1,89.2 L134.7,89.7 L136.2,90.1 L137.7,90.5 L139.3,90.9 L140.8,91.2 L142.3,91.4 L143.9,91.6 L145.4,91.8 L146.9,91.9 L148.5,92 L150,92 L151.5,92 L153.1,91.9 L154.6,91.8 L156.1,91.6 L157.7,91.4 L159.2,91.2 L160.7,90.9 L162.3,90.5 L163.8,90.1 L165.3,89.7 L166.9,89.2 L168.4,88.6 L169.9,88.1 L171.5,87.4 L173,86.8 L174.5,86 L176.1,85.3 L177.6,84.4 L179.1,83.6 L180.7,82.7 L182.2,81.7 L183.7,80.7 L185.3,79.7 L186.8,78.6 L188.3,77.4 L189.9,76.2 L191.4,75 L192.9,73.7 L194.5,72.4 L196,71 L197.6,69.6 L199.1,68.1 L200.6,66.6 L202.2,65 L203.7,63.4 L205.2,61.8" fill="none" stroke="#2563EB" stroke-width="3"/>
+<path d="M205.2,61.8 L206.8,60.1 L208.3,58.3 L209.8,56.5 L211.4,54.7 L212.9,52.8 L214.4,50.8 L216,48.9 L217.5,46.8 L219,44.8 L220.6,42.6 L222.1,40.5 L223.6,38.2 L225.2,36 L226.7,33.7 L228.2,31.3 L229.8,28.9 L231.3,26.5 L232.8,24 L234.4,21.4 L235.9,18.8 L237.4,16.2 L239,13.5 L240.5,10.8 L242,8" fill="none" stroke="#94A3B8" stroke-width="2.2"/>
+<line x1="95" y1="62" x2="205" y2="62" stroke="#2563EB" stroke-width="5.5" stroke-linecap="butt"/>
+<circle cx="95" cy="62" r="5.6" fill="#2563EB" stroke="#2563EB" stroke-width="2.6"/>
+<circle cx="205" cy="62" r="5.6" fill="#2563EB" stroke="#2563EB" stroke-width="2.6"/>
+<text x="95" y="83" text-anchor="middle" font-family="Arial" font-size="13.5" font-weight="700" fill="#1C2733">−2</text>
+<text x="205" y="83" text-anchor="middle" font-family="Arial" font-size="13.5" font-weight="700" fill="#1C2733">2</text>
+</svg></div>
+      $$\boxed{-2\le x\le 2}$$
+      בדיקה בגבול, <span class="fi">\(x=2\)</span>: <span class="fi">\(4\le 4\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row"><span>הגבול הימני:</span>
+    <input class="q-input" data-answer="2" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex5"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 6 — ריבוע גדול או שווה</h4></div>
+  <p class="q-text"><span class="mk mk-find">פתרי את האי-שוויון:</span>
+    <span class="fi">\(x^{2}\ge 25\)</span>
+    <br><span class="aside">משבצת, רמה ב, שאלה 21ב.</span></p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      מסדרים מול אפס:
+      $$x^{2}\ge 25\qquad\textcolor{#C0392B}{/\;-25}$$
+      $$x^{2}-25\ge 0$$
+      נקודות האפס:
+      $$(x-5)(x+5)=0$$
+      $$x_{1}=-5\qquad\qquad x_{2}=5$$
+      <span class="fi">\(a=1\gt 0\)</span>, פתוחה למעלה. מבקשים <span class="fi">\(\ge 0\)</span>:
+      <div class="sk"><svg viewBox="0 0 300 122" width="300" height="122" role="img" aria-label="סקיצה לתרגיל 6">
+<line x1="14" y1="62" x2="286" y2="62" stroke="#5A6875" stroke-width="1.5"/>
+<polygon points="292,62 284,57.6 284,66.4" fill="#5A6875"/>
+<text x="288" y="54" font-family="Arial" font-size="12" font-style="italic" fill="#5A6875">x</text>
+<path d="M58,8 L59.5,10.8 L61,13.5 L62.6,16.2 L64.1,18.8 L65.6,21.4 L67.2,24 L68.7,26.5 L70.2,28.9 L71.8,31.3 L73.3,33.7 L74.8,36 L76.4,38.2 L77.9,40.5 L79.4,42.6 L81,44.7 L82.5,46.8 L84,48.9 L85.6,50.8 L87.1,52.8 L88.6,54.7 L90.2,56.5 L91.7,58.3 L93.2,60.1 L94.8,61.8 L96.3,63.4" fill="none" stroke="#2563EB" stroke-width="3"/>
+<path d="M96.3,63.4 L97.8,65 L99.4,66.6 L100.9,68.1 L102.4,69.6 L104,71 L105.5,72.4 L107.1,73.7 L108.6,75 L110.1,76.2 L111.7,77.4 L113.2,78.6 L114.7,79.7 L116.3,80.7 L117.8,81.7 L119.3,82.7 L120.9,83.6 L122.4,84.4 L123.9,85.3 L125.5,86 L127,86.8 L128.5,87.4 L130.1,88.1 L131.6,88.6 L133.1,89.2 L134.7,89.7 L136.2,90.1 L137.7,90.5 L139.3,90.9 L140.8,91.2 L142.3,91.4 L143.9,91.6 L145.4,91.8 L146.9,91.9 L148.5,92 L150,92 L151.5,92 L153.1,91.9 L154.6,91.8 L156.1,91.6 L157.7,91.4 L159.2,91.2 L160.7,90.9 L162.3,90.5 L163.8,90.1 L165.3,89.7 L166.9,89.2 L168.4,88.6 L169.9,88.1 L171.5,87.4 L173,86.8 L174.5,86 L176.1,85.3 L177.6,84.4 L179.1,83.6 L180.7,82.7 L182.2,81.7 L183.7,80.7 L185.3,79.7 L186.8,78.6 L188.3,77.4 L189.9,76.2 L191.4,75 L192.9,73.7 L194.5,72.4 L196,71 L197.6,69.6 L199.1,68.1 L200.6,66.6 L202.2,65 L203.7,63.4 L205.2,61.8" fill="none" stroke="#94A3B8" stroke-width="2.2"/>
+<path d="M205.2,61.8 L206.8,60.1 L208.3,58.3 L209.8,56.5 L211.4,54.7 L212.9,52.8 L214.4,50.8 L216,48.9 L217.5,46.8 L219,44.8 L220.6,42.6 L222.1,40.5 L223.6,38.2 L225.2,36 L226.7,33.7 L228.2,31.3 L229.8,28.9 L231.3,26.5 L232.8,24 L234.4,21.4 L235.9,18.8 L237.4,16.2 L239,13.5 L240.5,10.8 L242,8" fill="none" stroke="#2563EB" stroke-width="3"/>
+<line x1="24" y1="62" x2="95" y2="62" stroke="#2563EB" stroke-width="5.5" stroke-linecap="butt"/>
+<polygon points="14,62 26,55.4 26,68.6" fill="#2563EB"/>
+<line x1="205" y1="62" x2="276" y2="62" stroke="#2563EB" stroke-width="5.5" stroke-linecap="butt"/>
+<polygon points="286,62 274,55.4 274,68.6" fill="#2563EB"/>
+<circle cx="95" cy="62" r="5.6" fill="#2563EB" stroke="#2563EB" stroke-width="2.6"/>
+<circle cx="205" cy="62" r="5.6" fill="#2563EB" stroke="#2563EB" stroke-width="2.6"/>
+<text x="95" y="83" text-anchor="middle" font-family="Arial" font-size="13.5" font-weight="700" fill="#1C2733">−5</text>
+<text x="205" y="83" text-anchor="middle" font-family="Arial" font-size="13.5" font-weight="700" fill="#1C2733">5</text>
+</svg></div>
+      <p class="concl"><span class="fi">\(x\le -5\)</span> או <span class="fi">\(x\ge 5\)</span></p>
+      בדיקה ב-<span class="fi">\(x=-6\)</span>: <span class="fi">\(36\ge 25\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row"><span>הגבול החיובי:</span>
+    <input class="q-input" data-answer="5" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex6"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 7 — מקדם <span class="fi">\(x^{2}\)</span> שלילי</h4></div>
+  <p class="q-text"><span class="mk mk-find">פתרי את האי-שוויון:</span>
+    <span class="fi">\(-x^{2}-14x\gt 0\)</span>
+    <br><span class="aside">משבצת, רמה ב, שאלה 21ו.</span></p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      נקודות האפס:
+      $$-x^{2}-14x=0$$
+      $$-x(x+14)=0$$
+      $$x_{1}=-14\qquad\qquad x_{2}=0$$
+      <span class="fi">\(a=-1\lt 0\)</span>, פתוחה למטה. מבקשים <span class="fi">\(\gt 0\)</span> — מעל הציר:
+      <div class="sk"><svg viewBox="0 0 300 122" width="300" height="122" role="img" aria-label="סקיצה לתרגיל 7">
+<line x1="14" y1="58" x2="286" y2="58" stroke="#5A6875" stroke-width="1.5"/>
+<polygon points="292,58 284,53.6 284,62.4" fill="#5A6875"/>
+<text x="288" y="50" font-family="Arial" font-size="12" font-style="italic" fill="#5A6875">x</text>
+<path d="M56.9,114 L58.4,111.2 L60,108.4 L61.5,105.6 L63.1,102.9 L64.6,100.3 L66.2,97.7 L67.7,95.1 L69.3,92.6 L70.8,90.1 L72.4,87.7 L74,85.4 L75.5,83 L77.1,80.8 L78.6,78.5 L80.2,76.4 L81.7,74.2 L83.3,72.2 L84.8,70.1 L86.4,68.2 L87.9,66.2 L89.5,64.3 L91,62.5 L92.6,60.7 L94.1,59 L95.7,57.3" fill="none" stroke="#94A3B8" stroke-width="2.2"/>
+<path d="M95.7,57.3 L97.2,55.6 L98.8,54 L100.3,52.5 L101.9,51 L103.4,49.5 L105,48.1 L106.5,46.7 L108.1,45.4 L109.6,44.1 L111.2,42.9 L112.8,41.8 L114.3,40.6 L115.9,39.6 L117.4,38.5 L119,37.6 L120.5,36.6 L122.1,35.7 L123.6,34.9 L125.2,34.1 L126.7,33.4 L128.3,32.7 L129.8,32 L131.4,31.4 L132.9,30.9 L134.5,30.4 L136,29.9 L137.6,29.5 L139.1,29.2 L140.7,28.9 L142.2,28.6 L143.8,28.4 L145.3,28.2 L146.9,28.1 L148.4,28 L150,28 L151.6,28 L153.1,28.1 L154.7,28.2 L156.2,28.4 L157.8,28.6 L159.3,28.9 L160.9,29.2 L162.4,29.5 L164,29.9 L165.5,30.4 L167.1,30.9 L168.6,31.4 L170.2,32 L171.7,32.7 L173.3,33.4 L174.8,34.1 L176.4,34.9 L177.9,35.7 L179.5,36.6 L181,37.6 L182.6,38.5 L184.1,39.6 L185.7,40.6 L187.2,41.8 L188.8,42.9 L190.4,44.1 L191.9,45.4 L193.5,46.7 L195,48.1 L196.6,49.5 L198.1,51 L199.7,52.5 L201.2,54 L202.8,55.6 L204.3,57.3 L205.9,59" fill="none" stroke="#2563EB" stroke-width="3"/>
+<path d="M205.9,59 L207.4,60.7 L209,62.5 L210.5,64.3 L212.1,66.2 L213.6,68.2 L215.2,70.1 L216.7,72.2 L218.3,74.2 L219.8,76.4 L221.4,78.5 L222.9,80.8 L224.5,83 L226,85.4 L227.6,87.7 L229.2,90.1 L230.7,92.6 L232.3,95.1 L233.8,97.7 L235.4,100.3 L236.9,102.9 L238.5,105.6 L240,108.4 L241.6,111.2 L243.1,114" fill="none" stroke="#94A3B8" stroke-width="2.2"/>
+<line x1="95" y1="58" x2="205" y2="58" stroke="#2563EB" stroke-width="5.5" stroke-linecap="butt"/>
+<circle cx="95" cy="58" r="5.6" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<circle cx="205" cy="58" r="5.6" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<text x="95" y="79" text-anchor="middle" font-family="Arial" font-size="13.5" font-weight="700" fill="#1C2733">−14</text>
+<text x="205" y="79" text-anchor="middle" font-family="Arial" font-size="13.5" font-weight="700" fill="#1C2733">0</text>
+</svg></div>
+      $$\boxed{-14\lt x\lt 0}$$
+      בדרך 2, כפל ב-<span class="fi">\(-1\)</span>:
+      $$-x^{2}-14x\gt 0\qquad\textcolor{#C0392B}{/\;\cdot(-1)}$$
+      $$x^{2}+14x\lt 0$$
+      פתוחה למעלה, <span class="fi">\(\lt 0\)</span> — בין האפסים: אותה תשובה ✓
+      <br>בדיקה ב-<span class="fi">\(x=-1\)</span>: <span class="fi">\(-1+14=13\gt 0\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row"><span>הגבול השמאלי:</span>
+    <input class="q-input" data-answer="-14" inputmode="text" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex7"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 8 — סוגריים בשני האגפים</h4></div>
+  <p class="q-text"><span class="mk mk-find">פתרי את האי-שוויון:</span>
+    <span class="fi">\((3x-2)^{2}-(4+x)^{2}\lt 9x\)</span>
+    <br><span class="aside">משבצת, רמה א, שאלה 22ג.</span></p>
+  <details class="step"><summary>רמז — אחרי הסידור</summary>
+    <div class="step-body">אחרי פתיחת הסוגריים והעברה לאגף אחד מתקבל
+    <span class="fi">\(8x^{2}-29x-12\lt 0\)</span>.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      פותחים סוגריים:
+      $$\underbrace{9x^{2}-12x+4}_{(3x-2)^{2}}\;\textcolor{#C0392B}{-1\cdot}\underbrace{(16+8x+x^{2})}_{(4+x)^{2}}\lt 9x$$
+      $$9x^{2}-12x+4-16-8x-x^{2}\lt 9x$$
+      $$8x^{2}-20x-12\lt 9x\qquad\textcolor{#C0392B}{/\;-9x}$$
+      $$8x^{2}-29x-12\lt 0$$
+      נקודות האפס, בנוסחה, עם <span class="fi">\(a=8,\ b=-29,\ c=-12\)</span>:
+      $$\Delta=841+384=1225\qquad\sqrt{1225}=35$$
+      $$x_{1,2}=\frac{29\pm35}{16}$$
+      $$x_{1}=-\tfrac{6}{16}=-\tfrac38\qquad\qquad x_{2}=\tfrac{64}{16}=4$$
+      <span class="fi">\(a=8\gt 0\)</span>, פתוחה למעלה. מבקשים <span class="fi">\(\lt 0\)</span>:
+      <div class="sk"><svg viewBox="0 0 300 122" width="300" height="122" role="img" aria-label="סקיצה לתרגיל 8">
+<line x1="14" y1="62" x2="286" y2="62" stroke="#5A6875" stroke-width="1.5"/>
+<polygon points="292,62 284,57.6 284,66.4" fill="#5A6875"/>
+<text x="288" y="54" font-family="Arial" font-size="12" font-style="italic" fill="#5A6875">x</text>
+<path d="M58,8 L59.5,10.8 L61,13.5 L62.6,16.2 L64.1,18.8 L65.6,21.4 L67.2,24 L68.7,26.5 L70.2,28.9 L71.8,31.3 L73.3,33.7 L74.8,36 L76.4,38.2 L77.9,40.5 L79.4,42.6 L81,44.7 L82.5,46.8 L84,48.9 L85.6,50.8 L87.1,52.8 L88.6,54.7 L90.2,56.5 L91.7,58.3 L93.2,60.1 L94.8,61.8 L96.3,63.4" fill="none" stroke="#94A3B8" stroke-width="2.2"/>
+<path d="M96.3,63.4 L97.8,65 L99.4,66.6 L100.9,68.1 L102.4,69.6 L104,71 L105.5,72.4 L107.1,73.7 L108.6,75 L110.1,76.2 L111.7,77.4 L113.2,78.6 L114.7,79.7 L116.3,80.7 L117.8,81.7 L119.3,82.7 L120.9,83.6 L122.4,84.4 L123.9,85.3 L125.5,86 L127,86.8 L128.5,87.4 L130.1,88.1 L131.6,88.6 L133.1,89.2 L134.7,89.7 L136.2,90.1 L137.7,90.5 L139.3,90.9 L140.8,91.2 L142.3,91.4 L143.9,91.6 L145.4,91.8 L146.9,91.9 L148.5,92 L150,92 L151.5,92 L153.1,91.9 L154.6,91.8 L156.1,91.6 L157.7,91.4 L159.2,91.2 L160.7,90.9 L162.3,90.5 L163.8,90.1 L165.3,89.7 L166.9,89.2 L168.4,88.6 L169.9,88.1 L171.5,87.4 L173,86.8 L174.5,86 L176.1,85.3 L177.6,84.4 L179.1,83.6 L180.7,82.7 L182.2,81.7 L183.7,80.7 L185.3,79.7 L186.8,78.6 L188.3,77.4 L189.9,76.2 L191.4,75 L192.9,73.7 L194.5,72.4 L196,71 L197.6,69.6 L199.1,68.1 L200.6,66.6 L202.2,65 L203.7,63.4 L205.2,61.8" fill="none" stroke="#2563EB" stroke-width="3"/>
+<path d="M205.2,61.8 L206.8,60.1 L208.3,58.3 L209.8,56.5 L211.4,54.7 L212.9,52.8 L214.4,50.8 L216,48.9 L217.5,46.8 L219,44.8 L220.6,42.6 L222.1,40.5 L223.6,38.2 L225.2,36 L226.7,33.7 L228.2,31.3 L229.8,28.9 L231.3,26.5 L232.8,24 L234.4,21.4 L235.9,18.8 L237.4,16.2 L239,13.5 L240.5,10.8 L242,8" fill="none" stroke="#94A3B8" stroke-width="2.2"/>
+<line x1="95" y1="62" x2="205" y2="62" stroke="#2563EB" stroke-width="5.5" stroke-linecap="butt"/>
+<circle cx="95" cy="62" r="5.6" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<circle cx="205" cy="62" r="5.6" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<text x="95" y="83" text-anchor="middle" font-family="Arial" font-size="13.5" font-weight="700" fill="#1C2733">−3/8</text>
+<text x="205" y="83" text-anchor="middle" font-family="Arial" font-size="13.5" font-weight="700" fill="#1C2733">4</text>
+</svg></div>
+      $$\boxed{-\tfrac38\lt x\lt 4}$$
+      בדיקה ב-<span class="fi">\(x=0\)</span>: <span class="fi">\(4-16=-12\lt 0\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row"><span>הגבול הימני:</span>
+    <input class="q-input" data-answer="4" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>הגבול השמאלי (כמספר עשרוני):</span>
+    <input class="q-input" data-answer="-0.375" inputmode="text" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex8"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 9 — סידור, ו-<span class="fi">\(\ge\)</span></h4></div>
+  <p class="q-text"><span class="mk mk-find">פתרי את האי-שוויון:</span>
+    <span class="fi">\((3x-8)^{2}-(3+x)^{2}\ge 1+3x\)</span>
+    <br><span class="aside">משבצת, רמה א, שאלה 22ו.</span></p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      פותחים סוגריים:
+      $$\underbrace{9x^{2}-48x+64}_{(3x-8)^{2}}\;\textcolor{#C0392B}{-1\cdot}\underbrace{(9+6x+x^{2})}_{(3+x)^{2}}\ge 1+3x$$
+      $$9x^{2}-48x+64-9-6x-x^{2}\ge 1+3x$$
+      $$8x^{2}-54x+55\ge 1+3x\qquad\textcolor{#C0392B}{/\;-1\;\;-3x}$$
+      $$8x^{2}-57x+54\ge 0$$
+      נקודות האפס, בנוסחה, עם <span class="fi">\(a=8,\ b=-57,\ c=54\)</span>:
+      $$\Delta=3249-1728=1521\qquad\sqrt{1521}=39$$
+      $$x_{1,2}=\frac{57\pm39}{16}$$
+      $$x_{1}=\tfrac{18}{16}=1\tfrac18\qquad\qquad x_{2}=\tfrac{96}{16}=6$$
+      <span class="fi">\(a=8\gt 0\)</span>, פתוחה למעלה. מבקשים <span class="fi">\(\ge 0\)</span>:
+      <div class="sk"><svg viewBox="0 0 300 122" width="300" height="122" role="img" aria-label="סקיצה לתרגיל 9">
+<line x1="14" y1="62" x2="286" y2="62" stroke="#5A6875" stroke-width="1.5"/>
+<polygon points="292,62 284,57.6 284,66.4" fill="#5A6875"/>
+<text x="288" y="54" font-family="Arial" font-size="12" font-style="italic" fill="#5A6875">x</text>
+<path d="M58,8 L59.5,10.8 L61,13.5 L62.6,16.2 L64.1,18.8 L65.6,21.4 L67.2,24 L68.7,26.5 L70.2,28.9 L71.8,31.3 L73.3,33.7 L74.8,36 L76.4,38.2 L77.9,40.5 L79.4,42.6 L81,44.7 L82.5,46.8 L84,48.9 L85.6,50.8 L87.1,52.8 L88.6,54.7 L90.2,56.5 L91.7,58.3 L93.2,60.1 L94.8,61.8 L96.3,63.4" fill="none" stroke="#2563EB" stroke-width="3"/>
+<path d="M96.3,63.4 L97.8,65 L99.4,66.6 L100.9,68.1 L102.4,69.6 L104,71 L105.5,72.4 L107.1,73.7 L108.6,75 L110.1,76.2 L111.7,77.4 L113.2,78.6 L114.7,79.7 L116.3,80.7 L117.8,81.7 L119.3,82.7 L120.9,83.6 L122.4,84.4 L123.9,85.3 L125.5,86 L127,86.8 L128.5,87.4 L130.1,88.1 L131.6,88.6 L133.1,89.2 L134.7,89.7 L136.2,90.1 L137.7,90.5 L139.3,90.9 L140.8,91.2 L142.3,91.4 L143.9,91.6 L145.4,91.8 L146.9,91.9 L148.5,92 L150,92 L151.5,92 L153.1,91.9 L154.6,91.8 L156.1,91.6 L157.7,91.4 L159.2,91.2 L160.7,90.9 L162.3,90.5 L163.8,90.1 L165.3,89.7 L166.9,89.2 L168.4,88.6 L169.9,88.1 L171.5,87.4 L173,86.8 L174.5,86 L176.1,85.3 L177.6,84.4 L179.1,83.6 L180.7,82.7 L182.2,81.7 L183.7,80.7 L185.3,79.7 L186.8,78.6 L188.3,77.4 L189.9,76.2 L191.4,75 L192.9,73.7 L194.5,72.4 L196,71 L197.6,69.6 L199.1,68.1 L200.6,66.6 L202.2,65 L203.7,63.4 L205.2,61.8" fill="none" stroke="#94A3B8" stroke-width="2.2"/>
+<path d="M205.2,61.8 L206.8,60.1 L208.3,58.3 L209.8,56.5 L211.4,54.7 L212.9,52.8 L214.4,50.8 L216,48.9 L217.5,46.8 L219,44.8 L220.6,42.6 L222.1,40.5 L223.6,38.2 L225.2,36 L226.7,33.7 L228.2,31.3 L229.8,28.9 L231.3,26.5 L232.8,24 L234.4,21.4 L235.9,18.8 L237.4,16.2 L239,13.5 L240.5,10.8 L242,8" fill="none" stroke="#2563EB" stroke-width="3"/>
+<line x1="24" y1="62" x2="95" y2="62" stroke="#2563EB" stroke-width="5.5" stroke-linecap="butt"/>
+<polygon points="14,62 26,55.4 26,68.6" fill="#2563EB"/>
+<line x1="205" y1="62" x2="276" y2="62" stroke="#2563EB" stroke-width="5.5" stroke-linecap="butt"/>
+<polygon points="286,62 274,55.4 274,68.6" fill="#2563EB"/>
+<circle cx="95" cy="62" r="5.6" fill="#2563EB" stroke="#2563EB" stroke-width="2.6"/>
+<circle cx="205" cy="62" r="5.6" fill="#2563EB" stroke="#2563EB" stroke-width="2.6"/>
+<text x="95" y="83" text-anchor="middle" font-family="Arial" font-size="13.5" font-weight="700" fill="#1C2733">1⅛</text>
+<text x="205" y="83" text-anchor="middle" font-family="Arial" font-size="13.5" font-weight="700" fill="#1C2733">6</text>
+</svg></div>
+      <p class="concl"><span class="fi">\(x\le 1\tfrac18\)</span> או <span class="fi">\(x\ge 6\)</span></p>
+      בדיקה ב-<span class="fi">\(x=0\)</span>: <span class="fi">\(64-9=55\ge 1\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row"><span>הגבול הגדול:</span>
+    <input class="q-input" data-answer="6" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>הגבול הקטן (כמספר עשרוני):</span>
+    <input class="q-input" data-answer="1.125" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex9"> סיימתי את התרגיל הזה</label>
+</article>
+
+<h3>אפס אחד, או בלי אפסים</h3>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 10 — ריבוע מלא</h4></div>
+  <p class="q-text"><span class="mk mk-find">פתרי את האי-שוויון:</span>
+    <span class="fi">\(x^{2}+12x+36\gt 0\)</span>
+    <br><span class="aside">משבצת, רמה א, שאלה 23ב.</span></p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$x^{2}+12x+36=(x+6)^{2}$$
+      נקודת אפס אחת:
+      $$(x+6)^{2}=0\;\Longrightarrow\;x=-6$$
+      הפרבולה פתוחה למעלה ונוגעת בציר ב-<span class="fi">\(-6\)</span>. מבקשים <span class="fi">\(\gt 0\)</span>:
+      <div class="sk"><svg viewBox="0 0 300 122" width="300" height="122" role="img" aria-label="סקיצה לתרגיל 10">
+<line x1="14" y1="92" x2="286" y2="92" stroke="#5A6875" stroke-width="1.5"/>
+<polygon points="292,92 284,87.6 284,96.4" fill="#5A6875"/>
+<text x="288" y="84" font-family="Arial" font-size="12" font-style="italic" fill="#5A6875">x</text>
+<path d="M65,12 L66.4,14.6 L67.8,17.2 L69.2,19.8 L70.7,22.3 L72.1,24.8 L73.5,27.2 L74.9,29.6 L76.3,31.9 L77.8,34.2 L79.2,36.4 L80.6,38.6 L82,40.8 L83.4,42.9 L84.8,45 L86.2,47 L87.7,49 L89.1,50.9 L90.5,52.8 L91.9,54.6 L93.3,56.4 L94.8,58.2 L96.2,59.9 L97.6,61.6 L99,63.2 L100.4,64.8 L101.8,66.3 L103.2,67.8 L104.7,69.2 L106.1,70.6 L107.5,72 L108.9,73.3 L110.3,74.6 L111.8,75.8 L113.2,77 L114.6,78.1 L116,79.2 L117.4,80.2 L118.8,81.2 L120.2,82.2 L121.7,83.1 L123.1,84 L124.5,84.8 L125.9,85.6 L127.3,86.3 L128.8,87 L130.2,87.6 L131.6,88.2 L133,88.8 L134.4,89.3 L135.8,89.8 L137.2,90.2 L138.7,90.6 L140.1,90.9 L141.5,91.2 L142.9,91.4 L144.3,91.6 L145.8,91.8 L147.2,91.9 L148.6,92 L150,92" fill="none" stroke="#2563EB" stroke-width="3"/>
+<path d="M150,92 L151.4,92" fill="none" stroke="#94A3B8" stroke-width="2.2"/>
+<path d="M151.4,92 L152.8,91.9 L154.2,91.8 L155.7,91.6 L157.1,91.4 L158.5,91.2 L159.9,90.9 L161.3,90.6 L162.8,90.2 L164.2,89.8 L165.6,89.3 L167,88.8 L168.4,88.2 L169.8,87.6 L171.2,87 L172.7,86.3 L174.1,85.6 L175.5,84.8 L176.9,84 L178.3,83.1 L179.8,82.2 L181.2,81.2 L182.6,80.2 L184,79.2 L185.4,78.1 L186.8,77 L188.2,75.8 L189.7,74.6 L191.1,73.3 L192.5,72 L193.9,70.6 L195.3,69.2 L196.8,67.8 L198.2,66.3 L199.6,64.8 L201,63.2 L202.4,61.6 L203.8,59.9 L205.2,58.2 L206.7,56.4 L208.1,54.6 L209.5,52.8 L210.9,50.9 L212.3,49 L213.8,47 L215.2,45 L216.6,42.9 L218,40.8 L219.4,38.6 L220.8,36.4 L222.2,34.2 L223.7,31.9 L225.1,29.6 L226.5,27.2 L227.9,24.8 L229.3,22.3 L230.8,19.8 L232.2,17.2 L233.6,14.6 L235,12" fill="none" stroke="#2563EB" stroke-width="3"/>
+<line x1="24" y1="92" x2="276" y2="92" stroke="#2563EB" stroke-width="5.5" stroke-linecap="butt"/>
+<polygon points="14,92 26,85.4 26,98.6" fill="#2563EB"/>
+<polygon points="286,92 274,85.4 274,98.6" fill="#2563EB"/>
+<circle cx="150" cy="92" r="5.6" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<text x="150" y="113" text-anchor="middle" font-family="Arial" font-size="13.5" font-weight="700" fill="#1C2733">−6</text>
+</svg></div>
+      $$\boxed{x\ne -6}$$
+      ב-<span class="fi">\(x=-6\)</span> הביטוי שווה <span class="fi">\(0\)</span>, ו-<span class="fi">\(0\gt 0\)</span>
+      אינו נכון; בכל מקום אחר הריבוע חיובי.
+    </div>
+  </details>
+  <div class="q-row"><span>הערך היחיד שאינו פתרון:</span>
+    <input class="q-input" data-answer="-6" inputmode="text" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex10"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 11 — ריבוע מלא עם מקדם שלילי</h4></div>
+  <p class="q-text"><span class="mk mk-find">פתרי את האי-שוויון:</span>
+    <span class="fi">\(-81+18x-x^{2}\lt 0\)</span>
+    <br><span class="aside">משבצת, רמה א, שאלה 23ד.</span></p>
+  <details class="step"><summary>רמז — לסדר לפי החזקות</summary>
+    <div class="step-body"><span class="fi">\(-x^{2}+18x-81\lt 0\)</span>, ואחרי כפל ב-<span class="fi">\(-1\)</span>:
+    <span class="fi">\(x^{2}-18x+81\gt 0\)</span>.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      מסדרים לפי החזקות:
+      $$-x^{2}+18x-81\lt 0\qquad\textcolor{#C0392B}{/\;\cdot(-1)}$$
+      $$x^{2}-18x+81\gt 0$$
+      $$(x-9)^{2}\gt 0$$
+      נקודת אפס אחת: <span class="fi">\(x=9\)</span>.
+      <br>בסקיצה של הביטוי המקורי — פתוחה למטה, נוגעת בציר ב-<span class="fi">\(9\)</span>. מבקשים
+      <span class="fi">\(\lt 0\)</span>:
+      <div class="sk"><svg viewBox="0 0 300 122" width="300" height="122" role="img" aria-label="סקיצה לתרגיל 11">
+<line x1="14" y1="30" x2="286" y2="30" stroke="#5A6875" stroke-width="1.5"/>
+<polygon points="292,30 284,25.6 284,34.4" fill="#5A6875"/>
+<text x="288" y="22" font-family="Arial" font-size="12" font-style="italic" fill="#5A6875">x</text>
+<path d="M65,110 L66.4,107.4 L67.8,104.8 L69.2,102.2 L70.7,99.7 L72.1,97.2 L73.5,94.8 L74.9,92.4 L76.3,90.1 L77.8,87.8 L79.2,85.6 L80.6,83.4 L82,81.2 L83.4,79.1 L84.8,77 L86.2,75 L87.7,73 L89.1,71.1 L90.5,69.2 L91.9,67.4 L93.3,65.6 L94.8,63.8 L96.2,62.1 L97.6,60.4 L99,58.8 L100.4,57.2 L101.8,55.7 L103.2,54.2 L104.7,52.8 L106.1,51.4 L107.5,50 L108.9,48.7 L110.3,47.4 L111.8,46.2 L113.2,45 L114.6,43.9 L116,42.8 L117.4,41.8 L118.8,40.8 L120.2,39.8 L121.7,38.9 L123.1,38 L124.5,37.2 L125.9,36.4 L127.3,35.7 L128.8,35 L130.2,34.4 L131.6,33.8 L133,33.2 L134.4,32.7 L135.8,32.2 L137.2,31.8 L138.7,31.4 L140.1,31.1 L141.5,30.8 L142.9,30.6 L144.3,30.4 L145.8,30.2 L147.2,30.1 L148.6,30 L150,30" fill="none" stroke="#2563EB" stroke-width="3"/>
+<path d="M150,30 L151.4,30" fill="none" stroke="#94A3B8" stroke-width="2.2"/>
+<path d="M151.4,30 L152.8,30.1 L154.2,30.2 L155.7,30.4 L157.1,30.6 L158.5,30.8 L159.9,31.1 L161.3,31.4 L162.8,31.8 L164.2,32.2 L165.6,32.7 L167,33.2 L168.4,33.8 L169.8,34.4 L171.2,35 L172.7,35.7 L174.1,36.4 L175.5,37.2 L176.9,38 L178.3,38.9 L179.8,39.8 L181.2,40.8 L182.6,41.8 L184,42.8 L185.4,43.9 L186.8,45 L188.2,46.2 L189.7,47.4 L191.1,48.7 L192.5,50 L193.9,51.4 L195.3,52.8 L196.8,54.2 L198.2,55.7 L199.6,57.2 L201,58.8 L202.4,60.4 L203.8,62.1 L205.2,63.8 L206.7,65.6 L208.1,67.4 L209.5,69.2 L210.9,71.1 L212.3,73 L213.8,75 L215.2,77 L216.6,79.1 L218,81.2 L219.4,83.4 L220.8,85.6 L222.2,87.8 L223.7,90.1 L225.1,92.4 L226.5,94.8 L227.9,97.2 L229.3,99.7 L230.8,102.2 L232.2,104.8 L233.6,107.4 L235,110" fill="none" stroke="#2563EB" stroke-width="3"/>
+<line x1="24" y1="30" x2="276" y2="30" stroke="#2563EB" stroke-width="5.5" stroke-linecap="butt"/>
+<polygon points="14,30 26,23.4 26,36.6" fill="#2563EB"/>
+<polygon points="286,30 274,23.4 274,36.6" fill="#2563EB"/>
+<circle cx="150" cy="30" r="5.6" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<text x="150" y="19" text-anchor="middle" font-family="Arial" font-size="13.5" font-weight="700" fill="#1C2733">9</text>
+</svg></div>
+      $$\boxed{x\ne 9}$$
+    </div>
+  </details>
+  <div class="q-row"><span>הערך היחיד שאינו פתרון:</span>
+    <input class="q-input" data-answer="9" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex11"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 12 — בלי אפסים</h4></div>
+  <p class="q-text"><span class="mk mk-find">פתרי את האי-שוויון:</span>
+    <span class="fi">\(3x^{2}-3x+7\gt 0\)</span>
+    <br><span class="aside">משבצת, רמה א, שאלה 23ג.</span></p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      נקודות האפס — בודקים את הדיסקרימיננטה:
+      $$\Delta=(-3)^{2}-4\cdot3\cdot7=9-84=-75\lt 0$$
+      אין נקודות אפס: הפרבולה לא חותכת את הציר.
+      <br><span class="fi">\(a=3\gt 0\)</span>, פתוחה למעלה — ולכן כולה מעל הציר:
+      <div class="sk"><svg viewBox="0 0 300 122" width="300" height="122" role="img" aria-label="סקיצה לתרגיל 12">
+<line x1="14" y1="96" x2="286" y2="96" stroke="#5A6875" stroke-width="1.5"/>
+<polygon points="292,96 284,91.6 284,100.4" fill="#5A6875"/>
+<text x="288" y="88" font-family="Arial" font-size="12" font-style="italic" fill="#5A6875">x</text>
+<path d="M65,16 L66.4,18 L67.8,20.1 L69.2,22 L70.7,24 L72.1,25.9 L73.5,27.8 L74.9,29.6 L76.3,31.4 L77.8,33.2 L79.2,34.9 L80.6,36.6 L82,38.3 L83.4,40 L84.8,41.6 L86.2,43.1 L87.7,44.7 L89.1,46.2 L90.5,47.6 L91.9,49 L93.3,50.4 L94.8,51.8 L96.2,53.1 L97.6,54.4 L99,55.7 L100.4,56.9 L101.8,58.1 L103.2,59.2 L104.7,60.4 L106.1,61.4 L107.5,62.5 L108.9,63.5 L110.3,64.5 L111.8,65.4 L113.2,66.4 L114.6,67.2 L116,68.1 L117.4,68.9 L118.8,69.7 L120.2,70.4 L121.7,71.1 L123.1,71.8 L124.5,72.4 L125.9,73 L127.3,73.6 L128.8,74.1 L130.2,74.6 L131.6,75.1 L133,75.5 L134.4,75.9 L135.8,76.3 L137.2,76.6 L138.7,76.9 L140.1,77.2 L141.5,77.4 L142.9,77.6 L144.3,77.7 L145.8,77.8 L147.2,77.9 L148.6,78 L150,78 L151.4,78 L152.8,77.9 L154.2,77.8 L155.7,77.7 L157.1,77.6 L158.5,77.4 L159.9,77.2 L161.3,76.9 L162.8,76.6 L164.2,76.3 L165.6,75.9 L167,75.5 L168.4,75.1 L169.8,74.6 L171.2,74.1 L172.7,73.6 L174.1,73 L175.5,72.4 L176.9,71.8 L178.3,71.1 L179.8,70.4 L181.2,69.7 L182.6,68.9 L184,68.1 L185.4,67.2 L186.8,66.4 L188.2,65.4 L189.7,64.5 L191.1,63.5 L192.5,62.5 L193.9,61.4 L195.3,60.4 L196.8,59.2 L198.2,58.1 L199.6,56.9 L201,55.7 L202.4,54.4 L203.8,53.1 L205.2,51.8 L206.7,50.4 L208.1,49 L209.5,47.6 L210.9,46.2 L212.3,44.7 L213.8,43.1 L215.2,41.6 L216.6,40 L218,38.3 L219.4,36.6 L220.8,34.9 L222.2,33.2 L223.7,31.4 L225.1,29.6 L226.5,27.8 L227.9,25.9 L229.3,24 L230.8,22 L232.2,20.1 L233.6,18 L235,16" fill="none" stroke="#2563EB" stroke-width="3"/>
+<line x1="24" y1="96" x2="276" y2="96" stroke="#2563EB" stroke-width="5.5" stroke-linecap="butt"/>
+<polygon points="14,96 26,89.4 26,102.6" fill="#2563EB"/>
+<polygon points="286,96 274,89.4 274,102.6" fill="#2563EB"/>
+</svg></div>
+      <p class="concl">התשובה: כל <span class="fi">\(x\)</span></p>
+      בדיקה ב-<span class="fi">\(x=0\)</span>: <span class="fi">\(7\gt 0\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row"><span><span class="fi">\(\Delta=\)</span></span>
+    <input class="q-input" data-answer="-75" inputmode="text" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex12"> סיימתי את התרגיל הזה</label>
+</article>
+
+<h3>פרבולה מול ישר</h3>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 13 — <span class="fi">\(f(x)\lt g(x)\)</span></h4></div>
+  <p class="q-text"><span class="mk mk-given">נתונות הפונקציות <span class="fi">\(f(x)=2x^{2}+5x-3\)</span>
+    ו-<span class="fi">\(g(x)=x^{2}+6x+3\)</span></span>.
+    <span class="mk mk-find">עבור אילו ערכי <span class="fi">\(x\)</span> מתקיים
+    <span class="fi">\(f(x)\lt g(x)\)</span>?</span>
+    <br><span class="aside">משבצת, רמה א, שאלה 24.</span></p>
+  <details class="step"><summary>רמז — צעד 1</summary>
+    <div class="step-body"><span class="fi">\(f(x)-g(x)\lt 0\)</span>.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      מסדרים מול אפס:
+      $$2x^{2}+5x-3\lt x^{2}+6x+3\qquad\textcolor{#C0392B}{/\;-x^{2}\;\;-6x\;\;-3}$$
+      $$x^{2}-x-6\lt 0$$
+      נקודות האפס — מכפלה <span class="fi">\(-6\)</span>, סכום <span class="fi">\(-1\)</span>:
+      $$(x-3)(x+2)=0$$
+      $$x_{1}=-2\qquad\qquad x_{2}=3$$
+      <span class="fi">\(a=1\gt 0\)</span>, פתוחה למעלה. מבקשים <span class="fi">\(\lt 0\)</span>:
+      <div class="sk"><svg viewBox="0 0 300 122" width="300" height="122" role="img" aria-label="סקיצה לתרגיל 13">
+<line x1="14" y1="62" x2="286" y2="62" stroke="#5A6875" stroke-width="1.5"/>
+<polygon points="292,62 284,57.6 284,66.4" fill="#5A6875"/>
+<text x="288" y="54" font-family="Arial" font-size="12" font-style="italic" fill="#5A6875">x</text>
+<path d="M58,8 L59.5,10.8 L61,13.5 L62.6,16.2 L64.1,18.8 L65.6,21.4 L67.2,24 L68.7,26.5 L70.2,28.9 L71.8,31.3 L73.3,33.7 L74.8,36 L76.4,38.2 L77.9,40.5 L79.4,42.6 L81,44.7 L82.5,46.8 L84,48.9 L85.6,50.8 L87.1,52.8 L88.6,54.7 L90.2,56.5 L91.7,58.3 L93.2,60.1 L94.8,61.8 L96.3,63.4" fill="none" stroke="#94A3B8" stroke-width="2.2"/>
+<path d="M96.3,63.4 L97.8,65 L99.4,66.6 L100.9,68.1 L102.4,69.6 L104,71 L105.5,72.4 L107.1,73.7 L108.6,75 L110.1,76.2 L111.7,77.4 L113.2,78.6 L114.7,79.7 L116.3,80.7 L117.8,81.7 L119.3,82.7 L120.9,83.6 L122.4,84.4 L123.9,85.3 L125.5,86 L127,86.8 L128.5,87.4 L130.1,88.1 L131.6,88.6 L133.1,89.2 L134.7,89.7 L136.2,90.1 L137.7,90.5 L139.3,90.9 L140.8,91.2 L142.3,91.4 L143.9,91.6 L145.4,91.8 L146.9,91.9 L148.5,92 L150,92 L151.5,92 L153.1,91.9 L154.6,91.8 L156.1,91.6 L157.7,91.4 L159.2,91.2 L160.7,90.9 L162.3,90.5 L163.8,90.1 L165.3,89.7 L166.9,89.2 L168.4,88.6 L169.9,88.1 L171.5,87.4 L173,86.8 L174.5,86 L176.1,85.3 L177.6,84.4 L179.1,83.6 L180.7,82.7 L182.2,81.7 L183.7,80.7 L185.3,79.7 L186.8,78.6 L188.3,77.4 L189.9,76.2 L191.4,75 L192.9,73.7 L194.5,72.4 L196,71 L197.6,69.6 L199.1,68.1 L200.6,66.6 L202.2,65 L203.7,63.4 L205.2,61.8" fill="none" stroke="#2563EB" stroke-width="3"/>
+<path d="M205.2,61.8 L206.8,60.1 L208.3,58.3 L209.8,56.5 L211.4,54.7 L212.9,52.8 L214.4,50.8 L216,48.9 L217.5,46.8 L219,44.8 L220.6,42.6 L222.1,40.5 L223.6,38.2 L225.2,36 L226.7,33.7 L228.2,31.3 L229.8,28.9 L231.3,26.5 L232.8,24 L234.4,21.4 L235.9,18.8 L237.4,16.2 L239,13.5 L240.5,10.8 L242,8" fill="none" stroke="#94A3B8" stroke-width="2.2"/>
+<line x1="95" y1="62" x2="205" y2="62" stroke="#2563EB" stroke-width="5.5" stroke-linecap="butt"/>
+<circle cx="95" cy="62" r="5.6" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<circle cx="205" cy="62" r="5.6" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<text x="95" y="83" text-anchor="middle" font-family="Arial" font-size="13.5" font-weight="700" fill="#1C2733">−2</text>
+<text x="205" y="83" text-anchor="middle" font-family="Arial" font-size="13.5" font-weight="700" fill="#1C2733">3</text>
+</svg></div>
+      $$\boxed{-2\lt x\lt 3}$$
+      בדיקה ב-<span class="fi">\(x=0\)</span>: <span class="fi">\(f(0)=-3\)</span>,
+      <span class="fi">\(g(0)=3\)</span>, ו-<span class="fi">\(-3\lt 3\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row"><span>הגבול השמאלי:</span>
+    <input class="q-input" data-answer="-2" inputmode="text" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>והימני:</span>
+    <input class="q-input" data-answer="3" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex13"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 14 — מהגרף לאי-שוויון</h4></div>
+  <p class="q-text"><span class="mk mk-given">לפניך הגרפים של הפונקציות <span class="fi">\(y=x-3\)</span>
+    ו-<span class="fi">\(y=x^{2}-4x+3\)</span></span>.
+    <br>א. <span class="mk mk-find">מצאי את שיעורי הנקודות A ו-B (נקודות החיתוך בין הגרפים).</span>
+    <br>ב. <span class="mk mk-find">עבור אילו ערכי <span class="fi">\(x\)</span> מתקיים
+    <span class="fi">\(x^{2}-4x+3\gt x-3\)</span>?</span>
+    <br><span class="aside">משבצת, רמה א, שאלה 25.</span></p>
+  <figure style="max-width:330px;margin:10px auto 4px">
+<svg viewBox="0 0 308 234" style="width:100%;height:auto" role="img" aria-label="פרבולה y שווה x בריבוע פחות 4x ועוד 3 וישר y שווה x פחות 3, נחתכים בנקודות A ו-B">
+<g stroke="#EFEAE0" stroke-width="1"><line x1="18" y1="18" x2="18" y2="216"/><line x1="52" y1="18" x2="52" y2="216"/><line x1="86" y1="18" x2="86" y2="216"/><line x1="120" y1="18" x2="120" y2="216"/><line x1="154" y1="18" x2="154" y2="216"/><line x1="188" y1="18" x2="188" y2="216"/><line x1="222" y1="18" x2="222" y2="216"/><line x1="256" y1="18" x2="256" y2="216"/><line x1="290" y1="18" x2="290" y2="216"/><line x1="18" y1="216" x2="290" y2="216"/><line x1="18" y1="194" x2="290" y2="194"/><line x1="18" y1="172" x2="290" y2="172"/><line x1="18" y1="150" x2="290" y2="150"/><line x1="18" y1="128" x2="290" y2="128"/><line x1="18" y1="106" x2="290" y2="106"/><line x1="18" y1="84" x2="290" y2="84"/><line x1="18" y1="62" x2="290" y2="62"/><line x1="18" y1="40" x2="290" y2="40"/><line x1="18" y1="18" x2="290" y2="18"/></g>
+<line x1="18" y1="128" x2="290" y2="128" stroke="#5A6875" stroke-width="1.5"/>
+<polygon points="297,128 289,123.6 289,132.4" fill="#5A6875"/>
+<line x1="86" y1="216" x2="86" y2="18" stroke="#5A6875" stroke-width="1.5"/>
+<polygon points="86,11 81.5,19 90.5,19" fill="#5A6875"/>
+<text x="292" y="120" font-family="Arial" font-size="13" font-style="italic" fill="#5A6875">x</text>
+<text x="94" y="22" font-family="Arial" font-size="13" font-style="italic" fill="#5A6875">y</text>
+<line x1="18" y1="124" x2="18" y2="132" stroke="#5A6875" stroke-width="1.3"/>
+<text x="18" y="144" text-anchor="middle" font-family="Arial" font-size="11" fill="#5A6875">−2</text>
+<line x1="52" y1="124" x2="52" y2="132" stroke="#5A6875" stroke-width="1.3"/>
+<text x="52" y="144" text-anchor="middle" font-family="Arial" font-size="11" fill="#5A6875">−1</text>
+<line x1="120" y1="124" x2="120" y2="132" stroke="#5A6875" stroke-width="1.3"/>
+<text x="120" y="144" text-anchor="middle" font-family="Arial" font-size="11" fill="#5A6875">1</text>
+<line x1="154" y1="124" x2="154" y2="132" stroke="#5A6875" stroke-width="1.3"/>
+<text x="154" y="144" text-anchor="middle" font-family="Arial" font-size="11" fill="#5A6875">2</text>
+<line x1="188" y1="124" x2="188" y2="132" stroke="#5A6875" stroke-width="1.3"/>
+<text x="188" y="144" text-anchor="middle" font-family="Arial" font-size="11" fill="#5A6875">3</text>
+<line x1="222" y1="124" x2="222" y2="132" stroke="#5A6875" stroke-width="1.3"/>
+<text x="222" y="144" text-anchor="middle" font-family="Arial" font-size="11" fill="#5A6875">4</text>
+<line x1="256" y1="124" x2="256" y2="132" stroke="#5A6875" stroke-width="1.3"/>
+<text x="256" y="144" text-anchor="middle" font-family="Arial" font-size="11" fill="#5A6875">5</text>
+<line x1="290" y1="124" x2="290" y2="132" stroke="#5A6875" stroke-width="1.3"/>
+<text x="290" y="144" text-anchor="middle" font-family="Arial" font-size="11" fill="#5A6875">6</text>
+<line x1="82" y1="216" x2="90" y2="216" stroke="#5A6875" stroke-width="1.3"/>
+<text x="79" y="220" text-anchor="end" font-family="Arial" font-size="11" fill="#5A6875">−4</text>
+<line x1="82" y1="194" x2="90" y2="194" stroke="#5A6875" stroke-width="1.3"/>
+<text x="79" y="198" text-anchor="end" font-family="Arial" font-size="11" fill="#5A6875">−3</text>
+<line x1="82" y1="172" x2="90" y2="172" stroke="#5A6875" stroke-width="1.3"/>
+<text x="79" y="176" text-anchor="end" font-family="Arial" font-size="11" fill="#5A6875">−2</text>
+<line x1="82" y1="150" x2="90" y2="150" stroke="#5A6875" stroke-width="1.3"/>
+<text x="79" y="154" text-anchor="end" font-family="Arial" font-size="11" fill="#5A6875">−1</text>
+<line x1="82" y1="106" x2="90" y2="106" stroke="#5A6875" stroke-width="1.3"/>
+<text x="79" y="110" text-anchor="end" font-family="Arial" font-size="11" fill="#5A6875">1</text>
+<line x1="82" y1="84" x2="90" y2="84" stroke="#5A6875" stroke-width="1.3"/>
+<text x="79" y="88" text-anchor="end" font-family="Arial" font-size="11" fill="#5A6875">2</text>
+<line x1="82" y1="62" x2="90" y2="62" stroke="#5A6875" stroke-width="1.3"/>
+<text x="79" y="66" text-anchor="end" font-family="Arial" font-size="11" fill="#5A6875">3</text>
+<line x1="82" y1="40" x2="90" y2="40" stroke="#5A6875" stroke-width="1.3"/>
+<text x="79" y="44" text-anchor="end" font-family="Arial" font-size="11" fill="#5A6875">4</text>
+<line x1="82" y1="18" x2="90" y2="18" stroke="#5A6875" stroke-width="1.3"/>
+<text x="79" y="22" text-anchor="end" font-family="Arial" font-size="11" fill="#5A6875">5</text>
+<path d="M74.1,28.5 L74.8,30.5 L75.4,32.5 L76.1,34.5 L76.8,36.5 L77.4,38.4 L78.1,40.4 L78.8,42.3 L79.4,44.2 L80.1,46 L80.8,47.9 L81.4,49.8 L82.1,51.6 L82.8,53.4 L83.4,55.2 L84.1,57 L84.8,58.7 L85.4,60.5 L86.1,62.2 L86.8,63.9 L87.4,65.6 L88.1,67.3 L88.7,69 L89.4,70.6 L90.1,72.2 L90.7,73.9 L91.4,75.4 L92.1,77 L92.7,78.6 L93.4,80.1 L94.1,81.7 L94.7,83.2 L95.4,84.7 L96.1,86.1 L96.7,87.6 L97.4,89 L98.1,90.5 L98.7,91.9 L99.4,93.3 L100.1,94.6 L100.7,96 L101.4,97.3 L102.1,98.7 L102.7,100 L103.4,101.3 L104.1,102.5 L104.7,103.8 L105.4,105 L106.1,106.3 L106.7,107.5 L107.4,108.7 L108.1,109.8 L108.7,111 L109.4,112.1 L110.1,113.2 L110.7,114.4 L111.4,115.4 L112.1,116.5 L112.7,117.6 L113.4,118.6 L114,119.6 L114.7,120.6 L115.4,121.6 L116,122.6 L116.7,123.5 L117.4,124.5 L118,125.4 L118.7,126.3 L119.4,127.2 L120,128.1 L120.7,128.9 L121.4,129.7 L122,130.6 L122.7,131.4 L123.4,132.1 L124,132.9 L124.7,133.7 L125.4,134.4 L126,135.1 L126.7,135.8 L127.4,136.5 L128,137.2 L128.7,137.8 L129.4,138.4 L130,139.1 L130.7,139.7 L131.4,140.2 L132,140.8 L132.7,141.4 L133.4,141.9 L134,142.4 L134.7,142.9 L135.4,143.4 L136,143.8 L136.7,144.3 L137.4,144.7 L138,145.1 L138.7,145.5 L139.4,145.9 L140,146.3 L140.7,146.6 L141.3,147 L142,147.3 L142.7,147.6 L143.3,147.8 L144,148.1 L144.7,148.3 L145.3,148.6 L146,148.8 L146.7,149 L147.3,149.2 L148,149.3 L148.7,149.5 L149.3,149.6 L150,149.7 L150.7,149.8 L151.3,149.9 L152,149.9 L152.7,150 L153.3,150 L154,150 L154.7,150 L155.3,150 L156,149.9 L156.7,149.9 L157.3,149.8 L158,149.7 L158.7,149.6 L159.3,149.5 L160,149.3 L160.7,149.2 L161.3,149 L162,148.8 L162.7,148.6 L163.3,148.3 L164,148.1 L164.7,147.8 L165.3,147.6 L166,147.3 L166.7,147 L167.3,146.6 L168,146.3 L168.6,145.9 L169.3,145.5 L170,145.1 L170.6,144.7 L171.3,144.3 L172,143.8 L172.6,143.4 L173.3,142.9 L174,142.4 L174.6,141.9 L175.3,141.4 L176,140.8 L176.6,140.2 L177.3,139.7 L178,139.1 L178.6,138.4 L179.3,137.8 L180,137.2 L180.6,136.5 L181.3,135.8 L182,135.1 L182.6,134.4 L183.3,133.7 L184,132.9 L184.6,132.1 L185.3,131.4 L186,130.6 L186.6,129.7 L187.3,128.9 L188,128.1 L188.6,127.2 L189.3,126.3 L190,125.4 L190.6,124.5 L191.3,123.5 L192,122.6 L192.6,121.6 L193.3,120.6 L193.9,119.6 L194.6,118.6 L195.3,117.6 L195.9,116.5 L196.6,115.4 L197.3,114.4 L197.9,113.2 L198.6,112.1 L199.3,111 L199.9,109.8 L200.6,108.7 L201.3,107.5 L201.9,106.3 L202.6,105 L203.3,103.8 L203.9,102.5 L204.6,101.3 L205.3,100 L205.9,98.7 L206.6,97.3 L207.3,96 L207.9,94.6 L208.6,93.3 L209.3,91.9 L209.9,90.5 L210.6,89 L211.3,87.6 L211.9,86.1 L212.6,84.7 L213.3,83.2 L213.9,81.7 L214.6,80.1 L215.3,78.6 L215.9,77 L216.6,75.4 L217.3,73.9 L217.9,72.2 L218.6,70.6 L219.3,69 L219.9,67.3 L220.6,65.6 L221.2,63.9 L221.9,62.2 L222.6,60.5 L223.2,58.7 L223.9,57 L224.6,55.2 L225.2,53.4 L225.9,51.6 L226.6,49.8 L227.2,47.9 L227.9,46 L228.6,44.2 L229.2,42.3 L229.9,40.4 L230.6,38.4 L231.2,36.5 L231.9,34.5 L232.6,32.5 L233.2,30.5 L233.9,28.5" fill="none" stroke="#B7791F" stroke-width="2.6"/>
+<text x="237.3" y="35.6" font-family="Arial" font-size="12.5" font-weight="700" fill="#B7791F" text-anchor="end">y = x² − 4x + 3</text>
+<path d="M52,216 L53,215.4 L54,214.7 L55,214.1 L56,213.4 L57,212.8 L58,212.1 L58.9,211.5 L59.9,210.9 L60.9,210.2 L61.9,209.6 L62.9,208.9 L63.9,208.3 L64.9,207.7 L65.9,207 L66.9,206.4 L67.9,205.7 L68.9,205.1 L69.8,204.4 L70.8,203.8 L71.8,203.2 L72.8,202.5 L73.8,201.9 L74.8,201.2 L75.8,200.6 L76.8,200 L77.8,199.3 L78.8,198.7 L79.8,198 L80.8,197.4 L81.8,196.8 L82.7,196.1 L83.7,195.5 L84.7,194.8 L85.7,194.2 L86.7,193.5 L87.7,192.9 L88.7,192.3 L89.7,191.6 L90.7,191 L91.7,190.3 L92.7,189.7 L93.7,189.1 L94.6,188.4 L95.6,187.8 L96.6,187.1 L97.6,186.5 L98.6,185.8 L99.6,185.2 L100.6,184.6 L101.6,183.9 L102.6,183.3 L103.6,182.6 L104.6,182 L105.6,181.3 L106.5,180.7 L107.5,180.1 L108.5,179.4 L109.5,178.8 L110.5,178.1 L111.5,177.5 L112.5,176.9 L113.5,176.2 L114.5,175.6 L115.5,174.9 L116.5,174.3 L117.4,173.7 L118.4,173 L119.4,172.4 L120.4,171.7 L121.4,171.1 L122.4,170.4 L123.4,169.8 L124.4,169.2 L125.4,168.5 L126.4,167.9 L127.4,167.2 L128.4,166.6 L129.3,165.9 L130.3,165.3 L131.3,164.7 L132.3,164 L133.3,163.4 L134.3,162.7 L135.3,162.1 L136.3,161.5 L137.3,160.8 L138.3,160.2 L139.3,159.5 L140.3,158.9 L141.2,158.2 L142.2,157.6 L143.2,157 L144.2,156.3 L145.2,155.7 L146.2,155 L147.2,154.4 L148.2,153.8 L149.2,153.1 L150.2,152.5 L151.2,151.8 L152.2,151.2 L153.2,150.6 L154.1,149.9 L155.1,149.3 L156.1,148.6 L157.1,148 L158.1,147.3 L159.1,146.7 L160.1,146.1 L161.1,145.4 L162.1,144.8 L163.1,144.1 L164.1,143.5 L165.1,142.8 L166,142.2 L167,141.6 L168,140.9 L169,140.3 L170,139.6 L171,139 L172,138.4 L173,137.7 L174,137.1 L175,136.4 L176,135.8 L176.9,135.2 L177.9,134.5 L178.9,133.9 L179.9,133.2 L180.9,132.6 L181.9,131.9 L182.9,131.3 L183.9,130.7 L184.9,130 L185.9,129.4 L186.9,128.7 L187.9,128.1 L188.9,127.4 L189.8,126.8 L190.8,126.2 L191.8,125.5 L192.8,124.9 L193.8,124.2 L194.8,123.6 L195.8,123 L196.8,122.3 L197.8,121.7 L198.8,121 L199.8,120.4 L200.8,119.8 L201.7,119.1 L202.7,118.5 L203.7,117.8 L204.7,117.2 L205.7,116.5 L206.7,115.9 L207.7,115.3 L208.7,114.6 L209.7,114 L210.7,113.3 L211.7,112.7 L212.6,112.1 L213.6,111.4 L214.6,110.8 L215.6,110.1 L216.6,109.5 L217.6,108.8 L218.6,108.2 L219.6,107.6 L220.6,106.9 L221.6,106.3 L222.6,105.6 L223.6,105 L224.6,104.3 L225.5,103.7 L226.5,103.1 L227.5,102.4 L228.5,101.8 L229.5,101.1 L230.5,100.5 L231.5,99.9 L232.5,99.2 L233.5,98.6 L234.5,97.9 L235.5,97.3 L236.4,96.7 L237.4,96 L238.4,95.4 L239.4,94.7 L240.4,94.1 L241.4,93.4 L242.4,92.8 L243.4,92.2 L244.4,91.5 L245.4,90.9 L246.4,90.2 L247.4,89.6 L248.4,88.9 L249.3,88.3 L250.3,87.7 L251.3,87 L252.3,86.4 L253.3,85.7 L254.3,85.1 L255.3,84.5 L256.3,83.8 L257.3,83.2 L258.3,82.5 L259.3,81.9 L260.2,81.2 L261.2,80.6 L262.2,80 L263.2,79.3 L264.2,78.7 L265.2,78 L266.2,77.4 L267.2,76.8 L268.2,76.1 L269.2,75.5 L270.2,74.8 L271.2,74.2 L272.1,73.6 L273.1,72.9 L274.1,72.3 L275.1,71.6 L276.1,71 L277.1,70.3 L278.1,69.7 L279.1,69.1 L280.1,68.4 L281.1,67.8 L282.1,67.1 L283.1,66.5 L284.1,65.8 L285,65.2 L286,64.6 L287,63.9 L288,63.3 L289,62.6 L290,62" fill="none" stroke="#2E6F8E" stroke-width="2.6"/>
+<text x="286.6" y="70.8" font-family="Arial" font-size="12.5" font-weight="700" fill="#2E6F8E" text-anchor="end">y = x − 3</text>
+<circle cx="154" cy="150" r="4.6" fill="#1C2733"/>
+<text x="144" y="166" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="800" fill="#1C2733">A</text>
+<circle cx="188" cy="128" r="4.6" fill="#1C2733"/>
+<text x="198" y="119" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="800" fill="#1C2733">B</text>
+</svg>
+  </figure>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      <strong>א.</strong> משווים:
+      $$x^{2}-4x+3=x-3\qquad\textcolor{#C0392B}{/\;-x\;\;+3}$$
+      $$x^{2}-5x+6=0$$
+      $$(x-2)(x-3)=0$$
+      $$x_{1}=2\qquad\qquad x_{2}=3$$
+      מציבים בישר <span class="fi">\(y=x-3\)</span>:
+      $$x_{1}=2:\quad y=-1\qquad\qquad x_{2}=3:\quad y=0$$
+      $$A(2,\,-1)\qquad B(3,\,0)$$
+      <strong>ב.</strong> מסדרים מול אפס — זו אותה משוואה מסעיף א, עם <span class="fi">\(\gt\)</span>:
+      $$x^{2}-5x+6\gt 0$$
+      האפסים <span class="fi">\(2\)</span> ו-<span class="fi">\(3\)</span>, פתוחה למעלה. מבקשים <span class="fi">\(\gt 0\)</span>:
+      <div class="sk"><svg viewBox="0 0 300 122" width="300" height="122" role="img" aria-label="סקיצה לתרגיל 14">
+<line x1="14" y1="62" x2="286" y2="62" stroke="#5A6875" stroke-width="1.5"/>
+<polygon points="292,62 284,57.6 284,66.4" fill="#5A6875"/>
+<text x="288" y="54" font-family="Arial" font-size="12" font-style="italic" fill="#5A6875">x</text>
+<path d="M58,8 L59.5,10.8 L61,13.5 L62.6,16.2 L64.1,18.8 L65.6,21.4 L67.2,24 L68.7,26.5 L70.2,28.9 L71.8,31.3 L73.3,33.7 L74.8,36 L76.4,38.2 L77.9,40.5 L79.4,42.6 L81,44.7 L82.5,46.8 L84,48.9 L85.6,50.8 L87.1,52.8 L88.6,54.7 L90.2,56.5 L91.7,58.3 L93.2,60.1 L94.8,61.8 L96.3,63.4" fill="none" stroke="#2563EB" stroke-width="3"/>
+<path d="M96.3,63.4 L97.8,65 L99.4,66.6 L100.9,68.1 L102.4,69.6 L104,71 L105.5,72.4 L107.1,73.7 L108.6,75 L110.1,76.2 L111.7,77.4 L113.2,78.6 L114.7,79.7 L116.3,80.7 L117.8,81.7 L119.3,82.7 L120.9,83.6 L122.4,84.4 L123.9,85.3 L125.5,86 L127,86.8 L128.5,87.4 L130.1,88.1 L131.6,88.6 L133.1,89.2 L134.7,89.7 L136.2,90.1 L137.7,90.5 L139.3,90.9 L140.8,91.2 L142.3,91.4 L143.9,91.6 L145.4,91.8 L146.9,91.9 L148.5,92 L150,92 L151.5,92 L153.1,91.9 L154.6,91.8 L156.1,91.6 L157.7,91.4 L159.2,91.2 L160.7,90.9 L162.3,90.5 L163.8,90.1 L165.3,89.7 L166.9,89.2 L168.4,88.6 L169.9,88.1 L171.5,87.4 L173,86.8 L174.5,86 L176.1,85.3 L177.6,84.4 L179.1,83.6 L180.7,82.7 L182.2,81.7 L183.7,80.7 L185.3,79.7 L186.8,78.6 L188.3,77.4 L189.9,76.2 L191.4,75 L192.9,73.7 L194.5,72.4 L196,71 L197.6,69.6 L199.1,68.1 L200.6,66.6 L202.2,65 L203.7,63.4 L205.2,61.8" fill="none" stroke="#94A3B8" stroke-width="2.2"/>
+<path d="M205.2,61.8 L206.8,60.1 L208.3,58.3 L209.8,56.5 L211.4,54.7 L212.9,52.8 L214.4,50.8 L216,48.9 L217.5,46.8 L219,44.8 L220.6,42.6 L222.1,40.5 L223.6,38.2 L225.2,36 L226.7,33.7 L228.2,31.3 L229.8,28.9 L231.3,26.5 L232.8,24 L234.4,21.4 L235.9,18.8 L237.4,16.2 L239,13.5 L240.5,10.8 L242,8" fill="none" stroke="#2563EB" stroke-width="3"/>
+<line x1="24" y1="62" x2="95" y2="62" stroke="#2563EB" stroke-width="5.5" stroke-linecap="butt"/>
+<polygon points="14,62 26,55.4 26,68.6" fill="#2563EB"/>
+<line x1="205" y1="62" x2="276" y2="62" stroke="#2563EB" stroke-width="5.5" stroke-linecap="butt"/>
+<polygon points="286,62 274,55.4 274,68.6" fill="#2563EB"/>
+<circle cx="95" cy="62" r="5.6" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<circle cx="205" cy="62" r="5.6" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<text x="95" y="83" text-anchor="middle" font-family="Arial" font-size="13.5" font-weight="700" fill="#1C2733">2</text>
+<text x="205" y="83" text-anchor="middle" font-family="Arial" font-size="13.5" font-weight="700" fill="#1C2733">3</text>
+</svg></div>
+      <p class="concl"><span class="fi">\(x\lt 2\)</span> או <span class="fi">\(x\gt 3\)</span></p>
+      בגרף: הפרבולה מעל הישר משמאל ל-A ומימין ל-B.
+    </div>
+  </details>
+  <div class="q-row"><span>שיעור ה-<span class="fi">\(y\)</span> של A:</span>
+    <input class="q-input" data-answer="-1" inputmode="text" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>בסעיף ב, הגבול הימני:</span>
+    <input class="q-input" data-answer="3" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex14"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 15 — בסגנון המפמ״ר</h4></div>
+  <p class="q-text"><span class="mk mk-given">נתונות הפונקציות <span class="fi">\(f(x)=-2(x-4)(x+2)\)</span>
+    ו-<span class="fi">\(g(x)=x-4\)</span></span>.
+    <span class="mk mk-find">פתרי את האי-שוויון <span class="fi">\(g(x)\gt f(x)\)</span>.</span>
+    <br><span class="aside">מבחן מפמ״ר כיתה ט׳ רמה א׳ תשע״ט, טור א׳, שאלה 1ד. את נקודות החיתוך
+    (שאלה 1א) פתרת ב<a href="02-parabola-and-line.html">תחנה הקודמת</a>, תרגיל 6.</span></p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      פותחים את הסוגריים של <span class="fi">\(f\)</span>:
+      $$f(x)=-2(x^{2}-2x-8)=-2x^{2}+4x+16$$
+      מסדרים מול אפס:
+      $$x-4\gt -2x^{2}+4x+16\qquad\textcolor{#C0392B}{/\;+2x^{2}\;\;-4x\;\;-16}$$
+      $$2x^{2}-3x-20\gt 0$$
+      נקודות האפס, בנוסחה, עם <span class="fi">\(a=2,\ b=-3,\ c=-20\)</span>:
+      $$\Delta=9+160=169\qquad\sqrt{169}=13$$
+      $$x_{1,2}=\frac{3\pm13}{4}$$
+      $$x_{1}=-2.5\qquad\qquad x_{2}=4$$
+      <span class="fi">\(a=2\gt 0\)</span>, פתוחה למעלה. מבקשים <span class="fi">\(\gt 0\)</span>:
+      <div class="sk"><svg viewBox="0 0 300 122" width="300" height="122" role="img" aria-label="סקיצה לתרגיל 15">
+<line x1="14" y1="62" x2="286" y2="62" stroke="#5A6875" stroke-width="1.5"/>
+<polygon points="292,62 284,57.6 284,66.4" fill="#5A6875"/>
+<text x="288" y="54" font-family="Arial" font-size="12" font-style="italic" fill="#5A6875">x</text>
+<path d="M58,8 L59.5,10.8 L61,13.5 L62.6,16.2 L64.1,18.8 L65.6,21.4 L67.2,24 L68.7,26.5 L70.2,28.9 L71.8,31.3 L73.3,33.7 L74.8,36 L76.4,38.2 L77.9,40.5 L79.4,42.6 L81,44.7 L82.5,46.8 L84,48.9 L85.6,50.8 L87.1,52.8 L88.6,54.7 L90.2,56.5 L91.7,58.3 L93.2,60.1 L94.8,61.8 L96.3,63.4" fill="none" stroke="#2563EB" stroke-width="3"/>
+<path d="M96.3,63.4 L97.8,65 L99.4,66.6 L100.9,68.1 L102.4,69.6 L104,71 L105.5,72.4 L107.1,73.7 L108.6,75 L110.1,76.2 L111.7,77.4 L113.2,78.6 L114.7,79.7 L116.3,80.7 L117.8,81.7 L119.3,82.7 L120.9,83.6 L122.4,84.4 L123.9,85.3 L125.5,86 L127,86.8 L128.5,87.4 L130.1,88.1 L131.6,88.6 L133.1,89.2 L134.7,89.7 L136.2,90.1 L137.7,90.5 L139.3,90.9 L140.8,91.2 L142.3,91.4 L143.9,91.6 L145.4,91.8 L146.9,91.9 L148.5,92 L150,92 L151.5,92 L153.1,91.9 L154.6,91.8 L156.1,91.6 L157.7,91.4 L159.2,91.2 L160.7,90.9 L162.3,90.5 L163.8,90.1 L165.3,89.7 L166.9,89.2 L168.4,88.6 L169.9,88.1 L171.5,87.4 L173,86.8 L174.5,86 L176.1,85.3 L177.6,84.4 L179.1,83.6 L180.7,82.7 L182.2,81.7 L183.7,80.7 L185.3,79.7 L186.8,78.6 L188.3,77.4 L189.9,76.2 L191.4,75 L192.9,73.7 L194.5,72.4 L196,71 L197.6,69.6 L199.1,68.1 L200.6,66.6 L202.2,65 L203.7,63.4 L205.2,61.8" fill="none" stroke="#94A3B8" stroke-width="2.2"/>
+<path d="M205.2,61.8 L206.8,60.1 L208.3,58.3 L209.8,56.5 L211.4,54.7 L212.9,52.8 L214.4,50.8 L216,48.9 L217.5,46.8 L219,44.8 L220.6,42.6 L222.1,40.5 L223.6,38.2 L225.2,36 L226.7,33.7 L228.2,31.3 L229.8,28.9 L231.3,26.5 L232.8,24 L234.4,21.4 L235.9,18.8 L237.4,16.2 L239,13.5 L240.5,10.8 L242,8" fill="none" stroke="#2563EB" stroke-width="3"/>
+<line x1="24" y1="62" x2="95" y2="62" stroke="#2563EB" stroke-width="5.5" stroke-linecap="butt"/>
+<polygon points="14,62 26,55.4 26,68.6" fill="#2563EB"/>
+<line x1="205" y1="62" x2="276" y2="62" stroke="#2563EB" stroke-width="5.5" stroke-linecap="butt"/>
+<polygon points="286,62 274,55.4 274,68.6" fill="#2563EB"/>
+<circle cx="95" cy="62" r="5.6" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<circle cx="205" cy="62" r="5.6" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<text x="95" y="83" text-anchor="middle" font-family="Arial" font-size="13.5" font-weight="700" fill="#1C2733">−2.5</text>
+<text x="205" y="83" text-anchor="middle" font-family="Arial" font-size="13.5" font-weight="700" fill="#1C2733">4</text>
+</svg></div>
+      <p class="concl"><span class="fi">\(x\lt -2.5\)</span> או <span class="fi">\(x\gt 4\)</span></p>
+      בגרף: הישר מעל הפרבולה משני צדי נקודות החיתוך — כי הפרבולה פתוחה למטה.
+      <br>בדיקה ב-<span class="fi">\(x=5\)</span>: <span class="fi">\(g(5)=1\)</span>,
+      <span class="fi">\(f(5)=-2\cdot1\cdot7=-14\)</span>, ו-<span class="fi">\(1\gt -14\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row"><span>הגבול השמאלי:</span>
+    <input class="q-input" data-answer="-2.5" inputmode="text" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>והימני:</span>
+    <input class="q-input" data-answer="4" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex15"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 16 — אי-שוויון בתוך שאלה על ישר</h4></div>
+  <p class="q-text"><span class="mk mk-given">נתונה הפונקציה <span class="fi">\(y=(c^{2}-4c-21)x+6\)</span></span>.
+    <br>א. <span class="mk mk-find">עבור אילו ערכי <span class="fi">\(c\)</span> הפונקציה הקווית תהיה פונקציה יורדת?</span>
+    <br>ב. <span class="mk mk-find">עבור אילו ערכי <span class="fi">\(c\)</span> תתקבל פונקציה קבועה?</span>
+    <br><span class="aside">משבצת, רמה א, שאלה 28.</span></p>
+  <details class="step"><summary>רמז — מתי ישר יורד</summary>
+    <div class="step-body">ישר יורד כשהשיפוע שלו שלילי. כאן השיפוע הוא
+    <span class="fi">\(c^{2}-4c-21\)</span>.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      <strong>א.</strong> השיפוע הוא המקדם של <span class="fi">\(x\)</span>:
+      $$m=c^{2}-4c-21$$
+      פונקציה יורדת:
+      $$c^{2}-4c-21\lt 0$$
+      נקודות האפס — מכפלה <span class="fi">\(-21\)</span>, סכום <span class="fi">\(-4\)</span>:
+      $$(c-7)(c+3)=0$$
+      $$c_{1}=-3\qquad\qquad c_{2}=7$$
+      פתוחה למעלה. מבקשים <span class="fi">\(\lt 0\)</span>:
+      <div class="sk"><svg viewBox="0 0 300 122" width="300" height="122" role="img" aria-label="סקיצה לתרגיל 16">
+<line x1="14" y1="62" x2="286" y2="62" stroke="#5A6875" stroke-width="1.5"/>
+<polygon points="292,62 284,57.6 284,66.4" fill="#5A6875"/>
+<text x="288" y="54" font-family="Arial" font-size="12" font-style="italic" fill="#5A6875">c</text>
+<path d="M58,8 L59.5,10.8 L61,13.5 L62.6,16.2 L64.1,18.8 L65.6,21.4 L67.2,24 L68.7,26.5 L70.2,28.9 L71.8,31.3 L73.3,33.7 L74.8,36 L76.4,38.2 L77.9,40.5 L79.4,42.6 L81,44.7 L82.5,46.8 L84,48.9 L85.6,50.8 L87.1,52.8 L88.6,54.7 L90.2,56.5 L91.7,58.3 L93.2,60.1 L94.8,61.8 L96.3,63.4" fill="none" stroke="#94A3B8" stroke-width="2.2"/>
+<path d="M96.3,63.4 L97.8,65 L99.4,66.6 L100.9,68.1 L102.4,69.6 L104,71 L105.5,72.4 L107.1,73.7 L108.6,75 L110.1,76.2 L111.7,77.4 L113.2,78.6 L114.7,79.7 L116.3,80.7 L117.8,81.7 L119.3,82.7 L120.9,83.6 L122.4,84.4 L123.9,85.3 L125.5,86 L127,86.8 L128.5,87.4 L130.1,88.1 L131.6,88.6 L133.1,89.2 L134.7,89.7 L136.2,90.1 L137.7,90.5 L139.3,90.9 L140.8,91.2 L142.3,91.4 L143.9,91.6 L145.4,91.8 L146.9,91.9 L148.5,92 L150,92 L151.5,92 L153.1,91.9 L154.6,91.8 L156.1,91.6 L157.7,91.4 L159.2,91.2 L160.7,90.9 L162.3,90.5 L163.8,90.1 L165.3,89.7 L166.9,89.2 L168.4,88.6 L169.9,88.1 L171.5,87.4 L173,86.8 L174.5,86 L176.1,85.3 L177.6,84.4 L179.1,83.6 L180.7,82.7 L182.2,81.7 L183.7,80.7 L185.3,79.7 L186.8,78.6 L188.3,77.4 L189.9,76.2 L191.4,75 L192.9,73.7 L194.5,72.4 L196,71 L197.6,69.6 L199.1,68.1 L200.6,66.6 L202.2,65 L203.7,63.4 L205.2,61.8" fill="none" stroke="#2563EB" stroke-width="3"/>
+<path d="M205.2,61.8 L206.8,60.1 L208.3,58.3 L209.8,56.5 L211.4,54.7 L212.9,52.8 L214.4,50.8 L216,48.9 L217.5,46.8 L219,44.8 L220.6,42.6 L222.1,40.5 L223.6,38.2 L225.2,36 L226.7,33.7 L228.2,31.3 L229.8,28.9 L231.3,26.5 L232.8,24 L234.4,21.4 L235.9,18.8 L237.4,16.2 L239,13.5 L240.5,10.8 L242,8" fill="none" stroke="#94A3B8" stroke-width="2.2"/>
+<line x1="95" y1="62" x2="205" y2="62" stroke="#2563EB" stroke-width="5.5" stroke-linecap="butt"/>
+<circle cx="95" cy="62" r="5.6" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<circle cx="205" cy="62" r="5.6" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<text x="95" y="83" text-anchor="middle" font-family="Arial" font-size="13.5" font-weight="700" fill="#1C2733">−3</text>
+<text x="205" y="83" text-anchor="middle" font-family="Arial" font-size="13.5" font-weight="700" fill="#1C2733">7</text>
+</svg></div>
+      $$\boxed{-3\lt c\lt 7}$$
+      <strong>ב.</strong> פונקציה קבועה — שיפוע <span class="fi">\(0\)</span>:
+      $$c^{2}-4c-21=0$$
+      <p class="concl"><span class="fi">\(c=-3\)</span> או <span class="fi">\(c=7\)</span></p>
+      בדיקה ב-<span class="fi">\(c=0\)</span>: השיפוע <span class="fi">\(-21\lt 0\)</span>, יורדת ✓
+    </div>
+  </details>
+  <div class="q-row"><span>א. הגבול השמאלי:</span>
+    <input class="q-input" data-answer="-3" inputmode="text" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>א. והימני:</span>
+    <input class="q-input" data-answer="7" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex16"> סיימתי את התרגיל הזה</label>
+</article>
+
+<div class="box def" style="margin-top:26px">
+  <div class="box-title">מה לקחת מכאן</div>
+  <ol class="steps">
+    <li><strong>מסדרים מול אפס</strong> — פותחים סוגריים ומעבירים הכול לאגף אחד;</li>
+    <li><strong>מוצאים אפסים</strong> — כמו במשוואה ריבועית;</li>
+    <li><strong>סקיצה</strong> — לאן הפרבולה פתוחה, ובאיזה צד של הציר היא נמצאת איפה.</li>
+  </ol>
+  קטע אחד — אי-שוויון כפול. שני חלקים — "או". <span class="fi">\(\le,\ \ge\)</span> — האפסים בפנים.
+</div>
+
+<div class="progresswrap no-print">
+  <span class="progressbar"><i></i></span><span class="progress-label"></span>
+  <button class="all-sols" style="font-family:inherit;font-size:12px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:4px 10px;cursor:pointer">לפתוח את כל הפתרונות</button>
+</div>
+
+<nav class="pagenav">
+  <a href="02-parabola-and-line.html"><span class="dir">→ הקודם</span>פרבולה וישר</a>
+  <a class="next" href="index.html"><span class="dir">המפה ←</span>פונקציות ט׳</a>
+</nav>
+
+<footer class="fin">חלק מהעולם של שירה ·
+<a href="../../index.html">חזרה למרכז</a> ·
+<a href="index.html">מפת הפונקציות</a></footer>
+</main>
+</div>
+</body>
+</html>

@@ -1,0 +1,1760 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<link rel="apple-touch-icon" href="../../assets/icons/icon-180.png">
+<link rel="manifest" href="../../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>השימושים בנוסחאות הכפל המקוצר — אלגברה ט׳ — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../../vendor/katex.min.css">
+<link rel="stylesheet" href="../../css/shira.css">
+<style>
+:root{--accent:#2E6F8E}
+/* המקרים של כל שימוש — כרטיס לכל מקרה, עם דוגמה פתורה */
+.fams{display:flex; flex-wrap:wrap; gap:11px; margin:14px 0}
+.fams>div{flex:1 1 280px; min-width:0; border:1px solid var(--line);
+  border-radius:var(--r-md); background:var(--card); padding:11px 14px 13px}
+.fams .ft{font-size:14.5px; font-weight:800; margin-bottom:3px}
+.fams .fs{font-size:13.5px; line-height:1.6}
+.fams .katex-display{margin:.45em 0}
+/* מסקנה במסגרת — כמו שהמורה מקיפה בלוח */
+.concl{display:inline-block; border:2px solid #1C2733; border-radius:7px;
+  padding:2px 12px; font-weight:800; margin:4px 0}
+/* מקרא הסימנים מהלוח */
+.marks-legend{display:flex; flex-wrap:wrap; gap:6px 18px; font-size:14px; margin-top:6px}
+table.outcomes td{vertical-align:middle}
+table.dtable .fi, table.dtable .fi .katex{white-space:nowrap}
+/* סעיפים ממוספרים: התווית העברית בחוץ, המתמטיקה בפנים */
+p.sub{margin:6px 0 6px; font-size:16px}
+.subrow{display:flex; flex-wrap:wrap; gap:6px 26px; margin:8px 0}
+.subrow .sub{white-space:nowrap}
+</style>
+<script defer src="../../vendor/katex.min.js"></script>
+<script defer src="../../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../../js/shira.js"></script>
+</head>
+<body data-page="g9alg:02b-formula-uses">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">אלגברה ט׳ — המפה</a>
+    <span class="crumbs">תחנה <b>3</b> מתוך 8 · <b>השימושים בנוסחאות</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">אלגברה · כיתה ט׳ · תחנה 3</div>
+  <h1>השימושים בנוסחאות הכפל המקוצר</h1>
+  <p class="lead">
+    את שלוש הנוסחאות כבר פתחת ופירקת ב<a href="02-short-multiplication.html">תחנה הקודמת</a>.
+    כאן משתמשים בהן כדי לפתור: לפשט ביטוי, להשלים חסר, לפתור משוואה, לחשב
+    בלי לדעת את המספרים, להוכיח התחלקות ולפתור בעיה מילולית.
+    חמשת השימושים מסודרים לפי הרשימה של המורה למבחן.
+  </p>
+  <p class="youknow"><b>בסוף העמוד תדעי:</b> לחסר ריבוע בלי לטעות בסימנים ·
+  להשלים מקומות ריקים לפי הנוסחה · לזהות משוואה עם פתרון אחד, בלי פתרון או עם
+  אינסוף פתרונות · לחשב <span class="fi">\(a^{2}+b^{2}\)</span> מתוך
+  <span class="fi">\(a+b\)</span> ו-<span class="fi">\(ab\)</span> ·
+  להוכיח שביטוי מתחלק במספר ללא שארית · ולבנות משוואה מבעיה על שטחים ומספרים.</p>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>≈ 90 דק׳</b> · 33 תרגילים</span>
+    <a class="pm-jump" href="#sec-practice">לקפוץ ישר לתרגילים ↓</a>
+  </p>
+</header>
+
+<div class="fbox">
+  <div class="fbox-title">שלוש הנוסחאות שכל העמוד בנוי עליהן</div>
+  $$(a+b)^{2}=a^{2}+2ab+b^{2}$$
+  $$(a-b)^{2}=a^{2}-2ab+b^{2}$$
+  $$(a+b)(a-b)=a^{2}-b^{2}$$
+  <span class="f-legend">
+    <span>שכחת מאיפה הן באות? <a href="02-short-multiplication.html#sec-why">תחנה 2, חלק 1</a></span>
+  </span>
+</div>
+
+<div class="box def">
+  <div class="box-title">הסימנים של הלוח בכיתה</div>
+  כמו שהמורה מסמנת על הלוח: קו אחד מתחת לאיברים הריבועיים, שני קווים מתחת
+  לאיברים עם האות בלבד. כאן הסימנים גם צבועים, כדי שיהיה קל לראות מי מתכנס עם מי:
+  <div class="marks-legend">
+    <span><span class="fi">\(\textcolor{#7C3AED}{\underline{x^{2}}}\)</span> איבר ריבועי — קו אחד</span>
+    <span><span class="fi">\(\textcolor{#EA580C}{\underline{\underline{x}}}\)</span> איבר עם האות — שני קווים</span>
+    <span><span class="fi">\(\textcolor{#059669}{7}\)</span> מספר בלי אות</span>
+    <span><span class="fi">\(\textcolor{#C0392B}{-1\cdot}\)</span> פעולה שאנחנו מוסיפות</span>
+  </div>
+</div>
+
+<!-- ============ 1. פישוט ============ -->
+<h2 id="sec-simplify"><span class="num">1</span>פישוט ביטויים בעזרת הנוסחאות</h2>
+
+<p>
+  פישוט פירושו: פותחים כל זוג סוגריים בעזרת הנוסחה המתאימה, ואז מכנסים איברים
+  דומים. החדש כאן הוא שיש כמה נוסחאות באותו ביטוי — ולפעמים מינוס לפני אחת מהן.
+</p>
+
+<div class="box def">
+  <div class="box-title">הצעד של המורה: <span class="fi">\(-1\cdot(\;)\)</span></div>
+  כשמחסרים ריבוע או מכפלה, את תוצאת הנוסחה כותבים קודם <strong>בתוך סוגריים</strong>,
+  ולפניהם <span class="fi">\(\textcolor{#C0392B}{-1\cdot}\)</span>.
+  <br>רק בשורה הבאה פותחים את הסוגריים, וכל איבר בתוכם מחליף סימן:
+  $$-(x-3)^{2}=\textcolor{#C0392B}{-1\cdot}(x^{2}-6x+9)=-x^{2}+6x-9$$
+</div>
+
+<div class="nb" data-nb>
+  <div class="nb-head"><b>בונים ביחד במחברת</b><span class="nb-count"></span></div>
+  <ol class="nb-steps">
+    <li class="nb-step"><b>התרגיל</b>
+      <p>פשטי: <span class="fi">\((x-6)^{2}-(x+8)(x-8)\)</span>
+      <br><span class="aside">מתוך "המלצה לרצף הוראה בנושא טכניקה אלגברית" של הפיקוח על
+      הוראת המתמטיקה, עמ׳ 10, דוגמה 1ב.</span></p>
+    </li>
+    <li class="nb-step"><b>מזהים את שתי הנוסחאות</b>
+      <p>$$\underbrace{(x-6)^{2}}_{(a-b)^{2}}\;-\;\underbrace{(x+8)(x-8)}_{(a+b)(a-b)}$$</p>
+    </li>
+    <li class="nb-step"><b>פותחים כל נוסחה; השנייה נכנסת לסוגריים עם <span class="fi">\(-1\cdot\)</span></b>
+      <p>$$x^{2}-12x+36\;\textcolor{#C0392B}{-1\cdot}(x^{2}-64)$$</p>
+    </li>
+    <li class="nb-step"><b>פותחים את הסוגריים ומסמנים איברים דומים</b>
+      <p>$$\textcolor{#7C3AED}{\underline{x^{2}}}\textcolor{#EA580C}{\underline{\underline{-12x}}}\textcolor{#059669}{+36}\textcolor{#7C3AED}{\underline{-x^{2}}}\textcolor{#059669}{+64}$$</p>
+    </li>
+    <li class="nb-step"><b>מכנסים</b>
+      <p>$$\underbrace{x^{2}-x^{2}}_{0}\;-12x\;+\underbrace{36+64}_{100}$$
+      $$=\boxed{-12x+100}$$</p>
+    </li>
+    <li class="nb-step"><b>בודקים במספר</b>
+      <p>מציבים <span class="fi">\(x=1\)</span> בתרגיל ובתשובה:
+      $$(1-6)^{2}-(9)(-7)=25+63=88$$
+      $$-12+100=88\;\checkmark$$</p>
+    </li>
+  </ol>
+  <div class="nb-acts">
+    <button type="button" class="nb-next">השלב הבא ↓</button>
+    <button type="button" class="nb-all">להציג את כל השלבים</button>
+  </div>
+</div>
+
+<div class="box example">
+  <div class="box-title">איך מזהים שזה הסוג הזה</div>
+  המילים <strong>"פשטי"</strong>, <strong>"פתחי סוגריים וכנסי איברים דומים"</strong>
+  או <strong>"רשמי בצורה פשוטה"</strong>; בביטוי יש <span class="fi">\((\;)^{2}\)</span>
+  או זוג <span class="fi">\((a+b)(a-b)\)</span>, ולרוב יותר מנוסחה אחת.
+  <br>התשובה היא ביטוי, בלי סימן שוויון ובלי <span class="fi">\(x=\)</span>.
+</div>
+
+<h3>המקרים שיכולים להופיע</h3>
+<div class="fams">
+  <div>
+    <div class="ft">מחסרים ריבוע</div>
+    <div class="fs">הריבוע השני נכנס לסוגריים עם <span class="fi">\(-1\cdot\)</span>:</div>
+    $$(x+5)^{2}-(x-2)^{2}$$
+    $$=x^{2}+10x+25\;\textcolor{#C0392B}{-1\cdot}(x^{2}-4x+4)$$
+    $$=\textcolor{#7C3AED}{\underline{x^{2}}}\textcolor{#EA580C}{\underline{\underline{+10x}}}\textcolor{#059669}{+25}\textcolor{#7C3AED}{\underline{-x^{2}}}\textcolor{#EA580C}{\underline{\underline{+4x}}}\textcolor{#059669}{-4}$$
+    $$=\boxed{14x+21}$$
+    <div class="fs">בדיקה ב-<span class="fi">\(x=1\)</span>:
+    <span class="fi">\(36-1=35\)</span> וגם <span class="fi">\(14+21=35\)</span> ✓</div>
+  </div>
+  <div>
+    <div class="ft">מכפלה של שלושה גורמים</div>
+    <div class="fs">קודם הנוסחה — והתוצאה נשארת בסוגריים. רק אחר כך כופלים במספר שבחוץ:</div>
+    $$3(x-2)^{2}=3(x^{2}-4x+4)$$
+    $$=\boxed{3x^{2}-12x+12}$$
+    $$-2(x+3)(x-3)=-2(x^{2}-9)$$
+    $$=\boxed{-2x^{2}+18}$$
+  </div>
+  <div>
+    <div class="ft">המשפחה <span class="fi">\((a+b)^{2}-(a-b)^{2}\)</span></div>
+    <div class="fs">אותם שני איברים, פעם בסכום ופעם בהפרש:</div>
+    $$a^{2}+2ab+b^{2}\;\textcolor{#C0392B}{-1\cdot}(a^{2}-2ab+b^{2})$$
+    $$=\textcolor{#7C3AED}{\underline{a^{2}}}+2ab+\textcolor{#7C3AED}{\underline{b^{2}}}\textcolor{#7C3AED}{\underline{-a^{2}}}+2ab\textcolor{#7C3AED}{\underline{-b^{2}}}=\boxed{4ab}$$
+    <div class="fs">ולכן, בלי לפתוח:</div>
+    $$(3x+2)^{2}-(3x-2)^{2}=4\cdot\underbrace{3x}_{a}\cdot\underbrace{2}_{b}=24x$$
+    <div class="fs">ובחיבור: <span class="fi">\((a+b)^{2}+(a-b)^{2}=2a^{2}+2b^{2}\)</span>
+    — האמצעיים מתבטלים.</div>
+  </div>
+</div>
+
+<!-- ============ 2. השלמה + משוואות ============ -->
+<h2 id="sec-blanks"><span class="num">2</span>השלמת המקומות הריקים, ופתרון משוואות</h2>
+
+<p>
+  בהשלמה, הנוסחה היא התבנית: כותבים אותה מתחת לתרגיל ומשווים איבר מול איבר.
+  במשוואה, פותחים בעזרת הנוסחאות — ולרוב האיברים הריבועיים מתבטלים, ונשארת
+  משוואה ממעלה ראשונה שאת כבר יודעת לפתור.
+</p>
+
+<div class="nb" data-nb>
+  <div class="nb-head"><b>בונים ביחד במחברת — השלמה</b><span class="nb-count"></span></div>
+  <ol class="nb-steps">
+    <li class="nb-step"><b>התרגיל</b>
+      <p>השלימי את החסר כך שיתקבל שוויון נכון <strong>לכל</strong> ערך של <span class="fi">\(x\)</span>:
+      $$(x+\square)^{2}=x^{2}+10x+\square$$
+      <span class="aside">מתוך דף חודשי מס׳ 1 לכיתה ט׳ רגילה (משרד החינוך, תשפ"ז), שאלה 3ב.</span></p>
+    </li>
+    <li class="nb-step"><b>כותבים את הנוסחה מתחת, איבר מול איבר</b>
+      <p>$$\begin{aligned}
+        (a+b)^{2} &amp;= a^{2}+\;\;2ab\;\;+b^{2}\\
+        (x+\square)^{2} &amp;= x^{2}+\;10x\;+\square
+      \end{aligned}$$</p>
+    </li>
+    <li class="nb-step"><b>האיבר האמצעי קובע את <span class="fi">\(b\)</span></b>
+      <p>$$2\cdot x\cdot b=10x$$
+      $$b=5$$</p>
+    </li>
+    <li class="nb-step"><b>ומכאן האיבר האחרון</b>
+      <p>$$b^{2}=5^{2}=25$$</p>
+    </li>
+    <li class="nb-step"><b>התשובה, ובדיקה</b>
+      <p>$$(x+\boxed{5})^{2}=x^{2}+10x+\boxed{25}$$
+      בדיקה ב-<span class="fi">\(x=1\)</span>:
+      <span class="fi">\(6^{2}=36\)</span> וגם <span class="fi">\(1+10+25=36\)</span> ✓</p>
+    </li>
+  </ol>
+  <div class="nb-acts">
+    <button type="button" class="nb-next">השלב הבא ↓</button>
+    <button type="button" class="nb-all">להציג את כל השלבים</button>
+  </div>
+</div>
+
+<div class="box intuition">
+  <div class="box-title">מה פירוש "נכון לכל x"</div>
+  שוויון שנכון לכל <span class="fi">\(x\)</span> נקרא <strong>זהות</strong>: שני האגפים הם
+  אותו ביטוי בדיוק. לכן מותר להשוות מקדם מול מקדם — מקדם
+  <span class="fi">\(x^{2}\)</span> מול מקדם <span class="fi">\(x^{2}\)</span>, מקדם
+  <span class="fi">\(x\)</span> מול מקדם <span class="fi">\(x\)</span>, מספר מול מספר.
+  <br>למשל, לאיזה <span class="fi">\(k\)</span> השוויון
+  <span class="fi">\((x-k)^{2}=x^{2}-14x+49\)</span> נכון לכל <span class="fi">\(x\)</span>?
+  $$\underbrace{-2k}_{\text{מקדם } x}=-14\qquad\Longrightarrow\qquad k=7$$
+  $$\underbrace{k^{2}}_{\text{המספר}}=7^{2}=49\;\checkmark$$
+</div>
+
+<div class="nb" data-nb>
+  <div class="nb-head"><b>בונים ביחד במחברת — משוואה</b><span class="nb-count"></span></div>
+  <ol class="nb-steps">
+    <li class="nb-step"><b>התרגיל</b>
+      <p>פתרי את המשוואה:
+      $$(3x-4)^{2}-(x-1)^{2}=(4x-9)(2x-1)$$
+      <span class="aside">התרגיל מהלוח בכיתה.</span></p>
+    </li>
+    <li class="nb-step"><b>פותחים: שני ריבועים באגף שמאל, כפל סוגריים באגף ימין</b>
+      <p>את הריבוע השני כותבים בסוגריים, עם <span class="fi">\(-1\cdot\)</span>:
+      $$\begin{aligned}&9x^{2}-24x+16\;\textcolor{#C0392B}{-1\cdot}(x^{2}-2x+1)\\=\;&8x^{2}-4x-18x+9\end{aligned}$$</p>
+    </li>
+    <li class="nb-step"><b>פותחים את הסוגריים ומסמנים איברים דומים</b>
+      <p>$$\begin{aligned}&\textcolor{#7C3AED}{\underline{9x^{2}}}\textcolor{#EA580C}{\underline{\underline{-24x}}}\textcolor{#059669}{+16}\textcolor{#7C3AED}{\underline{-x^{2}}}\textcolor{#EA580C}{\underline{\underline{+2x}}}\textcolor{#059669}{-1}\\=\;&\textcolor{#7C3AED}{\underline{8x^{2}}}\textcolor{#EA580C}{\underline{\underline{-4x}}}\textcolor{#EA580C}{\underline{\underline{-18x}}}\textcolor{#059669}{+9}\end{aligned}$$</p>
+    </li>
+    <li class="nb-step"><b>מכנסים בכל אגף</b>
+      <p>$$8x^{2}-22x+15=8x^{2}-22x+9$$
+      $$\textcolor{#C0392B}{/\;-8x^{2}\;\;\;+22x\;\;\;-15}$$</p>
+    </li>
+    <li class="nb-step"><b>מעבירים אגפים</b>
+      <p>$$\textcolor{#7C3AED}{\underline{8x^{2}}}\textcolor{#EA580C}{\underline{\underline{-22x}}}\textcolor{#7C3AED}{\underline{-8x^{2}}}\textcolor{#EA580C}{\underline{\underline{+22x}}}=9-15$$
+      $$0=-6$$</p>
+    </li>
+    <li class="nb-step"><b>המסקנה</b>
+      <p>השוויון <span class="fi">\(0=-6\)</span> שקרי, ואין בו בכלל
+      <span class="fi">\(x\)</span> — כלומר שום ערך של <span class="fi">\(x\)</span>
+      לא יהפוך אותו לנכון.
+      <br><span class="concl">אין פתרון למשוואה</span></p>
+    </li>
+  </ol>
+  <div class="nb-acts">
+    <button type="button" class="nb-next">השלב הבא ↓</button>
+    <button type="button" class="nb-all">להציג את כל השלבים</button>
+  </div>
+</div>
+
+<div class="box essence">
+  <div class="box-title">שלוש התוצאות האפשריות של משוואה</div>
+  <div class="tbl-scroll">
+  <table class="dtable outcomes">
+    <tr><th>מה נשאר בסוף</th><th>מה זה אומר</th><th>מה כותבים</th></tr>
+    <tr><td><span class="fi">\(x=2\)</span></td>
+        <td>מספר אחד בדיוק מקיים את המשוואה</td>
+        <td><strong>פתרון אחד:</strong> <span class="fi">\(x=2\)</span></td></tr>
+    <tr><td><span class="fi">\(0=-6\)</span></td>
+        <td>שוויון שקרי בלי <span class="fi">\(x\)</span> — שום מספר לא מקיים</td>
+        <td><span class="concl">אין פתרון</span></td></tr>
+    <tr><td><span class="fi">\(0=0\)</span></td>
+        <td>שוויון אמיתי בלי <span class="fi">\(x\)</span> — כל מספר מקיים; זו זהות</td>
+        <td><strong>אינסוף פתרונות</strong> — כל <span class="fi">\(x\)</span></td></tr>
+  </table>
+  </div>
+</div>
+
+<div class="fams">
+  <div>
+    <div class="ft">פתרון אחד</div>
+    $$(x+2)^{2}-(x-2)^{2}=16$$
+    $$x^{2}+4x+4\;\textcolor{#C0392B}{-1\cdot}(x^{2}-4x+4)=16$$
+    $$\textcolor{#7C3AED}{\underline{x^{2}}}\textcolor{#EA580C}{\underline{\underline{+4x}}}\textcolor{#059669}{+4}\textcolor{#7C3AED}{\underline{-x^{2}}}\textcolor{#EA580C}{\underline{\underline{+4x}}}\textcolor{#059669}{-4}=16$$
+    $$8x=16\qquad\textcolor{#C0392B}{/\;:8}$$
+    $$x=2$$
+    <div class="fs">בדיקה: <span class="fi">\(4^{2}-0^{2}=16\)</span> ✓</div>
+  </div>
+  <div>
+    <div class="ft">אינסוף פתרונות</div>
+    $$(x+3)^{2}-6x=x^{2}+9$$
+    $$\textcolor{#7C3AED}{\underline{x^{2}}}\textcolor{#EA580C}{\underline{\underline{+6x}}}\textcolor{#059669}{+9}\textcolor{#EA580C}{\underline{\underline{-6x}}}=\textcolor{#7C3AED}{\underline{x^{2}}}\textcolor{#059669}{+9}\qquad\textcolor{#C0392B}{/\;-x^{2}\;\;-9}$$
+    $$0=0$$
+    <div class="fs">כל <span class="fi">\(x\)</span> מקיים — למשל
+    <span class="fi">\(x=1\)</span>: <span class="fi">\(16-6=10\)</span> וגם
+    <span class="fi">\(1+9=10\)</span> ✓</div>
+  </div>
+</div>
+
+<div class="box example">
+  <div class="box-title">איך מזהים שזה הסוג הזה</div>
+  <strong>השלמה:</strong> ריבועים ריקים או קווים (<span class="fi">\(\square\)</span>, ___)
+  בתוך נוסחה, ולרוב המילים "כך שיתקבל שוויון נכון לכל <span class="fi">\(x\)</span>".
+  <br><strong>משוואה:</strong> "פתרי את המשוואה" כשיש
+  <span class="fi">\((\;)^{2}\)</span> באחד האגפים. ואם כתוב "קבעי אם יש פתרון אחד,
+  אין פתרון או אינסוף פתרונות" — זו בדיוק הטבלה שלמעלה.
+</div>
+
+<!-- ============ 3. חישוב על סמך נתונים ============ -->
+<h2 id="sec-given"><span class="num">3</span>חישוב ביטויים על סמך נתונים</h2>
+
+<p>
+  נותנים לך, למשל, את <span class="fi">\(a+b\)</span> ואת <span class="fi">\(ab\)</span>,
+  ומבקשים את <span class="fi">\(a^{2}+b^{2}\)</span>. את <span class="fi">\(a\)</span>
+  ואת <span class="fi">\(b\)</span> עצמם לא מחפשים: בוחרים נוסחה שיש בה גם מה שמבקשים
+  וגם מה שנתון, מבודדים — ומציבים.
+</p>
+
+<div class="fbox">
+  <div class="fbox-title">אותה נוסחה, מסודרת לפי מה שנתון</div>
+  $$(a+b)^{2}=a^{2}+b^{2}+2ab$$
+  $$\Longrightarrow\quad a^{2}+b^{2}=(a+b)^{2}-2ab$$
+  $$(a-b)^{2}=a^{2}+b^{2}-2ab$$
+  $$\Longrightarrow\quad a^{2}+b^{2}=(a-b)^{2}+2ab$$
+  $$(a-b)^{2}=\underbrace{a^{2}+b^{2}}_{(a+b)^{2}-2ab}-2ab=(a+b)^{2}-4ab$$
+  $$a^{2}-b^{2}=(a+b)(a-b)$$
+  <span class="f-legend">
+    <span>בכל שורה, בצד ימין נשארו רק דברים שנתונים בשאלה</span>
+  </span>
+</div>
+
+<div class="nb" data-nb>
+  <div class="nb-head"><b>בונים ביחד במחברת</b><span class="nb-count"></span></div>
+  <ol class="nb-steps">
+    <li class="nb-step"><b>התרגיל</b>
+      <p>נתון: <span class="fi">\(a+b=12\)</span>, <span class="fi">\(ab=32\)</span>.
+      חשבי את <span class="fi">\(a^{2}+b^{2}\)</span>.
+      <br><span class="aside">הנתונים מדף חודשי מס׳ 1, עתודה מדעית טכנולוגית (משרד החינוך, תשפ"ז),
+      שאלה 6. את השאלה המקורית תמצאי בתרגול, תרגיל 18.</span></p>
+    </li>
+    <li class="nb-step"><b>נוסחה שיש בה גם את המבוקש וגם את הנתונים</b>
+      <p>$$(a+b)^{2}=a^{2}+b^{2}+2ab$$</p>
+    </li>
+    <li class="nb-step"><b>מבודדים את המבוקש</b>
+      <p>$$a^{2}+b^{2}=(a+b)^{2}-2ab$$</p>
+    </li>
+    <li class="nb-step"><b>מציבים</b>
+      <p>$$a^{2}+b^{2}=\underbrace{12^{2}}_{(a+b)^{2}}-\underbrace{2\cdot 32}_{2ab}$$
+      $$=144-64=\boxed{80}$$</p>
+    </li>
+    <li class="nb-step"><b>בודקים</b>
+      <p>המספרים 4 ו-8 מקיימים את הנתונים:
+      <span class="fi">\(4+8=12\)</span>, <span class="fi">\(4\cdot8=32\)</span>.
+      $$4^{2}+8^{2}=16+64=80\;\checkmark$$</p>
+    </li>
+  </ol>
+  <div class="nb-acts">
+    <button type="button" class="nb-next">השלב הבא ↓</button>
+    <button type="button" class="nb-all">להציג את כל השלבים</button>
+  </div>
+</div>
+
+<div class="box example">
+  <div class="box-title">איך מזהים שזה הסוג הזה</div>
+  "נתון ש… חשבי את ערך הביטוי", כשהנתונים הם <strong>צירופים</strong>
+  (<span class="fi">\(a+b\)</span>, <span class="fi">\(a-b\)</span>,
+  <span class="fi">\(ab\)</span>, <span class="fi">\(x+\tfrac{1}{x}\)</span>) ולא המשתנים
+  עצמם. לפעמים כתוב במפורש "בלי למצוא את <span class="fi">\(a\)</span> ואת
+  <span class="fi">\(b\)</span>". ובגרסת ההוכחה: "הוכיחי ש…" — מתחילים מאגף אחד
+  ומגיעים לשני.
+</div>
+
+<h3>המקרים שיכולים להופיע</h3>
+<div class="fams">
+  <div>
+    <div class="ft">נתונים <span class="fi">\(a+b\)</span> ו-<span class="fi">\(ab\)</span></div>
+    <div class="fs">עם הנתונים של הדוגמה, <span class="fi">\(a+b=12\)</span>,
+    <span class="fi">\(ab=32\)</span>:</div>
+    $$(a-b)^{2}=(a+b)^{2}-4ab$$
+    $$=12^{2}-4\cdot32=144-128=\boxed{16}$$
+    <div class="fs">בדיקה: <span class="fi">\((8-4)^{2}=16\)</span> ✓</div>
+  </div>
+  <div>
+    <div class="ft">נתונים <span class="fi">\(a-b\)</span> ו-<span class="fi">\(ab\)</span></div>
+    <div class="fs">נתון <span class="fi">\(a-b=3\)</span>, <span class="fi">\(ab=10\)</span>:</div>
+    $$a^{2}+b^{2}=(a-b)^{2}+2ab$$
+    $$=3^{2}+2\cdot10=9+20=\boxed{29}$$
+    <div class="fs">בדיקה עם 5 ו-2: <span class="fi">\(25+4=29\)</span> ✓</div>
+  </div>
+  <div>
+    <div class="ft">נתון <span class="fi">\(x+\tfrac{1}{x}\)</span></div>
+    <div class="fs">נתון <span class="fi">\(x+\frac{1}{x}=5\)</span>; חשבי
+    <span class="fi">\(x^{2}+\frac{1}{x^{2}}\)</span>. האיבר האמצעי כאן הוא מספר:</div>
+    $$\left(x+\tfrac{1}{x}\right)^{2}=x^{2}+\underbrace{2\cdot x\cdot\tfrac{1}{x}}_{2}+\tfrac{1}{x^{2}}$$
+    $$x^{2}+\tfrac{1}{x^{2}}=\left(x+\tfrac{1}{x}\right)^{2}-2$$
+    $$=5^{2}-2=\boxed{23}$$
+  </div>
+  <div>
+    <div class="ft">נתונים <span class="fi">\(a+b\)</span> ו-<span class="fi">\(a-b\)</span></div>
+    <div class="fs">נתון <span class="fi">\(a+b=9\)</span>, <span class="fi">\(a-b=4\)</span>;
+    חשבי <span class="fi">\(a^{2}-b^{2}\)</span>:</div>
+    $$a^{2}-b^{2}=\underbrace{(a+b)}_{9}\cdot\underbrace{(a-b)}_{4}=\boxed{36}$$
+  </div>
+  <div>
+    <div class="ft">"הוכיחי ש…"</div>
+    <div class="fs">נתון <span class="fi">\(a+b=5\)</span>, <span class="fi">\(ab=6\)</span>.
+    הוכיחי: <span class="fi">\(a^{2}+b^{2}=13\)</span>.
+    <br>מתחילים מאגף שמאל ומגיעים לימין:</div>
+    $$a^{2}+b^{2}=(a+b)^{2}-2ab$$
+    $$=5^{2}-2\cdot6=25-12=13$$
+    <div class="fs">הגענו לאגף ימין. מש"ל</div>
+  </div>
+</div>
+
+<!-- ============ 4. הוכחת התחלקות ============ -->
+<h2 id="sec-divide"><span class="num">4</span>הוכחת התחלקות ללא שארית</h2>
+
+<p>
+  כדי להוכיח שביטוי מתחלק ב-8 לכל <span class="fi">\(n\)</span> שלם: מפשטים אותו,
+  ומוציאים 8 כגורם משותף. ביטוי מהצורה <span class="fi">\(8\cdot(\text{מספר שלם})\)</span>
+  מתחלק ב-8 ללא שארית.
+</p>
+
+<div class="nb" data-nb>
+  <div class="nb-head"><b>בונים ביחד במחברת</b><span class="nb-count"></span></div>
+  <ol class="nb-steps">
+    <li class="nb-step"><b>התרגיל</b>
+      <p><span class="fi">\(n\)</span> מספר שלם. הוכיחי שהביטוי
+      <span class="fi">\((3n+1)^{2}-(n+3)^{2}\)</span> מתחלק ב-8 ללא שארית.
+      <br><span class="aside">התרגיל מהלוח בכיתה.</span></p>
+    </li>
+    <li class="nb-step"><b>פותחים את שני הריבועים; את השני — בסוגריים, עם <span class="fi">\(-1\cdot\)</span></b>
+      <p>$$9n^{2}+6n+1\;\textcolor{#C0392B}{-1\cdot}(n^{2}+6n+9)$$</p>
+    </li>
+    <li class="nb-step"><b>פותחים את הסוגריים ומסמנים איברים דומים</b>
+      <p>$$\textcolor{#7C3AED}{\underline{9n^{2}}}\textcolor{#EA580C}{\underline{\underline{+6n}}}\textcolor{#059669}{+1}\textcolor{#7C3AED}{\underline{-n^{2}}}\textcolor{#EA580C}{\underline{\underline{-6n}}}\textcolor{#059669}{-9}$$</p>
+    </li>
+    <li class="nb-step"><b>מכנסים</b>
+      <p>$$\underbrace{9n^{2}-n^{2}}_{8n^{2}}\;\underbrace{+6n-6n}_{0}\;\underbrace{+1-9}_{-8}$$
+      $$=8n^{2}-8$$</p>
+    </li>
+    <li class="nb-step"><b>מוציאים גורם משותף 8</b>
+      <p>$$\underline{8}n^{2}-\underline{8}=\boxed{8\cdot(n^{2}-1)}$$</p>
+    </li>
+    <li class="nb-step"><b>משפט המסקנה</b>
+      <p><span class="fi">\(n\)</span> מספר שלם, ולכן גם
+      <span class="fi">\(n^{2}-1\)</span> מספר שלם.
+      <br>הביטוי שווה ל-8 כפול מספר שלם, ולכן הוא מתחלק ב-8 ללא שארית. מש"ל</p>
+    </li>
+    <li class="nb-step"><b>בדיקה במספר: <span class="fi">\(n=2\)</span></b>
+      <p>$$(3\cdot2+1)^{2}-(2+3)^{2}=7^{2}-5^{2}=49-25=24$$
+      $$8\cdot(2^{2}-1)=8\cdot3=24\;\checkmark$$
+      ו-24 מתחלק ב-8 ✓</p>
+    </li>
+  </ol>
+  <div class="nb-acts">
+    <button type="button" class="nb-next">השלב הבא ↓</button>
+    <button type="button" class="nb-all">להציג את כל השלבים</button>
+  </div>
+</div>
+
+<div class="box def">
+  <div class="box-title">משפט המסקנה — תמיד באותו מבנה</div>
+  הביטוי שווה ל- <span class="fi">\(k\cdot(\ldots)\)</span>.
+  <br>מכיוון ש-<span class="fi">\(n\)</span> שלם, גם הביטוי שבסוגריים הוא מספר שלם.
+  <br>לכן הביטוי מתחלק ב-<span class="fi">\(k\)</span> ללא שארית.
+</div>
+
+<div class="box warn">
+  <div class="box-title">שימי לב</div>
+  הבדיקה ב-<span class="fi">\(n=2\)</span> תופסת טעויות חשבון, וההוכחה עצמה היא
+  האלגברה: היא מראה שהתכונה נכונה לכל <span class="fi">\(n\)</span> בבת אחת.
+</div>
+
+<div class="box example">
+  <div class="box-title">איך מזהים שזה הסוג הזה</div>
+  "הוכיחי שהביטוי מתחלק ב-… ללא שארית", "לכל <span class="fi">\(n\)</span> שלם / טבעי",
+  "הוכיחי שסכום / הפרש / מכפלה של מספרים עוקבים הוא תמיד…".
+</div>
+
+<h3>מספרים עוקבים — איך כותבים אותם</h3>
+<div class="tbl-scroll">
+<table class="dtable">
+  <tr><th>מה כתוב בשאלה</th><th>איך כותבים באלגברה</th><th>דוגמה</th></tr>
+  <tr><td>שני מספרים עוקבים</td><td><span class="fi">\(n,\;\;n+1\)</span></td><td>7, 8</td></tr>
+  <tr><td>המספר שלפני <span class="fi">\(n\)</span> והמספר שאחריו</td><td><span class="fi">\(n-1,\;\;n+1\)</span></td><td>6, 8</td></tr>
+  <tr><td>שני מספרים זוגיים עוקבים</td><td><span class="fi">\(2n,\;\;2n+2\)</span></td><td>4, 6</td></tr>
+  <tr><td>שני מספרים אי-זוגיים עוקבים</td><td><span class="fi">\(2n-1,\;\;2n+1\)</span></td><td>5, 7</td></tr>
+</table>
+</div>
+
+<h3>המקרים שיכולים להופיע</h3>
+<div class="fams">
+  <div>
+    <div class="ft">הפרש הריבועים של שני עוקבים</div>
+    $$(n+1)^{2}-n^{2}=n^{2}+2n+1\;\textcolor{#C0392B}{-1\cdot}n^{2}$$
+    $$=2n+1=\underbrace{n}_{\text{הקטן}}+\underbrace{(n+1)}_{\text{הגדול}}$$
+    <div class="fs">התוצאה אי-זוגית, והיא שווה לסכום שני המספרים.
+    <br>בדיקה: <span class="fi">\(8^{2}-7^{2}=15=7+8\)</span> ✓</div>
+  </div>
+  <div>
+    <div class="ft">לפני ואחרי: מתחלק ב-4</div>
+    $$(n+1)^{2}-(n-1)^{2}$$
+    $$=n^{2}+2n+1\;\textcolor{#C0392B}{-1\cdot}(n^{2}-2n+1)$$
+    $$=\textcolor{#7C3AED}{\underline{n^{2}}}\textcolor{#EA580C}{\underline{\underline{+2n}}}\textcolor{#059669}{+1}\textcolor{#7C3AED}{\underline{-n^{2}}}\textcolor{#EA580C}{\underline{\underline{+2n}}}\textcolor{#059669}{-1}=\boxed{4n}$$
+    <div class="fs"><span class="fi">\(n\)</span> שלם, ולכן <span class="fi">\(4n\)</span>
+    מתחלק ב-4 ללא שארית.
+    <br>בדיקה: <span class="fi">\(8^{2}-6^{2}=28=4\cdot7\)</span> ✓</div>
+  </div>
+  <div>
+    <div class="ft">מכפלה של שני זוגיים עוקבים, ועוד 1</div>
+    $$2n\cdot(2n+2)+1=4n^{2}+4n+1$$
+    $$=\boxed{(2n+1)^{2}}$$
+    <div class="fs">התוצאה היא תמיד ריבוע — של המספר האי-זוגי שבין שניהם.
+    <br>בדיקה: <span class="fi">\(4\cdot6+1=25=5^{2}\)</span> ✓</div>
+  </div>
+</div>
+
+<!-- ============ 5. בעיות מילוליות ============ -->
+<h2 id="sec-words"><span class="num">5</span>בעיות מילוליות</h2>
+
+<p>
+  הדרך קבועה: מגדירים נעלם ← כותבים כל כמות בעזרתו ← בונים משוואה ← פותחים
+  בעזרת הנוסחאות ← פותרים ← בודקים מול הסיפור. ברוב הבעיות האלה האיבר הריבועי
+  מתבטל, ונשארת משוואה ממעלה ראשונה.
+</p>
+
+<div class="nb" data-nb>
+  <div class="nb-head"><b>בונים ביחד במחברת</b><span class="nb-count"></span></div>
+  <ol class="nb-steps">
+    <li class="nb-step"><b>התרגיל</b>
+      <p>צלע של ריבוע הוארכה ב-3 ס"מ, ושטח הריבוע גדל ב-39 סמ"ר.
+      מה היה אורך הצלע המקורית?</p>
+    </li>
+    <li class="nb-step"><b>מגדירים נעלם</b>
+      <p>$$x=\text{אורך הצלע המקורית}$$
+      $$x+3=\text{אורך הצלע החדשה}$$</p>
+    </li>
+    <li class="nb-step"><b>כותבים את שני השטחים ובונים משוואה</b>
+      <p>השטח החדש פחות השטח המקורי שווה ל-39:
+      $$\underbrace{(x+3)^{2}}_{\text{השטח החדש}}-\underbrace{x^{2}}_{\text{השטח המקורי}}=39$$</p>
+    </li>
+    <li class="nb-step"><b>פותחים בעזרת הנוסחה ומכנסים</b>
+      <p>$$\textcolor{#7C3AED}{\underline{x^{2}}}+6x+9\textcolor{#7C3AED}{\underline{-x^{2}}}=39$$
+      $$6x+9=39\qquad\textcolor{#C0392B}{/\;-9}$$</p>
+    </li>
+    <li class="nb-step"><b>פותרים</b>
+      <p>$$6x=30\qquad\textcolor{#C0392B}{/\;:6}$$
+      $$x=5$$</p>
+    </li>
+    <li class="nb-step"><b>תשובה, ובדיקה מול הסיפור</b>
+      <p>אורך הצלע המקורית: <strong>5 ס"מ</strong>.
+      $$5^{2}=25\qquad 8^{2}=64\qquad 64-25=39\;\checkmark$$</p>
+    </li>
+  </ol>
+  <div class="nb-acts">
+    <button type="button" class="nb-next">השלב הבא ↓</button>
+    <button type="button" class="nb-all">להציג את כל השלבים</button>
+  </div>
+</div>
+
+<div class="box example">
+  <div class="box-title">איך מזהים שזה הסוג הזה</div>
+  "צלע / אורך הוגדל ב-…", "השטח גדל / קטן ב-…", "ריבוע של מספר", "מספרים עוקבים",
+  "מלבן לעומת ריבוע". כשיש בסיפור שטח של ריבוע — יש בו
+  <span class="fi">\((\;)^{2}\)</span>, ושם נכנסת הנוסחה.
+</div>
+
+<h3>המקרים שיכולים להופיע</h3>
+<div class="fams">
+  <div>
+    <div class="ft">בעיית מספרים</div>
+    <div class="fs">ההפרש בין הריבועים של שני מספרים טבעיים עוקבים הוא 37. מצאי את המספרים.</div>
+    $$n=\text{המספר הקטן}\qquad n+1=\text{המספר הגדול}$$
+    $$(n+1)^{2}-n^{2}=37$$
+    $$n^{2}+2n+1-n^{2}=37$$
+    $$2n+1=37\qquad\textcolor{#C0392B}{/\;-1}$$
+    $$2n=36\qquad\textcolor{#C0392B}{/\;:2}$$
+    $$n=18$$
+    <div class="fs">המספרים: 18 ו-19.
+    <br>בדיקה: <span class="fi">\(361-324=37\)</span> ✓</div>
+  </div>
+  <div>
+    <div class="ft">מלבן לעומת ריבוע</div>
+    <div class="fs">לריבוע צלע <span class="fi">\(x\)</span>. למלבן צלעות
+    <span class="fi">\(x+4\)</span> ו-<span class="fi">\(x-4\)</span>
+    (<span class="fi">\(x&gt;4\)</span>). של מי השטח גדול יותר, ובכמה?</div>
+    $$\underbrace{(x+4)(x-4)}_{\text{שטח המלבן}}=x^{2}-16$$
+    $$\underbrace{x^{2}}_{\text{שטח הריבוע}}-(x^{2}-16)=16$$
+    <div class="fs">שטח הריבוע גדול ב-16 יחידות שטח — לכל <span class="fi">\(x\)</span>.
+    <br>בדיקה ב-<span class="fi">\(x=10\)</span>: <span class="fi">\(100-14\cdot6=100-84=16\)</span> ✓</div>
+  </div>
+</div>
+
+<!-- ============ 6. תרגול ============ -->
+<h2 id="sec-practice"><span class="num">6</span>תרגול — משלב לשלב</h2>
+
+<p>
+  התרגילים מסודרים לפי חמשת השימושים, ובכל שימוש — מהקל לקשה. ליד כל תרגיל כתוב
+  מאיפה הוא; תרגילים בלי מקור כתבנו אנחנו, באותו סגנון.
+</p>
+
+<h3>פישוט ביטויים</h3>
+<article class="ex" id="t1">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 1 — ריבוע עם שתי אותיות</h4></div>
+  <p class="q-text"><span class="mk mk-find">פתחי סוגריים:</span>
+    <span class="fi">\((4x-7y)^{2}\)</span>
+    <br><span class="aside">"המלצה לרצף הוראה בנושא טכניקה אלגברית", עמ׳ 10, דוגמה 1א.</span></p>
+  <details class="step"><summary>רמז — מי <span class="fi">\(a\)</span> ומי <span class="fi">\(b\)</span></summary>
+    <div class="step-body"><span class="fi">\(a=4x\)</span> ו-<span class="fi">\(b=7y\)</span> — כל איבר
+    כולל המקדם שלו.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$(4x-7y)^{2}=\underbrace{(4x)^{2}}_{a^{2}}-\underbrace{2\cdot4x\cdot7y}_{2ab}+\underbrace{(7y)^{2}}_{b^{2}}$$
+      $$=\boxed{16x^{2}-56xy+49y^{2}}$$
+      בדיקה ב-<span class="fi">\(x=1,\;y=1\)</span>:
+      <span class="fi">\((-3)^{2}=9\)</span> וגם <span class="fi">\(16-56+49=9\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row">
+    <span>מקדם <span class="fi">\(xy\)</span>:</span>
+    <input class="q-input" data-answer="-56" inputmode="text" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex1"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="t2">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 2 — התאימי ביטויים שווים</h4></div>
+  <p class="q-text"><span class="mk mk-find">התאימי לכל ביטוי בטור א׳ ביטוי שווה לו בטור ב׳, והסבירי מדוע הם שווים.</span>
+    <br><span class="aside">"המלצה לרצף הוראה בנושא טכניקה אלגברית", עמ׳ 10, דוגמה 2.</span></p>
+  <div class="tbl-scroll">
+  <table class="dtable">
+    <tr><th>טור א׳</th><th>טור ב׳</th></tr>
+    <tr><td><span class="fi">\(x^{2}+6x+9\)</span></td><td><span class="fi">\((x-2)(x-3)\)</span></td></tr>
+    <tr><td><span class="fi">\(a^{2}+9+6a\)</span></td><td><span class="fi">\((x-3)(x+3)\)</span></td></tr>
+    <tr><td><span class="fi">\(-x^{2}-6x-9\)</span></td><td><span class="fi">\(x(x-9)\)</span></td></tr>
+    <tr><td><span class="fi">\(9-6a+a^{2}\)</span></td><td><span class="fi">\((a-3)^{2}\)</span></td></tr>
+    <tr><td><span class="fi">\(x^{2}-9x\)</span></td><td><span class="fi">\((a+3)^{2}\)</span></td></tr>
+    <tr><td><span class="fi">\(x^{2}-9\)</span></td><td><span class="fi">\(-(x+3)^{2}\)</span></td></tr>
+    <tr><td><span class="fi">\(x^{2}+5x+6\)</span></td><td><span class="fi">\((x+3)^{2}\)</span></td></tr>
+    <tr><td><span class="fi">\(x^{2}-5x+6\)</span></td><td><span class="fi">\((x+2)(x+3)\)</span></td></tr>
+  </table>
+  </div>
+  <details class="step"><summary>רמז — מאיזה טור מתחילים</summary>
+    <div class="step-body">קל יותר לפתוח את טור ב׳ ולחפש את התוצאה בטור א׳. שימי לב
+    שהסדר של האיברים בטור א׳ לא תמיד מהגדול לקטן: <span class="fi">\(a^{2}+9+6a\)</span>
+    הוא אותו ביטוי כמו <span class="fi">\(a^{2}+6a+9\)</span>.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$(x+3)^{2}=x^{2}+6x+9$$
+      $$(a+3)^{2}=a^{2}+6a+9=a^{2}+9+6a$$
+      $$-(x+3)^{2}=\textcolor{#C0392B}{-1\cdot}(x^{2}+6x+9)=-x^{2}-6x-9$$
+      $$(a-3)^{2}=a^{2}-6a+9=9-6a+a^{2}$$
+      $$x(x-9)=x^{2}-9x$$
+      $$(x-3)(x+3)=x^{2}-9$$
+      $$(x+2)(x+3)=x^{2}+5x+6$$
+      $$(x-2)(x-3)=x^{2}-5x+6$$
+      ארבע הראשונות הן נוסחאות הכפל המקוצר; ארבע האחרונות — כפל רגיל (וגם
+      <span class="fi">\((x-3)(x+3)\)</span> הוא הפרש ריבועים).
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex2"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="t3">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 3 — מספר ועוד הפרש ריבועים</h4></div>
+  <p class="q-text"><span class="mk mk-find">פשטי. היעזרי בנוסחאות הכפל המקוצר:</span>
+    <span class="fi">\(36+(2x+4)(2x-4)\)</span>
+    <br><span class="aside">משבצת (גבי יקואל), דף עבודה "נוסחאות הכפל המקוצר — רמה א", שאלה 4ב.</span></p>
+  <details class="step"><summary>רמז</summary>
+    <div class="step-body">המכפלה היא <span class="fi">\((a+b)(a-b)\)</span> עם
+    <span class="fi">\(a=2x\)</span> ו-<span class="fi">\(b=4\)</span>.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$36+\underbrace{(2x+4)(2x-4)}_{(2x)^{2}-4^{2}}$$
+      $$=\textcolor{#059669}{36}+4x^{2}\textcolor{#059669}{-16}$$
+      $$=\boxed{4x^{2}+20}$$
+      בדיקה ב-<span class="fi">\(x=1\)</span>:
+      <span class="fi">\(36+6\cdot(-2)=24\)</span> וגם <span class="fi">\(4+20=24\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row">
+    <span>המספר החופשי:</span>
+    <input class="q-input" data-answer="20" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex3"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="t4">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 4 — הפרש ריבועים, ואחריו מינוס</h4></div>
+  <p class="q-text"><span class="mk mk-find">פתחי סוגריים וכנסי איברים דומים:</span>
+    <span class="fi">\((2a-1)(2a+1)-(2a+3)(a+1)\)</span>
+    <br><span class="aside">"המלצה לרצף הוראה בנושא טכניקה אלגברית", עמ׳ 10, דוגמה 1ג.</span></p>
+  <details class="step"><summary>רמז — שתי המכפלות שונות</summary>
+    <div class="step-body">הראשונה היא הפרש ריבועים. השנייה היא כפל סוגריים רגיל —
+    ואת התוצאה שלה כותבים בסוגריים, עם <span class="fi">\(-1\cdot\)</span>.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$\underbrace{(2a-1)(2a+1)}_{(2a)^{2}-1^{2}}-(2a+3)(a+1)$$
+      $$=4a^{2}-1\;\textcolor{#C0392B}{-1\cdot}(2a^{2}+2a+3a+3)$$
+      $$=\textcolor{#7C3AED}{\underline{4a^{2}}}\textcolor{#059669}{-1}\textcolor{#7C3AED}{\underline{-2a^{2}}}\textcolor{#EA580C}{\underline{\underline{-5a}}}\textcolor{#059669}{-3}$$
+      $$=\boxed{2a^{2}-5a-4}$$
+      בדיקה ב-<span class="fi">\(a=1\)</span>:
+      <span class="fi">\(1\cdot3-5\cdot2=-7\)</span> וגם <span class="fi">\(2-5-4=-7\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row">
+    <span>מקדם <span class="fi">\(a\)</span>:</span>
+    <input class="q-input" data-answer="-5" inputmode="text" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <span>המספר החופשי:</span>
+    <input class="q-input" data-answer="-4" inputmode="text" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex4"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="t5">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 5 — המינוס לפני המכפלה השנייה</h4></div>
+  <p class="q-text">נתון הביטוי <span class="fi">\((x-4)(x+3)-(x-2)(x-4)\)</span>.
+    <br>א. <span class="mk mk-find">האם הביטוי שווה לביטוי <span class="fi">\((x-4)(x+3-x-2)\)</span>?</span> נמקי.
+    <br>ב. <span class="mk mk-find">פשטי את הביטוי.</span>
+    <br><span class="aside">דף חודשי מס׳ 1, עתודה מדעית טכנולוגית (משרד החינוך, תשפ"ז), שאלה 4.</span></p>
+  <details class="step"><summary>רמז — מה המינוס עושה לסוגריים</summary>
+    <div class="step-body">לשני האיברים יש גורם משותף <span class="fi">\((x-4)\)</span>.
+    כשמוציאים אותו, נשאר <span class="fi">\((x+3)-1\cdot(x-2)\)</span> — והמינוס פועל על
+    <strong>שני</strong> האיברים של <span class="fi">\((x-2)\)</span>.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      <strong>א.</strong> מוציאים גורם משותף <span class="fi">\((x-4)\)</span>:
+      $$(x-4)\bigl[(x+3)\textcolor{#C0392B}{-1\cdot}(x-2)\bigr]$$
+      $$=(x-4)(x+3-x+2)$$
+      בסוגריים השניים צריך להופיע <span class="fi">\(+2\)</span>, כי
+      <span class="fi">\(-1\cdot(-2)=+2\)</span>. בביטוי המוצע כתוב
+      <span class="fi">\(-2\)</span>, ולכן <strong>הביטויים אינם שווים</strong>.
+      <br>בדיקה ב-<span class="fi">\(x=0\)</span>: הנתון שווה
+      <span class="fi">\((-4)(3)-(-2)(-4)=-20\)</span>, והמוצע שווה
+      <span class="fi">\((-4)(0+3-0-2)=-4\)</span>.
+      <br><br><strong>ב.</strong>
+      $$(x-4)(x+3-x+2)=(x-4)\cdot5=\boxed{5x-20}$$
+      בדיקה ב-<span class="fi">\(x=0\)</span>: <span class="fi">\(-20\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row">
+    <span>בסעיף ב — המספר החופשי:</span>
+    <input class="q-input" data-answer="-20" inputmode="text" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex5"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="t6">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 6 — מינוס לפני ריבוע, ועוד מינוס</h4></div>
+  <p class="q-text"><span class="mk mk-find">פתחי סוגריים וכנסי איברים דומים:</span>
+    <span class="fi">\(-(x-6)^{2}-(x+6)(x+4)\)</span>
+    <br><span class="aside">משבצת (גבי יקואל), "נוסחאות הכפל המקוצר — רמה א", שאלה 12ד.</span></p>
+  <details class="step"><summary>רמז</summary>
+    <div class="step-body">שני המינוסים מטופלים אותו דבר: התוצאה של כל אחד נכנסת
+    לסוגריים, עם <span class="fi">\(-1\cdot\)</span> לפניהם.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$\textcolor{#C0392B}{-1\cdot}(x^{2}-12x+36)\;\textcolor{#C0392B}{-1\cdot}(x^{2}+4x+6x+24)$$
+      $$=\textcolor{#7C3AED}{\underline{-x^{2}}}\textcolor{#EA580C}{\underline{\underline{+12x}}}\textcolor{#059669}{-36}\textcolor{#7C3AED}{\underline{-x^{2}}}\textcolor{#EA580C}{\underline{\underline{-10x}}}\textcolor{#059669}{-24}$$
+      $$=\boxed{-2x^{2}+2x-60}$$
+      בדיקה ב-<span class="fi">\(x=0\)</span>:
+      <span class="fi">\(-36-24=-60\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row">
+    <span>מקדם <span class="fi">\(x^{2}\)</span>:</span>
+    <input class="q-input" data-answer="-2" inputmode="text" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <span>המספר החופשי:</span>
+    <input class="q-input" data-answer="-60" inputmode="text" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex6"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="t7">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 7 — שלושה גורמים, פעמיים הפרש ריבועים</h4></div>
+  <p class="q-text"><span class="mk mk-find">פשטי:</span>
+    <span class="fi">\((x^{2}+1)(x^{4}+1)(x^{2}-1)\)</span>
+    <br><span class="aside">משבצת (גבי יקואל), "נוסחאות הכפל המקוצר — רמה א", שאלה 3א.</span></p>
+  <details class="step"><summary>רמז — באיזה סדר כופלים</summary>
+    <div class="step-body">כפל אפשר לעשות בכל סדר. חפשי שני גורמים שהם
+    <span class="fi">\((a+b)(a-b)\)</span> — הם לא עומדים זה ליד זה.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$\underbrace{(x^{2}+1)(x^{2}-1)}_{(x^{2})^{2}-1^{2}}\cdot(x^{4}+1)$$
+      $$=(x^{4}-1)(x^{4}+1)$$
+      $$=(x^{4})^{2}-1^{2}=\boxed{x^{8}-1}$$
+      בדיקה ב-<span class="fi">\(x=2\)</span>:
+      <span class="fi">\(5\cdot17\cdot3=255\)</span> וגם <span class="fi">\(256-1=255\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row">
+    <span>החזקה של <span class="fi">\(x\)</span> בתשובה:</span>
+    <input class="q-input" data-answer="8" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex7"> סיימתי את התרגיל הזה</label>
+</article>
+
+<h3>השלמת מקומות ריקים, ופתרון משוואות</h3>
+<article class="ex" id="t8">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 8 — שלוש השלמות</h4></div>
+  <p class="q-text"><span class="mk mk-find">השלימי את החסר כך שיתקבל שוויון נכון לכל ערך של <span class="fi">\(x\)</span>:</span>
+    <br><span class="aside">דף חודשי מס׳ 1 לכיתה ט׳ רגילה (משרד החינוך, תשפ"ז), שאלה 3ב.</span></p>
+  <p class="sub">א. <span class="fi">\((x-\square)^{2}=x^{2}-\square+49\)</span></p>
+  <p class="sub">ב. <span class="fi">\((\square-3)(\square+3)=4x^{2}-9\)</span></p>
+  <p class="sub">ג. <span class="fi">\((x+5)(\square)=25-x^{2}\)</span></p>
+  <details class="step"><summary>רמז לסעיף א</summary>
+    <div class="step-body">49 הוא <span class="fi">\(b^{2}\)</span>, ולכן
+    <span class="fi">\(b=7\)</span>. החסר השני הוא <span class="fi">\(2ab\)</span>.</div>
+  </details>
+  <details class="step"><summary>רמז לסעיף ג</summary>
+    <div class="step-body"><span class="fi">\(25-x^{2}=5^{2}-x^{2}\)</span>, כלומר
+    <span class="fi">\(a=5\)</span> ו-<span class="fi">\(b=x\)</span>. הסוגריים הנתונים
+    <span class="fi">\((x+5)\)</span> הם <span class="fi">\((a+b)\)</span>.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      <strong>א.</strong>
+      $$b^{2}=49\quad\Longrightarrow\quad b=7$$
+      $$2ab=2\cdot x\cdot7=14x$$
+      $$(x-\boxed{7})^{2}=x^{2}-\boxed{14x}+49$$
+      <strong>ב.</strong>
+      $$a^{2}=4x^{2}\quad\Longrightarrow\quad a=2x$$
+      $$(\boxed{2x}-3)(\boxed{2x}+3)=4x^{2}-9$$
+      <strong>ג.</strong>
+      $$25-x^{2}=\underbrace{5^{2}}_{a^{2}}-\underbrace{x^{2}}_{b^{2}}=(5+x)(5-x)$$
+      $$(x+5)(\boxed{5-x})=25-x^{2}$$
+      בדיקה של ג ב-<span class="fi">\(x=1\)</span>:
+      <span class="fi">\(6\cdot4=24\)</span> וגם <span class="fi">\(25-1=24\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row">
+    <span>א — מקדם <span class="fi">\(x\)</span> בחסר השני:</span>
+    <input class="q-input" data-answer="14" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <span>ב — מקדם <span class="fi">\(x\)</span> בחסר:</span>
+    <input class="q-input" data-answer="2" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex8"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="t9">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 9 — מי הפתרון? בשתי דרכים</h4></div>
+  <p class="q-text">נתונה המשוואה <span class="fi">\((x-3)^{2}-(x+2)(x-2)=1\)</span>.
+    <br>א. <span class="mk mk-find">איזה מבין הערכים <span class="fi">\(x=1\)</span>, <span class="fi">\(x=2\)</span>, <span class="fi">\(x=3\)</span> הוא פתרון המשוואה?</span>
+    <br>ב. <span class="mk mk-find">הציגי שתי דרכים שונות להצדקת התשובה.</span>
+    <br><span class="aside">דף חודשי מס׳ 1 לכיתה ט׳ רגילה (משרד החינוך, תשפ"ז), שאלה 4.</span></p>
+  <details class="step"><summary>רמז — שתי הדרכים</summary>
+    <div class="step-body">דרך 1: מציבים כל ערך באגף שמאל ובודקים מתי יוצא 1.
+    דרך 2: פותרים את המשוואה.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      <strong>דרך 1 — הצבה.</strong>
+      $$x=1:\quad(-2)^{2}-(3)(-1)=4+3=7$$
+      $$x=2:\quad(-1)^{2}-(4)(0)=1\;\checkmark$$
+      $$x=3:\quad0^{2}-(5)(1)=-5$$
+      <strong>דרך 2 — פותרים.</strong>
+      $$x^{2}-6x+9\;\textcolor{#C0392B}{-1\cdot}(x^{2}-4)=1$$
+      $$\textcolor{#7C3AED}{\underline{x^{2}}}\textcolor{#EA580C}{\underline{\underline{-6x}}}\textcolor{#059669}{+9}\textcolor{#7C3AED}{\underline{-x^{2}}}\textcolor{#059669}{+4}=1$$
+      $$-6x+13=1\qquad\textcolor{#C0392B}{/\;-13}$$
+      $$-6x=-12\qquad\textcolor{#C0392B}{/\;:(-6)}$$
+      $$x=2$$
+      הפתרון הוא <strong><span class="fi">\(x=2\)</span></strong>, ובשתי הדרכים מתקבלת אותה תשובה.
+    </div>
+  </details>
+  <div class="q-row">
+    <span>הפתרון:</span>
+    <input class="q-input" data-answer="2" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex9"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="t10">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 10 — השלמה, כשחסר גם האיבר הראשון</h4></div>
+  <p class="q-text"><span class="mk mk-find">השלימי מספרים במקומות החסרים לקבלת שוויון. היעזרי בנוסחאות הכפל המקוצר.</span>
+    <br><span class="aside">משבצת (גבי יקואל), "נוסחאות הכפל המקוצר — רמה א", שאלה 21.</span></p>
+  <p class="sub">א. <span class="fi">\((x+\square)^{2}=\square+16x+\square\)</span></p>
+  <p class="sub">ב. <span class="fi">\((\square+\square)^{2}=9a^{2}+\square+\tfrac{1}{9}\)</span></p>
+  <p class="sub">ג. <span class="fi">\((2-\square)^{2}=\square-\tfrac{4}{x}+\square\)</span></p>
+  <p class="sub">ד. <span class="fi">\((\square-\square)^{2}=144-144x+\square\)</span></p>
+  <details class="step"><summary>רמז — מאיפה מתחילים</summary>
+    <div class="step-body">מתחילים מהאיברים הריבועיים שנתונים: מוציאים מהם שורש ומקבלים
+    את <span class="fi">\(a\)</span> ואת <span class="fi">\(b\)</span>. אם נתון רק אחד, האיבר
+    האמצעי <span class="fi">\(2ab\)</span> נותן את השני.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      <strong>א.</strong>
+      $$2\cdot x\cdot b=16x\quad\Longrightarrow\quad b=8$$
+      $$(x+\boxed{8})^{2}=\boxed{x^{2}}+16x+\boxed{64}$$
+      <strong>ב.</strong>
+      $$a=\sqrt{9a^{2}}=3a\qquad b=\sqrt{\tfrac{1}{9}}=\tfrac{1}{3}$$
+      $$2ab=2\cdot3a\cdot\tfrac{1}{3}=2a$$
+      $$(\boxed{3a}+\boxed{\tfrac{1}{3}})^{2}=9a^{2}+\boxed{2a}+\tfrac{1}{9}$$
+      <strong>ג.</strong>
+      $$2\cdot2\cdot b=\tfrac{4}{x}\quad\Longrightarrow\quad b=\tfrac{1}{x}$$
+      $$(2-\boxed{\tfrac{1}{x}})^{2}=\boxed{4}-\tfrac{4}{x}+\boxed{\tfrac{1}{x^{2}}}$$
+      <strong>ד.</strong>
+      $$a=\sqrt{144}=12$$
+      $$2\cdot12\cdot b=144x\quad\Longrightarrow\quad b=6x$$
+      $$(\boxed{12}-\boxed{6x})^{2}=144-144x+\boxed{36x^{2}}$$
+    </div>
+  </details>
+  <div class="q-row">
+    <span>א — המספר האחרון:</span>
+    <input class="q-input" data-answer="64" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <span>ד — מקדם <span class="fi">\(x^{2}\)</span>:</span>
+    <input class="q-input" data-answer="36" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex10"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="t11">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 11 — גדול, קטן או שווה</h4></div>
+  <p class="q-text"><span class="mk mk-find">השלימי ב-<span class="fi">\(\square\)</span> סימן מתאים
+    (<span class="fi">\(&lt;\)</span>, <span class="fi">\(&gt;\)</span>, <span class="fi">\(=\)</span>) לקבלת טענה נכונה.</span>
+    <br><span class="aside">משבצת (גבי יקואל), "נוסחאות הכפל המקוצר — רמה ב", שאלה 17.</span></p>
+  <p class="sub">א. <span class="fi">\((x+6)^{2}\;\square\;(x-6)^{2}+24x\)</span></p>
+  <p class="sub">ב. <span class="fi">\((x+8)(x-8)\;\square\;(x+10)(x-10)+33\)</span></p>
+  <p class="sub">ג. <span class="fi">\(4a(a-1)\;\square\;(2a-1)^{2}\)</span></p>
+  <p class="sub">ד. <span class="fi">\(x^{2}+(x+1)^{2}\;\square\;2x(x+1)+1\)</span></p>
+  <details class="step"><summary>רמז</summary>
+    <div class="step-body">פותחים כל צד לבד. האיברים הריבועיים בשני הצדדים יוצאים זהים —
+    ומה שנשאר מכריע.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      <strong>א.</strong>
+      $$\underbrace{x^{2}+12x+36}_{\text{שמאל}}$$
+      $$\underbrace{x^{2}-12x+36+24x}_{\text{ימין}}=x^{2}+12x+36$$
+      אותו ביטוי: <span class="fi">\(\boxed{=}\)</span>
+      <br><br><strong>ב.</strong>
+      $$\underbrace{x^{2}-64}_{\text{שמאל}}\qquad\underbrace{x^{2}-100+33}_{\text{ימין}}=x^{2}-67$$
+      ‏<span class="fi">\(-64&gt;-67\)</span>, ולכן: <span class="fi">\(\boxed{&gt;}\)</span>
+      <br><br><strong>ג.</strong>
+      $$\underbrace{4a^{2}-4a}_{\text{שמאל}}\qquad\underbrace{4a^{2}-4a+1}_{\text{ימין}}$$
+      הצד הימני גדול ב-1: <span class="fi">\(\boxed{&lt;}\)</span>
+      <br><br><strong>ד.</strong>
+      $$\underbrace{x^{2}+x^{2}+2x+1}_{\text{שמאל}}=2x^{2}+2x+1$$
+      $$\underbrace{2x^{2}+2x+1}_{\text{ימין}}$$
+      אותו ביטוי: <span class="fi">\(\boxed{=}\)</span>
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex11"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="t12">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 12 — אחד, אין או אינסוף</h4></div>
+  <p class="q-text"><span class="mk mk-find">פתרי את המשוואות, וקבעי לגבי כל משוואה אם יש לה פתרון אחד, אין לה פתרון או שיש לה אינסוף פתרונות.</span> נמקי.
+    <br><span class="aside">דף חודשי מס׳ 1 לכיתה ט׳ רגילה (משרד החינוך, תשפ"ז), שאלה 5.</span></p>
+  <p class="sub">א. <span class="fi">\((x+1)^{2}=x^{2}+2x+1\)</span></p>
+  <p class="sub">ב. <span class="fi">\((x+1)^{2}=x^{2}+1\)</span></p>
+  <p class="sub">ג. <span class="fi">\((x+1)(x-1)=x^{2}+1\)</span></p>
+  <details class="step"><summary>רמז</summary>
+    <div class="step-body">פותחים את אגף שמאל, ומעבירים את <span class="fi">\(x^{2}\)</span> לצד אחד.
+    מה שנשאר — מספר, שוויון שקרי או שוויון אמיתי — מכריע.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      <strong>א.</strong>
+      $$\textcolor{#7C3AED}{\underline{x^{2}}}\textcolor{#EA580C}{\underline{\underline{+2x}}}\textcolor{#059669}{+1}=\textcolor{#7C3AED}{\underline{x^{2}}}\textcolor{#EA580C}{\underline{\underline{+2x}}}\textcolor{#059669}{+1}\qquad\textcolor{#C0392B}{/\;-x^{2}\;\;-2x\;\;-1}$$
+      $$0=0$$
+      שוויון אמיתי בלי <span class="fi">\(x\)</span>: <strong>אינסוף פתרונות</strong> — זו
+      בדיוק הנוסחה, והיא נכונה לכל <span class="fi">\(x\)</span>.
+      <br><br><strong>ב.</strong>
+      $$\textcolor{#7C3AED}{\underline{x^{2}}}\textcolor{#EA580C}{\underline{\underline{+2x}}}\textcolor{#059669}{+1}=\textcolor{#7C3AED}{\underline{x^{2}}}\textcolor{#059669}{+1}\qquad\textcolor{#C0392B}{/\;-x^{2}\;\;-1}$$
+      $$2x=0\qquad\textcolor{#C0392B}{/\;:2}$$
+      $$x=0$$
+      <strong>פתרון אחד</strong>: <span class="fi">\(x=0\)</span>.
+      בדיקה: <span class="fi">\(1^{2}=0+1\)</span> ✓
+      <br><br><strong>ג.</strong>
+      $$\textcolor{#7C3AED}{\underline{x^{2}}}\textcolor{#059669}{-1}=\textcolor{#7C3AED}{\underline{x^{2}}}\textcolor{#059669}{+1}\qquad\textcolor{#C0392B}{/\;-x^{2}}$$
+      $$-1=1$$
+      שוויון שקרי בלי <span class="fi">\(x\)</span>:
+      <br><span class="concl">אין פתרון למשוואה</span>
+    </div>
+  </details>
+  <div class="q-row">
+    <span>הפתרון של ב:</span>
+    <input class="q-input" data-answer="0" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex12"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="t13">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 13 — משוואה עם הפרש ריבועים</h4></div>
+  <p class="q-text"><span class="mk mk-find">פתרי את המשוואה:</span>
+    <span class="fi">\((2a+5)(2a-5)-2a(2a+4)=-9\)</span>
+    <br><span class="aside">משבצת (גבי יקואל), "נוסחאות הכפל המקוצר — רמה א", שאלה 8ג.</span></p>
+  <details class="step"><summary>רמז</summary>
+    <div class="step-body">את <span class="fi">\(2a(2a+4)\)</span> פותחים בחוק הפילוג, ואת
+    התוצאה כותבים בסוגריים עם <span class="fi">\(-1\cdot\)</span>.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$4a^{2}-25\;\textcolor{#C0392B}{-1\cdot}(4a^{2}+8a)=-9$$
+      $$\textcolor{#7C3AED}{\underline{4a^{2}}}\textcolor{#059669}{-25}\textcolor{#7C3AED}{\underline{-4a^{2}}}\textcolor{#EA580C}{\underline{\underline{-8a}}}=-9$$
+      $$-8a-25=-9\qquad\textcolor{#C0392B}{/\;+25}$$
+      $$-8a=16\qquad\textcolor{#C0392B}{/\;:(-8)}$$
+      $$a=-2$$
+      בדיקה: <span class="fi">\((1)(-9)-(-4)(0)=-9\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row">
+    <span><span class="fi">\(a=\)</span></span>
+    <input class="q-input" data-answer="-2" inputmode="text" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex13"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="t14">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 14 — שתי משוואות ארוכות</h4></div>
+  <p class="q-text"><span class="mk mk-find">פתרי את המשוואות:</span>
+    <br><span class="aside">משבצת (גבי יקואל), "נוסחאות הכפל המקוצר — רמה א", שאלה 13 (סעיפים ג ו-ד).</span></p>
+  <p class="sub">ג. <span class="fi">\(6+(x+10)^{2}-(x+1)(x-1)=7\)</span></p>
+  <p class="sub">ד. <span class="fi">\((5x+1)^{2}=(4x-1)^{2}+9x(x-2)\)</span></p>
+  <details class="step"><summary>רמז לסעיף ד</summary>
+    <div class="step-body">באגף ימין יש שני חלקים: ריבוע, ועוד חוק הפילוג. פותחים כל אחד,
+    ומכנסים באגף לפני שמעבירים.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      <strong>ג.</strong>
+      $$6+x^{2}+20x+100\;\textcolor{#C0392B}{-1\cdot}(x^{2}-1)=7$$
+      $$\textcolor{#059669}{6}\textcolor{#7C3AED}{\underline{+x^{2}}}\textcolor{#EA580C}{\underline{\underline{+20x}}}\textcolor{#059669}{+100}\textcolor{#7C3AED}{\underline{-x^{2}}}\textcolor{#059669}{+1}=7$$
+      $$20x+107=7\qquad\textcolor{#C0392B}{/\;-107}$$
+      $$20x=-100\qquad\textcolor{#C0392B}{/\;:20}$$
+      $$x=-5$$
+      בדיקה: <span class="fi">\(6+25-(-4)(-6)=31-24=7\)</span> ✓
+      <br><br><strong>ד.</strong>
+      $$25x^{2}+10x+1=16x^{2}-8x+1+9x^{2}-18x$$
+      $$\textcolor{#7C3AED}{\underline{25x^{2}}}\textcolor{#EA580C}{\underline{\underline{+10x}}}\textcolor{#059669}{+1}=\textcolor{#7C3AED}{\underline{25x^{2}}}\textcolor{#EA580C}{\underline{\underline{-26x}}}\textcolor{#059669}{+1}$$
+      $$\textcolor{#C0392B}{/\;-25x^{2}\;\;\;-1}$$
+      $$10x=-26x\qquad\textcolor{#C0392B}{/\;+26x}$$
+      $$36x=0\qquad\textcolor{#C0392B}{/\;:36}$$
+      $$x=0$$
+      בדיקה: <span class="fi">\(1^{2}=(-1)^{2}+0\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row">
+    <span>ג — <span class="fi">\(x=\)</span></span>
+    <input class="q-input" data-answer="-5" inputmode="text" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <span>ד — <span class="fi">\(x=\)</span></span>
+    <input class="q-input" data-answer="0" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex14"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="t15">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 15 — האם קיים x?</h4></div>
+  <p class="q-text">
+    א. נתון השוויון <span class="fi">\((x+4)^{2}=x^{2}+4^{2}\)</span>.
+    <span class="mk mk-find">מצאי ערך ל-<span class="fi">\(x\)</span> עבורו מתקיים השוויון.</span>
+    <br>ב. נתון אי-השוויון <span class="fi">\((x+4)^{2}&lt;x^{2}+4^{2}\)</span>.
+    <span class="mk mk-find">מצאי ערך ל-<span class="fi">\(x\)</span> עבורו מתקיים אי-השוויון.</span>
+    <br>ג. נתון השוויון <span class="fi">\((x+6)^{2}=-1\)</span>.
+    <span class="mk mk-find">האם קיים ערך ל-<span class="fi">\(x\)</span> עבורו השוויון מתקיים?</span> נמקי.
+    <br><span class="aside">משבצת (גבי יקואל), "נוסחאות הכפל המקוצר — רמה א", שאלה 19.</span></p>
+  <details class="step"><summary>רמז לסעיף ג</summary>
+    <div class="step-body">מה יכול להיות הסימן של מספר כלשהו בריבוע?</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      <strong>א.</strong>
+      $$\textcolor{#7C3AED}{\underline{x^{2}}}\textcolor{#EA580C}{\underline{\underline{+8x}}}\textcolor{#059669}{+16}=\textcolor{#7C3AED}{\underline{x^{2}}}\textcolor{#059669}{+16}\qquad\textcolor{#C0392B}{/\;-x^{2}\;\;-16}$$
+      $$8x=0$$
+      $$x=0$$
+      <strong>ב.</strong> באותה דרך:
+      $$8x&lt;0\qquad\textcolor{#C0392B}{/\;:8}$$
+      $$x&lt;0$$
+      אי-השוויון מתקיים לכל <span class="fi">\(x\)</span> שלילי — למשל
+      <span class="fi">\(x=-1\)</span>: <span class="fi">\(9&lt;17\)</span> ✓
+      <br><br><strong>ג.</strong> ריבוע של מספר הוא תמיד אפס או חיובי:
+      $$(x+6)^{2}\ge0$$
+      ואילו <span class="fi">\(-1\)</span> שלילי, ולכן אין מספר שהריבוע שלו שווה ל-<span class="fi">\(-1\)</span>.<br>
+      <span class="concl">אין ערך כזה — אין פתרון</span>
+    </div>
+  </details>
+  <div class="q-row">
+    <span>א — <span class="fi">\(x=\)</span></span>
+    <input class="q-input" data-answer="0" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex15"> סיימתי את התרגיל הזה</label>
+</article>
+
+<h3>חישוב ביטויים על סמך נתונים</h3>
+<article class="ex" id="t16">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 16 — חשבון בלי מחשבון</h4></div>
+  <p class="q-text"><span class="mk mk-find">חשבי בעזרת נוסחאות הכפל המקוצר (ללא מחשבון). צייני באיזו נוסחה השתמשת בכל תרגיל.</span>
+    <span class="subrow"><span class="sub">א. <span class="fi">\(48\cdot52\)</span></span> <span class="sub">ב. <span class="fi">\(99^{2}\)</span></span> <span class="sub">ג. <span class="fi">\(21^{2}=(20+1)^{2}\)</span></span></span>
+    <span class="aside">דף חודשי מס׳ 1 לכיתה ט׳ רגילה (משרד החינוך, תשפ"ז), שאלה 3א.</span></p>
+  <details class="step"><summary>רמז</summary>
+    <div class="step-body">48 ו-52 נמצאים באותו מרחק מ-50. ו-99 הוא <span class="fi">\(100-1\)</span>.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      <strong>א.</strong> הפרש ריבועים:
+      $$48\cdot52=(50-2)(50+2)$$
+      $$=50^{2}-2^{2}=2500-4=\boxed{2496}$$
+      <strong>ב.</strong> ריבוע של הפרש:
+      $$99^{2}=(100-1)^{2}=10000-200+1=\boxed{9801}$$
+      <strong>ג.</strong> ריבוע של סכום:
+      $$21^{2}=(20+1)^{2}=400+40+1=\boxed{441}$$
+    </div>
+  </details>
+  <div class="q-row">
+    <span>א:</span>
+    <input class="q-input" data-answer="2496" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <span>ב:</span>
+    <input class="q-input" data-answer="9801" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <span>ג:</span>
+    <input class="q-input" data-answer="441" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex16"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="t17">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 17 — עוד ארבעה כפלים בראש</h4></div>
+  <p class="q-text"><span class="mk mk-find">היעזרי בנוסחאות הכפל המקוצר וכפלי:</span>
+    <span class="subrow"><span class="sub">א. <span class="fi">\(53\cdot47\)</span></span> <span class="sub">ב. <span class="fi">\(104\cdot96\)</span></span> <span class="sub">ג. <span class="fi">\(66\cdot74\)</span></span> <span class="sub">ד. <span class="fi">\(95\cdot85\)</span></span></span>
+    <span class="aside">משבצת (גבי יקואל), "נוסחאות הכפל המקוצר — רמה א", שאלה 10.</span></p>
+  <details class="step"><summary>רמז</summary>
+    <div class="step-body">לכל זוג מחפשים את המספר שבאמצע: 50, 100, 70, 90.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      <p class="sub">א. <span class="fi">\(53\cdot47=(50+3)(50-3)\)</span></p>
+      $$=2500-9=\boxed{2491}$$
+      <p class="sub">ב. <span class="fi">\(104\cdot96=(100+4)(100-4)\)</span></p>
+      $$=10000-16=\boxed{9984}$$
+      <p class="sub">ג. <span class="fi">\(66\cdot74=(70-4)(70+4)\)</span></p>
+      $$=4900-16=\boxed{4884}$$
+      <p class="sub">ד. <span class="fi">\(95\cdot85=(90+5)(90-5)\)</span></p>
+      $$=8100-25=\boxed{8075}$$
+    </div>
+  </details>
+  <div class="q-row">
+    <span>ד:</span>
+    <input class="q-input" data-answer="8075" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex17"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="t18">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 18 — השאלה המקורית מהדוגמה</h4></div>
+  <p class="q-text">נתון כי <span class="fi">\(a+b=12\)</span>, <span class="fi">\(ab=32\)</span>.
+    <span class="mk mk-find">חשבי את ערך הביטוי <span class="fi">\(a^{2}b+ab^{2}\)</span>.</span>
+    <br><span class="aside">דף חודשי מס׳ 1, עתודה מדעית טכנולוגית (משרד החינוך, תשפ"ז), שאלה 6.</span></p>
+  <details class="step"><summary>רמז</summary>
+    <div class="step-body">כאן לא צריך ריבוע: לשני האיברים יש גורם משותף
+    <span class="fi">\(ab\)</span>.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$a^{2}b+ab^{2}=ab\,(a+b)$$
+      $$=\underbrace{32}_{ab}\cdot\underbrace{12}_{a+b}=\boxed{384}$$
+      בדיקה עם 4 ו-8: <span class="fi">\(16\cdot8+4\cdot64=128+256=384\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row">
+    <span>ערך הביטוי:</span>
+    <input class="q-input" data-answer="384" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex18"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="t19">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 19 — נתון סכום הריבועים</h4></div>
+  <p class="q-text">נתון: <span class="fi">\(a^{2}+b^{2}=74\)</span>, <span class="fi">\(ab=35\)</span>.
+    <br><span class="mk mk-find">א. חשבי את <span class="fi">\((a+b)^{2}\)</span>.
+    &nbsp; ב. חשבי את <span class="fi">\((a-b)^{2}\)</span>.</span>
+    <br><span class="aside">משבצת (גבי יקואל), "נוסחאות הכפל המקוצר — רמה א", שאלה 14.</span></p>
+  <details class="step"><summary>רמז</summary>
+    <div class="step-body">כאן לא צריך לסדר מחדש: פותחים את <span class="fi">\((a+b)^{2}\)</span>,
+    ובפנים כבר יושבים <span class="fi">\(a^{2}+b^{2}\)</span> ו-<span class="fi">\(ab\)</span>.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      <strong>א.</strong>
+      $$(a+b)^{2}=\underbrace{a^{2}+b^{2}}_{74}+\underbrace{2ab}_{2\cdot35}=74+70=\boxed{144}$$
+      <strong>ב.</strong>
+      $$(a-b)^{2}=\underbrace{a^{2}+b^{2}}_{74}-\underbrace{2ab}_{2\cdot35}=74-70=\boxed{4}$$
+      בדיקה עם 7 ו-5: <span class="fi">\(49+25=74\)</span>, <span class="fi">\(7\cdot5=35\)</span>,
+      <span class="fi">\(12^{2}=144\)</span>, <span class="fi">\(2^{2}=4\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row">
+    <span>א:</span>
+    <input class="q-input" data-answer="144" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <span>ב:</span>
+    <input class="q-input" data-answer="4" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex19"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="t20">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 20 — בלי למצוא את a ואת b</h4></div>
+  <p class="q-text">
+    שאלה 16. נתון: <span class="fi">\(a-b=4\)</span>, <span class="fi">\(a^{2}-b^{2}=72\)</span>.
+    <span class="mk mk-find">חשבי את <span class="fi">\(a+b\)</span> מבלי למצוא את ערכם של <span class="fi">\(a\)</span> ו-<span class="fi">\(b\)</span>.</span>
+    <br>שאלה 17. נתון: <span class="fi">\(ab=18\)</span>, <span class="fi">\((a+b)^{2}=81\)</span>.
+    <span class="mk mk-find">חשבי את <span class="fi">\(a^{2}+b^{2}\)</span>.</span>
+    <br><span class="aside">משבצת (גבי יקואל), "נוסחאות הכפל המקוצר — רמה א", שאלות 16 ו-17.</span></p>
+  <details class="step"><summary>רמז לשאלה 16</summary>
+    <div class="step-body"><span class="fi">\(a^{2}-b^{2}=(a+b)(a-b)\)</span> — ואחד הגורמים נתון.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      <strong>שאלה 16.</strong>
+      $$\underbrace{a^{2}-b^{2}}_{72}=(a+b)\cdot\underbrace{(a-b)}_{4}$$
+      $$72=4(a+b)\qquad\textcolor{#C0392B}{/\;:4}$$
+      $$a+b=\boxed{18}$$
+      <strong>שאלה 17.</strong>
+      $$a^{2}+b^{2}=(a+b)^{2}-2ab$$
+      $$=81-2\cdot18=81-36=\boxed{45}$$
+      בדיקה עם 6 ו-3: <span class="fi">\(6\cdot3=18\)</span>, <span class="fi">\(9^{2}=81\)</span>,
+      <span class="fi">\(36+9=45\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row">
+    <span>16 — <span class="fi">\(a+b=\)</span></span>
+    <input class="q-input" data-answer="18" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <span>17 — <span class="fi">\(a^{2}+b^{2}=\)</span></span>
+    <input class="q-input" data-answer="45" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex20"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="t21">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 21 — הוכחה עם שורשים</h4></div>
+  <p class="q-text"><span class="mk mk-find">הוכיחי:</span>
+    $$(\sqrt{26}-\sqrt{7})(\sqrt{26}+\sqrt{7})=(\sqrt{33}+\sqrt{14})(\sqrt{33}-\sqrt{14})$$
+    <span class="aside">דף חודשי מס׳ 1, עתודה מדעית טכנולוגית (משרד החינוך, תשפ"ז), שאלה 1.</span></p>
+  <details class="step"><summary>רמז</summary>
+    <div class="step-body">כל אגף הוא <span class="fi">\((a-b)(a+b)\)</span>, ו-<span class="fi">\((\sqrt{26})^{2}=26\)</span>.
+    מחשבים כל אגף לבד.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      אגף שמאל:
+      $$(\sqrt{26})^{2}-(\sqrt{7})^{2}=26-7=19$$
+      אגף ימין:
+      $$(\sqrt{33})^{2}-(\sqrt{14})^{2}=33-14=19$$
+      שני האגפים שווים ל-19, ולכן הם שווים זה לזה. מש"ל
+    </div>
+  </details>
+  <div class="q-row">
+    <span>הערך של כל אגף:</span>
+    <input class="q-input" data-answer="19" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex21"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="t22">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 22 — מכפלה שקרובה למיליון</h4></div>
+  <p class="q-text"><span class="mk mk-find">היעזרי בנוסחאות הכפל המקוצר כדי למצוא שני מספרים <span class="fi">\(a,b\)</span> כך ש-<span class="fi">\(a\cdot b=999{,}996\)</span>.</span>
+    <br><span class="aside">דף חודשי מס׳ 1, עתודה מדעית טכנולוגית (משרד החינוך, תשפ"ז), שאלה 2ב.</span></p>
+  <details class="step"><summary>רמז</summary>
+    <div class="step-body">‏999,996 קטן ב-4 ממיליון, ומיליון הוא <span class="fi">\(1000^{2}\)</span>.
+    ו-4 הוא <span class="fi">\(2^{2}\)</span>.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$999{,}996=1{,}000{,}000-4=1000^{2}-2^{2}$$
+      $$=(1000-2)(1000+2)=\boxed{998\cdot1002}$$
+      בדיקה: <span class="fi">\(998\cdot1002=1{,}000{,}000-4=999{,}996\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row">
+    <span>המספר הקטן מביניהם:</span>
+    <input class="q-input" data-answer="998" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex22"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="t23">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 23 — שבר ועוד ההפוך שלו</h4></div>
+  <p class="q-text"><span class="mk mk-find">חשבי את הערך של <span class="fi">\(\dfrac{a^{2}}{b^{2}}+\dfrac{b^{2}}{a^{2}}\)</span>
+    אם ידוע כי <span class="fi">\(\dfrac{a}{b}+\dfrac{b}{a}=2.9\)</span></span>
+    (<span class="fi">\(a\neq0,\;b\neq0\)</span>).
+    <br><span class="aside">"חיזוק מיומנויות אלגבריות לכיתה ט׳", עתודה מדעית טכנולוגית (משרד החינוך), עמ׳ 9, שאלה 2ב.</span></p>
+  <details class="step"><summary>רמז</summary>
+    <div class="step-body">זו המשפחה <span class="fi">\(x+\frac{1}{x}\)</span>: כאן
+    <span class="fi">\(\frac{a}{b}\cdot\frac{b}{a}=1\)</span>, ולכן האיבר האמצעי הוא 2.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$\left(\frac{a}{b}+\frac{b}{a}\right)^{2}=\frac{a^{2}}{b^{2}}+\underbrace{2\cdot\frac{a}{b}\cdot\frac{b}{a}}_{2}+\frac{b^{2}}{a^{2}}$$
+      $$\frac{a^{2}}{b^{2}}+\frac{b^{2}}{a^{2}}=\left(\frac{a}{b}+\frac{b}{a}\right)^{2}-2$$
+      $$=2.9^{2}-2=8.41-2=\boxed{6.41}$$
+    </div>
+  </details>
+  <div class="q-row">
+    <span>הערך:</span>
+    <input class="q-input" data-answer="6.41" data-tol="0.001" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex23"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="t24">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 24 — הפרש ריבועים מתוך שברים</h4></div>
+  <p class="q-text"><span class="mk mk-find">חשבי את הערך של הביטוי <span class="fi">\(a^{2}-b^{2}\)</span> אם ידוע כי</span>
+    $$\frac{a-b}{a^{2}-2ab+b^{2}}-\frac{3}{b-a}=a+b\qquad(a\neq b)$$
+    <span class="aside">"חיזוק מיומנויות אלגבריות לכיתה ט׳", עתודה מדעית טכנולוגית (משרד החינוך), עמ׳ 9, שאלה 2ג.</span></p>
+  <details class="step"><summary>רמז 1 — המכנה הראשון</summary>
+    <div class="step-body"><span class="fi">\(a^{2}-2ab+b^{2}=(a-b)^{2}\)</span>, ואפשר לצמצם.</div>
+  </details>
+  <details class="step"><summary>רמז 2 — המכנה השני</summary>
+    <div class="step-body"><span class="fi">\(b-a=-1\cdot(a-b)\)</span>, ולכן
+    <span class="fi">\(-\frac{3}{b-a}=+\frac{3}{a-b}\)</span>.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$\frac{a-b}{(a-b)^{2}}=\frac{1}{a-b}\qquad\qquad-\frac{3}{b-a}=\frac{3}{a-b}$$
+      $$\frac{1}{a-b}+\frac{3}{a-b}=a+b$$
+      $$\frac{4}{a-b}=a+b\qquad\textcolor{#C0392B}{/\;\cdot(a-b)}$$
+      $$4=(a+b)(a-b)$$
+      $$a^{2}-b^{2}=\boxed{4}$$
+    </div>
+  </details>
+  <div class="q-row">
+    <span><span class="fi">\(a^{2}-b^{2}=\)</span></span>
+    <input class="q-input" data-answer="4" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex24"> סיימתי את התרגיל הזה</label>
+</article>
+
+<h3>הוכחת התחלקות ללא שארית</h3>
+<article class="ex" id="t25">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 25 — מתחלק ב-16, מתחלק ב-3</h4></div>
+  <p class="q-text">
+    א. <span class="mk mk-find">הראי שהביטוי <span class="fi">\((x+5)^{2}-(x-3)^{2}\)</span> מתחלק ב-16 ללא שארית.</span>
+    (<span class="fi">\(x\)</span> מספר שלם)
+    <br>ב. <span class="mk mk-find">הראי שהביטוי <span class="fi">\((2x+1)^{2}-(x+2)^{2}\)</span> מתחלק ב-3 ללא שארית.</span>
+    (<span class="fi">\(x\)</span> מספר שלם)
+    <br><span class="aside">משבצת (גבי יקואל), "נוסחאות הכפל המקוצר — רמה א", שאלה 22.</span></p>
+  <details class="step"><summary>רמז</summary>
+    <div class="step-body">בדיוק כמו התרגיל מהלוח: הריבוע השני בסוגריים עם
+    <span class="fi">\(-1\cdot\)</span>, מכנסים, ומוציאים גורם משותף.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      <strong>א.</strong>
+      $$x^{2}+10x+25\;\textcolor{#C0392B}{-1\cdot}(x^{2}-6x+9)$$
+      $$=\textcolor{#7C3AED}{\underline{x^{2}}}\textcolor{#EA580C}{\underline{\underline{+10x}}}\textcolor{#059669}{+25}\textcolor{#7C3AED}{\underline{-x^{2}}}\textcolor{#EA580C}{\underline{\underline{+6x}}}\textcolor{#059669}{-9}$$
+      $$=\underline{16}x+\underline{16}=\boxed{16\cdot(x+1)}$$
+      <span class="fi">\(x\)</span> שלם, ולכן גם <span class="fi">\(x+1\)</span> שלם.
+      <br>הביטוי שווה ל-16 כפול מספר שלם, ולכן מתחלק ב-16 ללא שארית. מש"ל
+      <br>בדיקה ב-<span class="fi">\(x=2\)</span>:
+      <span class="fi">\(49-1=48=16\cdot3\)</span> ✓
+      <br><br><strong>ב.</strong>
+      $$4x^{2}+4x+1\;\textcolor{#C0392B}{-1\cdot}(x^{2}+4x+4)$$
+      $$=\textcolor{#7C3AED}{\underline{4x^{2}}}\textcolor{#EA580C}{\underline{\underline{+4x}}}\textcolor{#059669}{+1}\textcolor{#7C3AED}{\underline{-x^{2}}}\textcolor{#EA580C}{\underline{\underline{-4x}}}\textcolor{#059669}{-4}$$
+      $$=\underline{3}x^{2}-\underline{3}=\boxed{3\cdot(x^{2}-1)}$$
+      <span class="fi">\(x\)</span> שלם, ולכן גם <span class="fi">\(x^{2}-1\)</span> שלם.
+      <br>הביטוי שווה ל-3 כפול מספר שלם, ולכן מתחלק ב-3 ללא שארית. מש"ל
+      <br>בדיקה ב-<span class="fi">\(x=2\)</span>:
+      <span class="fi">\(25-16=9=3\cdot3\)</span> ✓
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex25"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="t26">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 26 — שני אי-זוגיים עוקבים</h4></div>
+  <p class="q-text"><span class="mk mk-find">הוכיחי שההפרש בין הריבועים של שני מספרים אי-זוגיים עוקבים מתחלק ב-8 ללא שארית.</span></p>
+  <details class="step"><summary>רמז — איך כותבים אותם</summary>
+    <div class="step-body"><span class="fi">\(2n-1\)</span> ו-<span class="fi">\(2n+1\)</span>,
+    כאשר <span class="fi">\(n\)</span> שלם (הטבלה בחלק 4).</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$(2n+1)^{2}-(2n-1)^{2}$$
+      $$=4n^{2}+4n+1\;\textcolor{#C0392B}{-1\cdot}(4n^{2}-4n+1)$$
+      $$=\textcolor{#7C3AED}{\underline{4n^{2}}}\textcolor{#EA580C}{\underline{\underline{+4n}}}\textcolor{#059669}{+1}\textcolor{#7C3AED}{\underline{-4n^{2}}}\textcolor{#EA580C}{\underline{\underline{+4n}}}\textcolor{#059669}{-1}$$
+      $$=\boxed{8n}$$
+      <span class="fi">\(n\)</span> שלם, ולכן <span class="fi">\(8n\)</span> הוא 8 כפול מספר שלם
+      — מתחלק ב-8 ללא שארית. מש"ל
+      <br>בדיקה ב-<span class="fi">\(n=2\)</span> (המספרים 3 ו-5):
+      <span class="fi">\(25-9=16=8\cdot2\)</span> ✓
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex26"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="t27">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 27 — מכפלה ועוד 1 נותנת ריבוע</h4></div>
+  <p class="q-text"><span class="mk mk-find">בחרי שני מספרים אי-זוגיים עוקבים כלשהם (לדוגמה 7 ו-9). חשבי את מכפלתם ולתוצאה הוסיפי 1. הסבירי מדוע תמיד יתקבל מספר ריבועי.</span>
+    <br><span class="aside">"אוסף משימות במתמטיקה לתלמידי כיתה ט׳" (משרד החינוך, מכון ויצמן), עמ׳ 120, שאלה 16ג.</span></p>
+  <details class="step"><summary>רמז</summary>
+    <div class="step-body">כתבי את המספרים <span class="fi">\(2n-1\)</span> ו-<span class="fi">\(2n+1\)</span>.
+    המכפלה שלהם היא הפרש ריבועים.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      עם הדוגמה: <span class="fi">\(7\cdot9+1=64=8^{2}\)</span>.
+      <br>באופן כללי:
+      $$(2n-1)(2n+1)+1=\underbrace{4n^{2}-1}_{(2n)^{2}-1^{2}}+1$$
+      $$=4n^{2}=\boxed{(2n)^{2}}$$
+      התוצאה היא תמיד ריבוע של <span class="fi">\(2n\)</span> — המספר הזוגי שבין שני המספרים.
+      <br>בדיקה ב-<span class="fi">\(n=4\)</span>: <span class="fi">\(7\cdot9+1=64=8^{2}\)</span> ✓
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex27"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="t28">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 28 — ארבעה עוקבים</h4></div>
+  <p class="q-text"><span class="fi">\(a,b,c,d\)</span> הם ארבעה מספרים טבעיים עוקבים כלשהם.
+    <span class="mk mk-find">הוכיחי כי:</span>
+    <br>א. <span class="fi">\(bc-ad=2\)</span>
+    <br>ב. <span class="fi">\(bd-ac\)</span> הוא תמיד מספר אי-זוגי.
+    <br><span class="aside">"אוסף משימות במתמטיקה לתלמידי כיתה ט׳" (משרד החינוך, מכון ויצמן), עמ׳ 108, שאלה 6.</span></p>
+  <details class="step"><summary>רמז</summary>
+    <div class="step-body"><span class="fi">\(a=n\)</span>, <span class="fi">\(b=n+1\)</span>,
+    <span class="fi">\(c=n+2\)</span>, <span class="fi">\(d=n+3\)</span>. את
+    <span class="fi">\(ad\)</span> ואת <span class="fi">\(ac\)</span> כותבים בסוגריים עם
+    <span class="fi">\(-1\cdot\)</span>.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$a=n\qquad b=n+1\qquad c=n+2\qquad d=n+3$$
+      <strong>א.</strong>
+      $$bc-ad=(n+1)(n+2)\textcolor{#C0392B}{-1\cdot}n(n+3)$$
+      $$=n^{2}+3n+2\;\textcolor{#C0392B}{-1\cdot}(n^{2}+3n)$$
+      $$=\textcolor{#7C3AED}{\underline{n^{2}}}\textcolor{#EA580C}{\underline{\underline{+3n}}}\textcolor{#059669}{+2}\textcolor{#7C3AED}{\underline{-n^{2}}}\textcolor{#EA580C}{\underline{\underline{-3n}}}=2$$
+      מש"ל
+      <br><br><strong>ב.</strong>
+      $$bd-ac=(n+1)(n+3)\textcolor{#C0392B}{-1\cdot}n(n+2)$$
+      $$=n^{2}+4n+3\;\textcolor{#C0392B}{-1\cdot}(n^{2}+2n)$$
+      $$=\textcolor{#7C3AED}{\underline{n^{2}}}\textcolor{#EA580C}{\underline{\underline{+4n}}}\textcolor{#059669}{+3}\textcolor{#7C3AED}{\underline{-n^{2}}}\textcolor{#EA580C}{\underline{\underline{-2n}}}=2n+3$$
+      $$=\underbrace{2(n+1)}_{\text{זוגי}}+1$$
+      זוגי ועוד 1 הוא אי-זוגי. מש"ל
+      <br>בדיקה עם 1, 2, 3, 4: <span class="fi">\(2\cdot3-1\cdot4=2\)</span> ✓
+      <span class="fi">\(2\cdot4-1\cdot3=5\)</span> ✓
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="ex28"> סיימתי את התרגיל הזה</label>
+</article>
+
+<h3>בעיות מילוליות</h3>
+<article class="ex" id="t29">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 29 — החצר של בית הספר</h4></div>
+  <p class="q-text">בבית הספר "אופק" יש חצר בצורת ריבוע שאורך צלעה <span class="fi">\(a\)</span> מטרים.
+    הנהלת בית הספר החליטה להרחיב את החצר כך שאורך כל אחת מצלעותיה יגדל ב-<span class="fi">\(b\)</span> מטרים.
+    <br>א. <span class="mk mk-find">נועה טוענת כי <span class="fi">\((x+5)^{2}=x^{2}+25\)</span>. בדקי את טענתה ונמקי.</span>
+    <br>ב. <span class="mk mk-find">אורך צלע החצר הוא 10 מטרים, והחליטו להגדיל כל צלע ב-2 מטרים. חשבי את תוספת השטח בלי לחשב את שטח החצר כולה.</span>
+    <br><span class="aside">דף חודשי מס׳ 1 לכיתה ט׳ רגילה (משרד החינוך, תשפ"ז), שאלה 2 (סעיפים ג ו-ה).</span></p>
+  <details class="step"><summary>רמז — לצייר</summary>
+    <div class="step-body">החצר אחרי ההרחבה מתחלקת לארבעה חלקים: הריבוע המקורי
+    <span class="fi">\(a^{2}\)</span>, שני מלבנים <span class="fi">\(ab\)</span> וריבוע קטן
+    <span class="fi">\(b^{2}\)</span>. התוספת היא שלושת החלקים החדשים.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      <strong>א.</strong>
+      $$(x+5)^{2}=x^{2}+\underbrace{2\cdot x\cdot5}_{10x}+25=x^{2}+10x+25$$
+      לטענה של נועה חסר האיבר <span class="fi">\(10x\)</span> — שני המלבנים שבציור, כל
+      אחד בשטח <span class="fi">\(5x\)</span>. הטענה נכונה רק כש-<span class="fi">\(x=0\)</span>.
+      <br><br><strong>ב.</strong>
+      $$\underbrace{(10+2)^{2}}_{\text{החצר החדשה}}-\underbrace{10^{2}}_{\text{החצר המקורית}}=\underbrace{2\cdot10\cdot2}_{\text{שני המלבנים}}+\underbrace{2^{2}}_{\text{הריבוע הקטן}}$$
+      $$=40+4=\boxed{44}$$
+      תוספת השטח: 44 מ"ר.
+      <br>בדיקה: <span class="fi">\(144-100=44\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row">
+    <span>תוספת השטח (מ"ר):</span>
+    <input class="q-input" data-answer="44" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex29"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="t30">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 30 — ממלבן לריבוע</h4></div>
+  <p class="q-text">נתון מלבן שאורכי צלעותיו הם <span class="fi">\(x\)</span> ס"מ ו-<span class="fi">\(x+5\)</span> ס"מ.
+    הקטינו את אורך הצלע הארוכה של המלבן ב-3 ס"מ.
+    <br>א. <span class="mk mk-find">בכמה יש להגדיל את אורך הצלע הקצרה של המלבן לקבלת ריבוע?</span>
+    <br>ב. <span class="mk mk-find">שטח הריבוע שהתקבל גדול ב-1 סמ"ר משטח המלבן המקורי. מצאי את אורכי צלעות הריבוע.</span>
+    <br><span class="aside">משבצת (גבי יקואל), "נוסחאות הכפל המקוצר — רמה א", שאלה 18.</span></p>
+  <details class="step"><summary>רמז</summary>
+    <div class="step-body">אחרי ההקטנה הצלע הארוכה היא <span class="fi">\(x+2\)</span>. בריבוע שתי
+    הצלעות שוות.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      <strong>א.</strong>
+      $$(x+5)-3=x+2$$
+      כדי לקבל ריבוע, גם הצלע הקצרה <span class="fi">\(x\)</span> צריכה להיות
+      <span class="fi">\(x+2\)</span>: מגדילים אותה <strong>ב-2 ס"מ</strong>.
+      <br><br><strong>ב.</strong>
+      $$\underbrace{(x+2)^{2}}_{\text{שטח הריבוע}}=\underbrace{x(x+5)}_{\text{שטח המלבן}}+1$$
+      $$\textcolor{#7C3AED}{\underline{x^{2}}}\textcolor{#EA580C}{\underline{\underline{+4x}}}\textcolor{#059669}{+4}=\textcolor{#7C3AED}{\underline{x^{2}}}\textcolor{#EA580C}{\underline{\underline{+5x}}}\textcolor{#059669}{+1}\qquad\textcolor{#C0392B}{/\;-x^{2}\;\;-4x\;\;-1}$$
+      $$3=x$$
+      צלע הריבוע: <span class="fi">\(3+2=5\)</span> ס"מ.
+      <br>בדיקה: <span class="fi">\(5^{2}=25\)</span> וגם <span class="fi">\(3\cdot8+1=25\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row">
+    <span>ב — צלע הריבוע (ס"מ):</span>
+    <input class="q-input" data-answer="5" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex30"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="t31">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 31 — ריבוע חדש מול מלבן</h4></div>
+  <p class="q-text">נתון ריבוע שאורך צלעו <span class="fi">\(x\)</span> ס"מ.
+    מגדילים כל צלע של הריבוע ב-2 ס"מ ומקבלים ריבוע <strong>חדש</strong>.
+    אם מגדילים <strong>רק</strong> צלע אחת של הריבוע (והנגדית לה) ב-8 ס"מ, מקבלים <strong>מלבן</strong>.
+    שטח הריבוע החדש שווה לשטח המלבן.
+    <br>א. <span class="mk mk-find">רשמי ביטוי אלגברי לאורך צלע הריבוע החדש.</span>
+    <br>ב. <span class="mk mk-find">רשמי ביטוי אלגברי לאורכי צלעות המלבן.</span>
+    <br>ג. <span class="mk mk-find">בני משוואה מתאימה ומצאי את אורך צלע הריבוע הנתון.</span>
+    <br>ד. <span class="mk mk-find">חשבי את שטח הריבוע החדש ואת שטח המלבן.</span>
+    <br><span class="aside">משבצת (גבי יקואל), "נוסחאות הכפל המקוצר — רמה ב", שאלה 13.</span></p>
+  <details class="step"><summary>רמז</summary>
+    <div class="step-body">המלבן שומר על צלע אחת של הריבוע המקורי, <span class="fi">\(x\)</span>.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      <strong>א.</strong> <span class="fi">\(x+2\)</span> ס"מ.
+      <br><strong>ב.</strong> <span class="fi">\(x\)</span> ס"מ ו-<span class="fi">\(x+8\)</span> ס"מ.
+      <br><strong>ג.</strong>
+      $$\underbrace{(x+2)^{2}}_{\text{הריבוע החדש}}=\underbrace{x(x+8)}_{\text{המלבן}}$$
+      $$\textcolor{#7C3AED}{\underline{x^{2}}}\textcolor{#EA580C}{\underline{\underline{+4x}}}\textcolor{#059669}{+4}=\textcolor{#7C3AED}{\underline{x^{2}}}\textcolor{#EA580C}{\underline{\underline{+8x}}}\qquad\textcolor{#C0392B}{/\;-x^{2}\;\;-4x}$$
+      $$4=4x\qquad\textcolor{#C0392B}{/\;:4}$$
+      $$x=1$$
+      צלע הריבוע הנתון: 1 ס"מ.
+      <br><strong>ד.</strong>
+      $$(1+2)^{2}=9\qquad\qquad1\cdot(1+8)=9$$
+      שני השטחים: 9 סמ"ר ✓
+    </div>
+  </details>
+  <div class="q-row">
+    <span>ג — <span class="fi">\(x=\)</span></span>
+    <input class="q-input" data-answer="1" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex31"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="t32">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 32 — המשטח למקלדת</h4></div>
+  <p class="q-text">חברת "דסק פלוס" מייצרת משטחים למקלדת ולעכבר. אורכי הצלעות של המשטח
+    המקורי הם <span class="fi">\(x+5\)</span> ס"מ ו-<span class="fi">\(x+3\)</span> ס"מ, כאשר
+    <span class="fi">\(x\)</span> הוא מספר חיובי. החברה החליטה לפתוח דגם חדש: להאריך את
+    הצלע הקצרה של המשטח המקורי ב-2 ס"מ ולקצר את הצלע הארוכה ב-1 ס"מ.
+    <br>א. <span class="mk mk-find">הביעי באמצעות <span class="fi">\(x\)</span> את שטח המשטח המקורי ואת שטח המשטח החדש. פשטי את הביטויים.</span>
+    <br>ב. <span class="mk mk-find">האם כמות החומר לדגם החדש גדולה, קטנה או שווה לכמות החומר לדגם המקורי?</span> נמקי.
+    <br>ג. <span class="mk mk-find">ידוע ששטח המשטח החדש גדול ב-12 סמ"ר משטח המשטח המקורי. מצאי את <span class="fi">\(x\)</span> ואת אורכי הצלעות של המשטח החדש.</span>
+    <br><span class="aside">דף חודשי מס׳ 1 לכיתה ט׳ רגילה (משרד החינוך, תשפ"ז), שאלה 6.</span></p>
+  <details class="step"><summary>רמז — הצלעות החדשות</summary>
+    <div class="step-body">הקצרה <span class="fi">\(x+3\)</span> גדלה ב-2 והופכת ל-<span class="fi">\(x+5\)</span>.
+    הארוכה <span class="fi">\(x+5\)</span> קטנה ב-1 והופכת ל-<span class="fi">\(x+4\)</span>.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      <strong>א.</strong>
+      <p class="sub">המקורי: <span class="fi">\((x+5)(x+3)=x^{2}+8x+15\)</span></p>
+      <p class="sub">החדש: <span class="fi">\((x+5)(x+4)=x^{2}+9x+20\)</span></p>
+      <strong>ב.</strong> מחסרים:
+      $$x^{2}+9x+20\;\textcolor{#C0392B}{-1\cdot}(x^{2}+8x+15)$$
+      $$=\textcolor{#7C3AED}{\underline{x^{2}}}\textcolor{#EA580C}{\underline{\underline{+9x}}}\textcolor{#059669}{+20}\textcolor{#7C3AED}{\underline{-x^{2}}}\textcolor{#EA580C}{\underline{\underline{-8x}}}\textcolor{#059669}{-15}=x+5$$
+      <span class="fi">\(x\)</span> חיובי, ולכן <span class="fi">\(x+5&gt;0\)</span>: המשטח החדש
+      גדול יותר, ולדגם החדש צריך <strong>יותר</strong> חומר.
+      <br><br><strong>ג.</strong>
+      $$x+5=12\qquad\textcolor{#C0392B}{/\;-5}$$
+      $$x=7$$
+      צלעות המשטח החדש: <span class="fi">\(7+5=12\)</span> ס"מ ו-<span class="fi">\(7+4=11\)</span> ס"מ.
+      <br>בדיקה: <span class="fi">\(12\cdot11-12\cdot10=132-120=12\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row">
+    <span>ג — <span class="fi">\(x=\)</span></span>
+    <input class="q-input" data-answer="7" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex32"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex" id="t33">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 33 — מלבן: אלכסון ושטח</h4></div>
+  <p class="q-text">ידוע כי אורך אלכסון של מלבן נתון הוא 13 ס"מ ושטחו 60 סמ"ר.
+    <br>א. <span class="mk mk-find">מצאי את היקף המלבן.</span>
+    <br>ב. <span class="mk mk-find">מצאי את אורכי צלעות המלבן.</span>
+    <br><span class="aside">"אוסף משימות במתמטיקה לתלמידי כיתה ט׳" (משרד החינוך, מכון ויצמן), עמ׳ 100, שאלה 1
+    (וגם בדף עבודה שבועי מס׳ 3 לכיתה ט׳, שאלה 4).</span></p>
+  <details class="step"><summary>רמז 1 — מה נתון באלגברה</summary>
+    <div class="step-body">אם הצלעות הן <span class="fi">\(a\)</span> ו-<span class="fi">\(b\)</span>,
+    אז לפי פיתגורס <span class="fi">\(a^{2}+b^{2}=13^{2}=169\)</span>, והשטח נותן
+    <span class="fi">\(ab=60\)</span>.</div>
+  </details>
+  <details class="step"><summary>רמז 2 — מה מבקשים</summary>
+    <div class="step-body">ההיקף הוא <span class="fi">\(2(a+b)\)</span>. נוסחה שיש בה גם
+    <span class="fi">\(a+b\)</span> וגם <span class="fi">\(a^{2}+b^{2}\)</span> ו-<span class="fi">\(ab\)</span>?</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$a^{2}+b^{2}=13^{2}=169\qquad\qquad ab=60$$
+      <strong>א.</strong>
+      $$(a+b)^{2}=\underbrace{a^{2}+b^{2}}_{169}+\underbrace{2ab}_{120}=289$$
+      $$a+b=\sqrt{289}=17$$
+      (<span class="fi">\(a+b\)</span> חיובי, כי אלה אורכים.)
+      $$\text{היקף}=2\cdot17=\boxed{34}$$
+      ההיקף: 34 ס"מ — ולא היינו צריכות לדעת את הצלעות.
+      <br><br><strong>ב.</strong> באותה דרך, עם הנוסחה השנייה (נניח <span class="fi">\(a&gt;b\)</span>):
+      $$(a-b)^{2}=\underbrace{a^{2}+b^{2}}_{169}-\underbrace{2ab}_{120}=49$$
+      $$a-b=7$$
+      $$a+b=17\qquad a-b=7$$
+      מחברים את שתי המשוואות:
+      $$2a=24\qquad a=12\qquad b=17-12=5$$
+      הצלעות: 12 ס"מ ו-5 ס"מ.
+      <br>בדיקה: <span class="fi">\(12\cdot5=60\)</span> ✓
+      <span class="fi">\(144+25=169=13^{2}\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row">
+    <span>ההיקף (ס"מ):</span>
+    <input class="q-input" data-answer="34" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex33"> סיימתי את התרגיל הזה</label>
+</article>
+
+<div class="box def" style="margin-top:26px">
+  <div class="box-title">חמשת השימושים במבט אחד</div>
+  <ol class="steps">
+    <li><strong>פישוט</strong> — פותחים כל נוסחה; ריבוע שמחסרים נכנס לסוגריים עם <span class="fi">\(-1\cdot\)</span>.</li>
+    <li><strong>השלמה ומשוואות</strong> — נוסחה מתחת לתרגיל, איבר מול איבר; במשוואה: מספר / שקר / <span class="fi">\(0=0\)</span>.</li>
+    <li><strong>חישוב על סמך נתונים</strong> — מסדרים נוסחה כך שבצד אחד נשארים רק הנתונים.</li>
+    <li><strong>התחלקות</strong> — מפשטים, מוציאים גורם משותף, וכותבים את משפט המסקנה.</li>
+    <li><strong>בעיות מילוליות</strong> — נעלם, משוואה, פתיחה בנוסחה, פתרון, בדיקה מול הסיפור.</li>
+  </ol>
+</div>
+
+<div class="progresswrap no-print">
+  <span class="progressbar"><i></i></span><span class="progress-label"></span>
+  <button class="all-sols" style="font-family:inherit;font-size:12px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:4px 10px;cursor:pointer">לפתוח את כל הפתרונות</button>
+</div>
+
+<nav class="pagenav">
+  <a href="02-short-multiplication.html"><span class="dir">→ הקודם</span>נוסחאות הכפל המקוצר</a>
+  <a class="next" href="03-factoring.html"><span class="dir">הבא ←</span>פירוק לגורמים</a>
+</nav>
+
+<footer class="fin">חלק מהעולם של שירה ·
+<a href="../../index.html">חזרה למרכז</a> ·
+<a href="index.html">מפת האלגברה</a></footer>
+</main>
+</div>
+</body>
+</html>

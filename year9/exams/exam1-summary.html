@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<link rel="apple-touch-icon" href="../../assets/icons/icon-180.png">
+<link rel="manifest" href="../../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<title>דף הסיכום למבחן 1 — כיתה ט׳ — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../../vendor/katex.min.css">
+<link rel="stylesheet" href="../../css/shira.css">
+<style>
+/* ============================================================
+   דף סיכום למבחן 1 — מודפס על A4, חמישה דפים, כל דף = רעיון אחד.
+   כל דף מגדיר צבע נושא: --t (קווים וכותרות) ו--tb (מילוי בהיר).
+   גרסת חיסכון בדיו: html.ink — אותם ממדים בדיוק, רק בלי מילויים.
+   ============================================================ */
+:root{--accent:#2E6F8E; --t:#2E6F8E; --tb:#E6F0F5; --tl:#C9DCE6;
+  --sq:#7C3AED; --lin:#EA580C; --num:#059669; --op:#C0392B}
+.s-mul {--t:#1D6FA5; --tb:#E3EFF9; --tl:#BFD8EE}
+.s-use {--t:#0F766E; --tb:#DFF2EF; --tl:#B5DDD7}
+.s-lin {--t:#B45309; --tb:#FCEFDF; --tl:#F0D2AC}
+.s-kite{--t:#7A4E8C; --tb:#F1E8F5; --tl:#DCC8E5}
+.s-prf {--t:#9D2B5C; --tb:#F9E6EE; --tl:#EDC3D5}
+
+body{background:var(--paper)}
+.sumwrap{max-width:826px; margin:0 auto; padding:18px 16px 70px}
+.dl{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:4px 0 18px}
+.dl a{display:inline-block; padding:8px 14px; border-radius:99px; font-weight:700; font-size:14px;
+  text-decoration:none; border:1.5px solid var(--ink); color:var(--ink); background:var(--card)}
+.dl a.main{background:var(--ink); color:#fff}
+.dl small{color:var(--soft); font-size:12.5px}
+
+.sheet{background:var(--card); border:1px solid var(--line); border-radius:14px;
+  padding:16px 18px 14px; margin:0 0 22px; box-sizing:border-box; font-size:12.5px; line-height:1.45}
+.sheet .katex{font-size:1.04em; white-space:nowrap}
+table.st td .m{text-align:right}
+.lines>div{margin:1px 0}
+.sheet .katex-display{margin:3px 0; padding:2px 0}
+.shead{display:flex; align-items:center; gap:10px; border:2px solid var(--t); background:var(--t);
+  color:#fff; border-radius:9px; padding:5px 12px; margin-bottom:9px}
+.shead .n{font-weight:800; font-size:12px; border:1.5px solid currentColor; border-radius:99px;
+  padding:1px 8px; white-space:nowrap}
+.shead h2{margin:0; padding:0; border:0; font-size:18px; color:inherit; line-height:1.25}
+.shead .sub{margin-inline-start:auto; font-size:11.5px; opacity:.95; text-align:left}
+.idea{margin:0 0 8px; font-size:12.5px; color:var(--soft)}
+.idea b{color:var(--ink)}
+
+.grid{display:grid; gap:8px; margin:0 0 8px}
+.g2{grid-template-columns:1fr 1fr} .g3{grid-template-columns:1fr 1fr 1fr}
+.g-fig{grid-template-columns:minmax(0,1fr) auto}
+.card{border:1.5px solid var(--tl); border-radius:10px; padding:6px 10px 7px; background:var(--card);
+  break-inside:avoid; min-width:0}
+.card h3{margin:0 0 3px; font-size:13.5px; color:var(--t); line-height:1.3}
+.card h3 .k{display:inline-block; min-width:19px; height:19px; line-height:19px; text-align:center;
+  border-radius:50%; border:1.5px solid var(--t); background:var(--t); color:#fff; font-size:11.5px;
+  margin-inline-end:5px}
+.card p{margin:2px 0}
+.fx{border:1.5px solid var(--t); background:var(--tb); border-radius:8px; padding:3px 8px; margin:2px 0 5px;
+  text-align:center; break-inside:avoid}
+.fx .katex{font-size:1.16em}
+.lab{font-size:11px; font-weight:800; color:var(--t); letter-spacing:.02em}
+.spot{font-size:11.5px; color:var(--soft)}
+.spot b{color:var(--ink)}
+.ans{display:inline-block; border:1.5px solid var(--t); border-radius:6px; padding:0 7px; font-weight:800;
+  color:var(--t); background:var(--tb)}
+ol.rec{margin:2px 0 3px; padding-inline-start:17px}
+ol.rec li{margin:1px 0}
+.m{direction:ltr; unicode-bidi:isolate; text-align:center}
+.m .katex-display{margin:1px 0}
+
+/* שורת דוגמה: תווית בצד ימין, החישוב באמצע */
+.ex{display:flex; gap:7px; align-items:center; border-top:1px dashed var(--tl); padding-top:3px; margin-top:3px}
+.ex .lab{flex:0 0 auto; min-width:34px}
+.ex .m{flex:1; min-width:0}
+table.st{border-collapse:collapse; width:100%; margin:3px 0 5px; font-size:12px}
+table.st th,table.st td{border:1.2px solid var(--tl); padding:2px 6px; text-align:right; vertical-align:middle}
+table.st th{background:var(--tb); color:var(--t); font-size:11.5px; font-weight:800}
+table.st td.c{text-align:center}
+table.st td.yes{color:#2E7D32; font-weight:800; text-align:center}
+table.st td.no{color:var(--op); font-weight:800; text-align:center}
+table.st tr{break-inside:avoid}
+
+/* טבלת טענה ונימוק — בדיוק כמו במחברת */
+table.pt{border-collapse:collapse; width:100%; font-size:12px; margin:3px 0}
+table.pt th,table.pt td{border:1.5px solid var(--ink); padding:2px 7px; vertical-align:middle}
+table.pt th{background:var(--faint); font-weight:800; text-align:center}
+table.pt td.i{width:18px; text-align:center; color:var(--soft); font-size:11px}
+table.pt td.c{white-space:nowrap}
+table.pt tr.qed td{text-align:left; font-weight:800; color:var(--t); letter-spacing:.04em; padding:2px 12px}
+table.pt tr.hl-g td.c{box-shadow:inset 4px 0 0 #2563EB}
+table.pt tr.hl-a td.c{box-shadow:inset 4px 0 0 #B7791F}
+table.pt tr.hl-s td.c{box-shadow:inset 4px 0 0 #EA580C}
+table.pt tr.hl-p td.c{box-shadow:inset 4px 0 0 #059669}
+
+ul.sw{list-style:none; padding:0; margin:2px 0}
+ul.sw li{margin:2px 0; padding-inline-start:16px; position:relative}
+ul.sw li::before{content:""; position:absolute; right:0; top:.42em; width:10px; height:10px; border-radius:3px;
+  background:var(--c,var(--t))}
+ul.dots{margin:2px 0; padding-inline-start:16px}
+ul.dots li{margin:1px 0}
+ul.dots.cols{columns:2; column-gap:22px}
+ul.dots.cols li{break-inside:avoid}
+.check{border:2px solid var(--t); border-radius:10px; padding:6px 11px; break-inside:avoid}
+.check h3{margin:0 0 3px; color:var(--t); font-size:14px}
+ul.cl{list-style:none; padding:0; margin:0; columns:2; column-gap:18px}
+ul.cl li{break-inside:avoid; padding-inline-start:18px; position:relative; margin:2px 0}
+ul.cl li::before{content:"☐"; position:absolute; right:0; top:-1px; color:var(--t); font-size:13px}
+.foot{font-size:10.5px; color:var(--soft); text-align:center; margin-top:6px}
+figure.fg{margin:0; text-align:center; break-inside:avoid}
+figure.fg figcaption{font-size:11px; color:var(--soft); margin-top:1px}
+
+/* ---------- מסך צר ---------- */
+@media (max-width:640px){
+  .g2,.g3,.g-fig{grid-template-columns:1fr}
+  .sheet{padding:12px 11px; font-size:13.5px}
+  .shead{flex-wrap:wrap}
+  .shead .sub{margin-inline-start:0; text-align:right; width:100%}
+  ul.cl{columns:1}
+  table.st,table.pt{font-size:12.5px}
+  table.pt td.c{white-space:normal}
+  ul.dots.cols{columns:1}
+  table.st.stack tr:first-child{display:none}
+  table.st.stack,table.st.stack tbody,table.st.stack tr,table.st.stack td{display:block; width:auto !important}
+  table.st.stack tr{border:1.2px solid var(--tl); border-radius:8px; margin:0 0 6px; padding:3px 0}
+  table.st.stack td{border:0; padding:2px 8px}
+  table.st.stack td.yes,table.st.stack td.no{display:inline-block; text-align:right}
+  table.st.stack td.yes::before{content:"הכרחי/מספיק: "; color:var(--soft); font-weight:400}
+  table.st.stack td.yes+td.yes::before,table.st.stack td.yes+td.no::before{content:"· "}
+}
+
+/* ---------- הדפסה: כל דף = A4 אחד ---------- */
+@page{size:A4; margin:9mm 10mm}
+@media print{
+  body{background:#fff}
+  .sumwrap{max-width:none; padding:0; margin:0}
+  .sheet{border:0; border-radius:0; padding:0; margin:0; break-after:page; font-size:12px}
+  .sheet:last-of-type{break-after:auto}
+  .card,.fx,table.st,table.pt,figure.fg,.check{break-inside:avoid}
+}
+
+/* ---------- גרסת חיסכון בדיו (html.ink) ----------
+   לא משנים אף מידה — רק מורידים מילויים. הצבע נשאר על הטקסט ועל הקווים. */
+html.ink body{background:#fff}
+html.ink .shead{background:#fff; color:var(--t)}
+html.ink .card h3 .k{background:#fff; color:var(--t)}
+html.ink .fx,html.ink .ans,html.ink table.st th,html.ink table.pt th{background:#fff}
+html.ink svg .fill{fill:none}
+</style>
+<script defer src="../../vendor/katex.min.js"></script>
+<script defer src="../../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../../js/shira.js"></script>
+</head>
+<body>
+
+<div class="topbar no-print">
+  <div class="topbar-in">
+    <a class="home" href="../../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="exam1.html">מבחן 1 — הדף הראשי</a>
+    <span class="crumbs"><b>דף הסיכום</b></span>
+  </div>
+</div>
+
+<div class="sumwrap">
+
+<div class="dl no-print">
+  <a class="main" href="exam1-summary.pdf" download>⬇ להוריד PDF</a>
+  <a href="exam1-summary-ink.pdf" download>⬇ גרסה חסכונית בדיו להדפסה</a>
+  <small>חמישה דפי A4 — פותרים לידם ומתרגלים לידם.</small>
+</div>
+
+<!-- =========================================================== דף 1 -->
+<section class="sheet s-mul" id="p1">
+<div class="shead"><span class="n">דף 1 מתוך 5</span><h2>הכלים: נוסחאות הכפל המקוצר וחוקי החזקות</h2>
+  <span class="sub">מבחן 1 · ט׳ א1 · יום ד׳ 4.11</span></div>
+<p class="idea"><b>כל נוסחה היא דרך דו-כיוונית.</b> קוראים משמאל לימין — פותחים סוגריים. קוראים מימין לשמאל — מפרקים לגורמים.</p>
+
+<div class="grid g3">
+  <div class="card">
+    <h3><span class="k">1</span>ריבוע של סכום</h3>
+    <div class="fx">\((a+b)^{2}=a^{2}+2ab+b^{2}\)</div>
+    <p class="spot"><b>האיבר האמצעי \(+2ab\) — באותו סימן כמו בסוגריים.</b> \(ab\) מופיע פעמיים — \(a\cdot b\) וגם \(b\cdot a\) — ומכאן \(2ab\).</p>
+    <div class="ex"><span class="lab">לפתוח</span><div class="m">\((x+7)^{2}=x^{2}+14x+49\)</div></div>
+    <div class="ex"><span class="lab">לפרק</span><div class="m">\(x^{2}+10x+25=(x+5)^{2}\)</div></div>
+  </div>
+  <div class="card">
+    <h3><span class="k">2</span>ריבוע של הפרש</h3>
+    <div class="fx">\((a-b)^{2}=a^{2}-2ab+b^{2}\)</div>
+    <p class="spot"><b>האיבר האמצעי \(-2ab\) — באותו סימן כמו בסוגריים.</b> הריבוע של \(b\) נכתב עם \(+\): \((-b)^{2}=+b^{2}\).</p>
+    <div class="ex"><span class="lab">לפתוח</span><div class="m">\((2x-3)^{2}=4x^{2}-12x+9\)</div></div>
+    <div class="ex"><span class="lab">לפרק</span><div class="m">\(9x^{2}-30x+25=(3x-5)^{2}\)</div></div>
+  </div>
+  <div class="card">
+    <h3><span class="k">3</span>הפרש ריבועים</h3>
+    <div class="fx">\((a+b)(a-b)=a^{2}-b^{2}\)</div>
+    <p class="spot"><b>האיבר האמצעי מתאפס:</b> \(-ab+ab=0\).</p>
+    <div class="ex"><span class="lab">לפתוח</span><div class="m">\((x-9)(x+9)=x^{2}-81\)</div></div>
+    <div class="ex"><span class="lab">לפרק</span><div class="m">\(9x^{2}-25=(3x-5)(3x+5)\)</div></div>
+  </div>
+</div>
+
+<div class="grid g2">
+  <div class="card">
+    <h3>לפתוח נכון — \(a\) ו-\(b\) הם איברים שלמים, כולל המקדם</h3>
+    <div class="m">$$(4x-7y)^{2}=\underbrace{(4x)^{2}}_{a^{2}}-\underbrace{2\cdot4x\cdot7y}_{2ab}+\underbrace{(7y)^{2}}_{b^{2}}$$
+    $$=16x^{2}-56xy+49y^{2}$$</div>
+    <p>הריבוע חל על המקדם ועל האות: \((3x)^{2}=9x^{2}\).</p>
+    <p>מחסרים ריבוע — קודם התוצאה בתוך סוגריים עם \(\textcolor{#C0392B}{-1\cdot}\), ורק אחר כך פותחים:</p>
+    <div class="m">$$-(x-3)^{2}=\textcolor{#C0392B}{-1\cdot}(x^{2}-6x+9)=-x^{2}+6x-9$$</div>
+    <p>מספר שבחוץ — קודם הנוסחה, אחר כך הכפל:</p>
+    <div class="m">$$3(x-2)^{2}=3(x^{2}-4x+4)=3x^{2}-12x+12$$</div>
+    <p class="spot">ובמספרים, האיבר האמצעי הוא \(2\cdot3\cdot4=24\):</p>
+    <div class="m">$$(3+4)^{2}=9+24+16=49$$</div>
+  </div>
+  <div class="card">
+    <h3>לפרק — איך מזהים איזו נוסחה</h3>
+    <p><b>שני איברים</b>, מינוס ביניהם, ולכל אחד מהם שורש נאה — הפרש ריבועים:</p>
+    <div class="m">$$x^{2}-64=(x-8)(x+8)$$</div>
+    <p><b>שלושה איברים</b>, ובשני הקצוות ריבועים — ריבוע של סכום או של הפרש.
+      הסימן של האיבר האמצעי הוא הסימן שבתוך הסוגריים.</p>
+    <p><b>בודקים את האיבר האמצעי</b> — הוא חייב להיות \(2\cdot a\cdot b\). למשל ב-\(9x^{2}-30x+25\):</p>
+    <div class="m">$$\sqrt{9x^{2}}=3x\qquad \sqrt{25}=5\qquad 2\cdot3x\cdot5=30x\;\checkmark$$
+    $$9x^{2}-30x+25=(3x-5)^{2}$$</div>
+    <p><b>בסוף פותחים בחזרה</b> — בדיקה של חמש שניות:</p>
+    <div class="m">$$(3x-5)(3x+5)=9x^{2}-25\;\checkmark$$</div>
+  </div>
+</div>
+
+<div class="card">
+  <h3>חוקי החזקות — כולם ספירה של גורמים</h3>
+  <div class="grid g2" style="margin:0">
+    <table class="st">
+      <tr><th>החוק</th><th>דוגמה</th></tr>
+      <tr><td class="c">\(a^{m}\cdot a^{n}=a^{m+n}\)</td><td class="c">\(x^{3}\cdot x^{5}=x^{8}\)</td></tr>
+      <tr><td class="c">\(\dfrac{a^{m}}{a^{n}}=a^{m-n}\)</td><td class="c">\(\dfrac{12a^{7}b^{3}}{6a^{4}b^{3}}=2a^{3}\)</td></tr>
+      <tr><td class="c">\((a^{m})^{n}=a^{m\cdot n}\)</td><td class="c">\((x^{2})^{3}=x^{6}\)</td></tr>
+      <tr><td class="c">\((a\cdot b)^{n}=a^{n}\cdot b^{n}\)</td><td class="c">\((3x)^{2}=9x^{2}\)</td></tr>
+      <tr><td class="c">\(\left(\dfrac{a}{b}\right)^{n}=\dfrac{a^{n}}{b^{n}}\)</td><td class="c">\(\left(\dfrac{x}{2}\right)^{3}=\dfrac{x^{3}}{8}\)</td></tr>
+      <tr><td class="c">\(a^{0}=1\quad(a\neq0)\)</td><td class="c">\(\dfrac{b^{3}}{b^{3}}=b^{0}=1\)</td></tr>
+    </table>
+    <div>
+      <p><b>אותו בסיס:</b> שני החוקים הראשונים פועלים כשהבסיס זהה. המקדמים מתחלקים כרגיל: \(12:6=2\).</p>
+      <p><b>מעריכים נפגשים בכפל ובחילוק.</b> בחיבור מכנסים איברים דומים:</p>
+      <div class="m">$$x^{3}\cdot x^{5}=x^{8}\qquad\qquad 3x+5x=8x$$</div>
+      <p><b>הסוגריים קובעים מה הבסיס:</b></p>
+      <div class="m">$$(-2)^{4}=+16\qquad\qquad {-2^{4}}=-16$$</div>
+      <p class="spot">מעריך זוגי על בסיס שלילי נותן תוצאה חיובית; מעריך אי-זוגי משאיר את המינוס.</p>
+      <p class="spot">בתכנית של כיתה ט׳ המעריכים הם \(0,1,2,3,\ldots\) — בלי מעריכים שליליים.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- =========================================================== דף 2 -->
+<section class="sheet s-use" id="p2">
+<div class="shead"><span class="n">דף 2 מתוך 5</span><h2>חמשת השימושים — מזהים את סוג השאלה, מפעילים את המתכון</h2>
+  <span class="sub">לפי הרשימה של המורה</span></div>
+<p class="idea"><b>הסימנים של הלוח:</b>
+  \(\textcolor{#7C3AED}{\underline{x^{2}}}\) איבר ריבועי — קו אחד ·
+  \(\textcolor{#EA580C}{\underline{\underline{x}}}\) איבר עם האות — שני קווים ·
+  \(\textcolor{#059669}{7}\) מספר בלי אות ·
+  \(\textcolor{#C0392B}{-1\cdot}\) פעולה שאנחנו מוסיפות.</p>
+
+<div class="grid g2">
+  <div class="card">
+    <h3><span class="k">1</span>פישוט ביטויים</h3>
+    <p class="spot"><b>מזהים:</b> „פשטי”, „פתחי סוגריים וכנסי איברים דומים”. התשובה היא ביטוי — בלי סימן שוויון.</p>
+    <ol class="rec">
+      <li>מזהים כל נוסחה בביטוי.</li>
+      <li>ריבוע או מכפלה שמחסרים: התוצאה נכנסת לסוגריים עם \(\textcolor{#C0392B}{-1\cdot}\).</li>
+      <li>פותחים, מסמנים איברים דומים, מכנסים.</li>
+      <li>בודקים בהצבת \(x=1\) בתרגיל ובתשובה.</li>
+    </ol>
+    <div class="m">$$(x+5)^{2}-(x-2)^{2}$$
+    $$=x^{2}+10x+25\;\textcolor{#C0392B}{-1\cdot}(x^{2}-4x+4)$$
+    $$=\textcolor{#7C3AED}{\underline{x^{2}}}\textcolor{#EA580C}{\underline{\underline{+10x}}}\textcolor{#059669}{+25}\textcolor{#7C3AED}{\underline{-x^{2}}}\textcolor{#EA580C}{\underline{\underline{+4x}}}\textcolor{#059669}{-4}$$
+    $$=\boxed{14x+21}$$</div>
+    <p class="spot">בדיקה ב-\(x=1\): בתרגיל \(6^{2}-(-1)^{2}=35\), בתשובה \(14+21=35\) ✓</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="k">2</span>השלמת מקומות ריקים · פתרון משוואות</h3>
+    <p class="spot"><b>השלמה:</b> כותבים את הנוסחה מתחת לתרגיל, איבר מול איבר. האיבר האמצעי קובע את \(b\).</p>
+    <div class="m">$$\begin{aligned}(a+b)^{2}&=a^{2}+2ab+b^{2}\\(x+\square)^{2}&=x^{2}+10x+\square\end{aligned}$$
+    $$2\cdot x\cdot b=10x\;\Rightarrow\; b=5\;\Rightarrow\; b^{2}=25$$</div>
+    <p class="spot"><b>משוואה:</b> פותחים בנוסחאות; לרוב האיברים הריבועיים מתבטלים. התרגיל מהלוח בכיתה:</p>
+    <div class="m">$$(3x-4)^{2}-(x-1)^{2}=(4x-9)(2x-1)$$
+    $$9x^{2}-24x+16\;\textcolor{#C0392B}{-1\cdot}(x^{2}-2x+1)=8x^{2}-4x-18x+9$$
+    $$8x^{2}-22x+15=8x^{2}-22x+9\qquad \textcolor{#C0392B}{/\;-8x^{2}\;\;+22x\;\;-15}$$
+    $$0=-6$$</div>
+    <p style="text-align:center;margin:1px 0 4px"><span class="ans">אין פתרון למשוואה</span></p>
+    <table class="st">
+      <tr><th>מה נשאר בסוף</th><th>מה כותבים</th></tr>
+      <tr><td>\(x=2\)</td><td>פתרון אחד: \(x=2\)</td></tr>
+      <tr><td>\(0=-6\) — שוויון שקרי, בלי \(x\)</td><td>אין פתרון למשוואה</td></tr>
+      <tr><td>\(0=0\) — שוויון אמיתי, בלי \(x\)</td><td>אינסוף פתרונות — כל \(x\) (זהות)</td></tr>
+    </table>
+    <p class="spot">למשל זהות: \((x+3)^{2}-6x=x^{2}+9\) נותנת \(0=0\).</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="k">3</span>חישוב ביטויים על סמך נתונים</h3>
+    <p class="spot"><b>מזהים:</b> „נתון ש… חשבי את ערך הביטוי”. הנתונים הם צירופים כמו \(a+b\) ו-\(ab\), ולא \(a\) ו-\(b\) עצמם.</p>
+    <ol class="rec">
+      <li>בוחרים נוסחה שיש בה גם את המבוקש וגם את הנתונים.</li>
+      <li>מבודדים את המבוקש, ומציבים.</li>
+    </ol>
+    <table class="st">
+      <tr><td class="c">\(a^{2}+b^{2}=(a+b)^{2}-2ab\)</td><td class="c">\(a^{2}+b^{2}=(a-b)^{2}+2ab\)</td></tr>
+      <tr><td class="c">\((a-b)^{2}=(a+b)^{2}-4ab\)</td><td class="c">\(a^{2}-b^{2}=(a+b)(a-b)\)</td></tr>
+      <tr><td class="c">\((a+b)^{2}-(a-b)^{2}=4ab\)</td><td class="c">\(x^{2}+\tfrac{1}{x^{2}}=\left(x+\tfrac{1}{x}\right)^{2}-2\)</td></tr>
+    </table>
+    <p>נתון \(a+b=12\) וגם \(ab=32\). חשבי את \(a^{2}+b^{2}\).</p>
+    <div class="m">$$a^{2}+b^{2}=\underbrace{12^{2}}_{(a+b)^{2}}-\underbrace{2\cdot32}_{2ab}=144-64=\boxed{80}$$</div>
+    <p class="spot">„הוכיחי ש…” — מתחילים מאגף אחד, מגיעים לאגף השני, ומסיימים במש״ל.</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="k">4</span>הוכחת התחלקות ללא שארית</h3>
+    <p class="spot"><b>מזהים:</b> „הוכיחי שהביטוי מתחלק ב-… ללא שארית, לכל \(n\) שלם”.</p>
+    <ol class="rec">
+      <li>מפשטים (עם \(\textcolor{#C0392B}{-1\cdot}\) לפני הריבוע שמחסרים).</li>
+      <li>מוציאים את המספר כגורם משותף.</li>
+      <li>כותבים את משפט המסקנה.</li>
+    </ol>
+    <div class="m">$$(3n+1)^{2}-(n+3)^{2}=9n^{2}+6n+1\;\textcolor{#C0392B}{-1\cdot}(n^{2}+6n+9)$$
+    $$=\textcolor{#7C3AED}{\underline{9n^{2}}}\textcolor{#EA580C}{\underline{\underline{+6n}}}\textcolor{#059669}{+1}\textcolor{#7C3AED}{\underline{-n^{2}}}\textcolor{#EA580C}{\underline{\underline{-6n}}}\textcolor{#059669}{-9}$$
+    $$=8n^{2}-8=\boxed{8\cdot(n^{2}-1)}$$</div>
+    <p><b>משפט המסקנה:</b> \(n\) מספר שלם, ולכן גם \(n^{2}-1\) מספר שלם. הביטוי שווה ל-8 כפול מספר שלם, ולכן הוא מתחלק ב-8 ללא שארית. מש״ל</p>
+    <table class="st">
+      <tr><th>בשאלה</th><th>באלגברה</th></tr>
+      <tr><td>שני מספרים עוקבים</td><td>\(n,\;n+1\)</td></tr>
+      <tr><td>המספר שלפני \(n\) והמספר שאחריו</td><td>\(n-1,\;n+1\)</td></tr>
+      <tr><td>שני מספרים זוגיים עוקבים</td><td>\(2n,\;2n+2\)</td></tr>
+      <tr><td>שני מספרים אי-זוגיים עוקבים</td><td>\(2n-1,\;2n+1\)</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <h3><span class="k">5</span>בעיות מילוליות</h3>
+  <div class="grid g2" style="margin:0">
+    <div>
+      <p class="spot"><b>מזהים:</b> „הצלע הוארכה ב-…”, „השטח גדל ב-…”, „ריבוע של מספר”, „מספרים עוקבים”. בשטח של ריבוע יש \((\;)^{2}\) — ושם נכנסת הנוסחה.</p>
+      <ol class="rec">
+        <li>מגדירים נעלם, וכותבים כל כמות בעזרתו.</li>
+        <li>בונים משוואה מהסיפור.</li>
+        <li>פותחים בנוסחה ופותרים — לרוב האיבר הריבועי מתבטל.</li>
+        <li>כותבים תשובה במילים, עם יחידות, ובודקים מול הסיפור.</li>
+      </ol>
+      <p>צלע של ריבוע הוארכה ב-3 ס״מ, והשטח גדל ב-39 סמ״ר. מה היה אורך הצלע המקורית?</p>
+    </div>
+    <div>
+      <p class="spot">\(x\) — אורך הצלע המקורית, \(x+3\) — אורך הצלע החדשה.<br>
+        השטח החדש פחות השטח המקורי שווה ל-39:</p>
+      <div class="m">$$\begin{aligned}(x+3)^{2}-x^{2}&=39\\
+      \textcolor{#7C3AED}{\underline{x^{2}}}+6x+9\textcolor{#7C3AED}{\underline{-x^{2}}}&=39\\
+      6x+9&=39\qquad\textcolor{#C0392B}{/\;-9}\\
+      6x&=30\qquad\textcolor{#C0392B}{/\;:6}\\
+      x&=5\end{aligned}$$</div>
+      <p class="spot">תשובה: אורך הצלע המקורית 5 ס״מ. בדיקה: \(8^{2}-5^{2}=64-25=39\) ✓</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- =========================================================== דף 3 -->
+<section class="sheet s-lin" id="p3">
+<div class="shead"><span class="n">דף 3 מתוך 5</span><h2>פונקציה קווית — הכול על ישר אחד</h2>
+  <span class="sub">שאלה אחת במבחן מתוך עבודת הקיץ</span></div>
+<p class="idea"><b>כל ישר נקבע משני מספרים:</b> \(\textcolor{#EA580C}{m}\) — השיפוע, ו-\(\textcolor{#059669}{b}\) — המספר החופשי.
+  כל שאלה היא דרך אחרת לתת אותם או לבקש אותם. כל הדוגמאות בדף הן על שני הישרים שבשרטוט:
+  \(\textcolor{#C2408C}{f(x)=2x-4}\) ו-\(\textcolor{#B7791F}{g(x)=-x+5}\).</p>
+
+<div class="grid g-fig">
+  <div>
+    <div class="fx">\(\textcolor{#7C3AED}{y}=\textcolor{#EA580C}{m}\textcolor{#2563EB}{x}+\textcolor{#059669}{b}\)</div>
+    <p><b>\(\textcolor{#EA580C}{m}\) — השיפוע: כמה עולים בכל צעד ימינה.</b> ב-\(f\): צעד אחד ימינה ושניים למעלה, ולכן \(m=2\) (מדרגת השיפוע — הקווים הכתומים המקווקווים).</p>
+    <p><b>\(\textcolor{#059669}{b}\) — המספר החופשי: הישר חוצה את ציר \(y\) בנקודה \((0,b)\).</b> ב-\(f\): \((0,-4)\).</p>
+    <p class="spot">\(m\) הוא המספר הצמוד ל-\(x\), כולל הסימן. ב-\(y=6-2x\): \(m=-2\), \(b=6\). ב-\(y=3x\): \(b=0\). ב-\(y=x+5\): \(m=1\).</p>
+    <table class="st">
+      <tr><th>השיפוע</th><th>הישר</th><th>דוגמה</th></tr>
+      <tr><td class="c">\(m&gt;0\)</td><td>עולה — פונקציה עולה</td><td class="c">\(f(x)=2x-4\)</td></tr>
+      <tr><td class="c">\(m&lt;0\)</td><td>יורד — פונקציה יורדת</td><td class="c">\(g(x)=-x+5\)</td></tr>
+      <tr><td class="c">\(m=0\)</td><td>אופקי, מקביל לציר \(x\)</td><td class="c">\(y=3\)</td></tr>
+    </table>
+    <p class="spot">ישר אנכי, כמו \(x=2\), אינו פונקציה, ואין לו שיפוע.</p>
+    <div class="fx" style="margin-top:6px">\(\textcolor{#EA580C}{m}=\dfrac{\textcolor{#7C3AED}{y_{2}-y_{1}}}{\textcolor{#2563EB}{x_{2}-x_{1}}}\)</div>
+    <p class="spot" style="text-align:center">השיפוע משתי נקודות — אותו סדר במונה ובמכנה.</p>
+  </div>
+  <figure class="fg"><svg viewBox="0 0 252 331" style="width:100%;max-width:250px;height:auto" role="img" aria-label="הישרים f(x)=2x-4 ו-g(x)=-x+5 במערכת צירים"><line x1="36.8" y1="323.9" x2="36.8" y2="8.0" stroke="#E5E7EB" stroke-width="1" stroke-linecap="round"/><line x1="63.8" y1="323.9" x2="63.8" y2="8.0" stroke="#E5E7EB" stroke-width="1" stroke-linecap="round"/><line x1="90.8" y1="323.9" x2="90.8" y2="8.0" stroke="#E5E7EB" stroke-width="1" stroke-linecap="round"/><line x1="117.8" y1="323.9" x2="117.8" y2="8.0" stroke="#E5E7EB" stroke-width="1" stroke-linecap="round"/><line x1="144.8" y1="323.9" x2="144.8" y2="8.0" stroke="#E5E7EB" stroke-width="1" stroke-linecap="round"/><line x1="171.8" y1="323.9" x2="171.8" y2="8.0" stroke="#E5E7EB" stroke-width="1" stroke-linecap="round"/><line x1="198.8" y1="323.9" x2="198.8" y2="8.0" stroke="#E5E7EB" stroke-width="1" stroke-linecap="round"/><line x1="225.8" y1="323.9" x2="225.8" y2="8.0" stroke="#E5E7EB" stroke-width="1" stroke-linecap="round"/><line x1="26.0" y1="313.1" x2="242.0" y2="313.1" stroke="#E5E7EB" stroke-width="1" stroke-linecap="round"/><line x1="26.0" y1="286.1" x2="242.0" y2="286.1" stroke="#E5E7EB" stroke-width="1" stroke-linecap="round"/><line x1="26.0" y1="259.1" x2="242.0" y2="259.1" stroke="#E5E7EB" stroke-width="1" stroke-linecap="round"/><line x1="26.0" y1="232.1" x2="242.0" y2="232.1" stroke="#E5E7EB" stroke-width="1" stroke-linecap="round"/><line x1="26.0" y1="205.1" x2="242.0" y2="205.1" stroke="#E5E7EB" stroke-width="1" stroke-linecap="round"/><line x1="26.0" y1="178.1" x2="242.0" y2="178.1" stroke="#E5E7EB" stroke-width="1" stroke-linecap="round"/><line x1="26.0" y1="151.1" x2="242.0" y2="151.1" stroke="#E5E7EB" stroke-width="1" stroke-linecap="round"/><line x1="26.0" y1="124.1" x2="242.0" y2="124.1" stroke="#E5E7EB" stroke-width="1" stroke-linecap="round"/><line x1="26.0" y1="97.1" x2="242.0" y2="97.1" stroke="#E5E7EB" stroke-width="1" stroke-linecap="round"/><line x1="26.0" y1="70.1" x2="242.0" y2="70.1" stroke="#E5E7EB" stroke-width="1" stroke-linecap="round"/><line x1="26.0" y1="43.1" x2="242.0" y2="43.1" stroke="#E5E7EB" stroke-width="1" stroke-linecap="round"/><line x1="26.0" y1="16.1" x2="242.0" y2="16.1" stroke="#E5E7EB" stroke-width="1" stroke-linecap="round"/><polygon points="117.8,178.1 198.8,178.1 144.8,124.1" fill="#D3ECF1" stroke="#0E7490" stroke-width="1.8" stroke-linejoin="round" class="fill"/><defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs><line x1="26.0" y1="178.1" x2="242.0" y2="178.1" stroke="#334155" stroke-width="1.6" marker-end="url(#ah)"/><line x1="63.8" y1="323.9" x2="63.8" y2="8.0" stroke="#334155" stroke-width="1.6" marker-end="url(#ah)"/><text x="36.8" y="191.1" text-anchor="middle" font-size="10" fill="#64748B">−1</text><text x="90.8" y="191.1" text-anchor="middle" font-size="10" fill="#64748B">1</text><text x="117.8" y="191.1" text-anchor="middle" font-size="10" fill="#64748B">2</text><text x="144.8" y="191.1" text-anchor="middle" font-size="10" fill="#64748B">3</text><text x="171.8" y="191.1" text-anchor="middle" font-size="10" fill="#64748B">4</text><text x="198.8" y="191.1" text-anchor="middle" font-size="10" fill="#64748B">5</text><text x="225.8" y="191.1" text-anchor="middle" font-size="10" fill="#64748B">6</text><text x="59.8" y="316.6" text-anchor="end" font-size="10" fill="#64748B">−5</text><text x="59.8" y="289.6" text-anchor="end" font-size="10" fill="#64748B">−4</text><text x="59.8" y="262.6" text-anchor="end" font-size="10" fill="#64748B">−3</text><text x="59.8" y="235.6" text-anchor="end" font-size="10" fill="#64748B">−2</text><text x="59.8" y="208.6" text-anchor="end" font-size="10" fill="#64748B">−1</text><text x="59.8" y="154.6" text-anchor="end" font-size="10" fill="#64748B">1</text><text x="59.8" y="127.6" text-anchor="end" font-size="10" fill="#64748B">2</text><text x="59.8" y="100.6" text-anchor="end" font-size="10" fill="#64748B">3</text><text x="59.8" y="73.6" text-anchor="end" font-size="10" fill="#64748B">4</text><text x="59.8" y="46.6" text-anchor="end" font-size="10" fill="#64748B">5</text><text x="59.8" y="19.6" text-anchor="end" font-size="10" fill="#64748B">6</text><text x="238.0" y="171.1" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">x</text><text x="73.8" y="16.0" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">y</text><line x1="47.6" y1="318.5" x2="202.9" y2="8.0" stroke="#C2408C" stroke-width="2.6" stroke-linecap="round"/><line x1="28.7" y1="8.0" x2="236.6" y2="215.9" stroke="#B7791F" stroke-width="2.6" stroke-linecap="round"/><line x1="63.8" y1="286.1" x2="90.8" y2="286.1" stroke="#EA580C" stroke-width="2" stroke-linecap="round" stroke-dasharray="4 3"/><line x1="90.8" y1="286.1" x2="90.8" y2="232.1" stroke="#EA580C" stroke-width="2" stroke-linecap="round" stroke-dasharray="4 3"/><text x="77.3" y="299.1" text-anchor="middle" font-size="11" font-weight="bold" fill="#EA580C">1</text><text x="98.8" y="263.1" text-anchor="middle" font-size="11" font-weight="bold" fill="#EA580C">2</text><circle cx="63.8" cy="286.1" r="4" fill="#059669" stroke="#fff" stroke-width="1.2"/><circle cx="117.8" cy="178.1" r="4" fill="#C2408C" stroke="#fff" stroke-width="1.2"/><circle cx="63.8" cy="43.1" r="4" fill="#059669" stroke="#fff" stroke-width="1.2"/><circle cx="198.8" cy="178.1" r="4" fill="#B7791F" stroke="#fff" stroke-width="1.2"/><circle cx="144.8" cy="124.1" r="4" fill="#334155" stroke="#fff" stroke-width="1.2"/><text x="13.8" y="290.1" text-anchor="start" font-size="11" font-weight="bold" fill="#059669">(0,−4)</text><text x="101.8" y="172.1" text-anchor="middle" font-size="11" font-weight="bold" fill="#C2408C">(2,0)</text><text x="70.8" y="38.1" text-anchor="start" font-size="11" font-weight="bold" fill="#059669">(0,5)</text><text x="212.8" y="172.1" text-anchor="middle" font-size="11" font-weight="bold" fill="#B7791F">(5,0)</text><text x="148.8" y="114.1" text-anchor="middle" font-size="11" font-weight="bold" fill="#334155">(3,2)</text><text x="172.6" y="48.5" text-anchor="middle" font-size="15" font-weight="bold" fill="#C2408C">f</text><text x="225.8" y="197.1" text-anchor="middle" font-size="15" font-weight="bold" fill="#B7791F">g</text></svg></figure>
+</div>
+
+<table class="st stack">
+  <tr><th style="width:21%">השאלה</th><th style="width:37%">מה עושים</th><th>דוגמה</th></tr>
+  <tr><td><b>האם נקודה על הישר?</b></td><td>מציבים את ה-\(x\) של הנקודה. אם מתקבל ה-\(y\) שלה — היא על הישר.</td>
+    <td class="lines"><div>\(f(3)=2\cdot3-4=2\;\checkmark\)</div><div>ולכן \((3,2)\) על \(f\).</div></td></tr>
+  <tr><td><b>חיתוך עם ציר \(y\)</b></td><td>מציבים \(x=0\). יוצא תמיד \((0,b)\).</td>
+    <td class="lines"><div>\(f(0)=-4\;\Rightarrow\;(0,-4)\)</div><div>\(g(0)=5\;\Rightarrow\;(0,5)\)</div></td></tr>
+  <tr><td><b>חיתוך עם ציר \(x\)</b> — נקודת האפס</td><td>מציבים \(y=0\) ופותרים.</td>
+    <td class="lines"><div>\(2x-4=0\;\Rightarrow\;x=2\;\Rightarrow\;(2,0)\)</div><div>\(-x+5=0\;\Rightarrow\;x=5\;\Rightarrow\;(5,0)\)</div></td></tr>
+  <tr><td><b>משוואת ישר משיפוע ונקודה</b></td><td>מציבים את הנקודה ב-\(y=mx+b\) ומוצאים את \(b\).</td>
+    <td class="lines"><div>שיפוע \(-3\), דרך \((2,1)\):</div><div>\(1=-3\cdot2+b\;\Rightarrow\;b=7\;\Rightarrow\;y=-3x+7\)</div></td></tr>
+  <tr><td><b>משוואת ישר משתי נקודות</b></td><td>מחשבים את \(m\) משתי הנקודות, ואז כמו בשורה הקודמת. בודקים בנקודה השנייה.</td>
+    <td class="lines"><div>\(A(1,3)\), \(B(4,9)\): \(m=\frac{9-3}{4-1}=2\)</div><div>\(3=2\cdot1+b\;\Rightarrow\;b=1\;\Rightarrow\;y=2x+1\)</div><div>בדיקה ב-\(B\): \(2\cdot4+1=9\;\checkmark\)</div></td></tr>
+  <tr><td><b>ישר מקביל</b></td><td>ישרים מקבילים — אותו שיפוע. מציבים את הנקודה ומוצאים את \(b\).</td>
+    <td class="lines"><div>מקביל ל-\(f\) ועובר דרך \((1,5)\):</div><div>\(5=2\cdot1+b\;\Rightarrow\;b=3\;\Rightarrow\;y=2x+3\)</div></td></tr>
+  <tr><td><b>מקבילים, נחתכים או מתלכדים?</b></td><td>קודם מסדרים כל משוואה לצורה \(y=mx+b\), ורק אז משווים את \(m\) ואת \(b\).</td>
+    <td class="lines"><div>מקבילים: \(m_1=m_2,\;b_1\neq b_2\) — אין נקודה משותפת</div><div>נחתכים: \(m_1\neq m_2\) — נקודה משותפת אחת</div><div>מתלכדים: \(m_1=m_2,\;b_1=b_2\) — אותו ישר</div><div>למשל \(2y=4x+12\) הוא \(y=2x+6\)</div></td></tr>
+  <tr><td><b>נקודת החיתוך של שני ישרים</b></td><td>משווים את שני האגפים ופותרים ל-\(x\). מציבים באחד הישרים ומקבלים \(y\). בודקים בישר השני.</td>
+    <td class="lines"><div>\(2x-4=-x+5\;\Rightarrow\;3x=9\;\Rightarrow\;x=3\)</div><div>\(y=2\cdot3-4=2\;\Rightarrow\;(3,2)\)</div><div>בדיקה ב-\(g\): \(-3+5=2\;\checkmark\)</div></td></tr>
+  <tr><td><b>תחום חיוביות ושליליות</b></td><td>מוצאים את נקודת האפס. ישר עולה: שלילי לפניה וחיובי אחריה. ישר יורד — הפוך.</td>
+    <td class="lines"><div>\(f\) חיובית ב-\(x&gt;2\)</div><div>\(f\) שלילית ב-\(x&lt;2\)</div></td></tr>
+  <tr><td><b>מי מעל מי: \(f(x)&gt;g(x)\)</b></td><td>מוצאים את נקודת החיתוך, ובודקים בגרף באיזה צד שלה \(f\) מעל \(g\).</td>
+    <td class="lines"><div>מימין ל-\((3,2)\) הישר \(f\) מעל \(g\):</div><div>\(f(x)&gt;g(x)\) כאשר \(x&gt;3\)</div></td></tr>
+  <tr><td><b>שטח משולש בין ישרים לציר</b></td><td>הבסיס על הציר — ההפרש בין שיעורי ה-\(x\). הגובה — שיעור ה-\(y\) של הקודקוד השלישי.</td>
+    <td class="lines"><div>המשולש הצבוע בתכלת: \((2,0)\), \((5,0)\), \((3,2)\)</div><div>\(S=\frac{3\cdot2}{2}=3\) יחידות שטח</div></td></tr>
+</table>
+</section>
+
+<!-- =========================================================== דף 4 -->
+<section class="sheet s-kite" id="p4">
+<div class="shead"><span class="n">דף 4 מתוך 5</span><h2>הדלתון — מה יודעים כשנתון דלתון</h2>
+  <span class="sub">חלק ב׳ — גאומטריה</span></div>
+<p class="idea"><b>דלתון = שני משולשים שווי שוקיים על בסיס משותף.</b> כל התכונות, כל ההוכחות ונוסחת השטח יוצאות מהתמונה הזאת.</p>
+
+<div class="grid g-fig">
+  <div>
+    <div class="card" style="margin-bottom:7px">
+      <h3>ההגדרה</h3>
+      <p><b>דלתון הוא מרובע המורכב משני משולשים שווי שוקיים בעלי בסיס משותף.</b></p>
+      <p class="spot">בניסוח של חוברת משרד החינוך: דלתון הוא מרובע שיש לו שני זוגות זרים של צלעות סמוכות השוות זו לזו.
+        בשרטוט: \(\textcolor{#2563EB}{AB=AD}\) וגם \(\textcolor{#059669}{CB=CD}\).</p>
+    </div>
+    <table class="st">
+      <tr><th>השם</th><th>בשרטוט</th><th>מה זה</th></tr>
+      <tr><td>קדקודי הראש</td><td class="c">\(A,\;C\)</td><td>שם נפגשות שתי צלעות שוות</td></tr>
+      <tr><td>זוויות הראש</td><td class="c">\(\angle A,\;\angle C\)</td><td>הזוויות שבקדקודי הראש</td></tr>
+      <tr><td>הזוויות שאינן זוויות הראש</td><td class="c">\(\angle B,\;\angle D\)</td><td>בקצות הבסיס המשותף („זוויות צד”)</td></tr>
+      <tr><td>האלכסון הראשי</td><td class="c">\(AC\)</td><td>מחבר את שני קדקודי הראש</td></tr>
+      <tr><td>האלכסון המשני</td><td class="c">\(BD\)</td><td>הבסיס המשותף של שני המשולשים</td></tr>
+    </table>
+    <div class="card">
+      <h3>התכונות (תנאים הכרחיים) — בשרטוט, באותם צבעים</h3>
+      <ul class="sw">
+        <li style="--c:#B7791F">האלכסון הראשי חוצה את זוויות הראש: \(\angle BAC=\angle DAC\)</li>
+        <li style="--c:#0E7490">וגם: \(\angle BCA=\angle DCA\)</li>
+        <li style="--c:#334155">האלכסון הראשי מאונך לאלכסון המשני: \(AC\perp BD\)</li>
+        <li style="--c:#7C3AED">האלכסון הראשי חוצה את האלכסון המשני: \(BM=MD\)</li>
+        <li style="--c:#C2408C">הזוויות שאינן זוויות הראש שוות זו לזו: \(\angle ABC=\angle ADC\)</li>
+      </ul>
+      <p class="spot">מכל אלה יחד: האלכסון הראשי הוא <b>האנך האמצעי</b> של האלכסון המשני, והוא <b>ציר הסימטריה</b> של הדלתון.
+        הוא מחלק את הדלתון לשני משולשים חופפים: \(\triangle ABC\cong\triangle ADC\).</p>
+    </div>
+  </div>
+  <figure class="fg"><svg viewBox="0 0 300 290" style="width:100%;max-width:300px;height:auto" role="img" aria-label="דלתון ABCD: AB=AD, CB=CD, האלכסונים נחתכים ב-M"><polygon points="150.0,37.0 50.0,112.0 150.0,262.0 250.0,112.0" fill="#F3ECF7" stroke="none" stroke-width="2.4" stroke-linejoin="round" class="fill"/><line x1="150.0" y1="37.0" x2="150.0" y2="262.0" stroke="#EA580C" stroke-width="3" stroke-linecap="round"/><line x1="50.0" y1="112.0" x2="250.0" y2="112.0" stroke="#7C3AED" stroke-width="3" stroke-linecap="round"/><polygon points="150.0,37.0 50.0,112.0 150.0,262.0 250.0,112.0" fill="none" stroke="#334155" stroke-width="2.6" stroke-linejoin="round"/><line x1="120.0" y1="217.0" x2="80.0" y2="157.0" stroke="#2563EB" stroke-width="5" stroke-linecap="round" opacity=".9"/><line x1="95.0" y1="190.3" x2="105.0" y2="183.7" stroke="#2563EB" stroke-width="2.4"/><line x1="180.0" y1="217.0" x2="220.0" y2="157.0" stroke="#2563EB" stroke-width="5" stroke-linecap="round" opacity=".9"/><line x1="195.0" y1="183.7" x2="205.0" y2="190.3" stroke="#2563EB" stroke-width="2.4"/><line x1="120.0" y1="59.5" x2="80.0" y2="89.5" stroke="#059669" stroke-width="5" stroke-linecap="round" opacity=".9"/><line x1="106.0" y1="77.5" x2="98.8" y2="67.9" stroke="#059669" stroke-width="2.4"/><line x1="101.2" y1="81.1" x2="94.0" y2="71.5" stroke="#059669" stroke-width="2.4"/><line x1="180.0" y1="59.5" x2="220.0" y2="89.5" stroke="#059669" stroke-width="5" stroke-linecap="round" opacity=".9"/><line x1="201.2" y1="67.9" x2="194.0" y2="77.5" stroke="#059669" stroke-width="2.4"/><line x1="206.0" y1="71.5" x2="198.8" y2="81.1" stroke="#059669" stroke-width="2.4"/><line x1="100.0" y1="106.0" x2="100.0" y2="118.0" stroke="#7C3AED" stroke-width="2.4"/><line x1="200.0" y1="106.0" x2="200.0" y2="118.0" stroke="#7C3AED" stroke-width="2.4"/><path d="M159.0,112.0 L159.0,121.0 L150.0,121.0" fill="none" stroke="#334155" stroke-width="1.8"/><path d="M132.6,232.8 A34,34 0 0 1 145.5,228.3" fill="none" stroke="#B7791F" stroke-width="3.2"/><line x1="140.5" y1="234.6" x2="137.2" y2="225.2" stroke="#B7791F" stroke-width="2"/><path d="M154.5,228.3 A34,34 0 0 1 167.4,232.8" fill="none" stroke="#B7791F" stroke-width="3.2"/><line x1="159.5" y1="234.6" x2="162.8" y2="225.2" stroke="#B7791F" stroke-width="2"/><path d="M168.5,52.3 A24,24 0 0 1 154.5,60.6" fill="none" stroke="#0E7490" stroke-width="3.2"/><line x1="161.1" y1="52.4" x2="167.0" y2="60.5" stroke="#0E7490" stroke-width="2"/><line x1="158.1" y1="54.2" x2="162.3" y2="63.3" stroke="#0E7490" stroke-width="2"/><path d="M145.5,60.6 A24,24 0 0 1 131.5,52.3" fill="none" stroke="#0E7490" stroke-width="3.2"/><line x1="141.9" y1="54.2" x2="137.7" y2="63.3" stroke="#0E7490" stroke-width="2"/><line x1="138.9" y1="52.4" x2="133.0" y2="60.5" stroke="#0E7490" stroke-width="2"/><path d="M63.6,101.8 A17,17 0 0 1 59.4,126.1" fill="none" stroke="#C2408C" stroke-width="3.2"/><path d="M240.6,126.1 A17,17 0 0 1 236.4,101.8" fill="none" stroke="#C2408C" stroke-width="3.2"/><text x="150.0" y="28.0" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">C</text><text x="150.0" y="282.0" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">A</text><text x="38.0" y="117.0" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">B</text><text x="262.0" y="117.0" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">D</text><text x="140.0" y="105.0" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">M</text><text x="143.0" y="172.0" text-anchor="end" font-size="13" font-weight="bold" fill="#334155">6</text><text x="143.0" y="78.5" text-anchor="end" font-size="13" font-weight="bold" fill="#334155">3</text><text x="77.5" y="105.0" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">4</text><text x="159.8" y="202.0" text-anchor="start" font-size="12" font-weight="bold" fill="#EA580C">אלכסון ראשי</text><text x="200.0" y="129.0" text-anchor="middle" font-size="12" font-weight="bold" fill="#7C3AED">אלכסון משני</text></svg>
+    <figcaption>\(\textcolor{#2563EB}{AB=AD}\) — קו אחד · \(\textcolor{#059669}{CB=CD}\) — שני קווים<br>האורכים בס״מ: \(AM=6\), \(MC=3\), \(BM=4\) (הדוגמה של השטח)</figcaption></figure>
+</div>
+
+<div class="grid g2">
+  <div class="card">
+    <h3>מי חוצה את מי</h3>
+    <p>האלכסון <b>הראשי</b> \(AC\) חוצה את המשני: \(BM=MD\).</p>
+    <p>האלכסון המשני מחלק את הראשי לשני קטעים, \(AM\) ו-\(MC\), ובדרך כלל אורכיהם שונים (בשרטוט \(AM=6\), \(MC=3\)). הם שווים רק כשהדלתון הוא מעוין.</p>
+    <p>הזוויות השוות \(\angle B\) ו-\(\angle D\) יושבות בקצות האלכסון <b>המשני</b>.</p>
+    <p class="spot"><b>מעוין וריבוע הם דלתונים:</b> במעוין כל הצלעות שוות, ולכן בפרט \(AB=AD\) וגם \(CB=CD\).
+      דלתון הוא מעוין כשכל ארבע הצלעות שלו שוות.</p>
+    <p class="spot"><b>סכום הזוויות</b> בדלתון \(360^\circ\), כמו בכל מרובע.</p>
+    <p class="spot"><b>בתוך הדלתון:</b> במשולש \(ABD\) נתון \(AB=AD\), ולכן \(\angle ABD=\angle ADB\) — במשולש שווה שוקיים זוויות הבסיס שוות.</p>
+  </div>
+  <div class="card">
+    <h3>שטח הדלתון</h3>
+    <div class="fx">\(S=\dfrac{AC\cdot BD}{2}\)</div>
+    <p style="text-align:center"><b>שטח הדלתון שווה למחצית המכפלה של אלכסוניו.</b></p>
+    <p class="spot">למה: \(AC\) מחלק את הדלתון לשני משולשים, ו-\(BM\), \(DM\) הם הגבהים שלהם לצלע \(AC\):</p>
+    <div class="m">$$S=\frac{AC\cdot BM}{2}+\frac{AC\cdot DM}{2}=\frac{AC\cdot(BM+DM)}{2}=\frac{AC\cdot BD}{2}$$</div>
+    <p class="spot">הנוסחה נכונה בכל מרובע שאלכסוניו מאונכים זה לזה — גם במעוין ובריבוע.</p>
+    <p><b>דוגמה — הדלתון שבשרטוט (האורכים רשומים עליו):</b> \(AM=6\) ס״מ, \(MC=3\) ס״מ, \(BM=4\) ס״מ.</p>
+    <div class="m">$$MD=BM=4\qquad AC=6+3=9\qquad BD=4+4=8$$
+    $$S=\frac{9\cdot8}{2}=36$$</div>
+    <p class="spot" style="text-align:center">השטח: 36 סמ״ר.</p>
+    <p class="spot">הצלעות — פיתגורס במשולשים הישרים שליד \(M\) (האלכסונים מאונכים):</p>
+    <div class="m">$$AB=\sqrt{6^{2}+4^{2}}=\sqrt{52}\approx7.21\qquad CB=\sqrt{3^{2}+4^{2}}=5$$
+    $$P=2\cdot(\sqrt{52}+5)\approx24.42$$</div>
+    <p class="spot" style="text-align:center">ההיקף: בערך 24.42 ס״מ.</p>
+  </div>
+</div>
+
+<div class="card">
+    <h3>המשולש שווה השוקיים — הנימוקים שחוזרים בהוכחות על דלתון</h3>
+    <ul class="dots cols">
+      <li>במשולש שווה שוקיים זוויות הבסיס שוות.</li>
+      <li>במשולש שווה שוקיים, חוצה זווית הראש, התיכון לבסיס והגובה לבסיס מתלכדים.</li>
+      <li>אם במשולש שתי זוויות שוות זו לזו, אז המשולש הוא שווה שוקיים.</li>
+      <li>אם במשולש חוצה זווית הוא גובה, אז המשולש הוא שווה שוקיים.</li>
+      <li>אם במשולש חוצה זווית הוא תיכון, אז המשולש הוא שווה שוקיים.</li>
+      <li>אם במשולש גובה הוא תיכון, אז המשולש הוא שווה שוקיים.</li>
+    </ul>
+</div>
+</section>
+
+<!-- =========================================================== דף 5 -->
+<section class="sheet s-prf" id="p5">
+<div class="shead"><span class="n">דף 5 מתוך 5</span><h2>הוכחות — מה צריך להראות</h2>
+  <span class="sub">טענה ונימוק · מש״ל</span></div>
+<p class="idea"><b>מוכיחים דלתון כשמראים שני משולשים שווי שוקיים על בסיס משותף</b> — שני זוגות זרים של צלעות סמוכות שוות. את הצלעות השוות מקבלים מחפיפה.</p>
+
+<table class="st stack">
+  <tr><th>התנאי במרובע \(ABCD\)</th><th style="width:7%">הכרחי</th><th style="width:7%">מספיק</th><th style="width:37%">איך מוכיחים / למה</th></tr>
+  <tr><td>שני זוגות זרים של צלעות סמוכות שוות</td><td class="yes">כן</td><td class="yes">כן</td><td>זו ההגדרה</td></tr>
+  <tr><td>זוג צלעות סמוכות שוות, והאלכסון שיוצא מהקדקוד שביניהן חוצה את הזווית</td><td class="yes">כן</td><td class="yes">כן</td><td>חפיפה צ.ז.צ נותנת את הזוג השני (הדגם למטה)</td></tr>
+  <tr><td>אלכסון אחד חוצה את האלכסון השני ומאונך לו</td><td class="yes">כן</td><td class="yes">כן</td><td>שתי חפיפות צ.ז.צ נותנות את שני הזוגות</td></tr>
+  <tr><td>אלכסון חוצה זווית ומאונך לאלכסון השני</td><td class="yes">כן</td><td class="yes">כן</td><td>חפיפה ז.צ.ז נותנת זוג צלעות ואת חציית האלכסון השני</td></tr>
+  <tr><td>אלכסון חוצה שתי זוויות נגדיות</td><td class="yes">כן</td><td class="yes">כן</td><td>חפיפה ז.צ.ז נותנת את שני הזוגות</td></tr>
+  <tr><td>האלכסונים מאונכים</td><td class="yes">כן</td><td class="no">לא</td><td rowspan="5">תכונות של כל דלתון, ולכן הכרחיות. דוגמה נגדית אחת מספיקה כדי לקבוע „לא מספיק”. לשורה הראשונה: מרובע שאלכסוניו מאונכים, ואף אחד מהם לא חוצה את השני. לארבע האחרות: מקבילית שצלעותיה 5, 3, 5, 3.</td></tr>
+  <tr><td>אחד האלכסונים חוצה את השני</td><td class="yes">כן</td><td class="no">לא</td></tr>
+  <tr><td>זוג אחד של זוויות נגדיות שוות</td><td class="yes">כן</td><td class="no">לא</td></tr>
+  <tr><td>אלכסון מחלק את המרובע לשני משולשים חופפים</td><td class="yes">כן</td><td class="no">לא</td></tr>
+  <tr><td>שני זוגות של צלעות שוות (בלי המילה „סמוכות”)</td><td class="yes">כן</td><td class="no">לא</td></tr>
+</table>
+
+<div class="grid g-fig">
+  <div class="card">
+    <h3>דגם הוכחה — כך כותבים במבחן</h3>
+    <p>במרובע \(ABCD\) נתון \(AB=AD\), והאלכסון \(AC\) חוצה את \(\angle A\). <b>הוכיחי</b> כי \(ABCD\) דלתון.</p>
+    <p class="spot">איך חושבים: חסר הזוג \(CB=CD\). צלעות שוות מקבלים מחפיפה. המשולשים \(ABC\) ו-\(ADC\) חולקים את \(AC\): צלע, זווית כלואה, צלע — צ.ז.צ.</p>
+    <table class="pt">
+      <tr><th></th><th>טענה</th><th>נימוק</th></tr>
+      <tr class="hl-g"><td class="i">1</td><td class="c">\(AB=AD\)</td><td>נתון</td></tr>
+      <tr class="hl-a"><td class="i">2</td><td class="c">\(\angle BAC=\angle DAC\)</td><td>נתון: \(AC\) חוצה את \(\angle A\)</td></tr>
+      <tr class="hl-s"><td class="i">3</td><td class="c">\(AC=AC\)</td><td>צלע משותפת</td></tr>
+      <tr><td class="i">4</td><td class="c">\(\triangle ABC\cong\triangle ADC\)</td><td>משפט חפיפה צ.ז.צ (לפי 1, 2, 3)</td></tr>
+      <tr class="hl-p"><td class="i">5</td><td class="c">\(CB=CD\)</td><td>צלעות מתאימות במשולשים חופפים שוות (לפי 4)</td></tr>
+      <tr><td class="i">6</td><td class="c">\(ABCD\) דלתון</td><td>מרובע המורכב משני משולשים שווי שוקיים בעלי בסיס משותף הוא דלתון (\(\triangle ABD\) ו-\(\triangle CBD\) על הבסיס \(BD\); לפי 1, 5)</td></tr>
+      <tr class="qed"><td colspan="3">מש״ל</td></tr>
+    </table>
+    <p class="spot">כל נתון בשורה משלו עם „נתון” · כל טענה עם נימוק ומספרי השורות · השורה האחרונה היא ההגדרה · ובסוף מש״ל.
+    שאלת חישוב מסתיימת בתשובה עם יחידות, בלי מש״ל.</p>
+  </div>
+  <figure class="fg"><svg viewBox="0 0 200 222" style="width:100%;max-width:200px;height:auto" role="img" aria-label="מרובע ABCD: AB=AD, AC חוצה את זווית A; צריך להוכיח CB=CD"><line x1="24.0" y1="82.0" x2="176.0" y2="82.0" stroke="#94A3B8" stroke-width="1.6" stroke-linecap="round"/><line x1="100.0" y1="25.0" x2="100.0" y2="196.0" stroke="#EA580C" stroke-width="2.6" stroke-linecap="round"/><polygon points="100.0,25.0 24.0,82.0 100.0,196.0 176.0,82.0" fill="none" stroke="#334155" stroke-width="2.4" stroke-linejoin="round"/><line x1="77.2" y1="42.1" x2="46.8" y2="64.9" stroke="#2563EB" stroke-width="5" stroke-linecap="round" opacity=".9"/><line x1="65.6" y1="58.3" x2="58.4" y2="48.7" stroke="#2563EB" stroke-width="2.4"/><line x1="122.8" y1="42.1" x2="153.2" y2="64.9" stroke="#2563EB" stroke-width="5" stroke-linecap="round" opacity=".9"/><line x1="141.6" y1="48.7" x2="134.4" y2="58.3" stroke="#2563EB" stroke-width="2.4"/><line x1="77.2" y1="161.8" x2="46.8" y2="116.2" stroke="#059669" stroke-width="5" stroke-linecap="round" opacity=".9" stroke-dasharray="6 4"/><line x1="58.7" y1="144.8" x2="68.7" y2="138.2" stroke="#059669" stroke-width="2.4"/><line x1="55.3" y1="139.8" x2="65.3" y2="133.2" stroke="#059669" stroke-width="2.4"/><line x1="122.8" y1="161.8" x2="153.2" y2="116.2" stroke="#059669" stroke-width="5" stroke-linecap="round" opacity=".9" stroke-dasharray="6 4"/><line x1="131.3" y1="138.2" x2="141.3" y2="144.8" stroke="#059669" stroke-width="2.4"/><line x1="134.7" y1="133.2" x2="144.7" y2="139.8" stroke="#059669" stroke-width="2.4"/><path d="M123.1,44.2 A30,30 0 0 1 104.5,54.7" fill="none" stroke="#B7791F" stroke-width="3.2"/><line x1="112.3" y1="46.8" x2="117.2" y2="55.5" stroke="#B7791F" stroke-width="2"/><path d="M95.5,54.7 A30,30 0 0 1 76.9,44.2" fill="none" stroke="#B7791F" stroke-width="3.2"/><line x1="87.7" y1="46.8" x2="82.8" y2="55.5" stroke="#B7791F" stroke-width="2"/><text x="100.0" y="17.0" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">A</text><text x="100.0" y="215.0" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">C</text><text x="13.0" y="87.0" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">B</text><text x="187.0" y="87.0" text-anchor="middle" font-size="14" font-weight="bold" fill="#334155">D</text></svg>
+    <figcaption>מלא — נתון · מקווקו — צריך להוכיח</figcaption></figure>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <h3>משפטי החפיפה, והנימוקים שאחריה</h3>
+    <ul class="dots cols">
+      <li><b>צ.צ.צ</b> — שלוש צלעות שוות בהתאמה.</li>
+      <li><b>צ.ז.צ</b> — שתי צלעות והזווית <b>הכלואה</b> ביניהן.</li>
+      <li><b>ז.צ.ז</b> — שתי זוויות והצלע <b>הכלואה</b> ביניהן.</li>
+      <li><b>צ.צ.ז</b> — שתי צלעות והזווית שמול <b>הגדולה</b> מביניהן.</li>
+    </ul>
+    <p class="spot">אחרי החפיפה: „צלעות מתאימות במשולשים חופפים שוות”, „זוויות מתאימות במשולשים חופפים שוות”.
+    האלכסון בשני המשולשים — „צלע משותפת”. שתי זוויות צמודות שוות — כל אחת \(90^\circ\).</p>
+    <p class="spot"><b>אנך אמצעי</b> = שני נתונים: אמצע הקטע, וגם אנך לו. כל נקודה הנמצאת על האנך האמצעי של קטע נמצאת במרחקים שווים מקצות הקטע.</p>
+  </div>
+</div>
+
+<div class="check">
+  <h3>רשימת בדיקה ליום המבחן</h3>
+  <ul class="cl">
+    <li>כותבת את שלוש הנוסחאות בראש הדף לפני שמתחילה.</li>
+    <li>מחסרים ריבוע: קודם \(-1\cdot(\;)\), אחר כך פותחים.</li>
+    <li>\(a\) ו-\(b\) כוללים את המקדם: \((2x)^{2}=4x^{2}\).</li>
+    <li>בודקת כל פישוט בהצבת \(x=1\), וכל פתרון בהצבה במשוואה.</li>
+    <li>נשאר \(0=-6\): „אין פתרון למשוואה”. נשאר \(0=0\): „אינסוף פתרונות”.</li>
+    <li>התחלקות: גורם משותף, משפט המסקנה, מש״ל.</li>
+    <li>בעיה מילולית: תשובה במילים, עם יחידות, ובדיקה מול הסיפור.</li>
+    <li>ישר: מסדרת ל-\(y=mx+b\) לפני שמשווה שיפועים. נקודה = גם \(x\) וגם \(y\).</li>
+    <li>גאומטריה: מסרטטת מחדש בגדול ומסמנת את כל הנתונים.</li>
+    <li>כל טענה — עם נימוק ומספרי שורות. הוכחה נגמרת במש״ל.</li>
+  </ul>
+</div>
+<p class="foot">דף הסיכום למבחן 1 · המתמטיקה של שירה · כל מספר בדף נבדק בחישוב</p>
+</section>
+
+</div>
+</body>
+</html>

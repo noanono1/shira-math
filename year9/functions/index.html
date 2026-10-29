@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<link rel="apple-touch-icon" href="../../assets/icons/icon-180.png">
+<link rel="manifest" href="../../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>פונקציות — המפה — כיתה ט׳ — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../../vendor/katex.min.css">
+<link rel="stylesheet" href="../../css/shira.css">
+<style>
+:root{--accent:#B7791F}
+.wrap{max-width:880px}
+
+/* לוח "שכחתי איך עושים…" — אותו רכיב כמו במפות של ח׳ */
+.quick{display:grid; grid-template-columns:repeat(auto-fill,minmax(215px,1fr)); gap:8px; margin:14px 0 4px}
+.quick a{display:block; text-decoration:none; background:var(--card); color:var(--ink);
+  border:1px solid var(--line); border-radius:10px; padding:9px 12px; transition:.15s}
+.quick a:hover{border-color:var(--accent)}
+.quick a b{display:block; font-size:13.5px}
+.quick a span{color:var(--soft); font-size:11.5px; line-height:1.5}
+
+.grouplead{font-size:13.5px; color:var(--soft); margin:8px 0 14px}
+.stations{display:flex; flex-direction:column; gap:11px}
+.st{display:flex; gap:13px; align-items:flex-start; background:var(--card);
+  border:1px solid var(--line); border-radius:12px; padding:13px 16px;
+  text-decoration:none; color:var(--ink); transition:.15s;
+  box-shadow:0 10px 26px -26px var(--shadow)}
+a.st:hover{border-color:var(--accent); box-shadow:0 14px 30px -24px var(--shadow)}
+.st .n{flex:0 0 auto; width:30px; height:30px; border-radius:9px; background:var(--accent);
+  color:#fff; font-weight:800; font-size:14.5px;
+  display:flex; align-items:center; justify-content:center}
+.st .tx{min-width:0}
+.st .tx b{display:block; font-size:16px; font-weight:800; letter-spacing:-.01em}
+.st .tx p{margin:3px 0 0; font-size:13.5px; color:var(--soft); line-height:1.55}
+.st .tx .meta{margin-top:6px; font-size:11.5px; color:var(--soft); font-weight:700}
+/* תחנה שטרם נכתבה: אותה צורה בדיוק, בלי קישור — כדי שהמפה של השנה
+   תהיה שלמה ואמינה, ולא תבטיח דף שאינו קיים. */
+.st.soon{background:#FBFAF7; border-style:dashed; cursor:default}
+.st.soon .n{background:var(--line); color:var(--soft)}
+.st.soon .tx b{color:var(--soft)}
+.st .tag{margin-inline-start:auto; flex:0 0 auto; font-size:11px; font-weight:800;
+  color:var(--soft); background:var(--faint); border-radius:99px; padding:3px 10px;
+  align-self:center; white-space:nowrap}
+</style>
+<script defer src="../../vendor/katex.min.js"></script>
+<script defer src="../../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../../js/shira.js"></script>
+</head>
+<body data-page="g9fun:index">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../../index.html">⌂ המרכז של שירה</a>
+    <span class="crumbs">כיתה ט׳ · <b>פונקציות</b> — המפה</span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">כיתה ט׳ · המפה</div>
+  <h1>פונקציות — הפרבולה</h1>
+  <p class="lead">
+    עד היום כל גרף שראית היה <strong>ישר</strong>. הפונקציה <span class="fi">\(y=x^{2}\)</span> נותנת עקומה — פרבולה — ואיתה מילים חדשות: קדקוד, ציר סימטריה, ותחומי עלייה וירידה. השאלות ינוסחו בדיוק באותן מילים שאת כבר מכירה מהישר.
+  </p>
+
+  <p class="youknow"><b>מה נשען על מה:</b> כל התחנה הזאת עומדת על <a href="../../year8/algebra/04-linear-function.html">הפונקציה הקווית</a> — תחומי סימן, נקודות חיתוך וקריאת גרף — ועל <a href="../algebra/index.html">פירוק לגורמים</a>, שהוא הדרך למצוא את נקודות האפס.</p>
+
+</header>
+
+<h2>שכחתי איך עושים…</h2>
+<div class="quick">
+  <a href="01-parabola.html#sec-forms"><b>איפה הקדקוד</b><span>צורת הקדקוד — הסימן מתהפך</span></a>
+  <a href="01-parabola.html#sec-a"><b>לאיזה כיוון היא פתוחה</b><span>הסימן של <span class="fi">\(a\)</span></span></a>
+  <a href="01-parabola.html#sec-sign"><b>מתי חיובית ומתי שלילית</b><span>ביחס לשתי נקודות האפס</span></a>
+  <a href="01-parabola.html#sec-sign"><b>מתי עולה ומתי יורדת</b><span>נקודת המפנה היא הקדקוד</span></a>
+  <a href="01b-shifts-and-properties.html#sec-both"><b>הזזות של פרבולה</b><span>למעלה, הצידה, ושיקוף</span></a>
+  <a href="01b-shifts-and-properties.html#sec-equation"><b>למצוא משוואת פרבולה</b><span>מקדקוד, מאפסים, או מהגרף</span></a>
+  <a href="01b-shifts-and-properties.html#sec-props"><b>תכונות מהגרף</b><span>עלייה, ירידה וערך מקסימלי</span></a>
+  <a href="02-parabola-and-line.html#sec-meet"><b>נקודות מפגש עם ישר</b><span>משווים ופותרים</span></a>
+  <a href="02-parabola-and-line.html#sec-above"><b>מי מעל מי</b><span>מציבים מספר בכל תחום</span></a>
+  <a href="02-parabola-and-line.html#sec-none"><b>אין נקודות מפגש?</b><span>הדיסקרימיננטה שלילית</span></a>
+  <a href="02b-quadratic-inequalities.html#sec-method"><b>אי-שוויון ריבועי</b><span>אפסים → כיוון הפתיחה → קוראים</span></a>
+  <a href="02b-quadratic-inequalities.html#sec-write"><b>איך כותבים את התשובה</b><span>"או" או אי-שוויון כפול</span></a>
+</div>
+
+<h2>המסלול</h2>
+<p class="grouplead">כל תחנה נפתחת בפתרון שנבנה שלב-אחרי-שלב, וממשיכה לתרגול מדורג.</p>
+
+<div class="stations">
+
+  <a class="st" href="01-parabola.html">
+    <span class="n">1</span>
+    <span class="tx"><b>הפרבולה</b>
+      <p>שלוש צורות הכתיבה, ומה כל אחת מהן מסגירה במבט אחד.</p>
+      <span class="meta">≈ 40 דק׳ · 9 תרגילים</span></span>
+  </a>
+
+  <a class="st" href="01b-shifts-and-properties.html">
+    <span class="n">2</span>
+    <span class="tx"><b>הזזות ותכונות הפונקציה</b>
+      <p>הזזה למעלה, הצידה ושיקוף — למצוא משוואה של פרבולה, ולקרוא מהגרף עלייה, ירידה וערך מקסימלי.</p>
+      <span class="meta">≈ 75 דק׳ · 20 תרגילים</span></span>
+  </a>
+
+  <a class="st" href="02-parabola-and-line.html">
+    <span class="n">3</span>
+    <span class="tx"><b>פרבולה וישר</b>
+      <p>נקודות מפגש, מי מעל מי, ומתי בכלל אין מפגש.</p>
+      <span class="meta">≈ 35 דק׳ · 7 תרגילים</span></span>
+  </a>
+
+  <a class="st" href="02b-quadratic-inequalities.html">
+    <span class="n">4</span>
+    <span class="tx"><b>אי-שוויונות ריבועיים</b>
+      <p>איפה הפרבולה מעל ציר x — שרטוט, שלושה צעדים, ואיך כותבים את התשובה.</p>
+      <span class="meta">≈ 60 דק׳ · 16 תרגילים</span></span>
+  </a>
+
+</div>
+
+<h2 id="bank">כשרוצים עוד תרגול</h2>
+<div class="stations">
+  <a class="st" href="04-exercise-bank.html">
+    <span class="n">∑</span>
+    <span class="tx"><b>🗂️ מחסן התרגילים</b>
+      <p>ארבעה-עשר תרגילים לפי סוג — קדקוד, נקודות חיתוך, תחומי סימן ומפגש עם ישר.</p>
+      <span class="meta">14 תרגילים · ≈ 3 דק׳ לתרגיל</span></span>
+  </a>
+  <a class="st" href="03-quiz.html">
+    <span class="n">✓</span>
+    <span class="tx"><b>בוחן הבית</b>
+      <p>חמש שאלות בסגנון המפמ״ר, על פונקציות שלא ראית באתר.</p>
+      <span class="meta">≈ 40 דק׳ · 5 שאלות</span></span>
+  </a>
+</div>
+
+<footer class="fin">חלק מהעולם של שירה ·
+<a href="../../index.html">חזרה למרכז</a> ·
+<a href="../../year8/index.html">כיתה ח׳ — היסודות</a></footer>
+</main>
+</div>
+</body>
+</html>

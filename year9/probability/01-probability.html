@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<link rel="apple-touch-icon" href="../../assets/icons/icon-180.png">
+<link rel="manifest" href="../../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>הסתברות — ט׳ — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../../vendor/katex.min.css">
+<link rel="stylesheet" href="../../css/shira.css">
+<style>
+:root{--accent:#2E7D6B}
+.treewrap{margin:16px 0}
+table.pt td,table.pt th{text-align:center}
+</style>
+<script defer src="../../vendor/katex.min.js"></script>
+<script defer src="../../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../../js/shira.js"></script>
+</head>
+<body data-page="g9prob:01-probability">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">הסתברות ט׳ — המפה</a>
+    <span class="crumbs">תחנה <b>1</b> מתוך 2 · <b>הסתברות</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">הסתברות ואוריינות · כיתה ט׳ · תחנה 1</div>
+  <h1>הסתברות</h1>
+  <p class="lead">
+    מה הסיכוי שמשהו יקרה. זה אותו שבר "חלק מתוך שלם" שאת מכירה
+    <a href="../../year8/statistics/04-relative-frequency.html">משכיחות יחסית</a> —
+    ההבדל היחיד הוא שהוא מסתכל <strong>קדימה</strong>, על מה שעוד יקרה,
+    ולא אחורה על מה שכבר נמדד.
+  </p>
+  <p class="youknow"><b>בסוף העמוד תדעי:</b> לחשב הסתברות של ניסוי אחד ·
+  לדעת מתי מכפילים ומתי מחברים · לצייר עץ הסתברויות לשני שלבים ·
+  ולהבחין בין הוצאה <em>עם</em> החזרה לבין <em>בלי</em> החזרה.</p>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>≈ 35 דק׳</b> · 9 תרגילים</span>
+    <a class="pm-jump" href="#sec-practice">לקפוץ ישר לתרגילים ↓</a>
+  </p>
+</header>
+
+<!-- ============ 1. הבסיס ============ -->
+<h2 id="sec-basic"><span class="num">1</span>הנוסחה הבסיסית</h2>
+
+<div class="fbox">
+  <div class="fbox-title">הסתברות של מאורע</div>
+  $$P=\frac{\text{favourable}}{\text{total}}$$
+  <span class="f-legend">
+    <span>מספר המקרים ה<strong>רצויים</strong> — חלקי מספר <strong>כל</strong> המקרים</span>
+  </span>
+</div>
+
+<p>
+  שני התנאים שהופכים את הנוסחה הזאת לנכונה: כל התוצאות חייבות להיות
+  <strong>שוות סיכוי</strong>, וצריך לספור את <em>כולן</em>.
+  בקובייה הוגנת יש 6 תוצאות שוות סיכוי, ולכן ההסתברות לקבל 4 היא
+  <span class="fi">\(\tfrac16\)</span>.
+</p>
+
+<div class="box def">
+  <div class="box-title">שלושה דברים שנכונים תמיד</div>
+  <ul class="steps">
+    <li>הסתברות היא תמיד בין <span class="fi">\(0\)</span> ל-<span class="fi">\(1\)</span>.
+        תשובה כמו <span class="fi">\(1.4\)</span> היא בהכרח טעות.</li>
+    <li><span class="fi">\(P=0\)</span> — בלתי אפשרי.
+        <span class="fi">\(P=1\)</span> — בטוח שיקרה.</li>
+    <li>סכום ההסתברויות של כל התוצאות האפשריות הוא בדיוק
+        <span class="fi">\(1\)</span>.</li>
+  </ul>
+</div>
+
+<div class="box intuition">
+  <div class="box-title">המשלים — קיצור שחוסך עבודה</div>
+  ההסתברות שמשהו <strong>לא</strong> יקרה היא מה שנשאר:
+  $$P(\text{not }A)=1-P(A)$$
+  זה שימושי מאוד בשאלות עם "לפחות". במקום לספור את כל המקרים של "לפחות
+  אחד", סופרים את המקרה היחיד של "אף אחד" ומחסרים מ-1.
+</div>
+
+<!-- ============ 2. מכפילים או מחברים ============ -->
+<h2 id="sec-and-or"><span class="num">2</span>מכפילים או מחברים — ההכרעה החשובה</h2>
+
+<p>
+  זו השאלה שקובעת אם התשובה נכונה, והיא נקבעת ממילה אחת בשאלה:
+</p>
+
+<table class="dtable">
+  <tr><th>המילה בשאלה</th><th>מה עושים</th><th>למה</th></tr>
+  <tr>
+    <td><strong>וגם</strong> · "ואז" · "שניהם"</td>
+    <td><span class="fi">\(P_{1}\cdot P_{2}\)</span></td>
+    <td>שני תנאים שצריכים להתקיים יחד — כל אחד <em>מקטין</em> את הסיכוי</td>
+  </tr>
+  <tr>
+    <td><strong>או</strong> · "אחד מהם"</td>
+    <td><span class="fi">\(P_{1}+P_{2}\)</span></td>
+    <td>יותר אפשרויות מתאימות — הסיכוי <em>גדל</em></td>
+  </tr>
+</table>
+
+<div class="box warn">
+  <div class="box-title">בדיקת שפיות בחינם</div>
+  כפל של שני מספרים קטנים מ-1 נותן מספר <strong>קטן עוד יותר</strong>.
+  לכן אם חישבת "וגם" וקיבלת תוצאה גדולה מכל אחד מהגורמים — טעית.
+  <br>ולהפך: "או" חייב לצאת גדול משניהם.
+  <br>הבדיקה הזאת לוקחת שנייה ותופסת את הטעות הנפוצה ביותר בפרק.
+</div>
+
+<div class="box warn">
+  <div class="box-title">חיבור עובד רק כשהמאורעות זרים</div>
+  אפשר לחבר רק כששני המאורעות <strong>לא יכולים לקרות יחד</strong>.
+  בקובייה, "לקבל 2" ו"לקבל 5" זרים — ולכן
+  <span class="fi">\(\tfrac16+\tfrac16=\tfrac26\)</span>.
+  <br>אבל "מספר זוגי" ו"מספר גדול מ-3" <em>יכולים</em> לקרות יחד
+  (למשל 4 ו-6), ואז חיבור פשוט סופר אותם פעמיים. בשאלות כאלה עדיף פשוט
+  <strong>למנות את התוצאות</strong>: <span class="fi">\(\{2,4,5,6\}\)</span>,
+  כלומר <span class="fi">\(\tfrac46\)</span>.
+</div>
+
+<!-- ============ 3. עץ ============ -->
+<h2 id="sec-tree"><span class="num">3</span>עץ הסתברויות — לשני שלבים</h2>
+
+<p>
+  כשיש שני שלבים ברצף, מציירים עץ. כל ענף נושא את ההסתברות שלו,
+  ו<strong>מכפילים לאורך המסלול</strong> כדי לקבל את ההסתברות של אותו
+  מסלול. אם כמה מסלולים מתאימים — מחברים ביניהם.
+</p>
+
+<figure style="max-width:430px;margin:16px auto 6px">
+  <svg viewBox="0 0 330 210" style="width:100%;height:auto" role="img"
+       aria-label="עץ הסתברויות בשני שלבים, גדל מימין לשמאל: שליפה ראשונה אדום או כחול, ולכל אחת שליפה שנייה">
+    <!-- העץ גדל מימין לשמאל, בכיוון הקריאה: השורש בימין, התוצאות בשמאל -->
+    <circle cx="300" cy="105" r="6" fill="#2E7D6B"/>
+    <line x1="294" y1="105" x2="200" y2="55" stroke="#5A6875" stroke-width="1.6"/>
+    <line x1="294" y1="105" x2="200" y2="155" stroke="#5A6875" stroke-width="1.6"/>
+    <text x="258" y="70" text-anchor="middle" font-family="Arial" font-size="11.5" font-weight="700" fill="#B4553C">3/5</text>
+    <text x="258" y="147" text-anchor="middle" font-family="Arial" font-size="11.5" font-weight="700" fill="#2E6F8E">2/5</text>
+    <circle cx="194" cy="55" r="6" fill="#B4553C"/>
+    <circle cx="194" cy="155" r="6" fill="#2E6F8E"/>
+    <line x1="188" y1="55" x2="95" y2="25" stroke="#5A6875" stroke-width="1.4"/>
+    <line x1="188" y1="55" x2="95" y2="82" stroke="#5A6875" stroke-width="1.4"/>
+    <line x1="188" y1="155" x2="95" y2="128" stroke="#5A6875" stroke-width="1.4"/>
+    <line x1="188" y1="155" x2="95" y2="185" stroke="#5A6875" stroke-width="1.4"/>
+    <circle cx="89" cy="25" r="5" fill="#B4553C"/><circle cx="89" cy="82" r="5" fill="#2E6F8E"/>
+    <circle cx="89" cy="128" r="5" fill="#B4553C"/><circle cx="89" cy="185" r="5" fill="#2E6F8E"/>
+    <text x="72" y="29" text-anchor="end" font-family="Arial" font-size="11" fill="#5A6875">9/25</text>
+    <text x="72" y="86" text-anchor="end" font-family="Arial" font-size="11" fill="#5A6875">6/25</text>
+    <text x="72" y="132" text-anchor="end" font-family="Arial" font-size="11" fill="#5A6875">6/25</text>
+    <text x="72" y="189" text-anchor="end" font-family="Arial" font-size="11" fill="#5A6875">4/25</text>
+    <text x="165" y="205" text-anchor="middle" font-family="Arial" font-size="11" fill="#5A6875">‏1 = סכום ארבעת הקצוות</text>
+  </svg>
+  <figcaption>
+    שקית עם 3 אדומים ו-2 כחולים, שתי שליפות <strong>עם החזרה</strong>.
+    כל קצה הוא מכפלת ההסתברויות לאורך המסלול, וסכום כולם 1 — בדיקה
+    שכדאי לעשות תמיד.
+  </figcaption>
+</figure>
+
+<div class="box def">
+  <div class="box-title">עם החזרה או בלי — ההבדל שקובע הכול</div>
+  <strong>עם החזרה</strong> — מחזירים את מה ששלפנו. השקית זהה בשלב השני,
+  והשלבים <em>אינם תלויים</em>.
+  <br><strong>בלי החזרה</strong> — לא מחזירים. בשלב השני יש פריט אחד פחות
+  בסך הכול, וגם מהצבע שנשלף יש אחד פחות.
+  <br><br>לכן, ב-3 אדומים מתוך 5, ההסתברות לשני אדומים היא:
+  $$\text{with}:\ \frac{3}{5}\cdot\frac{3}{5}=\frac{9}{25}
+    \qquad\qquad
+    \text{without}:\ \frac{3}{5}\cdot\frac{2}{4}=\frac{6}{20}=\frac{3}{10}$$
+  שימי לב ש<strong>שני</strong> המספרים בשבר השני קטנו — גם המונה וגם המכנה.
+  זו הטעות הנפוצה: לשנות רק את המכנה.
+</div>
+
+<div class="nb" data-nb>
+  <div class="nb-head"><b>בונים ביחד במחברת</b><span class="nb-count"></span></div>
+  <ol class="nb-steps">
+    <li class="nb-step"><b>השאלה</b>
+      <p>בשקית 4 כדורים אדומים ו-6 כחולים. שולפים שני כדורים
+      <strong>בלי החזרה</strong>.
+      <br>מה ההסתברות ששניהם אדומים?</p>
+    </li>
+    <li class="nb-step"><b>סה״כ בשלב הראשון</b>
+      <p><span class="fi">\(4+6=10\)</span> כדורים, מהם 4 אדומים:
+      $$P_{1}=\frac{4}{10}=\frac{2}{5}$$</p>
+    </li>
+    <li class="nb-step"><b>מה השתנה לשלב השני</b>
+      <p>הוצאנו כדור אדום ולא החזרנו. עכשיו יש 9 כדורים בסך הכול,
+      ומהם 3 אדומים:
+      $$P_{2}=\frac{3}{9}=\frac{1}{3}$$</p>
+    </li>
+    <li class="nb-step"><b>"שניהם" ⟵ מכפילים</b>
+      <p>$$P=\frac{4}{10}\cdot\frac{3}{9}=\frac{12}{90}=\frac{2}{15}$$</p>
+    </li>
+    <li class="nb-step"><b>בדיקה</b>
+      <p><span class="fi">\(\frac{2}{15}\approx 0.133\)</span> — קטן משני
+      הגורמים (0.4 ו-0.33) ✓ כמצופה בכפל.
+      <br>ולהשוואה, <em>עם</em> החזרה היה יוצא
+      <span class="fi">\(\frac{4}{10}\cdot\frac{4}{10}=0.16\)</span> —
+      גדול יותר, וזה הגיוני: כשמחזירים, נשארים יותר אדומים בשקית.</p>
+    </li>
+  </ol>
+</div>
+
+<!-- ============ 4. תרגול ============ -->
+<h2 id="sec-practice"><span class="num">4</span>תרגול — משלב לשלב</h2>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 1 — קובייה</h4></div>
+  <p class="q-text"><span class="mk mk-find">מה ההסתברות לקבל מספר זוגי
+    בהטלת קובייה?</span></p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      המקרים הרצויים: <span class="fi">\(\{2,4,6\}\)</span> — שלושה.
+      סך הכול: שישה.
+      $$P=\frac{3}{6}=\frac12=0.5$$
+    </div>
+  </details>
+  <div class="q-row"><span>כמספר עשרוני:</span>
+    <input class="q-input" data-answer="0.5" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex1"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 2 — שקית</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">בשקית 5 גולות אדומות, 3 כחולות ו-2 ירוקות</span>.
+    <span class="mk mk-find">מה ההסתברות לשלוף אדומה?</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      סך הכול <span class="fi">\(5+3+2=10\)</span>:
+      $$P=\frac{5}{10}=0.5$$
+    </div>
+  </details>
+  <div class="q-row"><span>כמספר עשרוני:</span>
+    <input class="q-input" data-answer="0.5" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex2"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 3 — המשלים</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">באותה שקית</span>.
+    <span class="mk mk-find">מה ההסתברות לשלוף גולה שאינה אדומה?</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      <strong>דרך המשלים:</strong>
+      $$P=1-0.5=0.5$$
+      <strong>ובספירה ישירה:</strong> 3 כחולות ועוד 2 ירוקות זה 5 מתוך 10 —
+      אותה תשובה ✓ תמיד כדאי לוודא שהשתיים מסכימות.
+    </div>
+  </details>
+  <div class="q-row"><span>כמספר עשרוני:</span>
+    <input class="q-input" data-answer="0.5" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex3"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 4 — שתי הטלות</h4></div>
+  <p class="q-text">
+    <span class="mk mk-find">מה ההסתברות לקבל 6 בשתי הטלות קובייה
+    ברצף?</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      "וגם" ⟵ מכפילים. הקובייה לא זוכרת מה יצא קודם, ולכן ההסתברות זהה
+      בשתי ההטלות:
+      $$P=\frac16\cdot\frac16=\frac{1}{36}$$
+      $$\frac{1}{36}\approx 0.028$$
+      קטן משני הגורמים ✓
+    </div>
+  </details>
+  <div class="q-row"><span>המכנה:</span>
+    <input class="q-input" data-answer="36" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex4"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 5 — עם החזרה</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">בשקית 3 גולות לבנות ו-7 שחורות</span>.
+    <span class="mk mk-given">שולפים שתיים <strong>עם</strong> החזרה</span>.
+    <span class="mk mk-find">מה ההסתברות ששתיהן לבנות?</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      עם החזרה ⟵ השקית זהה בשני השלבים:
+      $$P=\frac{3}{10}\cdot\frac{3}{10}=\frac{9}{100}=0.09$$
+    </div>
+  </details>
+  <div class="q-row"><span>כמספר עשרוני:</span>
+    <input class="q-input" data-answer="0.09" data-tol="0.005" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex5"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 6 — בלי החזרה</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">אותה שקית, אבל <strong>בלי</strong> החזרה</span>.
+    <span class="mk mk-find">מה ההסתברות ששתיהן לבנות?</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      בשלב השני נשארו 9 גולות, ומהן 2 לבנות:
+      $$P=\frac{3}{10}\cdot\frac{2}{9}=\frac{6}{90}=\frac{1}{15}\approx 0.067$$
+      <strong>פחות</strong> מהתוצאה עם החזרה (0.09) — הגיוני, כי אחרי
+      שהוצאנו לבנה נשארו פחות לבנות בשקית.
+    </div>
+  </details>
+  <div class="q-row"><span>כמספר עשרוני:</span>
+    <input class="q-input" data-answer="0.067" data-tol="0.005" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex6"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 7 — "לפחות אחד"</h4></div>
+  <p class="q-text">
+    <span class="mk mk-find">מטילים קובייה פעמיים. מה ההסתברות לקבל
+    <strong>לפחות</strong> 6 אחד?</span>
+  </p>
+  <details class="step"><summary>שלב ראשון — למה לא לספור ישירות</summary>
+    <div class="step-body">"לפחות אחד" מכסה שלושה מקרים: 6 ראשון בלבד,
+    6 שני בלבד, ושניהם. קל יותר לספור את המקרה ההפוך היחיד.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      המשלים של "לפחות 6 אחד" הוא "<strong>אף 6</strong>".
+      <br>בהטלה אחת, ההסתברות לא לקבל 6 היא <span class="fi">\(\frac56\)</span>:
+      $$P(\text{no }6)=\frac56\cdot\frac56=\frac{25}{36}$$
+      $$P(\text{at least one})=1-\frac{25}{36}=\frac{11}{36}\approx 0.306$$
+      <strong>הכלל:</strong> כשרואים "לפחות" — כמעט תמיד עוברים למשלים.
+      זה הופך שלושה חישובים לאחד.
+    </div>
+  </details>
+  <div class="q-row"><span>המונה (מתוך 36):</span>
+    <input class="q-input" data-answer="11" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex7"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 8 — שני מסלולים בעץ</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">בשקית 4 אדומות ו-6 כחולות, שולפים שתיים
+    בלי החזרה</span>.
+    <span class="mk mk-find">מה ההסתברות שהן בצבעים <strong>שונים</strong>?</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      שני מסלולים מתאימים — אדום ואז כחול, או כחול ואז אדום:
+      $$P(\text{R,B})=\frac{4}{10}\cdot\frac{6}{9}=\frac{24}{90}$$
+      $$P(\text{B,R})=\frac{6}{10}\cdot\frac{4}{9}=\frac{24}{90}$$
+      "או" ⟵ מחברים:
+      $$P=\frac{24}{90}+\frac{24}{90}=\frac{48}{90}=\frac{8}{15}\approx 0.533$$
+      <strong>שני המסלולים יוצאים שווים</strong>, וזה לא במקרה — הסדר לא
+      משנה את המכפלה. לכן אפשר לחשב אחד ולהכפיל ב-2.
+      <br>ומי שחישבה רק מסלול אחד קיבלה חצי מהתשובה.
+    </div>
+  </details>
+  <div class="q-row"><span>כמספר עשרוני:</span>
+    <input class="q-input" data-answer="0.533" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex8"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 9 — למצוא כמה יש</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">בשקית גולות שחורות ולבנות בלבד</span>.
+    <span class="mk mk-given">ההסתברות לשלוף לבנה היא
+    <span class="fi">\(0.25\)</span>, ובשקית 12 גולות לבנות</span>.
+    <span class="mk mk-find">כמה גולות יש בסך הכול?</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      נסמן ב-<span class="fi">\(n\)</span> את מספר הגולות הכולל:
+      $$\frac{12}{n}=0.25\;\Longrightarrow\;12=0.25n\;\Longrightarrow\;n=48$$
+      בסך הכול 48 גולות, מהן 12 לבנות ו-36 שחורות.
+      <br>בדיקה: <span class="fi">\(\frac{12}{48}=\frac14=0.25\)</span> ✓
+      <br><br>שימי לב שהנוסחה עובדת גם <strong>אחורה</strong> — בדיוק כמו
+      שכל נוסחה בשנה הזאת עובדת. אם ידועים שניים מהשלושה, השלישי נפתר
+      במשוואה.
+    </div>
+  </details>
+  <div class="q-row"><span>סך הגולות:</span>
+    <input class="q-input" data-answer="48" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex9"> סיימתי את התרגיל הזה</label>
+</article>
+
+<div class="box def" style="margin-top:26px">
+  <div class="box-title">מה לקחת מכאן</div>
+  שלוש שאלות לפני כל חישוב: <strong>"וגם" או "או"?</strong> ·
+  <strong>עם החזרה או בלי?</strong> · <strong>ואולי המשלים קצר יותר?</strong>
+  ובסוף — לוודא שהתשובה בין 0 ל-1, ושכפל הקטין ולא הגדיל.
+</div>
+
+
+<div class="watch">
+  <h3>רוצה לראות את זה מוסבר בקול?</h3>
+  <p>הסרטונים הם תגבור, לא חובה — ומי שהעמוד הספיק לה יכולה לדלג.</p>
+  <a class="video-link" href="https://www.youtube.com/watch?v=cuYfCSnzNDs" target="_blank" rel="noopener">
+    <img src="../../assets/g9-vids/cuYfCSnzNDs.jpg" alt="עץ הסתברויות — תמונה מהסרטון" loading="lazy">
+    <span class="vt"><b>קורס הסתברות - דיאגרמת עץ</b><span>דיאגרמת עץ, עם דוגמאות · 8:10 · אילון פרץ | מתמטיקה לבגרות ולחטיבה – Level Up </span></span>
+    <span class="play">▶</span>
+  </a>
+</div>
+
+<div class="progresswrap no-print">
+  <span class="progressbar"><i></i></span><span class="progress-label"></span>
+  <button class="all-sols" style="font-family:inherit;font-size:12px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:4px 10px;cursor:pointer">לפתוח את כל הפתרונות</button>
+</div>
+
+<nav class="pagenav">
+  <a class="next" href="02-literacy.html"><span class="dir">הבא ←</span>אוריינות מתמטית</a>
+</nav>
+
+<footer class="fin">חלק מהעולם של שירה ·
+<a href="../../index.html">חזרה למרכז</a> ·
+<a href="index.html">מפת ההסתברות</a></footer>
+</main>
+</div>
+</body>
+</html>

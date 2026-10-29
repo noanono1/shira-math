@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<link rel="apple-touch-icon" href="../../assets/icons/icon-180.png">
+<link rel="manifest" href="../../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>נוסחאות הכפל המקוצר — אלגברה ט׳ — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../../vendor/katex.min.css">
+<link rel="stylesheet" href="../../css/shira.css">
+<style>
+:root{--accent:#2E6F8E}
+/* טבלת שלוש הנוסחאות — הנוסחה גדולה, ההערה קטנה */
+table.three td{vertical-align:middle}
+table.three .note{font-size:13px; color:var(--soft); line-height:1.5}
+/* שתי העמודות: "לפתוח" מול "לפרק" — אותו דף, שני כיוונים */
+.twoway{display:flex; flex-wrap:wrap; gap:12px; margin:14px 0}
+.twoway>div{flex:1 1 260px; min-width:0; border:1px solid var(--line);
+  border-radius:var(--r-md); padding:11px 15px 13px; background:var(--card)}
+.twoway .ttl{font-size:12px; font-weight:800; letter-spacing:.06em;
+  text-transform:uppercase; margin-bottom:4px}
+.twoway .open .ttl{color:#1D6FA5}
+.twoway .fact .ttl{color:#2E7D32}
+.twoway .open{background:#F7FBFD}
+.twoway .fact{background:#F7FCF7}
+</style>
+<script defer src="../../vendor/katex.min.js"></script>
+<script defer src="../../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../../js/shira.js"></script>
+</head>
+<body data-page="g9alg:02-short-multiplication">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">אלגברה ט׳ — המפה</a>
+    <span class="crumbs">תחנה <b>2</b> מתוך 8 · <b>כפל מקוצר</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">אלגברה · כיתה ט׳ · תחנה 2</div>
+  <h1>נוסחאות הכפל המקוצר</h1>
+  <p class="lead">
+    שלוש נוסחאות, ואף אחת מהן אינה חוק חדש — כולן תוצאה של
+    <a href="../../year8/algebra/01-algebra-language.html#sec-distribute">חוק הפילוג</a>
+    שאת כבר יודעת. מה שהן נותנות זה קיצור. ומה שהופך אותן לנושא הכי חשוב
+    בסתיו זה שאפשר לקרוא אותן גם <strong>מימין לשמאל</strong> — וזה כבר
+    פירוק לגורמים.
+  </p>
+  <p class="youknow"><b>בסוף העמוד תדעי:</b> לפתוח
+  <span class="fi">\((a+b)^{2}\)</span> ו-<span class="fi">\((a-b)^{2}\)</span>
+  בלי לטעות באיבר האמצעי · לזהות הפרש ריבועים במבט · לקרוא כל נוסחה לשני
+  הכיוונים · ולדעת למה <span class="fi">\((a+b)^{2}\neq a^{2}+b^{2}\)</span>
+  — לא כי אמרו לך, אלא כי ראית.</p>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>≈ 30 דק׳</b> · 9 תרגילים</span>
+    <a class="pm-jump" href="#sec-practice">לקפוץ ישר לתרגילים ↓</a>
+  </p>
+</header>
+
+<!-- ============ 1. מאיפה זה בא ============ -->
+<h2 id="sec-why"><span class="num">1</span>מאיפה הנוסחאות באות — ולמה זו לא נוסחה חדשה</h2>
+
+<p>
+  <span class="fi">\((a+b)^{2}\)</span> פירושו
+  <span class="fi">\((a+b)(a+b)\)</span> — כלומר סוגריים כפול סוגריים,
+  בדיוק מה שאת כבר יודעת לפתוח. נעשה את זה לאט, איבר מול איבר:
+</p>
+
+<div class="fbox">
+  <div class="fbox-title">ארבעה מכפלות, ושתיים מהן זהות</div>
+  $$(a+b)(a+b)=
+    \underbrace{a\cdot a}_{a^{2}}+
+    \underbrace{a\cdot b}_{ab}+
+    \underbrace{b\cdot a}_{ab}+
+    \underbrace{b\cdot b}_{b^{2}}$$
+  $$=a^{2}+\underbrace{ab+ab}_{2ab}+b^{2}=a^{2}+2ab+b^{2}$$
+  <span class="f-legend">
+    <span>שני האיברים האמצעיים שווים זה לזה — ולכן הם מצטרפים ל-<span class="fi">\(2ab\)</span></span>
+  </span>
+</div>
+
+<p>
+  <strong>זה הכול.</strong> ה-<span class="fi">\(2\)</span> באיבר האמצעי אינו
+  שרירותי: הוא בא מכך ש-<span class="fi">\(ab\)</span> מופיע פעמיים —
+  פעם אחת <span class="fi">\(a\cdot b\)</span> ופעם אחת
+  <span class="fi">\(b\cdot a\)</span>. מי שזוכרת את זה לא שוכחת את האיבר
+  האמצעי, ומי שרק שיננה — כן.
+</p>
+
+<figure style="max-width:400px;margin:18px auto 6px">
+  <svg viewBox="0 0 340 250" style="width:100%;height:auto" role="img"
+       aria-label="ריבוע שצלעו a ועוד b, מחולק לארבעה חלקים: ריבוע a בריבוע, שני מלבנים של a כפול b, וריבוע b בריבוע">
+    <!-- outer square -->
+    <rect x="40" y="40" width="240" height="200" fill="none" stroke="#1C2733" stroke-width="2"/>
+    <!-- a^2 -->
+    <rect x="40" y="40" width="160" height="133" fill="#DDEDF8" stroke="#2E6F8E" stroke-width="1.4"/>
+    <!-- ab top-right -->
+    <rect x="200" y="40" width="80" height="133" fill="#FBF0C9" stroke="#8A6D1B" stroke-width="1.4"/>
+    <!-- ab bottom-left -->
+    <rect x="40" y="173" width="160" height="67" fill="#FBF0C9" stroke="#8A6D1B" stroke-width="1.4"/>
+    <!-- b^2 -->
+    <rect x="200" y="173" width="80" height="67" fill="#DFF0DC" stroke="#2E7D32" stroke-width="1.4"/>
+    <text x="120" y="112" text-anchor="middle" font-family="Arial" font-size="19" font-weight="800" fill="#2E6F8E">a²</text>
+    <text x="240" y="112" text-anchor="middle" font-family="Arial" font-size="17" font-weight="800" fill="#8A6D1B">ab</text>
+    <text x="120" y="212" text-anchor="middle" font-family="Arial" font-size="17" font-weight="800" fill="#8A6D1B">ab</text>
+    <text x="240" y="212" text-anchor="middle" font-family="Arial" font-size="17" font-weight="800" fill="#2E7D32">b²</text>
+    <!-- side labels -->
+    <line x1="40" y1="30" x2="200" y2="30" stroke="#5A6875" stroke-width="1.2"/>
+    <line x1="200" y1="30" x2="280" y2="30" stroke="#5A6875" stroke-width="1.2"/>
+    <text x="120" y="24" text-anchor="middle" font-family="Arial" font-size="14" font-style="italic" fill="#5A6875">a</text>
+    <text x="240" y="24" text-anchor="middle" font-family="Arial" font-size="14" font-style="italic" fill="#5A6875">b</text>
+    <line x1="292" y1="40" x2="292" y2="173" stroke="#5A6875" stroke-width="1.2"/>
+    <line x1="292" y1="173" x2="292" y2="240" stroke="#5A6875" stroke-width="1.2"/>
+    <text x="305" y="110" text-anchor="middle" font-family="Arial" font-size="14" font-style="italic" fill="#5A6875">a</text>
+    <text x="305" y="212" text-anchor="middle" font-family="Arial" font-size="14" font-style="italic" fill="#5A6875">b</text>
+  </svg>
+  <figcaption>
+    ריבוע שצלעו <span class="fi">\(a+b\)</span>. שטחו הכולל הוא
+    <span class="fi">\((a+b)^{2}\)</span>, והוא מורכב מארבעה חלקים —
+    ושני הצהובים זהים. זו הסיבה ל-<span class="fi">\(2ab\)</span>, בתמונה.
+  </figcaption>
+</figure>
+
+<div class="box warn">
+  <div class="box-title">הטעות שהתמונה מסבירה</div>
+  הרבה כותבים <span class="fi">\((a+b)^{2}=a^{2}+b^{2}\)</span>. בציור רואים
+  בדיוק מה זה מפספס: את <strong>שני המלבנים הצהובים</strong>.
+  <br>ובמספרים, בלי אף אות:
+  $$(3+4)^{2}=7^{2}=49
+    \qquad\text{vs.}\qquad
+    3^{2}+4^{2}=9+16=25$$
+  ‏49 ולא 25. ההפרש, 24, הוא בדיוק <span class="fi">\(2\cdot3\cdot4\)</span> —
+  שני המלבנים.
+</div>
+
+<!-- ============ 2. שלוש הנוסחאות ============ -->
+<h2 id="sec-three"><span class="num">2</span>שלוש הנוסחאות</h2>
+
+<table class="dtable three">
+  <tr><th>הנוסחה</th><th>מה חשוב לשים לב</th></tr>
+  <tr>
+    <td><span class="fi">\((a+b)^{2}=a^{2}+2ab+b^{2}\)</span></td>
+    <td class="note">כל השלושה חיוביים.</td>
+  </tr>
+  <tr>
+    <td><span class="fi">\((a-b)^{2}=a^{2}-2ab+b^{2}\)</span></td>
+    <td class="note">רק האמצעי שלילי. הריבועים תמיד חיוביים — גם
+      <span class="fi">\((-b)^{2}=b^{2}\)</span>.</td>
+  </tr>
+  <tr>
+    <td><span class="fi">\((a+b)(a-b)=a^{2}-b^{2}\)</span></td>
+    <td class="note">האיבר האמצעי <strong>נעלם</strong>. זו החביבה על המבחנים.</td>
+  </tr>
+</table>
+
+<p>
+  השנייה אינה נוסחה נוספת שצריך לזכור — היא הראשונה עם
+  <span class="fi">\(-b\)</span> במקום <span class="fi">\(b\)</span>.
+  נציב ונראה מה קורה לכל איבר:
+</p>
+
+$$2a\cdot(-b)=-2ab\qquad\qquad(-b)^{2}=+b^{2}$$
+
+<p>
+  האמצעי מתהפך, האחרון לא — ולכן רק הסימן האמצעי משתנה בין שתי הנוסחאות.
+</p>
+
+<div class="box intuition">
+  <div class="box-title">למה באמת האמצע נעלם בשלישית</div>
+  נפתח את <span class="fi">\((a+b)(a-b)\)</span> איבר-איבר, בלי נוסחה:
+  $$a\cdot a - a\cdot b + b\cdot a - b\cdot b
+    = a^{2}\;\underbrace{-\,ab+ab}_{0}\;-b^{2}=a^{2}-b^{2}$$
+  שני האמצעיים שווים בגודלם והפוכים בסימנם, ולכן מתאפסים. זה כל ההסבר.
+</div>
+
+<!-- ============ 3. שני הכיוונים ============ -->
+<h2 id="sec-both"><span class="num">3</span>הכיוון השני — וכאן מתחילה כל השנה</h2>
+
+<p>
+  עד כאן קראנו את הנוסחאות משמאל לימין: מסוגריים אל ביטוי פתוח. אבל סימן
+  שוויון עובד לשני הכיוונים, ואם קוראים אותן <strong>הפוך</strong> — מביטוי
+  פתוח אל מכפלה — קיבלנו פירוק לגורמים.
+</p>
+
+<div class="twoway">
+  <div class="open">
+    <div class="ttl">לפתוח ← מה שעשית עד היום</div>
+    $$(x+5)^{2}=x^{2}+10x+25$$
+    $$(x-8)(x+8)=x^{2}-64$$
+  </div>
+  <div class="fact">
+    <div class="ttl">לפרק ← מה שתעשי כל השנה</div>
+    $$x^{2}+10x+25=(x+5)^{2}$$
+    $$x^{2}-64=(x-8)(x+8)$$
+  </div>
+</div>
+
+<p>
+  אותן שתי שורות בדיוק, קראנו אותן מהצד השני. וזו הסיבה שהתחנה הזאת חייבת
+  להיות מוצקה לפני <a href="index.html">תחנה 3</a>: מי שלא מזהה
+  <span class="fi">\(x^{2}-64\)</span> כהפרש ריבועים, לא תוכל לפרק אותו.
+</p>
+
+<div class="box def">
+  <div class="box-title">איך מזהים הפרש ריבועים</div>
+  שלושה תנאים, וכולם חייבים להתקיים:
+  <ol class="steps">
+    <li>יש בדיוק <strong>שני איברים</strong>;</li>
+    <li>הסימן ביניהם הוא <strong>מינוס</strong>;</li>
+    <li>לכל אחד מהם יש <strong>שורש נאה</strong> — הוא ריבוע של משהו.</li>
+  </ol>
+  ואז מפרקים ל-(שורש + שורש)(שורש − שורש).
+  <br><br><strong>ומה עם סכום ריבועים?</strong>
+  <span class="fi">\(x^{2}+64\)</span> — לא ניתן לפירוק. אין נוסחה כזאת,
+  וזו לא שכחה שלנו.
+</div>
+
+<div class="nb" data-nb>
+  <div class="nb-head"><b>בונים ביחד במחברת</b><span class="nb-count"></span></div>
+  <ol class="nb-steps">
+    <li class="nb-step"><b>התרגיל</b>
+      <p>לפרק לגורמים: <span class="fi">\(9x^{2}-25\)</span>
+      <br><span style="font-size:13px;color:var(--soft)">מתוך דף העבודה השבועי
+      מס׳ 2 של משרד החינוך לכיתה ט׳.</span></p>
+    </li>
+    <li class="nb-step"><b>בודקים את שלושת התנאים</b>
+      <p>שני איברים ✓ · מינוס ביניהם ✓ · ולשניהם שורש נאה? נבדוק בשלב הבא.</p>
+    </li>
+    <li class="nb-step"><b>מוציאים שורש מכל איבר בנפרד</b>
+      <p>$$\sqrt{9x^{2}}=3x\qquad\qquad\sqrt{25}=5$$
+      שימי לב ש-<span class="fi">\(\sqrt{9x^{2}}\)</span> הוא
+      <span class="fi">\(3x\)</span> ולא <span class="fi">\(3x^{2}\)</span> —
+      השורש פועל גם על המקדם וגם על האות.</p>
+    </li>
+    <li class="nb-step"><b>מרכיבים את שני הסוגריים</b>
+      <p>$$9x^{2}-25=(3x-5)(3x+5)$$</p>
+    </li>
+    <li class="nb-step"><b>בודקים בכיוון ההפוך</b>
+      <p>פותחים בחזרה:
+      <span class="fi">\((3x)^{2}-5^{2}=9x^{2}-25\)</span> ✓
+      <br>בדיקה כזאת לוקחת חמש שניות ותופסת כמעט כל טעות. שווה לעשות אותה תמיד.</p>
+    </li>
+  </ol>
+</div>
+
+<div class="nb" data-nb>
+  <div class="nb-head"><b>בונים ביחד במחברת</b><span class="nb-count"></span></div>
+  <ol class="nb-steps">
+    <li class="nb-step"><b>תרגיל שנראה שונה — ובעצם אותו דבר</b>
+      <p>לפרק: <span class="fi">\(9x^{2}-30x+25\)</span>
+      <br><span style="font-size:13px;color:var(--soft)">גם הוא מאותו דף עבודה.</span></p>
+    </li>
+    <li class="nb-step"><b>שלושה איברים ⟵ זו לא הנוסחה השלישית</b>
+      <p>הפרש ריבועים הוא שני איברים. כאן יש שלושה, ולכן המועמדות הן שתי
+      הנוסחאות הראשונות — כלומר ריבוע של סוגריים.</p>
+    </li>
+    <li class="nb-step"><b>מזהים את שני הריבועים בקצוות</b>
+      <p>$$\sqrt{9x^{2}}=3x\qquad\qquad\sqrt{25}=5$$
+      אז המועמד שלנו הוא <span class="fi">\((3x-5)^{2}\)</span> —
+      מינוס, כי האיבר האמצעי שלילי.</p>
+    </li>
+    <li class="nb-step"><b>וכאן הבדיקה שאסור לדלג עליה</b>
+      <p>צריך לוודא שהאמצעי באמת מתאים. לפי הנוסחה הוא אמור להיות
+      <span class="fi">\(2ab\)</span>:
+      $$2\cdot(3x)\cdot 5=30x\;\checkmark$$
+      מתאים בדיוק לאיבר האמצעי שבתרגיל.</p>
+    </li>
+    <li class="nb-step"><b>התשובה</b>
+      <p>$$9x^{2}-30x+25=(3x-5)^{2}$$
+      אילו האמצעי היה, נניח, <span class="fi">\(31x\)</span> — הפירוק הזה
+      <em>לא</em> היה נכון, והיינו צריכות דרך אחרת. לכן הבדיקה בשלב הקודם היא
+      חלק מהפתרון, לא קישוט.</p>
+    </li>
+  </ol>
+</div>
+
+<!-- ============ 4. תרגול ============ -->
+<h2 id="sec-practice"><span class="num">4</span>תרגול — משלב לשלב</h2>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 1 — לפתוח ריבוע של סכום</h4></div>
+  <p class="q-text"><span class="mk mk-find">פתחי:</span>
+    <span class="fi">\((x+7)^{2}\)</span></p>
+  <details class="step"><summary>שלב ראשון — לזהות מי <span class="fi">\(a\)</span> ומי <span class="fi">\(b\)</span></summary>
+    <div class="step-body">כאן <span class="fi">\(a=x\)</span> ו-<span class="fi">\(b=7\)</span>.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$(x+7)^{2}=x^{2}+2\cdot x\cdot 7+7^{2}=x^{2}+14x+49$$
+      בדיקה מהירה ב-<span class="fi">\(x=1\)</span>:
+      <span class="fi">\(8^{2}=64\)</span> וגם
+      <span class="fi">\(1+14+49=64\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row">
+    <span>מקדם האיבר האמצעי:</span>
+    <input class="q-input" data-answer="14" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <span>האיבר החופשי:</span>
+    <input class="q-input" data-answer="49" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex1"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 2 — ריבוע של הפרש, עם מקדם</h4></div>
+  <p class="q-text"><span class="mk mk-find">פתחי:</span>
+    <span class="fi">\((2x-3)^{2}\)</span></p>
+  <details class="step"><summary>שלב ראשון — <span class="fi">\(a\)</span> הוא כל האיבר, כולל המקדם</summary>
+    <div class="step-body">כאן <span class="fi">\(a=2x\)</span> — לא
+    <span class="fi">\(x\)</span>. וזו הטעות הנפוצה: כשמעלים בריבוע צריך
+    <span class="fi">\((2x)^{2}=4x^{2}\)</span>.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$(2x-3)^{2}=(2x)^{2}-2\cdot(2x)\cdot 3+3^{2}=4x^{2}-12x+9$$
+      בדיקה ב-<span class="fi">\(x=1\)</span>:
+      <span class="fi">\((-1)^{2}=1\)</span> וגם
+      <span class="fi">\(4-12+9=1\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row">
+    <span>מקדם <span class="fi">\(x^{2}\)</span>:</span>
+    <input class="q-input" data-answer="4" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <span>האיבר האמצעי:</span>
+    <input class="q-input" data-answer="-12" inputmode="text" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex2"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 3 — הנוסחה שמעלימה את האמצע</h4></div>
+  <p class="q-text"><span class="mk mk-find">פתחי:</span>
+    <span class="fi">\((x-9)(x+9)\)</span></p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      אותם שני מספרים, סימן הפוך — זו הנוסחה השלישית:
+      $$(x-9)(x+9)=x^{2}-81$$
+      אין איבר אמצעי בכלל.
+    </div>
+  </details>
+  <div class="q-row">
+    <span>האיבר החופשי (עם הסימן):</span>
+    <input class="q-input" data-answer="-81" inputmode="text" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex3"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 4 — הכיוון ההפוך</h4></div>
+  <p class="q-text"><span class="mk mk-find">פרקי לגורמים:</span>
+    <span class="fi">\(x^{2}-49\)</span></p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      שני איברים, מינוס, ולשניהם שורש נאה:
+      <span class="fi">\(\sqrt{x^{2}}=x\)</span> ו-<span class="fi">\(\sqrt{49}=7\)</span>.
+      $$x^{2}-49=(x-7)(x+7)$$
+    </div>
+  </details>
+  <div class="q-row">
+    <span>המספר בסוגריים:</span>
+    <input class="q-input" data-answer="7" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex4"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 5 — הפרש ריבועים עם מקדם</h4></div>
+  <p class="q-text"><span class="mk mk-find">פרקי לגורמים:</span>
+    <span class="fi">\(16x^{2}-81\)</span></p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$\sqrt{16x^{2}}=4x\qquad\sqrt{81}=9$$
+      $$16x^{2}-81=(4x-9)(4x+9)$$
+      בדיקה: <span class="fi">\((4x)^{2}-9^{2}=16x^{2}-81\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row">
+    <span>מקדם <span class="fi">\(x\)</span> בסוגריים:</span>
+    <input class="q-input" data-answer="4" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <div class="q-row">
+    <span>והמספר:</span>
+    <input class="q-input" data-answer="9" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex5"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 6 — לזהות ריבוע שלם</h4></div>
+  <p class="q-text"><span class="mk mk-find">פרקי לגורמים:</span>
+    <span class="fi">\(x^{2}+12x+36\)</span></p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      הקצוות ריבועים: <span class="fi">\(\sqrt{x^{2}}=x\)</span> ו-<span class="fi">\(\sqrt{36}=6\)</span>.
+      בודקים את האמצעי:
+      $$2\cdot x\cdot 6=12x\;\checkmark$$
+      מתאים, ולכן:
+      $$x^{2}+12x+36=(x+6)^{2}$$
+    </div>
+  </details>
+  <div class="q-row">
+    <span>המספר בסוגריים:</span>
+    <input class="q-input" data-answer="6" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex6"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 7 — מלכודת: זה בכלל לא ריבוע שלם</h4></div>
+  <p class="q-text">
+    <span class="mk mk-find">האם <span class="fi">\(x^{2}+10x+16\)</span>
+    הוא ריבוע של סוגריים?</span> נמקי.
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      הקצוות אמנם ריבועים — <span class="fi">\(x\)</span> ו-<span class="fi">\(4\)</span> —
+      אבל הבדיקה של האמצעי נכשלת:
+      $$2\cdot x\cdot 4=8x\qquad\neq\qquad 10x$$
+      ולכן <strong>לא</strong>. הביטוי הזה כן ניתן לפירוק, אבל בדרך אחרת —
+      טרינום, שהוא הנושא של <a href="index.html">תחנה 3</a>:
+      $$x^{2}+10x+16=(x+2)(x+8)$$
+      <strong>המסקנה החשובה:</strong> "הקצוות נראים ריבועים" זה לא מספיק.
+      הבדיקה של האיבר האמצעי היא מה שמכריע.
+    </div>
+  </details>
+  <div class="q-row">
+    <span>כמה אמור להיות האמצעי לפי הנוסחה:</span>
+    <input class="q-input" data-answer="8" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex7"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 8 — קיצור דרך לחשבון בראש</h4></div>
+  <p class="q-text">
+    <span class="mk mk-find">חשבי בלי מחשבון:</span>
+    <span class="fi">\(103\times 97\)</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      שני המספרים נמצאים במרחק שווה מ-100 — אחד מעל, אחד מתחת. זה בדיוק
+      הפרש ריבועים:
+      $$103\times 97=(100+3)(100-3)=100^{2}-3^{2}=10000-9=9991$$
+      נוסחאות אינן רק לאותיות. זה אותו כלי, על מספרים.
+    </div>
+  </details>
+  <div class="q-row">
+    <span>התוצאה:</span>
+    <input class="q-input" data-answer="9991" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex8"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 9 — לפשט ביטוי שלם</h4></div>
+  <p class="q-text">
+    <span class="mk mk-find">פשטי:</span>
+    <span class="fi">\((x+4)^{2}-(x-4)^{2}\)</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      <strong>הדרך הישירה</strong> — פותחים כל אחד ומחסרים:
+      $$(x^{2}+8x+16)-(x^{2}-8x+16)$$
+      $$=x^{2}+8x+16-x^{2}+8x-16=16x$$
+      שימי לב לסוגריים בחיסור: <em>כל</em> איבר בסוגריים השניים מתהפך.
+      <br><br>
+      <strong>דרך נוספת</strong> — לראות את כל הביטוי כהפרש של שני ריבועים,
+      שבו <span class="fi">\(a=x+4\)</span> ו-<span class="fi">\(b=x-4\)</span>:
+      $$\bigl[(x+4)+(x-4)\bigr]\cdot\bigl[(x+4)-(x-4)\bigr]=(2x)(8)=16x$$
+      אותה תשובה, בשורה אחת. שתי הדרכים נכונות לגמרי — השנייה רק מהירה יותר
+      למי שכבר רואה את התבנית.
+    </div>
+  </details>
+  <div class="q-row">
+    <span>התשובה (מקדם <span class="fi">\(x\)</span>):</span>
+    <input class="q-input" data-answer="16" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button>
+    <span class="q-feedback"></span>
+  </div>
+  <label class="mark"><input type="checkbox" data-k="ex9"> סיימתי את התרגיל הזה</label>
+</article>
+
+<div class="box def" style="margin-top:26px">
+  <div class="box-title">מה לקחת מכאן לתחנה הבאה</div>
+  שלוש הנוסחאות בעל-פה — אבל בעיקר <strong>ביכולת לזהות אותן הפוך</strong>.
+  בתחנה 3 את תקבלי ביטוי ותצטרכי להחליט לבד באיזו דרך לפרק אותו, ושתיים
+  משלוש הדרכים שם הן בדיוק שתי הנוסחאות שלמדת כאן.
+</div>
+
+
+<div class="watch">
+  <h3>רוצה לראות את זה מוסבר בקול?</h3>
+  <p>הסרטונים הם תגבור, לא חובה — ומי שהעמוד הספיק לה יכולה לדלג.</p>
+  <a class="video-link" href="https://www.youtube.com/watch?v=_KUNq-XCqYE" target="_blank" rel="noopener">
+    <img src="../../assets/g9-vids/_KUNq-XCqYE.jpg" alt="נוסחאות הכפל המקוצר — תמונה מהסרטון" loading="lazy">
+    <span class="vt"><b>נוסחאות כפל מקוצר כיתה ט-נפשט ביטוי ע"י נוסחאת כפל מקוצר (הנוסחה להפרש ריבועים).</b><span>מפשט ביטוי בעזרת נוסחת כפל מקוצר — קצר ולעניין · 3:28 · Ovad Lev Ari</span></span>
+    <span class="play">▶</span>
+  </a>
+</div>
+
+<div class="progresswrap no-print">
+  <span class="progressbar"><i></i></span><span class="progress-label"></span>
+  <button class="all-sols" style="font-family:inherit;font-size:12px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:4px 10px;cursor:pointer">לפתוח את כל הפתרונות</button>
+</div>
+
+<nav class="pagenav">
+  <a href="01-powers.html"><span class="dir">→ הקודם</span>חוקי חזקות</a>
+  <a class="next" href="02b-formula-uses.html"><span class="dir">הבא ←</span>השימושים בנוסחאות</a>
+</nav>
+
+<footer class="fin">חלק מהעולם של שירה ·
+<a href="../../index.html">חזרה למרכז</a> ·
+<a href="index.html">מפת האלגברה</a></footer>
+</main>
+</div>
+</body>
+</html>

@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<link rel="apple-touch-icon" href="../../assets/icons/icon-180.png">
+<link rel="manifest" href="../../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>גופים ונפחים — גאומטריה ט׳ — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../../vendor/katex.min.css">
+<link rel="stylesheet" href="../../css/shira.css">
+<style>
+:root{--accent:#7A4E8C}
+/* 2×2 ולא 3+1 */
+.solids{display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin:16px 0}
+@media (max-width:520px){.solids{grid-template-columns:1fr}}
+.solid{min-width:0; border:1px solid var(--line);
+  border-radius:var(--r-md); background:var(--card); padding:12px 14px 14px; text-align:center}
+.solid b{display:block; font-size:15px; margin-bottom:4px}
+.solid svg{display:block; margin:0 auto 6px}
+.solid .katex-display{margin:.35em 0}
+.solid p{margin:5px 0 0; font-size:12.5px; color:var(--soft); line-height:1.5}
+</style>
+<script defer src="../../vendor/katex.min.js"></script>
+<script defer src="../../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../../js/shira.js"></script>
+</head>
+<body data-page="g9geo:04-solids">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">גאומטריה ט׳ — המפה</a>
+    <span class="crumbs">תחנה <b>6</b> מתוך 6 · <b>גופים ונפחים</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">גאומטריה · כיתה ט׳ · תחנה 6</div>
+  <h1>גופים ונפחים</h1>
+  <p class="lead">
+    מהמישור אל המרחב: תיבה, קובייה, מנסרה וגליל. הנוסחאות נראות כמו רשימה
+    חדשה לשינון, ואינן — <strong>כולן אותה נוסחה אחת</strong>. אם את יודעת
+    לחשב שטח של צורה שטוחה, קיבלת את הנפח בכפל אחד.
+  </p>
+  <p class="youknow"><b>בסוף העמוד תדעי:</b> לחשב נפח של כל ארבעת הגופים
+  מנוסחה אחת · להבחין בין נפח לשטח פנים ולדעת מתי משתמשים בכל אחד ·
+  לעבוד עם יחידות נכון · ולמצוא נעלם כשהנפח נתון.</p>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>≈ 35 דק׳</b> · 8 תרגילים</span>
+    <a class="pm-jump" href="#sec-practice">לקפוץ ישר לתרגילים ↓</a>
+  </p>
+</header>
+
+<!-- ============ 1. נוסחה אחת ============ -->
+<h2 id="sec-one"><span class="num">1</span>נוסחה אחת, ארבע צורות</h2>
+
+<div class="fbox">
+  <div class="fbox-title">כל נפח בעמוד הזה</div>
+  $$V=S_{\text{base}}\cdot h$$
+  <span class="f-legend">
+    <span>שטח הבסיס — כפול הגובה. וזה הכול.</span>
+  </span>
+</div>
+
+<div class="box intuition">
+  <div class="box-title">למה זה עובד — חשבי על ערימה</div>
+  דמייני ערימה של דפים זהים. שטח דף אחד הוא שטח הבסיס, וגובה הערימה הוא
+  <span class="fi">\(h\)</span>. הנפח הוא כמה חומר יש בערימה — כלומר
+  שטח הדף כפול הגובה.
+  <br>הגוף משתנה רק ב<strong>צורת הדף</strong>: מלבן ⟵ תיבה, משולש ⟵
+  מנסרה משולשת, עיגול ⟵ גליל. הנוסחה עצמה לא זזה.
+</div>
+
+<div class="solids">
+  <div class="solid">
+    <b>תיבה</b>
+    <svg viewBox="0 0 110 90" width="100" height="82" role="img" aria-label="תיבה מלבנית">
+      <polygon points="15,30 15,72 70,72 70,30" fill="#F3ECF7" stroke="#7A4E8C" stroke-width="1.8"/>
+      <polygon points="15,30 35,15 90,15 70,30" fill="#EADDF2" stroke="#7A4E8C" stroke-width="1.8"/>
+      <polygon points="70,30 90,15 90,57 70,72" fill="#E0CFEB" stroke="#7A4E8C" stroke-width="1.8"/>
+    </svg>
+    $$V=a\cdot b\cdot h$$
+    <p>הבסיס מלבן, ושטחו <span class="fi">\(a\cdot b\)</span>.</p>
+  </div>
+  <div class="solid">
+    <b>קובייה</b>
+    <svg viewBox="0 0 110 90" width="100" height="82" role="img" aria-label="קובייה">
+      <polygon points="20,32 20,72 60,72 60,32" fill="#F3ECF7" stroke="#7A4E8C" stroke-width="1.8"/>
+      <polygon points="20,32 40,15 80,15 60,32" fill="#EADDF2" stroke="#7A4E8C" stroke-width="1.8"/>
+      <polygon points="60,32 80,15 80,55 60,72" fill="#E0CFEB" stroke="#7A4E8C" stroke-width="1.8"/>
+    </svg>
+    $$V=a^{3}$$
+    <p>תיבה שכל מידותיה שוות.</p>
+  </div>
+  <div class="solid">
+    <b>מנסרה</b>
+    <svg viewBox="0 0 110 90" width="100" height="82" role="img" aria-label="מנסרה משולשת: משולש בחזית, ואותו משולש בעומק, מחוברים בפאה מלבנית">
+      <!-- הפאה המלבנית הנראית, מהמשולש הקדמי אל האחורי -->
+      <polygon points="70,70 45,28 73,14 98,56" fill="#E0CFEB" stroke="#7A4E8C" stroke-width="1.6"/>
+      <!-- המשולש הקדמי -->
+      <polygon points="20,70 70,70 45,28" fill="#F3ECF7" stroke="#7A4E8C" stroke-width="1.8"/>
+      <!-- הקצוות המוסתרים של המשולש האחורי -->
+      <polyline points="20,70 48,56 98,56" fill="none" stroke="#7A4E8C" stroke-width="1.1" stroke-dasharray="3 3" opacity=".55"/>
+      <line x1="48" y1="56" x2="73" y2="14" stroke="#7A4E8C" stroke-width="1.1" stroke-dasharray="3 3" opacity=".55"/>
+    </svg>
+    $$V=S_{\text{base}}\cdot h$$
+    <p>הבסיס יכול להיות כל מצולע — משולש, טרפז, מה שנתון.</p>
+  </div>
+  <div class="solid">
+    <b>גליל</b>
+    <svg viewBox="0 0 110 90" width="100" height="82" role="img" aria-label="גליל">
+      <ellipse cx="55" cy="24" rx="30" ry="10" fill="#EADDF2" stroke="#7A4E8C" stroke-width="1.8"/>
+      <path d="M25,24 L25,64 A30,10 0 0,0 85,64 L85,24" fill="#F3ECF7" stroke="#7A4E8C" stroke-width="1.8"/>
+      <line x1="55" y1="24" x2="85" y2="24" stroke="#B4553C" stroke-width="1.6"/>
+      <text x="70" y="38" text-anchor="middle" font-family="Arial" font-size="11" font-weight="700" fill="#B4553C">r</text>
+    </svg>
+    $$V=\pi r^{2}h$$
+    <p>הבסיס עיגול, ושטחו <span class="fi">\(\pi r^{2}\)</span>.</p>
+  </div>
+</div>
+
+<!-- ============ 2. נפח מול שטח פנים ============ -->
+<h2 id="sec-vs"><span class="num">2</span>נפח מול שטח פנים — שתי שאלות שונות</h2>
+
+<p>
+  זו ההבחנה שהכי הרבה נקודות נופלות עליה, והיא לא מתמטית אלא לשונית:
+  צריך לקרוא מה בדיוק שאלו.
+</p>
+
+<table class="dtable">
+  <tr><th></th><th>נפח</th><th>שטח פנים</th></tr>
+  <tr><td>מה זה</td>
+      <td>כמה <strong>נכנס</strong> בפנים</td>
+      <td>כמה <strong>עוטף</strong> מבחוץ</td></tr>
+  <tr><td>שאלה טיפוסית</td>
+      <td>כמה מים ממלאים את האקווריום</td>
+      <td>כמה נייר עוטפים בו קופסה</td></tr>
+  <tr><td>יחידות</td>
+      <td>סמ״ק · מ״ק — בחזקת <strong>שלוש</strong></td>
+      <td>סמ״ר · מ״ר — בחזקת <strong>שתיים</strong></td></tr>
+  <tr><td>איך מחשבים</td>
+      <td>שטח בסיס כפול גובה</td>
+      <td>סכום שטחי כל הפאות</td></tr>
+</table>
+
+<div class="box def">
+  <div class="box-title">שטח הפנים — לפרוש את הגוף</div>
+  הדרך הבטוחה היא לדמיין שפורשים את הגוף לפריסה שטוחה, ומחברים את שטחי
+  כל החלקים.
+  <br><strong>בתיבה</strong> יש שש פאות, בשלושה זוגות זהים:
+  $$S=2(ab+ah+bh)$$
+  <strong>בקובייה</strong> כל שש הפאות זהות:
+  $$S=6a^{2}$$
+  <strong>בגליל</strong> — שני עיגולים ומלבן אחד שנכרך סביבם, שאורכו הוא
+  היקף הבסיס:
+  $$S=2\pi r^{2}+2\pi r h$$
+</div>
+
+<div class="box warn">
+  <div class="box-title">היחידות אינן קישוט</div>
+  אם מידה אחת בסנטימטרים ואחת במטרים — <strong>קודם ממירים</strong>,
+  ורק אז מחשבים.
+  <br>ושימי לב: <span class="fi">\(1\)</span> מ״ק אינו
+  <span class="fi">\(100\)</span> סמ״ק אלא
+  <span class="fi">\(100^{3}=1{,}000{,}000\)</span> סמ״ק — כי הכפל קורה
+  בשלושה כיוונים.
+  <br>שווה גם לזכור: <strong>ליטר אחד = 1000 סמ״ק</strong>, וזה מה
+  שמופיע בשאלות על מיכלים ובריכות.
+</div>
+
+<div class="nb" data-nb>
+  <div class="nb-head"><b>בונים ביחד במחברת</b><span class="nb-count"></span></div>
+  <ol class="nb-steps">
+    <li class="nb-step"><b>התרגיל</b>
+      <p>במוזאון תת-ימי יש אקווריום בצורת תיבה שבסיסה ריבוע. אורך צלע
+      הריבוע 4 מ׳, ונפח האקווריום 24 מ״ק.
+      <br>מה גובה האקווריום?
+      <br><span style="font-size:13px;color:var(--soft)">מתוך חוברת הנפחים
+      של משרד החינוך.</span></p>
+    </li>
+    <li class="nb-step"><b>מה נתון ומה מבקשים</b>
+      <p>נתון הנפח והבסיס, ומבקשים את הגובה — כלומר הנוסחה מופעלת
+      <strong>אחורה</strong>.</p>
+    </li>
+    <li class="nb-step"><b>שטח הבסיס</b>
+      <p>הבסיס ריבוע שצלעו 4:
+      $$S_{\text{base}}=4\cdot 4=16\ \text{m}^{2}$$</p>
+    </li>
+    <li class="nb-step"><b>מציבים בנוסחה</b>
+      <p>$$V=S_{\text{base}}\cdot h\;\Longrightarrow\;24=16\cdot h$$</p>
+    </li>
+    <li class="nb-step"><b>פותרים</b>
+      <p>$$h=\frac{24}{16}=1.5\ \text{m}$$
+      גובה האקווריום 1.5 מטר.</p>
+    </li>
+    <li class="nb-step"><b>בדיקה</b>
+      <p><span class="fi">\(16\cdot1.5=24\)</span> ✓
+      <br>וגם הגיוני: אקווריום בגובה מטר וחצי הוא מידה סבירה. תשובה כמו
+      150 מטר הייתה סימן לטעות ביחידות.</p>
+    </li>
+  </ol>
+</div>
+
+<!-- ============ 3. תרגול ============ -->
+<h2 id="sec-practice"><span class="num">3</span>תרגול — משלב לשלב</h2>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 1 — נפח תיבה</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">תיבה שמידותיה 5, 3 ו-4 ס״מ</span>.
+    <span class="mk mk-find">מהו נפחה?</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">$$V=5\cdot3\cdot4=60\ \text{cm}^{3}$$
+    ‏60 סמ״ק. סדר הכפל לא משנה.</div>
+  </details>
+  <div class="q-row"><span>הנפח (סמ״ק):</span>
+    <input class="q-input" data-answer="60" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex1"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 2 — שטח פנים של קובייה</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">אורך צלע של קובייה הוא 10 ס״מ</span>.
+    <span class="mk mk-find">מהו שטח הפנים שלה?</span>
+    <br><span style="font-size:13px;color:var(--soft)">מחוברת הנפחים של משרד החינוך.</span>
+  </p>
+  <details class="step"><summary>שלב ראשון — לקרוא מה שאלו</summary>
+    <div class="step-body">שאלו על <strong>שטח פנים</strong>, ולא על נפח.
+    התשובה תהיה בסמ״ר.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$S=6a^{2}=6\cdot 10^{2}=600\ \text{cm}^{2}$$
+      ‏600 סמ״ר.
+      <br><strong>המלכודת:</strong> לחשב <span class="fi">\(10^{3}=1000\)</span>
+      — זה הנפח, לא שטח הפנים. מי שלא קראה את השאלה עד הסוף עונה על שאלה אחרת.
+    </div>
+  </details>
+  <div class="q-row"><span>שטח הפנים (סמ״ר):</span>
+    <input class="q-input" data-answer="600" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex2"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 3 — נפח גליל</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">גליל שרדיוס בסיסו 3 ס״מ וגובהו 10 ס״מ</span>.
+    <span class="mk mk-find">מהו נפחו?</span> (<span class="fi">\(\pi\approx3.14\)</span>)
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$S_{\text{base}}=\pi r^{2}=3.14\cdot 9=28.26$$
+      $$V=28.26\cdot 10=282.6\ \text{cm}^{3}$$
+      <strong>שימי לב:</strong> רק הרדיוס מועלה בריבוע, לא הגובה.
+      טעות נפוצה היא לכפול <span class="fi">\(\pi\cdot(3\cdot10)^{2}\)</span>.
+    </div>
+  </details>
+  <div class="q-row"><span>הנפח (סמ״ק):</span>
+    <input class="q-input" data-answer="282.6" data-tol="0.5" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex3"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 4 — למצוא מידה חסרה</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">נפח קופסה מלבנית הוא 200 סמ״ק, ובסיסה
+    <span class="fi">\(10\times 5\)</span> ס״מ</span>.
+    <span class="mk mk-find">מה גובהה?</span>
+    <br><span style="font-size:13px;color:var(--soft)">מחוברת הנפחים של משרד החינוך.</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$S_{\text{base}}=10\cdot5=50$$
+      $$200=50\cdot h\;\Longrightarrow\;h=4\ \text{cm}$$
+      בדיקה: <span class="fi">\(10\cdot5\cdot4=200\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row"><span>הגובה (ס״מ):</span>
+    <input class="q-input" data-answer="4" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex4"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 5 — מנסרה משולשת</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">מנסרה שבסיסה משולש ישר-זווית שניצביו 6 ו-8 ס״מ,
+    וגובה המנסרה 12 ס״מ</span>.
+    <span class="mk mk-find">מהו נפחה?</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      שטח הבסיס — משולש ישר-זווית, ולכן שני הניצבים הם הבסיס והגובה שלו:
+      $$S_{\text{base}}=\frac{6\cdot 8}{2}=24$$
+      $$V=24\cdot 12=288\ \text{cm}^{3}$$
+      <strong>שימי לב לשני "גבהים" שונים בשאלה אחת:</strong> הגובה של
+      המשולש (בתוך הבסיס) והגובה של המנסרה. קל להתבלבל, ולכן כדאי לחשב
+      את שטח הבסיס לגמרי לפני שנוגעים בגובה המנסרה.
+    </div>
+  </details>
+  <div class="q-row"><span>שטח הבסיס:</span>
+    <input class="q-input" data-answer="24" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>הנפח (סמ״ק):</span>
+    <input class="q-input" data-answer="288" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex5"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 6 — שטח פנים של תיבה</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">תיבה שמידותיה 2, 3 ו-4 ס״מ</span>.
+    <span class="mk mk-find">מהו שטח הפנים שלה?</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      שלושה זוגות של פאות זהות:
+      $$S=2(2\cdot3+2\cdot4+3\cdot4)=2(6+8+12)=2\cdot26=52$$
+      ‏52 סמ״ר.
+      <br>אפשר גם לספור פאה-פאה: שתיים של 6, שתיים של 8 ושתיים של 12 —
+      אותו דבר.
+    </div>
+  </details>
+  <div class="q-row"><span>שטח הפנים (סמ״ר):</span>
+    <input class="q-input" data-answer="52" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex6"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 7 — ליטרים</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">מיכל בצורת תיבה שמידותיו
+    <span class="fi">\(50\times 40\times 30\)</span> ס״מ</span>.
+    <span class="mk mk-find">כמה ליטרים הוא מכיל?</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$V=50\cdot40\cdot30=60{,}000\ \text{cm}^{3}$$
+      וממירים לליטרים — כל ליטר הוא 1000 סמ״ק:
+      $$60{,}000:1000=60\ \text{L}$$
+      <strong>ההמרה היא חלק מהתשובה.</strong> "60,000" נכון מספרית אבל
+      עונה על שאלה אחרת מזו שנשאלה.
+    </div>
+  </details>
+  <div class="q-row"><span>ליטרים:</span>
+    <input class="q-input" data-answer="60" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex7"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 8 — מה קורה כשמכפילים מידה</h4></div>
+  <p class="q-text">
+    <span class="mk mk-find">אם מכפילים כל מידה של קובייה פי 2 —
+    פי כמה גדל הנפח?</span> נמקי.
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      נבדוק על מספר: קובייה שצלעה 3 ⟵ <span class="fi">\(V=27\)</span>.
+      אחרי ההכפלה הצלע 6 ⟵ <span class="fi">\(V=216\)</span>.
+      $$216:27=8$$
+      <strong>פי 8</strong> — כלומר <span class="fi">\(2^{3}\)</span>.
+      <br>ובאותיות:
+      $$V_{\text{new}}=(2a)^{3}=8a^{3}=8V$$
+      <br><strong>הדפוס השלם:</strong> אורך גדל פי <span class="fi">\(k\)</span>,
+      שטח פי <span class="fi">\(k^{2}\)</span>, ונפח פי
+      <span class="fi">\(k^{3}\)</span> — כי כל ממד תורם כפל אחד.
+      את החלק של השטחים כבר פגשת
+      <a href="02-similarity-thales.html">בדמיון</a>.
+    </div>
+  </details>
+  <div class="q-row"><span>פי כמה:</span>
+    <input class="q-input" data-answer="8" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex8"> סיימתי את התרגיל הזה</label>
+</article>
+
+<div class="box def" style="margin-top:26px">
+  <div class="box-title">מה לקחת מכאן</div>
+  אין ארבע נוסחאות — יש אחת: <strong>שטח הבסיס כפול הגובה</strong>.
+  ולפני שמתחילים לחשב, שתי שאלות: <em>נפח או שטח פנים?</em> ו<em>האם כל
+  היחידות זהות?</em> שתיהן יחד מונעות את רוב הטעויות בפרק הזה.
+</div>
+
+<div class="progresswrap no-print">
+  <span class="progressbar"><i></i></span><span class="progress-label"></span>
+  <button class="all-sols" style="font-family:inherit;font-size:12px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:4px 10px;cursor:pointer">לפתוח את כל הפתרונות</button>
+</div>
+
+<nav class="pagenav">
+  <a href="03-analytic.html"><span class="dir">→ הקודם</span>גאומטריה אנליטית</a>
+  <a class="next" href="index.html"><span class="dir">המפה ←</span>גאומטריה ט׳</a>
+</nav>
+
+<footer class="fin">חלק מהעולם של שירה ·
+<a href="../../index.html">חזרה למרכז</a> ·
+<a href="index.html">מפת הגאומטריה</a></footer>
+</main>
+</div>
+</body>
+</html>

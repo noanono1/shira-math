@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<link rel="apple-touch-icon" href="../../assets/icons/icon-180.png">
+<link rel="manifest" href="../../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>אלגברה — המפה — כיתה ט׳ — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../../vendor/katex.min.css">
+<link rel="stylesheet" href="../../css/shira.css">
+<style>
+:root{--accent:#2E6F8E}
+.wrap{max-width:880px}
+
+/* לוח "שכחתי איך עושים…" — אותו רכיב כמו במפות של ח׳ */
+.quick{display:grid; grid-template-columns:repeat(auto-fill,minmax(215px,1fr)); gap:8px; margin:14px 0 4px}
+.quick a{display:block; text-decoration:none; background:var(--card); color:var(--ink);
+  border:1px solid var(--line); border-radius:10px; padding:9px 12px; transition:.15s}
+.quick a:hover{border-color:var(--accent)}
+.quick a b{display:block; font-size:13.5px}
+.quick a span{color:var(--soft); font-size:11.5px; line-height:1.5}
+
+.grouplead{font-size:13.5px; color:var(--soft); margin:8px 0 14px}
+.stations{display:flex; flex-direction:column; gap:11px}
+.st{display:flex; gap:13px; align-items:flex-start; background:var(--card);
+  border:1px solid var(--line); border-radius:12px; padding:13px 16px;
+  text-decoration:none; color:var(--ink); transition:.15s;
+  box-shadow:0 10px 26px -26px var(--shadow)}
+a.st:hover{border-color:var(--accent); box-shadow:0 14px 30px -24px var(--shadow)}
+.st .n{flex:0 0 auto; width:30px; height:30px; border-radius:9px; background:var(--accent);
+  color:#fff; font-weight:800; font-size:14.5px;
+  display:flex; align-items:center; justify-content:center}
+.st .tx{min-width:0}
+.st .tx b{display:block; font-size:16px; font-weight:800; letter-spacing:-.01em}
+.st .tx p{margin:3px 0 0; font-size:13.5px; color:var(--soft); line-height:1.55}
+.st .tx .meta{margin-top:6px; font-size:11.5px; color:var(--soft); font-weight:700}
+/* תחנה שטרם נכתבה: אותה צורה בדיוק, בלי קישור — כדי שהמפה של השנה
+   תהיה שלמה ואמינה, ולא תבטיח דף שאינו קיים. */
+.st.soon{background:#FBFAF7; border-style:dashed; cursor:default}
+.st.soon .n{background:var(--line); color:var(--soft)}
+.st.soon .tx b{color:var(--soft)}
+.st .tag{margin-inline-start:auto; flex:0 0 auto; font-size:11px; font-weight:800;
+  color:var(--soft); background:var(--faint); border-radius:99px; padding:3px 10px;
+  align-self:center; white-space:nowrap}
+</style>
+<script defer src="../../vendor/katex.min.js"></script>
+<script defer src="../../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../../js/shira.js"></script>
+</head>
+<body data-page="g9alg:index">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../../index.html">⌂ המרכז של שירה</a>
+    <span class="crumbs">כיתה ט׳ · <b>אלגברה</b> — המפה</span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">כיתה ט׳ · המפה</div>
+  <h1>אלגברה — הטכניקה של השנה</h1>
+  <p class="lead">
+    שש תחנות, מסלול אחד. בכיתה ח׳ עבדת עם <span class="fi">\(x\)</span> בחזקה
+    ראשונה; כאן נכנס <span class="fi">\(x^{2}\)</span> — ואיתו כלי אחד שכל
+    השנה עומדת עליו: <strong>פירוק לגורמים</strong>. כל שאר הנושאים הם צדדים
+    שונים שלו.
+  </p>
+  <p class="youknow"><b>למה בסדר הזה:</b> חזקות וכפל מקוצר הם הכלים; פירוק
+  לגורמים מרכיב אותם יחד; ושברים אלגבריים והמשוואה הריבועית הם שני השימושים
+  שלו. מי שמדלגת על תחנה 3 נתקעת בכל השאר.</p>
+</header>
+
+<h2>שכחתי איך עושים…</h2>
+<div class="quick">
+  <a href="01-powers.html#sec-rules"><b>כופלים חזקות</b><span>אותו בסיס — מחברים מעריכים</span></a>
+  <a href="01-powers.html#sec-zero"><b>מעריך אפס או שלילי</b><span>ממשיכים את הדפוס שורה למטה</span></a>
+  <a href="01-powers.html#sec-roots"><b>לפשט שורש</b><span>מחלצים את הריבוע המושלם</span></a>
+  <a href="02-short-multiplication.html#sec-three"><b>פותחים ריבוע של סוגריים</b><span>ריבוע · פעמיים מכפלה · ריבוע</span></a>
+  <a href="02-short-multiplication.html#sec-both"><b>מזהים הפרש ריבועים</b><span>שני איברים · מינוס · שורשים נאים</span></a>
+  <a href="02b-formula-uses.html#sec-divide"><b>הוכחת התחלקות</b><span>לפתוח, לכנס, להוציא גורם משותף</span></a>
+  <a href="02b-formula-uses.html#sec-given"><b>חישוב על סמך נתונים</b><span>נתון a+b ו-ab — מה a²+b²?</span></a>
+  <a href="02b-formula-uses.html#sec-blanks"><b>מקומות ריקים ומשוואות</b><span>פתרון אחד, אין פתרון, או כל x</span></a>
+  <a href="03-factoring.html#sec-order"><b>מאיפה מתחילים לפרק</b><span>גורם משותף ← נוסחה ← טרינום</span></a>
+  <a href="03-factoring.html#sec-trinomial"><b>טרינום</b><span>שני מספרים: מכפלה ו-סכום</span></a>
+  <a href="04-algebraic-fractions.html#sec-domain"><b>תחום הצבה</b><span>המכנה אסור שיתאפס</span></a>
+  <a href="04-algebraic-fractions.html#sec-reduce"><b>מותר לצמצם?</b><span>רק גורמים — לעולם לא סכום</span></a>
+  <a href="05-quadratic-equation.html#sec-zero"><b>מכפלה ששווה אפס</b><span>אחד הגורמים חייב להתאפס</span></a>
+  <a href="05-quadratic-equation.html#sec-formula"><b>נוסחת השורשים</b><span>כשהפירוק לא מסתדר</span></a>
+  <a href="05-quadratic-equation.html#sec-disc"><b>כמה פתרונות יש</b><span>הסימן של הדיסקרימיננטה</span></a>
+  <a href="05b-equations-plus.html#sec-fractions"><b>משוואה עם שברים</b><span>תחום הצבה קודם — ובסוף בודקים</span></a>
+  <a href="05b-equations-plus.html#sec-sub"><b>משוואה בהצבה</b><span>מסמנים t ופותרים ריבועית</span></a>
+  <a href="05b-equations-plus.html#sec-systems"><b>מערכת ממעלה שנייה</b><span>מבודדים משתנה ומציבים</span></a>
+  <a href="06-word-problems.html#sec-table"><b>בעיית תנועה</b><span>טבלה: מרחק · מהירות · זמן</span></a>
+  <a href="06-word-problems.html#sec-work"><b>בעיית הספק</b><span>מחברים חלקים לשעה, לא זמנים</span></a>
+</div>
+
+<h2>המסלול</h2>
+<p class="grouplead">כל תחנה נפתחת בפתרון שנבנה שלב-אחרי-שלב, וממשיכה לתרגול מדורג.</p>
+
+<div class="stations">
+
+  <a class="st" href="01-powers.html">
+    <span class="n">1</span>
+    <span class="tx"><b>חוקי חזקות</b>
+      <p>מחברים מעריכים בכפל, מחסרים בחילוק — ומה זה בכלל <span class="fi">\(a^{0}\)</span> ו-<span class="fi">\(a^{-n}\)</span>.</p>
+      <span class="meta">≈ 30 דק׳ · 9 תרגילים</span></span>
+  </a>
+
+  <a class="st" href="02-short-multiplication.html">
+    <span class="n">2</span>
+    <span class="tx"><b>נוסחאות הכפל המקוצר</b>
+      <p>שלוש נוסחאות — ובעיקר, איך קוראים אותן גם מימין לשמאל.</p>
+      <span class="meta">≈ 30 דק׳ · 9 תרגילים</span></span>
+  </a>
+
+  <a class="st" href="02b-formula-uses.html">
+    <span class="n">3</span>
+    <span class="tx"><b>השימושים בנוסחאות</b>
+      <p>פישוט, השלמת מקומות ריקים, חישוב על סמך נתונים, הוכחת התחלקות ובעיות מילוליות — בדיוק לפי רשימת המורה.</p>
+      <span class="meta">≈ 90 דק׳ · 33 תרגילים</span></span>
+  </a>
+
+  <a class="st" href="03-factoring.html">
+    <span class="n">4</span>
+    <span class="tx"><b>פירוק לגורמים</b>
+      <p>הכיוון ההפוך של פתיחת סוגריים. הנושא המרכזי של השנה.</p>
+      <span class="meta">≈ 40 דק׳ · 11 תרגילים</span></span>
+  </a>
+
+  <a class="st" href="04-algebraic-fractions.html">
+    <span class="n">5</span>
+    <span class="tx"><b>שברים אלגבריים</b>
+      <p>כל מה שאת יודעת על שברים — רק שקודם צריך לפרק.</p>
+      <span class="meta">≈ 35 דק׳ · 9 תרגילים</span></span>
+  </a>
+
+  <a class="st" href="05-quadratic-equation.html">
+    <span class="n">6</span>
+    <span class="tx"><b>המשוואה הריבועית</b>
+      <p>שני פתרונות, אחד, או אף אחד — ואיך יודעים מראש.</p>
+      <span class="meta">≈ 40 דק׳ · 10 תרגילים</span></span>
+  </a>
+
+  <a class="st" href="05b-equations-plus.html">
+    <span class="n">7</span>
+    <span class="tx"><b>משוואות עם שברים ומערכות ממעלה שנייה</b>
+      <p>משוואה עם מכנים (ותחום ההצבה), משוואות בהצבה, ומערכת של ישר ופרבולה או שתי פרבולות.</p>
+      <span class="meta">≈ 80 דק׳ · 18 תרגילים</span></span>
+  </a>
+
+  <a class="st" href="06-word-problems.html">
+    <span class="n">8</span>
+    <span class="tx"><b>בעיות מילוליות</b>
+      <p>תנועה, הספק וקנייה-מכירה — רובן נוחתות במשוואה ריבועית.</p>
+      <span class="meta">≈ 40 דק׳ · 8 תרגילים</span></span>
+  </a>
+
+</div>
+
+<h2 id="bank">כשרוצים עוד תרגול</h2>
+<div class="stations">
+  <a class="st" href="08-exercise-bank.html">
+    <span class="n">∑</span>
+    <span class="tx"><b>🗂️ מחסן התרגילים</b>
+      <p>362 תרגילים מסודרים לפי סוג, עם "מאתר הסוגים" בראש הדף — חזקות, נוסחאות הכפל המקוצר והשימושים בהם, פירוק, שברים, משוואות, בעיות מילוליות ופונקציה קווית.</p>
+      <span class="meta">362 תרגילים · ≈ 3 דק׳ לתרגיל</span></span>
+  </a>
+  <a class="st" href="07-quiz.html">
+    <span class="n">✓</span>
+    <span class="tx"><b>בוחן הבית</b>
+      <p>שבע שאלות שלא ראית באתר — בלי צבעים, בלי רמזים, בלי שלבים. הפתרונות בקופסה אחת בתחתית.</p>
+      <span class="meta">≈ 45 דק׳ · 7 שאלות</span></span>
+  </a>
+</div>
+
+<footer class="fin">חלק מהעולם של שירה ·
+<a href="../../index.html">חזרה למרכז</a> ·
+<a href="../../year8/index.html">כיתה ח׳ — היסודות</a></footer>
+</main>
+</div>
+</body>
+</html>

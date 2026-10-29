@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<link rel="apple-touch-icon" href="../../assets/icons/icon-180.png">
+<link rel="manifest" href="../../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>מחסן התרגילים — גאומטריה ט׳ — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../../vendor/katex.min.css">
+<link rel="stylesheet" href="../../css/shira.css">
+<style>
+:root{--accent:#7A4E8C}
+.wrap{max-width:880px}
+.finder{display:grid; grid-template-columns:repeat(auto-fill,minmax(215px,1fr)); gap:8px; margin:14px 0 4px}
+.finder a{display:block; text-decoration:none; background:var(--card); color:var(--ink);
+  border:1px solid var(--line); border-radius:10px; padding:9px 12px; transition:.15s}
+.finder a:hover{border-color:var(--accent)}
+.finder a b{display:block; font-size:13.5px}
+.finder a span{color:var(--soft); font-size:11.5px; line-height:1.5}
+.finder a .cnt{float:left; font-size:11px; font-weight:800; color:var(--accent);
+  background:#F3ECF7; border-radius:20px; padding:1px 8px; margin-inline-start:6px}
+.grouplead{font-size:13.5px; color:var(--soft); margin:8px 0 16px}
+article.ex .ex-head .lvl{background:var(--accent); letter-spacing:.06em; font-size:11px}
+</style>
+<script defer src="../../vendor/katex.min.js"></script>
+<script defer src="../../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../../js/shira.js"></script>
+</head>
+<body data-page="g9geo:06-exercise-bank">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">גאומטריה ט׳ — המפה</a>
+    <span class="crumbs">גאומטריה ט׳ · <b>מחסן התרגילים</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">גאומטריה · כיתה ט׳ · תרגול</div>
+  <h1>מחסן התרגילים</h1>
+  <p class="lead">
+    שישה-עשר תרגילים לפי סוג, כל אחד עם פתרון מלא. מוצאים את הסוג שנתקעת
+    בו, ורואים אותו נפתר.
+  </p>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>16 תרגילים</b> · ≈ 3 דק׳ לתרגיל</span>
+  </p>
+</header>
+
+<h2 id="finder">🔎 מאתר הסוגים</h2>
+<div class="finder">
+  <a href="#g-quad"><b>מרובעים — תכונות<span class="cnt">4</span></b><span>זוויות, צלעות ואלכסונים</span></a>
+  <a href="#g-thales"><b>תאלס וקטע אמצעים<span class="cnt">4</span></b><span>יחסים על מקבילים</span></a>
+  <a href="#g-anal"><b>גאומטריה אנליטית<span class="cnt">5</span></b><span>מרחק, אמצע, שיפוע ושטח</span></a>
+  <a href="#g-vol"><b>נפחים ושטח פנים<span class="cnt">3</span></b><span>תיבה, מנסרה וגליל</span></a>
+</div>
+
+<!-- ============ א · מרובעים ============ -->
+<h2 id="g-quad"><span class="num">א</span>מרובעים — תכונות</h2>
+<p class="grouplead">התחנה: <a href="01-quadrilaterals.html">משפחת המרובעים</a>. תמיד לשאול קודם — תכונה או משפט הפוך.</p>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">א1</span><h4>זווית במקבילית</h4></div>
+  <p class="q-text">במקבילית <span class="fi">\(\angle A=115^\circ\)</span>.
+    מהי הזווית הסמוכה לה?</p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">סכום זוויות סמוכות במקבילית הוא
+    <span class="fi">\(180^\circ\)</span>:
+    $$180-115=65$$</div>
+  </details>
+  <div class="q-row"><span>הזווית (מעלות):</span>
+    <input class="q-input" data-answer="65" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="a1"> סיימתי</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">א2</span><h4>אלכסון במלבן</h4></div>
+  <p class="q-text">במלבן האלכסונים נחתכים ב-<span class="fi">\(M\)</span>,
+    ונתון <span class="fi">\(AM=7\)</span>. מהו אורך האלכסון השני?</p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      האלכסונים חוצים זה את זה, ולכן <span class="fi">\(AC=2\cdot7=14\)</span>.
+      ובמלבן האלכסונים שווים, ולכן גם השני 14.
+    </div>
+  </details>
+  <div class="q-row"><span>האורך:</span>
+    <input class="q-input" data-answer="14" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="a2"> סיימתי</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">א3</span><h4>אלכסון במעוין</h4></div>
+  <p class="q-text">במעוין <span class="fi">\(\angle A=80^\circ\)</span>.
+    מהי הזווית בין האלכסון <span class="fi">\(AC\)</span> לצלע
+    <span class="fi">\(AD\)</span>?</p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">במעוין האלכסונים חוצים את הזוויות:
+    $$\frac{80}{2}=40$$</div>
+  </details>
+  <div class="q-row"><span>הזווית (מעלות):</span>
+    <input class="q-input" data-answer="40" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="a3"> סיימתי</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">א4</span><h4>איזו צורה זו</h4></div>
+  <p class="q-text">מקבילית שבה שתי צלעות סמוכות שוות ויש בה זווית ישרה —
+    איזו צורה היא?</p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      שני שדרוגים בזה אחר זה:
+      <br>מקבילית + צלעות סמוכות שוות ⟵ <strong>מעוין</strong>.
+      <br>מעוין + זווית ישרה ⟵ <strong>ריבוע</strong>.
+      <br>(אפשר גם בסדר ההפוך: מקבילית + זווית ישרה ⟵ מלבן, ומלבן +
+      צלעות סמוכות שוות ⟵ ריבוע. אותה תשובה.)
+    </div>
+  </details>
+  <label class="mark"><input type="checkbox" data-k="a4"> סיימתי</label>
+</article>
+
+<!-- ============ ב · תאלס ============ -->
+<h2 id="g-thales"><span class="num">ב</span>תאלס וקטע אמצעים</h2>
+<p class="grouplead">התחנה: <a href="02-similarity-thales.html">דמיון ומשפט תאלס</a>. לשמור על אותו סדר בשני אגפי היחס.</p>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">ב1</span><h4>תאלס</h4></div>
+  <p class="q-text"><span class="fi">\(DE\parallel BC\)</span>,
+    <span class="fi">\(AD=4\)</span>, <span class="fi">\(DB=8\)</span>,
+    <span class="fi">\(AE=6\)</span>. מהו <span class="fi">\(EC\)</span>?</p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$\frac{4}{8}=\frac{6}{EC}\;\Longrightarrow\;4\cdot EC=48\;\Longrightarrow\;EC=12$$
+    </div>
+  </details>
+  <div class="q-row"><span class="fi">\(EC=\)</span>
+    <input class="q-input" data-answer="12" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="b1"> סיימתי</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">ב2</span><h4>יחס לצלע השלמה</h4></div>
+  <p class="q-text">באותו סרטוט, נתון <span class="fi">\(BC=18\)</span>.
+    מהו <span class="fi">\(DE\)</span>?</p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      <span class="fi">\(AB=4+8=12\)</span>, ולכן יחס הדמיון
+      <span class="fi">\(\frac{4}{12}=\frac13\)</span>:
+      $$DE=\frac{18}{3}=6$$
+    </div>
+  </details>
+  <div class="q-row"><span class="fi">\(DE=\)</span>
+    <input class="q-input" data-answer="6" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="b2"> סיימתי</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">ב3</span><h4>קטע אמצעים</h4></div>
+  <p class="q-text">קטע אמצעים במשולש אורכו 9. מהי הצלע השלישית?</p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">$$2\cdot 9=18$$</div>
+  </details>
+  <div class="q-row"><span>הצלע:</span>
+    <input class="q-input" data-answer="18" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="b3"> סיימתי</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">ב4</span><h4>יחס שטחים</h4></div>
+  <p class="q-text">יחס הדמיון בין שני משולשים הוא 4. פי כמה גדול שטח הגדול?</p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      השטחים ביחס <span class="fi">\(k^{2}\)</span>:
+      $$4^{2}=16$$
+      פי 16, ולא פי 4.
+    </div>
+  </details>
+  <div class="q-row"><span>פי כמה:</span>
+    <input class="q-input" data-answer="16" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="b4"> סיימתי</label>
+</article>
+
+<!-- ============ ג · אנליטית ============ -->
+<h2 id="g-anal"><span class="num">ג</span>גאומטריה אנליטית</h2>
+<p class="grouplead">התחנה: <a href="03-analytic.html">גאומטריה אנליטית</a>. לחפש קודם צלע אופקית או אנכית.</p>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">ג1</span><h4>מרחק</h4></div>
+  <p class="q-text">מהו המרחק בין <span class="fi">\((0,0)\)</span>
+    ל-<span class="fi">\((6,8)\)</span>?</p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">$$d=\sqrt{36+64}=\sqrt{100}=10$$</div>
+  </details>
+  <div class="q-row"><span class="fi">\(d=\)</span>
+    <input class="q-input" data-answer="10" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="c1"> סיימתי</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">ג2</span><h4>אמצע קטע</h4></div>
+  <p class="q-text">מהו אמצע הקטע שקצותיו <span class="fi">\((3,7)\)</span>
+    ו-<span class="fi">\((9,1)\)</span>?</p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">$$M=\left(\frac{3+9}{2},\ \frac{7+1}{2}\right)=(6,4)$$</div>
+  </details>
+  <div class="q-row"><span>שיעור <span class="fi">\(x\)</span>:</span>
+    <input class="q-input" data-answer="6" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>שיעור <span class="fi">\(y\)</span>:</span>
+    <input class="q-input" data-answer="4" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="c2"> סיימתי</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">ג3</span><h4>שיפוע</h4></div>
+  <p class="q-text">מהו שיפוע הישר דרך <span class="fi">\((-1,4)\)</span>
+    ו-<span class="fi">\((3,-4)\)</span>?</p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$m=\frac{-4-4}{3-(-1)}=\frac{-8}{4}=-2$$
+      שיפוע שלילי — הישר יורד.
+    </div>
+  </details>
+  <div class="q-row"><span class="fi">\(m=\)</span>
+    <input class="q-input" data-answer="-2" inputmode="text" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="c3"> סיימתי</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">ג4</span><h4>ניצבות</h4></div>
+  <p class="q-text">שיפוע ישר הוא <span class="fi">\(5\)</span>.
+    מהו שיפוע המאונך לו?</p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$5\cdot m=-1\;\Longrightarrow\;m=-\frac15=-0.2$$
+    </div>
+  </details>
+  <div class="q-row"><span>כמספר עשרוני:</span>
+    <input class="q-input" data-answer="-0.2" data-tol="0.01" inputmode="text" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="c4"> סיימתי</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">ג5</span><h4>שטח משולש</h4></div>
+  <p class="q-text">מהו שטח המשולש שקדקודיו <span class="fi">\((1,2)\)</span>,
+    <span class="fi">\((9,2)\)</span>, <span class="fi">\((5,8)\)</span>?</p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      שתי הנקודות הראשונות באותו גובה ⟵ בסיס אופקי:
+      $$b=9-1=8\qquad h=8-2=6$$
+      $$S=\frac{8\cdot 6}{2}=24$$
+    </div>
+  </details>
+  <div class="q-row"><span>השטח:</span>
+    <input class="q-input" data-answer="24" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="c5"> סיימתי</label>
+</article>
+
+<!-- ============ ד · נפחים ============ -->
+<h2 id="g-vol"><span class="num">ד</span>נפחים ושטח פנים</h2>
+<p class="grouplead">התחנה: <a href="04-solids.html">גופים ונפחים</a>. קודם לקרוא — נפח או שטח פנים.</p>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">ד1</span><h4>נפח תיבה</h4></div>
+  <p class="q-text">תיבה שמידותיה 7, 4 ו-5 ס״מ. מהו נפחה?</p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">$$V=7\cdot4\cdot5=140\ \text{cm}^{3}$$</div>
+  </details>
+  <div class="q-row"><span>הנפח (סמ״ק):</span>
+    <input class="q-input" data-answer="140" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="d1"> סיימתי</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">ד2</span><h4>גובה חסר</h4></div>
+  <p class="q-text">נפח מנסרה 150 סמ״ק ושטח בסיסה 25 סמ״ר. מהו גובהה?</p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">$$150=25\cdot h\;\Longrightarrow\;h=6\ \text{cm}$$</div>
+  </details>
+  <div class="q-row"><span>הגובה (ס״מ):</span>
+    <input class="q-input" data-answer="6" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="d2"> סיימתי</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">ד3</span><h4>גליל</h4></div>
+  <p class="q-text">גליל שרדיוסו 5 ס״מ וגובהו 4 ס״מ. מהו נפחו?
+    (<span class="fi">\(\pi\approx3.14\)</span>)</p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$S_{\text{base}}=3.14\cdot 25=78.5$$
+      $$V=78.5\cdot 4=314\ \text{cm}^{3}$$
+    </div>
+  </details>
+  <div class="q-row"><span>הנפח (סמ״ק):</span>
+    <input class="q-input" data-answer="314" data-tol="0.5" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="d3"> סיימתי</label>
+</article>
+
+<div class="progresswrap no-print">
+  <span class="progressbar"><i></i></span><span class="progress-label"></span>
+  <button class="all-sols" style="font-family:inherit;font-size:12px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:4px 10px;cursor:pointer">לפתוח את כל הפתרונות</button>
+</div>
+
+<nav class="pagenav">
+  <a href="05-quiz.html"><span class="dir">→ הקודם</span>בוחן הבית</a>
+  <a class="next" href="index.html"><span class="dir">המפה ←</span>גאומטריה ט׳</a>
+</nav>
+
+<footer class="fin">חלק מהעולם של שירה ·
+<a href="../../index.html">חזרה למרכז</a> ·
+<a href="index.html">מפת הגאומטריה</a></footer>
+</main>
+</div>
+</body>
+</html>

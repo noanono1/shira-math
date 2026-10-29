@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#129518;</text></svg>'>
+<link rel="apple-touch-icon" href="../../assets/icons/icon-180.png">
+<link rel="manifest" href="../../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>בוחן הבית — גאומטריה ט׳ — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../../vendor/katex.min.css">
+<link rel="stylesheet" href="../../css/shira.css">
+<style>
+:root{--accent:#7A4E8C}
+.qz{border:1px solid var(--line); border-radius:var(--r-md); background:var(--card);
+  padding:13px 17px 15px; margin:13px 0}
+.qz .qh{font-size:15.5px; font-weight:800; margin-bottom:6px}
+.qz .qh span{font-size:11.5px; font-weight:700; color:var(--soft);
+  background:var(--faint); border-radius:99px; padding:2px 9px; margin-inline-end:8px}
+.qz p{margin:0 0 8px; line-height:1.8}
+.qz ol{margin:6px 0 0; padding-inline-start:20px}
+.qz ol li{margin-bottom:3px}
+.answers{border:1px solid var(--line); border-radius:var(--r-md);
+  background:#FBFAF7; margin-top:26px}
+.answers>summary{cursor:pointer; padding:13px 17px; font-weight:800; font-size:15.5px}
+.answers .abody{padding:0 17px 16px; border-top:1px solid var(--line)}
+.answers h4{margin:16px 0 4px; font-size:15px}
+</style>
+<script defer src="../../vendor/katex.min.js"></script>
+<script defer src="../../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../../js/shira.js"></script>
+</head>
+<body data-page="g9geo:05-quiz">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../../index.html">&#8962; המרכז של שירה</a>
+    <a class="home" href="index.html">גאומטריה ט׳ — המפה</a>
+    <span class="crumbs">גאומטריה ט׳ · <b>בוחן הבית</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">גאומטריה · כיתה ט׳ · הגמר</div>
+  <h1>בוחן הבית</h1>
+  <p class="lead">
+    שש שאלות בסגנון פרק הגאומטריה במפמ״ר — תרגיל חישוב ותרגיל הוכחה,
+    בדיוק כמו במבחן. מחברת ליד, וסרטוט לכל שאלה.
+  </p>
+  <p class="youknow"><b>מה נבדק כאן:</b> תכונות מרובעים ומשפטים הפוכים ·
+  כתיבת הוכחה בטענה ונימוק · תאלס וקטע אמצעים · יחס שטחים ·
+  גאומטריה אנליטית · ונפחים.</p>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>&#8776; 45 דק׳</b> · 6 שאלות</span>
+    <a class="pm-jump" href="#answers">לפתרונות &#8595;</a>
+  </p>
+</header>
+
+<div class="box warn">
+  <div class="box-title">איך עובדים</div>
+  בשאלות ההוכחה יש לכתוב <strong>נתון, צ״ל וטבלת טענה ונימוק</strong> —
+  זה הפורמט שנבדק. בשאלות החישוב יש להציג דרך, לא רק תשובה.
+</div>
+
+<div class="qz">
+  <div class="qh"><span>1</span>תכונות מרובעים</div>
+  <p>קבעי לגבי כל טענה אם היא נכונה, ונמקי:</p>
+  <ol>
+    <li>בכל מקבילית האלכסונים שווים זה לזה.</li>
+    <li>בכל מעוין האלכסונים מאונכים זה לזה.</li>
+    <li>מרובע שאלכסוניו חוצים זה את זה ושווים זה לזה הוא מלבן.</li>
+    <li>כל ריבוע הוא מעוין.</li>
+  </ol>
+</div>
+
+<div class="qz">
+  <div class="qh"><span>2</span>הוכחה</div>
+  <p>
+    במקבילית <span class="fi">\(ABCD\)</span> נתון שהאלכסון
+    <span class="fi">\(AC\)</span> חוצה את הזווית
+    <span class="fi">\(\angle A\)</span>.
+    <br>הוכיחי שהמרובע הוא מעוין.
+  </p>
+</div>
+
+<div class="qz">
+  <div class="qh"><span>3</span>תאלס</div>
+  <p>
+    במשולש <span class="fi">\(ABC\)</span> נתון
+    <span class="fi">\(DE\parallel BC\)</span>, כאשר
+    <span class="fi">\(AD=5\)</span>, <span class="fi">\(DB=10\)</span>
+    ו-<span class="fi">\(AE=6\)</span>.
+  </p>
+  <ol>
+    <li>מצאי את <span class="fi">\(EC\)</span>.</li>
+    <li>נתון בנוסף <span class="fi">\(BC=27\)</span>. מצאי את
+        <span class="fi">\(DE\)</span>.</li>
+  </ol>
+</div>
+
+<div class="qz">
+  <div class="qh"><span>4</span>יחס שטחים</div>
+  <p>
+    שני משולשים דומים. היקף הקטן 12 ס״מ והיקף הגדול 30 ס״מ.
+  </p>
+  <ol>
+    <li>מהו יחס הדמיון?</li>
+    <li>אם שטח הקטן 8 סמ״ר — מהו שטח הגדול?</li>
+  </ol>
+</div>
+
+<div class="qz">
+  <div class="qh"><span>5</span>גאומטריה אנליטית</div>
+  <p>
+    נתון מרובע <span class="fi">\(ABCD\)</span> עם הקדקודים
+    <span class="fi">\(A(0,0)\)</span>, <span class="fi">\(B(6,0)\)</span>,
+    <span class="fi">\(C(8,4)\)</span>, <span class="fi">\(D(2,4)\)</span>.
+  </p>
+  <ol>
+    <li>הוכיחי שהמרובע הוא מקבילית.</li>
+    <li>מצאי את אורך הצלע <span class="fi">\(AD\)</span>.</li>
+    <li>מצאי את שטח המרובע.</li>
+  </ol>
+</div>
+
+<div class="qz">
+  <div class="qh"><span>6</span>נפח</div>
+  <p>
+    מנסרה שבסיסה מלבן שמידותיו <span class="fi">\(5\times 8\)</span> ס״מ,
+    ונפחה 320 סמ״ק.
+  </p>
+  <ol>
+    <li>מהו גובה המנסרה?</li>
+    <li>מהו שטח הפנים שלה?</li>
+  </ol>
+</div>
+
+<details class="answers" id="answers">
+  <summary>הפתרונות — רק אחרי שניסית את כולן &#8595;</summary>
+  <div class="abody">
+
+    <h4>שאלה 1</h4>
+    <p>
+      <strong>1. לא נכון.</strong> במקבילית האלכסונים חוצים זה את זה אבל
+      אינם שווים. הם שווים רק במלבן (ובריבוע).
+      <br><strong>2. נכון.</strong> זו אחת מתכונות המעוין.
+      <br><strong>3. נכון.</strong> "חוצים זה את זה" נותן מקבילית, ומקבילית
+      שאלכסוניה שווים היא מלבן — שני משפטים הפוכים בזה אחר זה.
+      <br><strong>4. נכון.</strong> בריבוע כל הצלעות שוות, וזו בדיוק ההגדרה
+      של מעוין. ריבוע הוא גם מלבן וגם מעוין.
+    </p>
+
+    <h4>שאלה 2</h4>
+    <table class="dtable">
+      <tr><th></th><th>טענה</th><th>נימוק</th></tr>
+      <tr><td>1</td><td><span class="fi">\(\angle BAC=\angle DAC\)</span></td>
+          <td style="text-align:right">נתון — <span class="fi">\(AC\)</span> חוצה זווית</td></tr>
+      <tr><td>2</td><td><span class="fi">\(\angle DAC=\angle BCA\)</span></td>
+          <td style="text-align:right">זוויות מתחלפות בין <span class="fi">\(AD\parallel BC\)</span></td></tr>
+      <tr><td>3</td><td><span class="fi">\(\angle BAC=\angle BCA\)</span></td>
+          <td style="text-align:right">כלל המעבר, מ-1 ומ-2</td></tr>
+      <tr><td>4</td><td><span class="fi">\(AB=BC\)</span></td>
+          <td style="text-align:right">מול זוויות שוות במשולש מונחות צלעות שוות</td></tr>
+      <tr><td>5</td><td><span class="fi">\(ABCD\)</span> מעוין</td>
+          <td style="text-align:right">מקבילית בעלת שתי צלעות סמוכות שוות</td></tr>
+    </table>
+    <p>
+      מש״ל.
+      <br>אפשר היה גם לסיים בשורה אחת פחות, במשפט ההפוך הישיר:
+      <em>"מקבילית שאחד מאלכסוניה חוצה את אחת מזוויותיה היא מעוין"</em> —
+      שתי הדרכים מלאות ונכונות.
+    </p>
+
+    <h4>שאלה 3</h4>
+    <p>1. לפי תאלס:</p>
+    $$\frac{5}{10}=\frac{6}{EC}\;\Longrightarrow\;5\cdot EC=60\;\Longrightarrow\;EC=12$$
+    <p>2. כאן צריך את היחס לצלע השלמה:
+       <span class="fi">\(AB=5+10=15\)</span>, ולכן</p>
+    $$\frac{DE}{BC}=\frac{AD}{AB}=\frac{5}{15}=\frac13$$
+    $$DE=\frac{27}{3}=9$$
+
+    <h4>שאלה 4</h4>
+    <p>
+      1. יחס ההיקפים שווה ליחס הדמיון:
+      <span class="fi">\(k=\frac{30}{12}=2.5\)</span>.
+      <br>2. יחס השטחים הוא <span class="fi">\(k^{2}\)</span>:
+    </p>
+    $$S=8\cdot 2.5^{2}=8\cdot 6.25=50$$
+    <p>שטח המשולש הגדול 50 סמ״ר.</p>
+
+    <h4>שאלה 5</h4>
+    <p>1. אמצעי האלכסונים:</p>
+    $$M_{AC}=\left(\tfrac{0+8}{2},\ \tfrac{0+4}{2}\right)=(4,2)$$
+    $$M_{BD}=\left(\tfrac{6+2}{2},\ \tfrac{0+4}{2}\right)=(4,2)$$
+    <p>זהים ⟵ האלכסונים חוצים זה את זה ⟵ מקבילית. מש״ל.</p>
+    <p>2. מרחק בין <span class="fi">\(A(0,0)\)</span> ל-<span class="fi">\(D(2,4)\)</span>:</p>
+    $$AD=\sqrt{2^{2}+4^{2}}=\sqrt{20}=2\sqrt{5}$$
+    <p>
+      3. <span class="fi">\(AB\)</span> אופקית ואורכה 6, והגובה אליה הוא
+      המרחק האנכי עד <span class="fi">\(D\)</span>, כלומר 4:
+    </p>
+    $$S=6\cdot 4=24$$
+    <p>
+      שימי לב: בשטח מקבילית הנוסחה היא צלע כפול הגובה <em>אליה</em> —
+      ולא כפול הצלע השנייה. הצלע <span class="fi">\(AD\)</span> אלכסונית
+      ואינה הגובה.
+    </p>
+
+    <h4>שאלה 6</h4>
+    <p>1. שטח הבסיס <span class="fi">\(5\cdot8=40\)</span>, ולכן:</p>
+    $$320=40\cdot h\;\Longrightarrow\;h=8\ \text{cm}$$
+    <p>
+      2. זו למעשה תיבה שמידותיה 5, 8 ו-8:
+    </p>
+    $$S=2(5\cdot8+5\cdot8+8\cdot8)=2(40+40+64)=288$$
+    <p>שטח הפנים 288 סמ״ר.</p>
+
+    <div class="box def" style="margin-top:18px">
+      <div class="box-title">איך לקרוא את התוצאה שלך</div>
+      טעות בשאלה 1 או 2 היא כמעט תמיד בלבול בין תכונה למשפט הפוך — חזרה
+      ל<a href="01-quadrilaterals.html#sec-directions">שני הכיוונים</a>.
+      טעות בשאלה 4 היא כמעט תמיד לשכוח שהשטחים בריבוע. ובשאלה 5 סעיף 3,
+      הטעות הנפוצה היא לכפול שתי צלעות במקום צלע בגובה.
+    </div>
+  </div>
+</details>
+
+<nav class="pagenav">
+  <a href="04-solids.html"><span class="dir">&#8594; הקודם</span>גופים ונפחים</a>
+  <a class="next" href="06-exercise-bank.html"><span class="dir">הבא &#8592;</span>מחסן התרגילים</a>
+</nav>
+
+<footer class="fin">חלק מהעולם של שירה ·
+<a href="../../index.html">חזרה למרכז</a> ·
+<a href="index.html">מפת הגאומטריה</a></footer>
+</main>
+</div>
+</body>
+</html>

@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<link rel="apple-touch-icon" href="../../assets/icons/icon-180.png">
+<link rel="manifest" href="../../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>גאומטריה אנליטית — גאומטריה ט׳ — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../../vendor/katex.min.css">
+<link rel="stylesheet" href="../../css/shira.css">
+<style>
+:root{--accent:#7A4E8C}
+/* ארבעת הכלים — כרטיס לכל נוסחה, עם מה היא עונה עליו */
+/* שתי עמודות בדיוק — ארבעה כרטיסים נופלים 2×2 ולא 3+1 עם חלל יתום */
+.tools{display:grid; grid-template-columns:repeat(2,1fr); gap:11px; margin:16px 0}
+@media (max-width:560px){.tools{grid-template-columns:1fr}}
+.tool{min-width:0; border:1px solid var(--line);
+  border-radius:var(--r-md); background:var(--card); padding:11px 15px 13px}
+.tool .tq{font-size:12px; font-weight:800; letter-spacing:.05em;
+  text-transform:uppercase; color:var(--accent); margin-bottom:2px}
+.tool .katex-display{margin:.4em 0}
+.tool p{margin:5px 0 0; font-size:12.8px; color:var(--soft); line-height:1.55}
+</style>
+<script defer src="../../vendor/katex.min.js"></script>
+<script defer src="../../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../../js/shira.js"></script>
+</head>
+<body data-page="g9geo:03-analytic">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">גאומטריה ט׳ — המפה</a>
+    <span class="crumbs">תחנה <b>5</b> מתוך 6 · <b>אנליטית</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">גאומטריה · כיתה ט׳ · תחנה 5</div>
+  <h1>גאומטריה אנליטית</h1>
+  <p class="lead">
+    גאומטריה שנפגשת עם מערכת הצירים. במקום סרטוט עם טענה ונימוק, הצורה
+    נתונה ב<strong>שיעורי הקדקודים</strong> שלה — ומוכיחים עליה דברים
+    בחשבון. זה הנושא שבו כמעט כל מה שלמדת השנה נפגש במקום אחד.
+  </p>
+  <p class="youknow"><b>בסוף העמוד תדעי:</b> לחשב מרחק בין שתי נקודות ·
+  למצוא אמצע קטע · לזהות ישרים מקבילים וניצבים · להוכיח שמרובע נתון בשיעורים
+  הוא מקבילית או מלבן · ולחשב שטח של צורה במערכת צירים.</p>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>≈ 40 דק׳</b> · 8 תרגילים</span>
+    <a class="pm-jump" href="#sec-practice">לקפוץ ישר לתרגילים ↓</a>
+  </p>
+</header>
+
+<!-- ============ 1. ארבעת הכלים ============ -->
+<h2 id="sec-tools"><span class="num">1</span>ארבעת הכלים</h2>
+
+<p>
+  כל הפרק הזה רץ על ארבע נוסחאות. שווה לראות מיד שאף אחת מהן אינה חדשה
+  באמת — כולן דברים שאת כבר יודעת, כתובים בשיעורים.
+</p>
+
+<div class="tools">
+  <div class="tool">
+    <div class="tq">כמה רחוקות שתי נקודות</div>
+    $$d=\sqrt{(x_{2}-x_{1})^{2}+(y_{2}-y_{1})^{2}}$$
+    <p>זה <a href="../../year8/geometry/08-pythagoras.html">פיתגורס</a>
+    בתחפושת — ההפרשים הם שני הניצבים, והמרחק הוא היתר.</p>
+  </div>
+  <div class="tool">
+    <div class="tq">איפה אמצע הקטע</div>
+    $$M=\left(\frac{x_{1}+x_{2}}{2},\;\frac{y_{1}+y_{2}}{2}\right)$$
+    <p>ממוצע של שני ה-<span class="fi">\(x\)</span>-ים וממוצע של שני
+    ה-<span class="fi">\(y\)</span>-ים. בדיוק כמו חציון בין שני מספרים.</p>
+  </div>
+  <div class="tool">
+    <div class="tq">מה השיפוע</div>
+    $$m=\frac{y_{2}-y_{1}}{x_{2}-x_{1}}$$
+    <p>אותו שיפוע
+    <a href="../../year8/algebra/05-line-equation.html">ממשוואת הישר</a> —
+    כמה עולים על כל צעד ימינה.</p>
+  </div>
+  <div class="tool">
+    <div class="tq">מקבילים או ניצבים</div>
+    $$m_{1}=m_{2}\qquad\text{vs.}\qquad m_{1}\cdot m_{2}=-1$$
+    <p>שיפועים שווים ⟵ מקבילים. מכפלת שיפועים
+    <span class="fi">\(-1\)</span> ⟵ מאונכים.</p>
+  </div>
+</div>
+
+<div class="box intuition">
+  <div class="box-title">למה המרחק הוא פיתגורס</div>
+  כדי למדוד מרחק בין שתי נקודות, מציירים ביניהן משולש ישר-זווית:
+  הולכים אופקית ואז אנכית.
+  <br>הצלע האופקית באורך <span class="fi">\(|x_{2}-x_{1}|\)</span>,
+  האנכית באורך <span class="fi">\(|y_{2}-y_{1}|\)</span>, והמרחק הישיר
+  הוא היתר. פיתגורס נותן בדיוק את הנוסחה שלמעלה.
+</div>
+
+<figure style="max-width:400px;margin:16px auto 6px">
+  <svg viewBox="0 0 300 190" style="width:100%;height:auto" role="img"
+       aria-label="שתי נקודות במערכת צירים, ומשולש ישר זווית שבו המרחק ביניהן הוא היתר">
+    <g stroke="#EFEAE0" stroke-width="1">
+      <line x1="35" y1="40" x2="275" y2="40"/><line x1="35" y1="75" x2="275" y2="75"/>
+      <line x1="35" y1="110" x2="275" y2="110"/><line x1="35" y1="145" x2="275" y2="145"/>
+      <line x1="80" y1="25" x2="80" y2="165"/><line x1="125" y1="25" x2="125" y2="165"/>
+      <line x1="170" y1="25" x2="170" y2="165"/><line x1="215" y1="25" x2="215" y2="165"/>
+    </g>
+    <line x1="30" y1="160" x2="285" y2="160" stroke="#5A6875" stroke-width="1.5"/>
+    <line x1="45" y1="18" x2="45" y2="175" stroke="#5A6875" stroke-width="1.5"/>
+    <!-- triangle -->
+    <line x1="80" y1="145" x2="215" y2="145" stroke="#B4553C" stroke-width="2.2" stroke-dasharray="5 3"/>
+    <line x1="215" y1="145" x2="215" y2="40" stroke="#B4553C" stroke-width="2.2" stroke-dasharray="5 3"/>
+    <line x1="80" y1="145" x2="215" y2="40" stroke="#7A4E8C" stroke-width="2.8"/>
+    <circle cx="80" cy="145" r="4.2" fill="#2E6F8E"/><circle cx="215" cy="40" r="4.2" fill="#2E6F8E"/>
+    <text x="72" y="160" font-family="Arial" font-size="12" font-weight="700" fill="#2E6F8E">A</text>
+    <text x="221" y="36" font-family="Arial" font-size="12" font-weight="700" fill="#2E6F8E">B</text>
+    <text x="147" y="159" text-anchor="middle" font-family="Arial" font-size="11" fill="#B4553C">הפרש ה-x</text>
+    <text x="240" y="95" text-anchor="middle" font-family="Arial" font-size="11" fill="#B4553C">הפרש ה-y</text>
+    <text x="130" y="88" text-anchor="middle" font-family="Arial" font-size="11.5" font-weight="700" fill="#7A4E8C">המרחק</text>
+  </svg>
+  <figcaption>המרחק הוא היתר של משולש שהניצבים שלו הם ההפרשים.</figcaption>
+</figure>
+
+<div class="box warn">
+  <div class="box-title">שני דברים שמפילים במבחן</div>
+  <strong>אחד — הסדר בהפרש לא משנה במרחק</strong>, כי מעלים בריבוע:
+  <span class="fi">\((3-7)^{2}\)</span> ו-<span class="fi">\((7-3)^{2}\)</span>
+  שניהם 16. אבל <strong>בשיפוע כן משנה</strong> — שם חייבים לשמור על אותו
+  סדר במונה ובמכנה.
+  <br><strong>שניים — ישר אנכי אין לו שיפוע.</strong> המכנה מתאפס. לכן
+  כלל הניצבות לא חל על זוג של ישר אנכי וישר אופקי, למרות שהם מאונכים.
+</div>
+
+<!-- ============ 2. להוכיח בחשבון ============ -->
+<h2 id="sec-prove"><span class="num">2</span>להוכיח צורה — בחשבון במקום בנימוק</h2>
+
+<p>
+  זו השאלה הטיפוסית של הפרק: נתונים ארבעה קדקודים, וצריך להוכיח שהמרובע
+  הוא מקבילית, מלבן או מעוין. <strong>המשפטים ההפוכים
+  <a href="01-quadrilaterals.html">מתחנה 1</a> הם עדיין הכלי</strong> —
+  רק שבמקום נימוק מהסרטוט, מביאים חישוב.
+</p>
+
+<table class="dtable">
+  <tr><th>מה רוצים להוכיח</th><th>מה מחשבים</th></tr>
+  <tr><td>מקבילית</td>
+      <td>שיפועי שתי זוגות הצלעות הנגדיות — שווים בכל זוג
+          <br><em>או</em>: אמצעי שני האלכסונים — יוצאים אותה נקודה</td></tr>
+  <tr><td>מלבן</td>
+      <td>מקבילית, ובנוסף אורכי האלכסונים שווים
+          <br><em>או</em>: מכפלת שיפועי שתי צלעות סמוכות היא <span class="fi">\(-1\)</span></td></tr>
+  <tr><td>מעוין</td>
+      <td>מקבילית, ובנוסף אורכי שתי צלעות סמוכות שווים</td></tr>
+  <tr><td>טרפז</td>
+      <td>שיפועי זוג אחד בלבד של צלעות נגדיות שווים</td></tr>
+</table>
+
+<div class="box intuition">
+  <div class="box-title">איזו דרך לבחור</div>
+  <strong>אמצעי האלכסונים</strong> היא לרוב הדרך הקצרה ביותר להוכיח
+  מקבילית — שני חישובים פשוטים של ממוצעים, בלי שברים.
+  <br><strong>שיפועים</strong> נוחים כשצריך גם לבדוק ניצבות אחר כך.
+  <br><strong>אורכים</strong> — רק כשבאמת שואלים על אורכים, כי שם נכנסים
+  שורשים.
+</div>
+
+<div class="nb" data-nb>
+  <div class="nb-head"><b>בונים ביחד במחברת</b><span class="nb-count"></span></div>
+  <ol class="nb-steps">
+    <li class="nb-step"><b>התרגיל</b>
+      <p>נתון מרובע <span class="fi">\(ABCD\)</span> עם הקדקודים
+      <span class="fi">\(A(1,1)\)</span>, <span class="fi">\(B(5,1)\)</span>,
+      <span class="fi">\(C(7,4)\)</span>, <span class="fi">\(D(3,4)\)</span>.
+      <br>הוכיחי שהוא מקבילית.</p>
+    </li>
+    <li class="nb-step"><b>בוחרים דרך — אמצעי האלכסונים</b>
+      <p>אם שני האלכסונים חוצים זה את זה, יש להם אותה נקודת אמצע.
+      האלכסונים הם <span class="fi">\(AC\)</span> ו-<span class="fi">\(BD\)</span>.</p>
+    </li>
+    <li class="nb-step"><b>אמצע <span class="fi">\(AC\)</span></b>
+      <p>$$M_{AC}=\left(\frac{1+7}{2},\ \frac{1+4}{2}\right)=(4,\ 2.5)$$</p>
+    </li>
+    <li class="nb-step"><b>אמצע <span class="fi">\(BD\)</span></b>
+      <p>$$M_{BD}=\left(\frac{5+3}{2},\ \frac{1+4}{2}\right)=(4,\ 2.5)$$</p>
+    </li>
+    <li class="nb-step"><b>המסקנה</b>
+      <p>שתי נקודות האמצע זהות ⟵ האלכסונים חוצים זה את זה ⟵ לפי המשפט
+      ההפוך, <span class="fi">\(ABCD\)</span> מקבילית. מש״ל.</p>
+    </li>
+    <li class="nb-step"><b>בדיקה בדרך אחרת</b>
+      <p>נבדוק בשיפועים, כדי לוודא:
+      $$m_{AB}=\frac{1-1}{5-1}=0\qquad m_{DC}=\frac{4-4}{7-3}=0$$
+      $$m_{AD}=\frac{4-1}{3-1}=\frac32\qquad m_{BC}=\frac{4-1}{7-5}=\frac32$$
+      שני הזוגות מקבילים ✓ אותה מסקנה, בדרך שנייה.</p>
+    </li>
+  </ol>
+</div>
+
+<!-- ============ 3. שטח ============ -->
+<h2 id="sec-area"><span class="num">3</span>שטח במערכת צירים</h2>
+
+<p>
+  אין נוסחה חדשה. מחשבים אורכים מהשיעורים, ומציבים בנוסחת השטח הרגילה
+  <a href="../../year8/geometry/03-quadrilaterals-areas.html">מכיתה ח׳</a>.
+  הטריק היחיד הוא לבחור צלע שקל למדוד.
+</p>
+
+<div class="box def">
+  <div class="box-title">קיצור שחוסך את רוב העבודה</div>
+  צלע <strong>אופקית</strong> (שני קדקודים עם אותו <span class="fi">\(y\)</span>)
+  — אורכה הוא פשוט הפרש ה-<span class="fi">\(x\)</span>-ים.
+  <br>צלע <strong>אנכית</strong> — הפרש ה-<span class="fi">\(y\)</span>-ים.
+  <br>ואז הגובה אליהן נמדד גם הוא כהפרש פשוט. אין שורשים בכלל.
+  <br><br>לכן בשאלה על שטח משולש, כדאי לחפש קודם צלע אופקית או אנכית
+  ולקחת אותה כבסיס.
+</div>
+
+<div class="nb" data-nb>
+  <div class="nb-head"><b>בונים ביחד במחברת</b><span class="nb-count"></span></div>
+  <ol class="nb-steps">
+    <li class="nb-step"><b>התרגיל</b>
+      <p>מצאי את שטח המשולש שקדקודיו
+      <span class="fi">\(A(2,1)\)</span>, <span class="fi">\(B(8,1)\)</span>,
+      <span class="fi">\(C(5,6)\)</span>.</p>
+    </li>
+    <li class="nb-step"><b>מחפשים צלע נוחה</b>
+      <p>ל-<span class="fi">\(A\)</span> ול-<span class="fi">\(B\)</span> יש
+      אותו <span class="fi">\(y=1\)</span> ⟵ <span class="fi">\(AB\)</span>
+      אופקית. ניקח אותה כבסיס.</p>
+    </li>
+    <li class="nb-step"><b>אורך הבסיס</b>
+      <p>$$AB=8-2=6$$
+      בלי שורש, בלי פיתגורס.</p>
+    </li>
+    <li class="nb-step"><b>הגובה אל הבסיס</b>
+      <p>הבסיס יושב על הישר <span class="fi">\(y=1\)</span>, והקדקוד
+      <span class="fi">\(C\)</span> נמצא ב-<span class="fi">\(y=6\)</span>.
+      המרחק האנכי ביניהם:
+      $$h=6-1=5$$</p>
+    </li>
+    <li class="nb-step"><b>מציבים בנוסחה</b>
+      <p>$$S=\frac{b\cdot h}{2}=\frac{6\cdot 5}{2}=15$$
+      שטח המשולש 15 יחידות ריבועיות.</p>
+    </li>
+    <li class="nb-step"><b>למה לא מדדנו את הצלעות האחרות</b>
+      <p><span class="fi">\(AC\)</span> ו-<span class="fi">\(BC\)</span>
+      אלכסוניות, ואורכן כרוך בשורשים. לא היה בהן צורך — נוסחת השטח דורשת
+      בסיס אחד וגובה אחד בלבד.</p>
+    </li>
+  </ol>
+</div>
+
+<!-- ============ 4. תרגול ============ -->
+<h2 id="sec-practice"><span class="num">4</span>תרגול — משלב לשלב</h2>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 1 — מרחק</h4></div>
+  <p class="q-text"><span class="mk mk-find">מהו המרחק בין</span>
+    <span class="fi">\(A(1,2)\)</span> <span class="mk mk-find">ל-</span>
+    <span class="fi">\(B(4,6)\)</span>?</p>
+  <details class="step"><summary>שלב ראשון — ההפרשים</summary>
+    <div class="step-body"><span class="fi">\(4-1=3\)</span> ו-<span class="fi">\(6-2=4\)</span>.</div>
+  </details>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$d=\sqrt{3^{2}+4^{2}}=\sqrt{9+16}=\sqrt{25}=5$$
+      זה המשולש 3-4-5 המוכר מפיתגורס.
+    </div>
+  </details>
+  <div class="q-row"><span class="fi">\(d=\)</span>
+    <input class="q-input" data-answer="5" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex1"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 2 — אמצע קטע</h4></div>
+  <p class="q-text"><span class="mk mk-find">מהו אמצע הקטע שקצותיו</span>
+    <span class="fi">\((-2,5)\)</span> <span class="mk mk-find">ו-</span>
+    <span class="fi">\((6,1)\)</span>?</p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$M=\left(\frac{-2+6}{2},\ \frac{5+1}{2}\right)=(2,\ 3)$$
+      בדיקה: 2 באמת נמצא בין <span class="fi">\(-2\)</span> ל-6,
+      ו-3 בין 1 ל-5 ✓
+    </div>
+  </details>
+  <div class="q-row"><span>שיעור <span class="fi">\(x\)</span>:</span>
+    <input class="q-input" data-answer="2" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>שיעור <span class="fi">\(y\)</span>:</span>
+    <input class="q-input" data-answer="3" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex2"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l1">שלב 1 · ביחד</span><h4>תרגיל 3 — שיפוע</h4></div>
+  <p class="q-text"><span class="mk mk-find">מהו שיפוע הישר העובר דרך</span>
+    <span class="fi">\((2,3)\)</span> <span class="mk mk-find">ו-</span>
+    <span class="fi">\((6,11)\)</span>?</p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$m=\frac{11-3}{6-2}=\frac{8}{4}=2$$
+      <strong>אותו סדר בשני המקומות:</strong> הנקודה השנייה פחות הראשונה,
+      גם למעלה וגם למטה. אם מהפכים רק אחד מהם, מקבלים
+      <span class="fi">\(-2\)</span> — שיפוע הפוך.
+    </div>
+  </details>
+  <div class="q-row"><span class="fi">\(m=\)</span>
+    <input class="q-input" data-answer="2" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex3"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 4 — ניצבות</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">שיפוע ישר אחד הוא <span class="fi">\(\frac{3}{4}\)</span></span>.
+    <span class="mk mk-find">מהו שיפועו של ישר המאונך לו?</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      $$m_{1}\cdot m_{2}=-1\;\Longrightarrow\;\frac34\cdot m_{2}=-1$$
+      $$m_{2}=-\frac43$$
+      <strong>קיצור:</strong> הופכים את השבר ומחליפים סימן. זה עובד תמיד.
+    </div>
+  </details>
+  <div class="q-row"><span>המונה (עם הסימן):</span>
+    <input class="q-input" data-answer="-4" inputmode="text" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>והמכנה:</span>
+    <input class="q-input" data-answer="3" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex4"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l2">שלב 2 · לבד עם רשת</span><h4>תרגיל 5 — שטח משולש</h4></div>
+  <p class="q-text">
+    <span class="mk mk-find">מהו שטח המשולש שקדקודיו</span>
+    <span class="fi">\((0,0)\)</span>, <span class="fi">\((10,0)\)</span>,
+    <span class="fi">\((4,7)\)</span>?
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      שתי הנקודות הראשונות על ציר <span class="fi">\(x\)</span> ⟵ הבסיס
+      אופקי ואורכו <span class="fi">\(10\)</span>.
+      <br>הגובה הוא שיעור ה-<span class="fi">\(y\)</span> של הקדקוד השלישי:
+      <span class="fi">\(7\)</span>.
+      $$S=\frac{10\cdot 7}{2}=35$$
+      שימי לב ששיעור ה-<span class="fi">\(x\)</span> של הקדקוד השלישי
+      (<span class="fi">\(4\)</span>) לא השפיע כלל — הזזה שלו ימינה או
+      שמאלה לא משנה את השטח, כי הגובה נשאר.
+    </div>
+  </details>
+  <div class="q-row"><span>השטח:</span>
+    <input class="q-input" data-answer="35" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex5"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 6 — להוכיח מקבילית</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">נתון מרובע עם הקדקודים
+    <span class="fi">\(A(0,0)\)</span>, <span class="fi">\(B(6,2)\)</span>,
+    <span class="fi">\(C(8,7)\)</span>, <span class="fi">\(D(2,5)\)</span></span>.
+    <span class="mk mk-find">הוכיחי שהוא מקבילית.</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      <strong>דרך אמצעי האלכסונים:</strong>
+      $$M_{AC}=\left(\frac{0+8}{2},\ \frac{0+7}{2}\right)=(4,\ 3.5)$$
+      $$M_{BD}=\left(\frac{6+2}{2},\ \frac{2+5}{2}\right)=(4,\ 3.5)$$
+      האמצעים זהים ⟵ האלכסונים חוצים זה את זה ⟵ מקבילית. מש״ל.
+      <br><br><strong>דרך נוספת — שיפועים:</strong>
+      $$m_{AB}=\frac{2-0}{6-0}=\frac13\qquad m_{DC}=\frac{7-5}{8-2}=\frac13$$
+      $$m_{AD}=\frac{5-0}{2-0}=\frac52\qquad m_{BC}=\frac{7-2}{8-6}=\frac52$$
+      שני זוגות הצלעות הנגדיות מקבילים ⟵ מקבילית. אותה מסקנה.
+    </div>
+  </details>
+  <div class="q-row"><span>שיעור <span class="fi">\(x\)</span> של נקודת המפגש:</span>
+    <input class="q-input" data-answer="4" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>ושיעור ה-<span class="fi">\(y\)</span>:</span>
+    <input class="q-input" data-answer="3.5" data-tol="0.01" inputmode="decimal" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex6"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 7 — מקבילית או מלבן?</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">נתון מרובע עם הקדקודים
+    <span class="fi">\(A(0,0)\)</span>, <span class="fi">\(B(4,0)\)</span>,
+    <span class="fi">\(C(4,3)\)</span>, <span class="fi">\(D(0,3)\)</span></span>.
+    <span class="mk mk-find">הוכיחי שהוא מלבן.</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      <strong>שלב א׳ — מקבילית.</strong>
+      $$m_{AB}=\frac{0-0}{4-0}=0\qquad m_{DC}=\frac{3-3}{4-0}=0$$
+      <span class="fi">\(AD\)</span> ו-<span class="fi">\(BC\)</span> שניהם
+      אנכיים (אין להם שיפוע), ולכן מקבילים זה לזה.
+      שני הזוגות מקבילים ⟵ מקבילית.
+      <br><br><strong>שלב ב׳ — זווית ישרה.</strong>
+      <span class="fi">\(AB\)</span> אופקית ו-<span class="fi">\(AD\)</span>
+      אנכית, ולכן <span class="fi">\(\angle A=90^\circ\)</span>.
+      מקבילית בעלת זווית ישרה היא מלבן. מש״ל.
+      <br><br><strong>שימי לב למקרה הקצה:</strong> כאן <em>אי אפשר</em>
+      להשתמש ב-<span class="fi">\(m_{1}m_{2}=-1\)</span>, כי לישר אנכי אין
+      שיפוע כלל. במצב כזה מנמקים במילים — "אופקי ואנכי, ולכן מאונכים" —
+      וזה נימוק מלא ומתקבל.
+      <br><br><strong>בדיקה נוספת</strong> — אלכסונים שווים:
+      $$AC=\sqrt{16+9}=5\qquad BD=\sqrt{16+9}=5\;\checkmark$$
+    </div>
+  </details>
+  <div class="q-row"><span>אורך האלכסון:</span>
+    <input class="q-input" data-answer="5" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex7"> סיימתי את התרגיל הזה</label>
+</article>
+
+<article class="ex">
+  <div class="ex-head"><span class="lvl l3">שלב 3 · לבד</span><h4>תרגיל 8 — למצוא נעלם</h4></div>
+  <p class="q-text">
+    <span class="mk mk-given">הנקודות <span class="fi">\(A(1,2)\)</span>
+    ו-<span class="fi">\(B(a,10)\)</span> נמצאות במרחק 10 זו מזו</span>.
+    <span class="mk mk-find">מצאי את <span class="fi">\(a\)</span>.</span>
+  </p>
+  <details class="sol"><summary>הצגי פתרון</summary>
+    <div class="sol-body">
+      מציבים בנוסחת המרחק:
+      $$\sqrt{(a-1)^{2}+(10-2)^{2}}=10$$
+      מעלים בריבוע את שני האגפים:
+      $$(a-1)^{2}+64=100\;\Longrightarrow\;(a-1)^{2}=36$$
+      $$a-1=\pm 6\;\Longrightarrow\;a_{1}=7,\ a_{2}=-5$$
+      <strong>שתי תשובות, ושתיהן נכונות.</strong> יש שתי נקודות בגובה
+      <span class="fi">\(y=10\)</span> שמרחקן מ-<span class="fi">\(A\)</span>
+      הוא 10 — אחת מימין ואחת משמאל. כאן, בניגוד לשאלות על אורך או גובה,
+      אין סיבה לפסול את השלילית.
+      <br>בדיקה ל-<span class="fi">\(a=7\)</span>:
+      <span class="fi">\(\sqrt{36+64}=\sqrt{100}=10\)</span> ✓
+    </div>
+  </details>
+  <div class="q-row"><span>הפתרון החיובי:</span>
+    <input class="q-input" data-answer="7" inputmode="numeric" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <div class="q-row"><span>והשלילי:</span>
+    <input class="q-input" data-answer="-5" inputmode="text" placeholder="?">
+    <button class="q-check">בדקי</button><span class="q-feedback"></span></div>
+  <label class="mark"><input type="checkbox" data-k="ex8"> סיימתי את התרגיל הזה</label>
+</article>
+
+<div class="box def" style="margin-top:26px">
+  <div class="box-title">מה לקחת מכאן</div>
+  ארבע נוסחאות, ואף אחת מהן אינה חדשה. והכלל המעשי: <strong>לפני שמחשבים,
+  להסתכל אם יש צלע אופקית או אנכית</strong> — היא חוסכת שורשים, פיתגורס
+  ורוב הטעויות.
+</div>
+
+<div class="progresswrap no-print">
+  <span class="progressbar"><i></i></span><span class="progress-label"></span>
+  <button class="all-sols" style="font-family:inherit;font-size:12px;border:1px solid var(--line);background:#FBFAF7;border-radius:7px;padding:4px 10px;cursor:pointer">לפתוח את כל הפתרונות</button>
+</div>
+
+<nav class="pagenav">
+  <a href="02-similarity-thales.html"><span class="dir">→ הקודם</span>דמיון ומשפט תאלס</a>
+  <a class="next" href="04-solids.html"><span class="dir">הבא ←</span>גופים ונפחים</a>
+</nav>
+
+<footer class="fin">חלק מהעולם של שירה ·
+<a href="../../index.html">חזרה למרכז</a> ·
+<a href="index.html">מפת הגאומטריה</a></footer>
+</main>
+</div>
+</body>
+</html>

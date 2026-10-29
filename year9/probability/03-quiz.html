@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>'>
+<link rel="apple-touch-icon" href="../../assets/icons/icon-180.png">
+<link rel="manifest" href="../../manifest.webmanifest">
+<meta name="theme-color" content="#F7F5F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="מתמטיקה">
+<title>בוחן הבית — הסתברות ואוריינות ט׳ — המתמטיקה של שירה</title>
+<link rel="stylesheet" href="../../vendor/katex.min.css">
+<link rel="stylesheet" href="../../css/shira.css">
+<style>
+:root{--accent:#2E7D6B}
+.qz{border:1px solid var(--line); border-radius:var(--r-md); background:var(--card);
+  padding:13px 17px 15px; margin:13px 0}
+.qz .qh{font-size:15.5px; font-weight:800; margin-bottom:6px}
+.qz .qh span{font-size:11.5px; font-weight:700; color:var(--soft);
+  background:var(--faint); border-radius:99px; padding:2px 9px; margin-inline-end:8px}
+.qz p{margin:0 0 8px; line-height:1.8}
+.qz ol{margin:6px 0 0; padding-inline-start:20px}
+.qz ol li{margin-bottom:3px}
+.answers{border:1px solid var(--line); border-radius:var(--r-md);
+  background:#FBFAF7; margin-top:26px}
+.answers>summary{cursor:pointer; padding:13px 17px; font-weight:800; font-size:15.5px}
+.answers .abody{padding:0 17px 16px; border-top:1px solid var(--line)}
+.answers h4{margin:16px 0 4px; font-size:15px}
+</style>
+<script defer src="../../vendor/katex.min.js"></script>
+<script defer src="../../vendor/contrib/auto-render.min.js"></script>
+<script defer src="../../js/shira.js"></script>
+</head>
+<body data-page="g9prob:03-quiz">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="home" href="../../index.html">⌂ המרכז של שירה</a>
+    <a class="home" href="index.html">הסתברות ט׳ — המפה</a>
+    <span class="crumbs">הסתברות ואוריינות · <b>בוחן הבית</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+<main>
+
+<header class="hero">
+  <div class="eyebrow">הסתברות ואוריינות · כיתה ט׳ · הגמר</div>
+  <h1>בוחן הבית</h1>
+  <p class="lead">
+    חמש שאלות בסגנון פרק ג׳ במפמ״ר — הסתברות ואוריינות יחד, בדיוק כמו
+    שהן מופיעות במבחן.
+  </p>
+  <p class="pagemeta no-print">
+    <span class="pm-time"><b>≈ 35 דק׳</b> · 5 שאלות</span>
+    <a class="pm-jump" href="#answers">לפתרונות ↓</a>
+  </p>
+</header>
+
+<div class="box warn">
+  <div class="box-title">איך עובדים</div>
+  בשאלות ההסתברות — לכתוב את השבר לפני שמחשבים, ולציין אם זה "וגם" או
+  "או". בשאלות האוריינות — לענות <strong>במילים</strong>, ולא רק במספר.
+</div>
+
+<div class="qz">
+  <div class="qh"><span>1</span>ניסוי אחד</div>
+  <p>בכד 6 כדורים אדומים, 4 כחולים ו-10 ירוקים.</p>
+  <ol>
+    <li>מה ההסתברות לשלוף כדור כחול?</li>
+    <li>מה ההסתברות לשלוף כדור שאינו ירוק?</li>
+    <li>כמה כדורים אדומים צריך להוסיף כדי שההסתברות לשלוף אדום תהיה
+        בדיוק <span class="fi">\(0.5\)</span>?</li>
+  </ol>
+</div>
+
+<div class="qz">
+  <div class="qh"><span>2</span>שני שלבים</div>
+  <p>
+    בקופסה 5 סוכריות תות ו-3 סוכריות לימון. מוציאים שתיים
+    <strong>בלי</strong> החזרה.
+  </p>
+  <ol>
+    <li>מה ההסתברות ששתיהן תות?</li>
+    <li>מה ההסתברות שהראשונה תות והשנייה לימון?</li>
+    <li>מה ההסתברות שהן משני טעמים שונים?</li>
+  </ol>
+</div>
+
+<div class="qz">
+  <div class="qh"><span>3</span>לפחות אחד</div>
+  <p>
+    מטילים קובייה שלוש פעמים.
+    <br>מה ההסתברות לקבל לפחות 1 אחד? הציגי דרך פתרון.
+  </p>
+</div>
+
+<div class="qz">
+  <div class="qh"><span>4</span>אוריינות — תעריפים</div>
+  <p>
+    שתי חברות משכירות אופניים:
+    <br><strong>א׳</strong> — 20 ₪ פתיחה ועוד 2 ₪ לכל דקה.
+    <br><strong>ב׳</strong> — 3 ₪ לכל דקה, בלי דמי פתיחה.
+  </p>
+  <ol>
+    <li>כמה יעלה אצל כל חברה טיול של 15 דקות?</li>
+    <li>אחרי כמה דקות המחיר משתווה?</li>
+    <li>לדנה יש 50 ₪. באיזו חברה תוכל לרכוב יותר זמן, וכמה?</li>
+  </ol>
+</div>
+
+<div class="qz">
+  <div class="qh"><span>5</span>אוריינות — מבצע</div>
+  <p>
+    זוג נעליים עולה 240 ₪.
+    <br>בחנות א׳ יש הנחה של 25%. בחנות ב׳ יש הנחה של 10%, ועל המחיר
+    שאחריה עוד 15%.
+  </p>
+  <ol>
+    <li>מה המחיר בכל חנות?</li>
+    <li>איזו חנות זולה יותר, ובכמה?</li>
+  </ol>
+</div>
+
+<details class="answers" id="answers">
+  <summary>הפתרונות — רק אחרי שניסית את כולן ↓</summary>
+  <div class="abody">
+
+    <h4>שאלה 1</h4>
+    <p>סך הכול <span class="fi">\(6+4+10=20\)</span> כדורים.</p>
+    <p>1. <span class="fi">\(P=\frac{4}{20}=0.2\)</span></p>
+    <p>
+      2. "שאינו ירוק" = אדום או כחול = <span class="fi">\(6+4=10\)</span>:
+      <span class="fi">\(P=\frac{10}{20}=0.5\)</span>.
+      <br>אפשר גם דרך המשלים: <span class="fi">\(1-\frac{10}{20}=0.5\)</span> ✓
+    </p>
+    <p>
+      3. נסמן ב-<span class="fi">\(k\)</span> את מספר האדומים שמוסיפים.
+      אחרי ההוספה יש <span class="fi">\(6+k\)</span> אדומים מתוך
+      <span class="fi">\(20+k\)</span>:
+    </p>
+    $$\frac{6+k}{20+k}=0.5\;\Longrightarrow\;6+k=0.5(20+k)$$
+    $$6+k=10+0.5k\;\Longrightarrow\;0.5k=4\;\Longrightarrow\;k=8$$
+    <p>
+      צריך להוסיף <strong>8 כדורים אדומים</strong>.
+      <br>בדיקה: <span class="fi">\(\frac{14}{28}=0.5\)</span> ✓
+      <br><strong>שימי לב:</strong> ההוספה משנה גם את המונה וגם את המכנה —
+      זו הטעות הנפוצה כאן.
+    </p>
+
+    <h4>שאלה 2</h4>
+    <p>סך הכול 8 סוכריות.</p>
+    <p>1. שתיהן תות — "וגם", ובלי החזרה:</p>
+    $$P=\frac{5}{8}\cdot\frac{4}{7}=\frac{20}{56}=\frac{5}{14}\approx0.357$$
+    <p>2. תות ואז לימון — הסדר קבוע:</p>
+    $$P=\frac{5}{8}\cdot\frac{3}{7}=\frac{15}{56}\approx0.268$$
+    <p>3. טעמים שונים — שני מסלולים, ולכן מחברים:</p>
+    $$P=\frac{5}{8}\cdot\frac{3}{7}+\frac{3}{8}\cdot\frac{5}{7}
+      =\frac{15}{56}+\frac{15}{56}=\frac{30}{56}=\frac{15}{28}\approx0.536$$
+    <p>
+      שני המסלולים יצאו שווים — הסדר לא משנה את המכפלה.
+      <br>סעיף 3 הוא בדיוק פעמיים סעיף 2, וזו בדיקה טובה.
+    </p>
+
+    <h4>שאלה 3</h4>
+    <p>עוברים למשלים — "אף 1":</p>
+    $$P(\text{no }1)=\left(\frac56\right)^{3}=\frac{125}{216}$$
+    $$P(\text{at least one})=1-\frac{125}{216}=\frac{91}{216}\approx0.421$$
+    <p>
+      הדרך הישירה הייתה דורשת לספור שבעה מקרים נפרדים. המשלים הפך את זה
+      לחישוב אחד.
+    </p>
+
+    <h4>שאלה 4</h4>
+    <p>1. ל-15 דקות:</p>
+    $$A=20+2\cdot15=50\qquad\qquad B=3\cdot15=45$$
+    <p>חברה ב׳ זולה יותר — 45 ₪ מול 50 ₪.</p>
+    <p>2. משווים:</p>
+    $$20+2x=3x\;\Longrightarrow\;x=20$$
+    <p>אחרי <strong>20 דקות</strong> שתיהן עולות 60 ₪.</p>
+    <p>3. עם 50 ₪:</p>
+    $$A:\ 20+2x=50\;\Longrightarrow\;x=15
+      \qquad\qquad
+      B:\ 3x=50\;\Longrightarrow\;x=16.67$$
+    <p>
+      בחברה ב׳ היא תרכב <strong>16 דקות שלמות</strong> לעומת 15 בחברה א׳ —
+      כלומר <strong>דקה אחת יותר</strong>.
+      <br>שימי לב שעיגלנו <em>למטה</em>: אי אפשר לרכוב 16.67 דקות עם
+      50 ₪ אם משלמים על דקה שלמה. תשובה "16.67 דקות" מפספסת את ההקשר.
+    </p>
+
+    <h4>שאלה 5</h4>
+    <p>1. חנות א׳ — מקדם <span class="fi">\(0.75\)</span>:</p>
+    $$240\cdot0.75=180$$
+    <p>חנות ב׳ — שני מקדמים ברצף:</p>
+    $$240\cdot0.9\cdot0.85=240\cdot0.765=183.6$$
+    <p>
+      2. <strong>חנות א׳ זולה יותר</strong>, ב-3.6 ₪.
+      <br>ההנחה בחנות ב׳ היא בסך הכול
+      <span class="fi">\(1-0.765=23.5\%\)</span> — פחות מ-25%, ולא 25%
+      כפי שאפשר לחשוב מ-<span class="fi">\(10+15\)</span>.
+      <br>זו בדיוק המלכודת של שני שינויים ברצף.
+    </p>
+
+    <div class="box def" style="margin-top:18px">
+      <div class="box-title">איך לקרוא את התוצאה שלך</div>
+      טעות בשאלה 2 היא כמעט תמיד שכחה לעדכן את המכנה בשלב השני.
+      טעות בשאלה 3 — ניסיון לספור ישירות במקום להשתמש במשלים.
+      ובשאלות 4 ו-5, הטעות היא כמעט תמיד לא מתמטית אלא בקריאה: לענות
+      במספר כשביקשו החלטה, או לחבר אחוזים שאסור לחבר.
+    </div>
+  </div>
+</details>
+
+<nav class="pagenav">
+  <a href="02-literacy.html"><span class="dir">→ הקודם</span>אוריינות מתמטית</a>
+  <a class="next" href="04-exercise-bank.html"><span class="dir">הבא ←</span>מחסן התרגילים</a>
+</nav>
+
+<footer class="fin">חלק מהעולם של שירה ·
+<a href="../../index.html">חזרה למרכז</a> ·
+<a href="index.html">מפת ההסתברות</a></footer>
+</main>
+</div>
+</body>
+</html>
